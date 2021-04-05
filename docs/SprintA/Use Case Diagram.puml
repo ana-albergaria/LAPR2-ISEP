@@ -1,0 +1,36 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+actor Receptionist
+actor "Medical Lab Technician" as MLT
+actor Administrator
+actor "Clinical Chemistry Technologist" as CCT
+actor "Laboratory Coordinator" as LC
+actor "Specialist Doctor" as SD
+actor Client
+:Barcode Reader API: as API << API >>
+:External Module: as EM << External Module >>
+
+
+rectangle Application {
+Receptionist -- (UC 1 - Register a new client)
+MLT -- (UC 2 - Register all the clinical blood and Covid-19 tests performed)
+Receptionist -- (UC 4 - Register a test to be performed to a registered client)
+MLT -- (UC 5 - Record the samples collected in the scope of a given test)
+CCT -- (UC 6 - Record the chemical analysis results)
+SD -- (UC 7 - Make a diagnosis and register a report in the system)
+LC -- (UC 8 - Check the chemical test/result and associated diagnosis and post them in the central application)
+Administrator -- (UC 9 - Specifiy a new type of test and its collecting methods)
+Administrator -- (UC 10 - Specifiy a new test parameter and categorize it)
+Administrator -- (UC 11 - Specify a new parameter category)
+
+(UC 1 - Register a new client) -- Client
+(UC 4 - Register a test to be performed to a registered client) -- Client
+(UC 5 - Record the samples collected in the scope of a given test) -- Client
+(UC 5 - Record the samples collected in the scope of a given test) -- API
+(UC 7 - Make a diagnosis and register a report in the system) -- EM : Automatic Validation
+}
+
+
+@enduml
