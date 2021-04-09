@@ -35,7 +35,6 @@ All the three points above mention the necessity for an application user manual,
 - "The user authentication password must hold seven alphanumeric characters, including three capital letters and two digits" - It is a password's specificity for user authentication. It has a different impact in another context, namely in the “Others (+)” category, in the “Implementation” subcategory.
 - "Only the specialist doctor is allowed to access all client data." - In this context, the system must have the functionality of accessing all client data. It has a different impact in another context, namely in the “Usability” category, in the “Adequacy Of The Interface For Different Types Of Users” subcategory.
 
-### Workflow
 
 
 
@@ -96,7 +95,7 @@ configurability, installability, scalability and more._
 
 _Specifies or constraints the system design process. Examples may include: programming languages, software process, mandatory standards/patterns, use of development tools, class library, etc._
 
-•	“During system development, the team must:  
+-	“During system development, the team must:  
 (i)	adopt best practices for identifying requirements and for OO software analysis and design;  
 (ii)	adopt recognized coding standards (e.g., CamelCase);  
 (iii)	use Javadoc to generate useful documentation for Java code.”
@@ -106,31 +105,29 @@ _Specifies or constraints the system design process. Examples may include: progr
 
 _Specifies or constraints the code or construction of a system such
 such as: mandatory standards/patterns, implementation languages,
-database integrity, resource limits, operating system._
-- "The application must be developed in Java language using the IntelliJ IDE"
-- "The application graphical interface is to be developed in JavaFX 11"
-- "The unit tests should be implemented using the JUnit 4 framework."
-- "The JaCoCo plugin should be used to generate the coverage report." - – In this context, it specifies which plugin is to be used for test coverage. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
-- “The development team must implement unit tests for all methods except methods that implement Input/Output operations.” – In this context, it specifies the need for a type of software testing – unit testing. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
-- “All the images/figures produced during the software development process should be recorded in SVG format.” - It is a mandatory standard to have all images in SVG format. It has a different impact in the "Usability" category in the "Interface aesthetics and design" subcategory.
-- "The application should use object serialization to ensure data persistence between two runs of the application."
-- "The implemented (brute-force) algorithm should be analysed in terms of its worst-case time complexity, and it should be compared to a provided benchmark algorithm." 
-- “The algorithm to be used by the application must be defined through a configuration file.” – This for the ordering algorithm, the brute-force algorithm and for the linear regression algorithms.
-- "For predictions of covid-19, forecasts the linear regression algorithm should be used."
-- "The user authentication password must hold seven alphanumeric characters, including three capital letters and two digits."
-- “It is intended that the choice of the ordering algorithm is based on the algorithm complexity (mainly the execution time).” - In this context, it refers to the necessity of an ordering algorithm. It has a different impact in the "Performance" category in the "Response Time" subcategory.
+database integrity, resource limits, operating system._  
+
+* "The application must be developed in Java language using the IntelliJ IDE"
+* "The application graphical interface is to be developed in JavaFX 11"
+* "The unit tests should be implemented using the JUnit 4 framework."
+* "The JaCoCo plugin should be used to generate the coverage report." - – In this context, it specifies which plugin is to be used for test coverage. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
+* “The development team must implement unit tests for all methods except methods that implement Input/Output operations.” – In this context, it specifies the need for a type of software testing – unit testing. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
+* “All the images/figures produced during the software development process should be recorded in SVG format.” - It is a mandatory standard to have all images in SVG format. It has a different impact in the "Usability" category in the "Interface aesthetics and design" subcategory.
+* "The application should use object serialization to ensure data persistence between two runs of the application."
+* "The implemented (brute-force) algorithm should be analysed in terms of its worst-case time complexity, and it should be compared to a provided benchmark algorithm." 
+* “The algorithm to be used by the application must be defined through a configuration file.” – This for the ordering algorithm, the brute-force algorithm and for the linear regression algorithms.
+* "For predictions of covid-19, forecasts the linear regression algorithm should be used."
+* "The user authentication password must hold seven alphanumeric characters, including three capital letters and two digits."
+* “It is intended that the choice of the ordering algorithm is based on the algorithm complexity (mainly the execution time).” - In this context, it refers to the necessity of an ordering algorithm. It has a different impact in the "Performance" category in the "Response Time" subcategory.
 
 ### Interface Constraints
 _Specifies or constraints the features inherent to the interaction of the
 system being developed with other external systems._
-- “the application uses an external module that is responsible for doing an automatic validation using test reference values”
-- “Client receives a notification alerting that the results are already available in the central application”
-- “The company is also required to generate daily (automatic) reports with all the information demanded by the NHS and should send them to the NHS using their API.” - In this context, the system interacts with the NHS API. It has a different impact in the "Functionality" category, in the "Reporting" subcategory.
+* “the application uses an external module that is responsible for doing an automatic validation using test reference values”
+* “Client receives a notification alerting that the results are already available in the central application”
+* “The company is also required to generate daily (automatic) reports with all the information demanded by the NHS and should send them to the NHS using their API.” - In this context, the system interacts with the NHS API. It has a different impact in the "Functionality" category, in the "Reporting" subcategory.
 
-(fill in here )
 
 ### Physical Constraints
 
 _Specifies a limitation or physical requirement regarding the hardware used to house the system, as for example: material, shape, size or weight._
-
-(fill in here )
