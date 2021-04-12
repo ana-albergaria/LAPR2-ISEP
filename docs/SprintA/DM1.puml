@@ -1,0 +1,104 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Test{}
+class Sample{}
+class Result{}
+class ChemicalResult{}
+class ClinicalResult{}
+class Diagnosis{}
+class Parameter{}
+class Notification{}
+class Courier{}
+class SpecialistDoctorReport{}
+class Covid19Data{}
+class Forecast{}
+class NHSDailyReports{}
+class Client{}
+class Administrator{}
+class Doctor{}
+class Receptionist{}
+class MedicalLabTechnician{}
+class ClinicalChemistryTechnologist{}
+class SpecialistDoctor{}
+class LaboratoryCoordinator{}
+class ClinicalAnalysisLaboratory{}
+class ChemicalLaboratory{}
+class Application{}
+class ChemicalAnalysis{}
+class ClinicalAnalysis{}
+class TestType{}
+class Category{}
+class Covid19Test{}
+class BloodTest{}
+class OtherTest{}
+class Company{}
+class NHS{}
+class NHSAPI{}
+class ExternalModule{}
+class LabOrder{}
+
+Company -- Test : performs >
+Company -- TestType : conducts >
+Company -- ChemicalLaboratory : owns >
+/'Company -- ClinicalAnalysisLaboratory : owns >'/
+Company -- Covid19Data : reports >
+Parameter -- Category : presented under >
+Category -- Administrator : created by >
+Test -- Client : requested by >
+Test -- Application : is known by >
+Test -- TestType : is of >
+Test -- Sample : collects >
+Test -- Parameter : requested analysis of >
+Test -- MedicalLabTechnician : registered by >
+Receptionist -- Client : registers >
+Receptionist -- Test : registers >
+Receptionist - Company : belongs to >
+/'MedicalLabTechnician -- Sample : collects >'/
+/'MedicalLabTechnician -- ClinicalAnalysisLaboratory : belongs to >'/
+MedicalLabTechnician -- Sample : records >
+Sample -- Application : is known >
+Sample -- ChemicalLaboratory : sent to >
+ClinicalChemistryTechnologist -- ChemicalLaboratory : belongs to >
+ClinicalChemistryTechnologist -- Sample : receives >
+ClinicalChemistryTechnologist -- ChemicalAnalysis : performs >
+ClinicalChemistryTechnologist -- ChemicalResult : records >
+LabOrder -- Doctor : prescribed by >
+ChemicalResult -- SpecialistDoctor : analysed by >
+/'SpecialistDoctor - Diagnosis : makes >'/
+SpecialistDoctor -- SpecialistDoctorReport : writes >
+SpecialistDoctorReport -- Client : delivered to >
+SpecialistDoctorReport -- Application : known by >
+SpecialistDoctorReport -- LaboratoryCoordinator : validated by >
+ClinicalResult -- Application : known by >
+ClinicalResult -- LaboratoryCoordinator : validated by >
+Client -- Notification : receives >
+Result -- Client : known by >
+/'Result -- MedicalLabTechnician : known by >
+Result -- ClinicalChemistryTechnologist : known by >
+Result -- SpecialistDoctor : known by >'/
+Result -- LaboratoryCoordinator : known by >
+NHS -- Covid19Data : receives >
+Application -- Covid19Data : generates >
+/'NHSDailyReports -- Covid19Data : part of >
+Forecast -- Covid19Data : part of >'/
+Covid19Test -- TestType : part of >
+Covid19Test -- Parameter : characterized by >
+BloodTest -- TestType : part of >
+BloodTest -- Parameter : characterized by >
+Application -- OtherTest : supports >
+OtherTest -- TestType : part of >
+OtherTest -- Parameter : characterized by >
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
