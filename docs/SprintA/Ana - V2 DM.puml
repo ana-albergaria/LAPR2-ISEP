@@ -1,5 +1,7 @@
 @startuml
 
+/'Adicionei Cliente <-> Resultado'/
+
 skinparam classAttributeIconSize 0
 
 class Test{
@@ -23,8 +25,8 @@ class SpecialistDoctorReport{}
 class Covid19Data{}
 class Forecast{
 - totalCovidNextDay
-- totalCovidWeek
-- totalCovidMonth
+- totalCovidNextWeek
+- totalCovidNextMonth
 }
 class NHSDailyReports{
 - numCovidTests
@@ -92,10 +94,13 @@ Company -[hidden]--> ChemicalLaboratory
 Company -[hidden]--> ClinicalAnalysisLaboratory
 ChemicalLaboratory -[hidden]--> ClinicalAnalysisLaboratory
 MedicalLabTechnician -[hidden]up-|> ClinicalAnalysisLaboratory
+/'Acrescentei a linha abaixo'/
+Receptionist -[hidden]up-|> ClinicalAnalysisLaboratory
 ClinicalChemistryTechnologist -[hidden]> ChemicalLaboratory
 ClinicalChemistryTechnologist -[hidden]up-|> ChemicalLaboratory
 
 Covid19Data -[hidden]down-|> Application
+
 
 
 
@@ -138,7 +143,7 @@ Test "*" -- "1..*" Parameter : requested analysis of >
 Test -- MedicalLabTechnician : registered by >
 Receptionist -- Client : registers >
 Receptionist -- Test : registers >
-Receptionist - Company : belongs to >
+Receptionist - ClinicalAnalysisLaboratory : belongs to >
 MedicalLabTechnician -- Sample : collects >
 MedicalLabTechnician -- ClinicalAnalysisLaboratory : belongs to >
 MedicalLabTechnician -- Sample : records >
@@ -158,7 +163,7 @@ SpecialistDoctorReport -- LaboratoryCoordinator : validated by >
 /'ClinicalResult -- Application : known by >'/
 ClinicalResult -- LaboratoryCoordinator : validated by >
 Client -- Notification : receives >
-/'Result -- Client : known by >'/
+Result -- Client : known by >
 /'Result -- MedicalLabTechnician : known by >'/
 /'Result -- ClinicalChemistryTechnologist : known by >'/
 /'Result -- SpecialistDoctor : known by >'/
