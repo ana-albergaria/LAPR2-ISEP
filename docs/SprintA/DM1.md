@@ -30,7 +30,6 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 **Transaction Records**
 
 * Report (Specialist Doctor);
@@ -39,8 +38,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * Daily reports (NHS);
 
 
----  
-
+--- 
 
 **Roles of People or Organizations**
 
@@ -54,7 +52,6 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 
 ---
-
 
 **Places**
 
@@ -72,13 +69,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 **Physical Objects**
 
 *
 
 ---
-
 
 **Descriptions of Things**
 
@@ -91,13 +86,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 **Catalogs**
 
 *  
 
 ---
-
 
 **Containers**
 
@@ -105,13 +98,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 **Elements of Containers**
 
 *  
 
 ---
-
 
 **Organizations**
 
@@ -126,13 +117,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 **Records of finance, work, contracts, legal matters**
 
 * 
 
 ---
-
 
 **Financial Instruments**
 
@@ -140,14 +129,11 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 ---
 
-
 **Documents mentioned/used to perform some work/**
 
 * Lab order;
 
 ---
-
-
 
 ### **Rationale to identify associations between conceptual classes**
 
@@ -160,8 +146,6 @@ An association is a relationship between instances of objects that indicates a r
 * **_A_** uses or manages or owns **_B_**
 * **_A_** is related with a transaction (item) of **_B_**
 * etc.
-
-
 
 | Concept (A) 		|  Association   	|  Concept (B) |
 |----------	   		|:-------------:		|------:       |
