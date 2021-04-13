@@ -122,7 +122,8 @@ database integrity, resource limits, operating system._
 
 ### Interface Constraints
 _Specifies or constraints the features inherent to the interaction of the
-system being developed with other external systems._
+system being developed with other external systems._  
+
 * “the application uses an external module that is responsible for doing an automatic validation using test reference values”
 * “Client receives a notification alerting that the results are already available in the central application”
 * “The company is also required to generate daily (automatic) reports with all the information demanded by the NHS and should send them to the NHS using their API.” - In this context, the system interacts with the NHS API. It has a different impact in the "Functionality" category, in the "Reporting" subcategory.
