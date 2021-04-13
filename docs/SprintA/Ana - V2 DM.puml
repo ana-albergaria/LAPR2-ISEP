@@ -22,7 +22,7 @@ class ChemicalResult{}
 class Diagnosis{}
 class Parameter{}
 class Notification{}
-class Courier{}
+/'class Courier{}'/
 class SpecialistDoctorReport{}
 class Covid19Data{}
 class Forecast{
@@ -60,7 +60,7 @@ class Administrator{
 - standardOccupationalClassificationCode
 }
 
-class Doctor{}
+/'class Doctor{}'/
 class Receptionist{
 - employeeID
 - organizationRole
@@ -129,7 +129,7 @@ class ChemicalLaboratory{
 
 class Application{}
 class ChemicalAnalysis{}
-class ClinicalAnalysis{}
+/'class ClinicalAnalysis{}'/
 class TestType{
 - **designation**
 }
@@ -151,14 +151,11 @@ class Company{
 - **designation**
 }
 
-class NHS{}
-class NHSAPI{}
-class ExternalModule{}
+/'class NHS{}'/
+class nhsAPI{}
+/'class ExternalModule{}'/
 
-class LabOrder{
-- TestType CLASS
-- Parameter CLASS
-}
+class LabOrder{}
 
 /'LAYOUT PURPOSES'/
 together {
@@ -182,6 +179,7 @@ Covid19Data -[hidden]down-|> Application
 
 
 
+
 together {
 class Client
 class Test
@@ -199,6 +197,15 @@ TestType -[hidden]--> BloodTest
 TestType -[hidden]--> Covid19Test
 TestType -[hidden]--> OtherTest
 
+together {
+class Diagnosis
+class SpecialistDoctorReport
+}
+
+
+
+
+
 
 
 
@@ -210,7 +217,7 @@ Company "1" -- "*" Test : performs >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "1" ChemicalLaboratory : owns >
 Company "1" -- "*" ClinicalAnalysisLaboratory : owns >
-Company -- Covid19Data : reports >
+Company "1" -- "1..*" Covid19Data : reports >
 Parameter "*" -- "1" Category : presented under >
 Category "*" -- "1" Administrator : created by >
 Test "*" -- "1" Client : requested by >
@@ -218,45 +225,51 @@ Test "*" -- "1" Client : requested by >
 Test "*" -- "1" TestType : is of >
 Test "1" -- "*" Sample : collects >
 Test "*" -- "1..*" Parameter : requested analysis of >
-Test -- MedicalLabTechnician : registered by >
-Receptionist -- Client : registers >
-Receptionist -- Test : registers >
-Receptionist - ClinicalAnalysisLaboratory : works for >
-MedicalLabTechnician -- Sample : collects >
-MedicalLabTechnician -- ClinicalAnalysisLaboratory : works for >
-MedicalLabTechnician -- Sample : records >
+Test "*" -- "1..*" MedicalLabTechnician : registered by >
+Test "1" - "1" LabOrder : requested by >
+LabOrder "1..*" -- "1" Client : owns <
+Receptionist "1" -- "*" Client : registers >
+Receptionist "1" -- "*" Test : registers >
+/'PERGUNTAR CLIENTE LINHA ABAIXO'/
+Receptionist "1..*" - "1" ClinicalAnalysisLaboratory : works for >
+MedicalLabTechnician "1" -- "*" Sample : collects >
+MedicalLabTechnician "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
+MedicalLabTechnician "1" -- "*" Sample : records >
 /'Sample -- Application : is known >'/
-Sample -- ChemicalLaboratory : sent to >
-ClinicalChemistryTechnologist -- ChemicalLaboratory : works for >
-ClinicalChemistryTechnologist -- Sample : receives >
-ClinicalChemistryTechnologist -- ChemicalAnalysis : performs >
-ClinicalChemistryTechnologist -- ChemicalResult : records >
+Sample "*" -- "1" ChemicalLaboratory : sent to >
+ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
+ClinicalChemistryTechnologist "1" -- "*" Sample : receives >
+ClinicalChemistryTechnologist "1" -- "*" ChemicalAnalysis : performs >
+ClinicalChemistryTechnologist "1" -- "*" ChemicalResult : records >
 /'LabOrder -- Doctor : prescribed by >'/
-ChemicalResult -- SpecialistDoctor : analysed by >
-SpecialistDoctor - Diagnosis : makes >
-SpecialistDoctor -- SpecialistDoctorReport : writes >
+ChemicalResult "*" -- "1" SpecialistDoctor : analysed by >
+SpecialistDoctor "1" -- "*" Diagnosis : makes >
+SpecialistDoctor "1" -- "*" SpecialistDoctorReport : writes >
 /'SpecialistDoctorReport -- Client : delivered to >'/
 /'SpecialistDoctorReport -- Application : known by >'/
-SpecialistDoctorReport -- LaboratoryCoordinator : validated by >
+SpecialistDoctorReport "*" -- "1" LaboratoryCoordinator : validated by >
 /'ClinicalResult -- Application : known by >'/
 /'ClinicalResult -- LaboratoryCoordinator : validated by >'/
-Client -- Notification : receives >
-Result -- Client : known by >
+Diagnosis "*" -- "1" LaboratoryCoordinator : validated by >
+LaboratoryCoordinator -- Result : confirms
+Client "1" -- "1..*" Notification : receives >
+Result "1..*" -- "1" Client : known by >
 /'Result -- MedicalLabTechnician : known by >'/
 /'Result -- ClinicalChemistryTechnologist : known by >'/
 /'Result -- SpecialistDoctor : known by >'/
 /'Result -- LaboratoryCoordinator : known by >'/
-NHS -- Covid19Data : receives >
-Application -- Covid19Data : generates >
-NHSDailyReports -- Covid19Data : part of >
-Forecast -- Covid19Data : part of >
-Covid19Test -- TestType : part of >
-Covid19Test -- Parameter : characterized by >
-BloodTest -- TestType : part of >
-BloodTest -- Parameter : characterized by >
-Application -- OtherTest : supports >
-OtherTest -- TestType : part of >
-OtherTest -- Parameter : characterized by >
+nhsAPI "1" -- "1..*" Covid19Data : receives >
+Application "1" --- "1..*" Covid19Data : generates >
+NHSDailyReports "1..*" -- "1" Covid19Data : part of >
+Forecast "1" -- "1..*" Covid19Data : part of >
+Covid19Test "*" -- "1" TestType : part of >
+Covid19Test "*" -- "1" Parameter : characterized by >
+BloodTest "*" -- "1" TestType : part of >
+BloodTest "*" -- "3..*" Parameter : characterized by >
+Application "1" - "*" OtherTest : supports >
+Application "1" -- "1" Company : knows <
+OtherTest "*" -- "1" TestType : part of >
+OtherTest "*" -- "1..*" Parameter : characterized by >
 
 
 
