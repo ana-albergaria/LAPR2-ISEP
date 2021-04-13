@@ -10,25 +10,23 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Business Transactions**
 
-* **Test;**
+* Test;
 
 ---
 
-**Transaction Line Itemss**
+**Transaction Line Items**
 
-* **Sample;**
+* Sample;
 * Result;
 * Chemical Result;
-* Clinical Result;
 * Diagnosis;
 
 ---
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-* **Parameter:**
+* Parameter:
 * Notification;
-* Courier;
 
 ---
 
@@ -46,9 +44,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Roles of People or Organizations**
 
-* **Client;**
-* **Administrator;**
-* Doctor;
+* Client;
+* Administrator;
 * Receptionist;
 * Medical lab technician;
 * Clinical chemistry technologist;
@@ -61,8 +58,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Places**
 
-* **Clinical Analysis Laboratory;**
-* **Chemical Laboratory;**
+* Clinical Analysis Laboratory;
+* Chemical Laboratory;
 * Application;
 
 
@@ -71,8 +68,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Noteworthy Events**
 
-* **Chemical Analysis;**
-* Clinical analysis;
+* Chemical Analysis;
 
 ---
 
@@ -86,8 +82,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Descriptions of Things**
 
-* **Type of Test;**
-* **Category;**
+* Type of Test;
+* Category;
 * Covid-19 test;
 * Blood test;
 * Other Test;
@@ -119,17 +115,13 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Organizations**
 
-* **Company;**
-* NHS;
-
+* Company;
 
 ---
 
 **Other External/Collaborating Systems**
 
 * NHS API;
-* External module;
-
 
 
 ---
@@ -173,60 +165,51 @@ An association is a relationship between instances of objects that indicates a r
 
 | Concept (A) 		|  Association   	|  Concept (B) |
 |----------	   		|:-------------:		|------:       |
-| **Company** 	| **performs** 		 	| **Test**  |
-|  | **conducts** | **TestType** |
-|  |**owns** |**Chemical laboratory**|
-|  | **owns** |**Clinical Analysis Laboratory**|
-|  | **conducts**   		 	| **TestType**  |
+| Company 	| performs		 | Test  |
+|  | conducts | TestType |
+|  |owns |Chemical laboratory|
+|  |owns |Clinical Analysis Laboratory|
 |  | reports | Covid-19 Data |
-|  **Parameter**	| **presented under**  		 	| **Category**  |
-|  **Category**	| **created by**		 	| Administrator |
-|  | **presented under** | **Parameter** |
-|  | **created by** | **Administrator** |
-| **Test**	| **requested by**  		 	| **Client** |
-|  |  **is known by** |**Application** |
-|  | **is of** | **TestType**|
-|  | **collects** | **Sample**|
-|  | **requested by** |  **Client**|
-|  | **requestes analysis of** | **Parameter**|
+|  | knows | Application |
+|  Parameter	| presented under  		 	| Category  |
+|  Category	| created by		 	| Administrator |
+| Test	| requested by 		 	| Client |
+|  | is of | TestType|
+|  | collects | Sample|
+|  | requested by |  Lab Order|
+|  | requestes analysis of | Parameter|
 |  | is registered by | Medical Lab Technician |
 |Receptionist | registers | Client |
-|| registers | Test |
+| | registers | Test |
+| | works for | Clinical Analysis Laboratory |
 |Medical Lab Technician | collects | Samples|
-|| belongs to | Clinical Analysis Laboratory|
 | | records the | Samples |
-|Samples | are known by | Application |
-|| are sent to| Chemical laboratory|
-|Clinical chemistry technologist| belongs to | Chemical Laboratory|
-|  |receives  |Sample |
+| | works for | Clinical Analysis Laboratory |
+|Samples| are sent to| Chemical laboratory|
+|Clinical chemistry technologist| works for | Chemical Laboratory|
 | | performs |Chemical analysis|
 | | records |Chemical result|
-|Lab order | prescribed by  | Doctor |
 |Chemical Result| is analysed by| Specialist doctor|
 |Specialist doctor |  makes | Diagnosis |
-|| writes| |Report|
-|Report | is delivered to | Client |
-| | is known by | Application|
-|| is validated by | Laboratory Coordinator |
-|Clinical Result | is known by | Application|
-| | is validated by | Laboratory Coordinator|
+| | writes| Report|
+|Diagnosis | is validated by | Laboratory Coordinator |
+|Report| is validated by | Laboratory Coordinator|
+|Laboratory Coordinator| confirms | Result |
 |Client| receives |Notification|
+| | owns |Lab Order|
 |Result | is known by | Client|
-| | is known by | Medical lab technicians|
-| | is known by | Clinical chemistry technologist|
-| | is known by | Specialist doctor|
-| | is known by | Laboratory coordinator|
-|NHS |receives |Covid-19 Data|
+|NHS API |receives |Covid-19 Data|
 |Application | generates | Covid-19 Data|
 |Daily reports (NHS) | is a part of | Covid-19 Data|
 |Forecasts | is a part of | Covid-19 Data|
 |Covid-19 test | is a part of | TestType|
 | | is characterized by | Parameter|
 |Blood test | is a part of |  TestType|
-|| is characterized by | Parameter|
+| | is characterized by | Parameter|
 |Application | suports | Other Test|
+| | knows | Company |
 |Other Test | is a part of | TestType|
-|| is characterized by | Parameter|
+| | is characterized by | Parameter|
 
 
 
