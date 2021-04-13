@@ -3,6 +3,8 @@
 /'Adicionei Cliente <-> Resultado'/
 
 skinparam classAttributeIconSize 0
+hide empty methods
+hide empty attributes
 
 class Test{
 - **code**
@@ -251,7 +253,7 @@ SpecialistDoctorReport "*" -- "1" LaboratoryCoordinator : validated by >
 /'ClinicalResult -- Application : known by >'/
 /'ClinicalResult -- LaboratoryCoordinator : validated by >'/
 Diagnosis "*" -- "1" LaboratoryCoordinator : validated by >
-LaboratoryCoordinator -- Result : confirms
+LaboratoryCoordinator -- Result : confirms >
 Client "1" -- "1..*" Notification : receives >
 Result "1..*" -- "1" Client : known by >
 /'Result -- MedicalLabTechnician : known by >'/
