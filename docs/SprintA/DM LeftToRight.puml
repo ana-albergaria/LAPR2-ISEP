@@ -1,0 +1,297 @@
+@startuml
+
+/'Adicionei Cliente <-> Resultado'/
+
+skinparam classAttributeIconSize 0
+hide empty methods
+hide empty attributes
+/' ACRESCENTEI AQUI '/
+left to right direction
+
+class Test{
+- code
+- NhsCode
+- createdAt
+
+}
+
+class Sample{
+- barCode
+
+}
+
+class Result{}
+class ChemicalResult{}
+/'class ClinicalResult{}'/
+class Diagnosis{}
+class Parameter{}
+class Notification{}
+/'class Courier{}'/
+class SpecialistDoctorReport{}
+class Covid19Data{}
+class Forecast{
+- totalCovidNextDay
+- totalCovidNextWeek
+- totalCovidNextMonth
+}
+
+class NHSDailyReports{
+- numCovidTests
+- positiveCovid
+- totalCovidDay
+- totalCovidWeek
+- totalCovidMonth
+- totalCovidYear
+}
+
+class Client{
+- name
+- citizenCardNum
+- nhsNum
+- birthDate
+- sex
+- taxIdNum
+- phoneNum
+- email
+}
+class Administrator{
+- employeeID
+- organizationRole
+- name
+- address
+- phone Number
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+/'class Doctor{}'/
+class Receptionist{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class MedicalLabTechnician{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class ClinicalChemistryTechnologist{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class SpecialistDoctor{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+- doctorIndexNumber
+}
+
+class LaboratoryCoordinator{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class ClinicalAnalysisLaboratory{
+- laboratoryID
+- name
+- address
+- phoneNumber
+- numTIN
+}
+
+class ChemicalLaboratory{
+- name
+- address
+- phoneNumber
+- numTIN
+}
+
+class Application{}
+class ChemicalAnalysis{}
+/'class ClinicalAnalysis{}'/
+class TestType{
+- designation
+}
+class Category{
+- code
+- description
+- nhsId
+}
+class Covid19Test{
+}
+class BloodTest{
+
+}
+
+class OtherTest{
+}
+
+class Company{
+- designation
+}
+
+/'class NHS{}'/
+class nhsAPI{}
+/'class ExternalModule{}'/
+
+class LabOrder{}
+
+/'LAYOUT PURPOSES'/
+together {
+class ChemicalLaboratory
+class ClinicalAnalysisLaboratory
+class ChemicalAnalysis
+class Test
+
+
+}
+
+Company -[hidden]--> ChemicalLaboratory
+Company -[hidden]--> ClinicalAnalysisLaboratory
+ChemicalLaboratory -[hidden]--> ClinicalAnalysisLaboratory
+MedicalLabTechnician -[hidden]up-|> ClinicalAnalysisLaboratory
+/'Acrescentei a linha abaixo'/
+ClinicalAnalysisLaboratory -[hidden]-|> Receptionist
+ClinicalChemistryTechnologist -[hidden]up-|> ChemicalLaboratory
+ClinicalAnalysisLaboratory -[hidden]up-|> Receptionist
+
+Covid19Data -[hidden]down-|> Application
+
+
+
+
+
+
+together {
+class Client
+class Test
+}
+
+
+
+together {
+class Covid19Test
+class BloodTest
+class OtherTest
+}
+
+TestType -[hidden]--> BloodTest
+TestType -[hidden]--> Covid19Test
+TestType -[hidden]--> OtherTest
+
+together {
+class Diagnosis
+class SpecialistDoctorReport
+}
+
+LabOrder -[hidden]--> Client
+
+
+
+
+
+
+
+
+/' END OF LAYOUT PURPOSES '/
+
+
+Company "1" -- "*" Test : performs >
+Company "1" -- "*" TestType : conducts >
+Company "1" -- "1" ChemicalLaboratory : owns >
+Company "1" -- "*" ClinicalAnalysisLaboratory : owns >
+Company "1" -- "1..*" Covid19Data : reports >
+Parameter "*" -- "1" Category : presented under >
+Category "*" -- "1" Administrator : created by >
+Test "*" -- "1" Client : requested by >
+/'Test -- Application : is known by >'/
+Test "*" -- "1" TestType : is of >
+Test "1" -- "*" Sample : collects >
+Test "*" -- "1..*" Parameter : requested analysis of >
+Test "*" -- "1..*" MedicalLabTechnician : registered by >
+Test "1" - "1" LabOrder : requested by >
+LabOrder "1..*" -- "1" Client : owns <
+Receptionist "1" -- "*" Client : registers >
+Receptionist "1" -- "*" Test : registers >
+/'PERGUNTAR CLIENTE LINHA ABAIXO'/
+Receptionist "1..*" - "1" ClinicalAnalysisLaboratory : works for >
+MedicalLabTechnician "1" -- "*" Sample : collects >
+MedicalLabTechnician "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
+MedicalLabTechnician "1" -- "*" Sample : records >
+/'Sample -- Application : is known >'/
+Sample "*" -- "1" ChemicalLaboratory : sent to >
+ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
+ClinicalChemistryTechnologist "1" -- "*" Sample : receives >
+ClinicalChemistryTechnologist "1" -- "*" ChemicalAnalysis : performs >
+ClinicalChemistryTechnologist "1" -- "*" ChemicalResult : records >
+/'LabOrder -- Doctor : prescribed by >'/
+ChemicalResult "*" -- "1" SpecialistDoctor : analysed by >
+SpecialistDoctor "1" -- "*" Diagnosis : makes >
+SpecialistDoctor "1" -- "*" SpecialistDoctorReport : writes >
+/'SpecialistDoctorReport -- Client : delivered to >'/
+/'SpecialistDoctorReport -- Application : known by >'/
+SpecialistDoctorReport "*" -- "1" LaboratoryCoordinator : validated by >
+/'ClinicalResult -- Application : known by >'/
+/'ClinicalResult -- LaboratoryCoordinator : validated by >'/
+Diagnosis "*" -- "1" LaboratoryCoordinator : validated by >
+LaboratoryCoordinator -- Result : confirms >
+Client "1" -- "1..*" Notification : receives >
+Result "1..*" -- "1" Client : known by >
+/'Result -- MedicalLabTechnician : known by >'/
+/'Result -- ClinicalChemistryTechnologist : known by >'/
+/'Result -- SpecialistDoctor : known by >'/
+/'Result -- LaboratoryCoordinator : known by >'/
+nhsAPI "1" -- "1..*" Covid19Data : receives >
+Application "1" --- "1..*" Covid19Data : generates >
+NHSDailyReports "1..*" -- "1" Covid19Data : part of >
+Forecast "1" -- "1..*" Covid19Data : part of >
+Covid19Test "*" -- "1" TestType : part of >
+Covid19Test "*" -- "1" Parameter : characterized by >
+BloodTest "*" -- "1" TestType : part of >
+BloodTest "*" -- "3..*" Parameter : characterized by >
+Application "1" - "*" OtherTest : supports >
+Application "1" -- "1" Company : knows <
+OtherTest "*" -- "1" TestType : part of >
+OtherTest "*" -- "1..*" Parameter : characterized by >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
