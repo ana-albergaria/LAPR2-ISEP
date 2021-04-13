@@ -8,15 +8,17 @@ class Test{
 - **code**
 - **NhsCode**
 - **createdAt**
-VER MELHOR
+
 }
+
 class Sample{
-- Client CLASS
 - barCode
+
 }
+
 class Result{}
 class ChemicalResult{}
-class ClinicalResult{}
+/'class ClinicalResult{}'/
 class Diagnosis{}
 class Parameter{}
 class Notification{}
@@ -28,6 +30,7 @@ class Forecast{
 - totalCovidNextWeek
 - totalCovidNextMonth
 }
+
 class NHSDailyReports{
 - numCovidTests
 - positiveCovid
@@ -36,6 +39,7 @@ class NHSDailyReports{
 - totalCovidMonth
 - totalCovidYear
 }
+
 class Client{
 - **name**
 - citizenCardNum
@@ -46,15 +50,83 @@ class Client{
 - phoneNum
 - email
 }
-class Administrator{}
+class Administrator{
+- employeeID
+- organizationRole
+- name
+- address
+- phone Number
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
 class Doctor{}
-class Receptionist{}
-class MedicalLabTechnician{}
-class ClinicalChemistryTechnologist{}
-class SpecialistDoctor{}
-class LaboratoryCoordinator{}
-class ClinicalAnalysisLaboratory{}
-class ChemicalLaboratory{}
+class Receptionist{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class MedicalLabTechnician{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class ClinicalChemistryTechnologist{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class SpecialistDoctor{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+- doctorIndexNumber
+}
+
+class LaboratoryCoordinator{
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class ClinicalAnalysisLaboratory{
+- laboratoryID
+- name
+- address
+- phoneNumber
+- numTIN
+}
+
+class ChemicalLaboratory{
+- name
+- address
+- phoneNumber
+- numTIN
+}
+
 class Application{}
 class ChemicalAnalysis{}
 class ClinicalAnalysis{}
@@ -69,19 +141,25 @@ class Category{
 class Covid19Test{
 }
 class BloodTest{
+
 }
+
 class OtherTest{
 }
+
 class Company{
 - **designation**
 }
+
 class NHS{}
 class NHSAPI{}
 class ExternalModule{}
+
 class LabOrder{
 - TestType CLASS
 - Parameter CLASS
 }
+
 /'LAYOUT PURPOSES'/
 together {
 class ChemicalLaboratory
@@ -143,13 +221,13 @@ Test "*" -- "1..*" Parameter : requested analysis of >
 Test -- MedicalLabTechnician : registered by >
 Receptionist -- Client : registers >
 Receptionist -- Test : registers >
-Receptionist - ClinicalAnalysisLaboratory : belongs to >
+Receptionist - ClinicalAnalysisLaboratory : works for >
 MedicalLabTechnician -- Sample : collects >
-MedicalLabTechnician -- ClinicalAnalysisLaboratory : belongs to >
+MedicalLabTechnician -- ClinicalAnalysisLaboratory : works for >
 MedicalLabTechnician -- Sample : records >
 /'Sample -- Application : is known >'/
 Sample -- ChemicalLaboratory : sent to >
-ClinicalChemistryTechnologist -- ChemicalLaboratory : belongs to >
+ClinicalChemistryTechnologist -- ChemicalLaboratory : works for >
 ClinicalChemistryTechnologist -- Sample : receives >
 ClinicalChemistryTechnologist -- ChemicalAnalysis : performs >
 ClinicalChemistryTechnologist -- ChemicalResult : records >
@@ -161,7 +239,7 @@ SpecialistDoctor -- SpecialistDoctorReport : writes >
 /'SpecialistDoctorReport -- Application : known by >'/
 SpecialistDoctorReport -- LaboratoryCoordinator : validated by >
 /'ClinicalResult -- Application : known by >'/
-ClinicalResult -- LaboratoryCoordinator : validated by >
+/'ClinicalResult -- LaboratoryCoordinator : validated by >'/
 Client -- Notification : receives >
 Result -- Client : known by >
 /'Result -- MedicalLabTechnician : known by >'/
