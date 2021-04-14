@@ -5,7 +5,6 @@
 skinparam classAttributeIconSize 0
 hide empty methods
 hide empty attributes
-/' ACRESCENTEI AQUI '/
 left to right direction
 
 class Test{
@@ -24,7 +23,9 @@ class Result{}
 class ChemicalResult{}
 /'class ClinicalResult{}'/
 class Diagnosis{}
-class Parameter{}
+class Parameter{
+- designation
+}
 class Notification{}
 /'class Courier{}'/
 class SpecialistDoctorReport{}
@@ -161,6 +162,8 @@ class nhsAPI{}
 
 class LabOrder{}
 
+
+
 /'LAYOUT PURPOSES'/
 together {
 class ChemicalLaboratory
@@ -175,14 +178,15 @@ Company -[hidden]--> ChemicalLaboratory
 Company -[hidden]--> ClinicalAnalysisLaboratory
 ChemicalLaboratory -[hidden]--> ClinicalAnalysisLaboratory
 MedicalLabTechnician -[hidden]up-|> ClinicalAnalysisLaboratory
-/'Acrescentei a linha abaixo'/
+
 ClinicalAnalysisLaboratory -[hidden]-|> Receptionist
 ClinicalChemistryTechnologist -[hidden]up-|> ChemicalLaboratory
 ClinicalAnalysisLaboratory -[hidden]up-|> Receptionist
 
 Covid19Data -[hidden]down-|> Application
 
-
+/' ACRESCENTEI AQUI AO RETIRAR TEST REQUESTED BY CLIENT '/
+Covid19Data -[hidden]up-|> Company
 
 
 
@@ -227,8 +231,11 @@ Company "1" -- "1" ChemicalLaboratory : owns >
 Company "1" -- "*" ClinicalAnalysisLaboratory : owns >
 Company "1" -- "1..*" Covid19Data : reports >
 Parameter "*" -- "1" Category : presented under >
+/'ACRESCENTEI LINHA ABAIXO'/
+Parameter "*" -- "1" Administrator : created by >
 Category "*" -- "1" Administrator : created by >
-Test "*" -- "1" Client : requested by >
+/'RETIREI A LINHA ABAIXO TEST IS REQUESTED BY CLIENT'/
+/'Test "*" -- "1" Client : requested by >'/
 /'Test -- Application : is known by >'/
 Test "*" -- "1" TestType : is of >
 Test "1" -- "*" Sample : collects >
