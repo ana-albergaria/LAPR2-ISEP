@@ -17,7 +17,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 **Transaction Line Items**
 
 * Sample;
-* Result;
+* Final Result;
 * Chemical Result;
 * Diagnosis;
 
@@ -178,10 +178,10 @@ An association is a relationship between instances of objects that indicates a r
 | | writes| Report|
 |Diagnosis | is validated by | Laboratory Coordinator |
 |Report| is validated by | Laboratory Coordinator|
-|Laboratory Coordinator| confirms | Result |
+|Laboratory Coordinator| confirms | Final Result |
 |Client| receives |Notification|
 | | owns |Lab Order|
-|Result | is known by | Client|
+|Final Result | is known by | Client|
 |NHS API |receives |Covid-19 Data|
 |Application | generates | Covid-19 Data|
 |Daily reports (NHS) | is a part of | Covid-19 Data|
