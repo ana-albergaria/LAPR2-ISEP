@@ -19,14 +19,16 @@ class Sample{
 
 }
 
-class Result{}
+class FinalResult{}
 class ChemicalResult{}
 /'class ClinicalResult{}'/
 class Diagnosis{}
 class Parameter{
 - designation
 }
-class Notification{}
+class Notification{
+- textDescription
+}
 /'class Courier{}'/
 class SpecialistDoctorReport{}
 class Covid19Data{}
@@ -188,6 +190,9 @@ Covid19Data -[hidden]down-|> Application
 /' ACRESCENTEI AQUI AO RETIRAR TEST REQUESTED BY CLIENT '/
 Covid19Data -[hidden]up-|> Company
 
+Forecast -[hidden]down-|> nhsAPI
+NHSDailyReports -[hidden]down-|> nhsAPI
+
 
 
 
@@ -253,7 +258,7 @@ MedicalLabTechnician "1" -- "*" Sample : records >
 /'Sample -- Application : is known >'/
 Sample "*" -- "1" ChemicalLaboratory : sent to >
 ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
-ClinicalChemistryTechnologist "1" -- "*" Sample : receives >
+/'ClinicalChemistryTechnologist "1" -- "*" Sample : receives >'/
 ClinicalChemistryTechnologist "1" -- "*" ChemicalAnalysis : performs >
 ClinicalChemistryTechnologist "1" -- "*" ChemicalResult : records >
 /'LabOrder -- Doctor : prescribed by >'/
@@ -266,9 +271,9 @@ SpecialistDoctorReport "*" -- "1" LaboratoryCoordinator : validated by >
 /'ClinicalResult -- Application : known by >'/
 /'ClinicalResult -- LaboratoryCoordinator : validated by >'/
 Diagnosis "*" -- "1" LaboratoryCoordinator : validated by >
-LaboratoryCoordinator -- Result : confirms >
+LaboratoryCoordinator -- FinalResult : confirms >
 Client "1" -- "1..*" Notification : receives >
-Result "1..*" -- "1" Client : known by >
+FinalResult "1..*" -- "1" Client : known by >
 /'Result -- MedicalLabTechnician : known by >'/
 /'Result -- ClinicalChemistryTechnologist : known by >'/
 /'Result -- SpecialistDoctor : known by >'/
