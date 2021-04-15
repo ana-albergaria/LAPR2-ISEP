@@ -156,6 +156,7 @@ An association is a relationship between instances of objects that indicates a r
 |  | reports | Covid-19 Data |
 |  | knows | Application |
 |  Parameter	| presented under  		 	| Category  |
+|  | created by         | Administrator
 |  Category	| created by		 	| Administrator |
 | Test	| requested by 		 	| Client |
 |  | is of | TestType|
