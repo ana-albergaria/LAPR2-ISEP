@@ -18,8 +18,8 @@
 | **Diagnosis** | **Diagnóstico** | The act of identifying a disease from its signs and symptoms. |
 | **Doctor** | **Doutor** | A person who is qualified to treat people who are ill |
 | **Headquarters** | **Sede** | It refers to the Many Labs' headquarters located in London. |
-| **Lab Order** | **Prescrição Médica** | Is a health care program implemented by a physician or other qualified health care practitioner in the form of instructions that govern the plan of care for an individual patient.|
 | **Lab** | **Laboratório** | Synonym of laboratory. A room or building with equipment for doing scientific tests or for teaching science, or a place where chemicals or medicines are produced.|
+| **Lab Order** | **Prescrição Médica** | Is a health care program implemented by a physician or other qualified health care practitioner in the form of instructions that govern the plan of care for an individual patient.|
 | **Laboratory** | **Laboratório** | Synonym of lab. A room or building with equipment for doing scientific tests or for teaching science, or a place where chemicals or medicines are produced.|
 | **Many Labs** | **Many Labs** | A fiction English company that has a network of clinical analysis laboratories. |
 | **MLT** | **MLT** | Acronym for Medical Lab Technician. It is a end-users' role. |
