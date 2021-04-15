@@ -190,8 +190,10 @@ Covid19Data -[hidden]down-|> Application
 /' ACRESCENTEI AQUI AO RETIRAR TEST REQUESTED BY CLIENT '/
 Covid19Data -[hidden]up-|> Company
 
-Forecast -[hidden]down-|> nhsAPI
-NHSDailyReports -[hidden]down-|> nhsAPI
+/'ACRESCENTEI ISTO PARA O NHSAPI FICAR EM BAIXO DO Covid19Data'/
+nhsAPI -[hidden]down-|> Covid19Data
+
+
 
 
 
