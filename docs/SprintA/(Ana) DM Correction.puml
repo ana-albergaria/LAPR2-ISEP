@@ -1,0 +1,285 @@
+@startuml
+
+/'Adicionei Cliente <-> Resultado'/
+
+skinparam classAttributeIconSize 0
+hide empty methods
+hide empty attributes
+left to right direction
+
+class Employee {
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class Test{
+- code
+- NhsCode
+- createdAt
+
+}
+
+class Sample{
+- barCode
+
+}
+
+class FinalResult{}
+class ChemicalResult{}
+/'class ClinicalResult{}'/
+class Diagnosis{}
+class Parameter{
+- designation
+}
+class Notification{
+- textDescription
+}
+/'class Courier{}'/
+class SpecialistDoctorReport{}
+class Covid19Report{}
+class Forecast{
+- totalCovidNextDay
+- totalCovidNextWeek
+- totalCovidNextMonth
+}
+
+class NHSDailyReports{
+- numCovidTests
+- positiveCovid
+- totalCovidDay
+- totalCovidWeek
+- totalCovidMonth
+- totalCovidYear
+}
+
+class Client{
+- name
+- citizenCardNum
+- nhsNum
+- birthDate
+- sex
+- taxIdNum
+- phoneNum
+- email
+}
+class Administrator{}
+
+/'class Doctor{}'/
+class Receptionist{}
+
+class MedicalLabTechnician{}
+
+class ClinicalChemistryTechnologist{}
+
+class SpecialistDoctor{
+- doctorIndexNumber
+}
+
+class LaboratoryCoordinator{}
+
+class ClinicalAnalysisLaboratory{
+- laboratoryID
+- name
+- address
+- phoneNumber
+- numTIN
+}
+
+class ChemicalLaboratory{
+- name
+- address
+- phoneNumber
+- numTIN
+}
+
+class Application{}
+class ChemicalAnalysis{}
+/'class ClinicalAnalysis{}'/
+class TestType{
+- designation
+}
+class Category{
+- code
+- description
+- nhsId
+}
+class Covid19Test{
+}
+class BloodTest{
+
+}
+
+class OtherTest{
+}
+
+class Company{
+- designation
+}
+
+/'class NHS{}'/
+class nhsAPI{}
+/'class ExternalModule{}'/
+
+class LabOrder{}
+
+
+
+/'LAYOUT PURPOSES'/
+together {
+class ChemicalLaboratory
+class ClinicalAnalysisLaboratory
+class ChemicalAnalysis
+class Test
+
+
+}
+
+Company -[hidden]--> ChemicalLaboratory
+/'Company -[hidden]--> ClinicalAnalysisLaboratory'/
+ChemicalLaboratory -[hidden]down-|> ClinicalAnalysisLaboratory
+MedicalLabTechnician -[hidden]up-|> ClinicalAnalysisLaboratory
+
+ClinicalAnalysisLaboratory -[hidden]-|> Receptionist
+ClinicalChemistryTechnologist -[hidden]up-|> ChemicalLaboratory
+ClinicalAnalysisLaboratory -[hidden]up-|> Receptionist
+
+Covid19Report -[hidden]down-|> Application
+
+/' ACRESCENTEI AQUI AO RETIRAR TEST REQUESTED BY CLIENT '/
+Covid19Report -[hidden]up-|> Company
+
+/'ACRESCENTEI ISTO PARA O NHSAPI FICAR EM BAIXO DO Covid19Data'/
+nhsAPI -[hidden]down-|> Covid19Report
+
+
+/'Company -[hidden]left-|> Company'/
+
+
+
+together {
+class Client
+class Test
+}
+
+
+
+together {
+class Covid19Test
+class BloodTest
+class OtherTest
+}
+
+/'TestType -[hidden]--> BloodTest
+TestType -[hidden]--> Covid19Test
+TestType -[hidden]--> OtherTest'/
+
+together {
+class Diagnosis
+class SpecialistDoctorReport
+}
+
+LabOrder -[hidden]--> Client
+
+
+
+
+
+
+
+
+
+/' END OF LAYOUT PURPOSES '/
+
+
+Employee "1..*" -- "1" Company : works for >
+Receptionist "1..*" -- "1" Employee : is of >
+MedicalLabTechnician "1..*" -- "1" Employee : is of >
+ClinicalChemistryTechnologist "1..*" -- "1" Employee : is of >
+SpecialistDoctor "1..*" -- "1" Employee : is of >
+LaboratoryCoordinator "1..*" -- "1" Employee : is of >
+Administrator "1..*" -- "1" Employee : is of >
+
+Company "1" -- "*" Test : performs >
+Company "1" -- "*" TestType : conducts >
+Company "1" -- "1" ChemicalLaboratory : owns >
+Company "1" -- "*" ClinicalAnalysisLaboratory : owns >
+Company "1" -- "1..*" Covid19Report : reports >
+Parameter "*" -- "1" Category : presented under >
+/'ACRESCENTEI LINHA ABAIXO'/
+Parameter "*" -- "1" Administrator : created by >
+Category "*" -- "1" Administrator : created by >
+/'RETIREI A LINHA ABAIXO TEST IS REQUESTED BY CLIENT'/
+/'Test "*" -- "1" Client : requested by >'/
+/'Test -- Application : is known by >'/
+Test "*" -- "1" TestType : is of >
+Test "1" -- "*" Sample : collects >
+Test "*" -- "1..*" Parameter : requested analysis of >
+Test "*" -- "1..*" MedicalLabTechnician : registered by >
+Test "1" - "1" LabOrder : requested by >
+LabOrder "1..*" -- "1" Client : owns <
+Receptionist "1" -- "*" Client : registers >
+Receptionist "1" -- "*" Test : registers >
+/'PERGUNTAR CLIENTE LINHA ABAIXO'/
+Receptionist "1..*" - "1" ClinicalAnalysisLaboratory : works for >
+/'MedicalLabTechnician "1" -- "*" Sample : collects >'/
+MedicalLabTechnician "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
+MedicalLabTechnician "1" -- "*" Sample : records >
+/'Sample -- Application : is known >'/
+/'Sample "*" -- "1" ChemicalLaboratory : sent to >'/
+ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
+/'ClinicalChemistryTechnologist "1" -- "*" Sample : receives >'/
+ClinicalChemistryTechnologist "1" -- "*" ChemicalAnalysis : performs >
+ClinicalChemistryTechnologist "1" -- "*" ChemicalResult : records >
+/'LabOrder -- Doctor : prescribed by >'/
+ChemicalResult "*" -- "1" SpecialistDoctor : analysed by >
+SpecialistDoctor "1" -- "*" Diagnosis : makes >
+SpecialistDoctor "1" -- "*" SpecialistDoctorReport : writes >
+/'SpecialistDoctorReport -- Client : delivered to >'/
+/'SpecialistDoctorReport -- Application : known by >'/
+SpecialistDoctorReport "*" -- "1" LaboratoryCoordinator : validated by >
+/'ClinicalResult -- Application : known by >'/
+/'ClinicalResult -- LaboratoryCoordinator : validated by >'/
+Diagnosis "*" -- "1" LaboratoryCoordinator : validated by >
+LaboratoryCoordinator -- FinalResult : confirms >
+Client "1" -- "1..*" Notification : receives >
+FinalResult "1..*" -- "1" Client : known by >
+/'Result -- MedicalLabTechnician : known by >'/
+/'Result -- ClinicalChemistryTechnologist : known by >'/
+/'Result -- SpecialistDoctor : known by >'/
+/'Result -- LaboratoryCoordinator : known by >'/
+nhsAPI "1" -- "1..*" Covid19Report : receives >
+Application "1" --- "1..*" Covid19Report : generates >
+NHSDailyReports "1..*" -- "1" Covid19Report : part of >
+Forecast "1" -- "1..*" Covid19Report : part of >
+/'Covid19Test "*" -- "1" TestType : part of >'/
+/'Covid19Test "*" -- "1" Parameter : characterized by >'/
+/'BloodTest "*" -- "1" TestType : part of >'/
+/'BloodTest "*" -- "3..*" Parameter : characterized by >'/
+Application "1" - "*" TestType : supports >
+Application "1" -- "1" Company : knows <
+/'OtherTest "*" -- "1" TestType : part of >'/
+/'OtherTest "*" -- "1..*" Parameter : characterized by >'/
+
+TestType "*" -- "1" Parameter : characterized by >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml
