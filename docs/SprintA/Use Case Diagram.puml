@@ -22,11 +22,12 @@ CCT --> (UC 8 - Record the chemical analysis results)
 Administrator --> (UC 5 - Specify a new type of test and its collecting methods)
 Administrator --> (UC 6 - Specify a new test parameter and categorize it)
 Administrator --> (UC 7 - Specify a new parameter category)
-SD --> (UC 11 - Make a diagnosis in the system)
-SD --> (UC 12 - Register a report in the system)
-LC --> (UC 9 - Validate the chemical test/result and associated diagnosis)
-LC --> (UC 10 - Post the chemical test/result and associated diagnosis in the central application)
+SD --> (UC 11 - Make a diagnosis)
+SD --> (UC 12 - Register a report)
+LC --> (UC 9 - Validate the chemical test/result)
+LC --> (UC 10 - Post the chemical test/result)
 Application --> (UC 13 - Generate Covid-19 reports)
+(UC 12 - Register a report) --> (UC 11 - Make a diagnosis) #brown;line.dashed;text:black : <<Include>>
 }
 
 
