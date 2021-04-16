@@ -14,17 +14,17 @@ actor Client
 
 rectangle Application {
 Receptionist --> (UC 1 - Register a new client)
-MLT --> (UC 2 - Register all the clinical blood and Covid-19 tests performed)
-Receptionist --> (UC 4 - Register a test to be performed to a registered client)
-MLT --> (UC 5 - Record the samples collected in the scope of a given test)
-CCT --> (UC 6 - Record the chemical analysis results)
-SD --> (UC 7 - Make a diagnosis in the system)
-SD --> (UC 7 - Register a report in the system)
-LC --> (UC 8 - Check the chemical test/result and associated diagnosis)
-LC --> (UC 8 - Post the chemical test/result and associated diagnosis in the central application)
-Administrator --> (UC 9 - Specifiy a new type of test and its collecting methods)
-Administrator --> (UC 10 - Specifiy a new test parameter and categorize it)
-Administrator --> (UC 11 - Specify a new parameter category)
+Receptionist --> (UC 2 - Register a test to be performed to a registered client)
+MLT --> (UC 3 - Register all the clinical blood and Covid-19 tests performed)
+MLT --> (UC 4 - Record the samples collected in the scope of a given test)
+CCT --> (UC 8 - Record the chemical analysis results)
+Administrator --> (UC 5 - Specifiy a new type of test and its collecting methods)
+Administrator --> (UC 6 - Specifiy a new test parameter and categorize it)
+Administrator --> (UC 7 - Specify a new parameter category)
+SD --> (UC 11 - Make a diagnosis in the system)
+SD --> (UC 12 - Register a report in the system)
+LC --> (UC 9 - Check the chemical test/result and associated diagnosis)
+LC --> (UC 10 - Post the chemical test/result and associated diagnosis in the central application)
 
 }
 
