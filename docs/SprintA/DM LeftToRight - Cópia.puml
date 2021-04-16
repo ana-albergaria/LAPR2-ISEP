@@ -7,6 +7,16 @@ hide empty methods
 hide empty attributes
 left to right direction
 
+class Employee {
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
 class Test{
 - code
 - NhsCode
@@ -57,67 +67,20 @@ class Client{
 - phoneNum
 - email
 }
-class Administrator{
-- employeeID
-- organizationRole
-- name
-- address
-- phone Number
-- e-Mail
-- standardOccupationalClassificationCode
-}
+class Administrator{}
 
 /'class Doctor{}'/
-class Receptionist{
-- employeeID
-- organizationRole
-- name
-- address
-- phoneNumber
-- e-Mail
-- standardOccupationalClassificationCode
-}
+class Receptionist{}
 
-class MedicalLabTechnician{
-- employeeID
-- organizationRole
-- name
-- address
-- phoneNumber
-- e-Mail
-- standardOccupationalClassificationCode
-}
+class MedicalLabTechnician{}
 
-class ClinicalChemistryTechnologist{
-- employeeID
-- organizationRole
-- name
-- address
-- phoneNumber
-- e-Mail
-- standardOccupationalClassificationCode
-}
+class ClinicalChemistryTechnologist{}
 
 class SpecialistDoctor{
-- employeeID
-- organizationRole
-- name
-- address
-- phoneNumber
-- e-Mail
-- standardOccupationalClassificationCode
 - doctorIndexNumber
 }
 
-class LaboratoryCoordinator{
-- employeeID
-- organizationRole
-- name
-- address
-- phoneNumber
-- e-Mail
-- standardOccupationalClassificationCode
-}
+class LaboratoryCoordinator{}
 
 class ClinicalAnalysisLaboratory{
 - laboratoryID
@@ -194,7 +157,7 @@ Covid19Data -[hidden]up-|> Company
 nhsAPI -[hidden]down-|> Covid19Data
 
 
-
+/'Company -[hidden]left-|> Company'/
 
 
 
@@ -229,8 +192,17 @@ LabOrder -[hidden]--> Client
 
 
 
+
 /' END OF LAYOUT PURPOSES '/
 
+
+Employee -- Company : works for >
+Receptionist -- Employee : is of >
+MedicalLabTechnician -- Employee : is of >
+ClinicalChemistryTechnologist -- Employee : is of >
+SpecialistDoctor -- Employee : is of >
+LaboratoryCoordinator -- Employee : is of >
+Administrator -- Employee : is of >
 
 Company "1" -- "*" Test : performs >
 Company "1" -- "*" TestType : conducts >
