@@ -14,9 +14,16 @@ However, be aware, this is a pedagogical simplification. On further projects and
 # Use Cases / User Stories
 | UC/US  | Description                                                               |                   
 |:----|:------------------------------------------------------------------------|
-| US1 | [ShortNameOfUS1](US1.md)   |
-| US2 | [ShortNameOfUS2](US2.md)  |
-| US3 | [ShortNameOfUS3](US3.md)|
-| US4 | [ShortNameOfUS4](US4.md)|
-| ... | ...|
-| US326 | [ShortNameOfUS4](US326.md)|
+| US1 | [As a receptionist, I intend to register a new client](US1.md)   |
+| US2 | [As a receptionist, I intend to register a test to be performed to a registered client](US2.md)  |
+| US3 | [As a medical lab technician, I want to register all the clinical blood and Covid-19 tests performed](US3.md)|
+| US4 | [As a medical lab technician, I want to record the samples collected in the scope of a given test](US4.md)|
+| US5 | [As an administrator, I want to specify a new type of test and its collecting methods.](US4.md)|
+| US6 | [As an administrator, I want to specify a new test parameter and categorize it.](US4.md)|
+| US7 | [As an administrator, I want to specify a new parameter category.](US4.md)|
+| US8 | [As a clinical chemistry technologist, I intend to record the chemical analysis results](US4.md)|
+| US9 | [As a Laboratory coordinator, I intend to validate the chemical test/result and associated diagnosis](US4.md)|
+| US10 | [As a Laboratory coordinator, I intend to post the chemical test/result and associated diagnosis in the central application](US4.md)|
+| US11 | [As a Specialist doctor, I want to make a diagnosis in the system](US4.md)|
+| US12 | [As a Specialist doctor, I want to register a report in the system](US4.md)|
+

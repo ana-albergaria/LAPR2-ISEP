@@ -23,7 +23,7 @@ Administrator --> (UC 6 - Specifiy a new test parameter and categorize it)
 Administrator --> (UC 7 - Specify a new parameter category)
 SD --> (UC 11 - Make a diagnosis in the system)
 SD --> (UC 12 - Register a report in the system)
-LC --> (UC 9 - Check the chemical test/result and associated diagnosis)
+LC --> (UC 9 - Validate the chemical test/result and associated diagnosis)
 LC --> (UC 10 - Post the chemical test/result and associated diagnosis in the central application)
 
 }
