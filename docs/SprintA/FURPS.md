@@ -55,6 +55,7 @@ documentation; consistency and standards._
 - “All the images/figures produced during the software development process should be recorded in SVG format.”
 - “To facilitate the access to the results, the application must allow ordering the clients by TIF and by name.”  - In this context, it focus on the usability, that is, the facility with which a user can access the results. It has a different impact in the “Functionality” Category, in the “Printing” subcategory.
 - "The application must support the English language only." - All the application has to be in English, therefore the consistency aspect. It has a different impact in the "Functionality" in the subcategory "Localization".
+- The user interface must be simple, intuitive and consistent.
 
 ### Help and documentation
 - “Therefore, at least two sorting algorithms should be evaluated and documented in the application user manual (in the annexes) that must be delivered with the application.”
@@ -115,7 +116,7 @@ _Specifies or constraints the system design process. Examples may include: progr
 -	“During system development, the team must:  
 (i)	adopt best practices for identifying requirements and for OO software analysis and design;  
 (ii)	adopt recognized coding standards (e.g., CamelCase);  
-(iii)	use Javadoc to generate useful documentation for Java code.”
+(iii)	use Javadoc to generate usefull documentation for Java code.”
 - The Diagrams are to be made in UML.
 
 ### Implementation Constraints
