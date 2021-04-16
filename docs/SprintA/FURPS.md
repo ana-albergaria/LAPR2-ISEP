@@ -89,8 +89,8 @@ _Evaluates the performance requirements of the software, namely: response time, 
 ### System start-up time
 - The system should start up in less than 10 seconds.
 
-### Memory comsuption
-- The application will be deployed to a machine with 8GB of RAM. - In this context, it specifies that the machine which uses the application should have 8GB of RAM.
+### Memory consumption
+- The application will be deployed to a machine with 8GB of RAM. - In this context, it specifies that the machine which uses the application should have 8GB of RAM. It has a different impact in the "Others" in the subcategory "Physical Constraints".
 
 
 ## Supportability
@@ -103,7 +103,7 @@ configurability, installability, scalability and more._
 - "The JaCoCo plugin should be used to generate the coverage report" - In this context, it refers to the necessity of having test coverage. It has a different impact in another context, namely in the “+” category, in the “Design” subcategory.
 
 ### Compatibility
-- The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it informs that the application is only compatible with Java Virtual Machine.
+- The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it informs that the application is only compatible with Java Virtual Machine. It has a different impact in the "Others" in the subcategory "Implementation Constraints".
 
 ## +
 
@@ -134,7 +134,7 @@ database integrity, resource limits, operating system._
 * "For predictions of covid-19, forecasts the linear regression algorithm should be used."
 * "The user authentication password must hold seven alphanumeric characters, including three capital letters and two digits."
 * “It is intended that the choice of the ordering algorithm is based on the algorithm complexity (mainly the execution time).” - In this context, it refers to the necessity of an ordering algorithm. It has a different impact in the "Performance" category in the "Response Time" subcategory.
-* The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it specifies the need of Java Virtual Machine to run the application.
+* The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it specifies the need of Java Virtual Machine to run the application. It has a different impact in the "Supportability" in the subcategory "Compatibility".
 * “use Javadoc to generate useful documentation for Java code.”
 
 ### Interface Constraints
@@ -150,4 +150,4 @@ system being developed with other external systems._
 
 _Specifies a limitation or physical requirement regarding the hardware used to house the system, as for example: material, shape, size or weight._
 
-* The application will be deployed to a machine with 8GB of RAM. - In this context, it limits the hardware of the machine that uses the application.
+* The application will be deployed to a machine with 8GB of RAM. - In this context, it limits the hardware of the machine that uses the application. It has a different impact in the "Performance" in the subcategory "Memory Consumption".
