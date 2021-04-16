@@ -26,4 +26,5 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US10 | [As a Laboratory coordinator, I intend to post the chemical test/result and associated diagnosis in the central application](US4.md)|
 | US11 | [As a Specialist doctor, I want to make a diagnosis in the system](US4.md)|
 | US12 | [As a Specialist doctor, I want to register a report in the system](US4.md)|
+| US13 | [As the Application, I intend to generate Covid-19 reports](US4.md)|
 

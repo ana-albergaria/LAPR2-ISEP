@@ -9,6 +9,7 @@ actor "Clinical Chemistry Technologist" as CCT
 actor "Laboratory Coordinator" as LC
 actor "Specialist Doctor" as SD
 actor Client
+actor Application
 
 
 
@@ -25,7 +26,7 @@ SD --> (UC 11 - Make a diagnosis in the system)
 SD --> (UC 12 - Register a report in the system)
 LC --> (UC 9 - Validate the chemical test/result and associated diagnosis)
 LC --> (UC 10 - Post the chemical test/result and associated diagnosis in the central application)
-
+Application --> (UC 13 - Generate Covid-19 reports)
 }
 
 
