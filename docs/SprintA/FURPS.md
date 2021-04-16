@@ -49,6 +49,7 @@ documentation; consistency and standards._
 
 ### Interface aesthetics and design
 - “All the images/figures produced during the software development process should be recorded in SVG format.” - In this context, the image's format will influence the images' quality in the application. It has a different impact in another context, namely in the “Others (+)” category, in the “Implementation” subcategory.
+- The user interface must be simple, intuitive and consistent.
 
 ### Consistency and standards
 - “All the images/figures produced during the software development process should be recorded in SVG format.”
@@ -68,6 +69,12 @@ In this context, all three points above mention that the two sorting algorithms,
 ## Reliability
 _Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
 
+### Frequency and severity of system failures
+- The system should not fail more than 5 days in one year.
+
+### Disaster recovery possibility
+- Whenever the system fails, there should be no data loss.
+
 ### Accuracy
 - "The application should implement a brute-force algorithm (…) to determine the contiguous subsequence with maximum sum, for any interval of time registered. The implemented algorithm should be analysed in terms of its worst-case time complexity, and it should be compared to a provided benchmark algorithm.” - – In this context, it focus on the results’ accuracy to be provided in order to make the Many Lab’s application performance better. It has a different impact in another context, namely in the “Performance” category and even another impact in the “+” category, in the “Implementation” category.
 
@@ -78,6 +85,13 @@ _Evaluates the performance requirements of the software, namely: response time, 
 - Choice of the ordering algorithm is based on the algorithm complexity (mainly the execution time). - In this context, it focus on the fact that the ordering algorithm is based on the execution time. It has a different impact in the "Others (+)" category in the "Implementation" subcategory.
 - “The complexity analysis must be accompanied by the observation of the execution time of the algorithms for inputs of variable size in order to observe the asymptotic behaviour.”
 - “Therefore, the company wants to decrease the number of tests waiting for its result. To evaluate this, it proceeds as following: (…). Now, the problem consists in determining what the contiguous subsequence of the initial sequence is, whose sum of their entries is maximum. This will show the time interval, in such week, when the company was less effective in responding. (…)"
+- Any interface between a user and the system shall have a maximum response time of 3 seconds.
+
+### System start-up time
+- The system should start up in less than 10 seconds.
+
+### Memory comsuption
+- The application will be deployed to a machine with 8GB of RAM. - In this context, it specifies that the machine which uses the application should have 8GB of RAM.
 
 
 ## Supportability
@@ -88,6 +102,9 @@ configurability, installability, scalability and more._
 ### Testability
 - "The development team must implement unit tests for all methods except methods that implement Input/Output operations." – In this context, it informs the necessity of testing the code. It has a different impact in another context, namely in the “+” category, in the “Implementation” subcategory.
 - "The JaCoCo plugin should be used to generate the coverage report" - In this context, it refers to the necessity of having test coverage. It has a different impact in another context, namely in the “+” category, in the “Design” subcategory.
+
+### Compatibility
+- The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it informs that the application is only compatible with Java Virtual Machine.
 
 ## +
 
@@ -110,7 +127,7 @@ database integrity, resource limits, operating system._
 * "The application must be developed in Java language using the IntelliJ IDE"
 * "The application graphical interface is to be developed in JavaFX 11"
 * "The unit tests should be implemented using the JUnit 4 framework."
-* "The JaCoCo plugin should be used to generate the coverage report." - – In this context, it specifies which plugin is to be used for test coverage. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
+* "The JaCoCo plugin should be used to generate the coverage report." - In this context, it specifies which plugin is to be used for test coverage. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
 * “The development team must implement unit tests for all methods except methods that implement Input/Output operations.” – In this context, it specifies the need for a type of software testing – unit testing. It has a different impact in another context, namely in the “Supportability” category, in the “Testability” subcategory.
 * “All the images/figures produced during the software development process should be recorded in SVG format.” - It is a mandatory standard to have all images in SVG format. It has a different impact in the "Usability" category in the "Interface aesthetics and design" subcategory.
 * "The application should use object serialization to ensure data persistence between two runs of the application."
@@ -119,6 +136,7 @@ database integrity, resource limits, operating system._
 * "For predictions of covid-19, forecasts the linear regression algorithm should be used."
 * "The user authentication password must hold seven alphanumeric characters, including three capital letters and two digits."
 * “It is intended that the choice of the ordering algorithm is based on the algorithm complexity (mainly the execution time).” - In this context, it refers to the necessity of an ordering algorithm. It has a different impact in the "Performance" category in the "Response Time" subcategory.
+* The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it specifies the need of Java Virtual Machine to run the application.
 
 ### Interface Constraints
 _Specifies or constraints the features inherent to the interaction of the
@@ -132,3 +150,5 @@ system being developed with other external systems._
 ### Physical Constraints
 
 _Specifies a limitation or physical requirement regarding the hardware used to house the system, as for example: material, shape, size or weight._
+
+* The application will be deployed to a machine with 8GB of RAM. - In this context, it limits the hardware of the machine that uses the application.
