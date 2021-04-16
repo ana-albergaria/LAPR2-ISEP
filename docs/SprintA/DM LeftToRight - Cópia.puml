@@ -41,7 +41,7 @@ class Notification{
 }
 /'class Courier{}'/
 class SpecialistDoctorReport{}
-class Covid19Data{}
+class Covid19Report{}
 class Forecast{
 - totalCovidNextDay
 - totalCovidNextWeek
@@ -140,21 +140,21 @@ class Test
 }
 
 Company -[hidden]--> ChemicalLaboratory
-Company -[hidden]--> ClinicalAnalysisLaboratory
-ChemicalLaboratory -[hidden]--> ClinicalAnalysisLaboratory
+/'Company -[hidden]--> ClinicalAnalysisLaboratory'/
+ChemicalLaboratory -[hidden]down-|> ClinicalAnalysisLaboratory
 MedicalLabTechnician -[hidden]up-|> ClinicalAnalysisLaboratory
 
 ClinicalAnalysisLaboratory -[hidden]-|> Receptionist
 ClinicalChemistryTechnologist -[hidden]up-|> ChemicalLaboratory
 ClinicalAnalysisLaboratory -[hidden]up-|> Receptionist
 
-Covid19Data -[hidden]down-|> Application
+Covid19Report -[hidden]down-|> Application
 
 /' ACRESCENTEI AQUI AO RETIRAR TEST REQUESTED BY CLIENT '/
-Covid19Data -[hidden]up-|> Company
+Covid19Report -[hidden]up-|> Company
 
 /'ACRESCENTEI ISTO PARA O NHSAPI FICAR EM BAIXO DO Covid19Data'/
-nhsAPI -[hidden]down-|> Covid19Data
+nhsAPI -[hidden]down-|> Covid19Report
 
 
 /'Company -[hidden]left-|> Company'/
@@ -208,7 +208,7 @@ Company "1" -- "*" Test : performs >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "1" ChemicalLaboratory : owns >
 Company "1" -- "*" ClinicalAnalysisLaboratory : owns >
-Company "1" -- "1..*" Covid19Data : reports >
+Company "1" -- "1..*" Covid19Report : reports >
 Parameter "*" -- "1" Category : presented under >
 /'ACRESCENTEI LINHA ABAIXO'/
 Parameter "*" -- "1" Administrator : created by >
@@ -226,11 +226,11 @@ Receptionist "1" -- "*" Client : registers >
 Receptionist "1" -- "*" Test : registers >
 /'PERGUNTAR CLIENTE LINHA ABAIXO'/
 Receptionist "1..*" - "1" ClinicalAnalysisLaboratory : works for >
-MedicalLabTechnician "1" -- "*" Sample : collects >
+/'MedicalLabTechnician "1" -- "*" Sample : collects >'/
 MedicalLabTechnician "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
 MedicalLabTechnician "1" -- "*" Sample : records >
 /'Sample -- Application : is known >'/
-Sample "*" -- "1" ChemicalLaboratory : sent to >
+/'Sample "*" -- "1" ChemicalLaboratory : sent to >'/
 ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
 /'ClinicalChemistryTechnologist "1" -- "*" Sample : receives >'/
 ClinicalChemistryTechnologist "1" -- "*" ChemicalAnalysis : performs >
@@ -252,10 +252,10 @@ FinalResult "1..*" -- "1" Client : known by >
 /'Result -- ClinicalChemistryTechnologist : known by >'/
 /'Result -- SpecialistDoctor : known by >'/
 /'Result -- LaboratoryCoordinator : known by >'/
-nhsAPI "1" -- "1..*" Covid19Data : receives >
-Application "1" --- "1..*" Covid19Data : generates >
-NHSDailyReports "1..*" -- "1" Covid19Data : part of >
-Forecast "1" -- "1..*" Covid19Data : part of >
+nhsAPI "1" -- "1..*" Covid19Report : receives >
+Application "1" --- "1..*" Covid19Report : generates >
+NHSDailyReports "1..*" -- "1" Covid19Report : part of >
+Forecast "1" -- "1..*" Covid19Report : part of >
 Covid19Test "*" -- "1" TestType : part of >
 Covid19Test "*" -- "1" Parameter : characterized by >
 BloodTest "*" -- "1" TestType : part of >

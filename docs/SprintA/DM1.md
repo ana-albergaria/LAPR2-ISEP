@@ -33,8 +33,8 @@ To identify domain conceptual classes, start by making a list of candidate conce
 **Transaction Records**
 
 * Report (Specialist Doctor);
-* Covid-19 Data;
-* Forecasts;
+* Covid-19 Report;
+* Forecast;
 * Daily reports (NHS);
 
 
@@ -153,7 +153,7 @@ An association is a relationship between instances of objects that indicates a r
 |  | conducts | TestType |
 |  |owns |Chemical laboratory|
 |  |owns |Clinical Analysis Laboratory|
-|  | reports | Covid-19 Data |
+|  | reports | Covid-19 Report |
 |  | knows | Application |
 |  Parameter	| presented under  		 	| Category  |
 |  | created by         | Administrator
@@ -168,11 +168,9 @@ An association is a relationship between instances of objects that indicates a r
 |  | is of | Employee|
 | | registers | Test |
 | | works for | Clinical Analysis Laboratory |
-|Medical Lab Technician | collects | Samples|
-|  | is of | Employee|
+|Medical Lab Technician | is of | Employee|
 | | records the | Samples |
 | | works for | Clinical Analysis Laboratory |
-|Samples| are sent to| Chemical laboratory|
 |Clinical chemistry technologist| works for | Chemical Laboratory|
 |  | is of | Employee|
 | | performs |Chemical analysis|
@@ -188,15 +186,15 @@ An association is a relationship between instances of objects that indicates a r
 |Client| receives |Notification|
 | | owns |Lab Order|
 |Final Result | is known by | Client|
-|NHS API |receives |Covid-19 Data|
-|Application | generates | Covid-19 Data|
-|Daily reports (NHS) | is a part of | Covid-19 Data|
-|Forecasts | is a part of | Covid-19 Data|
+|NHS API |receives |Covid-19 Report|
+|Application | generates | Covid-19 Report|
+|Daily reports (NHS) | is a part of | Covid-19 Report|
+|Forecast | is a part of | Covid-19 Report|
 |Covid-19 test | is a part of | TestType|
 | | is characterized by | Parameter|
 |Blood test | is a part of |  TestType|
 | | is characterized by | Parameter|
-|Application | suports | Other Test|
+|Application | supports | Other Test|
 | | knows | Company |
 |Other Test | is a part of | TestType|
 | | is characterized by | Parameter|
