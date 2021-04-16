@@ -49,22 +49,20 @@ documentation; consistency and standards._
 
 ### Interface aesthetics and design
 - “All the images/figures produced during the software development process should be recorded in SVG format.” - In this context, the image's format will influence the images' quality in the application. It has a different impact in another context, namely in the “Others (+)” category, in the “Implementation” subcategory.
-- The user interface must be simple, intuitive and consistent.
+- The user interface must be simple, intuitive and consistent. - In this context, it specifies how the interface should be.
 
 ### Consistency and standards
 - “All the images/figures produced during the software development process should be recorded in SVG format.”
 - “To facilitate the access to the results, the application must allow ordering the clients by TIF and by name.”  - In this context, it focus on the usability, that is, the facility with which a user can access the results. It has a different impact in the “Functionality” Category, in the “Printing” subcategory.
 - "The application must support the English language only." - All the application has to be in English, therefore the consistency aspect. It has a different impact in the "Functionality" in the subcategory "Localization".
-- The user interface must be simple, intuitive and consistent.
+- The user interface must be simple, intuitive and consistent. - In this context, it informs that the application sould be consistent.
 
 ### Help and documentation
 - “Therefore, at least two sorting algorithms should be evaluated and documented in the application user manual (in the annexes) that must be delivered with the application.”
 - “The time complexity analysis of the algorithms should be properly documented in the application user manual (in the annexes) that must be delivered with the application”
 - “The accuracy of the prediction models should be analysed and documented in the application user manual (in the annexes) that must be delivered with the application.”
 
-In this context, all three points above mention that the two sorting algorithms, the time complexity analysis of the algorithms and the accuracy of the prediction models, should be correctly and appropriately documented. It has a different impact in another context, namely in the “Functionality” category, in the “Help” subcategory.  
-
-- “use Javadoc to generate useful documentation for Java code.”
+In this context, all three points above mention that the two sorting algorithms, the time complexity analysis of the algorithms and the accuracy of the prediction models, should be correctly and appropriately documented. It has a different impact in another context, namely in the “Functionality” category, in the “Help” subcategory.
 
 
 ## Reliability
@@ -115,8 +113,7 @@ _Specifies or constraints the system design process. Examples may include: progr
 
 -	“During system development, the team must:  
 (i)	adopt best practices for identifying requirements and for OO software analysis and design;  
-(ii)	adopt recognized coding standards (e.g., CamelCase);  
-(iii)	use Javadoc to generate usefull documentation for Java code.”
+(ii)	adopt recognized coding standards (e.g., CamelCase);”
 - The Diagrams are to be made in UML.
 
 ### Implementation Constraints
@@ -138,6 +135,7 @@ database integrity, resource limits, operating system._
 * "The user authentication password must hold seven alphanumeric characters, including three capital letters and two digits."
 * “It is intended that the choice of the ordering algorithm is based on the algorithm complexity (mainly the execution time).” - In this context, it refers to the necessity of an ordering algorithm. It has a different impact in the "Performance" category in the "Response Time" subcategory.
 * The application should run on all platforms for which there exists a Java Virtual Machine. - In this context, it specifies the need of Java Virtual Machine to run the application.
+* “use Javadoc to generate useful documentation for Java code.”
 
 ### Interface Constraints
 _Specifies or constraints the features inherent to the interaction of the
