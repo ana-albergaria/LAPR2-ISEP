@@ -196,13 +196,13 @@ LabOrder -[hidden]--> Client
 /' END OF LAYOUT PURPOSES '/
 
 
-Employee -- Company : works for >
-Receptionist -- Employee : is of >
-MedicalLabTechnician -- Employee : is of >
-ClinicalChemistryTechnologist -- Employee : is of >
-SpecialistDoctor -- Employee : is of >
-LaboratoryCoordinator -- Employee : is of >
-Administrator -- Employee : is of >
+Employee "1..*" -- "1" Company : works for >
+Receptionist "1..*" -- "1" Employee : is of >
+MedicalLabTechnician "1..*" -- "1" Employee : is of >
+ClinicalChemistryTechnologist "1..*" -- "1" Employee : is of >
+SpecialistDoctor "1..*" -- "1" Employee : is of >
+LaboratoryCoordinator "1..*" -- "1" Employee : is of >
+Administrator "1..*" -- "1" Employee : is of >
 
 Company "1" -- "*" Test : performs >
 Company "1" -- "*" TestType : conducts >

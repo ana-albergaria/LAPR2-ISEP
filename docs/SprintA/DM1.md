@@ -94,7 +94,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Containers**
 
-*  
+*  Employee
 
 ---
 
@@ -165,21 +165,26 @@ An association is a relationship between instances of objects that indicates a r
 |  | requestes analysis of | Parameter|
 |  | is registered by | Medical Lab Technician |
 |Receptionist | registers | Client |
+|  | is of | Employee|
 | | registers | Test |
 | | works for | Clinical Analysis Laboratory |
 |Medical Lab Technician | collects | Samples|
+|  | is of | Employee|
 | | records the | Samples |
 | | works for | Clinical Analysis Laboratory |
 |Samples| are sent to| Chemical laboratory|
 |Clinical chemistry technologist| works for | Chemical Laboratory|
+|  | is of | Employee|
 | | performs |Chemical analysis|
 | | records |Chemical result|
 |Chemical Result| is analysed by| Specialist doctor|
 |Specialist doctor |  makes | Diagnosis |
+|  | is of | Employee|
 | | writes| Report|
 |Diagnosis | is validated by | Laboratory Coordinator |
 |Report| is validated by | Laboratory Coordinator|
 |Laboratory Coordinator| confirms | Final Result |
+|  | is of | Employee|
 |Client| receives |Notification|
 | | owns |Lab Order|
 |Final Result | is known by | Client|
@@ -195,6 +200,11 @@ An association is a relationship between instances of objects that indicates a r
 | | knows | Company |
 |Other Test | is a part of | TestType|
 | | is characterized by | Parameter|
+| Employee | works for | Company|
+| Administrator | is of | Employee|
+
+
+
 
 
 
