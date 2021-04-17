@@ -131,15 +131,12 @@ class NHSAPI{}
 class LabOrder{}
 
 
-
 /'LAYOUT PURPOSES'/
 together {
 class ChemicalLaboratory
 class ClinicalAnalysisLaboratory
 class ChemicalAnalysis
 class Test
-
-
 }
 
 Company -[hidden]--> ChemicalLaboratory
@@ -147,10 +144,9 @@ Company -[hidden]--> ChemicalLaboratory
 /'ChemicalLaboratory -[hidden]down-|> ClinicalAnalysisLaboratory'/
 MedicalLabTechnician -[hidden]up-|> ClinicalAnalysisLaboratory
 ClinicalAnalysisLaboratory -[hidden]up-> Application
-ClinicalAnalysisLaboratory -[hidden]-|> Receptionist
+ClinicalAnalysisLaboratory -[hidden]left-|> Receptionist
+Receptionist -[hidden]left-|> Test
 ClinicalChemistryTechnologist -[hidden]up-|> ChemicalLaboratory
-ClinicalAnalysisLaboratory -[hidden]-|> Receptionist
-
 NHSReport -[hidden]down-|> Application
 
 /' ACRESCENTEI AQUI AO RETIRAR TEST REQUESTED BY CLIENT '/
@@ -162,29 +158,13 @@ NHSAPI -[hidden]down-|> NHSReport
 /'Receptionist -[hidden]up-|> Client'/
 Employee -[hidden]right-|> Company
 
-/'together {
-class Covid19Test
-class BloodTest
-class OtherTest
-}'/
-
-/'TestType -[hidden]--> BloodTest
-TestType -[hidden]--> Covid19Test
-TestType -[hidden]--> OtherTest'/
-
 together {
 class Diagnosis
 class SpecialistDoctorReport
 }
 
-LabOrder -[hidden]down-> Client
+/'LabOrder -[hidden]down-> Client'/
 Diagnosis -[hidden]right-> SpecialistDoctorReport
-
-
-
-
-
-
 
 
 /' END OF LAYOUT PURPOSES '/
@@ -212,9 +192,9 @@ Category "*" -- "1" Administrator : created by >
 Test "*" -- "1" TestType : is of >
 Test "1" -- "1..*" Sample : collects >
 Test "*" -- "1..*" Parameter : requested analysis of >
-Test "*" -- "1..*" MedicalLabTechnician : registered locally by >
+Test "*" --- "1..*" MedicalLabTechnician : registered locally by >
 Test "1" --- "1" LabOrder : requested by >
-LabOrder "1..*" -- "1" Client : owns <
+LabOrder "1..*" --- "1" Client : owns <
 Receptionist "1" -- "*" Client : registers >
 Receptionist "1" -- "*" Test : registers >
 /'PERGUNTAR CLIENTE LINHA ABAIXO'/
@@ -253,7 +233,7 @@ Forecast "1" -- "1" NHSReport : part of >
 /'Covid19Test "*" -- "1" Parameter : characterized by >'/
 /'BloodTest "*" -- "1" TestType : part of >'/
 /'BloodTest "*" -- "3..*" Parameter : characterized by >'/
-Application "1" - "*" TestType : supports >
+/'Application "1" - "*" TestType : supports >'/
 Application "1" -- "1" Company : knows <
 Application "1" - "*" Notification : sends >
 /'OtherTest "*" -- "1" TestType : part of >'/
