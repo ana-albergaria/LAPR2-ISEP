@@ -6,7 +6,7 @@ However, be aware, this is a pedagogical simplification. On further projects and
 
 **Insert below the Use Case Diagram in a SVG format**
 
-![Use Case Diagram](UCD.svg)
+![Use Case Diagram](Use_Case_Diagram.svg)
 
 
 **For each UC/US, it must be provided evidences of applying main activities of the software development process (requirements, analysis, design, tests and code). Gather those evidences on a separate file for each UC/US and set up a link as suggested below.**
@@ -16,15 +16,15 @@ However, be aware, this is a pedagogical simplification. On further projects and
 |:----|:------------------------------------------------------------------------|
 | US1 | [As a receptionist, I intend to register a new client](US1.md)   |
 | US2 | [As a receptionist, I intend to register a test to be performed to a registered client](US2.md)  |
-| US3 | [As a medical lab technician, I want to register all the clinical blood and Covid-19 tests performed](US3.md)|
+| US3 | [As a medical lab technician, I want to register all the clinical tests performed](US3.md)|
 | US4 | [As a medical lab technician, I want to record the samples collected in the scope of a given test](US4.md)|
 | US5 | [As an administrator, I want to specify a new type of test and its collecting methods.](US4.md)|
 | US6 | [As an administrator, I want to specify a new test parameter and categorize it.](US4.md)|
 | US7 | [As an administrator, I want to specify a new parameter category.](US4.md)|
 | US8 | [As a clinical chemistry technologist, I intend to record the chemical analysis results](US4.md)|
 | US9 | [As a Laboratory coordinator, I intend to validate the chemical test/result and associated diagnosis](US4.md)|
-| US10 | [As a Laboratory coordinator, I intend to post the chemical test/result and associated diagnosis in the central application](US4.md)|
-| US11 | [As a Specialist doctor, I want to make a diagnosis in the system](US4.md)|
-| US12 | [As a Specialist doctor, I want to register a report in the system](US4.md)|
+| US10 | [As a Laboratory coordinator, I intend to post the chemical test/result](US4.md)|
+| US11 | [As a Specialist doctor, I want to make a diagnosis](US4.md)|
+| US12 | [As a Specialist doctor, I want to register a report](US4.md)|
 | US13 | [As the Application, I intend to generate Covid-19 reports](US4.md)|
 
