@@ -190,7 +190,6 @@ An association is a relationship between instances of objects that indicates a r
 |Daily Covid-19 Data | is a part of | NHS Report|
 |Forecast | is a part of | NHS Report|
 |TestType | is characterized by | Parameter|
-|Application | supports | TestType|
 | | knows | Company |
 | Employee | works for | Company|
 | Administrator | is of | Employee|
