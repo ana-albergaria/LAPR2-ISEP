@@ -33,9 +33,9 @@ To identify domain conceptual classes, start by making a list of candidate conce
 **Transaction Records**
 
 * Report (Specialist Doctor);
-* Covid-19 Report;
+* NHS Report;
 * Forecast;
-* Daily reports (NHS);
+* Daily Covid-19 Data;
 
 
 --- 
@@ -79,9 +79,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 * Type of Test;
 * Category;
-* Covid-19 test;
-* Blood test;
-* Other Test;
+
 
 
 ---
@@ -153,7 +151,7 @@ An association is a relationship between instances of objects that indicates a r
 |  | conducts | TestType |
 |  |owns |Chemical laboratory|
 |  |owns |Clinical Analysis Laboratory|
-|  | reports | Covid-19 Report |
+|  | reports | NHS Report |
 |  | knows | Application |
 |  Parameter	| presented under  		 	| Category  |
 |  | created by         | Administrator
@@ -186,18 +184,14 @@ An association is a relationship between instances of objects that indicates a r
 |Client| receives |Notification|
 | | owns |Lab Order|
 |Final Result | is known by | Client|
-|NHS API |receives |Covid-19 Report|
-|Application | generates | Covid-19 Report|
-|Daily reports (NHS) | is a part of | Covid-19 Report|
-|Forecast | is a part of | Covid-19 Report|
-|Covid-19 test | is a part of | TestType|
-| | is characterized by | Parameter|
-|Blood test | is a part of |  TestType|
-| | is characterized by | Parameter|
-|Application | supports | Other Test|
+|NHS API |receives |NHS Report|
+|Application | generates | NHS Report|
+| | sends | Notification|
+|Daily Covid-19 Data | is a part of | NHS Report|
+|Forecast | is a part of | NHS Report|
+|TestType | is characterized by | Parameter|
+|Application | supports | TestType|
 | | knows | Company |
-|Other Test | is a part of | TestType|
-| | is characterized by | Parameter|
 | Employee | works for | Company|
 | Administrator | is of | Employee|
 
