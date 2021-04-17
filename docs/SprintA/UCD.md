@@ -4,7 +4,6 @@
 
 However, be aware, this is a pedagogical simplification. On further projects and curricular units might also exist _1 to N **and/or** N to 1 relationships between US and UC.
 
-**Insert below the Use Case Diagram in a SVG format**
 
 ![Use Case Diagram](Use_Case_Diagram.svg)
 
