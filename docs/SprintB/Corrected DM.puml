@@ -223,7 +223,7 @@ MedicalLabTechnician "1" -- "*" Sample : records >
 /'Sample "*" -- "1" ChemicalLaboratory : sent to >'/
 ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
 /'ClinicalChemistryTechnologist "1" -- "*" Sample : receives >'/
-ClinicalChemistryTechnologist "1" -- "*" ChemicalAnalysis : performs >
+ClinicalChemistryTechnologist "1" - "*" ChemicalAnalysis : performs >
 ClinicalChemistryTechnologist "1" -- "*" ChemicalResult : records >
 /'LabOrder -- Doctor : prescribed by >'/
 ChemicalResult "*" -- "1" SpecialistDoctor : analysed by >
