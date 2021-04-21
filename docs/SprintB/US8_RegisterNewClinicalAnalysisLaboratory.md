@@ -24,13 +24,15 @@ kind of test(s) it operates.
 > The samples collected by the network of laboratories are then sent to the chemical laboratory located in the company headquarters and the chemical analysis are performed there.
 
 **From the client clarifications:**
->**Question**: What kind of information does the company store about their employees and owned laboratories?  
+>**Question**: [What kind of information does the company store about their employees and owned laboratories?][Question 1]  
 > **Answer**: Each Clinical Analysis Laboratory is characterized by the following attributes:  
 >Laboratory ID;  
 > Name;  
 > Address;  
 > Phone Number;  
 > TIN number.
+
+[Question 1]:https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7126
 
 
 ### 1.3. Acceptance Criteria
@@ -39,11 +41,26 @@ kind of test(s) it operates.
 
 ### 1.4. Found out Dependencies
 
-*Identify here any found out dependency to other US and/or requirements.*
+There is a dependency to "US009 To specify a new type of test and its collecting methods" since at least a type of test (specifically the blood test) must exist to determine the type of test(s) the clinical analysis laboratory operates.
 
 ### 1.5 Input and Output Data
 
 *Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*
+
+**Input Data:**
+* Typed data:
+  * a Laboratory ID; 
+  * an Address; 
+  * a Phone Number;
+  * a TIN number.  
+
+
+* Selected data:
+  * Determining type(s) of test  
+  
+**Output Data:**
+* List of existing types of test
+* (In)Success of the operation
 
 
 ### 1.6. System Sequence Diagram (SSD)
