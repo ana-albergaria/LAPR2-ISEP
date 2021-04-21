@@ -51,15 +51,13 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 **Input Data:**  
 
 * Typed data:
-  * a Laboratory ID
-  * an Address
-  * a Phone Number
-  * a TIN Number  
-    
+    * a Laboratory ID
+    * an Address
+    * a Phone Number  
+    * a TIN Number
 
 * Selected data:
-    * Determining type(s) of test
-    
+    * Determining type(s) of test    
 
 **Output Data:**
 
