@@ -1,39 +1,32 @@
-# US 008 - Register a new clinical analysis laboratory 
+# US 9 - As an administrator, I want to specify a new type of test and its collecting methods
 
 ## 1. Requirements Engineering
 
 *In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
 
-
 ### 1.1. User Story Description
 
-As an administrator, I want to register a new clinical analysis laboratory stating which
-kind of test(s) it operates.
+As an ***administrator***, I want to specify a **new type of test** and its **collecting methods**
 
 ### 1.2. Customer Specifications and Clarifications 
 
-*Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*
-
 **From the specifications document:**
->_Many Labs_ is an English company that (...) has a network of clinical analysis laboratories in England where analysis of blood (samples are collected) are performed, as well as Covid-19 tests.  
-> 
-> All _Many Labs_ clinical analysis laboratories perform clinical blood tests, and a subset of these laboratories also performs Covid-19 tests.
-> 
-> The set of _Many Labs_ clinical analysis laboratories form a network that covers all England, and it is responsible for collecting samples and interacting with clients.
-> 
-> The samples collected by the network of laboratories are then sent to the chemical laboratory located in the company headquarters and the chemical analysis are performed there.
+>"Once there, a receptionist asks the client’s citizen card number, the lab order (which
+ **contains the type of test** and parameters to be measured)"
+>
+>"Despite being out of scope, the system should be developed having in mind the **need to
+ easily support other kinds of tests (e.g., urine)**. Regardless, such tests rely on measuring one
+ or more parameters that can be grouped/organized by categories."
 
 **From the client clarifications:**
->**Question**: [What kind of information does the company store about their employees and owned laboratories?][Question 1]  
-> **Answer**: Each Clinical Analysis Laboratory is characterized by the following attributes:  
->Laboratory ID;  
-> Name;  
-> Address;  
-> Phone Number;  
-> TIN number.
-
-[Question 1]:https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7126
-
+>Q1: Does a type of test holds any atributte besides it's name and collecting methods?
+>
+>A1:
+>
+>Q2: Are the collecting methods stored simpled as a word or a sentence, or does it also must contain it's description, and/or another attributes?
+>
+>A2:
+>
 
 ### 1.3. Acceptance Criteria
 
@@ -41,27 +34,15 @@ kind of test(s) it operates.
 
 ### 1.4. Found out Dependencies
 
-There is a dependency to "US009 To specify a new type of test and its collecting methods" since at least a type of test (specifically the blood test) must exist to determine the type of test(s) the clinical analysis laboratory operates.
+*Identify here any found out dependency to other US and/or requirements.*
 
 ### 1.5 Input and Output Data
 
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*
-
-**Input Data:**
 * Typed data:
-  * a Laboratory ID; 
-  * an Address; 
-  * a Phone Number;
-  * a TIN number.  
-
-
+    * Name of TestType
+    * Collecting Methods
+    
 * Selected data:
-  * Determining type(s) of test  
-  
-**Output Data:**
-* List of existing types of test
-* (In)Success of the operation
-
 
 ### 1.6. System Sequence Diagram (SSD)
 
