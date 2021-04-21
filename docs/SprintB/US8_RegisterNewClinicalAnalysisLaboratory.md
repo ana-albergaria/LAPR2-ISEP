@@ -45,9 +45,10 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 
 ### 1.5 Input and Output Data
 
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*
+*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*  
 
-**Input Data:**
+
+**Input Data:**  
 
 * Typed data:
   * a Laboratory ID
@@ -55,9 +56,10 @@ There is a dependency to "US009 To specify a new type of test and its collecting
   * a Phone Number
   * a TIN Number
 
-
 * Selected data:
   * Determining type(s) of test
+
+
 
 
 **Output Data:**
