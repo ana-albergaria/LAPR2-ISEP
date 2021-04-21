@@ -28,18 +28,6 @@
 					<version>2.22.0</version>
 				</dependency>
 			</dependencies>
-			<configuration>
-			     <!-- new configuration needed for coverage per test -->
-                            <properties>
-                                  <property>
-                                     <name>listener</name>
-                                     <value>org.sonar.java.jacoco.JUnitListener</value> 
-                                   </property>
-                            </properties>
-				<includes>
-					<include>**/*.java</include>
-				</includes>
-			</configuration>
 			<!-- <dependencies>-->
                         <!-- This dependency must be included, otherwise Maven Surefire will not recognise the test cases -->
 				<!-- <dependency>
@@ -82,12 +70,10 @@
 			<targetClasses>
 				<param>app.domain.model.*</param>
 				<param>app.utils.*</param>
-				<param>app.controller.*</param>
 			</targetClasses>
 			<targetTests>
 				<param>app.domain.model.*</param>
 				<param>app.utils.*</param>
-				<param>app.controller.*</param>
 			</targetTests>
 			<outputFormats>
 				<outputFormat>XML</outputFormat>
