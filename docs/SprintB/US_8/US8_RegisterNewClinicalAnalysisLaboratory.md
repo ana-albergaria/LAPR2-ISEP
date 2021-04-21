@@ -1,17 +1,16 @@
 # US 008 - Register a new clinical analysis laboratory 
-
+ 
 ## 1. Requirements Engineering
-
-*In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
-
-
+ 
+*In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.* 
+ 
 ### 1.1. User Story Description
-
+ 
 As an administrator, I want to register a new clinical analysis laboratory stating which
 kind of test(s) it operates.
-
+ 
 ### 1.2. Customer Specifications and Clarifications 
-
+ 
 *Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*
 
 **From the specifications document:**
@@ -45,6 +44,7 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 
 ### 1.5 Input and Output Data
 
+
 *Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*  
 
 
@@ -54,19 +54,17 @@ There is a dependency to "US009 To specify a new type of test and its collecting
   * a Laboratory ID
   * an Address
   * a Phone Number
-  * a TIN Number
+  * a TIN Number  
+    
 
 * Selected data:
-  * Determining type(s) of test
-
-
-
+    * Determining type(s) of test
+    
 
 **Output Data:**
 
 * List of existing types of test
 * (In)Success of the operation
-
 
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -93,7 +91,6 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 *Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
 
 
-
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
@@ -113,13 +110,13 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+* Class1
+* Class2
+* Class3
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+* xxxxUI  
+* xxxxController
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -140,10 +137,10 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+@Test(expected = IllegalArgumentException.class)
+    public void ensureNullIsNotAllowed() {
+    Exemplo instance = new Exemplo(null, null);
+}
 
 *It is also recommended to organize this content by subsections.* 
 
@@ -161,8 +158,4 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 7. Observations
 
 *In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
-
-
-
-
-
+  

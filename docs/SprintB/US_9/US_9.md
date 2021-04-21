@@ -1,85 +1,48 @@
-# US 10 - to specify a new parameter and categorize it
+# US 9 - As an administrator, I want to specify a new type of test and its collecting methods
 
 ## 1. Requirements Engineering
 
+*In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
 
 ### 1.1. User Story Description
 
-
-As an administrator, I want to specify a new parameter and categorize it.
-
-
+As an ***administrator***, I want to specify a **new type of test** and its **collecting methods**
 
 ### 1.2. Customer Specifications and Clarifications 
 
-
 **From the specifications document:**
-
-> "Blood tests are frequently characterized by measuring several parameters which for presentation/reporting purposes are organized by categories. For example, parameters such as the number of Red Blood Cells (RBC), White Blood Cells (WBC) and Platelets (PLT) are usually presented under the blood count (Hemogram) category"
-
-
-> "Covid tests are characterized by measuring a single parameter stating whether it is a positive or a negative result"
-
-
-> "tests rely on measuring one or more parameters that can be grouped/organized by categories"
-
-
+>"Once there, a receptionist asks the client’s citizen card number, the lab order (which
+ **contains the type of test** and parameters to be measured)"
+>
+>"Despite being out of scope, the system should be developed having in mind the **need to
+ easily support other kinds of tests (e.g., urine)**. Regardless, such tests rely on measuring one
+ or more parameters that can be grouped/organized by categories."
 
 **From the client clarifications:**
-
-> **Question:** "What is the data that characterize a parameter?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
-
--
-
-> **Question:** "Should we follow the same data as the parameter category, for example, would each parameter have its own code, description and NHS identifier?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
-
--
-
-> **Question:** "Is there any acceptance criteria for these data other than those shown in the US11 of the parameter category?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
-
+>Q1: Does a type of test holds any atributte besides it's name and collecting methods?
+>
+>A1:
+>
+>Q2: Are the collecting methods stored simpled as a word or a sentence, or does it also must contain it's description, and/or another attributes?
+>
+>A2:
+>
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** xxx.
-* **AC2:** yyy.
-* **AC3:** zzz.
-
+*Insert here the client acceptance criteria.*
 
 ### 1.4. Found out Dependencies
 
-
-* There is a dependency to "US 11 To specify a new parameter category" since the parameter categories must exist to categorize new parameters.
-
+*Identify here any found out dependency to other US and/or requirements.*
 
 ### 1.5 Input and Output Data
 
-
-**Input Data:**
-
 * Typed data:
-	* xxx 
-	* yyy
-	
+    * Name of TestType
+    * Collecting Methods
+    
 * Selected data:
-	* zzz
-
-
-**Output Data:**
-
-* (In)Sucess of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
