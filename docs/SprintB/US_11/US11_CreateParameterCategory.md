@@ -1,54 +1,80 @@
-# US 9 - As an administrator, I want to specify a new type of test and its collecting methods
+# US 11 - to specify a new parameter category
 
 ## 1. Requirements Engineering
 
-*In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
 
 ### 1.1. User Story Description
 
-As an ***administrator***, I want to specify a **new type of test** and its **collecting methods**
+
+As an administrator, I want to specify a new parameter category.
+
+
 
 ### 1.2. Customer Specifications and Clarifications 
 
+
 **From the specifications document:**
->"Once there, a receptionist asks the client’s citizen card number, the lab order (which
- **contains the type of test** and parameters to be measured)"
->
->"Despite being out of scope, the system should be developed having in mind the **need to
- easily support other kinds of tests (e.g., urine)**. Regardless, such tests rely on measuring one
- or more parameters that can be grouped/organized by categories."
+
+> “Blood tests are frequently characterized by measuring several parameters which for presentation/reporting purposes are organized by categories. For example, parameters such as the number of Red Blood Cells (RBC), White Blood Cells (RBC) and Platelets (PLT) are usually presented under the blood count (Hemogram) category.”
+
+
+> “Regardless, such tests rely on measuring one or more parameters that can be grouped/organized by categories.”
+
+
 
 **From the client clarifications:**
->Q1: Does a type of test holds any atributte besides it's name and collecting methods?
+
+> **Question:** xxx.
 >
->A1:
+> **Answer:** yyyy.
+
+>Read the whole answer [here](zzz).
+
+-
+
+> **Question:** xxx.
 >
->Q2: Are the collecting methods stored simpled as a word or a sentence, or does it also must contain it's description, and/or another attributes?
->
->A2:
->
+> **Answer:** yyyy.
+
+>Read the whole answer [here](zzz).
+
 
 ### 1.3. Acceptance Criteria
 
-*Insert here the client acceptance criteria.*
+
+* **AC1:** Code must be unique having 4 to 8 chars.
+* **AC2:** Description cannot be empty and has, at maximum, 40 chars.
+* **AC3:** NHS identifier is not mandatory.
+
 
 ### 1.4. Found out Dependencies
 
-*Identify here any found out dependency to other US and/or requirements.*
+
+* No dependencies were found.
+
 
 ### 1.5 Input and Output Data
 
+
+**Input Data:**
+
 * Typed data:
-    * Name of TestType
-    * Collecting Methods
-    
+	* code
+	* description
+	* NHS identifier
+	
 * Selected data:
+	* (none)
+
+
+**Output Data:**
+
+* (In)Sucess of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-*Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
 
-![US9_SSD](US9_SSD.svg)
+![US011_SSD](US011_SSD.svg)
 
 
 ### 1.7 Other Relevant Remarks
@@ -59,9 +85,10 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
 
-![USXX-MD](USXX-MD.svg)
+
+![US011_MD](US011_MD.svg)
+
 
 ### 2.2. Other Remarks
 
@@ -98,9 +125,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
 
-![USXX-SD](USXX-SD.svg)
+![US011_SD](US011_SD.svg)
+
 
 ## 3.3. Class Diagram (CD)
 

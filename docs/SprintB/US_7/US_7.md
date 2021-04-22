@@ -1,85 +1,56 @@
-# US 10 - to specify a new parameter and categorize it
+# US 7 - As an administrator, I want to register a new employee
 
 ## 1. Requirements Engineering
 
+*In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
 
 ### 1.1. User Story Description
 
-
-As an administrator, I want to specify a new parameter and categorize it.
-
-
+As an ***administrator***, I want to **register** a new **employee**
 
 ### 1.2. Customer Specifications and Clarifications 
 
-
 **From the specifications document:**
 
-> "Blood tests are frequently characterized by measuring several parameters which for presentation/reporting purposes are organized by categories. For example, parameters such as the number of Red Blood Cells (RBC), White Blood Cells (WBC) and Platelets (PLT) are usually presented under the blood count (Hemogram) category"
-
-
-> "Covid tests are characterized by measuring a single parameter stating whether it is a positive or a negative result"
-
-
-> "tests rely on measuring one or more parameters that can be grouped/organized by categories"
-
-
-
 **From the client clarifications:**
-
-> **Question:** "What is the data that characterize a parameter?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
-
--
-
-> **Question:** "Should we follow the same data as the parameter category, for example, would each parameter have its own code, description and NHS identifier?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
-
--
-
-> **Question:** "Is there any acceptance criteria for these data other than those shown in the US11 of the parameter category?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
+>Q1: "Hello,
+      What kind of information does the company store about their employees and owned laboratories?
+      Are there common attributes between the roles below? If so, which ones? (i.e. employee ID, TIN, contact info, etc.)
+      Receptionist,cClinical Chemistry Technologist, Medical Lab Technician, Specialist Doctor, Lab Coordinator, Administrator"
+>
+>A1: "All the roles that exist in the Many Labs company are characterized by the following attributes:
+      Employee ID;
+      Organization Role;
+      Name;
+      Address;
+      Phone Number;
+      E-Mail;
+      Standard Occupational Classification (SOC) code.
+      The Specialist Doctor has an additional attribute: Doctor Index Number."
+>
 
 
 ### 1.3. Acceptance Criteria
 
-
-* **AC1:** xxx.
-* **AC2:** yyy.
-* **AC3:** zzz.
-
+* AC1:  "Each user must have a single role defined in the system."
+* AC2:  "The "auth" component available on the repository must be reused (without modifications)"
 
 ### 1.4. Found out Dependencies
 
-
-* There is a dependency to "US 11 To specify a new parameter category" since the parameter categories must exist to categorize new parameters.
-
+*Identify here any found out dependency to other US and/or requirements.*
 
 ### 1.5 Input and Output Data
 
-
-**Input Data:**
-
 * Typed data:
-	* xxx 
-	* yyy
-	
+    * Employee ID
+    * Organization Role
+    * Name
+    * Adress
+    * Phone Number
+    * E-mail
+    * SOC code
+    * Doctor Index Number
 * Selected data:
-	* zzz
-
-
-**Output Data:**
-
-* (In)Sucess of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -87,11 +58,9 @@ As an administrator, I want to specify a new parameter and categorize it.
 
 ![USXX-SSD](USXX-SSD.svg)
 
-
 ### 1.7 Other Relevant Remarks
 
 *Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
-
 
 ## 2. OO Analysis
 
