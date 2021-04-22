@@ -48,7 +48,7 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 *Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
 
-![USXX-SSD](USXX-SSD.svg)
+![US9_SSD](US9_SSD.svg)
 
 
 ### 1.7 Other Relevant Remarks
