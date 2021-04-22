@@ -71,8 +71,8 @@ As an administrator, I want to specify a new parameter and categorize it.
 **Input Data:**
 
 * Typed data:
-	* (parameter atributes)
-	* yyy
+	* designation
+	* (other parameter atributes)
 	
 * Selected data:
 	* Parameter category
