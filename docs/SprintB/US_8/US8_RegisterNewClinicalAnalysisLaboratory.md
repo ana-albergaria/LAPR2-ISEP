@@ -23,7 +23,7 @@ kind of test(s) it operates.
 > The samples collected by the network of laboratories are then sent to the chemical laboratory located in the company headquarters and the chemical analysis are performed there.
 
 **From the client clarifications:**
->**Question**: [What kind of information does the company store about their employees and owned laboratories?][Question 1]  
+>**Question**: What kind of information does the company store about their employees and owned laboratories?  
 > **Answer**: Each Clinical Analysis Laboratory is characterized by the following attributes:  
 >Laboratory ID;  
 > Name;  
@@ -31,7 +31,9 @@ kind of test(s) it operates.
 > Phone Number;  
 > TIN number.
 
-[Question 1]:https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7126
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7126).
+
+
 
 
 ### 1.3. Acceptance Criteria
@@ -97,12 +99,18 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
+| Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
+| 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
+| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Laboratory | Creator (Rule 1): in the DM, CAL is part of Laboratory.                            |
+| 			  		 |	**...knowing the user using the system?** |  |                              |
+| 			  		 |	**...knowing to which Company the user belongs to?** | **Application** | **IE: has registed all Companies**                           |
+| Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction                             |
+| Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created has its own data as well as inherits attributes from Laboratory class.                             |
+| Step 4:   		 |							 |             |                              |
 | Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |              
+| Step 6  		 |							 |             |                              |
+| Step 7  		 |							 |             |                              |
+| Step 8: informs operation success  		 |	...informing operation success?						 | RegisterNewCalUI            | IE: responsible for user interaction                                 |
 
 ### Systematization ##
 

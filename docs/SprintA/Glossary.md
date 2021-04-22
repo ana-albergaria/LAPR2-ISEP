@@ -9,6 +9,7 @@
 | **Barcode** | **Código de Barras** | A machine-readable code in the form of numbers and a pattern of parallel lines of varying widths, printed on a commodity and used especially for stock control.  |
 | **Benchmark Algorithm** | **Algoritmo de Referência** | It refers to the algorithm with which the brute-force algorithm should be compared to. |
 | **Brute-force Algorithm** | **Algoritmo de Força Bruta** | It refers to the algorithm, which examines each subsequence, to determine the contiguous subsequence with maximum sum, for any interval of time registered. |
+| **CAL** | **CAL** | Acronym for Clinical Analysis Laboratory. It refers to the laboratory where the clinical analysis are performed. It is also responsible for collecting samples and interacting with clients.
 | **Chemical Analysis** | **Análises Quimicas** | Determination of the physical properties or chemical composition of samples of matter. |
 | **Chemical Laboratory** | **Laboratório de analises químicas** | A room or building equipped for scientific experimentation or research. |
 | **Client** | **Cliente** | It refers to the person requesting a clinical analysis test. |
