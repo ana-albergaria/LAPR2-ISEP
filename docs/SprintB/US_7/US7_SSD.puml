@@ -1,0 +1,28 @@
+@startuml
+autonumber
+actor Administrator as A
+
+activate A
+A -> ":System" : asks to create a new employee
+activate ":System"
+":System" --> A : requests data (employeeId, organizationRole, name,address, phoneNumber, eMail, socCode, DoctorIndexNumber)
+deactivate ":System"
+
+A -> ":System" : types requested data
+activate ":System"
+":System" --> A : shows collecting methods list and  ask to select one or more
+deactivate ":System"
+/'down here it still todo: '/
+A -> ":System" : selects collecting methods
+activate ":System"
+":System" --> A : shows all data and requests confirmation
+deactivate ":System"
+
+A -> ":System" : confirms the data
+activate ":System"
+":System" --> A : informs operation success
+deactivate ":System"
+
+deactivate A
+
+@enduml

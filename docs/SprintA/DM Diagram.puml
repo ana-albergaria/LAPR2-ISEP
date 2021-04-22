@@ -22,7 +22,6 @@ class Test{
 - code
 - NhsCode
 - createdAt
-
 }
 
 class Sample{
@@ -104,7 +103,7 @@ class ChemicalAnalysis{}
 class TestType{
 - designation
 }
-class Category{
+class Category{ 
 - code
 - description
 - nhsId
