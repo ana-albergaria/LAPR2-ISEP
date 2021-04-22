@@ -16,13 +16,13 @@ As an administrator, I want to specify a new parameter and categorize it.
 
 **From the specifications document:**
 
-> "Blood tests are frequently characterized by measuring several parameters which for presentation/reporting purposes are organized by categories. For example, parameters such as the number of Red Blood Cells (RBC), White Blood Cells (WBC) and Platelets (PLT) are usually presented under the blood count (Hemogram) category"
+> "Blood tests are frequently characterized by measuring several parameters which for presentation/reporting purposes are organized by categories. For example, parameters such as the number of Red Blood Cells (RBC), White Blood Cells (WBC) and Platelets (PLT) are usually presented under the blood count (Hemogram) category."
+
+
+> “Regardless, such tests rely on measuring one or more parameters that can be grouped/organized by categories.”
 
 
 > "Covid tests are characterized by measuring a single parameter stating whether it is a positive or a negative result"
-
-
-> "tests rely on measuring one or more parameters that can be grouped/organized by categories"
 
 
 

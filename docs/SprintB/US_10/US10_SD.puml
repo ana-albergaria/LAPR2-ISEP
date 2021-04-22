@@ -1,0 +1,6 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADM
+
+@enduml

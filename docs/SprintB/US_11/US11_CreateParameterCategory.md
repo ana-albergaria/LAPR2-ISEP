@@ -24,11 +24,11 @@ As an administrator, I want to specify a new parameter category.
 
 **From the client clarifications:**
 
-> **Question:** xxx.
+> **Question:** Should each parameter category have a state regarding the number of parameters under that category?
 >
 > **Answer:** yyyy.
 
->Read the whole answer [here](zzz).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7610#p9903).
 
 -
 
@@ -104,11 +104,15 @@ As an administrator, I want to specify a new parameter category.
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
+| Step 1  		 |	... interacting with the actor? | CreateParameterCategoryUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|       	   	 |	... coordinating the US? | CreateParameterCategoryController | Controller |
+|       	   	 |	... instantiating a new Parameter Category? | Company | Creator (Rule 1/2): in the DM Organization adopts a Parameter Category. |
 | Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
+| Step 3  		 |	...saving the input data? | Parameter Category | IE: The object created in step 1 has its own data. |
+|       	   	 |	... informing operation sucess? | UI | IE: responsible for user interaction |
+| Step 4  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Parameter Category | IE: knows its own data. |
+|       	   	 |	... validating the data globally (e.g.: duplicated)? | Company | IE: knows all the ParameterCategory objects |
+| Step 5  		 |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
 | Step 6  		 |							 |             |                              |              
 
 ### Systematization ##
@@ -131,9 +135,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.3. Class Diagram (CD)
 
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
-![USXX-CD](USXX-CD.svg)
+![US011_CD](US011_CD.svg)
+
 
 # 4. Tests 
 *In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
