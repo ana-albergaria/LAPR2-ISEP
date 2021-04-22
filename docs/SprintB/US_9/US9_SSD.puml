@@ -1,0 +1,28 @@
+@startuml
+autonumber
+actor Administrator as A
+
+activate A
+A -> ":System" : asks to specify a new type of test
+activate ":System"
+":System" --> A : requests data (TestTypeName)
+deactivate ":System"
+
+A -> ":System" : types requested data
+activate ":System"
+":System" --> A : shows collecting methods list and  ask to select one or more
+deactivate ":System"
+
+A -> ":System" : selects collecting methods
+activate ":System"
+":System" --> A : shows all data and requests confirmation
+deactivate ":System"
+
+A -> ":System" : confirms the data
+activate ":System"
+":System" --> A : informs operation success
+deactivate ":System"
+
+deactivate A
+
+@enduml
