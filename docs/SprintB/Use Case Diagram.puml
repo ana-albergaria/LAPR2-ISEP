@@ -17,8 +17,8 @@ rectangle System {
 Receptionist --> (UC 2 - Register a test to be performed)
 (UC 2 - Register a test to be performed) --> (UC 1 - Register a new client) #brown;line.dashed;text:black : <<Include>>
 MLT --> (UC 3 - Register the clinical test performed)
-MLT --> (UC 4 - Record the samples collected in the scope of a given test)
-CCT --> (UC 8 - Record the chemical analysis results)
+MLT --> (UC 4 - Record the sample collected in the scope of a given test)
+CCT --> (UC 8 - Record the chemical analysis result)
 Administrator --> (UC 5 - Specify a new type of test and its collecting methods)
 Administrator --> (UC 6 - Specify a new test parameter and categorize it)
 Administrator --> (UC 7 - Specify a new parameter category)

@@ -178,9 +178,9 @@ Diagnosis -[hidden]right-> SpecialistDoctorReport
 
 /' END OF LAYOUT PURPOSES '/
 
-ChemicalLaboratory -- Laboratory : part of >
-Company -- Laboratory : owns >
-ClinicalAnalysisLaboratory -- Laboratory : part of >
+ChemicalLaboratory "1" -- "1" Laboratory : is of >
+Company "1" -- "3..*" Laboratory : owns >
+ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >
 
 
 
@@ -209,15 +209,16 @@ Category "*" -- "1" Administrator : created by >
 Test "*" -- "1" TestType : is of >
 Test "1" -- "1..*" Sample : collects >
 Test "*" -- "1..*" Parameter : requested analysis of >
-Test "*" --- "1..*" MedicalLabTechnician : registered locally by >
-Test "1" --- "1" LabOrder : requested by >
-LabOrder "1..*" --- "1" Client : owns <
+/'PROFFESSOR CORREÇÃO'/
+/'Test "*" --- "1..*" MedicalLabTechnician : registered locally by >'/
+Test "1" --- "1" LabOrder : originates <
+LabOrder "1..*" --- "1" Client : provided by >
 Receptionist "1" -- "*" Client : registers >
 Receptionist "1" -- "*" Test : registers >
 /'PERGUNTAR CLIENTE LINHA ABAIXO'/
 Receptionist "1..*" - "1" ClinicalAnalysisLaboratory : works for >
 /'MedicalLabTechnician "1" -- "*" Sample : collects >'/
-MedicalLabTechnician "1..*" - "1" ClinicalAnalysisLaboratory : works for >
+MedicalLabTechnician "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
 MedicalLabTechnician "1" -- "*" Sample : records >
 /'Sample -- Application : is known >'/
 /'Sample "*" -- "1" ChemicalLaboratory : sent to >'/
