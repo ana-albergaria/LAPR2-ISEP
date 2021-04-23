@@ -3,4 +3,21 @@ autonumber
 'hide footbox
 actor "Administrator" as ADM
 
+participant ":CreateParameterUI" as UI
+participant ":CreateParameterController" as CTRL
+participant ":Company" as CMP
+participant "prm: Parameter" as PRM
+
+activate ADM
+ADM -> UI : asks to create a new parameter
+activate UI
+UI --> ADM : requests data(i.e., designation, ???)
+deactivate UI
+
+ADM -> UI : types requested data
+activate UI
+
+UI -> CTRL : createParameter(designation, ???)
+activate CTRL
+
 @enduml
