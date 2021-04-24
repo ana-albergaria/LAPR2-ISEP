@@ -104,12 +104,14 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 | 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Laboratory | Creator (Rule 1): in the DM, CAL is part of Laboratory.                            |
 | 			  		 |	**...knowing the user using the system?** |  |                              |
 | 			  		 |	**...knowing to which Company the user belongs to?** | **Application** | **IE: has registed all Companies**                           |
+| 			  		 |	 | **Company** | **IE: knows/has its own Employees**                           |
+| 			  		 |	 | **<span style="color:red">Employee</span>** | **IE: knows/has its own data**                           |
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction                             |
-| Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created has its own data as well as inherits attributes from Laboratory class.                             |
-| Step 4:   		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |
-| Step 7  		 |							 |             |                              |
+| Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class                             |
+| Step 4: shows types of test list and asks to select at least one   		 |	...knowing the types of test to show?						 |   Company          |  **<span style="color:red">IE: Types of test are adopted by the Company </span>**                          |
+| Step 5: selects type(s) of test  		 |							 |             |                              |
+| Step 6: shows all data and requests confirmation  		 |							 |             |                              |
+| Step 7: confirms the data  		 |							 |             |                              |
 | Step 8: informs operation success  		 |	...informing operation success?						 | RegisterNewCalUI            | IE: responsible for user interaction                                 |
 
 ### Systematization ##
