@@ -8,7 +8,8 @@ participant ":RegisterNewCalController" as CTRL
 participant "App" as _APP
 participant "app\n:App" as APP
 participant "session\n:UserSession" as SESSAO
-participant ":Platform" as PLAT
+participant ":Company" as PLAT
+/'participant ":Platform" as PLAT'/
 participant "org\n:Organization" as ORG
 participant "task\n:Task" as TAREFA
 participant "cat\n:Category" as CAT
@@ -25,20 +26,20 @@ activate UI
 
 /'ESTOU AQUI'/
 
-UI -> CTRL : lc=getTaskCategories()
+UI -> CTRL : ltt = getTestTypes()
 activate CTRL
 
-CTRL -> PLAT : lc=getTaskCategories()
+CTRL -> PLAT : ltt = getTestTypes()
 activate PLAT
 |||
 deactivate PLAT
 deactivate CTRL
 
-UI --> ADM : shows task categories list and ask to select one
+UI --> ADM : shows types of test list and asks to select at least one
 deactivate PLAT
 deactivate UI
 
-ADM -> UI : selects a task category
+ADM -> UI : selects type(s) of test
 activate UI
 
 UI -> CTRL : createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)

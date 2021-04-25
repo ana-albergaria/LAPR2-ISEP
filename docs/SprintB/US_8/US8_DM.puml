@@ -67,7 +67,7 @@ ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >
 Company "1" -- "*" TestType : conducts >
 
 /' MUDAR SENTIDO DA SETA? POR CAUSA DO RATIONALE '/
-Application "1" -- "1" Company : knows >
+Application "1" -- "1" Company : knows <
 Test "*" -- "1" TestType : classified as >
 ClinicalAnalysisLaboratory -- TestType : operates >
 ClinicalAnalysisLaboratory -- Administrator : registered by >
