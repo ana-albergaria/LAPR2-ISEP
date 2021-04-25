@@ -206,7 +206,7 @@ Category "*" -- "1" Administrator : created by >
 /'RETIREI A LINHA ABAIXO TEST IS REQUESTED BY CLIENT'/
 /'Test "*" -- "1" Client : requested by >'/
 /'Test -- Application : is known by >'/
-Test "*" -- "1" TestType : is of >
+Test "*" -- "1" TestType : classified as >
 Test "1" -- "1..*" Sample : collects >
 Test "*" -- "1..*" Parameter : requested analysis of >
 /'PROFFESSOR CORREÇÃO'/
