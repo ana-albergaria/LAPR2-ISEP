@@ -137,6 +137,8 @@ class ChemicalAnalysis
 class Test
 }
 
+/'LAYOUT PURPOSES'/
+
 Laboratory -[hidden]-> ChemicalLaboratory
 Laboratory -[hidden]-> ClinicalAnalysisLaboratory
 
