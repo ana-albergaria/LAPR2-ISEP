@@ -1,0 +1,61 @@
+@startuml
+hide methods
+left to right direction
+skinparam classAttributeIconSize 0
+
+
+
+
+class Client {
+- clientsCitizenCardNumber
+- nhsNumber
+- birthDate
+- sex
+- tinNumber
+- e-Mail
+- name
+- phoneNumber
+}
+
+class Receptionist{
+
+}
+
+class Employee {
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- standardOccupationalClassificationCode
+}
+
+class Application{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Receptionist "0..1" -- "1" Client : records >
+Receptionist "0..1" -- "1" Employee : is of >
+Application "0..1" -- "1" Client : adopts   >
+Employee "0..1" -- "1" Application : interacts with   >
+
+
+
+
+
+
+
+@enduml
