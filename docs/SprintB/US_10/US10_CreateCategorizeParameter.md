@@ -115,7 +115,9 @@ As an administrator, I want to specify a new parameter and categorize it.
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
+| Step 1  		 |	... interacting with the actor? | CreateParameterUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|       	   	 |	... coordinating the US? | CreateParameterController | Controller |
+|       	   	 |	... instantiating a new Parameter? | Administrator | ??? |
 | Step 2  		 |							 |             |                              |
 | Step 3  		 |							 |             |                              |
 | Step 4  		 |							 |             |                              |

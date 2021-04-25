@@ -106,7 +106,7 @@ As an administrator, I want to specify a new parameter category.
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1  		 |	... interacting with the actor? | CreateParameterCategoryUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |       	   	 |	... coordinating the US? | CreateParameterCategoryController | Controller |
-|       	   	 |	... instantiating a new Parameter Category? | Company | Creator (Rule 1/2): in the DM Organization adopts a Parameter Category. |
+|       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator (Rule 1/2): in the DM Organization adopts a Parameter Category. |
 | Step 2  		 |							 |             |                              |
 | Step 3  		 |	...saving the input data? | Parameter Category | IE: The object created in step 1 has its own data. |
 |       	   	 |	... informing operation sucess? | UI | IE: responsible for user interaction |
