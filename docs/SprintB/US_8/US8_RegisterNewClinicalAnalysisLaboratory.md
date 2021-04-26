@@ -101,8 +101,8 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
-| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | <span style="color:red">Laboratory (and Company? Creator - Rule 2)</span> | Creator (Rule 1): in the DM, CAL is part of Laboratory.                            |
-| 			  		 |	**...knowing the user using the system?** |      **UserSession**                          |
+| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | <span style="color:red">Laboratory (and Company? Creator - Rule 2)</span> | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
+| 			  		 |	**...knowing the user using the system?** |      **UserSession**                          | According to A&A component documentation.
 | 			  		 |	**...knowing to which Company the user belongs to?** | **Application** | **IE: has registed/knows all Companies.**                           |
 | 			  		 |	 | **Company** | **IE: knows/has its own Employees.**                           |
 | 			  		 |	 | **<span style="color:red">Employee</span>** | **IE: knows/has its own data.**                           |
@@ -123,7 +123,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
 * Class2
 * Class3
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:  
+
 * RegisterNewCalUI  
 * RegisterNewCalController
 

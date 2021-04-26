@@ -10,10 +10,10 @@ participant "app\n:App" as APP
 participant "session\n:UserSession" as SESSAO
 participant ":Company" as PLAT
 /'participant ":Platform" as PLAT'/
-participant "org\n:Organization" as ORG
-participant "task\n:Task" as TAREFA
-participant "cat\n:Category" as CAT
-participant "lc\n:List<Category>" as LIST_CAT
+participant ":Laboratory" as ORG
+participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
+participant "tt\n:TestType" as CAT
+participant "ltt\n:List<TestType>" as LIST_CAT
 
 activate ADM
 ADM -> UI : asks to register a new Clinical Analysis Laboratory
@@ -23,8 +23,6 @@ deactivate UI
 
 ADM -> UI : types requested data
 activate UI
-
-/'ESTOU AQUI'/
 
 UI -> CTRL : ltt = getTestTypes()
 activate CTRL
@@ -42,10 +40,10 @@ deactivate UI
 ADM -> UI : selects type(s) of test
 activate UI
 
-UI -> CTRL : createTask(ref,designation,informalDesc,technicalDesc,duration,cost,categoryId)
+UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, TestTypesDesignations)
 activate CTRL
 
-CTRL -> PLAT : cat=getCategoryById(categoryId)
+CTRL -> PLAT : tt = getTestTypesByDesignation(selectedTestTypes)
 activate PLAT
 |||
 deactivate PLAT
@@ -60,21 +58,30 @@ activate APP
 |||
 deactivate APP
 
-CTRL -> SESSAO: email = getUserEmail()
+CTRL -> SESSAO : answer = isLoggedInWithRole(USER_ROLE)
 activate SESSAO
 |||
 deactivate SESSAO
 
-CTRL -> PLAT: org = getOrganizationByUserEmail(email)
+
+/'ANTES ESTAVA email = getUserEmail()
+CTRL -> SESSAO: email = getUserId()
+activate SESSAO
+|||
+deactivate SESSAO
+
+/'org = getOrganizationByUserEmail(email)
+CTRL -> PLAT: cmp = getCompanyByUserId(email)
 activate PLAT
 |||
-deactivate PLAT
+deactivate PLAT'/
 
-CTRL -> ORG: task=createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
+
+CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, tt)
 activate ORG
 
-ORG --> TAREFA**: create(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-ORG -> ORG: validateTask(task)
+ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, tt)
+ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
 
 CTRL --> UI: result
 
@@ -86,14 +93,14 @@ deactivate UI
 
 ADM -> UI : confirms the data
 activate UI
-UI -> CTRL : saveTask()
+UI -> CTRL : saveClinicalAnalysisLaboratory()
 activate CTRL
 
-CTRL -> ORG : saveTask(task)
+CTRL -> ORG : saveClinicalAnalysisLaboratory(cal)
 activate ORG
 
-ORG -> ORG: validateTask(task)
-ORG -> ORG: addTask(task)
+ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
+ORG -> ORG: addClinicalAnalysisLaboratory(cal)
 
 CTRL --> UI: result
 
