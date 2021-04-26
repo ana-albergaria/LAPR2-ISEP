@@ -103,9 +103,6 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
 | 			  		 |	...instantiating a new Clinical Analysis Laboratory? | <span style="color:red">Laboratory (and Company? Creator - Rule 2)</span> | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
 | 			  		 |	**...knowing the user using the system?** |      **UserSession**                          | According to A&A component documentation.
-| 			  		 |	**...knowing to which Company the user belongs to?** | **Application** | **IE: has registed/knows all Companies.**                           |
-| 			  		 |	 | **Company** | **IE: knows/has its own Employees.**                           |
-| 			  		 |	 | **<span style="color:red">Employee</span>** | **IE: knows/has its own data.**                           |
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
 | Step 4: shows types of test list and asks to select at least one   		 |	...knowing the types of test to show?						 |   <span style="color:red">Company (what about Application?)</span>          |  **<span style="color:red">IE: Types of test are conducted by the Company. </span>**                          |
