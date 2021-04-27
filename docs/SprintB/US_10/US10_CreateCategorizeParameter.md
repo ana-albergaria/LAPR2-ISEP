@@ -50,6 +50,118 @@ As an administrator, I want to specify a new parameter and categorize it.
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
 
+-
+
+> **Question:** "Which information will the client provide for the addition of a new parameter and its categorization?"
+>  
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
+
+-
+
+> **Question:** "Does the client want to specify more than one new parameter at a time?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
+
+-
+
+> **Question:** "What are the acceptance criteria for a new parameter category?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
+
+-
+
+> **Question:** "When a new parameter is specified, should there always be a category it falls under prior to its specification and subsequent categorization?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
+
+-
+
+> **Question:** "What are the information associated with a parameter? What rules are applicable to such data?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7639#p9943).
+
+-
+
+> **Question:** "Does the administrator need to log in order to create a parameter and categorize it?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7639#p9943).
+
+-
+
+> **Question:** "Is the categorization of a parameter mandatory or optional?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7649#p9973).
+
+-
+
+> **Question:** "How does the assignment of a parameter category works? Does he have to select the category or he have the option to create in the moment?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7649#p9973).
+
+-
+
+> **Question:** "The administrator needs to be logged in to execute his role?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p9991).
+
+-
+
+> **Question:** "Is the administrator an employee? If he/she is, who does him/her register?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p9991).
+
+-
+
+> **Question:** "Related to the US10, what information is part of each parameter?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p9991).
+
+-
+
+> **Question:** "What data does the parameter have and what type / format should they have?"
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+
+-
+
+> **Question:** "Does the data (code, description, and National Health Service ID) in the parameter category have any acceptance criteria? If yes, what acceptance criteria."
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+
+-
+
+> **Question:** "When creating a new parameter, if the category does not exist in the system, should the administrator have the possibility to create a new one, or he must categorize it in the existing ones."
+>
+> **Answer:** yyyy.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+
 
 ### 1.3. Acceptance Criteria
 

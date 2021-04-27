@@ -3,7 +3,7 @@ autonumber
 actor "Administrator" as Adm
 
 activate Adm
-Adm-> ":System" : starts new parameter category
+Adm-> ":System" : asks to create a new parameter category
 activate ":System"
 ":System" --> Adm : request data(i.e., code, description, nhsId)
 deactivate ":System"

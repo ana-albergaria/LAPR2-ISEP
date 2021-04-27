@@ -107,14 +107,15 @@ As an administrator, I want to specify a new parameter category.
 | Step 1  		 |	... interacting with the actor? | CreateParameterCategoryUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |       	   	 |	... coordinating the US? | CreateParameterCategoryController | Controller |
 |       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator (Rule 1/2): in the DM Organization adopts a Parameter Category. |
+|       	   	 |	... knowing the user using the system? | UserSession | ??? |
+|       	   	 |	... knowing to which organization the user belongs to? | Platform | IE: has registed all Laboratories |
 | Step 2  		 |							 |             |                              |
 | Step 3  		 |	...saving the input data? | Parameter Category | IE: The object created in step 1 has its own data. |
-|       	   	 |	... informing operation sucess? | UI | IE: responsible for user interaction |
-| Step 4  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Parameter Category | IE: knows its own data. |
+| Step 4  		 |							 |             |                              |
+| Step 5  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Parameter Category | IE: knows its own data. |
 |       	   	 |	... validating the data globally (e.g.: duplicated)? | Company | IE: knows all the ParameterCategory objects |
-| Step 5  		 |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
-| Step 6  		 |							 |             |                              |              
-
+|        		 |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
+| Step 6  	   	 |	... informing operation sucess? | UI | IE: responsible for user interaction |
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
