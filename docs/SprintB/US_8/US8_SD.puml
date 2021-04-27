@@ -40,7 +40,7 @@ deactivate UI
 ADM -> UI : selects type(s) of test
 activate UI
 
-UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, TestTypesDesignations)
+UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesDesignations)
 activate CTRL
 
 CTRL -> PLAT : tt = getTestTypesByDesignation(selectedTestTypes)
