@@ -3,6 +3,9 @@ package app.domain.model;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -47,4 +50,28 @@ public class Company {
         return this.parameterCategoryList.add(pc);
     }
 
+    //US8 - ANA
+    private List<TestType> totalTT;
+
+    public List<TestType> getTestTypes() {
+        return totalTT;
+    }
+
+    //COMO PASSAR O SELECTEDTT PARA O LABORATORY?
+    public List<TestType> getTestTypesByDesignation(List<String> testTypesDesignations) {
+        List<TestType> selectedTT = new ArrayList<>();
+
+        for (String item : testTypesDesignations) {
+            for (TestType tt : totalTT) {
+                if(item.equalsIgnoreCase(tt.getDesignation()))
+                    selectedTT.add(tt);
+            }
+        }
+        return selectedTT;
+    }
+
+
+    private List<Laboratory> laboratories; //Company owns Laboratory
+
+    //FIM US8 - ANA)
 }

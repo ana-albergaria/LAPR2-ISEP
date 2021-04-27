@@ -43,7 +43,7 @@ activate UI
 UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesDesignations)
 activate CTRL
 
-CTRL -> PLAT : tt = getTestTypesByDesignation(selectedTestTypes)
+CTRL -> PLAT : tt = getTestTypesByDesignation(testTypesDesignations)
 activate PLAT
 |||
 deactivate PLAT
