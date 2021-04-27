@@ -31,7 +31,8 @@ class Employee {
 - standardOccupationalClassificationCode
 }
 
-class Application{
+class Company{
+- designation
 }
 
 
@@ -49,8 +50,8 @@ class Application{
 
 Receptionist "0..1" -- "1" Client : records >
 Receptionist "0..1" -- "1" Employee : is of >
-Application "0..1" -- "1" Client : adopts   >
-Employee "0..1" -- "1" Application : interacts with   >
+Company "0..1" -- "1" Client : knows   >
+Employee "0..1" -- "1" Company : works for   >
 
 
 
