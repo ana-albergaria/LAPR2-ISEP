@@ -1,0 +1,73 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class App {
++{static} getInstance() : App
++getCurrentSession() : UserSession
+}
+
+class UserSession {
++isLoggedInWithRole() : boolean
+}
+
+class Laboratory {
+-name : String
+-address : String
+-phoneNumber : int
+-numTIN : int
++Laboratory(name : String, address : String, phoneNumber : int, numTIN : int)
++createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, tt)
++saveClinicalAnalysisLaboratory(cal)
+-addClinicalAnalysisLaboratory(cal)
+-validateClinicalAnalysisLaboratory(cal)
+}
+
+class ClinicalAnalysisLaboratory {
+-laboratoryID : String
++ClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, tt)
+}
+
+class TestType {
+-designation : String
+}
+
+class Company {
+-designation : String
++getTestTypes()
++getTestTypesByDesignation(selectedTestTypes)
+}
+
+class RegisterNewCalController {
++getTestTypes()
++createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, testTypesDesignations)
++saveClinicalAnalysisLaboratory()
+}
+
+class RegisterNewCalUI {
+
+}
+
+RegisterNewCalUI ..> RegisterNewCalController
+RegisterNewCalController ..> Laboratory
+RegisterNewCalController ..> TestType
+RegisterNewCalController ..> ClinicalAnalysisLaboratory
+RegisterNewCalController ..> Company
+RegisterNewCalController ..> App
+RegisterNewCalController ..> UserSession
+
+Company "1" -> "*" TestType : conducts >
+/'VERIFICAR MULTIPLICIDADE LINHA ABAIXO'/
+ClinicalAnalysisLaboratory "1" --> "1" Laboratory : is of >
+Company "1" --> "3..*" Laboratory : owns >
+ClinicalAnalysisLaboratory "1" -> "1..*" TestType : operates >
+
+
+TestType -[hidden]down-> ClinicalAnalysisLaboratory
+
+/'Laboratory <|-- ClinicalAnalysisLaboratory'/
+
+
+
+
+
+@enduml

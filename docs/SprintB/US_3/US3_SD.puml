@@ -1,89 +1,86 @@
 @startuml
 autonumber
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Receptionist" as RC
 
 participant ":RegisterClientUI" as UI
 participant ":RegisterClientController" as CTRL
+participant ":Company" as CP
 participant "session\n:UserSession" as SESSAO
-participant ":Platform" as PLAT
+participant "cl: Client" as CL
 
 
-activate ADM
-ADM -> UI : asks to register a new client
+activate RC
+RC -> UI : asks to register a new client
 activate UI
-UI --> ADM : requests data (clients citizen card number, NHS number,  birth \n date, sex, TIN number, e-mail, name, phone number)
+UI --> RC : requests data (clients citizen card number, NHS number,  birth \n date, sex, TIN number, e-mail, name, phone number)
 deactivate UI
 
-ADM -> UI : types requested data
+RC -> UI : types requested data
 activate UI
 
 UI -> CTRL : createClient(clients citizen card number, NHS number,  birth \n date, sex, TIN number, e-mail, name, phone number)
 activate CTRL
 
-CTRL -> PLAT : cl = createClient(clients citizen card number, NHS number,  birth \n date, sex, TIN number, e-mail, name, phone number)
-activate PLAT
+CTRL -> CP : cl = createClient(clients citizen card number, NHS number,  birth \n date, sex, TIN number, e-mail, name, phone number)
+activate CP
+CP -->  CL** : create(clients citizen card number, NHS number,  birth \n date, sex, TIN number, e-mail, name, phone number)
+deactivate CP
 
-CTRL -> PLAT : validateClient(cl)
-activate PLAT
-|||
-deactivate PLAT
+CTRL -> CP : validateClient(cl)
+activate CP
+
+deactivate CP
 deactivate CTRL
 
-UI --> ADM : informs operation sucess
-deactivate PLAT
+UI --> RC : informs operation sucess
+deactivate CP
 deactivate UI
 
-ADM -> UI : confirms the data
+RC -> UI : confirms the data
 activate UI
 
 UI -> CTRL : saveClient()
 activate CTRL
 
-CTRL -> PLAT : saveClient(cl)
-activate PLAT
+CTRL -> CP : saveClient(cl)
+activate CP
+CP -> CP : validateClient(cl)
+activate CP
+deactivate CP
+CP -> CP : addClient(cl)
+activate CP
+deactivate CP
 |||
-deactivate PLAT
+deactivate CP
 
-CTRL -> _APP: app = getInstance()
-activate _APP
-|||
-deactivate _APP
-
-CTRL -> APP: session = getCurrentSession()
-activate APP
-|||
-deactivate APP
-
-CTRL -> SESSAO: email = getUserEmail()
+CTRL -> SESSAO : addUser(String name, String email, String pwd)
 activate SESSAO
-|||
+SESSAO -> SESSAO : existsUser(String email)
+activate SESSAO
+deactivate SESSAO
 deactivate SESSAO
 
-CTRL -> PLAT: org = getOrganizationByUserEmail(email)
-activate PLAT
-|||
-deactivate PLAT
 
-CTRL -> ORG: task=createTask(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-activate ORG
 
-ORG --> TAREFA**: create(ref,designation,informalDesc,technicalDesc,duration,cost,cat)
-ORG -> ORG: validateTask(task)
 
-CTRL --> UI: result
 
-UI --> ADM: informs operation success
-deactivate ORG
-deactivate PLAT
+
+
+
+
+
+UI --> RC: informs operation success
+
+deactivate CP
 deactivate CTRL
 deactivate UI
 
 
-deactivate ORG
+
 deactivate CTRL
 deactivate UI
 
-deactivate ADM
+deactivate RC
 
 @enduml

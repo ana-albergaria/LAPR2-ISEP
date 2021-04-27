@@ -66,7 +66,7 @@ available on the repository must be reused (without modifications);
 ### 1.4. Found out Dependencies
 
 
-* Theres no dependeciess with other users stories for now.
+* There is a dependency to "US7 Register a new employee" since the receptionist must be registered in the application and do the login so he can register the client.
 
 
 ### 1.5 Input and Output Data
@@ -75,14 +75,14 @@ available on the repository must be reused (without modifications);
 **Input Data:**
 
 * Typed data:
-	* Clients citizen card number;
-	* National Healthcare Service (NHS) number;
-	* Birth date;
-	* Sex;
-	* Tax Identification Number (TIN);
-	* E-mail;
-    * Name;
-    * Phone Number (optional);
+	* a clients citizen card number;
+	* a NHS number;
+	* a birth date;
+	* the Sex;
+	* a Tax Identification Number (TIN);
+	* an e-mail;
+    * a name;
+    * a phone number (optional);
 
 
 **Output Data:**
@@ -91,28 +91,22 @@ available on the repository must be reused (without modifications);
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**Alternative 1**
 
-![US006_SSD](US006_SSD.svg)
-
-
-**Alternative 2**
-
-![US006_SSD_v2](US006_SSD_v2.svg)
+![US3_SSD](US3_SSD.svg)
 
 
 **Other alternatives might exist.**
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+n/a
 
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![US006_MD](US006_MD.svg)
+![US3_MD](US3_MD.svg)
 
 ### 2.2. Other Remarks
 
@@ -127,52 +121,42 @@ n/a
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                             |
-| 			  		 |	... instantiating a new Task? | Organization   | Creator (Rule 1): in the DM Organization has a Task.   |
-| 			  		 | ... knowing the user using the system?  | UserSession  | IE: cf. A&A component documentation.  |
-| 			  		 |	... knowing to which organization the user belongs to? | Platform  | IE: has registed all Organizations |
-| 			  		 |							 | Organization   | IE: knows/has its own Employees|
-| 			  		 |							 | Employee  | IE: knows its own data (e.g. email) |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Task  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the task categories to show? | Platform  | IE: Task Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Task  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |							 |             |                              |              
-| Step 7  		 |	... validating all data (local validation)? | Task | IE: owns its data.| 
-| 			  		 |	... validating all data (global validation)? | Organization | IE: knows all its tasks.| 
-| 			  		 |	... saving the created task? | Organization | IE: owns all its tasks.| 
-| Step 8  		 |	... informing operation success?| CreateTaskUI  | IE: is responsible for user interactions.  | 
+| Step 1  		 |	... interacting with the actor? | RegisterClientUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
+| 			  		 |	... coordinating the US? | RegisterClientController | Controller                             |
+|Step 2: starts new Client | ... instanting a new Client ? | Company | Creator: R1/2|
+|Step 3: resquest data | ... n/a | | |
+|Step 4: types requested data ? | ... saving the input data ?| Client | IE: The object created in step 2 has its own data|
+|Step 5: showns the data and requests a confirmation | ... validating the data locally ? | Client| IE: knows its own data |
+| | validating the data globally | Company | IE: knows all the Client objects|
+|Step 6: confirms data | ... saving the created client ? | Company | IE: adopts/records all the Clients objects|
+|Step 7| ... making the client a user of the system ? | UserSession | IE: cf. A&A component documentation.|
+|Step 8: informs operation success| ... informing operation success ?| UI| IE:responsible for user interactions |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Organization
- * Platform
- * Task
+ * Client;
+ * Company
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
- * CreateTaskUI  
- * CreateTaskController
+ * RegisterClientUI  
+ * RegisterClientController
 
 
 ## 3.2. Sequence Diagram (SD)
 
 **Alternative 1**
 
-![US006_SD](US006_SD.svg)
+![US3_SD](US3_SD.svg)
 
-**Alternative 2**
-
-![US006_SD](US006_SD_v2.svg)
 
 ## 3.3. Class Diagram (CD)
 
 **From alternative 1**
 
-![US006_CD](US006_CD.svg)
+![US3_CD](US3_CD.svg)
 
 # 4. Tests 
 
