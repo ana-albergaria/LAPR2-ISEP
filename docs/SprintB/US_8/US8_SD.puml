@@ -12,8 +12,8 @@ participant ":Company" as PLAT
 /'participant ":Platform" as PLAT'/
 participant ":Laboratory" as ORG
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
-participant "tt\n:TestType" as CAT
-participant "ltt\n:List<TestType>" as LIST_CAT
+participant "selectedTT\n:List<TestType>" as CAT
+participant "totalTT\n:List<TestType>" as LIST_CAT
 
 activate ADM
 ADM -> UI : asks to register a new Clinical Analysis Laboratory
@@ -24,10 +24,10 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : ltt = getTestTypes()
+UI -> CTRL : totalTT = getTestTypes()
 activate CTRL
 
-CTRL -> PLAT : ltt = getTestTypes()
+CTRL -> PLAT : totalTT = getTestTypes()
 activate PLAT
 |||
 deactivate PLAT
@@ -43,7 +43,7 @@ activate UI
 UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesDesignations)
 activate CTRL
 
-CTRL -> PLAT : tt = getTestTypesByDesignation(testTypesDesignations)
+CTRL -> PLAT : selectedTT = getTestTypesByDesignation(testTypesDesignations)
 activate PLAT
 |||
 deactivate PLAT
@@ -77,10 +77,10 @@ activate PLAT
 deactivate PLAT'/
 
 
-CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, tt)
+CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
 activate ORG
 
-ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, tt)
+ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
 ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
 
 CTRL --> UI: result

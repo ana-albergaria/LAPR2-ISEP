@@ -34,8 +34,12 @@ public class RegisterNewCalController {
                                                     String address,
                                                     int phoneNumber,
                                                     int numTIN,
-                                                    List<String> TestTypeDesignations){
-        this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, address, phoneNumber, numTIN, TestTypeDesignations);
+                                                    List<String> testTypeDesignations){
+
+        //ACRESCENTEI ESTA LINHA DE CÓDIGO
+        List<TestType> selectedTT = this.company.getTestTypesByDesignation(testTypeDesignations);
+
+        this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, address, phoneNumber, numTIN, selectedTT);
         return this.lab.validateClinicalAnalysisLaboratory(cal);
     }
 
@@ -43,6 +47,13 @@ public class RegisterNewCalController {
         return this.lab.saveClinicalAnalysisLaboratory(cal);
     }
 
-    //FALTA MÉTODO GETTESTTYPES!!
+    //VERIFICAR MÉTODO GETTESTTYPES!!
+    /*
+    public boolean getTestTypes() {
+        return this.company.getTestTypes();
+    }
+     */
+
+
 
 }
