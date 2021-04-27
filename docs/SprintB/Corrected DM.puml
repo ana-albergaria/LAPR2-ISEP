@@ -102,7 +102,7 @@ class ChemicalAnalysis{}
 class TestType{
 - designation
 }
-class Category{
+class ParameterCategory{
 - code
 - description
 - nhsId
@@ -196,15 +196,17 @@ ClinicalChemistryTechnologist "1" -- "1" Employee : is of >
 SpecialistDoctor "1" -- "1" Employee : is of >
 LaboratoryCoordinator "1" -- "1" Employee : is of >
 Administrator "1" -- "1" Employee : is of >
-
+Company "1" -- "*" Parameter : capable of analysing >
 Company "1" -- "*" TestType : conducts >
+Company "1" -- "*" Administrator : know >
+Company "1" -- "*" ParameterCategory : adopts >
 /'Company "1" -- "1" ChemicalLaboratory : owns >'/
 /'Company "1" -- "1..*" ClinicalAnalysisLaboratory : owns >'/
 Company "1" -- "1..*" NHSReport : reports >
-Parameter "*" -- "1..*" Category : presented under >
+Parameter "*" -- "1" ParameterCategory : presented under >
 /'ACRESCENTEI LINHA ABAIXO'/
 Parameter "*" -- "1" Administrator : created by >
-Category "*" -- "1" Administrator : created by >
+ParameterCategory "*" -- "1" Administrator : created by >
 /'RETIREI A LINHA ABAIXO TEST IS REQUESTED BY CLIENT'/
 /'Test "*" -- "1" Client : requested by >'/
 /'Test -- Application : is known by >'/
