@@ -12,6 +12,7 @@ class Laboratory {
 - numTIN
 }
 
+/'
 class Employee {
 - employeeID
 - organizationRole
@@ -20,7 +21,7 @@ class Employee {
 - phoneNumber
 - e-Mail
 - standardOccupationalClassificationCode
-}
+}'/
 
 class Test{
 - code
@@ -35,7 +36,8 @@ class ClinicalAnalysisLaboratory{
 class Application{}
 
 class TestType{
-- designation
+- code
+- description
 - collectingMethod
 }
 
