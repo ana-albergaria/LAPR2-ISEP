@@ -54,11 +54,30 @@ You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/di
 >My question therefore is: When creating a new Clinical Analysis Laboratory, should the system automatically record that it operates that type of test or should the person who is creating it select it manually while selecting other types of tests? Or other option?  
 >**Answer**: The administrator should select, manually, all the types of tests to be performed by the Clinical Analysis Laboratory.  
  
-You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7553#p10176).
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7553#p10176).  
+
+>**Question**: Which type/format has LaboratoryID, address, name, phone number, and TIN number on Clinical Analysis Laboratory?  
+>**Answer**: Each Clinical Analysis Laboratory is characterized by the following attributes:  
+>* Laboratory ID: five alphanumeric characters;  
+>* Name: A string with no more than 20 characters;  
+>* Address: A string with no more than 30 characters;  
+>* Phone Number: 11 digit number;  
+>* TIN number: 10 digit number; 
+>* Type of tests performed by the lab.  
+
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7636#p10191).
+
+
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required field must be filled in.
+* **AC1:** All required field must be filled in.  
+* **AC2:** The Laboratory ID must have five alphanumeric characters.  
+* **AC3:** The name is a string with no more than 20 characters.  
+* **AC4:** The Phone Number is a 11 digit number.
+* **AC5:** The TIN Number is a 10 digit number.
+* **AC6:** Type of tests must be an attribute of the Clinical Analysis Laboratory.  
+
 
 ### 1.4. Found out Dependencies
 
