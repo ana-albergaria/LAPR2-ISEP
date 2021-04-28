@@ -8,11 +8,16 @@ left to right direction
 class Company{
 - designation
 }
-class Parameter{
-- designation
+class ParameterCategory{
+- name
+- code
+- description
+- nhsId
 }
 class TestType{
-- designation
+- Code
+- Description
+- Collecting method
 }
 class Test{
 - code
@@ -20,20 +25,15 @@ class Test{
 - createdAt
 
 }
-class collectingMethod{
- - name
- - description
- }
 
  TestType -[hidden]right-|> Company
 
 Test "*" -- "1" TestType : classified as >
-Test "*" -- "1..*" Parameter : requested analysis of >
+Test "*" -- "1..*" ParameterCategory : requested analysis of >
 Company "1" -- "*" TestType : conducts >
-Company "1" -- "*" Parameter : capable of analysing >
+Company "1" -- "*" ParameterCategory : capable of analysing >
 Company "1" -- "*" Administrator : know >
-TestType "*" -- "1..*" Parameter : characterized by >
-TestType "1" -- "1..*" collectingMethod : has a >
+TestType "*" -- "1..*" ParameterCategory : characterized by >
 TestType "*" -- "1" Administrator : created by >
 
 @enduml

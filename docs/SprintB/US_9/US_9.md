@@ -21,11 +21,21 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 **From the client clarifications:**
 >Q1: Does a type of test holds any atributte besides it's name and collecting methods?
 >
->A1:
+>A1:The attributes for a new test type are:
+    Code: five alphanumeric characters. The code is not automatically generated.
+    Description: a string with no more than 15 characters.
+    Collecting Method: a string with no more than 20 characters.
+    Each test type should have a set of categories. Each category should be chosen from a list of categories.
+    From a previous post: "Each category has a name and a unique code. There are no subcategories."
+>   There exists only one collection method per test type.
 >
 >Q2: Are the collecting methods stored simpled as a word or a sentence, or does it also must contain it's description, and/or another attributes?
 >
->A2:
+>A2:From a previous post: "To make a Covid test you need a swab to collect a sample. To make a blood test you need sample tubes and a syringe.
+    When the administrator (US9) specifies a new type of test, the administrator also specifies the method to collect a sample. The administrator introduces a brief description for specifying the collecting method. "
+>   There exists only one collection method per test type.
+>
+>Question 1 and 2 link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507).
 >
 >Q3: "In the US9 what do you mean by the collecting methods and  what collecting methods  are available??"
 >
@@ -43,22 +53,24 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** Each collecting method has to have a description.
-* **AC2:** Every test type must have it's collecting methods.
+* **AC1:** The code must have 5 alphanumeric characters
+* **AC2:** Description must be a string with no more than 15 characters.
+* **AC3:** Collecting Method must be a string with no more than 20 characters.
+* **AC4:** Each test type should have a set of categories chosen from a list of categories.
+* **AC5:** Every test type must have one collecting method.
 
 ### 1.4. Found out Dependencies
 
-*Identify here any found out dependency to other US and/or requirements.*
+There is a dependency to "US 11 - to specify a new parameter category" since the test type must be associated with a Category
 
 ### 1.5 Input and Output Data
 
 * Typed data:
-    * Name of TestType
-    * Collecting Method
-    * Collecting Method Description 
+    * Code
+    * Description
+    * Collecting method
 * Selected data:
-    * (none)
-
+    * Categories
 ### 1.6. System Sequence Diagram (SSD)
 
 *Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
@@ -92,18 +104,16 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1: Asks to specify a new test type	                     |	        ... instantiating a new test type?				                        | Company                     | Creator: R1/2                                       |
-| Step 2: Request test type data(name)		                     |			n/a				                                                        |                             |                                                     |
-| Step 3: Types requested data		                             |			...saving input data?				                                    | Test Type                   | IE: The object created in step 1 has its own data.  |
-| Step 4: Request how many collecting methods to be added        |			n/a                                                                     |                             |                                                     |
-| Step 5: Types requested data	                                 |			n/a		                                                                |                             |                                                     |
-| Step 6: Request for collecting method data(name, description)  |			n/a				                                                        |                             |                                                     |              
-| Step 7: Types requested data                                   |          ...instanciate a collecting method?				                        | Test Type                   | Creator: R1/2/composition                           |
-|                                                                |			...saving the input data?				                                | Collecting Method           | IE: The object has its own data.                    |              
-| Step 8: Shows test type data and requests confirmation         |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type/Collecting Method | IE: Knows its own data.                             |              
-|                                                                |          … validating the data globally (e.g.: duplicated)?				        | Company                     | IE: Knows all Test Type objects.                    |              
-| Step 9: Confirms data                                          |			... saving the created test type?				                        | Company                     | IE: Records/adopts all the Test Type objects.       |              
-| Step 12: Informs operation success                             |			... informing operation success?				                        | UI                          | IE: responsible for user interaction                |              
+| Step 1: Asks to specify a new test type	                          |	        ... instantiating a new test type?				                        | Company                     | Creator: R1/2                                       |
+| Step 2: Request test type data(code, description, collectingMethod) |			n/a				                                                        |                             |                                                     |
+| Step 3: Types requested data		                                  |			...saving input data?				                                    | Test Type                   | IE: The object created in step 1 has its own data.  |
+| Step 4: Shows available categories and request to select one or more|			n/a				                                                        |                             |                                                     |              
+| Step 5: Selects requested adata                                     |          ...instanciate a collecting method?				                        | Test Type                   | Creator: R1/2/composition                           |
+|                                                                     |			...saving the input data?				                                | Collecting Method           | IE: The object has its own data.                    |              
+| Step 6: Shows test type data and requests confirmation              |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type/Collecting Method | IE: Knows its own data.                             |              
+|                                                                     |          … validating the data globally (e.g.: duplicated)?				        | Company                     | IE: Knows all Test Type objects.                    |              
+| Step 7: Confirms data                                               |			... saving the created test type?				                        | Company                     | IE: Records/adopts all the Test Type objects.       |              
+| Step 8: Informs operation success                                   |			... informing operation success?				                        | UI                          | IE: responsible for user interaction                |              
 
 ### Systematization ##
 
