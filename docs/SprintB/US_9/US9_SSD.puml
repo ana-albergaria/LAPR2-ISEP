@@ -19,10 +19,10 @@ loop for each collecting method to be added
 deactivate ":System"
 A -> ":System" : types requested data
 activate ":System"
-":System" --> A : show collecting method data and request confirmation
+/'":System" --> A : show collecting method data and request confirmation
 deactivate ":System"
 A -> ":System" : confirms data
-activate ":System"
+activate ":System"'/
 end
 
 ":System" --> A : show complete test type data and requests confirmation
