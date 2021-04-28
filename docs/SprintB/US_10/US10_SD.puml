@@ -57,11 +57,6 @@ activate APP
 |||
 deactivate APP
 
-CTRL -> SESSION: phoneNumber = getUserPhoneNumber()
-activate SESSION
-|||
-deactivate SESSION
-
 CTRL -> CMP: parameter = createParameter(parameterCode, shortName, description, cat)
 activate CMP
 
