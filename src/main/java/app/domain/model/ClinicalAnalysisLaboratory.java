@@ -11,7 +11,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, int phoneNumber, int numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
         this.laboratoryID = laboratoryID;
-        selectedTT = new ArrayList<TestType>();
+        this.selectedTT = new ArrayList<TestType>(selectedTT);
     }
 
     //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
