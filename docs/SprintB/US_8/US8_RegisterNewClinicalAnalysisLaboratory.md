@@ -33,12 +33,32 @@ kind of test(s) it operates.
 
 You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7126).
 
+>**Question**: Does it have any specific acceptance criteria you want to introduce?  
+> **Answer**: For now I have nothing more to say about the acceptance criteria of US8.  
 
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7744).
 
+>**Question**: Do you prefer that when registering a new CLA that you can register the employees who will work there at the same time or do you prefer to be able to register first and fill in later? And in that order, would it be okay to register a new CLA without employees?   
+> **Answer**: These are two different user stories in the requirements introduced in Sprint B. The application should include a functionality for creating CLAs and another one to register employees.  
+> Each Receptionist and each Medical Lab Technician can work in any Clinical Analysis Laboratory of the Many Labs network.  
+> 
+>**Question**: Of all the information that we have about the CLA, what would be the bare minimum to be able to successfully register a new CLA?  
+>**Answer**: All information is required.
+
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7536#p10174).  
+
+>**Question**: Is there a maximum limit of types of tests a clinical analysis laboratory can operate?  
+>**Answer**: No.  
+> 
+>**Question**:We know through the specifications document that "All Many Labs clinical analysis laboratories perform clinical blood tests".
+>My question therefore is: When creating a new Clinical Analysis Laboratory, should the system automatically record that it operates that type of test or should the person who is creating it select it manually while selecting other types of tests? Or other option?  
+>**Answer**: The administrator should select, manually, all the types of tests to be performed by the Clinical Analysis Laboratory.  
+ 
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7553#p10176).
 
 ### 1.3. Acceptance Criteria
 
-*Insert here the client acceptance criteria.*
+* **AC1:** All required field must be filled in.
 
 ### 1.4. Found out Dependencies
 
@@ -101,14 +121,14 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
-| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | <span style="color:red">Laboratory (and Company? Creator - Rule 2)</span> | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
+| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Laboratory | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
 | 			  		 |	**...knowing the user using the system?** |      **UserSession**                          | According to A&A component documentation.
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
-| Step 4: shows types of test list and asks to select at least one   		 |	...knowing the types of test to show?						 |   <span style="color:red">Company (what about Application?)</span>          |  **<span style="color:red">IE: Types of test are conducted by the Company. </span>**                          |
+| Step 4: shows types of test list and asks to select at least one   		 |	...knowing the types of test to show?						 |   Company        |  IE: Types of test are conducted by the Company.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
 | Step 6: shows all data and requests confirmation  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
-|             		 |	...validating the data globally (e.g.: duplicated)?						 |  <span style="color:red">Laboratory (and Company?)</span>           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
+|             		 |	...validating the data globally (e.g.: duplicated)?						 |  Laboratory           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
 | Step 7: confirms the data  		 |	...saving the created Clinical Analysis Laboratory?						 | Laboratory            |   IE: records all the ClinicalAnalysisLaboratory objects.                           |
 | Step 8: informs operation success  		 |	...informing operation success?						 | RegisterNewCalUI            | IE: responsible for user interaction                                 |
 
