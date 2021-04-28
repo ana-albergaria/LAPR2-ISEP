@@ -28,7 +28,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     private void checkLaboratoryIDRules(String laboratoryID) {
         if (StringUtils.isBlank(laboratoryID))
             throw new IllegalArgumentException("Laboratory ID cannot be blank.");
-        if ((laboratoryID.length() != 5)
+        if ((laboratoryID.length() != 5))
             throw new IllegalArgumentException("Laboratory ID must have exactly five alphanumeric characters.");
         //ALTERNATIVA 1
         /*
@@ -36,16 +36,18 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
          */
         //ALTERNATIVA 2
-        if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit))
+        if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit)))
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
     }
 
+    //CONTINUAR NAME RULES!!!!
     public void checkNameRules(String name) {
-        if (StringUtils.isBlank(laboratoryID))
+        if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if (!laboratoryID.matches())
-            throw new IllegalArgumentException("Name cannot be blank.");
-
+        if ((!name.matches("^[a-zA-Z]*$")
+            throw new IllegalArgumentException("Name must only contain letters.");
+        if (name.length() > 20)
+            throw new IllegalArgumentException("Name cannot have more than 20 characters.");
     }
 
     //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING

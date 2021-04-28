@@ -26,23 +26,24 @@ class Laboratory {
 
 class ClinicalAnalysisLaboratory {
 -laboratoryID : String
-+ClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, tt)
++ClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, selectedTT)
 }
 
 class TestType {
--designation : String
--collectingMethod : String
+- code : String
+- description : String
+- collectingMethod : String
 }
 
 class Company {
 -designation : String
-+getTestTypeStore
++getTestTypeStore()
 /'+getTestTypes()
 +getTestTypesByDesignation(selectedTestTypes)'/
 }
 class TestTypeStore {
 +getTestTypes()
-+getTestTypesByDesignation(selectedTestTypes)'
++getTestTypesByDesignation(testTypesDesignations)
 }
 
 /'class RegisterNewCalController {

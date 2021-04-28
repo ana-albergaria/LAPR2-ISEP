@@ -141,10 +141,11 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 | Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
 | 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Laboratory | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
-| 			  		 |	**...knowing the user using the system?** |      **UserSession**                          | According to A&A component documentation.
+| 			  		 |	...knowing the user using the system? |      UserSession                          | According to A&A component documentation.
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
-| Step 4: shows types of test list and asks to select at least one   		 |	...knowing the types of test to show?						 |   Company        |  IE: Types of test are conducted by the Company.                          |
+| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  IE: Company uses TestTypeStore.                     |
+|                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
 | Step 6: shows all data and requests confirmation  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
 |             		 |	...validating the data globally (e.g.: duplicated)?						 |  Laboratory           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
@@ -155,9 +156,9 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Class1
-* Class2
-* Class3
+* Company  
+* Laboratory  
+* ClinicalAnalysisLaboratory  
 
 Other software classes (i.e. Pure Fabrication) identified:  
 
