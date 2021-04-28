@@ -3,21 +3,30 @@ autonumber
 actor Administrator as A
 
 activate A
-A -> ":System" : asks to specify a new type of test
+A -> ":System" : asks to specify a new test type
 activate ":System"
-":System" --> A : requests data (TestTypeName)
+":System" --> A : requests data (TestType name)
 deactivate ":System"
-
 A -> ":System" : types requested data
 activate ":System"
-":System" --> A : shows collecting methods list and  ask to select one or more
+":System" --> A : request how many collecting methods to be added
 deactivate ":System"
-
-A -> ":System" : selects collecting methods
+A -> ":System" : types requested data
 activate ":System"
-":System" --> A : shows all data and requests confirmation
-deactivate ":System"
 
+loop for each collecting method to be added
+":System" --> A : Request for collecting method data(name, description)
+deactivate ":System"
+A -> ":System" : types requested data
+activate ":System"
+/'":System" --> A : show collecting method data and request confirmation
+deactivate ":System"
+A -> ":System" : confirms data
+activate ":System"'/
+end
+
+":System" --> A : show complete test type data and requests confirmation
+deactivate ":System"
 A -> ":System" : confirms the data
 activate ":System"
 ":System" --> A : informs operation success

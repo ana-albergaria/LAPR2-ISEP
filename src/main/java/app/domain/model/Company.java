@@ -57,7 +57,6 @@ public class Company {
         return totalTT;
     }
 
-    //COMO PASSAR O SELECTEDTT PARA O LABORATORY?
     public List<TestType> getTestTypesByDesignation(List<String> testTypesDesignations) {
         List<TestType> selectedTT = new ArrayList<>();
 

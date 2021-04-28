@@ -5,10 +5,11 @@ actor "Administrator" as ADM
 
 participant ":RegisterNewCalUI  " as UI
 participant ":RegisterNewCalController" as CTRL
-participant "App" as _APP
-participant "app\n:App" as APP
-participant "session\n:UserSession" as SESSAO
+/'participant "App" as _APP'/
+/'participant "app\n:App" as APP'/
+/'participant "session\n:UserSession" as SESSAO'/
 participant ":Company" as PLAT
+participant "store\n:TestTypeStore" as TEST_TYPE_STORE
 /'participant ":Platform" as PLAT'/
 participant ":Laboratory" as ORG
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
@@ -27,10 +28,15 @@ activate UI
 UI -> CTRL : totalTT = getTestTypes()
 activate CTRL
 
-CTRL -> PLAT : totalTT = getTestTypes()
+CTRL -> PLAT : store = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
+
+CTRL -> TEST_TYPE_STORE : totalTT = getTestTypes()
+activate TEST_TYPE_STORE
+|||
+deactivate TEST_TYPE_STORE
 deactivate CTRL
 
 UI --> ADM : shows types of test list and asks to select at least one
@@ -43,11 +49,17 @@ activate UI
 UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesDesignations)
 activate CTRL
 
-CTRL -> PLAT : selectedTT = getTestTypesByDesignation(testTypesDesignations)
+CTRL -> PLAT : store = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
 
+CTRL -> TEST_TYPE_STORE : selectedTT = getTestTypesByDesignation(testTypesDesignations)
+activate TEST_TYPE_STORE
+|||
+deactivate TEST_TYPE_STORE
+
+/'
 CTRL -> _APP: app = getInstance()
 activate _APP
 |||
@@ -61,7 +73,7 @@ deactivate APP
 CTRL -> SESSAO : answer = isLoggedInWithRole(USER_ROLE)
 activate SESSAO
 |||
-deactivate SESSAO
+deactivate SESSAO'/
 
 
 /'ANTES ESTAVA email = getUserEmail()

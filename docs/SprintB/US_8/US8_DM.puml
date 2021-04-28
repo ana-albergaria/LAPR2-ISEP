@@ -36,6 +36,7 @@ class Application{}
 
 class TestType{
 - designation
+- collectingMethod
 }
 
 class Company{

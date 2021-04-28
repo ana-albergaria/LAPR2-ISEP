@@ -27,10 +27,24 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 >
 >A2:
 >
+>Q3: "In the US9 what do you mean by the collecting methods and  what collecting methods  are available??"
+>
+>A3: "To make a Covid test you need a swab to collect a sample. To make a blood test you need sample tubes and a syringe. 
+>When the administrator (US9) specifies a new type of test, the administrator also specifies the method to collect a sample. The administrator introduces a brief description for each collecting method."
+>
+>Question 3 link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7752).
+>
+>Q4: "US9- Analog to US8 do you have any acceptance criteria you want to introduce in US9?"
+>
+>A4: "For now I have nothing more to say about the acceptance criteria of US9."
+>
+>Question 4 link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7744).
+
 
 ### 1.3. Acceptance Criteria
 
-*Insert here the client acceptance criteria.*
+* **AC1:** Each collecting method has to have a description.
+* **AC2:** Every test type must have it's collecting methods.
 
 ### 1.4. Found out Dependencies
 
@@ -40,9 +54,10 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 * Typed data:
     * Name of TestType
-    * Collecting Methods
-    
+    * Collecting Method
+    * Collecting Method Description 
 * Selected data:
+    * (none)
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -77,12 +92,18 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |              
+| Step 1: Asks to specify a new test type	                     |	        ... instantiating a new test type?				                        | Company                     | Creator: R1/2                                       |
+| Step 2: Request test type data(name)		                     |			n/a				                                                        |                             |                                                     |
+| Step 3: Types requested data		                             |			...saving input data?				                                    | Test Type                   | IE: The object created in step 1 has its own data.  |
+| Step 4: Request how many collecting methods to be added        |			n/a                                                                     |                             |                                                     |
+| Step 5: Types requested data	                                 |			n/a		                                                                |                             |                                                     |
+| Step 6: Request for collecting method data(name, description)  |			n/a				                                                        |                             |                                                     |              
+| Step 7: Types requested data                                   |          ...instanciate a collecting method?				                        | Test Type                   | Creator: R1/2/composition                           |
+|                                                                |			...saving the input data?				                                | Collecting Method           | IE: The object has its own data.                    |              
+| Step 8: Shows test type data and requests confirmation         |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type/Collecting Method | IE: Knows its own data.                             |              
+|                                                                |          … validating the data globally (e.g.: duplicated)?				        | Company                     | IE: Knows all Test Type objects.                    |              
+| Step 9: Confirms data                                          |			... saving the created test type?				                        | Company                     | IE: Records/adopts all the Test Type objects.       |              
+| Step 12: Informs operation success                             |			... informing operation success?				                        | UI                          | IE: responsible for user interaction                |              
 
 ### Systematization ##
 

@@ -1,0 +1,62 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADM
+
+participant ":CreateTestTypeUI" as UI
+participant ":CreateTestTypeController" as CTRL
+participant ":Company" as CMP
+participant "pc: ParameterCategory" as PC
+
+activate ADM
+ADM -> UI : starts new parameter category
+activate UI
+UI --> ADM : requests data (i.e., code, description, nhsId)
+deactivate UI
+
+ADM -> UI : types requested data
+activate UI
+
+UI -> CTRL : createParameterCategory(code, description, nhsId)
+activate CTRL
+
+CTRL -> CMP : pc = createParameterCategory(code, description, nhsId)
+activate CMP
+
+CMP --> PC** : create(code, description, nhsId)
+deactivate CMP
+
+CTRL -> CMP : validateParameterCategory(pc)
+activate CMP
+deactivate CTRL
+deactivate CMP
+
+UI --> ADM : shows the data and requests a confirmation
+deactivate UI
+
+ADM -> UI : confirms the data
+activate UI
+
+UI -> CTRL : saveParameterCategory()
+activate CTRL
+
+CTRL -> CMP : saveParameterCategory(pc)
+activate CMP
+
+CMP -> CMP : validateParameterCategory(pc)
+activate CMP
+|||
+deactivate CMP
+
+CMP -> CMP : addParameterCategory(pc)
+activate CMP
+|||
+deactivate CMP
+deactivate CMP
+deactivate CTRL
+
+ADM <-- UI : informs operation success
+deactivate UI
+deactivate ADM
+
+@enduml

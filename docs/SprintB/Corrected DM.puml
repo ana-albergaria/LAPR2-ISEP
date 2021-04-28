@@ -44,6 +44,10 @@ class Diagnosis{}
 class Parameter{
 - designation
 }
+class collectingMethod{
+- name
+- description
+}
 class Notification{
 - textDescription
 }
@@ -206,6 +210,7 @@ Company "1" -- "1..*" NHSReport : reports >
 Parameter "*" -- "1" ParameterCategory : presented under >
 /'ACRESCENTEI LINHA ABAIXO'/
 Parameter "*" -- "1" Administrator : created by >
+TestType "*" -- "1" Administrator : created by >
 ParameterCategory "*" -- "1" Administrator : created by >
 /'RETIREI A LINHA ABAIXO TEST IS REQUESTED BY CLIENT'/
 /'Test "*" -- "1" Client : requested by >'/
@@ -262,6 +267,7 @@ Application "1" - "*" Notification : sends >
 /'OtherTest "*" -- "1..*" Parameter : characterized by >'/
 
 TestType "*" -- "1..*" Parameter : characterized by >
+TestType "1" -- "1..*" collectingMethod : has a >
 
 
 /'Changed specialist doctor diagnosis line 244 and 251 cause its implicit by specialist doc report'/
