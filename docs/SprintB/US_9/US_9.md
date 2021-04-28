@@ -27,10 +27,25 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 >
 >A2:
 >
+>Q3: "In the US9 what do you mean by the collecting methods and  what collecting methods  are available??"
+>
+>A3: "To make a Covid test you need a swab to collect a sample. To make a blood test you need sample tubes and a syringe. 
+>
+>Question 3 link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7752).
+>
+>When the administrator (US9) specifies a new type of test, the administrator also specifies the method to collect a sample. The administrator introduces a brief description for each collecting method."
+>
+>Q4: "US9- Analog to US8 do you have any acceptance criteria you want to introduce in US9?"
+>
+>A4: "For now I have nothing more to say about the acceptance criteria of US9."
+>
+>Question 4 link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7744).
+
 
 ### 1.3. Acceptance Criteria
 
-*Insert here the client acceptance criteria.*
+* **AC1:** Each collecting method has to have a description.
+* **AC2:** Every test type must have it's collecting methods.
 
 ### 1.4. Found out Dependencies
 
@@ -40,9 +55,10 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 * Typed data:
     * Name of TestType
-    * Collecting Methods
-    
+    * Collecting Method
+    * Collecting Method Description 
 * Selected data:
+    * (none)
 
 ### 1.6. System Sequence Diagram (SSD)
 

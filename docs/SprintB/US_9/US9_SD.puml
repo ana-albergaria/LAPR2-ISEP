@@ -1,0 +1,114 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADM
+
+participant ":RegisterNewCalUI  " as UI
+participant ":RegisterNewCalController" as CTRL
+participant "App" as _APP
+participant "app\n:App" as APP
+participant "session\n:UserSession" as SESSAO
+participant ":Company" as PLAT
+/'participant ":Platform" as PLAT'/
+participant ":Laboratory" as ORG
+participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
+participant "selectedTT\n:List<TestType>" as CAT
+participant "totalTT\n:List<TestType>" as LIST_CAT
+
+activate ADM
+ADM -> UI : asks to register a new Clinical Analysis Laboratory
+activate UI
+UI --> ADM : requests data (laboratory ID, name, address, phone number, TIN number)
+deactivate UI
+
+ADM -> UI : types requested data
+activate UI
+
+UI -> CTRL : totalTT = getTestTypes()
+activate CTRL
+
+CTRL -> PLAT : totalTT = getTestTypes()
+activate PLAT
+|||
+deactivate PLAT
+deactivate CTRL
+
+UI --> ADM : shows types of test list and asks to select at least one
+deactivate PLAT
+deactivate UI
+
+ADM -> UI : selects type(s) of test
+activate UI
+
+UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesDesignations)
+activate CTRL
+
+CTRL -> PLAT : selectedTT = getTestTypesByDesignation(testTypesDesignations)
+activate PLAT
+|||
+deactivate PLAT
+
+CTRL -> _APP: app = getInstance()
+activate _APP
+|||
+deactivate _APP
+
+CTRL -> APP: session = getCurrentSession()
+activate APP
+|||
+deactivate APP
+
+CTRL -> SESSAO : answer = isLoggedInWithRole(USER_ROLE)
+activate SESSAO
+|||
+deactivate SESSAO
+
+
+/'ANTES ESTAVA email = getUserEmail()
+CTRL -> SESSAO: email = getUserId()
+activate SESSAO
+|||
+deactivate SESSAO
+
+/'org = getOrganizationByUserEmail(email)
+CTRL -> PLAT: cmp = getCompanyByUserId(email)
+activate PLAT
+|||
+deactivate PLAT'/
+
+
+CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+activate ORG
+
+ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
+
+CTRL --> UI: result
+
+UI --> ADM: shows all data and requests confirmation
+deactivate ORG
+deactivate PLAT
+deactivate CTRL
+deactivate UI
+
+ADM -> UI : confirms the data
+activate UI
+UI -> CTRL : saveClinicalAnalysisLaboratory()
+activate CTRL
+
+CTRL -> ORG : saveClinicalAnalysisLaboratory(cal)
+activate ORG
+
+ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
+ORG -> ORG: addClinicalAnalysisLaboratory(cal)
+
+CTRL --> UI: result
+
+UI --> ADM : informs operation success
+deactivate ORG
+deactivate CTRL
+deactivate UI
+
+deactivate ADM
+
+@enduml
