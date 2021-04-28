@@ -51,23 +51,14 @@ public class Company {
     }
 
     //US8 - ANA
-    private List<TestType> totalTT;
+    //private List<TestType> totalTT;
 
-    public List<TestType> getTestTypes() {
-        return totalTT;
+    private TestTypeStore ttStore; //Company uses TestTypeStore
+
+    public TestTypeStore getTestTypeStore() {
+        return ttStore;
     }
 
-    public List<TestType> getTestTypesByDesignation(List<String> testTypesDesignations) {
-        List<TestType> selectedTT = new ArrayList<>();
-
-        for (String item : testTypesDesignations) {
-            for (TestType tt : totalTT) {
-                if(item.equalsIgnoreCase(tt.getDesignation()))
-                    selectedTT.add(tt);
-            }
-        }
-        return selectedTT;
-    }
 
 
     private List<Laboratory> laboratories; //Company owns Laboratory

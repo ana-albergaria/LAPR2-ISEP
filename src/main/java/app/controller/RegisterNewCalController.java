@@ -13,10 +13,6 @@ public class RegisterNewCalController {
     private TestType tt;
     private Laboratory lab;
     private ClinicalAnalysisLaboratory cal;
-    /*
-    private App app;
-    private UserSession userSession;
-     */
 
     public RegisterNewCalController() {
         this(App.getInstance().getCompany());
@@ -37,7 +33,7 @@ public class RegisterNewCalController {
                                                     List<String> testTypeDesignations){
 
         //ACRESCENTEI ESTA LINHA DE CÓDIGO
-        List<TestType> selectedTT = this.company.getTestTypesByDesignation(testTypeDesignations);
+        List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByDesignation(testTypeDesignations);
 
         this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, address, phoneNumber, numTIN, selectedTT);
         return this.lab.validateClinicalAnalysisLaboratory(cal);
@@ -48,11 +44,10 @@ public class RegisterNewCalController {
     }
 
     //VERIFICAR MÉTODO GETTESTTYPES!!
-    /*
     public boolean getTestTypes() {
-        return this.company.getTestTypes();
+        List<TestType> totalTT = this.company.getTestTypeStore().getTestTypes();
+        return true;
     }
-     */
 
 
 
