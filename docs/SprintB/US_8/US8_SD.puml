@@ -48,6 +48,7 @@ activate PLAT
 |||
 deactivate PLAT
 
+/'
 CTRL -> _APP: app = getInstance()
 activate _APP
 |||
@@ -61,7 +62,7 @@ deactivate APP
 CTRL -> SESSAO : answer = isLoggedInWithRole(USER_ROLE)
 activate SESSAO
 |||
-deactivate SESSAO
+deactivate SESSAO'/
 
 
 /'ANTES ESTAVA email = getUserEmail()
