@@ -1,6 +1,7 @@
 @startuml
 hide empty methods
 hide empty attributes
+left to right direction
 skinparam classAttributeIconSize 0
 
 
@@ -9,12 +10,14 @@ class Company {
 }
 
 class Parameter {
-  -designation
+  -code
+  -shortName
+  -description
 }
 
 class ParameterCategory {
   -code
-  -description
+  -name
   -nhsId
 }
 

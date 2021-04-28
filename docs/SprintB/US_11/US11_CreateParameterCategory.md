@@ -24,7 +24,15 @@ As an administrator, I want to specify a new parameter category.
 
 **From the client clarifications:**
 
-> **Question:** Should each parameter category have a state regarding the number of parameters under that category?
+> **Question:** "What are the information related to a Parameter Category?"
+> 
+> **Answer:** "Each category has a name and a unique code. There are no subcategories."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7318#p9859).
+
+-
+
+> **Question:** "Should each parameter category have a state regarding the number of parameters under that category?"
 >
 > **Answer:** yyyy.
 
@@ -108,25 +116,23 @@ As an administrator, I want to specify a new parameter category.
 |       	   	 |	... coordinating the US? | CreateParameterCategoryController | Controller |
 |       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator (Rule 1/2): in the DM Organization adopts a Parameter Category. |
 |       	   	 |	... knowing the user using the system? | UserSession | ??? |
-|       	   	 |	... knowing to which organization the user belongs to? | Platform | IE: has registed all Laboratories |
 | Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the input data? | Parameter Category | IE: The object created in step 1 has its own data. |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Parameter Category | IE: knows its own data. |
+| Step 3  		 |	...saving the input data? | ParameterCategory | IE: The object created in step 1 has its own data. |
+| Step 4  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | ParameterCategory | IE: knows its own data. |
 |       	   	 |	... validating the data globally (e.g.: duplicated)? | Company | IE: knows all the ParameterCategory objects |
-|        		 |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
-| Step 6  	   	 |	... informing operation sucess? | UI | IE: responsible for user interaction |
+| Step 5  		 |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
+| Step 6  	   	 |	... informing operation success? | UI | IE: responsible for user interaction |
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+ * Administrator
+ * Company
+ * ParameterCategory
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+ * CreateParameterCategoryUI  
+ * CreateParameterCategoryController
 
 ## 3.2. Sequence Diagram (SD)
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD:docs/SprintB/US10_CreateCategorizeParameter.md
 # US 10 - to specify a new parameter and categorize it
 
 ## 1. Requirements Engineering
@@ -43,94 +42,72 @@ As an administrator, I want to specify a new parameter and categorize it.
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507#p10106).
 
 -
+
+> **Question:** "Can a parameter be classified in more than one parameter category?"
+> 
+>  **Answer:** "No. Each parameter has only one category. There are no subcategories."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7749#p10124).
+
 -
 
-> **Question:** "Which information will the client provide for the addition of a new parameter and its categorization?"
->  
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
-
--
 
 > **Question:** "Does the client want to specify more than one new parameter at a time?"
 >
-> **Answer:** yyyy.
+> **Answer:** "Yes."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
-
--
-
-> **Question:** "What are the acceptance criteria for a new parameter category?"
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p10189).
 
 -
 
 > **Question:** "When a new parameter is specified, should there always be a category it falls under prior to its specification and subsequent categorization?"
 >
-> **Answer:** yyyy.
+> **Answer:** "Each parameter is associated with one category."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p9914).
-
--
-
-> **Question:** "What are the information associated with a parameter? What rules are applicable to such data?"
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7639#p9943).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7616#p10189).
 
 -
 
 > **Question:** "Does the administrator need to log in order to create a parameter and categorize it?"
 >
-> **Answer:** yyyy.
+> **Answer:** "Yes"
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7639#p9943).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7639#p10195).
 
 -
 
 > **Question:** "Is the categorization of a parameter mandatory or optional?"
 >
-> **Answer:** yyyy.
+> **Answer:** "Yes."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7649#p9973).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7649#p10196).
 
 -
 
 > **Question:** "How does the assignment of a parameter category works? Does he have to select the category or he have the option to create in the moment?"
 >
-> **Answer:** yyyy.
+> **Answer:** "There exists a user story to specify a new parameter category. Therefore, the administrator should select one category when creating a parameter."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7649#p9973).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7649#p10196).
 
 -
 
 > **Question:** "The administrator needs to be logged in to execute his role?"
 >
-> **Answer:** yyyy.
+> **Answer:** "Yes."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p9991).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p10200).
 
 -
 
 > **Question:** "Is the administrator an employee? If he/she is, who does him/her register?"
 >
-> **Answer:** yyyy.
+> **Answer:** "Yes. An administrator should be registered when the application starts for first time.
+The application can have more than one administrator."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p9991).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p10200).
 
 -
-
-> **Question:** "Related to the US10, what information is part of each parameter?"
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p9991).
-
 -
 
 > **Question:** "What data does the parameter have and what type / format should they have?"
@@ -204,7 +181,7 @@ As an administrator, I want to specify a new parameter and categorize it.
 ### 2.1. Relevant Domain Model Excerpt 
 *In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
 
-![USXX-MD](USXX-MD.svg)
+![US010_MD](US010_MD.svg)
 
 ### 2.2. Other Remarks
 
@@ -223,23 +200,28 @@ As an administrator, I want to specify a new parameter and categorize it.
 | Step 1  		 |	... interacting with the actor? | CreateParameterUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |       	   	 |	... coordinating the US? | CreateParameterController | Controller |
 |       	   	 |	... instantiating a new Parameter? | Administrator | ??? |
+| 			  		 | ... knowing the user using the system?  | UserSession  | ??? |
 | Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |              
+| Step 3  		 |	...saving the inputted data? | Parameter  | IE: object created in step 1 has its own data.  |
+| Step 4  		 |	...knowing the parameter categories to show? | Platform  | IE: Parameter Categories are defined by the Platform. |
+| Step 5  		 |	... saving the selected category? | Parameter  | IE: object created in step 1 is classified in one Category.  |
+| Step 6  		 |	... validating all data (local validation)? | Parameter | IE: owns its data.|
+| 			  	 |	... validating all data (global validation)? | Company | IE: knows all its parameters.|
+| Step 7		 |	... saving the created parameter? | Company | IE: owns all its parameters.|
+| Step 8  		 |	... informing operation success?| CreateParameterUI  | IE: is responsible for user interactions.  |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+ * Administrator
+ * Platform
+ * Company
+ * Parameter
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+ * CreateParameterUI  
+ * CreateParameterController
 
 ## 3.2. Sequence Diagram (SD)
 

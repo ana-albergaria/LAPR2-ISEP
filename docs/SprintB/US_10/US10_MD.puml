@@ -10,12 +10,14 @@ class Company {
 }
 
 class Parameter {
-  -designation
+  -code
+  -shortName
+  -description
 }
 
 class ParameterCategory {
   -code
-  -description
+  -name
   -nhsId
 }
 
