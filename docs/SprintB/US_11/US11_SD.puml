@@ -11,19 +11,19 @@ participant "pc: ParameterCategory" as PC
 activate ADM
 ADM -> UI : starts new parameter category
 activate UI
-UI --> ADM : requests data (i.e., code, description, nhsId)
+UI --> ADM : requests data (i.e., code, name, nhsId)
 deactivate UI
 
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : createParameterCategory(code, description, nhsId)
+UI -> CTRL : createParameterCategory(code, name, nhsId)
 activate CTRL
 
-CTRL -> CMP : pc = createParameterCategory(code, description, nhsId)
+CTRL -> CMP : pc = createParameterCategory(code, name, nhsId)
 activate CMP
 
-CMP --> PC** : create(code, description, nhsId)
+CMP --> PC** : create(code, name, nhsId)
 deactivate CMP
 
 CTRL -> CMP : validateParameterCategory(pc)

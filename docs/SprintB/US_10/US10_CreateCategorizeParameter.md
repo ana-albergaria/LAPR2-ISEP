@@ -153,7 +153,7 @@ The application can have more than one administrator."
 **Input Data:**
 
 * Typed data:
-	* code
+	* parameter code
 	* short name
 	* description
 	
@@ -227,7 +227,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 *In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
 
-![USXX-SD](USXX-SD.svg)
+![US010_SD](US010_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 

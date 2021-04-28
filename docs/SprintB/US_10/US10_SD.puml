@@ -5,19 +5,95 @@ actor "Administrator" as ADM
 
 participant ":CreateParameterUI" as UI
 participant ":CreateParameterController" as CTRL
-participant ":Company" as CMP
-participant "prm: Parameter" as PRM
+participant "ApplicationPOT" as _APP
+participant "app\n:ApplicationPOT" as APP
+participant "session\n:UserSession" as SESSION
+participant "cmp\n:Company" as CMP
+participant ":Platform" as PLAT
+participant "prm\n:Parameter" as PRM
+participant "cat\n:Category" as CAT
+participant "lc\n:List<Category>" as LIST_CAT
 
 activate ADM
 ADM -> UI : asks to create a new parameter
 activate UI
-UI --> ADM : requests data(i.e., designation, ???)
+UI --> ADM : requests data(i.e., parameterCode, shortName, description)
 deactivate UI
 
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : createParameter(designation, ???)
+UI -> CTRL : lc = getParameterCategories()
 activate CTRL
+
+CTRL -> PLAT : lc = getParameterCategories()
+activate PLAT
+|||
+deactivate PLAT
+deactivate CTRL
+
+UI --> ADM : shows parameter categories list and ask to select one
+deactivate PLAT
+deactivate UI
+
+ADM -> UI : selects a parameter category
+activate UI
+
+UI -> CTRL : createParameter(parameterCode, shortName, description, categoryCode)
+activate CTRL
+
+CTRL -> PLAT : cat = getCategoryByCode(code)
+activate PLAT
+|||
+deactivate PLAT
+
+CTRL -> _APP: app = getInstance()
+activate _APP
+|||
+deactivate _APP
+
+CTRL -> APP: session = getCurrentSession()
+activate APP
+|||
+deactivate APP
+
+CTRL -> SESSION: phoneNumber = getUserPhoneNumber()
+activate SESSION
+|||
+deactivate SESSION
+
+CTRL -> CMP: parameter = createParameter(parameterCode, shortName, description, cat)
+activate CMP
+
+CMP --> PRM**: create(parameterCode, shortName, description, cat)
+CMP -> CMP: validateParameter(parameter)
+
+CTRL --> UI: result
+
+UI --> ADM: shows all data and requests confirmation
+deactivate CMP
+deactivate PLAT
+deactivate CTRL
+deactivate UI
+
+ADM -> UI : confirms the data
+activate UI
+UI -> CTRL : saveParameter()
+activate CTRL
+
+CTRL -> CMP : saveParameter(parameter)
+activate CMP
+
+CMP -> CMP: validateParameter(parameter)
+CMP -> CMP: addParameter(parameter)
+
+CTRL --> UI: result
+
+UI --> ADM : informs operation success
+deactivate CMP
+deactivate CTRL
+deactivate UI
+
+deactivate ADM
 
 @enduml
