@@ -104,16 +104,15 @@ There is a dependency to "US 11 - to specify a new parameter category" since the
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1: Asks to specify a new test type	                          |	        ... instantiating a new test type?				                        | Company                     | Creator: R1/2                                       |
-| Step 2: Request test type data(code, description, collectingMethod) |			n/a				                                                        |                             |                                                     |
-| Step 3: Types requested data		                                  |			...saving input data?				                                    | Test Type                   | IE: The object created in step 1 has its own data.  |
-| Step 4: Shows available categories and request to select one or more|			n/a				                                                        |                             |                                                     |              
-| Step 5: Selects requested adata                                     |          ...instanciate a collecting method?				                        | Test Type                   | Creator: R1/2/composition                           |
-|                                                                     |			...saving the input data?				                                | Collecting Method           | IE: The object has its own data.                    |              
-| Step 6: Shows test type data and requests confirmation              |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type/Collecting Method | IE: Knows its own data.                             |              
-|                                                                     |          … validating the data globally (e.g.: duplicated)?				        | Company                     | IE: Knows all Test Type objects.                    |              
-| Step 7: Confirms data                                               |			... saving the created test type?				                        | Company                     | IE: Records/adopts all the Test Type objects.       |              
-| Step 8: Informs operation success                                   |			... informing operation success?				                        | UI                          | IE: responsible for user interaction                |              
+| Step 1: Asks to specify a new test type	                          |	        ... instantiating a new test type?				                        | Test Type Store             | Creator: R1/2                                        |
+| Step 2: Request test type data(code, description, collectingMethod) |			n/a				                                                        |                             |                                                      |
+| Step 3: Types requested data		                                  |			...saving input data?				                                    | Test Type                   | IE: The object created in step 1 has its own data.   |
+| Step 4: Shows available categories and request to select one or more|			n/a				                                                        |                             |                                                      |              
+| Step 5: Selects requested data                                      |          ...saving the input data?				                                | Test Type                   | IE: Object created in step 1 has a set of categories.|         
+| Step 6: Shows test type data and requests confirmation              |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type                   | IE: Knows its own data.                              |              
+|                                                                     |          … validating the data globally (e.g.: duplicated)?				        | Test Type Store             | IE: Knows all Test Type objects.                     |              
+| Step 7: Confirms data                                               |			... saving the created test type?				                        | Company                     | IE: Records/adopts all the Test Type objects.        |              
+| Step 8: Informs operation success                                   |			... informing operation success?				                        | UI                          | IE: responsible for user interaction                 |              
 
 ### Systematization ##
 
