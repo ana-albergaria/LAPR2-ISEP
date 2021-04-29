@@ -111,20 +111,21 @@ There is a dependency to "US 11 - to specify a new parameter category" since the
 | Step 5: Selects requested data                                      |          ...saving the input data?				                                | Test Type                   | IE: Object created in step 1 has a set of categories.|         
 | Step 6: Shows test type data and requests confirmation              |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type                   | IE: Knows its own data.                              |              
 |                                                                     |          … validating the data globally (e.g.: duplicated)?				        | Test Type Store             | IE: Knows all Test Type objects.                     |              
-| Step 7: Confirms data                                               |			... saving the created test type?				                        | Company                     | IE: Records/adopts all the Test Type objects.        |              
+| Step 7: Confirms data                                               |			... saving the created test type?				                        | Test Type Store             | IE: Records/adopts all the Test Type objects.        |              
 | Step 8: Informs operation success                                   |			... informing operation success?				                        | UI                          | IE: responsible for user interaction                 |              
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+ * TestType
+ * Company
+ * Administrator
+ * ParameterCategory
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+ * CreateTestTypeUI  
+ * CreateTestTypeController
 
 ## 3.2. Sequence Diagram (SD)
 
