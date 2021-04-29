@@ -5,22 +5,22 @@ left to right direction
 skinparam classAttributeIconSize 0
 
 class Company {
-  -designation
-  +createParameterCategory(code, description, nhsId)
+  -String designation
+  +createParameterCategory(code, name, nhsId)
   +validateParameterCategory(pc)
   +saveParameterCategory(pc)
   +addParameterCategory(pc)
 }
 
 class ParameterCategory {
-   -code
-   -description
-   -nhsId
-   +ParameterCategory(code, description, nhsId)
+   -String code
+   -String name
+   -String nhsId
+   +ParameterCategory(code, name, nhsId)
 }
 
 class CreateParameterCategoryController {
-  +createParameterCategory(code, description, nhsId)
+  +createParameterCategory(code, name, nhsId)
   +saveParameterCategory()
 }
 

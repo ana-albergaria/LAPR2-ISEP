@@ -4,4 +4,69 @@ hide empty attributes
 left to right direction
 skinparam classAttributeIconSize 0
 
+class ApplicationPOT
+{
+  +static getInstance()
+  +getCurrentSession()
+}
+
+class UserSession
+{
+  +getUserPhoneNumber()
+}
+
+class Parameter {
+  -String parameterCode
+  -String shortName
+  -String description
+  +Parameter(parameterCode, shortName, description, cat)
+}
+
+class ParameterCategory {
+   -String code
+   -String name
+   -String nhsId
+   +ParameterCategory(code, name, nhsId)
+}
+
+class Company {
+  -String designation
+  +createParameterCategory(code, name, nhsId)
+  +validateParameterCategory(pc)
+  +saveParameterCategory(pc)
+  +addParameterCategory(pc)
+  +createParameter(parameterCode, shortName, description, cat)
+  +saveParameter(parameter)
+  -addParameter(parameter)
+  -validateParameter(parameter)
+}
+
+class Platform {
+  -String designation
+  +getParameterCategories()
+  +getParameterCategoryByCode(catCode)
+}
+
+class CreateParameterController {
+  +getParameterCategories()
+  +createParameter(parameterCode, shortName, description, cat, categoryCode)
+  +saveParameter()
+}
+
+class CreateParameterUI {
+
+}
+
+CreateParameterUI ..> CreateParameterController
+CreateParameterController ..> Platform
+CreateParameterController ..> ParameterCategory
+CreateParameterController ..> Parameter
+CreateParameterController ..> Company
+CreateParameterController ..> ApplicationPOT
+CreateParameterController ..> UserSession
+Parameter "*" -> "1" ParameterCategory : classified in
+Platform "1" --> "*" ParameterCategory : defines
+Company "1" --> "*" Parameter : owns
+
+
 @enduml
