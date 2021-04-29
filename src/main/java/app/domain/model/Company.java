@@ -53,10 +53,10 @@ public class Company {
     //US8 - ANA
     //private List<TestType> totalTT;
 
-    private TestTypeStore ttStore; //Company uses TestTypeStore
+    private TestTypeStore storeTest; //Company uses TestTypeStore
 
     public TestTypeStore getTestTypeStore() {
-        return ttStore;
+        return storeTest;
     }
 
 

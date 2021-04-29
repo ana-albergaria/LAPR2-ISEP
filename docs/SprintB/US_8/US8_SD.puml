@@ -9,9 +9,10 @@ participant ":RegisterNewCalController" as CTRL
 /'participant "app\n:App" as APP'/
 /'participant "session\n:UserSession" as SESSAO'/
 participant ":Company" as PLAT
-participant "store\n:TestTypeStore" as TEST_TYPE_STORE
+participant "storeTest\n:TestTypeStore" as TEST_TYPE_STORE
 /'participant ":Platform" as PLAT'/
 participant ":Laboratory" as ORG
+participant "storeLab\n:LaboratoryStore" as LAB_STORE
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
 participant "selectedTT\n:List<TestType>" as CAT
 participant "totalTT\n:List<TestType>" as LIST_CAT
@@ -28,7 +29,7 @@ activate UI
 UI -> CTRL : totalTT = getTestTypes()
 activate CTRL
 
-CTRL -> PLAT : store = getTestTypeStore()
+CTRL -> PLAT : storeTest = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
@@ -46,18 +47,23 @@ deactivate UI
 ADM -> UI : selects type(s) of test
 activate UI
 
-UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesDesignations)
+UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesCodes)
 activate CTRL
 
-CTRL -> PLAT : store = getTestTypeStore()
+CTRL -> PLAT : storeTest = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
 
-CTRL -> TEST_TYPE_STORE : selectedTT = getTestTypesByDesignation(testTypesDesignations)
+CTRL -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypesCodes)
 activate TEST_TYPE_STORE
 |||
 deactivate TEST_TYPE_STORE
+
+CTRL -> ORG : storeLab = getLaboratoryStore()
+activate ORG
+|||
+deactivate ORG
 
 /'
 CTRL -> _APP: app = getInstance()
@@ -89,16 +95,18 @@ activate PLAT
 deactivate PLAT'/
 
 
-CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-activate ORG
+CTRL -> LAB_STORE: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+activate LAB_STORE
 
-ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
+LAB_STORE --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+LAB_STORE -> LAB_STORE: validateClinicalAnalysisLaboratory(cal)
+activate LAB_STORE
+deactivate LAB_STORE
 
 CTRL --> UI: result
 
 UI --> ADM: shows all data and requests confirmation
-deactivate ORG
+deactivate LAB_STORE
 deactivate PLAT
 deactivate CTRL
 deactivate UI
@@ -108,11 +116,15 @@ activate UI
 UI -> CTRL : saveClinicalAnalysisLaboratory()
 activate CTRL
 
-CTRL -> ORG : saveClinicalAnalysisLaboratory(cal)
-activate ORG
+CTRL -> LAB_STORE : saveClinicalAnalysisLaboratory(cal)
+activate LAB_STORE
 
-ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
-ORG -> ORG: addClinicalAnalysisLaboratory(cal)
+LAB_STORE -> LAB_STORE: validateClinicalAnalysisLaboratory(cal)
+activate LAB_STORE
+deactivate LAB_STORE
+LAB_STORE -> LAB_STORE: addClinicalAnalysisLaboratory(cal)
+activate LAB_STORE
+deactivate LAB_STORE
 
 CTRL --> UI: result
 
