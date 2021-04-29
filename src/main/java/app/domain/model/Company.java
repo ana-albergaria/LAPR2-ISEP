@@ -14,7 +14,10 @@ public class Company {
 
     private String designation;
     private AuthFacade authFacade;
+    private List<ParameterCategory> parameterCategoryList;
     private ParameterCategoryStore parameterCategoryStore;
+    private TestTypeStore testTypeStore; //Company uses TestTypeStore
+    private List<Laboratory> laboratories; //Company owns Laboratory
 
     public Company(String designation)
     {
@@ -37,18 +40,10 @@ public class Company {
         return parameterCategoryStore;
     }
 
-    //US8 - ANA
-    //private List<TestType> totalTT;
-
-    private TestTypeStore testTypeStore; //Company uses TestTypeStore
-
+    //to be used in US8
     public TestTypeStore getTestTypeStore() {
         return testTypeStore;
     }
-
-    private List<Laboratory> laboratories; //Company owns Laboratory
-
-    private List<ParameterCategory> parameterCategoryList;
 
     public ParameterCategory createParameterCategory(String code, String name, String nhsId){
         return new ParameterCategory(code, name, nhsId);

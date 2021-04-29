@@ -7,7 +7,7 @@ public class Laboratory {
     private String address;
     private int phoneNumber;
     private int numTIN;
-    private LaboratoryStore storeLab; //Company uses LaboratoryStore
+    private LaboratoryStore storeLab; //Laboratory uses LaboratoryStore
 
     public Laboratory(String name, String address, int phoneNumber, int numTIN) {
         this.name = name;

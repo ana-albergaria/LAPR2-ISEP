@@ -32,7 +32,6 @@ public class RegisterNewCalController {
                                                     List<String> testTypeCodes){
 
 
-        //ACRESCENTEI ESTA LINHA DE CÓDIGO
         List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByCode(testTypeCodes);
 
         this.cal = this.lab.getLaboratoryStore().createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);

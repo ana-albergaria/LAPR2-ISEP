@@ -30,24 +30,35 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             throw new IllegalArgumentException("Laboratory ID cannot be blank.");
         if ((laboratoryID.length() != 5))
             throw new IllegalArgumentException("Laboratory ID must have exactly five alphanumeric characters.");
-        //ALTERNATIVA 1
-        /*
+        if(StringUtils.isAlphanumeric(laboratoryID))
+            throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
+        /*ALTERNATIVA 1
         if ((!laboratoryID.matches("^[a-zA-Z0-9]*$")
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-         */
         //ALTERNATIVA 2
         if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit)))
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
+         */
     }
 
-    //CONTINUAR NAME RULES!!!!
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if ((!name.matches("^[a-zA-Z]*$")))
+        if(StringUtils.isAlphanumeric(name))
             throw new IllegalArgumentException("Name must only contain letters.");
         if (name.length() > 20)
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
+    }
+
+    //INCOMPLETO!
+    public void checkPhoneNumberRules(int phoneNumber) {
+        if (phoneNumber != 11)
+            throw new IllegalArgumentException("Phone Number must contain exactly 11 digits.");
+    }
+    //INCOMPLETO!
+    public void checkTINNumberRules(int numTIN) {
+        if (numTIN != 10)
+            throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 
     //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
