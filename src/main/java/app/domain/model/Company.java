@@ -34,8 +34,8 @@ public class Company {
 
     private List<ParameterCategory> parameterCategoryList;
 
-    public ParameterCategory createParameterCategory(String code, String description, String nhsId){
-        return new ParameterCategory(code, description, nhsId);
+    public ParameterCategory createParameterCategory(String code, String name, String nhsId){
+        return new ParameterCategory(code, name, nhsId);
     }
 
     public boolean validateParameterCategory(ParameterCategory pc){
