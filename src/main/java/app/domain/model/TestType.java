@@ -1,14 +1,24 @@
 package app.domain.model;
 
-public class TestType {
-    private String designation;
+import java.util.ArrayList;
+import java.util.List;
 
-    public TestType(String designation) {
-        this.designation = designation;
+public class TestType {
+
+    private String code;
+    private String description;
+    private String collectingMethod;
+    private List<ParameterCategory> selectedCategories;
+
+    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
+        this.code = code;
+        this.description = description;
+        this.collectingMethod = collectingMethod;
+        this.selectedCategories = new ArrayList<>(selectedCategories);
     }
 
-    //US8 - ANA
-    public String getDesignation() {
-        return designation;
+    //to be used for US8
+    public String getCode() {
+        return code;
     }
 }

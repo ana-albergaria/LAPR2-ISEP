@@ -15,6 +15,10 @@ public class ParameterCategory {
         this.nhsId = nhsId;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     private void checkCodeRules(String code){
         if (StringUtils.isBlank(code))
             throw new IllegalArgumentException("Code cannot be blank.");

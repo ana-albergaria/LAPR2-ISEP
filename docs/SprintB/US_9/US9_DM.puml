@@ -33,7 +33,7 @@ Test "*" -- "1..*" ParameterCategory : requested analysis of >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "*" ParameterCategory : capable of analysing >
 Company "1" -- "*" Administrator : know >
-TestType "*" -- "1..*" ParameterCategory : characterized by >
+TestType "1" -- "1..*" ParameterCategory : characterized by >
 TestType "*" -- "1" Administrator : created by >
 
 @enduml

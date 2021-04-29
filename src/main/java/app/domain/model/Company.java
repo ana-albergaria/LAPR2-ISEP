@@ -14,6 +14,7 @@ public class Company {
 
     private String designation;
     private AuthFacade authFacade;
+    private ParameterCategoryStore parameterCategoryStore;
 
     public Company(String designation)
     {
@@ -32,36 +33,22 @@ public class Company {
         return authFacade;
     }
 
-    private List<ParameterCategory> parameterCategoryList;
-
-    public ParameterCategory createParameterCategory(String code, String description, String nhsId){
-        return new ParameterCategory(code, description, nhsId);
-    }
-
-    public boolean validateParameterCategory(ParameterCategory pc){
-        if (pc == null)
-            return false;
-        return ! this.parameterCategoryList.contains(pc);
-    }
-
-    public boolean saveParameterCategory(ParameterCategory pc){
-        if (!validateParameterCategory(pc))
-            return false;
-        return this.parameterCategoryList.add(pc);
+    public ParameterCategoryStore getParameterCategoryStore() {
+        return parameterCategoryStore;
     }
 
     //US8 - ANA
     //private List<TestType> totalTT;
 
-    private TestTypeStore ttStore; //Company uses TestTypeStore
+    private TestTypeStore testTypeStore; //Company uses TestTypeStore
 
     public TestTypeStore getTestTypeStore() {
-        return ttStore;
+        return testTypeStore;
     }
-
-
 
     private List<Laboratory> laboratories; //Company owns Laboratory
 
     //FIM US8 - ANA)
+
+
 }
