@@ -4,14 +4,14 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ParameterCategory {
     private String code;
-    private String description;
+    private String name;
     private String nhsId;
 
-    public ParameterCategory(String code, String description, String nhsId){
+    public ParameterCategory(String code, String name, String nhsId){
         checkCodeRules(code);
-        checkDescriptionRules(description);
+        checkDescriptionRules(name);
         this.code = code;
-        this.description = description;
+        this.name = name;
         this.nhsId = nhsId;
     }
 
@@ -26,7 +26,7 @@ public class ParameterCategory {
             throw new IllegalArgumentException("Code must have 4 to 8 chars.");
     }
 
-    public void checkDescriptionRules(String description){
+    public void checkDescriptionRules(String name){
 
     }
 

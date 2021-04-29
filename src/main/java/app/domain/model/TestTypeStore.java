@@ -26,7 +26,7 @@ public class TestTypeStore {
             return false;
         return this.testTypeStore.add(testType);
     }
-
+    
     public List<TestType> getTestTypesByCode(List<String> testTypeCodes) {
         List<TestType> selectedTT = new ArrayList<>();
 

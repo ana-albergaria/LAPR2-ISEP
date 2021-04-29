@@ -48,7 +48,24 @@ public class Company {
 
     private List<Laboratory> laboratories; //Company owns Laboratory
 
-    //FIM US8 - ANA)
+    private List<ParameterCategory> parameterCategoryList;
+
+    public ParameterCategory createParameterCategory(String code, String name, String nhsId){
+        return new ParameterCategory(code, name, nhsId);
+    }
+
+    public boolean validateParameterCategory(ParameterCategory pc){
+        if (pc == null)
+            return false;
+        return ! this.parameterCategoryList.contains(pc);
+    }
+
+    public boolean saveParameterCategory(ParameterCategory pc){
+        if (!validateParameterCategory(pc))
+            return false;
+        return this.parameterCategoryList.add(pc);
+    }
+
 
 
 }
