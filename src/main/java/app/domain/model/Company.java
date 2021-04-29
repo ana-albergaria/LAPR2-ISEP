@@ -14,6 +14,7 @@ public class Company {
 
     private String designation;
     private AuthFacade authFacade;
+    private ParameterCategoryStore parameterCategoryStore;
 
     public Company(String designation)
     {
@@ -31,6 +32,21 @@ public class Company {
     public AuthFacade getAuthFacade() {
         return authFacade;
     }
+
+    public ParameterCategoryStore getParameterCategoryStore() {
+        return parameterCategoryStore;
+    }
+
+    //US8 - ANA
+    //private List<TestType> totalTT;
+
+    private TestTypeStore testTypeStore; //Company uses TestTypeStore
+
+    public TestTypeStore getTestTypeStore() {
+        return testTypeStore;
+    }
+
+    private List<Laboratory> laboratories; //Company owns Laboratory
 
     private List<ParameterCategory> parameterCategoryList;
 
@@ -50,18 +66,6 @@ public class Company {
         return this.parameterCategoryList.add(pc);
     }
 
-    //US8 - ANA
-    //private List<TestType> totalTT;
-
-    private TestTypeStore storeTest; //Company uses TestTypeStore
-
-    public TestTypeStore getTestTypeStore() {
-        return storeTest;
-    }
 
 
-
-    private List<Laboratory> laboratories; //Company owns Laboratory
-
-    //FIM US8 - ANA)
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ClinicalAnalysisLaboratory extends Laboratory {
     private String laboratoryID;
-    private Laboratory isOf;
-    private List<TestType> selectedTT;
+    private LaboratoryStore isOf; //ClinicalAnalysisLaboratory isOf LaboratoryStore
+    private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
 
     public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, int phoneNumber, int numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
@@ -44,7 +44,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if ((!name.matches("^[a-zA-Z]*$")
+        if ((!name.matches("^[a-zA-Z]*$")))
             throw new IllegalArgumentException("Name must only contain letters.");
         if (name.length() > 20)
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");

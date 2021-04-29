@@ -74,14 +74,16 @@ RegisterNewCalController ..> UserSession'/
 Company "1" -> "1" TestTypeStore : uses >
 TestTypeStore "1" -> "*" TestType : conducts >
 /'VERIFICAR MULTIPLICIDADE LINHA ABAIXO'/
-ClinicalAnalysisLaboratory "1" --> "1" Laboratory : is of >
-Company "1" -> "1" LaboratoryStore : uses >
-LaboratoryStore "1" --> "3..*" Laboratory : owns >
+ClinicalAnalysisLaboratory "1" --> "1" LaboratoryStore : is of >
+Laboratory "1" --> "1" LaboratoryStore : uses >
+Company "1" --> "3..*" Laboratory : owns >
 ClinicalAnalysisLaboratory "1" -> "1..*" TestType : operates >
 
 TestTypeStore -[hidden]-> LaboratoryStore
 
 TestType -[hidden]down-> ClinicalAnalysisLaboratory
+
+
 
 /'Laboratory <|-- ClinicalAnalysisLaboratory'/
 
