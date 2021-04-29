@@ -45,15 +45,8 @@ public class Company {
         return testTypeStore;
     }
 
-<<<<<<< HEAD
-    private List<Laboratory> laboratories; //Company owns Laboratory
-
     //US11
 
-    private List<ParameterCategory> parameterCategoryList;
-
-=======
->>>>>>> 60ca280d47defb5fbd1730148582c1abc5edc7f0
     public ParameterCategory createParameterCategory(String code, String name, String nhsId){
         return new ParameterCategory(code, name, nhsId);
     }
