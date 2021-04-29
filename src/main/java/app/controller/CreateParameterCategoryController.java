@@ -17,8 +17,8 @@ public class CreateParameterCategoryController {
         this.pc = null;
     }
 
-    public boolean createParameterCategory(String code, String description, String nhsId){
-        this.pc = this.company.createParameterCategory(code, description, nhsId);
+    public boolean createParameterCategory(String code, String name, String nhsId){
+        this.pc = this.company.createParameterCategory(code, name, nhsId);
         return this.company.validateParameterCategory(pc);
     }
 
