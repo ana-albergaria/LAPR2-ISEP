@@ -16,6 +16,8 @@ public class Parameter {
     }
     //+cat
 
+    //AC1, AC2 e AC3:
+
     private void checkParameterCodeRules(String parameterCode){
 
     }

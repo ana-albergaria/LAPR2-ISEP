@@ -48,6 +48,8 @@ public class Company {
 
     private List<Laboratory> laboratories; //Company owns Laboratory
 
+    //US11
+
     private List<ParameterCategory> parameterCategoryList;
 
     public ParameterCategory createParameterCategory(String code, String name, String nhsId){
@@ -66,6 +68,26 @@ public class Company {
         return this.parameterCategoryList.add(pc);
     }
 
+    /*public boolean addParameterCategory(ParameterCategory pc){
 
+    }*/
+
+    //US10
+
+    /*public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory cat){
+
+    }*/
+
+    /*public boolean validateParameter(Parameter prm){
+
+    }*/
+
+    /*public boolean saveParameter(Parameter prm){
+
+    }*/
+
+    /*public boolean addParameter(Parameter prm){
+
+    }*/
 
 }

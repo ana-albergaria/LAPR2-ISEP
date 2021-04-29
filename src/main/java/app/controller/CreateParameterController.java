@@ -1,33 +1,37 @@
 package app.controller;
 
+import app.domain.model.Company;
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
 
 public class CreateParameterController {
 
+    private Company company;
     private ParameterCategory pc;
     private Parameter prm;
 
-    public ParameterCategory getParameterCategory(){
-        return pc;
-    }
+    /*public CreateParameterController(){
+        this(App.getInstance().getCompany());
+    }*/
 
-    public CreateParameterController(){
-
-    }
-
-    public CreateParameterController(ParameterCategory pc){
+    public CreateParameterController(Company company, ParameterCategory pc){
+        this.company = company;
         this.pc = pc;
         this.prm = null;
     }
 
-    /*public boolean createParameter(String parameterCode, String shortName, String description){
+//= +createParameter(parameterCode, shortName, description, categoryCode) =======
 
+    /*public boolean createParameter(String parameterCode, String shortName, String description){
+        this.prm = this.company.createParameter(parameterCode, shortName, description);
+        return this.company.validateParameter(prm);
     }*/
-    //+cat +categoryCode
+    //+ ParameterCategory cat + String categoryCode
+
+//========================= +saveParameter() ====================================
 
     /*public boolean saveParameter(){
-
+        return this.company.getParameterCategoryStore().getParameterCategory.saveParameter(prm);
     }*/
 
 }
