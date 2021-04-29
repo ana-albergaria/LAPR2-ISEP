@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestType {
-<<<<<<< HEAD
-
+    
     private String code;
     private String description;
     private String collectingMethod;
