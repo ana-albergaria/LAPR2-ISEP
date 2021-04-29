@@ -29,7 +29,6 @@ public class TestTypeStore {
     
     public List<TestType> getTestTypesByCode(List<String> testTypeCodes) {
         List<TestType> selectedTT = new ArrayList<>();
-
         for (String item : testTypeCodes) {
             for (TestType tt : testTypeStore) {
                 if(item.equalsIgnoreCase(tt.getCode()))
