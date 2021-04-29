@@ -27,7 +27,19 @@ public class ParameterCategoryStore {
         return this.parameterCategoriesStore.add(pc);
     }
 
-    public ParameterCategory getTestTypesByDesignation(String code) {
+    public List<ParameterCategory> getCategoriesByCode(List<String> paramenterCategoryCodes) {
+        List<ParameterCategory> selectedCategories = null;
+        for (String item : paramenterCategoryCodes) {
+            selectedCategories.add(getCategoryByCode(item));
+        }
+        if(selectedCategories != null) {
+            return selectedCategories;
+        }else{
+            throw new UnsupportedOperationException("No parameter categories found!");
+        }
+    }
+
+    private ParameterCategory getCategoryByCode(String code) {
         for (ParameterCategory pc : parameterCategoriesStore) {
             if(pc.getCode().equalsIgnoreCase(code)){
                 return pc;
