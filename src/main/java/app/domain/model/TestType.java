@@ -1,14 +1,14 @@
 package app.domain.model;
 
 public class TestType {
-    private String designation;
+    private String code;
 
     public TestType(String designation) {
-        this.designation = designation;
+        this.code = code;
     }
 
     //US8 - ANA
-    public String getDesignation() {
-        return designation;
+    public String getCode() {
+        return code;
     }
 }

@@ -19,12 +19,12 @@ public class TestTypeStore {
         return totalTT;
     }
 
-    public List<TestType> getTestTypesByDesignation(List<String> testTypesDesignations) {
+    public List<TestType> getTestTypesByCode(List<String> testTypesCodes) {
         List<TestType> selectedTT = new ArrayList<>();
 
-        for (String item : testTypesDesignations) {
+        for (String item : testTypesCodes) {
             for (TestType tt : totalTT) {
-                if(item.equalsIgnoreCase(tt.getDesignation()))
+                if(item.equalsIgnoreCase(tt.getCode())
                     selectedTT.add(tt);
             }
         }

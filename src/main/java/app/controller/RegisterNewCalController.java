@@ -29,10 +29,10 @@ public class RegisterNewCalController {
                                                     String address,
                                                     int phoneNumber,
                                                     int numTIN,
-                                                    List<String> testTypeDesignations){
+                                                    List<String> testTypeCodes){
 
 
-        List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByDesignation(testTypeDesignations);
+        List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByCode(testTypeCodes);
 
         this.cal = this.lab.getLaboratoryStore().createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
         return this.lab.getLaboratoryStore().validateClinicalAnalysisLaboratory(cal);
