@@ -4,7 +4,6 @@ import app.domain.model.ClinicalAnalysisLaboratory;
 import app.domain.model.Company;
 import app.domain.model.Laboratory;
 import app.domain.model.TestType;
-import auth.UserSession;
 
 import java.util.List;
 
@@ -35,12 +34,12 @@ public class RegisterNewCalController {
 
         List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByDesignation(testTypeDesignations);
 
-        this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, address, phoneNumber, numTIN, selectedTT);
-        return this.lab.validateClinicalAnalysisLaboratory(cal);
+        this.cal = this.lab.getLaboratoryStore().createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
+        return this.lab.getLaboratoryStore().validateClinicalAnalysisLaboratory(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(){
-        return this.lab.saveClinicalAnalysisLaboratory(cal);
+        return this.lab.getLaboratoryStore().saveClinicalAnalysisLaboratory(cal);
     }
 
     //VERIFICAR MÉTODO GETTESTTYPES!!

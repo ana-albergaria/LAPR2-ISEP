@@ -14,6 +14,9 @@ public class Company {
 
     private String designation;
     private AuthFacade authFacade;
+    //private List<TestType> totalTT; //Company conducts TestType
+    //private List<Laboratory> laboratories; //Company owns Laboratory
+    private TestTypeStore storeTest; //Company uses TestTypeStore
 
     public Company(String designation)
     {
@@ -51,17 +54,13 @@ public class Company {
     }
 
     //US8 - ANA
-    //private List<TestType> totalTT;
-
-    private TestTypeStore storeTest; //Company uses TestTypeStore
-
     public TestTypeStore getTestTypeStore() {
         return storeTest;
     }
 
 
 
-    private List<Laboratory> laboratories; //Company owns Laboratory
+
 
     //FIM US8 - ANA)
 }

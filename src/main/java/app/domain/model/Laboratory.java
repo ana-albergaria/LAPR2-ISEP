@@ -7,6 +7,7 @@ public class Laboratory {
     private String address;
     private int phoneNumber;
     private int numTIN;
+    private LaboratoryStore storeLab; //Company uses LaboratoryStore
 
     public Laboratory(String name, String address, int phoneNumber, int numTIN) {
         this.name = name;
@@ -15,33 +16,11 @@ public class Laboratory {
         this.numTIN = numTIN;
     }
 
-    private List<ClinicalAnalysisLaboratory> calList;
-
-
-    public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
-                                                                       String address,
-                                                                       int phoneNumber,
-                                                                       int numTIN,
-                                                                       List<TestType> selectedTT) {
-        return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
-                                                phoneNumber, numTIN, selectedTT);
-    }
-
-    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        if (cal == null)
-            return false;
-        return ! this.calList.contains(cal);
-    }
-
-    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        if (!validateClinicalAnalysisLaboratory(cal))
-            return false;
-        return this.calList.add(cal);
+    public LaboratoryStore getLaboratoryStore() {
+        return storeLab;
     }
 
 
-
-    //SUPOSTAMENTE ESTÁ COMPLETO!
 
 
 }
