@@ -24,7 +24,7 @@ public class TestTypeStore {
 
         for (String item : testTypesCodes) {
             for (TestType tt : totalTT) {
-                if(item.equalsIgnoreCase(tt.getCode())
+                if(item.equalsIgnoreCase(tt.getCode()))
                     selectedTT.add(tt);
             }
         }
