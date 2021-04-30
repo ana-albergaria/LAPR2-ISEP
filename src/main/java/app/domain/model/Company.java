@@ -14,7 +14,6 @@ public class Company {
 
     private String designation;
     private AuthFacade authFacade;
-    private List<ParameterCategory> parameterCategoryList;
     private ParameterCategoryStore parameterCategoryStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
