@@ -120,6 +120,9 @@ public class Client {
         checkName(name);
         checkPhoneNumber(phoneNumber);
 
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+
         this.clientsCitizenCardNumber = clientsCitizenCardNumber;
         this.nhsNumber = nhsNumber;
         this.birthDate = birthDate;
@@ -128,7 +131,7 @@ public class Client {
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.psw = generatepsw();
+        this.psw = generatepsw(salt,rnd);
     }
 
 
@@ -154,6 +157,8 @@ public class Client {
         checkTinNumber(tinNumber);
         checkEmail(email);
         checkName(name);
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
 
         this.clientsCitizenCardNumber = clientsCitizenCardNumber;
         this.nhsNumber = nhsNumber;
@@ -163,7 +168,7 @@ public class Client {
         this.email = email;
         this.name = name;
         this.phoneNumber = PHONE_NUMBER_POR_OMISSAO;
-        this.psw = generatepsw();
+        this.psw = generatepsw(salt,rnd);
     }
 
 
@@ -311,10 +316,9 @@ public class Client {
             }
     }
 
-    private String generatepsw() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
+    private String generatepsw(StringBuilder salt, Random rnd) {
+        String SALTCHARS = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
         while (salt.length() < 10) { // length of the random string.
             int index = (int) (rnd.nextFloat() * SALTCHARS.length());
             salt.append(SALTCHARS.charAt(index));
@@ -331,13 +335,9 @@ public class Client {
         Client client = (Client) o;
         return Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) &&
                 Objects.equals(nhsNumber, client.nhsNumber) &&
-                Objects.equals(birthDate, client.birthDate) &&
-                Objects.equals(sex, client.sex) &&
                 Objects.equals(tinNumber, client.tinNumber) &&
                 Objects.equals(email, client.email) &&
-                Objects.equals(name, client.name) &&
-                Objects.equals(phoneNumber, client.phoneNumber) &&
-                Objects.equals(psw, client.psw);
+                Objects.equals(phoneNumber, client.phoneNumber);
     }
 
 }

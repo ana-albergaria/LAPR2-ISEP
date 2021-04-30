@@ -28,15 +28,11 @@ public class ParameterCategoryStore {
     }
 
     public List<ParameterCategory> getCategoriesByCode(List<String> paramenterCategoryCodes) {
-        List<ParameterCategory> selectedCategories = null;
+        List<ParameterCategory> selectedCategories = new ArrayList<>();
         for (String item : paramenterCategoryCodes) {
             selectedCategories.add(getCategoryByCode(item));
         }
-        if(selectedCategories != null) {
-            return selectedCategories;
-        }else{
-            throw new UnsupportedOperationException("No parameter categories found!");
-        }
+        return selectedCategories;
     }
 
     public ParameterCategory getCategoryByCode(String code) {
