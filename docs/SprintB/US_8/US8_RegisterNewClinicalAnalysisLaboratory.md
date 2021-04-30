@@ -58,12 +58,12 @@ You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/di
 
 >**Question**: Which type/format has LaboratoryID, address, name, phone number, and TIN number on Clinical Analysis Laboratory?  
 >**Answer**: Each Clinical Analysis Laboratory is characterized by the following attributes:  
->* Laboratory ID: five alphanumeric characters;  
->* Name: A string with no more than 20 characters;  
->* Address: A string with no more than 30 characters;  
->* Phone Number: 11 digit number;  
->* TIN number: 10 digit number; 
->* Type of tests performed by the lab.  
+>- Laboratory ID: five alphanumeric characters;  
+>- Name: A string with no more than 20 characters;  
+>- Address: A string with no more than 30 characters;  
+>- Phone Number: 11 digit number;  
+>- TIN number: 10 digit number; 
+>- Type of tests performed by the lab.  
 
 You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7636#p10191).
 
@@ -74,9 +74,10 @@ You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/di
 * **AC1:** All required field must be filled in.  
 * **AC2:** The Laboratory ID must have five alphanumeric characters.  
 * **AC3:** The name is a string with no more than 20 characters.  
-* **AC4:** The Phone Number is a 11 digit number.
-* **AC5:** The TIN Number is a 10 digit number.
-* **AC6:** Type of tests must be an attribute of the Clinical Analysis Laboratory.  
+* **AC4:** The address is a string with no more than 30 characters.
+* **AC5:** The Phone Number is a 11 digit number.
+* **AC6:** The TIN Number is a 10 digit number.
+* **AC7:** Type of tests must be an attribute of the Clinical Analysis Laboratory.  
 
 
 ### 1.4. Found out Dependencies

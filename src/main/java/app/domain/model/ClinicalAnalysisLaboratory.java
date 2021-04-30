@@ -12,6 +12,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
 
     public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, int phoneNumber, int numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
+        checkLaboratoryIDRules(laboratoryID);
         this.laboratoryID = laboratoryID;
         this.selectedTT = new ArrayList<TestType>(selectedTT);
     }
@@ -20,9 +21,10 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
      **AC1:** All required field must be filled in.
      * **AC2:** The Laboratory ID must have five alphanumeric characters.
      * **AC3:** The name is a string with no more than 20 characters.
-     * **AC4:** The Phone Number is a 11 digit number.
-     * **AC5:** The TIN Number is a 10 digit number.
-     * **AC6:** Type of tests must be an attribute of the Clinical Analysis Laboratory.
+     * **AC4:** Address: A string with no more than 30 characters;
+     * **AC5:** The Phone Number is a 11 digit number.
+     * **AC6:** The TIN Number is a 10 digit number.
+     * **AC7:** Type of tests must be an attribute of the Clinical Analysis Laboratory.
      */
 
     private void checkLaboratoryIDRules(String laboratoryID) {
@@ -41,25 +43,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
          */
     }
 
-    public void checkNameRules(String name) {
-        if (StringUtils.isBlank(name))
-            throw new IllegalArgumentException("Name cannot be blank.");
-        if(StringUtils.isAlphanumeric(name))
-            throw new IllegalArgumentException("Name must only contain letters.");
-        if (name.length() > 20)
-            throw new IllegalArgumentException("Name cannot have more than 20 characters.");
-    }
-
-    //INCOMPLETO!
-    public void checkPhoneNumberRules(int phoneNumber) {
-        if (phoneNumber != 11)
-            throw new IllegalArgumentException("Phone Number must contain exactly 11 digits.");
-    }
-    //INCOMPLETO!
-    public void checkTINNumberRules(int numTIN) {
-        if (numTIN != 10)
-            throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
-    }
 
     //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
+    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
 }
