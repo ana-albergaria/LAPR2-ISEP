@@ -65,7 +65,6 @@ public class Company {
         return this.prmList.add(prm);
     }
 
-
     /*public boolean addParameter(Parameter prm){
 
     }*/
