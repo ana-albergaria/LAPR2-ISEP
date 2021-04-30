@@ -20,9 +20,6 @@ public class Company {
 
     private ClientSore clientSore;
 
-    private ParameterStore parameterStore;
-
-
     public Company(String designation)
     {
         if (StringUtils.isBlank(designation))
@@ -49,17 +46,8 @@ public class Company {
         return testTypeStore;
     }
 
-    //to be used in US10
-    public ParameterStore getParameterStore() {
-        return parameterStore;
-    }
-
-
     public ClientSore getClientSore(){
         return clientSore;
     }
 
 }
-
-
-
