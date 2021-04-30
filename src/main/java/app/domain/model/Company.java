@@ -18,6 +18,7 @@ public class Company {
     private ParameterCategoryStore parameterCategoryStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
+    private ParameterStore parameterStore;
 
     public Company(String designation)
     {
@@ -45,28 +46,8 @@ public class Company {
         return testTypeStore;
     }
 
-    //US10
-
-    private List<Parameter> prmList;
-
-    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory cat){
-        return new Parameter(parameterCode, shortName, description, cat);
+    public ParameterStore getParameterStore() {
+        return parameterStore;
     }
-
-    public boolean validateParameter(Parameter prm){
-        if (prm == null)
-            return false;
-        return ! this.prmList.contains(prm);
-    }
-
-    public boolean saveParameter(Parameter prm){
-        if (!validateParameter(prm))
-            return false;
-        return this.prmList.add(prm);
-    }
-
-    /*public boolean addParameter(Parameter prm){
-
-    }*/
 
 }
