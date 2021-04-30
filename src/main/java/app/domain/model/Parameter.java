@@ -7,7 +7,7 @@ public class Parameter {
     private String parameterCode;
     private String shortName;
     private String description;
-    private ParameterCategory pc;
+    private ParameterCategory pc; //Parameter is presented under 1 ParameterCategory
 
     public Parameter(String parameterCode, String shortName, String description, ParameterCategory pc){
         checkParameterCodeRules(parameterCode);
