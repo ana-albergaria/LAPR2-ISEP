@@ -20,8 +20,8 @@ public class ClinicalAnalysisLaboratoryTest {
     @Before
     public void setUp() {
         pcList = new ArrayList<>();
-        p1 = new ParameterCategory("CODE1","Description","NHDID");
-        p2 = new ParameterCategory("CODE2","Description","NHDID");
+        p1 = new ParameterCategory("CODE1","Description");
+        p2 = new ParameterCategory("CODE2","Description");
         pcList.add(p1);
         pcList.add(p2);
         t1 = new TestType("CODE3","Description","swab",pcList);
@@ -51,7 +51,7 @@ public class ClinicalAnalysisLaboratoryTest {
 
         //- Null laboratoryID
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(null,
-                "CAL","Lisboa","91841378811","1234567890",selectedTT);
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
     }
     @Test(expected = IllegalArgumentException.class)
@@ -60,7 +60,7 @@ public class ClinicalAnalysisLaboratoryTest {
 
         //- Empty laboratoryID
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("",
-                "CAL","Lisboa","91841378811","1234567890",selectedTT);
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -69,7 +69,7 @@ public class ClinicalAnalysisLaboratoryTest {
 
         //- Whitespace laboratoryID
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(" ",
-                "CAL","Lisboa","91841378811","1234567890",selectedTT);
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
     }
 
     //Test 5: Check that it is not possible to create an instance of the
@@ -130,4 +130,6 @@ public class ClinicalAnalysisLaboratoryTest {
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "Clinical Laboratory ManyLabs ","Lisboa","91841378811","1234567890",selectedTT);
     }
+
+
 }
