@@ -17,11 +17,11 @@ public class Company {
     private ParameterCategoryStore parameterCategoryStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
-<<<<<<< HEAD
+
     private ClientSore clientSore;
-=======
+
     private ParameterStore parameterStore;
->>>>>>> 84d26e81ed4d37ce5a3a62055ef64cc12e1f9921
+
 
     public Company(String designation)
     {
@@ -53,7 +53,7 @@ public class Company {
         return parameterStore;
     }
 
-<<<<<<< HEAD
+
     public ClientSore getClientSore(){
         return clientSore;
     }
@@ -83,6 +83,6 @@ public class Company {
     }*/
 
 }
-=======
-}
->>>>>>> 84d26e81ed4d37ce5a3a62055ef64cc12e1f9921
+
+
+
