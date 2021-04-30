@@ -2,6 +2,8 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 public class Parameter {
 
     private String parameterCode;
@@ -38,6 +40,24 @@ public class Parameter {
             throw new IllegalArgumentException("Description cannot be blank.");
         if (description.length()>20)
             throw new IllegalArgumentException("Description must have up to 20 chars.");
+    }
+
+    private List<Parameter> prmList;
+
+    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory pc){
+        return new Parameter(parameterCode, shortName, description, pc);
+    }
+
+    public boolean validateParameter(Parameter prm){
+        if (prm == null)
+            return false;
+        return ! this.prmList.contains(prm);
+    }
+
+    public boolean saveParameter(Parameter prm){
+        if (!validateParameter(prm))
+            return false;
+        return this.prmList.add(prm);
     }
 
 }
