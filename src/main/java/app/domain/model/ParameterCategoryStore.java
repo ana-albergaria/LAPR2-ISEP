@@ -7,8 +7,8 @@ public class ParameterCategoryStore {
 
     private List<ParameterCategory> parameterCategoriesStore;
 
-    public ParameterCategory createParameterCategory(String code, String description, String nhsId){
-        return new ParameterCategory(code, description, nhsId);
+    public ParameterCategory createParameterCategory(String code, String name, String nhsId){
+        return new ParameterCategory(code, name, nhsId);
     }
 
     public List<ParameterCategory> getParameterCategoriesStore() {
@@ -39,7 +39,7 @@ public class ParameterCategoryStore {
         }
     }
 
-    private ParameterCategory getCategoryByCode(String code) {
+    public ParameterCategory getCategoryByCode(String code) {
         for (ParameterCategory pc : parameterCategoriesStore) {
             if(pc.getCode().equalsIgnoreCase(code)){
                 return pc;

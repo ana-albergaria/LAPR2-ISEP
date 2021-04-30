@@ -2,6 +2,8 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 public class ParameterCategory {
     private String code;
     private String name;
@@ -28,6 +30,12 @@ public class ParameterCategory {
 
     public void checkNameRules(String name){
 
+    }
+
+    private ParameterStore parameterStore;
+
+    public ParameterStore getParameterStore(){
+        return parameterStore;
     }
 
 }
