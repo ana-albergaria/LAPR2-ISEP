@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ClinicalAnalysisLaboratory extends Laboratory {
     private String laboratoryID;
-    private LaboratoryStore isOf; //ClinicalAnalysisLaboratory isOf LaboratoryStore
+    private Laboratory isOf; //ClinicalAnalysisLaboratory isOf Laboratory
     private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
 
     public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT) {

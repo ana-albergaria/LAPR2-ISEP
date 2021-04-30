@@ -29,17 +29,17 @@ public class RegisterNewCalController {
                                                     List<String> testTypeCodes){
 
         //LaboratoryStore storeLab = this.lab.getLaboratoryStore()
-    // cal = create
+        // cal = create
         //- codeWithMe Plugin
 
         List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByCode(testTypeCodes);
 
-        this.cal = this.lab.getLaboratoryStore().createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
-        return this.lab.getLaboratoryStore().validateClinicalAnalysisLaboratory(cal);
+        this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
+        return this.lab.validateClinicalAnalysisLaboratory(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(){
-        return this.lab.getLaboratoryStore().saveClinicalAnalysisLaboratory(cal);
+        return this.lab.saveClinicalAnalysisLaboratory(cal);
     }
 
     public List<TestType> getTestTypes() {

@@ -9,3 +9,5 @@ PERGUNTAR PROF
 * Validação local relativa a números
 * Ao criar uma instância de Clinical Analysis Laboratory, como colocar o toString bonito
 * Adicionar as Store às Pure Fabrication???
+
+* Mudar lista totalTT para testTypeStore em todos os sítios

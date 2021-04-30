@@ -2,12 +2,15 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+
 public class Laboratory {
     private String name;
     private String address;
     private String phoneNumber;
     private String numTIN;
-    private LaboratoryStore storeLab; //Laboratory uses LaboratoryStore
+    //private List<Laboratory> labList;
+    private List<ClinicalAnalysisLaboratory> calList;
 
     public Laboratory(String name, String address, String phoneNumber, String numTIN) {
         checkNameRules(name);
@@ -18,10 +21,6 @@ public class Laboratory {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.numTIN = numTIN;
-    }
-
-    public LaboratoryStore getLaboratoryStore() {
-        return storeLab;
     }
 
     public void checkNameRules(String name) {
@@ -61,6 +60,29 @@ public class Laboratory {
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 
+    public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
+                                                                       String name,
+                                                                       String address,
+                                                                       String phoneNumber,
+                                                                       String numTIN,
+                                                                       List<TestType> selectedTT) {
+        return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
+                phoneNumber, numTIN, selectedTT);
+    }
+
+    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if (cal == null)
+            return false;
+        return ! this.calList.contains(cal);
+    }
+
+    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if (!validateClinicalAnalysisLaboratory(cal))
+            return false;
+        return this.calList.add(cal);
+    }
+
+    //SUPOSTAMENTE ESTÁ COMPLETO!
     //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
 
 
