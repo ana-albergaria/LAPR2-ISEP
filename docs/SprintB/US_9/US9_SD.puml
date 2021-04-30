@@ -57,7 +57,7 @@ activate TEST_TYPE_STORE
 deactivate TEST_TYPE_STORE
 end
 
-CTRL -> PLAT : TestTypeStore = getParameterCategoriyStore()
+CTRL -> PLAT : TestTypeStore = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
