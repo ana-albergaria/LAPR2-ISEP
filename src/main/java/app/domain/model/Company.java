@@ -18,6 +18,7 @@ public class Company {
     private ParameterCategoryStore parameterCategoryStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
+    private ClientSore clientSore;
 
     public Company(String designation)
     {
@@ -62,6 +63,12 @@ public class Company {
             return false;
         return this.parameterCategoryList.add(pc);
     }
+
+    public ClientSore getClientSore(){
+        return clientSore;
+    }
+
+
 
     /*public boolean addParameterCategory(ParameterCategory pc){
 
