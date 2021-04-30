@@ -3,7 +3,6 @@ package app.controller;
 import app.domain.model.Client;
 import app.domain.model.Company;
 
-import app.domain.model.TestType;
 import auth.AuthFacade;
 
 
@@ -44,6 +43,11 @@ public class RegisterClientController {
     public boolean saveClient() {
 
         return this.company.getClientSore().saveClient(cl);
+    }
+
+    public boolean makeClientAnUser(){
+        return this.company.getAuthFacade().addUser(cl.getName(),cl.getEmail(),cl.getPsw());
+
     }
 
 
