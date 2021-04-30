@@ -7,12 +7,12 @@ public class ParameterCategoryStore {
 
     private List<ParameterCategory> parameterCategoriesStore;
 
-    public ParameterCategory createParameterCategory(String code, String name, String nhsId){
-        return new ParameterCategory(code, name, nhsId);
-    }
-
     public List<ParameterCategory> getParameterCategoriesStore() {
         return parameterCategoriesStore;
+    }
+
+    public ParameterCategory createParameterCategory(String code, String name){
+        return new ParameterCategory(code, name);
     }
 
     public boolean validateParameterCategory(ParameterCategory pc){
@@ -27,9 +27,9 @@ public class ParameterCategoryStore {
         return this.parameterCategoriesStore.add(pc);
     }
 
-    public List<ParameterCategory> getCategoriesByCode(List<String> paramenterCategoryCodes) {
+    public List<ParameterCategory> getCategoriesByCode(List<String> parameterCategoryCodes) {
         List<ParameterCategory> selectedCategories = new ArrayList<>();
-        for (String item : paramenterCategoryCodes) {
+        for (String item : parameterCategoryCodes) {
             selectedCategories.add(getCategoryByCode(item));
         }
         return selectedCategories;

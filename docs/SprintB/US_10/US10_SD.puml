@@ -6,15 +6,11 @@ actor "Administrator" as ADM
 participant ":CreateParameterUI" as UI
 participant ":CreateParameterController" as CTRL
 participant "cmp\n:Company" as CMP
-participant "store\n:ParameterCategory" as store
+participant "store\n:ParameterCategoryStore" as STORE
 participant ":CreateParameterCategoryController" as PCCTRL
-'participant "ApplicationPOT" as _APP
-'participant "app\n:ApplicationPOT" as APP
-'participant "session\n:UserSession" as SESSION
-'participant ":Platform" as PLAT
 participant "prm\n:Parameter" as PRM
-participant "cat\n:Category" as CAT
-participant "lc\n:List<Category>" as LIST_CAT
+participant "pc\n:ParameterCategory" as PC
+participant "lc\n:List<ParameterCategory>" as LIST_CAT
 
 activate ADM
 ADM -> UI : asks to create a new parameter
@@ -25,55 +21,44 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : lc = getCategories()
+UI -> CTRL : lc = getParameterCategories()
 activate CTRL
 
 CTRL -> CMP : categoriesStore = getParameterCategoryStore()
 activate CMP
 |||
 deactivate CMP
-CTRL -> store : categoriesList = getCategories()
-activate store
+CTRL -> STORE : categoriesList = getParameterCategoriesStore()
+activate STORE
 |||
-deactivate store
+deactivate STORE
 deactivate CTRL
 
-UI --> ADM : shows parameter categories list and ask to select one
+UI --> ADM : shows parameter categories list and asks to select one
 deactivate CMP
 deactivate UI
 
 ADM -> UI : selects a parameter category
 activate UI
 
-UI -> CTRL : createParameter(parameterCode, shortName, description, categoryCode)
+UI -> CTRL : createParameter(parameterCode, shortName, description, pcCode)
 activate CTRL
 
-CTRL -> PCCTRL : cat = getCategoryByCode(catCode)
+CTRL -> PCCTRL : pc = getCategoryByCode(pcCode)
 activate PCCTRL
 |||
 deactivate PCCTRL
 
-'CTRL -> _APP: app = getInstance()
-'activate _APP
-'|||
-'deactivate _APP
-
-'CTRL -> APP: session = getCurrentSession()
-'activate APP
-'|||
-'deactivate APP
-
-CTRL -> CMP: prm = createParameter(parameterCode, shortName, description, cat)
+CTRL -> CMP: prm = createParameter(parameterCode, shortName, description, pc)
 activate CMP
 
-CMP --> PRM**: create(parameterCode, shortName, description, cat)
-CTRL -> CMP: validateParameter(parameter)
+CMP --> PRM**: create(parameterCode, shortName, description, pc)
+CTRL -> CMP: validateParameter(prm)
 
 CTRL --> UI: result
 
 UI --> ADM: shows all data and requests confirmation
 deactivate CMP
-'deactivate PLAT
 deactivate CTRL
 deactivate UI
 

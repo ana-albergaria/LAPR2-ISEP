@@ -17,6 +17,7 @@ public class Company {
     private ParameterCategoryStore parameterCategoryStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
+    private List<Parameter> prmList;
 
     private ClientSore clientSore;
 
@@ -48,6 +49,19 @@ public class Company {
 
     public ClientSore getClientSore(){
         return clientSore;
+    }
+
+    //to be used in US10
+    public boolean validateParameter(Parameter prm){
+        if (prm == null)
+            return false;
+        return ! this.prmList.contains(prm);
+    }
+
+    public boolean saveParameter(Parameter prm){
+        if (!validateParameter(prm))
+            return false;
+        return this.prmList.add(prm);
     }
 
 }

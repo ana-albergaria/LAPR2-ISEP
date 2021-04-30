@@ -4,17 +4,8 @@ hide empty attributes
 left to right direction
 skinparam classAttributeIconSize 0
 
-'class UserSession{
-  '+getUserPhoneNumber()
-'}
-
 class ParameterCategoryStore {
-    +getCategoriesList()
-    +getCategoriesByCode(code)
-}
-
-class ParameterStore {
-    createParameter(parameterCode, shortName, description, pc)
+    +getCategoryByCode(code)
 }
 
 class Parameter {
@@ -23,13 +14,15 @@ class Parameter {
   -String description
   -ParameterCategory pc
   +Parameter(parameterCode, shortName, description, pc)
+  +createParameter(parameterCode, shortName, description, pc)
+  +validateParameter(parameter)
+  +saveParameter(parameter)
 }
 
 class ParameterCategory {
    -String code
    -String name
-   -String nhsId
-   +ParameterCategory(code, name, nhsId)
+   +ParameterCategory(code, name)
    +getCode()
 }
 
@@ -49,16 +42,13 @@ class CreateParameterUI {
 }
 
 CreateParameterUI ..> CreateParameterController
-CreateParameterController ..> ParameterStore
 CreateParameterController ..> Company
 CreateParameterController ..> ParameterCategoryStore
-ParameterStore ..> Parameter
+CreateParameterController ..> Parameter
 ParameterCategoryStore ..> ParameterCategory
-Company "1" -- "1" ParameterStore : uses >
 Company "1" -- "1" ParameterCategoryStore : uses >
-Company "1" -- "*" ParameterCategory : capable of analysing >
+Company "1" -- "*" ParameterCategory : adopts >
 Parameter "1..*" -- "1" ParameterCategory : presented under >
-'CreateParameterController ..> UserSession
 
 
 @enduml

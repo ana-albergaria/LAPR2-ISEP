@@ -5,14 +5,12 @@ import org.apache.commons.lang3.StringUtils;
 public class ParameterCategory {
     private String code;
     private String name;
-    private String nhsId;
 
-    public ParameterCategory(String code, String name, String nhsId){
+    public ParameterCategory(String code, String name){
         checkCodeRules(code);
         checkNameRules(name);
         this.code = code;
         this.name = name;
-        this.nhsId = nhsId;
     }
 
     public String getCode() {
@@ -29,11 +27,5 @@ public class ParameterCategory {
     public void checkNameRules(String name){
 
     }
-
-    /*private ParameterStore parameterStore;
-
-    public ParameterStore getParameterStore(){
-        return parameterStore;
-    }*/
 
 }

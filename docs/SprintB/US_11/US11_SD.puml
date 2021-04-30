@@ -5,33 +5,37 @@ actor "Administrator" as ADM
 
 participant ":CreateParameterCategoryUI" as UI
 participant ":CreateParameterCategoryController" as CTRL
-participant ":Company" as CMP
-participant "pc: ParameterCategory" as PC
+participant "cmp\n:Company" as CMP
+participant "store\n:ParameterCategoryStore" as STORE
+participant "pc\n: ParameterCategory" as PC
 
 activate ADM
 ADM -> UI : starts new parameter category
 activate UI
-UI --> ADM : requests data (i.e., code, name, nhsId)
+UI --> ADM : requests data (i.e., code, name)
 deactivate UI
 
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : createParameterCategory(code, name, nhsId)
+UI -> CTRL : createParameterCategory(code, name)
 activate CTRL
 
-CTRL -> CMP : pc = createParameterCategory(code, name, nhsId)
+CTRL -> CMP : categoriesStore = getParameterCategoryStore()
 activate CMP
 
-CMP --> PC** : create(code, name, nhsId)
-deactivate CMP
+CMP -> STORE : pc = createParameterCategory(code, name)
+activate STORE
+STORE --> PC** : create(code, name)
 
 CTRL -> CMP : validateParameterCategory(pc)
-activate CMP
-deactivate CTRL
-deactivate CMP
+
+CTRL --> UI: result
 
 UI --> ADM : shows the data and requests a confirmation
+deactivate STORE
+deactivate CTRL
+deactivate CMP
 deactivate UI
 
 ADM -> UI : confirms the data
@@ -44,18 +48,12 @@ CTRL -> CMP : saveParameterCategory(pc)
 activate CMP
 
 CMP -> CMP : validateParameterCategory(pc)
-activate CMP
-|||
-deactivate CMP
 
 CMP -> CMP : addParameterCategory(pc)
-activate CMP
-|||
-deactivate CMP
-deactivate CMP
-deactivate CTRL
 
 ADM <-- UI : informs operation success
+deactivate CMP
+deactivate CTRL
 deactivate UI
 deactivate ADM
 

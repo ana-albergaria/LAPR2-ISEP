@@ -5,7 +5,7 @@ actor "Administrator" as Adm
 activate Adm
 Adm-> ":System" : asks to create a new parameter
 activate ":System"
-":System" --> Adm : requests data(i.e., code, shortName, description)
+":System" --> Adm : requests data(i.e., parameterCode, shortName, description)
 deactivate ":System"
 
 Adm-> ":System" : types requested data

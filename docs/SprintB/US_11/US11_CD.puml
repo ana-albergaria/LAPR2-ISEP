@@ -6,22 +6,24 @@ skinparam classAttributeIconSize 0
 
 class Company {
   -String designation
-  +createParameterCategory(code, name, nhsId)
-  +validateParameterCategory(pc)
-  +saveParameterCategory(pc)
-  +addParameterCategory(pc)
+  +getParameterCategoryStore()
 }
 
 class ParameterCategory {
    -String code
    -String name
-   -String nhsId
-   +ParameterCategory(code, name, nhsId)
-   +getCode(code)
+   +ParameterCategory(code, name)
+   +getCode()
+}
+
+class ParameterCategoryStore {
+    +createParameterCategory(code, name)
+    +validateParameterCategory(pc)
+    +saveParameterCategory(pc)
 }
 
 class CreateParameterCategoryController {
-  +createParameterCategory(code, name, nhsId)
+  +createParameterCategory(code, name)
   +saveParameterCategory()
 }
 
@@ -31,6 +33,9 @@ class CreateParameterCategoryUI {
 CreateParameterCategoryUI ..> CreateParameterCategoryController
 CreateParameterCategoryController ..> Company
 CreateParameterCategoryController ..> ParameterCategory
+CreateParameterCategoryController ..> ParameterCategoryStore
+ParameterCategoryStore ..> ParameterCategory
+Company "1" --> "1" ParameterCategoryStore : uses
 Company "1" --> "*" ParameterCategory : adopts
 
 
