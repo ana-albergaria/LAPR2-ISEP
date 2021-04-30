@@ -11,3 +11,5 @@ PERGUNTAR PROF
 * Adicionar as Store às Pure Fabrication???
 
 * Mudar lista totalTT para testTypeStore em todos os sítios
+
+* Será que temos de possibilitar os nomes terem acentos?

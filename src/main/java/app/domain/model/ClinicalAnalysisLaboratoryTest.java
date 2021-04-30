@@ -128,6 +128,6 @@ public class ClinicalAnalysisLaboratoryTest {
     @Test(expected = IllegalArgumentException.class)
     public void ensureNameWithRightLength() {
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
-                "Laboratório ManyLabs","Lisboa","91841378811","1234567890",selectedTT);
+                "Clinical Laboratory ManyLabs ","Lisboa","91841378811","1234567890",selectedTT);
     }
 }

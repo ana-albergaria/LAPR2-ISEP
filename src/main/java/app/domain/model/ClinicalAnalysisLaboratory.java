@@ -42,16 +42,16 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             throw new IllegalArgumentException("Laboratory ID cannot have more or less than five alphanumeric characters.");
         if(!StringUtils.isAlphanumeric(laboratoryID))
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-        /*ALTERNATIVA 1
+    }
+
+
+    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
+    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
+    /*ALTERNATIVA 1
         if ((!laboratoryID.matches("^[a-zA-Z0-9]*$")
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
         //ALTERNATIVA 2
         if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit)))
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
          */
-    }
-
-
-    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
-    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
 }

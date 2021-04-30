@@ -32,7 +32,7 @@ public class Laboratory {
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if ((!name.chars().allMatch(Character::isLetter)))
+        if ((!name.matches("^[ A-Za-z]+$")))
             throw new IllegalArgumentException("Name must only contain letters.");
         if (name.length() > 20)
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
@@ -50,6 +50,7 @@ public class Laboratory {
     public void checkPhoneNumberRules(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
             throw new IllegalArgumentException("Phone Number cannot be blank.");
+        //if ((!phoneNumber.chars().allMatch(Character::isLetter)))
         if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Phone Number must only contain digits.");
         if (phoneNumber.length() != 11)
