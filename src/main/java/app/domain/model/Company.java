@@ -17,7 +17,11 @@ public class Company {
     private ParameterCategoryStore parameterCategoryStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
+
+    private ClientSore clientSore;
+
     private ParameterStore parameterStore;
+
 
     public Company(String designation)
     {
@@ -50,4 +54,36 @@ public class Company {
         return parameterStore;
     }
 
+
+    public ClientSore getClientSore(){
+        return clientSore;
+    }
+
+
+
+    /*public boolean addParameterCategory(ParameterCategory pc){
+
+    }*/
+
+    //US10
+
+    /*public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory cat){
+
+    }*/
+
+    /*public boolean validateParameter(Parameter prm){
+
+    }*/
+
+    /*public boolean saveParameter(Parameter prm){
+
+    }*/
+
+    /*public boolean addParameter(Parameter prm){
+
+    }*/
+
 }
+
+
+

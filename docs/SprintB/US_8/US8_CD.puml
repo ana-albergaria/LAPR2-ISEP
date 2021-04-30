@@ -53,19 +53,19 @@ class LaboratoryStore {
 +validateClinicalAnalysisLaboratory(cal)
 }
 
-/'class RegisterNewCalController {
+class RegisterNewCalController {
 +getTestTypes()
 +createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, testTypesDesignations)
 +saveClinicalAnalysisLaboratory()
-}'/
+}
 
-/'class RegisterNewCalUI {}'/
+class RegisterNewCalUI {}
 
-/'RegisterNewCalUI ..> RegisterNewCalController'/
-/'RegisterNewCalController ..> Laboratory
+RegisterNewCalUI ..> RegisterNewCalController
+RegisterNewCalController ..> Laboratory
 RegisterNewCalController ..> TestType
 RegisterNewCalController ..> ClinicalAnalysisLaboratory
-RegisterNewCalController ..> Company'/
+RegisterNewCalController ..> Company
 /'RegisterNewCalController ..> App
 RegisterNewCalController ..> UserSession'/
 

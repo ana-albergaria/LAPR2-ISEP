@@ -144,12 +144,12 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 | 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Laboratory | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
 | 			  		 |	...knowing the user using the system? |      UserSession                          | According to A&A component documentation.
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
-| Step 3: types requested data		 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
+| Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
+|               	 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
 | Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  IE: Company uses TestTypeStore.                     |
 |                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
-| Step 6: shows all data and requests confirmation  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
-|             		 |	...validating the data globally (e.g.: duplicated)?						 |  Laboratory           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
+| Step 6: shows all data and requests confirmation            		 |	...validating the data globally (e.g.: duplicated)?						 |  Laboratory           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
 | Step 7: confirms the data  		 |	...saving the created Clinical Analysis Laboratory?						 | Laboratory            |   IE: records all the ClinicalAnalysisLaboratory objects.                           |
 | Step 8: informs operation success  		 |	...informing operation success?						 | RegisterNewCalUI            | IE: responsible for user interaction                                 |
 

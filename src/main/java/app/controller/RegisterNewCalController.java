@@ -43,9 +43,9 @@ public class RegisterNewCalController {
     }
 
     //VERIFICAR MÉTODO GETTESTTYPES!!
-    public boolean getTestTypes() {
+    public List<TestType> getTestTypes() {
         List<TestType> totalTT = this.company.getTestTypeStore().getTestTypes();
-        return true;
+        return totalTT;
     }
 
 
