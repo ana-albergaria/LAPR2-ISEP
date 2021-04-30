@@ -6,8 +6,8 @@ public class ParameterStore {
 
     private List<Parameter> prmList;
 
-    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory cat){
-        return new Parameter(parameterCode, shortName, description, cat);
+    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory pc){
+        return new Parameter(parameterCode, shortName, description, pc);
     }
 
     public boolean validateParameter(Parameter prm){

@@ -2,8 +2,6 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 public class ParameterCategory {
     private String code;
     private String name;
@@ -32,10 +30,10 @@ public class ParameterCategory {
 
     }
 
-    private ParameterStore parameterStore;
+    /*private ParameterStore parameterStore;
 
     public ParameterStore getParameterStore(){
         return parameterStore;
-    }
+    }*/
 
 }

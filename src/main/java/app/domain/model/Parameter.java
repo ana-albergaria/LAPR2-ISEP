@@ -7,16 +7,16 @@ public class Parameter {
     private String parameterCode;
     private String shortName;
     private String description;
-    private ParameterCategory cat;
+    private ParameterCategory pc;
 
-    public Parameter(String parameterCode, String shortName, String description, ParameterCategory cat){
+    public Parameter(String parameterCode, String shortName, String description, ParameterCategory pc){
         checkParameterCodeRules(parameterCode);
         checkShortNameRules(shortName);
         checkDescriptionRules(description);
         this.parameterCode = parameterCode;
         this.shortName = shortName;
         this.description = description;
-        //this.cat = cat;
+        this.pc = pc;
     }
 
     private void checkParameterCodeRules(String parameterCode){

@@ -45,6 +45,7 @@ public class Company {
         return testTypeStore;
     }
 
+    //to be used in US10
     public ParameterStore getParameterStore() {
         return parameterStore;
     }

@@ -4,20 +4,25 @@ hide empty attributes
 left to right direction
 skinparam classAttributeIconSize 0
 
-'class ApplicationPOT{
-  '+static getInstance()
-  '+getCurrentSession()
-'}
-
 'class UserSession{
   '+getUserPhoneNumber()
 '}
+
+class ParameterCategoryStore {
+    +getCategoriesList()
+    +getCategoriesByCode(code)
+}
+
+class ParameterStore {
+    createParameter(parameterCode, shortName, description, pc)
+}
 
 class Parameter {
   -String parameterCode
   -String shortName
   -String description
-  +Parameter(parameterCode, shortName, description, cat)
+  -ParameterCategory pc
+  +Parameter(parameterCode, shortName, description, pc)
 }
 
 class ParameterCategory {
@@ -25,27 +30,17 @@ class ParameterCategory {
    -String name
    -String nhsId
    +ParameterCategory(code, name, nhsId)
-   +getCode(code)
+   +getCode()
 }
 
 class Company {
   -String designation
+  +getParameterStore()
   +getParameterCategoryStore()
-  '+getCategoryByCode(code)
-  +createParameter(parameterCode, shortName, description, cat)
-  +saveParameter(parameter)
-  +addParameter(parameter)
-  +validateParameter(parameter)
 }
 
-'class Platform {
-  '-String designation
-  '+getParameterCategories()
-  '+getParameterCategoryByCode(catCode)
-'}
-
 class CreateParameterController {
-  +createParameter(parameterCode, shortName, description, categoryCode)
+  +createParameter(parameterCode, shortName, description, pcCode)
   +saveParameter()
 }
 
@@ -54,15 +49,16 @@ class CreateParameterUI {
 }
 
 CreateParameterUI ..> CreateParameterController
-'CreateParameterController ..> Platform
-CreateParameterController ..> ParameterCategory
-CreateParameterController ..> Parameter
+CreateParameterController ..> ParameterStore
 CreateParameterController ..> Company
-'CreateParameterController ..> ApplicationPOT
+CreateParameterController ..> ParameterCategoryStore
+ParameterStore ..> Parameter
+ParameterCategoryStore ..> ParameterCategory
+Company "1" -- "1" ParameterStore : uses >
+Company "1" -- "1" ParameterCategoryStore : uses >
+Company "1" -- "*" ParameterCategory : capable of analysing >
+Parameter "1..*" -- "1" ParameterCategory : presented under >
 'CreateParameterController ..> UserSession
-Parameter "*" -> "1" ParameterCategory : classified in
-'Platform "1" --> "*" ParameterCategory : defines
-Company "1" --> "*" Parameter : owns
 
 
 @enduml
