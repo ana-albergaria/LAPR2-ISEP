@@ -22,18 +22,18 @@ public class CreateParameterController {
         this.prm = null;
     }
 
-//= +createParameter(parameterCode, shortName, description, categoryCode) =======
+//= +createParameter(parameterCode, shortName, description, pcCode) =======
 
-    public boolean createParameter(String parameterCode, String shortName, String description, String parameterCategoryCode){
-        ParameterCategory cat = this.company.getParameterCategoryStore().getCategoryByCode(parameterCategoryCode); //precisamos do code para usar aqui
-        this.prm = this.company.createParameter(parameterCode, shortName, description, cat);
-        return this.company.validateParameter(prm);
+    public boolean createParameter(String parameterCode, String shortName, String description, String pcCode){
+        ParameterCategory cat = this.company.getParameterCategoryStore().getCategoryByCode(pcCode); //precisamos do code para usar aqui |
+        this.prm = this.company.createParameter(parameterCode, shortName, description, cat); //o createParameter está na company
+        return this.company.validateParameter(prm); //o validateParameter está na company
     }
 
 //========================= +saveParameter() ====================================
 
     public boolean saveParameter(){
-        return this.company.saveParameter(prm);
+        return this.company.saveParameter(prm); //o saveParameter está na company
     }
 
 }

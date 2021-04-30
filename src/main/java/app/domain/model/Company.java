@@ -45,28 +45,6 @@ public class Company {
         return testTypeStore;
     }
 
-    //US11
-
-    public ParameterCategory createParameterCategory(String code, String name, String nhsId){
-        return new ParameterCategory(code, name, nhsId);
-    }
-
-    public boolean validateParameterCategory(ParameterCategory pc){
-        if (pc == null)
-            return false;
-        return ! this.parameterCategoryList.contains(pc);
-    }
-
-    public boolean saveParameterCategory(ParameterCategory pc){
-        if (!validateParameterCategory(pc))
-            return false;
-        return this.parameterCategoryList.add(pc);
-    }
-
-    /*public boolean addParameterCategory(ParameterCategory pc){
-
-    }*/
-
     //US10
 
     private List<Parameter> prmList;
