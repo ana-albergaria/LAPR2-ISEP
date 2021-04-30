@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,6 +10,26 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ClinicalAnalysisLaboratoryTest {
+    private List<ParameterCategory> pcList;
+    private ParameterCategory p1;
+    private ParameterCategory p2;
+    private List<TestType> selectedTT;
+    private TestType t1;
+    private TestType t2;
+
+    @Before
+    public void setUp() {
+        pcList = new ArrayList<>();
+        p1 = new ParameterCategory("CODE1","Description","NHDID");
+        p2 = new ParameterCategory("CODE2","Description","NHDID");
+        pcList.add(p1);
+        pcList.add(p2);
+        t1 = new TestType("CODE3","Description","swab",pcList);
+        t2 = new TestType("CODE4","Description","swab",pcList);
+        selectedTT = new ArrayList<>();
+        selectedTT.add(t1);
+        selectedTT.add(t2);
+    }
 
     //Test 1: Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory
     // class with null values.
@@ -20,79 +41,93 @@ public class ClinicalAnalysisLaboratoryTest {
                 null,null,null,null,null);
     }
 
-    //AC2
-    //Test 2: Check that it is not possible to create an instance of the
+
+    //AC2 - The Laboratory ID must have five alphanumeric characters.
+    //Test 2, 3, 4: Check that it is not possible to create an instance of the
     //ClinicalAnalysisLaboratory class with a blank (null, empty (""), or whitespace) laboratoryID.
     @Test(expected = IllegalArgumentException.class)
     public void ensureLaboratoryIDNotNull() {
         System.out.println("ensureAC2LaboratoryIDNotNull");
 
-        List<ParameterCategory> pcList1 = new ArrayList<>();
-        ParameterCategory p1 = new ParameterCategory("CODE1","Description","NHDID");
-        ParameterCategory p2 = new ParameterCategory("CODE2","Description","NHDID");
-        pcList1.add(p1);
-        pcList1.add(p2);
-
-        List<TestType> selectedTT = new ArrayList<>();
-        TestType t1 = new TestType("CODE3","Description","swab",pcList1);
-        TestType t2 = new TestType("CODE4","Description","swab",pcList1);
-        selectedTT.add(t1);
-        selectedTT.add(t2);
-
         //- Null laboratoryID
-        ClinicalAnalysisLaboratory instance1 = new ClinicalAnalysisLaboratory(null,
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(null,
                 "CAL","Lisboa","91841378811","1234567890",selectedTT);
-        //- Empty laboratoryID
-        ClinicalAnalysisLaboratory instance2 = new ClinicalAnalysisLaboratory("",
-                "CAL","Lisboa","91841378811","1234567890",selectedTT);
-        //- Whitespace laboratoryID
-        ClinicalAnalysisLaboratory instance3 = new ClinicalAnalysisLaboratory(" ",
-                "CAL","Lisboa","91841378811","1234567890",selectedTT);
+
     }
     @Test(expected = IllegalArgumentException.class)
     public void ensureLaboratoryIDNotEmpty() {
         System.out.println("ensureAC2LaboratoryIDNotEmpty");
 
-        List<ParameterCategory> pcList2 = new ArrayList<>();
-        ParameterCategory p1 = new ParameterCategory("CODE1","Description","NHDID");
-        ParameterCategory p2 = new ParameterCategory("CODE2","Description","NHDID");
-        pcList2.add(p1);
-        pcList2.add(p2);
-
-        List<TestType> selectedTT = new ArrayList<>();
-        TestType t1 = new TestType("CODE3","Description","swab",pcList2);
-        TestType t2 = new TestType("CODE4","Description","swab",pcList2);
-        selectedTT.add(t1);
-        selectedTT.add(t2);
-
         //- Empty laboratoryID
-        ClinicalAnalysisLaboratory instance2 = new ClinicalAnalysisLaboratory("",
-                "CAL","Lisboa","91841378811","1234567890",selectedTT);
-        //- Whitespace laboratoryID
-        ClinicalAnalysisLaboratory instance3 = new ClinicalAnalysisLaboratory(" ",
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("",
                 "CAL","Lisboa","91841378811","1234567890",selectedTT);
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void ensureLaboratoryIDNotWhiteSpace() {
         System.out.println("ensureAC2LaboratoryIDNotWhiteSpace");
 
-        List<ParameterCategory> pcList3 = new ArrayList<>();
-        ParameterCategory p1 = new ParameterCategory("CODE1","Description","NHDID");
-        ParameterCategory p2 = new ParameterCategory("CODE2","Description","NHDID");
-        pcList3.add(p1);
-        pcList3.add(p2);
+        //- Whitespace laboratoryID
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(" ",
+                "CAL","Lisboa","91841378811","1234567890",selectedTT);
+    }
 
-        List<TestType> selectedTT = new ArrayList<>();
-        TestType t1 = new TestType("CODE3","Description","swab",pcList3);
-        TestType t2 = new TestType("CODE4","Description","swab",pcList3);
-        selectedTT.add(t1);
-        selectedTT.add(t2);
+    //Test 5: Check that it is not possible to create an instance of the
+    //ClinicalAnalysisLaboratory class with a laboratoryID length different than 5.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureLaboratoryIDWithRightLength() {
+        System.out.println("ensureAC2LaboratoryIDWithRightLength");
 
         //- Whitespace laboratoryID
-        ClinicalAnalysisLaboratory instance3 = new ClinicalAnalysisLaboratory(" ",
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL123456",
                 "CAL","Lisboa","91841378811","1234567890",selectedTT);
     }
 
 
 
+    //Test 6: Check that it is not possible to create an instance of the
+    //ClinicalAnalysisLaboratory class with a laboratoryID that
+    //doesn't contain alphanumeric characters.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureLaboratoryIDIsAlphanumeric() {
+        System.out.println("ensureAC2LaboratoryIDIsAlphanumeric");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("C.L1@",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+    }
+
+    //AC3 - The name is a string with no more than 20 characters.
+    //Test 7: Check that it is not possible to create an instance of the
+    //ClinicalAnalysisLaboratory class with a with a blank
+    // (null, empty (""), or whitespace) name.
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNameNotNull() {
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                null,"Lisboa","91841378811","1234567890",selectedTT);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNameNotEmpty() {
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "","Lisboa","91841378811","1234567890",selectedTT);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNameNotWhiteSpace() {
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                " ","Lisboa","91841378811","1234567890",selectedTT);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNameOnlyLetters() {
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "Ana24","Lisboa","91841378811","1234567890",selectedTT);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNameWithRightLength() {
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "Laboratório ManyLabs","Lisboa","91841378811","1234567890",selectedTT);
+    }
 }

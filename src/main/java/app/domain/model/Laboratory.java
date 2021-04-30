@@ -23,16 +23,22 @@ public class Laboratory {
         this.numTIN = numTIN;
     }
 
+    @Override
+    public String toString() {
+        return String.format("LABORATORY%nName: %s%n"
+                + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
+    }
+
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if(StringUtils.isAlphanumeric(name))
+        if ((!name.chars().allMatch(Character::isLetter)))
             throw new IllegalArgumentException("Name must only contain letters.");
         if (name.length() > 20)
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
     }
 
-    //INCOMPLETO?
+
     public void checkAddressRules(String address) {
         if (StringUtils.isBlank(address))
             throw new IllegalArgumentException("Address cannot be blank.");
@@ -40,17 +46,17 @@ public class Laboratory {
             throw new IllegalArgumentException("Address cannot have more than 30 characters.");
     }
 
-    //INCOMPLETO!
+
     public void checkPhoneNumberRules(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
             throw new IllegalArgumentException("Phone Number cannot be blank.");
-        if ((!phoneNumber.chars().allMatch(Character::isDigit)))
+        if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Phone Number must only contain digits.");
         if (phoneNumber.length() != 11)
             throw new IllegalArgumentException("Phone Number must contain exactly 11 digits.");
 
     }
-    //INCOMPLETO!
+
     public void checkTINNumberRules(String numTIN) {
         if (StringUtils.isBlank(numTIN))
             throw new IllegalArgumentException("TIN Number cannot be blank.");
