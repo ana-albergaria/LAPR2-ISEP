@@ -2,8 +2,6 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 public class Laboratory {
     private String name;
     private String address;
