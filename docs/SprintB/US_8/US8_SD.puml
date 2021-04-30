@@ -12,7 +12,7 @@ participant ":Company" as PLAT
 participant "storeTest\n:TestTypeStore" as TEST_TYPE_STORE
 /'participant ":Platform" as PLAT'/
 participant ":Laboratory" as ORG
-participant "storeLab\n:LaboratoryStore" as LAB_STORE
+/'participant "storeLab\n:LaboratoryStore" as LAB_STORE'/
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
 participant "selectedTT\n:List<TestType>" as CAT
 participant "totalTT\n:List<TestType>" as LIST_CAT
@@ -60,10 +60,10 @@ activate TEST_TYPE_STORE
 |||
 deactivate TEST_TYPE_STORE
 
-CTRL -> ORG : storeLab = getLaboratoryStore()
+/'CTRL -> ORG : storeLab = getLaboratoryStore()
 activate ORG
 |||
-deactivate ORG
+deactivate ORG'/
 
 /'
 CTRL -> _APP: app = getInstance()
@@ -95,18 +95,18 @@ activate PLAT
 deactivate PLAT'/
 
 
-CTRL -> LAB_STORE: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-activate LAB_STORE
+CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+activate ORG
 
-LAB_STORE --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-LAB_STORE -> LAB_STORE: validateClinicalAnalysisLaboratory(cal)
-activate LAB_STORE
-deactivate LAB_STORE
+ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
+activate ORG
+deactivate ORG
 
 CTRL --> UI: result
 
 UI --> ADM: shows all data and requests confirmation
-deactivate LAB_STORE
+deactivate ORG
 deactivate PLAT
 deactivate CTRL
 deactivate UI
@@ -116,15 +116,15 @@ activate UI
 UI -> CTRL : saveClinicalAnalysisLaboratory()
 activate CTRL
 
-CTRL -> LAB_STORE : saveClinicalAnalysisLaboratory(cal)
-activate LAB_STORE
+CTRL -> ORG : saveClinicalAnalysisLaboratory(cal)
+activate ORG
 
-LAB_STORE -> LAB_STORE: validateClinicalAnalysisLaboratory(cal)
-activate LAB_STORE
-deactivate LAB_STORE
-LAB_STORE -> LAB_STORE: addClinicalAnalysisLaboratory(cal)
-activate LAB_STORE
-deactivate LAB_STORE
+ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
+activate ORG
+deactivate ORG
+ORG -> ORG: addClinicalAnalysisLaboratory(cal)
+activate ORG
+deactivate ORG
 
 CTRL --> UI: result
 

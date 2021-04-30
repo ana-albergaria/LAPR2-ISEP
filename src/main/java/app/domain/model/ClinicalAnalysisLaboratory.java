@@ -7,17 +7,25 @@ import java.util.List;
 
 public class ClinicalAnalysisLaboratory extends Laboratory {
     private String laboratoryID;
-    private LaboratoryStore isOf; //ClinicalAnalysisLaboratory isOf LaboratoryStore
+    private Laboratory isOf; //ClinicalAnalysisLaboratory isOf Laboratory
     private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
 
-    public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, int phoneNumber, int numTIN, List<TestType> selectedTT) {
+    public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
         checkLaboratoryIDRules(laboratoryID);
         this.laboratoryID = laboratoryID;
         this.selectedTT = new ArrayList<TestType>(selectedTT);
     }
 
-    /*
+    @Override
+    public String toString() {
+        System.out.printf("%sLaboratory ID: %s%nTest Types: %n",
+                super.toString(), laboratoryID);
+        selectedTT.forEach(System.out::println);
+        return "";
+    }
+
+        /*
      **AC1:** All required field must be filled in.
      * **AC2:** The Laboratory ID must have five alphanumeric characters.
      * **AC3:** The name is a string with no more than 20 characters.
@@ -31,19 +39,19 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         if (StringUtils.isBlank(laboratoryID))
             throw new IllegalArgumentException("Laboratory ID cannot be blank.");
         if ((laboratoryID.length() != 5))
-            throw new IllegalArgumentException("Laboratory ID must have exactly five alphanumeric characters.");
-        if(StringUtils.isAlphanumeric(laboratoryID))
+            throw new IllegalArgumentException("Laboratory ID cannot have more or less than five alphanumeric characters.");
+        if(!StringUtils.isAlphanumeric(laboratoryID))
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-        /*ALTERNATIVA 1
+    }
+
+
+    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
+    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
+    /*ALTERNATIVA 1
         if ((!laboratoryID.matches("^[a-zA-Z0-9]*$")
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
         //ALTERNATIVA 2
         if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit)))
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
          */
-    }
-
-
-    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
-    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
 }

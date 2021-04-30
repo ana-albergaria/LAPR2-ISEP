@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.domain.model.ClinicalAnalysisLaboratory;
-import app.domain.model.Company;
-import app.domain.model.Laboratory;
-import app.domain.model.TestType;
+import app.domain.model.*;
 
 import java.util.List;
 
@@ -27,22 +24,24 @@ public class RegisterNewCalController {
     public boolean createClinicalAnalysisLaboratory(String laboratoryID,
                                                     String name,
                                                     String address,
-                                                    int phoneNumber,
-                                                    int numTIN,
+                                                    String phoneNumber,
+                                                    String numTIN,
                                                     List<String> testTypeCodes){
 
+        //LaboratoryStore storeLab = this.lab.getLaboratoryStore()
+        // cal = create
+        //- codeWithMe Plugin
 
         List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByCode(testTypeCodes);
 
-        this.cal = this.lab.getLaboratoryStore().createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
-        return this.lab.getLaboratoryStore().validateClinicalAnalysisLaboratory(cal);
+        this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
+        return this.lab.validateClinicalAnalysisLaboratory(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(){
-        return this.lab.getLaboratoryStore().saveClinicalAnalysisLaboratory(cal);
+        return this.lab.saveClinicalAnalysisLaboratory(cal);
     }
 
-    //VERIFICAR MÉTODO GETTESTTYPES!!
     public List<TestType> getTestTypes() {
         List<TestType> totalTT = this.company.getTestTypeStore().getTestTypes();
         return totalTT;

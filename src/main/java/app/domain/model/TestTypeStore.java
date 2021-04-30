@@ -26,7 +26,24 @@ public class TestTypeStore {
             return false;
         return this.testTypeStore.add(testType);
     }
-    
+
+    public List<TestType> getTestTypesByCode(List<String> testTypeCodes) {
+        List<TestType> selectedTT = new ArrayList<>();
+        for (String item : testTypeCodes) {
+            selectedTT.add(getSingleTestTypeByCode(item));
+        }
+        return selectedTT;
+    }
+
+    public TestType getSingleTestTypeByCode(String code) {
+        for (TestType tt : testTypeStore) {
+            if(tt.getCode().equalsIgnoreCase(code)){
+                return tt;
+            }
+        }
+        throw new UnsupportedOperationException("Test Type not found!");
+    }
+    /*
     public List<TestType> getTestTypesByCode(List<String> testTypeCodes) {
         List<TestType> selectedTT = new ArrayList<>();
         for (String item : testTypeCodes) {
@@ -37,6 +54,7 @@ public class TestTypeStore {
         }
         return selectedTT;
     }
+     */
 
 
 }
