@@ -5,11 +5,11 @@ import org.apache.commons.lang3.StringUtils;
 public class Laboratory {
     private String name;
     private String address;
-    private int phoneNumber;
-    private int numTIN;
+    private String phoneNumber;
+    private String numTIN;
     private LaboratoryStore storeLab; //Laboratory uses LaboratoryStore
 
-    public Laboratory(String name, String address, int phoneNumber, int numTIN) {
+    public Laboratory(String name, String address, String phoneNumber, String numTIN) {
         checkNameRules(name);
         checkAddressRules(address);
         checkPhoneNumberRules(phoneNumber);
@@ -42,13 +42,22 @@ public class Laboratory {
     }
 
     //INCOMPLETO!
-    public void checkPhoneNumberRules(int phoneNumber) {
-        if (phoneNumber != 11)
+    public void checkPhoneNumberRules(String phoneNumber) {
+        if (StringUtils.isBlank(phoneNumber))
+            throw new IllegalArgumentException("Phone Number cannot be blank.");
+        if ((!phoneNumber.chars().allMatch(Character::isDigit)))
+            throw new IllegalArgumentException("Phone Number must only contain digits.");
+        if (phoneNumber.length() != 11)
             throw new IllegalArgumentException("Phone Number must contain exactly 11 digits.");
+
     }
     //INCOMPLETO!
-    public void checkTINNumberRules(int numTIN) {
-        if (numTIN != 10)
+    public void checkTINNumberRules(String numTIN) {
+        if (StringUtils.isBlank(numTIN))
+            throw new IllegalArgumentException("TIN Number cannot be blank.");
+        if ((!numTIN.chars().allMatch(Character::isDigit)))
+            throw new IllegalArgumentException("TIN Number must only contain digits.");
+        if (numTIN.length() != 10)
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 

@@ -10,7 +10,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     private LaboratoryStore isOf; //ClinicalAnalysisLaboratory isOf LaboratoryStore
     private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
 
-    public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, int phoneNumber, int numTIN, List<TestType> selectedTT) {
+    public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
         checkLaboratoryIDRules(laboratoryID);
         this.laboratoryID = laboratoryID;

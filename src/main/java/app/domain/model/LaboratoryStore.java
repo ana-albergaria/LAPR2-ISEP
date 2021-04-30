@@ -10,8 +10,8 @@ public class LaboratoryStore {
     public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
                                                                        String name,
                                                                        String address,
-                                                                       int phoneNumber,
-                                                                       int numTIN,
+                                                                       String phoneNumber,
+                                                                       String numTIN,
                                                                        List<TestType> selectedTT) {
         return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
                 phoneNumber, numTIN, selectedTT);
