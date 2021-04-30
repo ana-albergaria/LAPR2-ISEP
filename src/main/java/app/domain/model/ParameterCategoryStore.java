@@ -39,7 +39,7 @@ public class ParameterCategoryStore {
         }
     }
 
-    private ParameterCategory getCategoryByCode(String code) {
+    public ParameterCategory getCategoryByCode(String code) {
         for (ParameterCategory pc : parameterCategoriesStore) {
             if(pc.getCode().equalsIgnoreCase(code)){
                 return pc;

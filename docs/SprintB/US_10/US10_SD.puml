@@ -5,10 +5,12 @@ actor "Administrator" as ADM
 
 participant ":CreateParameterUI" as UI
 participant ":CreateParameterController" as CTRL
+participant "cmp\n:Company" as CMP
+participant "store\n:ParameterCategory" as store
+participant ":CreateParameterCategoryController" as PCCTRL
 'participant "ApplicationPOT" as _APP
 'participant "app\n:ApplicationPOT" as APP
 'participant "session\n:UserSession" as SESSION
-participant "cmp\n:Company" as CMP
 'participant ":Platform" as PLAT
 participant "prm\n:Parameter" as PRM
 participant "cat\n:Category" as CAT
@@ -23,13 +25,14 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : lc = getParameterCategoryStore()
+UI -> CTRL : lc = getCategories()
 activate CTRL
 
-CTRL -> CMP : lc = getParameterCategoryStore()
+CTRL -> CMP : categoriesStore = getParameterCategoryStore()
 activate CMP
 |||
 deactivate CMP
+CTRL -> store : categoriesList = getCategories()
 deactivate CTRL
 
 UI --> ADM : shows parameter categories list and ask to select one
@@ -42,10 +45,10 @@ activate UI
 UI -> CTRL : createParameter(parameterCode, shortName, description, categoryCode)
 activate CTRL
 
-'CTRL -> CMP : cat = getCategoryByCode(code)
-'activate CMP
-'|||
-'deactivate CMP
+CTRL -> PCCTRL : cat = getCategoryByCode(catCode)
+activate PCCTRL
+|||
+deactivate PCCTRL
 
 'CTRL -> _APP: app = getInstance()
 'activate _APP
@@ -63,7 +66,7 @@ activate CMP
 CMP --> PRM**: create(parameterCode, shortName, description, cat)
 CTRL -> CMP: validateParameter(parameter)
 
-'CTRL --> UI: result
+CTRL --> UI: result
 
 UI --> ADM: shows all data and requests confirmation
 deactivate CMP
@@ -82,7 +85,7 @@ activate CMP
 CMP -> CMP: validateParameter(parameter)
 CMP -> CMP: addParameter(parameter)
 
-'CTRL --> UI: result
+CTRL --> UI: result
 
 UI --> ADM : informs operation success
 deactivate CMP

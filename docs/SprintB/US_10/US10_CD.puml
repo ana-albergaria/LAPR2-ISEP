@@ -25,6 +25,7 @@ class ParameterCategory {
    -String name
    -String nhsId
    +ParameterCategory(code, name, nhsId)
+   +getCode(code)
 }
 
 class Company {
