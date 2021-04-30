@@ -6,8 +6,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<ParameterCategory> pcList = new ArrayList<>();
-        ParameterCategory p1 = new ParameterCategory("CODE1","Description","NHDID");
-        ParameterCategory p2 = new ParameterCategory("CODE2","Description","NHDID");
+        ParameterCategory p1 = new ParameterCategory("CODE1","Description");
+        ParameterCategory p2 = new ParameterCategory("CODE2","Description");
         pcList.add(p1);
         pcList.add(p2);
         TestType t1 = new TestType("CODE3","Description","swab",pcList);
