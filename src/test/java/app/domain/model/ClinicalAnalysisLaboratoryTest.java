@@ -102,30 +102,40 @@ public class ClinicalAnalysisLaboratoryTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNameNotNull() {
+        System.out.println("ensureAC3NameNotNull");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 null,"Lisboa","91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNameNotEmpty() {
+        System.out.println("ensureAC3NameNotEmpty");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "","Lisboa","91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNameNotWhiteSpace() {
+        System.out.println("ensureAC3NameNotWhiteSpace");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 " ","Lisboa","91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNameOnlyLetters() {
+        System.out.printf("ensureAC3NameOnlyLetters");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "Ana24","Lisboa","91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNameWithRightLength() {
+        System.out.println("ensureAC3NameWithRightLength");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "Clinical Laboratory ManyLabs ","Lisboa","91841378811","1234567890", selectedTT);
     }
@@ -134,18 +144,24 @@ public class ClinicalAnalysisLaboratoryTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureAddressNotNull() {
+        System.out.println("ensureAC4AddressNotNull");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL",null,"91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureAddressNotEmpty() {
+        System.out.println("ensureAC4AddressNotEmpty");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","","91841378811","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureAddressNotWhiteSpace() {
+        System.out.println("ensureAC4AddressNotWhiteSpace");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL"," ","91841378811","1234567890", selectedTT);
     }
@@ -161,30 +177,40 @@ public class ClinicalAnalysisLaboratoryTest {
     //AC5 - The Phone Number is a 11 digit number.
     @Test(expected = IllegalArgumentException.class)
     public void ensurePhoneNumberNotNull() {
+        System.out.println("ensureAC5PhoneNumberNotNull");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa",null,"1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensurePhoneNumberNotEmpty() {
+        System.out.println("ensureAC5PhoneNumberNotEmpty");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensurePhoneNumberWhiteSpace() {
+        System.out.println("ensureAC5PhoneNumberWhiteSpace");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa"," ","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensurePhoneNumberOnlyDigits() {
+        System.out.println("ensureAC5PhoneNumberOnlyDigits");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","918413a7881","1234567890", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensurePhoneNumberWithRightLength() {
+        System.out.println("ensureAC5PhoneNumberWithRightLength");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","918413788112","1234567890", selectedTT);
     }
@@ -192,32 +218,61 @@ public class ClinicalAnalysisLaboratoryTest {
     //AC6 - The TIN Number is a 10 digit number.
     @Test(expected = IllegalArgumentException.class)
     public void ensureTINNumberNotNull() {
+        System.out.println("ensureAC6TINNumberNotNull");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811",null, selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureTINNumberNotEmpty() {
+        System.out.println("ensureAC6TINNumberNotEmpty");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureTINNumberWhiteSpace() {
+        System.out.println("ensureAC6TINNumberNotWhiteSpace");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811"," ", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureTINNumberOnlyDigits() {
+        System.out.println("ensureAC6TINNumberOnlyDigits");
+
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","123456789!", selectedTT);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureTINNumberWithRightLength() {
-        ClinicalAnalysisLaboratory instance4 = new ClinicalAnalysisLaboratory("CAL12",
+        System.out.println("ensureAC6TINNumberWithRightLength");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","123456789011", selectedTT);
+    }
+
+    //AC7 - Type of tests must be an attribute of the Clinical Analysis Laboratory.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureListOfTestTypesNotNull() {
+        System.out.println("ensureAC7ListOfTestTypesNotNull");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureListOfTestTypesNotEmpty() {
+        System.out.println("ensureAC6TINNumberNotEmpty");
+
+        List<TestType> emptyList = new ArrayList<>();
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", emptyList);
     }
 
 }

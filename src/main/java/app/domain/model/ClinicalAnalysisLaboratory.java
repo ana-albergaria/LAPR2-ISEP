@@ -13,8 +13,9 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
         checkLaboratoryIDRules(laboratoryID);
+        checkSelectedTestTypesRules(selectedTT);
         this.laboratoryID = laboratoryID;
-        this.selectedTT = new ArrayList<TestType>(selectedTT);
+        this.selectedTT = new ArrayList<>(selectedTT);
     }
 
     @Override
@@ -34,14 +35,10 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
     }
 
+    private void checkSelectedTestTypesRules(List<TestType> selectedTT) {
+        if(selectedTT == null || selectedTT.isEmpty())
+            throw new IllegalArgumentException("The list containing the Types of Test cannot be blank.");
+    }
 
-    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
-    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
-    /*ALTERNATIVA 1
-        if ((!laboratoryID.matches("^[a-zA-Z0-9]*$")
-            throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-        //ALTERNATIVA 2
-        if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit)))
-            throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-         */
+
 }
