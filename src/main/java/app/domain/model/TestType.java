@@ -43,7 +43,7 @@ public class TestType {
     private void checkDescription(String description){
         if (StringUtils.isBlank(description))
             throw new IllegalArgumentException("Description cannot be blank.");
-        if ((description.length() > DESCRIPTION_MAXLENGTH))
+        if ((description.length() >= DESCRIPTION_MAXLENGTH))
             throw new IllegalArgumentException("Description cannot have more than 15 characters.");
     }
 
