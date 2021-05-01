@@ -23,7 +23,6 @@ public class TestTypeTest {
         pcList.add(p2);
     }
 
-
     //Test 1: Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory
     // class with null values.
     @Test(expected = IllegalArgumentException.class)
@@ -96,4 +95,5 @@ public class TestTypeTest {
 
         TestType instance = new TestType("AA232", "blood analysis", "", pcList);
     }
+
 }

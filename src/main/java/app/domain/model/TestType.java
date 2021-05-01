@@ -62,4 +62,13 @@ public class TestType {
         return testTypeToCompare.getCode().equals(this.getCode());
     }
 
+    @Override
+    public String toString() {
+        return "TestType{" +
+                "code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", collectingMethod='" + collectingMethod + '\'' +
+                ", selectedCategories=" + selectedCategories +
+                '}';
+    }
 }
