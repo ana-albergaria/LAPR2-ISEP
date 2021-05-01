@@ -12,7 +12,7 @@ public class TestTypeStore {
     }
 
     public List<TestType> getTestTypes() {
-        return testTypeList;
+        return new ArrayList<>(testTypeList);
     }
 
     public boolean validateTestType(TestType testType){
