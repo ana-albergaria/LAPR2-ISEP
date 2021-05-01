@@ -144,7 +144,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **_DO NOT COPY ALL DEVELOPED TESTS HERE_**
 
-##4.1 TestType instances values testing
+###4.1 TestType instances values:
 **Test 1:** Check that it is not possible to create an instance of the TestType class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
@@ -166,6 +166,16 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 8:** Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters. 
 
 **Test 9:** Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
+
+##4.2 TestTypeStore
+
+**Test 10:** Check if createTestType method returns TestType correctly 
+
+**Test 11:** Check that it is not possible to create an instance of the TestType class with description being an empty String.
+
+**Test 12:** Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters. 
+
+**Test 13:** Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
 
 *It is also recommended to organize this content by subsections.* 
 

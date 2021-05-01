@@ -28,6 +28,8 @@ public class Company {
 
         this.designation = designation;
         this.authFacade = new AuthFacade();
+        this.testTypeStore = new TestTypeStore();
+        this.parameterCategoryStore = new ParameterCategoryStore();
     }
 
     public String getDesignation() {
