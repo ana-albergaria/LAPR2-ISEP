@@ -9,15 +9,14 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class LaboratoryTest {
+public class CompanyTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
     private ParameterCategory p2;
     private List<TestType> selectedTT;
     private TestType t1;
     private TestType t2;
-    private Laboratory lab = null;
-    private Laboratory lab2 = new Laboratory("Labora","Lisboa", "12345678901","1234567890");
+    private Company company;
 
     @Before
     public void setUp() {
@@ -31,18 +30,19 @@ public class LaboratoryTest {
         selectedTT = new ArrayList<>();
         selectedTT.add(t1);
         selectedTT.add(t2);
+        company = new Company("Many Labs");
     }
 
     @Test
     public void createClinicalAnalysisLaboratory() {
-        System.out.println("createClinicalAnalysisLaboratory (LaboratoryTest)");
+        System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
 
         //Arrange
         ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
         //Act
-        ClinicalAnalysisLaboratory obj = lab2.createClinicalAnalysisLaboratory("CAL12",
+        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
         //Assert

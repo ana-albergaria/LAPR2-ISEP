@@ -9,8 +9,7 @@ public class Laboratory {
     private String address;
     private String phoneNumber;
     private String numTIN;
-    //private List<Laboratory> labList;
-    private List<ClinicalAnalysisLaboratory> calList;
+
 
     public Laboratory(String name, String address, String phoneNumber, String numTIN) {
         checkNameRules(name);
@@ -68,27 +67,7 @@ public class Laboratory {
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 
-    public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
-                                                                       String name,
-                                                                       String address,
-                                                                       String phoneNumber,
-                                                                       String numTIN,
-                                                                       List<TestType> selectedTT) {
-        return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
-                phoneNumber, numTIN, selectedTT);
-    }
 
-    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        if (cal == null)
-            return false;
-        return ! this.calList.contains(cal);
-    }
-
-    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        if (!validateClinicalAnalysisLaboratory(cal))
-            return false;
-        return this.calList.add(cal);
-    }
 
 
 

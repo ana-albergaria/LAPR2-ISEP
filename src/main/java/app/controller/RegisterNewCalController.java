@@ -34,12 +34,12 @@ public class RegisterNewCalController {
 
         List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByCode(testTypeCodes);
 
-        this.cal = this.lab.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
-        return this.lab.validateClinicalAnalysisLaboratory(cal);
+        this.cal = this.company.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
+        return this.company.validateClinicalAnalysisLaboratory(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(){
-        return this.lab.saveClinicalAnalysisLaboratory(cal);
+        return this.company.saveClinicalAnalysisLaboratory(cal);
     }
 
     public List<TestType> getTestTypes() {

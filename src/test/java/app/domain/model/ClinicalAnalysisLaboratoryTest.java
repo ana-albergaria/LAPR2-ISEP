@@ -95,6 +95,15 @@ public class ClinicalAnalysisLaboratoryTest {
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
     }
 
+    //MUTATION - laboratoryID IS alphanumeric
+    @Test
+    public void LaboratoryIDAlreadyIsAlphanumeric() {
+        System.out.println("AC2LaboratoryIDAlreadyIsAlphanumeric");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+    }
+
     //AC3 - The name is a string with no more than 20 characters.
     //Test 7, 8, 9: Check that it is not possible to create an instance of the
     //ClinicalAnalysisLaboratory class with a with a blank
@@ -140,6 +149,15 @@ public class ClinicalAnalysisLaboratoryTest {
                 "Clinical Laboratory ManyLabs ","Lisboa","91841378811","1234567890", selectedTT);
     }
 
+    //CONFIRM - MUTATION - if name.length = 20
+    @Test
+    public void ensureNameWithLengthOf20() {
+        System.out.println("ensureMutationNameWithMaxLength");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "Laboratorio de Santa","Lisboa","91841378811","1234567890", selectedTT);
+    }
+
     //AC4 - Address: A string with no more than 30 characters.
 
     @Test(expected = IllegalArgumentException.class)
@@ -170,8 +188,26 @@ public class ClinicalAnalysisLaboratoryTest {
     public void ensureAddressWithRightLength() {
         System.out.println("ensureAC4AddressWithRightLength");
 
-        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL123456",
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Av. 25 de Abril, Ed. Sao Joao, 127-1º Fte, Dir e Esq.","91841378811","1234567890",selectedTT);
+    }
+
+    //CONFIRM - MUTATION - address.length() <= 30
+    @Test
+    public void ensureAddressWithLengthLesserThan30() {
+        System.out.println("ensureAC4AddressWithLengthLesserThan30");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Av. 25 de Abril","91841378811","1234567890",selectedTT);
+    }
+
+    //CONFIRM - MUTATION - address.length() == 30
+    @Test
+    public void ensureAddressWithLengthEqualsTo30() {
+        System.out.println("ensureAC4AddressWithLengthEqualsTo30");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","thisAddressHasLengthofThirty01","91841378811","1234567890",selectedTT);
     }
 
     //AC5 - The Phone Number is a 11 digit number.
