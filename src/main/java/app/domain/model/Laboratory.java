@@ -50,7 +50,7 @@ public class Laboratory {
     public void checkPhoneNumberRules(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
             throw new IllegalArgumentException("Phone Number cannot be blank.");
-        //if ((!phoneNumber.chars().allMatch(Character::isLetter)))
+        //if ((!phoneNumber.chars().allMatch(Character::isDigit)))
         if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Phone Number must only contain digits.");
         if (phoneNumber.length() != 11)

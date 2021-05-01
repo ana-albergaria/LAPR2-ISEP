@@ -17,7 +17,7 @@ public class Main {
         selectedTT.add(t2);
 
         ClinicalAnalysisLaboratory instance4 = new ClinicalAnalysisLaboratory("CAL12",
-                "CAL23","Lisboa","91841378811","1234567890",selectedTT);
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
         System.out.println(instance4);
 
