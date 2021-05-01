@@ -65,5 +65,35 @@ public class TestTypeTest {
         TestType instance = new TestType("AA23@", "blood analysis", "needle", pcList);
     }
 
+    //Test 6: Check that it is not possible to create an instance of the TestType class with description holding more than 15 characters.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeDescriptionLengthSmallerThan15Char() {
+        System.out.println("ensureTestTypeDescriptionLengthSmallerThan15Char");
 
+        TestType instance = new TestType("AA232", "1234567891234567", "needle", pcList);
+    }
+
+    //Test 7: Check that it is not possible to create an instance of the TestType class with description being an empty String.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeDescriptionIsNotEmpty() {
+        System.out.println("ensureTestTypeDescriptionIsNotEmpty");
+
+        TestType instance = new TestType("AA232", "", "needle", pcList);
+    }
+
+    //Test 8: Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCollectingMethodLengthSmallerThan20Char() {
+        System.out.println("ensureTestTypeCollectingMethodLengthSmallerThan20Char");
+
+        TestType instance = new TestType("AA232", "blood analysis", "fourfourfourfourfour1", pcList);
+    }
+
+    //Test 9: Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCollectingMethodIsNotEmpty() {
+        System.out.println("ensureTestTypeDescriptionIsNotEmpty");
+
+        TestType instance = new TestType("AA232", "blood analysis", "", pcList);
+    }
 }
