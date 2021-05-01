@@ -5,14 +5,14 @@ import java.util.List;
 
 public class TestTypeStore {
 
-    private List<TestType> testTypeList;
+    private List<TestType> testTypeList = new ArrayList<>();
 
     public TestType createTestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories){
         return new TestType(code, description, collectingMethod, selectedCategories);
     }
 
     public List<TestType> getTestTypes() {
-        return testTypeList;
+        return new ArrayList<>(testTypeList);
     }
 
     public boolean validateTestType(TestType testType){
@@ -35,13 +35,13 @@ public class TestTypeStore {
         return selectedTT;
     }
 
-    public TestType getSingleTestTypeByCode(String code) {
+    private TestType getSingleTestTypeByCode(String code) {
         for (TestType tt : testTypeList) {
             if(tt.getCode().equalsIgnoreCase(code)){
                 return tt;
             }
         }
-        throw new UnsupportedOperationException("Test Type not found!");
+        throw new UnsupportedOperationException("Test Type not found with given code: " + code);
     }
 
 }
