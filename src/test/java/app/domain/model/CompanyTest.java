@@ -33,6 +33,7 @@ public class CompanyTest {
         company = new Company("Many Labs");
     }
 
+    /*
     @Test
     public void createClinicalAnalysisLaboratory() {
         System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
@@ -49,6 +50,8 @@ public class CompanyTest {
         Assert.assertEquals(expObj, obj);
 
     }
+
+     */
 
     /*
     @Test
