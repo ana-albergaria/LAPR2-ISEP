@@ -33,7 +33,7 @@ public class CompanyTest {
         company = new Company("Many Labs");
     }
 
-    /*
+
     @Test
     public void createClinicalAnalysisLaboratory() {
         System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
@@ -48,18 +48,30 @@ public class CompanyTest {
 
         //Assert
         Assert.assertEquals(expObj, obj);
-
     }
 
-     */
-
-
-
-    /*
+/*
     @Test
     public void validateClinicalAnalysisLaboratory() {
-    }
+        System.out.println("validateClinicalAnalysisLaboratory (CompanyTest)");
 
+        //Arrange
+        Gas instance = new Gas("José",636);
+        float expResult = 508.8f;
+
+        //Act
+        float result = instance.calcularCustoConsumo();
+
+        //Assert
+        Assert.assertEquals(expResult,result,0.0001);
+        //OU assertEquals(expResult, result, 0.0f);
+        //delta -> desvio possível no resultado
+
+
+    }
+    
+ */
+    /*
     @Test
     public void saveClinicalAnalysisLaboratory() {
     }

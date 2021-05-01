@@ -2,15 +2,45 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+/**
+ * This class allows the construction of a class hierarchy
+ * to represent different types of laboratories.
+ * Specifies common characteristics to all the
+ * hierarchy classes.
+ *
+ * @author Ana Albergaria 1201518
+ */
 
 public class Laboratory {
+    /**
+     * The name of the Laboratory.
+     */
     private String name;
+
+    /**
+     * The address of the Laboratory.
+     */
     private String address;
+
+    /**
+     * The phone number the Laboratory.
+     */
     private String phoneNumber;
+
+    /**
+     * The TIN number of the Laboratory.
+     */
     private String numTIN;
 
-
+    /**
+     * Builds a Laboratory's instance receiving:
+     * the name, the address, the phone number, the TIN number
+     *
+     * @param name the name of the Laboratory
+     * @param address the address of the Laboratory
+     * @param phoneNumber the phone number of the Laboratory
+     * @param numTIN the TIN number of the Laboratory
+     */
     public Laboratory(String name, String address, String phoneNumber, String numTIN) {
         checkNameRules(name);
         checkAddressRules(address);
@@ -22,6 +52,11 @@ public class Laboratory {
         this.numTIN = numTIN;
     }
 
+    /**
+     * It returns the textual description of the Laboratory instance.
+     *
+     * @return characteristics of the Laboratory
+     */
     @Override
     public String toString() {
         return String.format("LABORATORY%nName: %s%n"
@@ -65,6 +100,22 @@ public class Laboratory {
             throw new IllegalArgumentException("TIN Number must only contain digits.");
         if (numTIN.length() != 10)
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        Laboratory otherLaboratory = (Laboratory) otherObject;
+
+        return this.name.equalsIgnoreCase(otherLaboratory.name) &&
+                this.address.equalsIgnoreCase(otherLaboratory.address) &&
+                this.phoneNumber.equalsIgnoreCase(otherLaboratory.phoneNumber) &&
+                this.numTIN.equalsIgnoreCase(otherLaboratory.numTIN);
     }
 
 
