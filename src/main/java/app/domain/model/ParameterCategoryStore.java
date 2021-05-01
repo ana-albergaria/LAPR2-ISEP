@@ -5,10 +5,10 @@ import java.util.List;
 
 public class ParameterCategoryStore {
 
-    private List<ParameterCategory> parameterCategoriesStore;
+    private List<ParameterCategory> parameterCategoriesList;
 
     public List<ParameterCategory> getParameterCategoriesStore() {
-        return parameterCategoriesStore;
+        return parameterCategoriesList;
     }
 
     public ParameterCategory createParameterCategory(String code, String name){
@@ -18,13 +18,13 @@ public class ParameterCategoryStore {
     public boolean validateParameterCategory(ParameterCategory pc){
         if (pc == null)
             return false;
-        return !this.parameterCategoriesStore.contains(pc);
+        return !this.parameterCategoriesList.contains(pc);
     }
 
     public boolean saveParameterCategory(ParameterCategory pc){
         if (!validateParameterCategory(pc))
             return false;
-        return this.parameterCategoriesStore.add(pc);
+        return this.parameterCategoriesList.add(pc);
     }
 
     public List<ParameterCategory> getCategoriesByCode(List<String> parameterCategoryCodes) {
@@ -36,7 +36,7 @@ public class ParameterCategoryStore {
     }
 
     public ParameterCategory getCategoryByCode(String code) {
-        for (ParameterCategory pc : parameterCategoriesStore) {
+        for (ParameterCategory pc : parameterCategoriesList) {
             if(pc.getCode().equalsIgnoreCase(code)){
                 return pc;
             }

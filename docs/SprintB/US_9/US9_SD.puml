@@ -35,13 +35,14 @@ activate TEST_TYPE_STORE
 deactivate TEST_TYPE_STORE
 deactivate CTRL
 
-UI --> ADM : shows types of test list and asks to select at least one
+loop while user adds categories
+UI --> ADM : shows available categories and request to select one
 deactivate PLAT
 deactivate UI
 
-ADM -> UI : selects type(s) of test
+ADM -> UI : selects requested data
 activate UI
-
+end
 UI -> CTRL : createTestType(code, description, collectingMethod, selectedCategoriesCodes)
 activate CTRL
 
@@ -71,7 +72,7 @@ activate ORG
 deactivate ORG
 CTRL --> UI: result
 
-UI --> ADM: shows all data and requests confirmation
+UI --> ADM: show test type data and requests confirmation
 deactivate ORG
 deactivate PLAT
 deactivate CTRL

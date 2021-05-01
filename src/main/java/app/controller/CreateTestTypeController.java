@@ -2,6 +2,7 @@ package app.controller;
 
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
+import app.domain.model.ParameterCategoryStore;
 import app.domain.model.TestType;
 
 import java.util.ArrayList;
@@ -26,12 +27,14 @@ public class CreateTestTypeController {
     }
 
     public List<ParameterCategory> getParameterCategories() {
-        List<ParameterCategory> categoriesList = this.company.getParameterCategoryStore().getParameterCategoriesStore();
+        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        List<ParameterCategory> categoriesList = new ArrayList<>(parameterCategoryStore.getParameterCategoriesStore());
         return categoriesList;
     }
 
     public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes){
-        List<ParameterCategory> selectedCategories = this.company.getParameterCategoryStore().getCategoriesByCode(selectedCategoriesCodes);
+        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
         this.testType = this.company.getTestTypeStore().createTestType(code, description, collectingMethod, selectedCategories);
         return this.company.getTestTypeStore().validateTestType(testType);
     }

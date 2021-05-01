@@ -18,15 +18,14 @@ class TestType {
 }
 
 class ParameterCategoryStore {
-+getCategoriesList()
-+getCategoriesByCode(code)
++getParameterCategoriesStore()
++getCategoriesByCode(List<String> parameterCategoryCodes)
++getCategoryByCode(String code)
 }
 
 class ParameterCategory{
 - name
 - code
-- description
-- nhsId
 }
 
 class Company {
