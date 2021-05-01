@@ -43,14 +43,14 @@ public class TestType {
     private void checkDescription(String description){
         if (StringUtils.isBlank(description))
             throw new IllegalArgumentException("Description cannot be blank.");
-        if ((description.length() >= DESCRIPTION_MAXLENGTH))
+        if ((description.length() > DESCRIPTION_MAXLENGTH))
             throw new IllegalArgumentException("Description cannot have more than 15 characters.");
     }
 
     private void checkCollectingMethod(String atributte){
         if (StringUtils.isBlank(atributte))
             throw new IllegalArgumentException("Collecting method cannot be blank.");
-        if ((atributte.length() >= COLLECTING_METHOD_MAXLENGTH))
+        if ((atributte.length() > COLLECTING_METHOD_MAXLENGTH))
             throw new IllegalArgumentException("Collecting method cannot have more than 20 alphanumeric characters.");
     }
 
