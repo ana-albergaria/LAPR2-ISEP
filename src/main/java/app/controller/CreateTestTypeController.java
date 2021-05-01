@@ -28,8 +28,8 @@ public class CreateTestTypeController {
 
     public List<ParameterCategory> getParameterCategories() {
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
-        List<ParameterCategory> categoriesList = new ArrayList<>(parameterCategoryStore.getParameterCategoriesStore());
-        return categoriesList;
+        /*List<ParameterCategory> categoriesList = new ArrayList<>(parameterCategoryStore.getParameterCategoriesStore());*/
+        return parameterCategoryStore.getParameterCategoriesStore();
     }
 
     public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes){

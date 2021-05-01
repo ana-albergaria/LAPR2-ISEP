@@ -171,11 +171,11 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 10:** Check if createTestType method returns TestType correctly 
 
-**Test 11:** Check that it is not possible to create an instance of the TestType class with description being an empty String.
+**Test 11:** Check that it is not possible to save a repeated Test Type in the store
 
-**Test 12:** Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters. 
+**Test 12:** Check that it is not possible to save a null Test Type in the store
 
-**Test 13:** Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
+**Test 13:** Check that it is not possible to get the test types by code with not assigned codes 
 
 *It is also recommended to organize this content by subsections.* 
 
