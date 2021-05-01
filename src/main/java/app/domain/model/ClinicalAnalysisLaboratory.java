@@ -25,16 +25,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         return "";
     }
 
-        /*
-     **AC1:** All required field must be filled in.
-     * **AC2:** The Laboratory ID must have five alphanumeric characters.
-     * **AC3:** The name is a string with no more than 20 characters.
-     * **AC4:** Address: A string with no more than 30 characters;
-     * **AC5:** The Phone Number is a 11 digit number.
-     * **AC6:** The TIN Number is a 10 digit number.
-     * **AC7:** Type of tests must be an attribute of the Clinical Analysis Laboratory.
-     */
-
     private void checkLaboratoryIDRules(String laboratoryID) {
         if (StringUtils.isBlank(laboratoryID))
             throw new IllegalArgumentException("Laboratory ID cannot be blank.");

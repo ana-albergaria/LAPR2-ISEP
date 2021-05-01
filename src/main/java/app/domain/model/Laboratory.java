@@ -61,7 +61,8 @@ public class Laboratory {
     public void checkTINNumberRules(String numTIN) {
         if (StringUtils.isBlank(numTIN))
             throw new IllegalArgumentException("TIN Number cannot be blank.");
-        if ((!numTIN.chars().allMatch(Character::isDigit)))
+        //if ((!numTIN.chars().allMatch(Character::isDigit)))
+        if ((!numTIN.matches("[0-9]+")))
             throw new IllegalArgumentException("TIN Number must only contain digits.");
         if (numTIN.length() != 10)
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
@@ -89,8 +90,6 @@ public class Laboratory {
         return this.calList.add(cal);
     }
 
-    //SUPOSTAMENTE ESTÁ COMPLETO!
-    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
 
 
 

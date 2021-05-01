@@ -208,6 +208,16 @@ public class ClinicalAnalysisLaboratoryTest {
                 "CAL","Lisboa","91841378811"," ", selectedTT);
     }
 
-    //Still have to finish TIN Number validation
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTINNumberOnlyDigits() {
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","123456789!", selectedTT);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTINNumberWithRightLength() {
+        ClinicalAnalysisLaboratory instance4 = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","123456789011", selectedTT);
+    }
 
 }
