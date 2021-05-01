@@ -15,7 +15,7 @@ deactivate ":System"
 
 Adm-> ":System" : confirms the data
 activate ":System"
-":System" --> Adm : informs operation sucess
+":System" --> Adm : informs operation success
 deactivate ":System"
 
 deactivate Adm

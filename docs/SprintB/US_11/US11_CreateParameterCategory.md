@@ -30,22 +30,6 @@ As an administrator, I want to specify a new parameter category.
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7318#p9859).
 
--
-
-> **Question:** "Should each parameter category have a state regarding the number of parameters under that category?"
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7610#p9903).
-
--
-
-> **Question:** xxx.
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](zzz).
-
 
 ### 1.3. Acceptance Criteria
 
@@ -68,8 +52,7 @@ As an administrator, I want to specify a new parameter category.
 
 * Typed data:
 	* code
-	* description
-	* NHS identifier
+	* name
 	
 * Selected data:
 	* (none)
@@ -112,16 +95,17 @@ As an administrator, I want to specify a new parameter category.
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateParameterCategoryUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 1: asks to create a new parameter category |	... interacting with the actor? | CreateParameterCategoryUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |       	   	 |	... coordinating the US? | CreateParameterCategoryController | Controller |
-|       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator (Rule 1/2): in the DM Organization adopts a Parameter Category. |
-|       	   	 |	... knowing the user using the system? | UserSession | ??? |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the input data? | ParameterCategory | IE: The object created in step 1 has its own data. |
-| Step 4  		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | ParameterCategory | IE: knows its own data. |
+|       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator: in the DM Company adopts a Parameter Category. |
+|       	   	 |	... knowing the user using the system? | UserSession | According to A&A component documentation. |
+| Step 2: request data(i.e., code, name) |	...asking the user for this data? | CreateParameterCategoryUI | IE: Responsable for user interaction. |
+| Step 3: types requested data | ...validating the input data? | ParameterCategory | IE: Knows its own data. |
+|                | ...saving the input data? | ParameterCategory | IE: It has its own data. |
+| Step 4: shows the data and requests a confirmation |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | ParameterCategory | IE: knows its own data. |
 |       	   	 |	... validating the data globally (e.g.: duplicated)? | Company | IE: knows all the ParameterCategory objects |
-| Step 5  		 |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
-| Step 6  	   	 |	... informing operation success? | UI | IE: responsible for user interaction |
+| Step 5: confirms the data |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
+| Step 6: informs operation success |	... informing operation success? | UI | IE: responsible for user interaction |
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 

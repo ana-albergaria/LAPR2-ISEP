@@ -8,10 +8,12 @@ activate ":System"
 ":System" --> A : requests data (code, description, collectingMethod)
 deactivate ":System"
 A -> ":System" : types requested data
+loop while user adds categories
 activate ":System"
-":System" --> A : shows available categories and request to select one or more
+":System" --> A : shows available categories and request to select one
 deactivate ":System"
 A -> ":System" : selects requested data
+end
 activate ":System"
 ":System" --> A : show test type data and requests confirmation
 deactivate ":System"

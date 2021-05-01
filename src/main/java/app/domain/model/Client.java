@@ -184,7 +184,6 @@ public class Client {
             throw new IllegalArgumentException("Clients Citizen Card Number must be 16 digits");
 
         checkDigits(clientsCitizenCardNumber, "Clients Citizen Card Number must be only digits");
-
     }
     // falta para o caso de ele por letras e nao numeros - tem de dar erro
 
