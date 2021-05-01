@@ -23,14 +23,14 @@ public class TestTypeTest {
         pcList.add(p2);
     }
 
-    //Test 1: Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory
+    /*//Test 1: Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory
     // class with null values.
     @Test(expected = IllegalArgumentException.class)
     public void ensureNullIsNotAllowed() {
         System.out.println("ensureNullIsNotAllowed");
 
         TestType instance = new TestType(null, null, null, null);
-    }
+    }*/
 
     //Test 2: Check that it is not possible to create an instance of the TestType class with code being an empty String.
     @Test(expected = IllegalArgumentException.class)
