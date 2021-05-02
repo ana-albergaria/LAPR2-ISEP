@@ -52,7 +52,7 @@ public class CompanyTest {
 
     @Test
     public void ensureDifferentClinicalAnalysisLaboratoryIsSaved() {
-        System.out.println("saveClinicalAnalysisLaboratory (CompanyTest)");
+        System.out.println("ensureDifferentClinicalAnalysisLaboratoryIsSaved (CompanyTest)");
 
         //Arrange
         ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",

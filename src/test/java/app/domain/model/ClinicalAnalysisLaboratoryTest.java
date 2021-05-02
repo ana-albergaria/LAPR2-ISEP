@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -309,4 +310,51 @@ public class ClinicalAnalysisLaboratoryTest {
                 "CAL","Lisboa","91841378811","1234567890", emptyList);
     }
 
+    @Test
+    public void ensureEqualsMethod() {
+        //Arrange
+        ClinicalAnalysisLaboratory object = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+
+        List<TestType> differentSelectedTT = new ArrayList<>();
+        TestType t3 = new TestType("TEST3","Description","blood",pcList);
+        TestType t4 = new TestType("TEST4","Description","blood",pcList);
+        differentSelectedTT.add(t3);
+        differentSelectedTT.add(t4);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentLabID = new ClinicalAnalysisLaboratory("CAL13",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentName = new ClinicalAnalysisLaboratory("CAL12",
+                "LAB","Lisboa","91841378811","1234567890", selectedTT);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentAddress = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Porto","91841378811","1234567890", selectedTT);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentPhoneNum = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378810","1234567890", selectedTT);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentTINNum = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567892", selectedTT);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentTestTypeList = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", differentSelectedTT);
+
+
+        //Act
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentLabID);
+        boolean resultDifferentName = object.equals(objectOnlyWithDifferentName);
+        boolean resultDifferentAddress = object.equals(objectOnlyWithDifferentAddress);
+        boolean resultDifferentPhoneNum = object.equals(objectOnlyWithDifferentPhoneNum);
+        boolean resultDifferentTINNum = object.equals(objectOnlyWithDifferentTINNum);
+        boolean resultDifferentTestTypeList = object.equals(objectOnlyWithDifferentTestTypeList);
+
+        //Assert
+        Assert.assertFalse(resultDifferentAddresses);
+        Assert.assertFalse(resultDifferentName);
+        Assert.assertFalse(resultDifferentAddress);
+        Assert.assertFalse(resultDifferentPhoneNum);
+        Assert.assertFalse(resultDifferentTINNum);
+        Assert.assertFalse(resultDifferentTestTypeList);
+    }
 }
