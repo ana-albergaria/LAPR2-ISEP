@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TestType {
 
@@ -62,13 +61,4 @@ public class TestType {
         return testTypeToCompare.getCode().equals(this.getCode());
     }
 
-    @Override
-    public String toString() {
-        return "TestType{" +
-                "code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", collectingMethod='" + collectingMethod + '\'' +
-                ", selectedCategories=" + selectedCategories +
-                '}';
-    }
 }

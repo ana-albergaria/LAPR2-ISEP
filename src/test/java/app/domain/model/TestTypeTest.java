@@ -23,14 +23,14 @@ public class TestTypeTest {
         pcList.add(p2);
     }
 
-    /*//Test 1: Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory
+    //Test 1: Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory
     // class with null values.
     @Test(expected = IllegalArgumentException.class)
     public void ensureNullIsNotAllowed() {
         System.out.println("ensureNullIsNotAllowed");
 
         TestType instance = new TestType(null, null, null, null);
-    }*/
+    }
 
     //Test 2: Check that it is not possible to create an instance of the TestType class with code being an empty String.
     @Test(expected = IllegalArgumentException.class)
@@ -71,7 +71,7 @@ public class TestTypeTest {
 
         TestType instance = new TestType("AA232", "1234567891234567", "needle", pcList);
     }
-    //Test 6(mutation): Check that it is not possible to create an instance of the TestType class with description holding more than 15 characters.
+    //Test 6(mutation): Check that it is possible to create an instance of the TestType class with description holding 15 characters.
     @Test
     public void ensureTestTypeDescriptionLengthSmallerOrEqualThan15Char() {
         System.out.println("ensureTestTypeDescriptionLengthSmallerOrEqualThan15Char");
@@ -94,7 +94,7 @@ public class TestTypeTest {
 
         TestType instance = new TestType("AA232", "blood analysis", "fourfourfourfourfour1", pcList);
     }
-    //Test 8(mutation): Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters.
+    //Test 8(mutation): Check that it is not possible to create an instance of the TestType class with collecting method holding 20 characters.
     @Test
     public void ensureTestTypeCollectingMethodLengthSmallerOrEqualThan20Char() {
         System.out.println("ensureTestTypeCollectingMethodLengthSmallerThan20Char");
