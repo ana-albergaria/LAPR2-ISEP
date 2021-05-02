@@ -357,4 +357,16 @@ public class ClinicalAnalysisLaboratoryTest {
         Assert.assertFalse(resultDifferentTINNum);
         Assert.assertFalse(resultDifferentTestTypeList);
     }
+
+    @Test
+    public void ensureEqualsMethodObjectsFromDifferentClasses() {
+        //Arrange
+        ClinicalAnalysisLaboratory c1 = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        //Act
+        boolean resultDifferentClasses = c1.equals(t1);
+        //Assert
+        Assert.assertFalse(resultDifferentClasses);
+
+    }
 }
