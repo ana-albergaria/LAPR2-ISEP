@@ -50,6 +50,23 @@ public class CompanyTest {
         Assert.assertEquals(expObj, obj);
     }
 
+    @Test
+    public void ensureDifferentClinicalAnalysisLaboratoryIsSaved() {
+        System.out.println("saveClinicalAnalysisLaboratory (CompanyTest)");
+
+        //Arrange
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        company.saveClinicalAnalysisLaboratory(c1);
+
+        //Act
+        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory("LAB23",
+                "Laboratorio","Outeiro","91841378810","1234567890", selectedTT);
+        boolean result = company.saveClinicalAnalysisLaboratory(c2);
+
+        //Assert
+        Assert.assertTrue(result);
+    }
 
     @Test
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
