@@ -18,8 +18,7 @@ public class Company {
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
     private List<Parameter> prmList;
-    private Laboratory lab;
-    private List<ClinicalAnalysisLaboratory> calList;
+    private List<ClinicalAnalysisLaboratory> calList = new ArrayList<>();
 
     private ClientSore clientSore;
 
@@ -49,11 +48,6 @@ public class Company {
     //to be used in US8
     public TestTypeStore getTestTypeStore() {
         return testTypeStore;
-    }
-
-    //to be used in US8
-    public Laboratory getLaboratory() {
-        return lab;
     }
 
     public ClientSore getClientSore(){

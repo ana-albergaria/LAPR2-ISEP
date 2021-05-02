@@ -25,8 +25,8 @@ public class CompanyTest {
         p2 = new ParameterCategory("CODE2","Description");
         pcList.add(p1);
         pcList.add(p2);
-        t1 = new TestType("CODE3","Description","swab",pcList);
-        t2 = new TestType("CODE4","Description","swab",pcList);
+        t1 = new TestType("CODE3","Description","swab", pcList);
+        t2 = new TestType("CODE4","Description","swab", pcList);
         selectedTT = new ArrayList<>();
         selectedTT.add(t1);
         selectedTT.add(t2);
@@ -50,31 +50,49 @@ public class CompanyTest {
         Assert.assertEquals(expObj, obj);
     }
 
-/*
+
     @Test
-    public void validateClinicalAnalysisLaboratory() {
-        System.out.println("validateClinicalAnalysisLaboratory (CompanyTest)");
+    public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
+        System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject (CompanyTest)");
 
         //Arrange
-        Gas instance = new Gas("José",636);
-        float expResult = 508.8f;
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        company.saveClinicalAnalysisLaboratory(c1);
 
         //Act
-        float result = instance.calcularCustoConsumo();
+        boolean result = company.saveClinicalAnalysisLaboratory(c1);
 
         //Assert
-        Assert.assertEquals(expResult,result,0.0001);
-        //OU assertEquals(expResult, result, 0.0f);
-        //delta -> desvio possível no resultado
-
-
+        Assert.assertFalse(result);
     }
-    
- */
-    /*
+
     @Test
-    public void saveClinicalAnalysisLaboratory() {
+    public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject() {
+        System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject (CompanyTest)");
+
+        //Arrange
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        company.saveClinicalAnalysisLaboratory(c1);
+
+        //Act
+        boolean result = company.saveClinicalAnalysisLaboratory(c2);
+
+        //Assert
+        Assert.assertFalse(result);
     }
-    
-     */
+
+    @Test
+    public void ensureNullClinicalAnalysisLaboratoryIsNotSaved() {
+        System.out.println("ensureNullClinicalAnalysisLaboratoryIsNotSaved (CompanyTest)");
+
+        //Act
+        boolean result = company.saveClinicalAnalysisLaboratory(null);
+
+        //Assert
+        Assert.assertFalse(result);
+    }
 }
