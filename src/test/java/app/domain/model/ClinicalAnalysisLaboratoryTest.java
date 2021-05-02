@@ -367,6 +367,17 @@ public class ClinicalAnalysisLaboratoryTest {
         boolean resultDifferentClasses = c1.equals(t1);
         //Assert
         Assert.assertFalse(resultDifferentClasses);
+    }
 
+    @Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+        //Arrange
+        ClinicalAnalysisLaboratory c1 = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratory c2 = null;
+        //Act
+        boolean resultWithNull = c1.equals(c2);
+        //Assert
+        Assert.assertFalse(resultWithNull);
     }
 }
