@@ -84,11 +84,7 @@ You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/di
 
 There is a dependency to "US009 To specify a new type of test and its collecting methods" since at least a type of test (specifically the blood test) must exist to determine the type of test(s) the clinical analysis laboratory operates.
 
-### 1.5 Input and Output Data
-
-
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*  
-
+### 1.5 Input and Output Data  
 
 **Input Data:**  
 

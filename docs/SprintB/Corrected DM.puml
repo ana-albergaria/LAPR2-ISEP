@@ -267,6 +267,9 @@ Application "1" - "*" Notification : sends >
 
 TestType "*" -- "1..*" Parameter : characterized by >
 
+/' US8 '/
+ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
+
 
 /'Changed specialist doctor diagnosis line 244 and 251 cause its implicit by specialist doc report'/
 
