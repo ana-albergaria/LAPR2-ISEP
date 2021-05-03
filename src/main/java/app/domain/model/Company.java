@@ -2,6 +2,7 @@ package app.domain.model;
 
 import app.domain.store.ClientSore;
 import app.domain.store.ParameterCategoryStore;
+import app.domain.store.ParameterStore;
 import app.domain.store.TestTypeStore;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
@@ -18,9 +19,9 @@ public class Company {
     private String designation;
     private AuthFacade authFacade;
     private ParameterCategoryStore parameterCategoryStore;
+    private ParameterStore parameterStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
-    private List<Parameter> prmList;
     private List<ClinicalAnalysisLaboratory> calList;
 
     private ClientSore clientSore;
@@ -49,6 +50,11 @@ public class Company {
         return parameterCategoryStore;
     }
 
+    //to be used in US10
+    public ParameterStore getParameterStore(){
+        return parameterStore;
+    }
+
     //to be used in US8
     public TestTypeStore getTestTypeStore() {
         return testTypeStore;
@@ -57,20 +63,6 @@ public class Company {
     public ClientSore getClientSore(){
         return clientSore;
     }
-
-    //to be used in US10
-    public boolean validateParameter(Parameter prm){
-        if (prm == null)
-            return false;
-        return ! this.prmList.contains(prm);
-    }
-
-    public boolean saveParameter(Parameter prm){
-        if (!validateParameter(prm))
-            return false;
-        return this.prmList.add(prm);
-    }
-
 
     //to be used in US8
     public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
