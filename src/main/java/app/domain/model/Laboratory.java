@@ -59,10 +59,28 @@ public class Laboratory {
      */
     @Override
     public String toString() {
-        return String.format("LABORATORY%nName: %s%n"
+        if(this.getClass().getSimpleName().equals("ClinicalAnalysisLaboratory"))
+            System.out.printf("CLINICAL ANALYSIS LABORATORY%n");
+        else
+            System.out.printf("CHEMICAL LABORATORY%n");
+        return String.format("Name: %s%n"
                 + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
     }
 
+    /**
+     * Returns true if the name received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the name provided:
+     * - It is blank
+     * - It doesn't contain only letters
+     * - Its length is greater than 20
+     *
+     * @param name name of the Laboratory
+     *
+     * @return true if the name respects all the rules,
+     *         otherwise returns false
+     */
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
@@ -72,7 +90,19 @@ public class Laboratory {
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
     }
 
-
+    /**
+     * Returns true if the address received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the address provided:
+     * - It is blank
+     * - Its length is greater than 30
+     *
+     * @param address address of the Laboratory
+     *
+     * @return true if the address respects all the rules,
+     *         otherwise returns false
+     */
     public void checkAddressRules(String address) {
         if (StringUtils.isBlank(address))
             throw new IllegalArgumentException("Address cannot be blank.");
@@ -80,7 +110,20 @@ public class Laboratory {
             throw new IllegalArgumentException("Address cannot have more than 30 characters.");
     }
 
-
+    /**
+     * Returns true if the phone number received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the phone number provided:
+     * - It is blank
+     * - It doesn't contain only digits
+     * - Its length is different than 11
+     *
+     * @param phoneNumber phone number of the Laboratory
+     *
+     * @return true if the phone number respects all the rules,
+     *         otherwise returns false
+     */
     public void checkPhoneNumberRules(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
             throw new IllegalArgumentException("Phone Number cannot be blank.");
@@ -92,6 +135,20 @@ public class Laboratory {
 
     }
 
+    /**
+     * Returns true if the TIN number received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the TIN number provided:
+     * - It is blank
+     * - It doesn't contain only digits
+     * - Its length is different than 10
+     *
+     * @param numTIN TIN number of the Laboratory
+     *
+     * @return true if the TIN number respects all the rules,
+     *         otherwise returns false
+     */
     public void checkTINNumberRules(String numTIN) {
         if (StringUtils.isBlank(numTIN))
             throw new IllegalArgumentException("TIN Number cannot be blank.");
@@ -102,6 +159,13 @@ public class Laboratory {
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 
+    /**
+     * Compares the Laboratory with the received object.
+     *
+     * @param otherObject the object to be compared with the Laboratory
+     * @return true if the received object represents other Laboratory
+     * equivalent to the Laboratory. Otherwise, returns false.
+     */
     @Override
     public boolean equals(Object otherObject) {
         if(this == otherObject)

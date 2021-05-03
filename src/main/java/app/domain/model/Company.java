@@ -18,7 +18,7 @@ public class Company {
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
     private List<Parameter> prmList;
-    private List<ClinicalAnalysisLaboratory> calList = new ArrayList<>();
+    private List<ClinicalAnalysisLaboratory> calList;
 
     private ClientSore clientSore;
 
@@ -31,6 +31,7 @@ public class Company {
         this.authFacade = new AuthFacade();
         this.testTypeStore = new TestTypeStore();
         this.parameterCategoryStore = new ParameterCategoryStore();
+        this.calList = new ArrayList<>();
     }
 
     public String getDesignation() {
@@ -67,6 +68,7 @@ public class Company {
         return this.prmList.add(prm);
     }
 
+
     //to be used in US8
     public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
                                                                        String name,
@@ -77,6 +79,7 @@ public class Company {
         return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
                 phoneNumber, numTIN, selectedTT);
     }
+
 
     public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
         if (cal == null)

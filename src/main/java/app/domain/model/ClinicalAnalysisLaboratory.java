@@ -50,10 +50,11 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
      */
     @Override
     public String toString() {
-        System.out.printf("%sLaboratory ID: %s%nTest Types: %n",
-                super.toString(), laboratoryID);
-        selectedTT.forEach(System.out::println);
-        return "";
+        //System.out.printf("%sLaboratory ID: %s%nTest Types: %n",
+                //super.toString(), laboratoryID, selectedTT);
+        //selectedTT.forEach(System.out::println);
+        return String.format("%sLaboratory ID: %s%nTest Types: %n%s",
+                super.toString(), laboratoryID, selectedTT);
     }
 
     /**
@@ -97,6 +98,13 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             throw new IllegalArgumentException("The list containing the Types of Test cannot be blank.");
     }
 
+    /**
+     * Compares the Clinical Analysis Laboratory with the received object.
+     *
+     * @param otherObject the object to be compared with the Clinical Analysis Laboratory
+     * @return true if the received object represents other Clinical Analysis Laboratory
+     * equivalent to the Clinical Analysis Laboratory. Otherwise, returns false.
+     */
     @Override
     public boolean equals(Object otherObject) {
         if(!super.equals(otherObject))

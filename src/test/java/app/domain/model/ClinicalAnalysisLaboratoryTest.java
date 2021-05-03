@@ -302,7 +302,7 @@ public class ClinicalAnalysisLaboratoryTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureListOfTestTypesNotEmpty() {
-        System.out.println("ensureAC6TINNumberNotEmpty");
+        System.out.println("ensureAC3ListOfTestTypesNotEmpty");
 
         List<TestType> emptyList = new ArrayList<>();
 

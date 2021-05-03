@@ -43,5 +43,4 @@ public class TestTypeStore {
         }
         throw new UnsupportedOperationException("Test Type not found with given code: " + code);
     }
-
 }
