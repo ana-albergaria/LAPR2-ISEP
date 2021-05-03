@@ -7,6 +7,10 @@ participant ":CreateTestTypeUI  " as UI
 participant ":CreateTestTypeController" as CTRL
 participant ":Company" as PLAT
 participant "store:ParameterCategory" as TEST_TYPE_STORE
+participant ": CategoryMapper" as MAPPER
+participant "categoriesList\n: List<ParameterCategory>" as LIST
+
+participant "objDto\n: CategoryDto" as OBJ_DTO
 /'participant ":Platform" as PLAT'/
 participant "store:TestTypeStore" as ORG
 participant "tt\n:TestType" as TAREFA
@@ -23,6 +27,54 @@ activate UI
 
 UI -> CTRL : categoriesList = getCategories()
 activate CTRL
+CTRL -> PLAT : storeTest = getTestTypeStore()
+activate PLAT
+|||
+deactivate PLAT
+
+CTRL -> TEST_TYPE_STORE : categoriesList = getCategories()
+activate TEST_TYPE_STORE
+/'|||'/
+
+/'deactivate CTRL'/
+
+TEST_TYPE_STORE --> LIST** : create()
+
+TEST_TYPE_STORE --> CTRL : categoriesList
+
+deactivate TEST_TYPE_STORE
+
+/'deactivate CTRL'/
+
+CTRL -> MAPPER : toDTO(categoriesList)
+activate MAPPER
+
+MAPPER --> LIST_DTO** : create()
+
+loop for each object in categoriesList
+MAPPER -> LIST : obj = get(i)
+activate LIST
+deactivate LIST
+
+MAPPER -> MAPPER : objDto = toDTO(obj)
+activate MAPPER
+
+/'ADICIONAR ATRIBUTOS AO CREATE!!!!!'/
+MAPPER --> OBJ_DTO** : create(...)
+deactivate MAPPER
+
+MAPPER -> LIST_DTO : add(objDto)
+activate LIST_DTO
+deactivate LIST_DTO
+end
+
+MAPPER --> CTRL : listCategoriesDto
+
+
+CTRL --> UI : listCategoriesDto
+deactivate CTRL
+/'
+
 
 CTRL -> PLAT : categoriesStore = getParameterCategoriyStore()
 activate PLAT
@@ -34,6 +86,7 @@ activate TEST_TYPE_STORE
 |||
 deactivate TEST_TYPE_STORE
 deactivate CTRL
+'/
 
 loop while user adds categories
 UI --> ADM : shows available categories and request to select one
