@@ -87,7 +87,8 @@ public class Company {
     public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
         if (cal == null)
             return false;
-        return !this.calList.contains(cal) && validateCalAttributes(cal);
+        checkCalDuplicates(cal);
+        return ! this.calList.contains(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
@@ -97,23 +98,25 @@ public class Company {
         return this.calList.add(cal);
     }
 
-    private boolean validateCalAttributes(ClinicalAnalysisLaboratory cal) {
+    private void checkCalDuplicates(ClinicalAnalysisLaboratory cal) {
         for (ClinicalAnalysisLaboratory item : calList) {
-            if(duplicatedLaboratoryID(cal.getLaboratoryID(), item) ||
-                    duplicatedAddress(cal.getAddress(), item) ||
-                    duplicatedPhoneNumber(cal.getPhoneNumber(), item) ||
-                    duplicatedNumTIN(cal.getNumTIN(), item))
-                return false;
+            if(duplicatedLaboratoryID(cal.getLaboratoryID(), item))
+                throw new IllegalArgumentException("Laboratory ID already registered in the system.");
+            if(duplicatedAddress(cal.getAddress(), item))
+                throw new IllegalArgumentException("Address already registered in the system.");
+            if(duplicatedPhoneNumber(cal.getPhoneNumber(), item))
+                throw new IllegalArgumentException("Phone Number already registered in the system.");
+            if(duplicatedNumTIN(cal.getNumTIN(), item))
+                throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
-        return true;
     }
 
     private boolean duplicatedLaboratoryID(String laboratoryID, ClinicalAnalysisLaboratory item) {
-        return laboratoryID.equals(item.getLaboratoryID());
+        return laboratoryID.equalsIgnoreCase(item.getLaboratoryID());
     }
 
     private boolean duplicatedAddress(String address, ClinicalAnalysisLaboratory item) {
-        return address.equals(item.getAddress());
+        return address.equalsIgnoreCase(item.getAddress());
     }
 
     private boolean duplicatedPhoneNumber(String phoneNumber, ClinicalAnalysisLaboratory item) {
