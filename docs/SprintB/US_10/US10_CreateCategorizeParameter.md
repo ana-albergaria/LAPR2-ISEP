@@ -197,18 +197,18 @@ The application can have more than one administrator."
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |	... interacting with the actor? | CreateParameterUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 1: asks to create a new parameter |	... interacting with the actor? | CreateParameterUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |       	   	 |	... coordinating the US? | CreateParameterController | Controller |
-|       	   	 |	... instantiating a new Parameter? | Administrator | ??? |
-| 			  		 | ... knowing the user using the system?  | UserSession  | ??? |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |	...saving the inputted data? | Parameter  | IE: object created in step 1 has its own data.  |
-| Step 4  		 |	...knowing the parameter categories to show? | Platform  | IE: Parameter Categories are defined by the Platform. |
-| Step 5  		 |	... saving the selected category? | Parameter  | IE: object created in step 1 is classified in one Category.  |
-| Step 6  		 |	... validating all data (local validation)? | Parameter | IE: owns its data.|
-| 			  	 |	... validating all data (global validation)? | Company | IE: knows all its parameters.|
-| Step 7		 |	... saving the created parameter? | Company | IE: owns all its parameters.|
-| Step 8  		 |	... informing operation success?| CreateParameterUI  | IE: is responsible for user interactions.  |
+|       	   	 |	... instantiating a new Parameter? | Administrator | Creator: in the DM a Parameter is presented under a Parameter Category, which company adopts. |
+| Step 2: request data(i.e., parameterCode, shortName, description) | ...asking the user for this data? | CreateParameterCategoryUI | IE: Responsable for user interaction. |
+| Step 3: types requested data | ...saving the inputted data? | Parameter | IE: object created in step 1 has its own data.  |
+| Step 4: shows parameter categories list and asks to select one |	...knowing the parameter categories to show? | ParameterCategoryStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 1 is classified in one Category.  |
+| 			  	 |	... validating all data (local validation)? | Parameter |  IE: owns its data.|
+| Step 6: shows all data and requests confirmation | ... showing all data and requesting confirmation? | CreateParameterUI | IE: is responsible for user interactions.|
+| Step 7: confirms the data | ... validating all data (global validation)? | Company | IE: knows all its parameters.|
+| 			  	 |	... saving the created parameter? | Company |  IE: owns all its parameters.|
+| Step 8: informs operation	success | ... informing operation success?| CreateParameterUI  | IE: is responsible for user interactions.  |
 
 ### Systematization ##
 

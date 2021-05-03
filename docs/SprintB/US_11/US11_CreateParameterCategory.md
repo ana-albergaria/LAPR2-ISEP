@@ -100,12 +100,12 @@ As an administrator, I want to specify a new parameter category.
 |       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator: in the DM Company adopts a Parameter Category. |
 |       	   	 |	... knowing the user using the system? | UserSession | According to A&A component documentation. |
 | Step 2: request data(i.e., code, name) |	...asking the user for this data? | CreateParameterCategoryUI | IE: Responsable for user interaction. |
-| Step 3: types requested data | ...validating the input data? | ParameterCategory | IE: Knows its own data. |
+| Step 3: types requested data | ...validating the input data locally? | ParameterCategory | IE: Knows its own data. |
 |                | ...saving the input data? | ParameterCategory | IE: It has its own data. |
-| Step 4: shows the data and requests a confirmation |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)? | ParameterCategory | IE: knows its own data. |
-|       	   	 |	... validating the data globally (e.g.: duplicated)? | Company | IE: knows all the ParameterCategory objects |
-| Step 5: confirms the data |	...saving the created parameter category? | Company | IE: adopts/records all the ParameterCategory objects |
-| Step 6: informs operation success |	... informing operation success? | UI | IE: responsible for user interaction |
+| Step 4: shows the data and requests a confirmation | ...showing the data and requesting a confirmation? | CreateParameterCategoryUI | IE: responsible for user interaction |
+| Step 5: confirms the data |	... validating the data globally (e.g.: duplicated)? | ParameterCategoryStore | IE: knows all the ParameterCategory objects |
+|       	   	 |	...saving the created parameter category? | ParameterCategoryStore | IE: adopts/records all the ParameterCategory objects |
+| Step 6: informs operation success |	... informing operation success? | CreateParameterCategoryUI | IE: responsible for user interaction |
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
