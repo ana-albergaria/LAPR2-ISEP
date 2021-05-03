@@ -3,6 +3,8 @@ package app.controller;
 import app.domain.model.Client;
 import app.domain.model.Company;
 
+
+import app.domain.model.Data;
 import auth.AuthFacade;
 
 
@@ -12,7 +14,7 @@ public class RegisterClientController {
 
     private Company company;
     private Client cl;
-    private AuthFacade af;
+
 
 
     public RegisterClientController() {
@@ -26,14 +28,14 @@ public class RegisterClientController {
 
 
 
-    public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, String birthDate, String sex,
+    public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, Data birthDate, String sex,
                                   String tinNumber, String email, String name, String phoneNumber) {
         this.cl = this.company.getClientSore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name, phoneNumber);
         return this.company.getClientSore().validateClient(cl);
     }
 
-    public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, String birthDate, String sex,
+    public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, Data birthDate, String sex,
                                   String tinNumber, String email, String name) {
         this.cl = this.company.getClientSore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name);
@@ -46,7 +48,7 @@ public class RegisterClientController {
     }
 
     public boolean makeClientAnUser(){
-        return this.company.getAuthFacade().addUser(cl.getName(),cl.getEmail(),cl.getPsw());
+        return this.company.getAuthFacade().addUser(cl.getName(),cl.getEmail().getEmail(),cl.getPsw());
 
     }
 

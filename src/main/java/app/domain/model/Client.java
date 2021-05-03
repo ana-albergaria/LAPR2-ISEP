@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import auth.domain.model.Email;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
@@ -26,7 +27,7 @@ public class Client {
     /**
      * The clients Birth Date
      */
-    private final String birthDate; // talvez seja melhorar criar um objeto do tipo data por composiçao nao ?
+    private final Data birthDate; // talvez seja melhorar criar um objeto do tipo data por composiçao nao ?
 
     /**
      * The clients Sex.
@@ -41,7 +42,8 @@ public class Client {
     /**
      * The clients E-mail.
      */
-    private final String email;
+    private final Email email;
+
 
     /**
      * The clients Name.
@@ -56,31 +58,13 @@ public class Client {
     private final String psw;
 
 
-    public static String getPhoneNumberPorOmissao() {
-        return PHONE_NUMBER_POR_OMISSAO;
-    }
-
     public String getClientsCitizenCardNumber() {
         return clientsCitizenCardNumber;
     }
 
-    public String getNhsNumber() {
-        return nhsNumber;
-    }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
+    public Email getEmail() {
 
-    public String getSex() {
-        return sex;
-    }
-
-    public String getTinNumber() {
-        return tinNumber;
-    }
-
-    public String getEmail() {
         return email;
     }
 
@@ -88,9 +72,6 @@ public class Client {
         return name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
     public String getPsw() {
         return psw;
@@ -108,12 +89,11 @@ public class Client {
      * @param name clients Name.
      * @param phoneNumber clients Phone Number.
      */
-    public Client(String clientsCitizenCardNumber, String nhsNumber, String birthDate, String sex,
+    public Client(String clientsCitizenCardNumber, String nhsNumber, Data birthDate, String sex,
                   String tinNumber, String email, String name, String phoneNumber) {
 
         checkClientsCitizenCardNumber(clientsCitizenCardNumber);
         checknhsNumber(nhsNumber);
-        checkBirthDate(birthDate);
         checkSex(sex);
         checkTinNumber(tinNumber);
         checkEmail(email);
@@ -125,10 +105,10 @@ public class Client {
 
         this.clientsCitizenCardNumber = clientsCitizenCardNumber;
         this.nhsNumber = nhsNumber;
-        this.birthDate = birthDate;
+        this.birthDate = new Data(birthDate);
         this.sex = sex;
         this.tinNumber = tinNumber;
-        this.email = email;
+        this.email = new Email(email);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.psw = generatepsw(salt,rnd);
@@ -147,12 +127,11 @@ public class Client {
      * @param name clients Name.
 
      */
-    public Client(String clientsCitizenCardNumber, String nhsNumber, String birthDate, String sex,
+    public Client(String clientsCitizenCardNumber, String nhsNumber, Data birthDate, String sex,
                   String tinNumber, String email, String name) {
 
         checkClientsCitizenCardNumber(clientsCitizenCardNumber);
         checknhsNumber(nhsNumber);
-        checkBirthDate(birthDate);
         checkSex(sex);
         checkTinNumber(tinNumber);
         checkEmail(email);
@@ -162,10 +141,10 @@ public class Client {
 
         this.clientsCitizenCardNumber = clientsCitizenCardNumber;
         this.nhsNumber = nhsNumber;
-        this.birthDate = birthDate;
+        this.birthDate = new Data(birthDate);
         this.sex = sex;
         this.tinNumber = tinNumber;
-        this.email = email;
+        this.email = new Email(email);
         this.name = name;
         this.phoneNumber = PHONE_NUMBER_POR_OMISSAO;
         this.psw = generatepsw(salt,rnd);
@@ -184,6 +163,7 @@ public class Client {
             throw new IllegalArgumentException("Clients Citizen Card Number must be 16 digits");
 
         checkDigits(clientsCitizenCardNumber, "Clients Citizen Card Number must be only digits");
+
     }
     // falta para o caso de ele por letras e nao numeros - tem de dar erro
 
@@ -323,7 +303,6 @@ public class Client {
             salt.append(SALTCHARS.charAt(index));
         }
         String saltStr = salt.toString();
-        System.out.println(saltStr);
         return saltStr;
     }
 
@@ -332,11 +311,23 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) &&
-                Objects.equals(nhsNumber, client.nhsNumber) &&
-                Objects.equals(tinNumber, client.tinNumber) &&
-                Objects.equals(email, client.email) &&
-                Objects.equals(phoneNumber, client.phoneNumber);
+
+
+
+        return Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) ||
+                Objects.equals(nhsNumber, client.nhsNumber) ||
+                Objects.equals(tinNumber, client.tinNumber) ||
+                Objects.equals(email, client.email) ||
+                equalsPhoneNumber(client);
+    }
+
+    private boolean equalsPhoneNumber (Client client) {
+        if (!phoneNumber.equals("sem numero")){
+            return false;
+        }else{
+            return Objects.equals(phoneNumber, client.phoneNumber);
+        }
+
     }
 
 }
