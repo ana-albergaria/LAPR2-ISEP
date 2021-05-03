@@ -5,12 +5,15 @@ actor "Administrator" as ADM
 
 participant ":CreateParameterUI" as UI
 participant ":CreateParameterController" as CTRL
-participant "cmp\n:Company" as CMP
+participant ":Company" as CMP
 participant "pcStore\n:ParameterCategoryStore" as PCSTORE
+participant ":ParameterCategoryMapper" as PCMAPPER
+participant "lc\n:List<ParameterCategory>" as LC
+participant "listParameterCategoryDto\n:List<ParameterCategoryDto>" as LIST_DTO
+participant "objDto\n: ParameterCategoryDto" as OBJ_DTO
 participant "prmStore\n:ParameterStore" as PRMSTORE
 participant "prm\n:Parameter" as PRM
 participant "pc\n:ParameterCategory" as PC
-participant "lc\n:List<ParameterCategory>" as LIST_CAT
 
 activate ADM
 ADM -> UI : asks to create a new parameter
@@ -24,14 +27,40 @@ activate UI
 UI -> CTRL : lc = getParameterCategories()
 activate CTRL
 
-CTRL -> CMP : categoriesStore = getParameterCategoryStore()
+CTRL -> CMP : pcStore = getParameterCategoryStore()
 activate CMP
 |||
 deactivate CMP
+
 CTRL -> PCSTORE : lc = getParameterCategoriesStore()
 activate PCSTORE
-|||
+
+PCSTORE -> LC** : create()
+PCSTORE --> CTRL : lc
 deactivate PCSTORE
+
+CTRL -> PCMAPPER : toDTO(lc)
+activate PCMAPPER
+
+PCMAPPER --> LIST_DTO** : create()
+
+loop for each object in lc
+PCMAPPER -> LC : obj = get(i)
+activate LC
+|||
+deactivate LC
+
+PCMAPPER -> PCMAPPER : objDto = toDTO(obj)
+activate PCMAPPER
+
+PCMAPPER --> OBJ_DTO** : create(code, name)
+deactivate PCMAPPER
+
+PCMAPPER --> LIST_DTO : add(objDto)
+activate LIST_DTO
+deactivate LIST_DTO
+end
+
 deactivate CTRL
 
 UI --> ADM : shows parameter categories list and asks to select one
@@ -44,6 +73,11 @@ activate UI
 loop while administrator wants to create one more parameter
 UI -> CTRL : createParameter(parameterCode, shortName, description, pcCode)
 activate CTRL
+
+CTRL -> CMP : pcStore = getParameterCategoryStore()
+activate CMP
+|||
+deactivate CMP
 
 CTRL -> PCSTORE : pc = getCategoryByCode(pcCode)
 activate PCSTORE
@@ -81,11 +115,18 @@ CTRL -> PRMSTORE : saveParameter(parameter)
 activate PRMSTORE
 
 PRMSTORE -> PRMSTORE: validateParameter(parameter)
+activate PRMSTORE
+|||
+deactivate PRMSTORE
 PRMSTORE -> PRMSTORE: addParameter(parameter)
+activate PRMSTORE
+|||
+deactivate PRMSTORE
 
 CTRL --> UI: result
 
 UI --> ADM : informs operation success
+deactivate PCMAPPER
 deactivate PRMSTORE
 deactivate CTRL
 deactivate UI
