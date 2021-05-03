@@ -53,9 +53,41 @@ public class TestType {
         this.collectingMethod = collectingMethod;
         this.selectedCategories = new ArrayList<>(selectedCategories);
     }
+
     //to be used for US8
+    /**
+     * Returns the code of the Test Type
+     *
+     * @return code of the Test Type
+     */
     public String getCode() {
         return code;
+    }
+    /**
+     * Returns the description of the Test Type
+     *
+     * @return description of the Test Type
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns the collecting method of the Test Type
+     *
+     * @return collecting method of the Test Type
+     */
+    public String getCollectingMethod() {
+        return collectingMethod;
+    }
+
+    /**
+     * Returns the parameter categories of the Test Type
+     *
+     * @return parameter categories of the Test Type
+     */
+    public List<ParameterCategory> getSelectedCategories() {
+        return selectedCategories;
     }
 
     /**

@@ -1,11 +1,12 @@
 package app.controller;
 
+import app.mappers.CategoriesMapper;
+import app.mappers.dto.CategoriesDTO;
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
-import app.domain.model.ParameterCategoryStore;
+import app.domain.store.ParameterCategoryStore;
 import app.domain.model.TestType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateTestTypeController {
@@ -26,12 +27,6 @@ public class CreateTestTypeController {
         return testType;
     }
 
-    public List<ParameterCategory> getParameterCategories() {
-        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
-        /*List<ParameterCategory> categoriesList = new ArrayList<>(parameterCategoryStore.getParameterCategoriesStore());*/
-        return parameterCategoryStore.getParameterCategoriesStore();
-    }
-
     public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes){
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
         List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
@@ -43,5 +38,14 @@ public class CreateTestTypeController {
         return this.company.getTestTypeStore().saveTestType(testType);
     }
 
+    public List<ParameterCategory> getParameterCategories() {
+        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        return parameterCategoryStore.getParameterCategoriesStore();
+    }
+
+    public List<CategoriesDTO> getParameterCategoriesDTO (){
+        CategoriesMapper mapper = new CategoriesMapper();
+        return mapper.toDTO(getParameterCategories());
+    }
 
 }

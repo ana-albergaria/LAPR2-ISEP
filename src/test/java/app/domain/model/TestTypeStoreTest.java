@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.store.TestTypeStore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
