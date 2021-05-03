@@ -44,15 +44,15 @@ activate UI
 UI -> CTRL : saveParameterCategory()
 activate CTRL
 
-CTRL -> CMP : saveParameterCategory(pc)
-activate CMP
+CTRL -> STORE : saveParameterCategory(pc)
+activate STORE
 
-CMP -> CMP : validateParameterCategory(pc)
+STORE -> STORE : validateParameterCategory(pc)
 
-CMP -> CMP : addParameterCategory(pc)
+STORE -> STORE : addParameterCategory(pc)
 
 ADM <-- UI : informs operation success
-deactivate CMP
+deactivate STORE
 deactivate CTRL
 deactivate UI
 deactivate ADM
