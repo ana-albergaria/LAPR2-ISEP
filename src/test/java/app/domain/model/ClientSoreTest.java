@@ -1,9 +1,8 @@
 package app.domain.model;
 
+import app.domain.store.ClientSore;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ClientSoreTest {
 

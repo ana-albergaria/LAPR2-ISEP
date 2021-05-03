@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.store.ClientSore;
 import app.domain.store.ParameterCategoryStore;
 import app.domain.store.TestTypeStore;
 import auth.AuthFacade;
