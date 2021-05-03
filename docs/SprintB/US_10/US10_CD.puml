@@ -8,15 +8,18 @@ class ParameterCategoryStore {
     +getCategoryByCode(code)
 }
 
+class ParameterStore {
+    +createParameter(parameterCode, shortName, description, pc)
+    +validateParameter(parameter)
+    +saveParameter(parameter)
+}
+
 class Parameter {
   -String parameterCode
   -String shortName
   -String description
   -ParameterCategory pc
   +Parameter(parameterCode, shortName, description, pc)
-  +createParameter(parameterCode, shortName, description, pc)
-  +validateParameter(parameter)
-  +saveParameter(parameter)
 }
 
 class ParameterCategory {
@@ -44,11 +47,12 @@ class CreateParameterUI {
 CreateParameterUI ..> CreateParameterController
 CreateParameterController ..> Company
 CreateParameterController ..> ParameterCategoryStore
-CreateParameterController ..> Parameter
-ParameterCategoryStore ..> ParameterCategory
+CreateParameterController ..> ParameterStore
+ParameterCategoryStore -- ParameterCategory : adopts >
 Company "1" -- "1" ParameterCategoryStore : uses >
-Company "1" -- "*" ParameterCategory : adopts >
-Parameter "1..*" -- "1" ParameterCategory : presented under >
+Company "1" -- "1" ParameterStore : uses >
+ParameterStore "1" -- "*" Parameter : capable of analysing >
+Parameter "*" -- "1" ParameterCategory : presented under >
 
 
 @enduml

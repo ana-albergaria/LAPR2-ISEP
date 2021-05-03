@@ -32,11 +32,9 @@ class CreateParameterCategoryUI {
 
 CreateParameterCategoryUI ..> CreateParameterCategoryController
 CreateParameterCategoryController ..> Company
-CreateParameterCategoryController ..> ParameterCategory
 CreateParameterCategoryController ..> ParameterCategoryStore
-ParameterCategoryStore ..> ParameterCategory
-Company "1" --> "1" ParameterCategoryStore : uses
-Company "1" --> "*" ParameterCategory : adopts
+ParameterCategoryStore "1" -- "*" ParameterCategory : adopts >
+Company "1" --> "1" ParameterCategoryStore : uses >
 
 
 @enduml

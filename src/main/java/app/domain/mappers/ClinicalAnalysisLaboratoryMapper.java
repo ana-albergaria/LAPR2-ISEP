@@ -1,12 +1,7 @@
 package app.domain.mappers;
 
 import app.domain.mappers.dto.ClinicalAnalysisLaboratoryDTO;
-import app.domain.mappers.dto.TestTypeDTO;
 import app.domain.model.ClinicalAnalysisLaboratory;
-import app.domain.model.TestType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClinicalAnalysisLaboratoryMapper {
 
