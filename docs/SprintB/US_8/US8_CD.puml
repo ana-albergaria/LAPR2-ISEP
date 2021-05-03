@@ -66,15 +66,20 @@ class RegisterNewCalController {
 class RegisterNewCalUI {}
 
 class TestTypeMapper {
-+List<TestTypeDto> toDTO(List<TestType> list)
-+TestTypeDto toDTO(TestType obj)
++List<TestTypeDto> toDTO(List<TestType> testTypes)
++TestTypeDto toDTO(TestType tt)
 }
 
-/'PREENCHER CLASS testTypeDto!!!!!!!!!'/
+
 class TestTypeDto {
--attribute1
--attribute2
-Xdto(...)
+-code
+-description
+-collectingMethod
++TestTypeDto(code, description, collectingMethod, selectedCategories)
++getCode()
++getDescription()
++getCollectingMethod()
++getSelectedCategories()
 }
 
 RegisterNewCalUI ..> RegisterNewCalController
@@ -111,7 +116,7 @@ TestType -[hidden]down-> ClinicalAnalysisLaboratory
 
 /'Laboratory <|-- ClinicalAnalysisLaboratory'/
 
-
+/'ACRESCENTAR TESTTYPE CHARACTERIZED BY CATEGORY!!!!!!'/
 
 
 

@@ -34,7 +34,7 @@ deactivate UI
 ADM -> UI : types requested data
 activate UI
 
-UI -> CTRL : totalTT = getTestTypes()
+UI -> CTRL : listTestType = getTestTypes()
 activate CTRL
 
 CTRL -> PLAT : storeTest = getTestTypeStore()
@@ -42,7 +42,7 @@ activate PLAT
 |||
 deactivate PLAT
 
-CTRL -> TEST_TYPE_STORE : totalTT = getTestTypes()
+CTRL -> TEST_TYPE_STORE : listTestType = getTestTypes()
 activate TEST_TYPE_STORE
 /'|||'/
 
