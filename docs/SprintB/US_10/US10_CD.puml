@@ -4,16 +4,16 @@ hide empty attributes
 left to right direction
 skinparam classAttributeIconSize 0
 
-class ParameterCategoryDto {
+class CategoriesDto {
     -code
     -name
     +ParameterCategory(code, name)
     +getCode()
 }
 
-class ParameterCategoryMapper {
-    +List<ParameterCategoryDto> toDto(List<ParameterCategory> parameterCategories)
-    +ParameterCategoryDto toDTO(ParameterCategory pc)
+class CategoriesMapper {
+    +List<CategoriesDto> toDto(List<ParameterCategory> parameterCategories)
+    +rCategoriesDto toDTO(ParameterCategory pc)
 }
 
 class ParameterCategoryStore {
@@ -58,10 +58,10 @@ CreateParameterUI ..> CreateParameterController
 CreateParameterController ..> Company
 CreateParameterController ..> ParameterCategoryStore
 CreateParameterController ..> ParameterStore
-CreateParameterController ..> ParameterCategoryMapper
-ParameterCategoryMapper ..> ParameterCategory
-ParameterCategoryMapper ..> ParameterCategoryDto
-CreateParameterUI ..> ParameterCategoryDto
+CreateParameterController ..> CategoriesMapper
+CategoriesMapper ..> ParameterCategory
+CategoriesMapper ..> CategoriesDto
+CreateParameterUI ..> CategoriesDto
 ParameterCategoryStore -- ParameterCategory : adopts >
 Company "1" -- "1" ParameterCategoryStore : uses >
 Company "1" -- "1" ParameterStore : uses >
