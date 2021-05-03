@@ -1,12 +1,13 @@
-package app.domain.model;
+package app.domain.mappers.dto;
 
+import app.domain.model.ParameterCategory;
+import app.domain.model.TestType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestType {
-
+public class TestTypeDTO {
     /**
      * Test Type unique code
      */
@@ -55,11 +56,6 @@ public class TestType {
     }
 
     //to be used for US8
-    /**
-     * Returns the code of the Test Type
-     *
-     * @return code of the Test Type
-     */
     public String getCode() {
         return code;
     }
@@ -106,5 +102,4 @@ public class TestType {
         TestType testTypeToCompare = (TestType) testTypeObject;
         return testTypeToCompare.getCode().equals(this.getCode());
     }
-
 }
