@@ -6,8 +6,8 @@ actor "Administrator" as ADM
 participant ":CreateParameterUI" as UI
 participant ":CreateParameterController" as CTRL
 participant "cmp\n:Company" as CMP
-participant "store\n:ParameterCategoryStore" as STORE
-participant ":CreateParameterCategoryController" as PCCTRL
+participant "pcStore\n:ParameterCategoryStore" as PCSTORE
+participant "prmStore\n:ParameterStore" as PRMSTORE
 participant "prm\n:Parameter" as PRM
 participant "pc\n:ParameterCategory" as PC
 participant "lc\n:List<ParameterCategory>" as LIST_CAT
@@ -28,10 +28,10 @@ CTRL -> CMP : categoriesStore = getParameterCategoryStore()
 activate CMP
 |||
 deactivate CMP
-CTRL -> STORE : categoriesList = getParameterCategoriesStore()
-activate STORE
+CTRL -> PCSTORE : lc = getParameterCategoriesStore()
+activate PCSTORE
 |||
-deactivate STORE
+deactivate PCSTORE
 deactivate CTRL
 
 UI --> ADM : shows parameter categories list and asks to select one
@@ -45,23 +45,30 @@ loop while administrator wants to create one more parameter
 UI -> CTRL : createParameter(parameterCode, shortName, description, pcCode)
 activate CTRL
 
-CTRL -> PCCTRL : pc = getCategoryByCode(pcCode)
-activate PCCTRL
+CTRL -> PCSTORE : pc = getCategoryByCode(pcCode)
+activate PCSTORE
 |||
-deactivate PCCTRL
+deactivate PCSTORE
 
-CTRL -> CMP: prm = createParameter(parameterCode, shortName, description, pc)
+CTRL -> CMP: prmStore = getParameterStore()
 activate CMP
+|||
+deactivate CMP
+CTRL -> PRMSTORE: prm = createParameter(parameterCode, shortName, description, pc)
+activate PRMSTORE
 
-CMP --> PRM**: create(parameterCode, shortName, description, pc)
-CTRL -> CMP: validateParameter(prm)
+PRMSTORE --> PRM**: create(parameterCode, shortName, description, pc)
+deactivate PRMSTORE
+CTRL -> PRMSTORE: validateParameter(prm)
+activate PRMSTORE
+|||
+deactivate PRMSTORE
 end
 
 
 CTRL --> UI: result
 
 UI --> ADM: shows all data and requests confirmation
-deactivate CMP
 deactivate CTRL
 deactivate UI
 
@@ -70,16 +77,16 @@ activate UI
 UI -> CTRL : saveParameter()
 activate CTRL
 
-CTRL -> CMP : saveParameter(parameter)
-activate CMP
+CTRL -> PRMSTORE : saveParameter(parameter)
+activate PRMSTORE
 
-CMP -> CMP: validateParameter(parameter)
-CMP -> CMP: addParameter(parameter)
+PRMSTORE -> PRMSTORE: validateParameter(parameter)
+PRMSTORE -> PRMSTORE: addParameter(parameter)
 
 CTRL --> UI: result
 
 UI --> ADM : informs operation success
-deactivate CMP
+deactivate PRMSTORE
 deactivate CTRL
 deactivate UI
 

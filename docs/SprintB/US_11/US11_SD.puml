@@ -23,13 +23,18 @@ activate CTRL
 
 CTRL -> CMP : categoriesStore = getParameterCategoryStore()
 activate CMP
+|||
+deactivate CMP
 
-CMP -> STORE : pc = createParameterCategory(code, name)
+CTRL -> STORE : pc = createParameterCategory(code, name)
 activate STORE
 STORE --> PC** : create(code, name)
+deactivate STORE
 
-CTRL -> CMP : validateParameterCategory(pc)
-
+CTRL -> STORE : validateParameterCategory(pc)
+activate STORE
+|||
+deactivate STORE
 CTRL --> UI: result
 
 UI --> ADM : shows the data and requests a confirmation
