@@ -11,14 +11,18 @@ participant ":RegisterNewCalController" as CTRL
 participant ":Company" as PLAT
 participant "storeTest\n:TestTypeStore" as TEST_TYPE_STORE
 participant "obj\n :TestType" as TEST_TYPE_OBJ
-participant ": TestTypeMapper" as TEST_TYPE_MAPPER
+participant ": TestTypeMapper" as MAPPER
 participant "listTestType\n: List<TestType>" as LIST
+participant "listTestTypeDto\n:List<TestTypeDto>" as LIST_DTO
+participant "objDto\n: TestTypeDto" as OBJ_DTO
 /'participant ":Platform" as PLAT'/
 /'participant ":Laboratory" as ORG'/
 /'participant "storeLab\n:LaboratoryStore" as LAB_STORE'/
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
 participant "selectedTT\n:List<TestType>" as CAT
-participant "totalTT\n:List<TestType>" as LIST_CAT
+
+/'listTestType É O MESMO QUE totalTT?'/
+/'participant "totalTT\n:List<TestType>" as LIST_CAT'/
 
 
 activate ADM
@@ -40,18 +44,52 @@ deactivate PLAT
 
 CTRL -> TEST_TYPE_STORE : totalTT = getTestTypes()
 activate TEST_TYPE_STORE
-|||
-deactivate TEST_TYPE_STORE
-deactivate CTRL
+/'|||'/
 
-TEST_TYPE_STORE ->
+/'deactivate CTRL'/
+
+TEST_TYPE_STORE --> LIST** : create()
+
+TEST_TYPE_STORE --> CTRL : listTestType
+
+deactivate TEST_TYPE_STORE
+
+/'deactivate CTRL'/
+
+CTRL -> MAPPER : toDTO(listTestType)
+activate MAPPER
+
+MAPPER --> LIST_DTO** : create()
+
+loop for each object in listTestType
+MAPPER -> LIST : obj = get(i)
+activate LIST
+deactivate LIST
+
+MAPPER -> MAPPER : objDto = toDTO(obj)
+activate MAPPER
+
+/'ADICIONAR ATRIBUTOS AO CREATE!!!!!'/
+MAPPER --> OBJ_DTO** : create(...)
+deactivate MAPPER
+
+MAPPER -> LIST_DTO : add(objDto)
+activate LIST_DTO
+deactivate LIST_DTO
+end
+
+MAPPER --> CTRL : listTestTypeDto
+
+
+CTRL --> UI : listTestTypeDto
+deactivate CTRL
 
 loop while user adds types of test
 UI --> ADM : shows types of test list and asks to select one
 deactivate PLAT
 deactivate UI
 
-ADM -> UI : selects type(s) of test
+ADM -> UI : selects type of test
 activate UI
 end
 

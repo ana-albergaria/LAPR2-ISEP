@@ -19,11 +19,6 @@ class Laboratory {
 -phoneNumber : int
 -numTIN : int
 +Laboratory(name : String, address : String, phoneNumber : int, numTIN : int)
-+getLaboratoryStore()
-+createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, tt)
-+saveClinicalAnalysisLaboratory(cal)
--addClinicalAnalysisLaboratory(cal)
-+validateClinicalAnalysisLaboratory(cal)
 }
 
 class ClinicalAnalysisLaboratory {
@@ -40,7 +35,10 @@ class TestType {
 class Company {
 -designation : String
 +getTestTypeStore()
-+getLaboratoryStore()
++createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, tt)
++saveClinicalAnalysisLaboratory(cal)
+-addClinicalAnalysisLaboratory(cal)
++validateClinicalAnalysisLaboratory(cal)
 /'+getTestTypes()
 +getTestTypesByDesignation(selectedTestTypes)'/
 }
