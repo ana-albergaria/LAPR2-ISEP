@@ -10,12 +10,16 @@ participant ":RegisterNewCalController" as CTRL
 /'participant "session\n:UserSession" as SESSAO'/
 participant ":Company" as PLAT
 participant "storeTest\n:TestTypeStore" as TEST_TYPE_STORE
+participant "obj\n :TestType" as TEST_TYPE_OBJ
+participant ": TestTypeMapper" as TEST_TYPE_MAPPER
+participant "listTestType\n: List<TestType>" as LIST
 /'participant ":Platform" as PLAT'/
-participant ":Laboratory" as ORG
+/'participant ":Laboratory" as ORG'/
 /'participant "storeLab\n:LaboratoryStore" as LAB_STORE'/
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
 participant "selectedTT\n:List<TestType>" as CAT
 participant "totalTT\n:List<TestType>" as LIST_CAT
+
 
 activate ADM
 ADM -> UI : asks to register a new Clinical Analysis Laboratory
@@ -40,12 +44,16 @@ activate TEST_TYPE_STORE
 deactivate TEST_TYPE_STORE
 deactivate CTRL
 
-UI --> ADM : shows types of test list and asks to select at least one
+TEST_TYPE_STORE ->
+
+loop while user adds types of test
+UI --> ADM : shows types of test list and asks to select one
 deactivate PLAT
 deactivate UI
 
 ADM -> UI : selects type(s) of test
 activate UI
+end
 
 UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesCodes)
 activate CTRL
@@ -95,18 +103,18 @@ activate PLAT
 deactivate PLAT'/
 
 
-CTRL -> ORG: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-activate ORG
+CTRL -> PLAT: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+activate PLAT
 
-ORG --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
-activate ORG
-deactivate ORG
+PLAT --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+PLAT -> PLAT: validateClinicalAnalysisLaboratory(cal)
+activate PLAT
+deactivate PLAT
 
 CTRL --> UI: result
 
 UI --> ADM: shows all data and requests confirmation
-deactivate ORG
+deactivate PLAT
 deactivate PLAT
 deactivate CTRL
 deactivate UI
@@ -116,20 +124,20 @@ activate UI
 UI -> CTRL : saveClinicalAnalysisLaboratory()
 activate CTRL
 
-CTRL -> ORG : saveClinicalAnalysisLaboratory(cal)
-activate ORG
+CTRL -> PLAT : saveClinicalAnalysisLaboratory(cal)
+activate PLAT
 
-ORG -> ORG: validateClinicalAnalysisLaboratory(cal)
-activate ORG
-deactivate ORG
-ORG -> ORG: addClinicalAnalysisLaboratory(cal)
-activate ORG
-deactivate ORG
+PLAT -> PLAT: validateClinicalAnalysisLaboratory(cal)
+activate PLAT
+deactivate PLAT
+PLAT -> PLAT: addClinicalAnalysisLaboratory(cal)
+activate PLAT
+deactivate PLAT
 
 CTRL --> UI: result
 
 UI --> ADM : informs operation success
-deactivate ORG
+deactivate PLAT
 deactivate CTRL
 deactivate UI
 
