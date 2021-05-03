@@ -61,7 +61,7 @@ As an ***administrator***, I want to specify a **new type of test** and its **co
 
 ### 1.4. Found out Dependencies
 
-There is a dependency to "US 11 - to specify a new parameter category" since the test type must be associated with a Category
+There is a dependency to "US 11 - to specify a new parameter category" since the test type must be associated with at least one Category
 
 ### 1.5 Input and Output Data
 
@@ -144,12 +144,38 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **_DO NOT COPY ALL DEVELOPED TESTS HERE_**
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+###4.1 TestType instances values:
+**Test 1:** Check that it is not possible to create an instance of the TestType class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
 		Exemplo instance = new Exemplo(null, null);
 	}
+**Test 2:** Check that it is not possible to create an instance of the TestType class with code being an empty String.	
+	
+**Test 3:** Check that it is not possible to create an instance of the TestType class with code holding more than 5 characters.  
+
+**Test 4:** Check that it is not possible to create an instance of the TestType class with code holding less than 5 characters. 
+	
+**Test 5:** Check that it is not possible to create an instance of the TestType class with code holding not alphanumeric characters. 
+
+**Test 6:** Check that it is not possible to create an instance of the TestType class with description holding more than 15 characters. 
+
+**Test 7:** Check that it is not possible to create an instance of the TestType class with description being an empty String.
+
+**Test 8:** Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters. 
+
+**Test 9:** Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
+
+##4.2 TestTypeStore
+
+**Test 10:** Check that it is not possible to save a repeated Test Type in the store
+* Same Object
+* Different Object, same code
+
+**Test 11:** Check that it is not possible to save a null Test Type in the store
+
+**Test 12:** Check that it is not possible to get the test types by code with not assigned codes 
 
 *It is also recommended to organize this content by subsections.* 
 

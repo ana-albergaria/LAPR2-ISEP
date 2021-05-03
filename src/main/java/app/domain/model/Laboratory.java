@@ -2,16 +2,45 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+/**
+ * This class allows the construction of a class hierarchy
+ * to represent different types of laboratories.
+ * Specifies common characteristics to all the
+ * hierarchy classes.
+ *
+ * @author Ana Albergaria 1201518
+ */
 
 public class Laboratory {
+    /**
+     * The name of the Laboratory.
+     */
     private String name;
-    private String address;
-    private String phoneNumber;
-    private String numTIN;
-    //private List<Laboratory> labList;
-    private List<ClinicalAnalysisLaboratory> calList;
 
+    /**
+     * The address of the Laboratory.
+     */
+    private String address;
+
+    /**
+     * The phone number the Laboratory.
+     */
+    private String phoneNumber;
+
+    /**
+     * The TIN number of the Laboratory.
+     */
+    private String numTIN;
+
+    /**
+     * Builds a Laboratory's instance receiving:
+     * the name, the address, the phone number, the TIN number
+     *
+     * @param name the name of the Laboratory
+     * @param address the address of the Laboratory
+     * @param phoneNumber the phone number of the Laboratory
+     * @param numTIN the TIN number of the Laboratory
+     */
     public Laboratory(String name, String address, String phoneNumber, String numTIN) {
         checkNameRules(name);
         checkAddressRules(address);
@@ -23,12 +52,35 @@ public class Laboratory {
         this.numTIN = numTIN;
     }
 
+    /**
+     * It returns the textual description of the Laboratory instance.
+     *
+     * @return characteristics of the Laboratory
+     */
     @Override
     public String toString() {
-        return String.format("LABORATORY%nName: %s%n"
+        if(this.getClass().getSimpleName().equals("ClinicalAnalysisLaboratory"))
+            System.out.printf("CLINICAL ANALYSIS LABORATORY%n");
+        else
+            System.out.printf("CHEMICAL LABORATORY%n");
+        return String.format("Name: %s%n"
                 + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
     }
 
+    /**
+     * Returns true if the name received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the name provided:
+     * - It is blank
+     * - It doesn't contain only letters
+     * - Its length is greater than 20
+     *
+     * @param name name of the Laboratory
+     *
+     * @return true if the name respects all the rules,
+     *         otherwise returns false
+     */
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
@@ -38,7 +90,19 @@ public class Laboratory {
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
     }
 
-
+    /**
+     * Returns true if the address received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the address provided:
+     * - It is blank
+     * - Its length is greater than 30
+     *
+     * @param address address of the Laboratory
+     *
+     * @return true if the address respects all the rules,
+     *         otherwise returns false
+     */
     public void checkAddressRules(String address) {
         if (StringUtils.isBlank(address))
             throw new IllegalArgumentException("Address cannot be blank.");
@@ -46,11 +110,24 @@ public class Laboratory {
             throw new IllegalArgumentException("Address cannot have more than 30 characters.");
     }
 
-
+    /**
+     * Returns true if the phone number received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the phone number provided:
+     * - It is blank
+     * - It doesn't contain only digits
+     * - Its length is different than 11
+     *
+     * @param phoneNumber phone number of the Laboratory
+     *
+     * @return true if the phone number respects all the rules,
+     *         otherwise returns false
+     */
     public void checkPhoneNumberRules(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
             throw new IllegalArgumentException("Phone Number cannot be blank.");
-        //if ((!phoneNumber.chars().allMatch(Character::isLetter)))
+        //if ((!phoneNumber.chars().allMatch(Character::isDigit)))
         if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Phone Number must only contain digits.");
         if (phoneNumber.length() != 11)
@@ -58,39 +135,55 @@ public class Laboratory {
 
     }
 
+    /**
+     * Returns true if the TIN number received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the TIN number provided:
+     * - It is blank
+     * - It doesn't contain only digits
+     * - Its length is different than 10
+     *
+     * @param numTIN TIN number of the Laboratory
+     *
+     * @return true if the TIN number respects all the rules,
+     *         otherwise returns false
+     */
     public void checkTINNumberRules(String numTIN) {
         if (StringUtils.isBlank(numTIN))
             throw new IllegalArgumentException("TIN Number cannot be blank.");
-        if ((!numTIN.chars().allMatch(Character::isDigit)))
+        //if ((!numTIN.chars().allMatch(Character::isDigit)))
+        if ((!numTIN.matches("[0-9]+")))
             throw new IllegalArgumentException("TIN Number must only contain digits.");
         if (numTIN.length() != 10)
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 
-    public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
-                                                                       String name,
-                                                                       String address,
-                                                                       String phoneNumber,
-                                                                       String numTIN,
-                                                                       List<TestType> selectedTT) {
-        return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
-                phoneNumber, numTIN, selectedTT);
-    }
+    /**
+     * Compares the Laboratory with the received object.
+     *
+     * @param otherObject the object to be compared with the Laboratory
+     * @return true if the received object represents other Laboratory
+     * equivalent to the Laboratory. Otherwise, returns false.
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
 
-    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        if (cal == null)
+        if(otherObject == null || this.getClass() != otherObject.getClass())
             return false;
-        return ! this.calList.contains(cal);
+
+        Laboratory otherLaboratory = (Laboratory) otherObject;
+
+        return this.name.equalsIgnoreCase(otherLaboratory.name) &&
+                this.address.equalsIgnoreCase(otherLaboratory.address) &&
+                this.phoneNumber.equalsIgnoreCase(otherLaboratory.phoneNumber) &&
+                this.numTIN.equalsIgnoreCase(otherLaboratory.numTIN);
     }
 
-    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        if (!validateClinicalAnalysisLaboratory(cal))
-            return false;
-        return this.calList.add(cal);
-    }
 
-    //SUPOSTAMENTE ESTÁ COMPLETO!
-    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
+
 
 
 

@@ -84,11 +84,7 @@ You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/di
 
 There is a dependency to "US009 To specify a new type of test and its collecting methods" since at least a type of test (specifically the blood test) must exist to determine the type of test(s) the clinical analysis laboratory operates.
 
-### 1.5 Input and Output Data
-
-
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*  
-
+### 1.5 Input and Output Data  
 
 **Input Data:**  
 
@@ -146,8 +142,8 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
 |               	 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
-| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  IE: Company uses TestTypeStore.                     |
-|                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
+| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  LC: Company uses TestTypeStore.                     |
+|                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for low coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
 | Step 6: shows all data and requests confirmation            		 |	...validating the data globally (e.g.: duplicated)?						 |  Laboratory           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
 | Step 7: confirms the data  		 |	...saving the created Clinical Analysis Laboratory?						 | Laboratory            |   IE: records all the ClinicalAnalysisLaboratory objects.                           |

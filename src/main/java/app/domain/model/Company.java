@@ -18,6 +18,7 @@ public class Company {
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
     private List<Parameter> prmList;
+    private List<ClinicalAnalysisLaboratory> calList;
 
     private ClientSore clientSore;
 
@@ -28,6 +29,9 @@ public class Company {
 
         this.designation = designation;
         this.authFacade = new AuthFacade();
+        this.testTypeStore = new TestTypeStore();
+        this.parameterCategoryStore = new ParameterCategoryStore();
+        this.calList = new ArrayList<>();
     }
 
     public String getDesignation() {
@@ -62,6 +66,31 @@ public class Company {
         if (!validateParameter(prm))
             return false;
         return this.prmList.add(prm);
+    }
+
+
+    //to be used in US8
+    public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
+                                                                       String name,
+                                                                       String address,
+                                                                       String phoneNumber,
+                                                                       String numTIN,
+                                                                       List<TestType> selectedTT) {
+        return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
+                phoneNumber, numTIN, selectedTT);
+    }
+
+
+    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if (cal == null)
+            return false;
+        return ! this.calList.contains(cal);
+    }
+
+    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if (!validateClinicalAnalysisLaboratory(cal))
+            return false;
+        return this.calList.add(cal);
     }
 
 }

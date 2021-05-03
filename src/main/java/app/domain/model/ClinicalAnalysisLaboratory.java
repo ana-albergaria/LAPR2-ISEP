@@ -5,36 +5,72 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Clinical Analysis Laboratory through:
+ * a Laboratory ID, a name, an address, a phone number, a TIN number and the type of tests
+ *
+ * @author Ana Albergaria 1201518
+ */
+
 public class ClinicalAnalysisLaboratory extends Laboratory {
+    /**
+     * The laboratory ID of the Clinical Analysis Laboratory.
+     */
     private String laboratoryID;
-    private Laboratory isOf; //ClinicalAnalysisLaboratory isOf Laboratory
+
+    /**
+     * The type of tests the Clinical Analysis Laboratory operates.
+     */
     private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
 
+    /**
+     * Builds a Clinical Analysis Laboratory's instance receiving:
+     * the Laboratory ID, the name, the address, the phone number, the TIN number and
+     * the type of tests
+     *
+     * @param laboratoryID the laboratory ID of the Clinical Analysis Laboratory
+     * @param name the name of the Clinical Analysis Laboratory
+     * @param address the address of the Clinical Analysis Laboratory
+     * @param phoneNumber the phone number of the Clinical Analysis Laboratory
+     * @param numTIN the TIN number of the Clinical Analysis Laboratory
+     * @param selectedTT the type of tests the Clinical Analysis Laboratory operates
+     */
     public ClinicalAnalysisLaboratory(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT) {
         super(name, address, phoneNumber, numTIN);
         checkLaboratoryIDRules(laboratoryID);
+        checkSelectedTestTypesRules(selectedTT);
         this.laboratoryID = laboratoryID;
-        this.selectedTT = new ArrayList<TestType>(selectedTT);
+        this.selectedTT = new ArrayList<>(selectedTT);
     }
 
+    /**
+     * It returns the textual description of the Clinical Analysis Laboratory instance.
+     *
+     * @return characteristics of the Clinical Analysis Laboratory
+     */
     @Override
     public String toString() {
-        System.out.printf("%sLaboratory ID: %s%nTest Types: %n",
-                super.toString(), laboratoryID);
-        selectedTT.forEach(System.out::println);
-        return "";
+        //System.out.printf("%sLaboratory ID: %s%nTest Types: %n",
+                //super.toString(), laboratoryID, selectedTT);
+        //selectedTT.forEach(System.out::println);
+        return String.format("%sLaboratory ID: %s%nTest Types: %n%s",
+                super.toString(), laboratoryID, selectedTT);
     }
 
-        /*
-     **AC1:** All required field must be filled in.
-     * **AC2:** The Laboratory ID must have five alphanumeric characters.
-     * **AC3:** The name is a string with no more than 20 characters.
-     * **AC4:** Address: A string with no more than 30 characters;
-     * **AC5:** The Phone Number is a 11 digit number.
-     * **AC6:** The TIN Number is a 10 digit number.
-     * **AC7:** Type of tests must be an attribute of the Clinical Analysis Laboratory.
+    /**
+     * Returns true if the laboratory ID received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the laboratory ID provided:
+     * - It is blank
+     * - It has a length different than 5
+     * - It doesn't contain only alphanumeric characters.
+     *
+     * @param laboratoryID the laboratory ID of the Clinical Analysis Laboratory
+     *
+     * @return true if the laboratory ID respects all the rules,
+     *         otherwise returns false
      */
-
     private void checkLaboratoryIDRules(String laboratoryID) {
         if (StringUtils.isBlank(laboratoryID))
             throw new IllegalArgumentException("Laboratory ID cannot be blank.");
@@ -44,14 +80,40 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
     }
 
+    /**
+     * Returns true if the list of the Test Types received in the parameter respects
+     * all the rules.
+     * It returns false as soon as one of these conditions are not verified
+     * by the List of Test Types provided:
+     * - It is null or it is empty
+     *
+     * @param selectedTT the type of tests the Clinical Analysis Laboratory operates
+     *
+     *
+     * @return true if the list of Test Types respects all the rules,
+     *         otherwise returns false
+     */
+    private void checkSelectedTestTypesRules(List<TestType> selectedTT) {
+        if(selectedTT == null || selectedTT.isEmpty())
+            throw new IllegalArgumentException("The list containing the Types of Test cannot be blank.");
+    }
 
-    //FALTA FAZER VALIDAÇÃO DOS ACCEPTING CRITERIA LOCALMENTE + TOSTRING
-    //FALTA VALIDAÇÃO TIPOS DE TESTE!!!
-    /*ALTERNATIVA 1
-        if ((!laboratoryID.matches("^[a-zA-Z0-9]*$")
-            throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-        //ALTERNATIVA 2
-        if ((!laboratoryID.chars().allMatch(Character::isLetterOrDigit)))
-            throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
-         */
+    /**
+     * Compares the Clinical Analysis Laboratory with the received object.
+     *
+     * @param otherObject the object to be compared with the Clinical Analysis Laboratory
+     * @return true if the received object represents other Clinical Analysis Laboratory
+     * equivalent to the Clinical Analysis Laboratory. Otherwise, returns false.
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        if(!super.equals(otherObject))
+            return false;
+
+        ClinicalAnalysisLaboratory instance = (ClinicalAnalysisLaboratory) otherObject;
+        return this.laboratoryID.equalsIgnoreCase(instance.laboratoryID) &&
+                this.selectedTT.equals(instance.selectedTT);
+    }
+
+
 }

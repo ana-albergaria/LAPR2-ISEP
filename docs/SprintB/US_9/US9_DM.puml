@@ -9,10 +9,8 @@ class Company{
 - designation
 }
 class ParameterCategory{
-- name
-- code
-- description
-- nhsId
+  -code
+  -name
 }
 class TestType{
 - Code
@@ -23,7 +21,6 @@ class Test{
 - code
 - NhsCode
 - createdAt
-
 }
 
  TestType -[hidden]right-|> Company
