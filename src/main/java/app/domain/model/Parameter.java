@@ -42,8 +42,4 @@ public class Parameter {
             throw new IllegalArgumentException("Description must have up to 20 chars.");
     }
 
-    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory pc){
-        return new Parameter(parameterCode, shortName, description, pc);
-    }
-
 }
