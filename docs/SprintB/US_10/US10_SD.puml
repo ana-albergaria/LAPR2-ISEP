@@ -41,6 +41,7 @@ deactivate UI
 ADM -> UI : selects a parameter category
 activate UI
 
+loop while administrator wants to create one more parameter
 UI -> CTRL : createParameter(parameterCode, shortName, description, pcCode)
 activate CTRL
 
@@ -54,6 +55,8 @@ activate CMP
 
 CMP --> PRM**: create(parameterCode, shortName, description, pc)
 CTRL -> CMP: validateParameter(prm)
+end
+
 
 CTRL --> UI: result
 
