@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import app.domain.store.ClientSore;
+import app.domain.utils.Data;
 import org.junit.Assert;
 import org.junit.Test;
 

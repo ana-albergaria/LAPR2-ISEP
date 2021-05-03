@@ -1,12 +1,8 @@
 package app.domain.model;
 
+import app.domain.utils.Data;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class ClientTest {
 

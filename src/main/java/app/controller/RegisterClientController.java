@@ -4,11 +4,7 @@ import app.domain.model.Client;
 import app.domain.model.Company;
 
 
-import app.domain.model.Data;
-import auth.AuthFacade;
-
-
-import java.util.List;
+import app.domain.utils.Data;
 
 public class RegisterClientController {
 

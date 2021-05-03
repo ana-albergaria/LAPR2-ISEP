@@ -1,7 +1,7 @@
 package app.domain.store;
 
 import app.domain.model.Client;
-import app.domain.model.Data;
+import app.domain.utils.Data;
 
 import java.util.ArrayList;
 import java.util.List;
