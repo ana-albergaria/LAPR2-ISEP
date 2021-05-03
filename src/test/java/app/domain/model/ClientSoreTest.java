@@ -41,7 +41,7 @@ public class ClientSoreTest {
 
     }
 
-    @Test
+    /*@Test
     public void createClientStoreWithSomeElementsButTwoAreTheSame() {
 
         Data d1 = new Data (2002,1,5);
@@ -61,10 +61,8 @@ public class ClientSoreTest {
         Client [] result = cs1.toArray();
         Assert.assertEquals(2, result.length);
 
-
-
     }
-
+*/
 
 
     @Test
