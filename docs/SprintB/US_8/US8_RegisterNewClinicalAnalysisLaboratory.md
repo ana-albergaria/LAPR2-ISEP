@@ -65,7 +65,21 @@ You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/di
 >- TIN number: 10 digit number; 
 >- Type of tests performed by the lab.  
 
-You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7636#p10191).
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7636#p10191).  
+
+>**Question**: Are two Clinical Analysis Laboratories with the same:  
+>a) Laboratory ID OR  
+>b) name OR  
+>c) address OR  
+>d) phone Number OR  
+>e) TIN number
+>allowed to exist?  
+>
+>**Answer**: Only the name of two CAL can be same.  
+
+You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7911#p10390).
+
+
 
 
 
@@ -137,7 +151,7 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
-| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Laboratory | Creator (Rule 1): in the DM, Laboratory has a Clinical Analysis Laboratory.                            |
+| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Company | Creator (Rule 1): in the DM, Company owns Laboratory (and a Clinical Analysis Laboratory is part of Laboratory)                           |
 | 			  		 |	...knowing the user using the system? |      UserSession                          | According to A&A component documentation.
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
@@ -145,8 +159,8 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 | Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  LC: Company uses TestTypeStore.                     |
 |                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for low coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
-| Step 6: shows all data and requests confirmation            		 |	...validating the data globally (e.g.: duplicated)?						 |  Laboratory           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
-| Step 7: confirms the data  		 |	...saving the created Clinical Analysis Laboratory?						 | Laboratory            |   IE: records all the ClinicalAnalysisLaboratory objects.                           |
+| Step 6: shows all data and requests confirmation            		 |	...validating the data globally (e.g.: duplicated)?						 |  Company           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
+| Step 7: confirms the data  		 |	...saving the created Clinical Analysis Laboratory?						 | Company          |   IE: records all the ClinicalAnalysisLaboratory objects.                           |
 | Step 8: informs operation success  		 |	...informing operation success?						 | RegisterNewCalUI            | IE: responsible for user interaction                                 |
 
 ### Systematization ##

@@ -44,6 +44,23 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     }
 
     /**
+     * Returns the laboratory ID of the Clinical Analysis Laboratory
+     *
+     * @return laboratory ID of the Clinical Analysis Laboratory
+     */
+    public String getLaboratoryID() {
+        return laboratoryID;
+    }
+    /**
+     * Returns the test types of the Clinical Analysis Laboratory
+     *
+     * @return test types of the Clinical Analysis Laboratory
+     */
+    public List<TestType> getSelectedTT() {
+        return selectedTT;
+    }
+
+    /**
      * It returns the textual description of the Clinical Analysis Laboratory instance.
      *
      * @return characteristics of the Clinical Analysis Laboratory

@@ -86,13 +86,44 @@ public class Company {
     public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
         if (cal == null)
             return false;
-        return ! this.calList.contains(cal);
+        return !this.calList.contains(cal) && validateCalAttributes(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
         if (!validateClinicalAnalysisLaboratory(cal))
             return false;
+
         return this.calList.add(cal);
     }
+
+    private boolean validateCalAttributes(ClinicalAnalysisLaboratory cal) {
+        for (ClinicalAnalysisLaboratory item : calList) {
+            if(duplicatedLaboratoryID(cal.getLaboratoryID(), item) ||
+                    duplicatedAddress(cal.getAddress(), item) ||
+                    duplicatedPhoneNumber(cal.getPhoneNumber(), item) ||
+                    duplicatedNumTIN(cal.getNumTIN(), item))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean duplicatedLaboratoryID(String laboratoryID, ClinicalAnalysisLaboratory item) {
+        return laboratoryID.equals(item.getLaboratoryID());
+    }
+
+    private boolean duplicatedAddress(String address, ClinicalAnalysisLaboratory item) {
+        return address.equals(item.getAddress());
+    }
+
+    private boolean duplicatedPhoneNumber(String phoneNumber, ClinicalAnalysisLaboratory item) {
+        return phoneNumber.equals(item.getPhoneNumber());
+    }
+
+    private boolean duplicatedNumTIN(String numTIN, ClinicalAnalysisLaboratory item) {
+        return numTIN.equals(item.getNumTIN());
+    }
+
+
+
 
 }
