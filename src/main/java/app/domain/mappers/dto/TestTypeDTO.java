@@ -56,8 +56,40 @@ public class TestTypeDTO {
     }
 
     //to be used for US8
+    /**
+     * Returns the code of the Test Type
+     *
+     * @return code of the Test Type
+     */
     public String getCode() {
         return code;
+    }
+
+    /**
+     * Returns the description of the Test Type
+     *
+     * @return description of the Test Type
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns the collecting method of the Test Type
+     *
+     * @return collecting method of the Test Type
+     */
+    public String getCollectingMethod() {
+        return collectingMethod;
+    }
+
+    /**
+     * Returns the parameter categories of the Test Type
+     *
+     * @return parameter categories of the Test Type
+     */
+    public List<ParameterCategory> getSelectedCategories() {
+        return selectedCategories;
     }
 
     /**
@@ -95,6 +127,13 @@ public class TestTypeDTO {
             throw new IllegalArgumentException("Collecting method cannot have more than 20 alphanumeric characters.");
     }
 
+    /**
+     * Compares the Test Type with the received object.
+     *
+     * @param testTypeObject the object to be compared with the Test Type
+     * @return true if the received object represents other Test Type
+     * equivalent to the Test Type. Otherwise, returns false.
+     */
     @Override
     public boolean equals(Object testTypeObject) {
         if (this == testTypeObject) return true;

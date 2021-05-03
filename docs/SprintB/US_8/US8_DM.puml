@@ -74,5 +74,8 @@ Application "1" -- "1" Company : knows <
 Test "*" -- "1" TestType : classified as >
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
 ClinicalAnalysisLaboratory "1..*" -- "1" Administrator : registered by >
+TestType "1" -- "1..*" ParameterCategory : characterized by >
+
+
 
 @enduml

@@ -63,6 +63,32 @@ public class TestType {
     public String getCode() {
         return code;
     }
+    /**
+     * Returns the description of the Test Type
+     *
+     * @return description of the Test Type
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns the collecting method of the Test Type
+     *
+     * @return collecting method of the Test Type
+     */
+    public String getCollectingMethod() {
+        return collectingMethod;
+    }
+
+    /**
+     * Returns the parameter categories of the Test Type
+     *
+     * @return parameter categories of the Test Type
+     */
+    public List<ParameterCategory> getSelectedCategories() {
+        return selectedCategories;
+    }
 
     /**
      * Code attribute validation for having non alphanumeric characters, more or less then 5 characters or blank
