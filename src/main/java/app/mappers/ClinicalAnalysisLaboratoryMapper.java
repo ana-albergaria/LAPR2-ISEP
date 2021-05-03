@@ -1,6 +1,6 @@
-package app.domain.mappers;
+package app.mappers;
 
-import app.domain.mappers.dto.ClinicalAnalysisLaboratoryDTO;
+import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.domain.model.ClinicalAnalysisLaboratory;
 
 public class ClinicalAnalysisLaboratoryMapper {
