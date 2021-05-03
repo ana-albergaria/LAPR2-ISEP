@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import app.domain.store.ParameterCategoryStore;
+import app.domain.store.TestTypeStore;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
 
