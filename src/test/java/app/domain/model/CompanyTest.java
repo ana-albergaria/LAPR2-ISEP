@@ -61,7 +61,7 @@ public class CompanyTest {
 
         //Act
         ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory("LAB23",
-                "Laboratorio","Outeiro","91841378810","1234567890", selectedTT);
+                "Laboratorio","Outeiro","91841378810","1234467890", selectedTT);
         boolean result = company.saveClinicalAnalysisLaboratory(c2);
 
         //Assert
