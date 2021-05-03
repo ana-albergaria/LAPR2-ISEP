@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Objects;
 import java.util.Random;
 
+import app.domain.utils.Data;
+
 public class Client {
 
 
