@@ -17,6 +17,9 @@ public class CompanyTest {
     private TestType t1;
     private TestType t2;
     private Company company;
+    private ClinicalAnalysisLaboratory c1;
+    private ClinicalAnalysisLaboratory c2;
+    private ClinicalAnalysisLaboratory c3;
 
     @Before
     public void setUp() {
@@ -31,6 +34,12 @@ public class CompanyTest {
         selectedTT.add(t1);
         selectedTT.add(t2);
         company = new Company("Many Labs");
+        c1 = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        c2 = new ClinicalAnalysisLaboratory("LAB23",
+                "Laboratorio","Porto","91899998811","1239999890", selectedTT);
+        c3 = new ClinicalAnalysisLaboratory("SON55",
+                "SYNLAB","Guarda","00899998811","0039999890", selectedTT);
     }
 
 
@@ -111,5 +120,61 @@ public class CompanyTest {
 
         //Assert
         Assert.assertFalse(result);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNoCalWithDuplicatedLaboratoryIDIsNotSaved() {
+        System.out.println("ensureNoCalWithDuplicatedLaboratoryIDIsNotSaved");
+
+        company.saveClinicalAnalysisLaboratory(c1);
+        company.saveClinicalAnalysisLaboratory(c2);
+        company.saveClinicalAnalysisLaboratory(c3);
+
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("LAB23",
+                "BMAC","Bragança","97777378811","1777767890", selectedTT);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNoCalWithDuplicatedAddressIsNotSaved() {
+        System.out.println("ensureNoCalWithDuplicatedAddressIsNotSaved");
+
+        company.saveClinicalAnalysisLaboratory(c1);
+        company.saveClinicalAnalysisLaboratory(c2);
+        company.saveClinicalAnalysisLaboratory(c3);
+
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("MEL23",
+                "BMAC","guarda","97777378811","1777767890", selectedTT);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNoCalWithDuplicatedPhoneNumberIsNotSaved() {
+        System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
+
+        company.saveClinicalAnalysisLaboratory(c1);
+        company.saveClinicalAnalysisLaboratory(c2);
+        company.saveClinicalAnalysisLaboratory(c3);
+
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("MEL23",
+                "BMAC","Bragança","91899998811","1777767890", selectedTT);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureNoCalWithDuplicatedTINNumberIsNotSaved() {
+        System.out.println("ensureNoCalWithDuplicatedTINNumberIsNotSaved");
+
+        company.saveClinicalAnalysisLaboratory(c1);
+        company.saveClinicalAnalysisLaboratory(c2);
+        company.saveClinicalAnalysisLaboratory(c3);
+
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
 }
