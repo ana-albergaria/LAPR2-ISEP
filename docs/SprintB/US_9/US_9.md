@@ -169,13 +169,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ##4.2 TestTypeStore
 
-**Test 10:** Check if createTestType method returns TestType correctly 
+**Test 10:** Check that it is not possible to save a repeated Test Type in the store
+* Same Object
+* Different Object, same code
 
-**Test 11:** Check that it is not possible to save a repeated Test Type in the store
+**Test 11:** Check that it is not possible to save a null Test Type in the store
 
-**Test 12:** Check that it is not possible to save a null Test Type in the store
-
-**Test 13:** Check that it is not possible to get the test types by code with not assigned codes 
+**Test 12:** Check that it is not possible to get the test types by code with not assigned codes 
 
 *It is also recommended to organize this content by subsections.* 
 
