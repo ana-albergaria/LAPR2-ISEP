@@ -4,6 +4,9 @@ import app.domain.store.ClientSore;
 import app.domain.store.ParameterCategoryStore;
 import app.domain.store.ParameterStore;
 import app.domain.store.TestTypeStore;
+import app.mappers.ClinicalAnalysisLaboratoryMapper;
+import app.mappers.TestTypeMapper;
+import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
 
@@ -65,6 +68,7 @@ public class Company {
     }
 
     //to be used in US8
+
     public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
                                                                        String name,
                                                                        String address,
@@ -74,6 +78,8 @@ public class Company {
         return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
                 phoneNumber, numTIN, selectedTT);
     }
+
+
 
 
     public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){

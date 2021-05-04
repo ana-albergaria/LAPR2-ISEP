@@ -1,6 +1,9 @@
 package app.controller;
 
 import app.domain.model.*;
+import app.domain.store.TestTypeStore;
+import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
+import app.mappers.dto.TestTypeDTO;
 
 import java.util.List;
 
@@ -28,23 +31,30 @@ public class RegisterNewCalController {
                                                     String numTIN,
                                                     List<String> testTypeCodes){
 
-        //LaboratoryStore storeLab = this.lab.getLaboratoryStore()
-        // cal = create
-        //- codeWithMe Plugin
 
-        List<TestType> selectedTT = this.company.getTestTypeStore().getTestTypesByCode(testTypeCodes);
+        TestTypeStore storeTest = this.company.getTestTypeStore();
+        List<TestType> selectedTT = storeTest.getTestTypesByCode(testTypeCodes);
+
+
 
         this.cal = this.company.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
         return this.company.validateClinicalAnalysisLaboratory(cal);
     }
 
+
+    /*
+    public createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
+
+    }
+     */
+
     public boolean saveClinicalAnalysisLaboratory(){
         return this.company.saveClinicalAnalysisLaboratory(cal);
     }
 
-    public List<TestType> getTestTypes() {
-        List<TestType> totalTT = this.company.getTestTypeStore().getTestTypes();
-        return totalTT;
+    public List<TestTypeDTO> getTestTypes() {
+        TestTypeStore storeTest = this.company.getTestTypeStore();
+        return storeTest.getTestTypesDto();
     }
 
 

@@ -168,7 +168,11 @@ PLAT -> CAL_DTO : phoneNumber = getPhoneNumber()
 activate CAL_DTO
 deactivate CAL_DTO
 
-PLAT -> CAL_DTO : name = getNumTIN()
+PLAT -> CAL_DTO : numTIN = getNumTIN()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> CAL_DTO : selectedTT = getSelectedTT()
 activate CAL_DTO
 deactivate CAL_DTO
 

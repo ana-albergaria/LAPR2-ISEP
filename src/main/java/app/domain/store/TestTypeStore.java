@@ -2,6 +2,9 @@ package app.domain.store;
 
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
+import app.mappers.TestTypeMapper;
+import app.mappers.dto.TestTypeDTO;
+import auth.mappers.UserRoleMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +27,15 @@ public class TestTypeStore {
         return new TestType(code, description, collectingMethod, selectedCategories);
     }
 
+
     public List<TestType> getTestTypes() {
         return new ArrayList<>(testTypeList);
+    }
+
+
+    public List<TestTypeDTO> getTestTypesDto() {
+        TestTypeMapper mapper = new TestTypeMapper();
+        return mapper.toDTO(getTestTypes());
     }
 
     /**

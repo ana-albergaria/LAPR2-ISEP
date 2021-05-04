@@ -50,7 +50,7 @@ public class ClinicalAnalysisLaboratoryDTO extends Laboratory {
      * @return test types of the Clinical Analysis Laboratory
      */
     public List<TestType> getSelectedTT() {
-        return selectedTT;
+        return new ArrayList<>(selectedTT);
     }
 
 }
