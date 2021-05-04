@@ -78,11 +78,17 @@ You can read the whole discussion here.
 
 You can read the whole discussion here.  
 
+>Q: Is the administrator an employee? If he/she is, who does him/her register?  
+A: Yes. An administrator should be registered when the application starts for first time.
+The application can have more than one administrator.  
+
+You can read the whole discussion here.
+
 
 ### 1.3. Acceptance Criteria
 
-* AC1:  "Each user must have a single role defined in the system."
-* AC2:  "The "auth" component available on the repository must be reused (without modifications)"
+* **AC1**:  "Each user must have a single role defined in the system."
+* **AC2:**  "The "auth" component available on the repository must be reused (without modifications)"
 
 ### 1.4. Found out Dependencies
 
