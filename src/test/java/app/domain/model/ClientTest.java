@@ -35,9 +35,6 @@ public class ClientTest {
     }
 
 
-
-
-
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithNhsNumberEmpty() {
         Data d1 = new Data (2002,1,5);

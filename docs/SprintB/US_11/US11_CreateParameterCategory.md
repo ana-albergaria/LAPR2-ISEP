@@ -30,13 +30,22 @@ As an administrator, I want to specify a new parameter category.
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7318#p9859).
 
+> **Question:** "You have said in a previous post that each category has a name and an unique code. What specifies each of those? How many characters composes a name and a code for a test type category, for example?"
+> 
+> **Answer:** "The format of the attributes of one category are:
+               Name: is a string with no more than 10 characters;
+               Code: are five alphanumeric characters. The code is unique and is not automatically generated.
+               Both attributes are mandatory.
+               There are no subcategories."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7898).
+
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** Code must be unique having 4 to 8 chars.
-* **AC2:** Description cannot be empty and has, at maximum, 40 chars.
-* **AC3:** NHS identifier is not mandatory.
+* **AC1:** Code is mandatory, unique and must have 5 alphanumeric characters.
+* **AC2:** Name is a string with at maximum 10 characters.
 
 
 ### 1.4. Found out Dependencies
