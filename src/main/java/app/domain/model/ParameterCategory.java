@@ -12,7 +12,6 @@ public class ParameterCategory {
         this.code = code;
         this.name = name;
     }
-
     public String getName() {
         return name;
     }
@@ -24,12 +23,15 @@ public class ParameterCategory {
     private void checkCodeRules(String code){
         if (StringUtils.isBlank(code))
             throw new IllegalArgumentException("Code cannot be blank.");
-        if ((code.length()<4)||(code.length()>8))
-            throw new IllegalArgumentException("Code must have 4 to 8 chars.");
+        if ((code.length() != 5 || !StringUtils.isAlphanumeric(code)))
+            throw new IllegalArgumentException("Code must have 5 alphanumeric characters.");
     }
 
     public void checkNameRules(String name){
-
+        if (StringUtils.isBlank(name))
+            throw new IllegalArgumentException("Name cannot be blank.");
+        if (name.length() > 10)
+            throw new IllegalArgumentException("Name cannot have more then 10 characters.");
     }
 
 }
