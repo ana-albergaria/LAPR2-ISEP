@@ -13,21 +13,70 @@ As an ***administrator***, I want to **register** a new **employee**
 **From the specifications document:**
 
 **From the client clarifications:**
->Q1: "Hello,
+>Q: "Hello,
       What kind of information does the company store about their employees and owned laboratories?
       Are there common attributes between the roles below? If so, which ones? (i.e. employee ID, TIN, contact info, etc.)
       Receptionist,cClinical Chemistry Technologist, Medical Lab Technician, Specialist Doctor, Lab Coordinator, Administrator"
 >
->A1: "All the roles that exist in the Many Labs company are characterized by the following attributes:
-      Employee ID;
-      Organization Role;
-      Name;
-      Address;
-      Phone Number;
-      E-Mail;
-      Standard Occupational Classification (SOC) code.
-      The Specialist Doctor has an additional attribute: Doctor Index Number."
+>A: "All the roles that exist in the Many Labs company are characterized by the following attributes:  
+      Employee ID;  
+      Organization Role;  
+      Name;  
+      Address;  
+      Phone Number;  
+      E-Mail;  
+      Standard Occupational Classification (SOC) code.  
+      The Specialist Doctor has an additional attribute: Doctor Index Number."  
+
+You can read the whole discussion here.  
+
+>Q: Are there any other employee roles than the othes specified in the documents?  
+>A: No.
 >
+>Q: Do these roles have different contracts with ManyLabs
+> (i.e. temporary contract, permanent contract, freelance, etc...?)  
+> If so, should this be registered in the system together with 
+> the employee role information?  
+> A: Many Labs is known for making permanent full-time contracts.
+> Therefore, there is no need to register this type of information.  
+
+You can read the whole discussion here.  
+
+>Q: When the application is delivered, should it have default employees
+> (ex: administrator, etc...), or should it be completely empty? (without any user or employee).  
+> A: One Administrator must be registered before starting the application for the first time.  
+> 
+> Q: The application can add new employees, but can it remove them? 
+> (for example, when one of them is fired)  
+> A: For now I do not want such feature.  
+
+You can read the whole discussion here.  
+
+>Q: Though all the information I have seen, "The Specialist Doctor has an additional attribute: Doctor Index Number".  
+> Since these specific role has an extra attribute, do you wish to be a new window where it asks
+> for the Doctor Index Number if the employee role is a Specialist Doctor,
+> or do you want to get all that information in a single window when creating a new employee?  
+> A: Whenever the Administrator selects to create a Specialist Doctor, the application should ask for the Doctor Index Number.  
+> **Important: in sprints B and C, the client only wants a console user interface.**  
+
+You can read the whole discussion here.  
+
+>Q: Regarding the registration of a new employee, which is the organization role's format?  
+> A: Organization Role: a string with no more than 15 characters.  
+
+You can read the whole discussion here.  
+
+>Q: I read in a previous post that "The Doctor Index Number" is introduced by the administrator".  
+> I searched in Google and I understood that its length is 6 digits.  
+> So I want to know if we need to do any validation.  
+> A: It is always a good practice to validate data introduced by the user.  
+> For now, it is not necessary to confirm that the code really exists.  
+>   
+> Q: I searched about the SOC number and its length is 4 digits.  
+> Having this in mind, I want to know if this number is introduced by the administrator or generated automatically and if there is any validation to do so.  
+> A: It is introduced by the administrator.  
+
+You can read the whole discussion here.  
 
 
 ### 1.3. Acceptance Criteria
