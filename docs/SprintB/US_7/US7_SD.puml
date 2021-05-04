@@ -1,0 +1,118 @@
+@startuml
+autonumber
+'hide footbox
+actor "Administrator" as ADM
+
+participant ":RegisterEmployeeUI" as UI
+participant ":RegisterEmployeeController" as CTRL
+/'participant "ApplicationPOT" as _APP
+participant "app\n:ApplicationPOT" as APP
+participant "session\n:UserSession" as SESSAO'/
+/'participant ":Platform" as PLAT'/
+participant "Company" as ORG
+participant "emp\n:Receptionist" as RECEPTIONIST
+participant "emp\n:Doctor" as DOCTOR
+/'participant "cat\n:Category" as CAT
+participant "lc\n:List<Category>" as LIST_CAT'/
+
+activate ADM
+ADM -> UI : starts registering a new employee
+activate UI
+UI --> ADM : asks to select the employee role
+deactivate UI
+
+ADM -> UI : selects the intended role
+activate UI
+
+/'UI -> CTRL : lc=getTaskCategories()
+activate CTRL'/
+
+/'CTRL -> PLAT : lc=getTaskCategories()
+activate PLAT
+|||
+deactivate PLAT
+deactivate CTRL'/
+
+UI --> ADM : requests data (employeeId, organizationRole, name, address, \nphoneNumber, email, socCode, DoctorIndexNumber)
+/'deactivate PLAT'/
+deactivate UI
+
+ADM -> UI : types requested data
+activate UI
+
+UI -> CTRL : createEmployee(role, employeeId, organizationRole, name, address, \nphoneNumber, email, socCode)
+activate CTRL
+
+/'
+CTRL -> PLAT : cat=getCategoryById(categoryId)
+activate PLAT
+|||
+deactivate PLAT'/
+/'
+CTRL -> _APP: app = getInstance()
+activate _APP
+|||
+deactivate _APP
+
+CTRL -> APP: session = getCurrentSession()
+activate APP
+|||
+deactivate APP
+
+CTRL -> SESSAO: email = getUserEmail()
+activate SESSAO
+|||
+deactivate SESSAO
+
+CTRL -> PLAT: org = getOrganizationByUserEmail(email)
+activate PLAT
+|||
+deactivate PLAT'/
+
+CTRL -> ORG: emp = createEmployee(role, employeeId, organizationRole, name, address, \nphoneNumber, email, socCode)
+activate ORG
+
+alt role="receptionist"
+ORG --> RECEPTIONIST**: create(employeeId, organizationRole, name, address, \nphoneNumber, email, socCode)
+/'ORG -> ORG: validateTask(task)'/
+
+else role="..."
+note over ORG
+alternative to other roles omitted
+end note
+else role="specialistDoctor"
+
+ORG --> DOCTOR**: create(employeeId, organizationRole, name, address, \nphoneNumber, email, socCode, doctorIndexNumber)
+end
+
+/'PODIA COMENTAR'/
+CTRL --> UI: result
+
+UI --> ADM: shows all data and requests confirmation
+deactivate ORG
+/'deactivate PLAT'/
+deactivate CTRL
+deactivate UI
+
+ADM -> UI : confirms the data
+activate UI
+UI -> CTRL : saveEmployee()
+activate CTRL
+
+CTRL -> ORG : saveEmployee(emp)
+activate ORG
+
+ORG -> ORG: validateEmployee(emp)
+ORG -> ORG: addEmployee(emp)
+
+/'PODIA COMENTAR'/
+CTRL --> UI: result
+
+UI --> ADM : informs operation success
+deactivate ORG
+deactivate CTRL
+deactivate UI
+
+deactivate ADM
+
+@enduml
