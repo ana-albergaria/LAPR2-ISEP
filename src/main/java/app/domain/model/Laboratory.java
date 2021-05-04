@@ -95,11 +95,7 @@ public class Laboratory {
      */
     @Override
     public String toString() {
-        if(this.getClass().getSimpleName().equals("ClinicalAnalysisLaboratory"))
-            System.out.printf("CLINICAL ANALYSIS LABORATORY%n");
-        else
-            System.out.printf("CHEMICAL LABORATORY%n");
-        return String.format("Name: %s%n"
+        return String.format("LABORATORY%nName: %s%n"
                 + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
     }
 
