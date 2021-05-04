@@ -91,6 +91,21 @@ public class TestType {
     }
 
     /**
+     * It returns the textual description of the Test Type.
+     *
+     * @return characteristics of the Test Type
+     */
+    @Override
+    public String toString() {
+        return "TestType{" +
+                "code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", collectingMethod='" + collectingMethod + '\'' +
+                ", selectedCategories=" + selectedCategories +
+                '}';
+    }
+
+    /**
      * Code attribute validation for having non alphanumeric characters, more or less then 5 characters or blank
      * @param code
      */

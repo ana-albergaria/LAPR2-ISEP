@@ -20,6 +20,14 @@ public class ParameterCategory {
         return code;
     }
 
+    @Override
+    public String toString() {
+        return "ParameterCategory{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     private void checkCodeRules(String code){
         if (StringUtils.isBlank(code))
             throw new IllegalArgumentException("Code cannot be blank.");
