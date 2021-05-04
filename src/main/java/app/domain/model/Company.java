@@ -92,17 +92,21 @@ public class Company {
 
     private void checkCalDuplicates(ClinicalAnalysisLaboratory cal) {
         for (ClinicalAnalysisLaboratory item : calList) {
-            if(duplicatedLaboratoryID(cal.getLaboratoryID(), item))
+            if(cal.getLaboratoryID().equalsIgnoreCase(item.getLaboratoryID()))
+            //if(duplicatedLaboratoryID(cal.getLaboratoryID(), item))
                 throw new IllegalArgumentException("Laboratory ID already registered in the system.");
-            if(duplicatedAddress(cal.getAddress(), item))
+            if(cal.getAddress().equalsIgnoreCase(item.getLaboratoryID()))
+            //if(duplicatedAddress(cal.getAddress(), item))
                 throw new IllegalArgumentException("Address already registered in the system.");
-            if(duplicatedPhoneNumber(cal.getPhoneNumber(), item))
+            if(cal.getPhoneNumber().equals(item.getPhoneNumber()))
+            //if(duplicatedPhoneNumber(cal.getPhoneNumber(), item))
                 throw new IllegalArgumentException("Phone Number already registered in the system.");
-            if(duplicatedNumTIN(cal.getNumTIN(), item))
+            if(cal.getNumTIN().equals(item.getNumTIN()))
+            //if(duplicatedNumTIN(cal.getNumTIN(), item))
                 throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
     }
-
+/*
     private boolean duplicatedLaboratoryID(String laboratoryID, ClinicalAnalysisLaboratory item) {
         return laboratoryID.equalsIgnoreCase(item.getLaboratoryID());
     }
@@ -118,6 +122,8 @@ public class Company {
     private boolean duplicatedNumTIN(String numTIN, ClinicalAnalysisLaboratory item) {
         return numTIN.equals(item.getNumTIN());
     }
+    
+ */
 
 
 
