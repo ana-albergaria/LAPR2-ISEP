@@ -95,7 +95,7 @@ public class Company {
             if(cal.getLaboratoryID().equalsIgnoreCase(item.getLaboratoryID()))
             //if(duplicatedLaboratoryID(cal.getLaboratoryID(), item))
                 throw new IllegalArgumentException("Laboratory ID already registered in the system.");
-            if(cal.getAddress().equalsIgnoreCase(item.getLaboratoryID()))
+            if(cal.getAddress().equalsIgnoreCase(item.getAddress()))
             //if(duplicatedAddress(cal.getAddress(), item))
                 throw new IllegalArgumentException("Address already registered in the system.");
             if(cal.getPhoneNumber().equals(item.getPhoneNumber()))
@@ -122,7 +122,7 @@ public class Company {
     private boolean duplicatedNumTIN(String numTIN, ClinicalAnalysisLaboratory item) {
         return numTIN.equals(item.getNumTIN());
     }
-    
+
  */
 
 
