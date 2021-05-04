@@ -10,11 +10,11 @@ deactivate ":System"
 
 A -> ":System" : selects the intended role
 activate ":System"
-/'ESTOU AQUI!!!!!!!!!!'/
-":System" --> A : shows collecting methods list and  ask to select one or more
+
+":System" --> A : requests data (employeeId, organizationRole, name, address, phoneNumber, email, socCode, DoctorIndexNumber)
 deactivate ":System"
-/'down here it still todo: '/
-A -> ":System" : selects collecting methods
+
+A -> ":System" : types requested data
 activate ":System"
 ":System" --> A : shows all data and requests confirmation
 deactivate ":System"

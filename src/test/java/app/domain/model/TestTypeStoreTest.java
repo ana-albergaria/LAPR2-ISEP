@@ -18,8 +18,8 @@ public class TestTypeStoreTest {
     @Before
     public void setUp() {
         pcList = new ArrayList<>();
-        p1 = new ParameterCategory("CODE1","Description");
-        p2 = new ParameterCategory("CODE2","Description");
+        p1 = new ParameterCategory("CODE1","Name");
+        p2 = new ParameterCategory("CODE2","Name");
         pcList.add(p1);
         pcList.add(p2);
     }
