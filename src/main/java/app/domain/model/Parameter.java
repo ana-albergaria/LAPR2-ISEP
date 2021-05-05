@@ -21,6 +21,10 @@ public class Parameter {
         this.pc = pc;
     }
 
+    /*public ParameterCategory getPc() {
+        return pc;
+    }*/
+
     private void checkParameterCodeRules(String parameterCode){
         if (StringUtils.isBlank(parameterCode))
             throw new IllegalArgumentException("Code cannot be blank.");
