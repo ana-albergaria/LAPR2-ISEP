@@ -74,7 +74,7 @@ public class ParameterTest {
         Parameter parameter = new Parameter("RBC01", "RBC", "Red Blood Cells", null);
     }
 
-    @Test
+    /*@Test
     public void equalsTrue() {
         Parameter parameter1 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         Parameter parameter2 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
@@ -102,7 +102,7 @@ public class ParameterTest {
         Parameter parameter1 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         boolean result = parameter1.equals(null);
         Assert.assertFalse(result);
-    }
+    }*/
 
     //equalsTrueWithXDifferent
 
