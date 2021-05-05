@@ -35,7 +35,7 @@ deactivate CMP
 CTRL -> PCSTORE : lc = getParameterCategoriesStore()
 activate PCSTORE
 
-PCSTORE -> LC** : create()
+PCSTORE --> LC** : create()
 PCSTORE --> CTRL : lc
 deactivate PCSTORE
 
