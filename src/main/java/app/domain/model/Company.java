@@ -24,6 +24,8 @@ public class Company {
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<Laboratory> laboratories; //Company owns Laboratory
     private List<ClinicalAnalysisLaboratory> calList;
+    private List<Employee> empList;
+    private List<OrgRole> roles;
 
     private ClientSore clientSore;
 
@@ -112,6 +114,25 @@ public class Company {
             if(cal.getNumTIN().equals(item.getNumTIN()))
                 throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
+    }
+
+    //to be used in US7
+
+    public List<OrgRole> getRoles() {
+        return new ArrayList<>(roles);
+    }
+
+    public boolean validateEmployee(Employee emp) {
+        if(emp == null)
+            return false;
+        return ! this.empList.contains(emp);
+    }
+
+    public boolean saveEmployee(Employee emp) {
+        if(!validateEmployee(emp))
+            return false;
+
+        return this.empList.add(emp);
     }
 
 }

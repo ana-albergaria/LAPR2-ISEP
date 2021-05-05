@@ -3,6 +3,10 @@ package app.mappers.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Ana Albergaria 1201518
+ */
+
 public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
     /**
      * The laboratory ID of the Clinical Analysis Laboratory.
