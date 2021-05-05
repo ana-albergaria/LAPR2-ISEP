@@ -34,7 +34,6 @@ public class Parameter {
     private ParameterCategory pc; //Parameter is presented under 1 ParameterCategory
 
     /**
-     *
      * Builds a parameter instance receiving:
      * the parameter code, name, description and parameter category.
      *
@@ -58,16 +57,12 @@ public class Parameter {
     }*/
 
     /**
-     * Returns true if the parameter code received in the parameter respects
-     * all the rules.
-     * It returns false as soon as one of these conditions are not verified
-     * by the parameter code provided:
-     * - It is blank.
-     * - It has a length different than 5.
+     * Checks if the parameter code received respects all the rules.
      *
      * @param parameterCode the parameter code.
      *
-     * @return true if the parameter code respects all the rules,
+     * @return true if the parameter code received respects all the rules
+     * (it isn't blank and it has a length of 5),
      * otherwise returns false.
      */
     private void checkParameterCodeRules(String parameterCode){
@@ -78,16 +73,12 @@ public class Parameter {
     }
 
     /**
-     * Returns true if the parameter name received in the parameter respects
-     * all the rules.
-     * It returns false as soon as one of these conditions are not verified
-     * by the parameter name provided:
-     * - It is blank.
-     * - It has a length longer than 8.
+     * Checks if the parameter name received respects all the rules.
      *
      * @param shortName the parameter name.
      *
-     * @return true if the parameter name respects all the rules,
+     * @return true if the parameter name received respects all the rules
+     * (it isn't blank and it hasn't a length longer than 8),
      * otherwise returns false.
      */
     private void checkShortNameRules(String shortName){
@@ -98,16 +89,12 @@ public class Parameter {
     }
 
     /**
-     * Returns true if the parameter description received in the parameter respects
-     * all the rules.
-     * It returns false as soon as one of these conditions are not verified
-     * by the parameter description provided:
-     * - It is blank.
-     * - It has a length longer than 20.
+     * Checks if the parameter description respects all the rules.
      *
      * @param description the parameter description.
      *
-     * @return true if the parameter description respects all the rules,
+     * @return true if the parameter description received respects all the rules
+     * (it isn't blank and it hasn't a length longer than 20),
      * otherwise returns false.
      */
     private void checkDescriptionRules(String description){

@@ -5,14 +5,42 @@ import app.domain.model.ParameterCategory;
 
 import java.util.List;
 
+/**
+ * Takes some of the company responsabilities regarding parameters,
+ * in order to achieve high cohesion and low coupling.
+ *
+ * @author Marta Ribeiro 1201592
+ */
 public class ParameterStore {
 
+    /**
+     * List of existing parameters.
+     */
     private List<Parameter> prmList;
 
+    /**
+     * Creates parameter reference.
+     *
+     * @param parameterCode
+     * @param shortName
+     * @param description
+     * @param pc
+     *
+     * @return created parameter reference.
+     */
     public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory pc){
         return new Parameter(parameterCode, shortName, description, pc);
     }
 
+    /**
+     * Validates parameter globally,
+     * checking if the parameter is null or duplicated.
+     *
+     * @param prm
+     *
+     * @return true if the parameter isn't null or duplicated,
+     * otherwise returns false.
+     */
     public boolean validateParameter(Parameter prm){
         if (prm == null)
             return false;
