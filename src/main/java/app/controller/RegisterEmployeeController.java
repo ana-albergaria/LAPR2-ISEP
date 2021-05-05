@@ -28,13 +28,14 @@ public class RegisterEmployeeController {
     }
 
     public boolean createEmployee(EmployeeDTO empDTO) {
-        if(empDTO.getRoleDesignation().equalsIgnoreCase("Specialist Doctor"))
+        if (empDTO.getRoleDesignation().equalsIgnoreCase("Specialist Doctor"))
             this.sd = this.company.createSpecialistDoctor((SpecialistDoctorDTO) empDTO);
         else
             this.emp = this.company.createEmployee(empDTO);
 
         return this.company.validateEmployee(emp);
     }
+
 
 
     public List<OrgRoleDTO> getRoles() {

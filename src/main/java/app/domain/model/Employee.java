@@ -52,4 +52,36 @@ public class Employee {
     public OrgRole getRole() {
         return role;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeID='" + employeeID + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", socCode='" + socCode + '\'' +
+                ", role=" + role +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        Employee otherEmployee = (Employee) otherObject;
+
+        return this.employeeID.equalsIgnoreCase(otherEmployee.employeeID) &&
+                this.name.equalsIgnoreCase(otherEmployee.name) &&
+                this.address.equalsIgnoreCase(otherEmployee.address) &&
+                this.phoneNumber.equalsIgnoreCase(otherEmployee.phoneNumber) &&
+                this.email.equalsIgnoreCase(otherEmployee.email) &&
+                this.socCode.equalsIgnoreCase(otherEmployee.socCode) &&
+                this.role.equals(otherEmployee.role);
+    }
 }

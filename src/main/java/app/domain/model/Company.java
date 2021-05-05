@@ -41,6 +41,8 @@ public class Company {
         this.testTypeStore = new TestTypeStore();
         this.parameterCategoryStore = new ParameterCategoryStore();
         this.calList = new ArrayList<>();
+        this.empList = new ArrayList<>();
+        this.roles = new ArrayList<>();
     }
 
     public String getDesignation() {
@@ -130,6 +132,20 @@ public class Company {
      * @return Organization Role reference
      */
     private OrgRole getRoleByDescription(String roleDescription) {
+        //PASSAR ESTE CÓDIGO PARA O CONSTRUTOR DA COMPANY
+        OrgRole r1 = new OrgRole("Administrator");
+        OrgRole r2 = new OrgRole("Receptionist");
+        OrgRole r3 = new OrgRole("Medical Lab Technician");
+        OrgRole r4 = new OrgRole("Laboratory Coordinator");
+        OrgRole r5 = new OrgRole("Specialist Doctor");
+        OrgRole r6 = new OrgRole("Clinical Chemistry Technologist");
+        this.roles.add(r1);
+        this.roles.add(r2);
+        this.roles.add(r3);
+        this.roles.add(r4);
+        this.roles.add(r5);
+        this.roles.add(r6);
+
         for (OrgRole role : roles) {
             if(role.getDescription().equalsIgnoreCase(roleDescription)){
                 return role;
