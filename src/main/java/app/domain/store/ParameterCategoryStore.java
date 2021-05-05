@@ -1,8 +1,6 @@
 package app.domain.store;
 
 import app.domain.model.ParameterCategory;
-import app.mappers.CategoriesMapper;
-import app.mappers.dto.CategoriesDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,6 @@ public class ParameterCategoryStore {
 
     private List<ParameterCategory> parameterCategoriesList = new ArrayList<>();
 
-    //US10 SD: 6
     public List<ParameterCategory> getParameterCategoriesStore() {
         return parameterCategoriesList;
     }
