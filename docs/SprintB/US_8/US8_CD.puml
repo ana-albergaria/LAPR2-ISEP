@@ -82,6 +82,24 @@ class TestTypeDto {
 +getSelectedCategories()
 }
 
+class LaboratoryDto {
+-name
+-address
+-phoneNumber
+-numTIN
++getName()
++getAddress()
++getPhoneNumber()
++getNumTIN()
+}
+
+class ClinicalAnalysisLaboratoryDto {
+-laboratoryID
+-testTypesCodes
++getLaboratoryID()
++getTestTypesCode()
+}
+
 RegisterNewCalUI ..> RegisterNewCalController
 RegisterNewCalController ..> Laboratory
 RegisterNewCalController ..> TestType
@@ -97,13 +115,18 @@ TestTypeMapper ..> TestTypeDto
 RegisterNewCalController ..> TestTypeDto
 RegisterNewCalUI ..> TestTypeDto
 
+RegisterNewCalController ..> LaboratoryDto
+ClinicalAnalysisLaboratoryDto --|> LaboratoryDto
+RegisterNewCalController .> ClinicalAnalysisLaboratoryDto
+RegisterNewCalUI ..> ClinicalAnalysisLaboratoryDto
+
 
 
 
 Company "1" -> "1" TestTypeStore : uses >
 TestTypeStore "1" -> "*" TestType : conducts >
 /'VERIFICAR MULTIPLICIDADE LINHA ABAIXO'/
-ClinicalAnalysisLaboratory "1" --> "1" Laboratory : is of >
+/'ClinicalAnalysisLaboratory "1" --> "1" Laboratory : is of >'/
 /'Laboratory "1" --> "1" LaboratoryStore : uses >'/
 Company "1" --> "3..*" Laboratory : owns >
 ClinicalAnalysisLaboratory "1" -> "1..*" TestType : operates >
@@ -113,8 +136,7 @@ ClinicalAnalysisLaboratory "1" -> "1..*" TestType : operates >
 TestType -[hidden]down-> ClinicalAnalysisLaboratory
 
 
-
-/'Laboratory <|-- ClinicalAnalysisLaboratory'/
+ClinicalAnalysisLaboratory --|> Laboratory
 
 /'ACRESCENTAR TESTTYPE CHARACTERIZED BY CATEGORY!!!!!!'/
 
