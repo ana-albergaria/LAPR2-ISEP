@@ -5,6 +5,8 @@ import app.domain.store.ParameterCategoryStore;
 import app.domain.store.ParameterStore;
 import app.domain.store.TestTypeStore;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
+import app.mappers.dto.EmployeeDTO;
+import app.mappers.dto.SpecialistDoctorDTO;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
 
@@ -120,6 +122,37 @@ public class Company {
 
     public List<OrgRole> getRoles() {
         return new ArrayList<>(roles);
+    }
+
+    /**
+     * Get Organization Role according to the its description
+     * @param roleDescription
+     * @return Organization Role reference
+     */
+    private OrgRole getRoleByDescription(String roleDescription) {
+        for (OrgRole role : roles) {
+            if(role.getDescription().equalsIgnoreCase(roleDescription)){
+                return role;
+            }
+        }
+        throw new UnsupportedOperationException("Organization Role not found with given description: " + roleDescription);
+    }
+
+    public Employee createEmployee(EmployeeDTO empDTO) {
+        String roleDesignation = empDTO.getRoleDesignation();
+        OrgRole role = getRoleByDescription(roleDesignation);
+
+        return new Employee(role, empDTO.getEmployeeID(), empDTO.getName(),
+                empDTO.getAddress(), empDTO.getPhoneNumber(), empDTO.getEmail(), empDTO.getSocCode());
+    }
+
+    public SpecialistDoctor createSpecialistDoctor(SpecialistDoctorDTO sdDTO) {
+        String roleDesignation = sdDTO.getRoleDesignation();
+        OrgRole role = getRoleByDescription(roleDesignation);
+
+        return new SpecialistDoctor(role, sdDTO.getEmployeeID(), sdDTO.getName(),
+                sdDTO.getAddress(), sdDTO.getPhoneNumber(), sdDTO.getEmail(),
+                sdDTO.getSocCode(), sdDTO.getDoctorIndexNumber());
     }
 
     public boolean validateEmployee(Employee emp) {
