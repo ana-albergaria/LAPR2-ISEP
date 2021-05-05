@@ -2,7 +2,6 @@ package app.domain.model;
 
 public class Employee {
     private String employeeID;
-    private String organizationRole;
     private String name;
     private String address;
     private String phoneNumber;
@@ -26,4 +25,31 @@ public class Employee {
         this.socCode = socCode;
     }
 
+    public String getEmployeeID() {
+        return employeeID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSocCode() {
+        return socCode;
+    }
+
+    public OrgRole getRole() {
+        return role;
+    }
 }

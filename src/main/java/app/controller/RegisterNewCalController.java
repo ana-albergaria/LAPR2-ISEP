@@ -2,6 +2,7 @@ package app.controller;
 
 import app.domain.model.*;
 import app.domain.store.TestTypeStore;
+import app.mappers.TestTypeMapper;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.TestTypeDTO;
 
@@ -55,7 +56,9 @@ public class RegisterNewCalController {
 
     public List<TestTypeDTO> getTestTypes() {
         TestTypeStore storeTest = this.company.getTestTypeStore();
-        return storeTest.getTestTypesDto();
+        List<TestType> listTestType = storeTest.getTestTypes();
+        TestTypeMapper mapper = new TestTypeMapper();
+        return mapper.toDTO(listTestType);
     }
 
 
