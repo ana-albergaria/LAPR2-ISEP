@@ -33,11 +33,6 @@ public class TestTypeStore {
     }
 
 
-    public List<TestTypeDTO> getTestTypesDto() {
-        TestTypeMapper mapper = new TestTypeMapper();
-        return mapper.toDTO(getTestTypes());
-    }
-
     /**
      * Validation of test type instance relative to list of test types. checking for null and duplicity
      * @param testType
