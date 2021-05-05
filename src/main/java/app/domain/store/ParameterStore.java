@@ -21,10 +21,10 @@ public class ParameterStore {
     /**
      * Creates parameter reference.
      *
-     * @param parameterCode
-     * @param shortName
-     * @param description
-     * @param pc
+     * @param parameterCode the parameter code.
+     * @param shortName the parameter name.
+     * @param description the parameter description.
+     * @param pc the parameter category of the parameter.
      *
      * @return created parameter reference.
      */
@@ -33,10 +33,10 @@ public class ParameterStore {
     }
 
     /**
-     * Validates parameter globally,
+     * Validates parameter instance globally,
      * checking if the parameter is null or duplicated.
      *
-     * @param prm
+     * @param prm the parameter.
      *
      * @return true if the parameter isn't null or duplicated,
      * otherwise returns false.
@@ -47,14 +47,23 @@ public class ParameterStore {
         return ! this.prmList.contains(prm);
     }
 
+    /**
+     * Saves parameter instance the parameter store list,
+     * validating the parameter before doing so.
+     *
+     * @param prm the parameter.
+     *
+     * @return true if the parameter is successfully validated,
+     * otherwise return false.
+     */
     public boolean saveParameter(Parameter prm){
         if (!validateParameter(prm))
             return false;
         return this.prmList.add(prm);
     }
 
-    public Parameter[] toArray() {
+    /*public Parameter[] toArray() {
         Parameter[] array = new Parameter[this.prmList.size()];
         return this.prmList.toArray(array);
-    }
+    }*/
 }
