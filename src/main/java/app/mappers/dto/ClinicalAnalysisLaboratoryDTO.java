@@ -1,12 +1,9 @@
 package app.mappers.dto;
 
-import app.domain.model.Laboratory;
-import app.domain.model.TestType;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClinicalAnalysisLaboratoryDTO extends Laboratory {
+public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
     /**
      * The laboratory ID of the Clinical Analysis Laboratory.
      */
