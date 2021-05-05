@@ -25,4 +25,8 @@ public class ParameterStore {
         return this.prmList.add(prm);
     }
 
+    public Parameter[] toArray() {
+        Parameter[] array = new Parameter[this.prmList.size()];
+        return this.prmList.toArray(array);
+    }
 }
