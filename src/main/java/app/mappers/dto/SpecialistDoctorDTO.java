@@ -1,9 +1,11 @@
-package app.domain.model;
+package app.mappers.dto;
 
-public class SpecialistDoctor extends Employee {
+import app.domain.model.OrgRole;
+
+public class SpecialistDoctorDTO extends EmployeeDTO {
     private String doctorIndexNumber;
 
-    public SpecialistDoctor(OrgRole role,
+    public SpecialistDoctorDTO(OrgRole role,
                             String employeeID,
                             String name,
                             String address,
