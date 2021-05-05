@@ -21,7 +21,7 @@ public class ParameterStoreTest {
         p2 = new ParameterCategory("COD01","Name");
     }
 
-    @Test
+    /*@Test
     public void createsParameterStore() {
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
@@ -41,7 +41,7 @@ public class ParameterStoreTest {
         ps1.saveParameter(parameter4);
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(4, result.length);
-    }
+    }*/
 
     @Test
     public void createParameter() {

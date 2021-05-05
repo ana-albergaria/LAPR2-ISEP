@@ -7,10 +7,10 @@ participant ":CreateParameterUI" as UI
 participant ":CreateParameterController" as CTRL
 participant ":Company" as CMP
 participant "pcStore\n:ParameterCategoryStore" as PCSTORE
-participant ":ParameterCategoryMapper" as PCMAPPER
+participant ":CategoriesMapper" as PCMAPPER
 participant "lc\n:List<ParameterCategory>" as LC
-participant "listParameterCategoryDto\n:List<ParameterCategoryDto>" as LIST_DTO
-participant "objDto\n: ParameterCategoryDto" as OBJ_DTO
+participant "listParameterCategoryDTO\n:List<ParameterCategoryDTO>" as LIST_DTO
+participant "objDTO\n: CategoriesDTO" as OBJ_DTO
 participant "prmStore\n:ParameterStore" as PRMSTORE
 participant "prm\n:Parameter" as PRM
 participant "pc\n:ParameterCategory" as PC
@@ -50,16 +50,19 @@ activate LC
 |||
 deactivate LC
 
-PCMAPPER -> PCMAPPER : objDto = toDTO(obj)
+PCMAPPER -> PCMAPPER : objDTO = toDTO(obj)
 activate PCMAPPER
 
 PCMAPPER --> OBJ_DTO** : create(code, name)
 deactivate PCMAPPER
 
-PCMAPPER --> LIST_DTO : add(objDto)
+PCMAPPER --> LIST_DTO : add(objDTO)
 activate LIST_DTO
 deactivate LIST_DTO
 end
+
+PCMAPPER --> CTRL : listCategoriesDto
+CTRL --> UI : listCategoriesDto
 
 deactivate CTRL
 

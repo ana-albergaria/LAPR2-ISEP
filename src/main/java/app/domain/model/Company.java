@@ -50,7 +50,7 @@ public class Company {
     public AuthFacade getAuthFacade() {
         return authFacade;
     }
-
+    
     public ParameterCategoryStore getParameterCategoryStore() {
         return parameterCategoryStore;
     }
