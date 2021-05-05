@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-/*
-public class CompanyTest {
+
+public class CompanyWithDtoTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
     private ParameterCategory p2;
@@ -20,6 +21,7 @@ public class CompanyTest {
     private ClinicalAnalysisLaboratory c1;
     private ClinicalAnalysisLaboratory c2;
     private ClinicalAnalysisLaboratory c3;
+    private List<String> testTypeCodes;
 
     @Before
     public void setUp() {
@@ -34,6 +36,10 @@ public class CompanyTest {
         selectedTT.add(t1);
         selectedTT.add(t2);
         company = new Company("Many Labs");
+        testTypeCodes = new ArrayList<>();
+        testTypeCodes.add("CODE3");
+        testTypeCodes.add("CODE4");
+
         c1 = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
         c2 = new ClinicalAnalysisLaboratory("LAB23",
@@ -48,17 +54,23 @@ public class CompanyTest {
         System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
 
         //Arrange
+        TestType testType1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
+        TestType testType2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
+        company.getTestTypeStore().saveTestType(testType1);
+        company.getTestTypeStore().saveTestType(testType2);
+
         ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO calDto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
 
         //Act
-        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory(calDto);
 
         //Assert
         Assert.assertEquals(expObj, obj);
     }
-
+/*
     @Test
     public void ensureDifferentClinicalAnalysisLaboratoryIsSaved() {
         System.out.println("ensureDifferentClinicalAnalysisLaboratoryIsSaved (CompanyTest)");
@@ -78,6 +90,8 @@ public class CompanyTest {
     }
 
  */
+
+
 /* TESTES DE VALIDAÇÃO
     @Test
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
@@ -114,8 +128,7 @@ public class CompanyTest {
     }
     FIM TESTES VALIDAÇÃO
 
- */
-/*
+
     @Test
     public void ensureNullClinicalAnalysisLaboratoryIsNotSaved() {
         System.out.println("ensureNullClinicalAnalysisLaboratoryIsNotSaved (CompanyTest)");
@@ -185,5 +198,6 @@ public class CompanyTest {
 
  */
 
-//} tirar chaveta do comentário
 
+
+}

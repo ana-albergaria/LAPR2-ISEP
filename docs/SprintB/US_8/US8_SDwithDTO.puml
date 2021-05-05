@@ -100,17 +100,18 @@ end
 UI -> CTRL : createClinicalAnalysisLaboratory(calDto)
 activate CTRL
 
+/'
 CTRL -> PLAT : storeTest = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
 
 
-/'MODIFICAR - COLOCAR UM LOOP + DTO!!!!!!!!'/
+
 CTRL -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypesCodes)
 activate TEST_TYPE_STORE
 |||
-deactivate TEST_TYPE_STORE
+deactivate TEST_TYPE_STORE'/
 
 /'CTRL -> ORG : storeLab = getLaboratoryStore()
 activate ORG
@@ -147,10 +148,25 @@ activate PLAT
 deactivate PLAT'/
 
 note over CTRL, PLAT
-calDto has all required data
+calDto has all required data, including the 'codes' of the selected test types
 end note
 CTRL -> PLAT: cal = createClinicalAnalysisLaboratory(calDto)
 activate PLAT
+
+PLAT -> CAL_DTO : testTypeCodes = getTestTypeCodes()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> TEST_TYPE_STORE : storeTest = getTestTypeStore()
+activate TEST_TYPE_STORE
+|||
+deactivate TEST_TYPE_STORE
+
+PLAT -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypesCodes)
+activate TEST_TYPE_STORE
+|||
+deactivate TEST_TYPE_STORE
+
 
 PLAT -> CAL_DTO : laboratoryID = getLaboratoryID()
 activate CAL_DTO
@@ -172,9 +188,9 @@ PLAT -> CAL_DTO : numTIN = getNumTIN()
 activate CAL_DTO
 deactivate CAL_DTO
 
-PLAT -> CAL_DTO : selectedTT = getSelectedTT()
+/'PLAT -> CAL_DTO : selectedTT = getSelectedTT()
 activate CAL_DTO
-deactivate CAL_DTO
+deactivate CAL_DTO'/
 
 PLAT --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
 PLAT -> PLAT: validateClinicalAnalysisLaboratory(cal)

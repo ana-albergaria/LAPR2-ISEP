@@ -65,7 +65,7 @@ ClinicalAnalysisLaboratory -[hidden]up-> TestType
 /' END OF LAYOUT PURPOSES '/
 
 Company "1" -- "3..*" Laboratory : owns >
-ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >
+/'ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >'/
 /'Employee "1..*" - "1" Company : works for >'/
 Company "1" -- "*" TestType : conducts >
 
@@ -75,6 +75,8 @@ Test "*" -- "1" TestType : classified as >
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
 ClinicalAnalysisLaboratory "1..*" -- "1" Administrator : registered by >
 TestType "1" -- "1..*" ParameterCategory : characterized by >
+
+Laboratory <|-- ClinicalAnalysisLaboratory
 
 
 

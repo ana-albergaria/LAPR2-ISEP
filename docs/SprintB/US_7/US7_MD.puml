@@ -1,27 +1,46 @@
 @startuml
-'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+skinparam classAttributeIconSize 0
+hide empty methods
+hide empty attributes
+left to right direction
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Company{
+- designation
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class Employee {
+- employeeID
+- organizationRole
+- name
+- address
+- phoneNumber
+- e-Mail
+- socCode
 }
+
+class User {
+-name
+-email
+-password
+}
+
+class OrganizationRole {
+-description
+}
+
+class SpecialistDoctor{
+- doctorIndexNumber
+}
+
+Employee "*" -- "1" Company : employ <
+Employee "0..1" -- "1" User : relates to >
+Employee <|-- SpecialistDoctor
+Employee "*" -- "1" OrganizationRole : has/plays >
+Company "1" -- "*" OrganizationRole : comprehends >
+
+Company -[hidden]down-> Employee
+
+
 
 @enduml

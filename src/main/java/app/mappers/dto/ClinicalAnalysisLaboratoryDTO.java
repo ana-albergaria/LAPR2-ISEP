@@ -1,12 +1,9 @@
 package app.mappers.dto;
 
-import app.domain.model.Laboratory;
-import app.domain.model.TestType;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClinicalAnalysisLaboratoryDTO extends Laboratory {
+public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
     /**
      * The laboratory ID of the Clinical Analysis Laboratory.
      */
@@ -15,7 +12,7 @@ public class ClinicalAnalysisLaboratoryDTO extends Laboratory {
     /**
      * The type of tests the Clinical Analysis Laboratory operates.
      */
-    private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
+    private List<String> testTypeCodes;
 
     /**
      * Builds a Clinical Analysis Laboratory's instance receiving:
@@ -27,12 +24,12 @@ public class ClinicalAnalysisLaboratoryDTO extends Laboratory {
      * @param address the address of the Clinical Analysis Laboratory
      * @param phoneNumber the phone number of the Clinical Analysis Laboratory
      * @param numTIN the TIN number of the Clinical Analysis Laboratory
-     * @param selectedTT the type of tests the Clinical Analysis Laboratory operates
+     * @param testTypeCodes the codes of the selected types of tests the Clinical Analysis Laboratory operates
      */
-    public ClinicalAnalysisLaboratoryDTO(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT) {
+    public ClinicalAnalysisLaboratoryDTO(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<String> testTypeCodes) {
         super(name, address, phoneNumber, numTIN);
         this.laboratoryID = laboratoryID;
-        this.selectedTT = new ArrayList<>(selectedTT);
+        this.testTypeCodes = new ArrayList<>(testTypeCodes);
     }
 
     /**
@@ -45,12 +42,11 @@ public class ClinicalAnalysisLaboratoryDTO extends Laboratory {
     }
 
     /**
-     * Returns the test types of the Clinical Analysis Laboratory
+     * Returns the codes of the selected test types of the Clinical Analysis Laboratory
      *
-     * @return test types of the Clinical Analysis Laboratory
+     * @return codes of test types of the Clinical Analysis Laboratory
      */
-    public List<TestType> getSelectedTT() {
-        return new ArrayList<>(selectedTT);
+    public List<String> getTestTypeCodes() {
+        return new ArrayList<>(testTypeCodes);
     }
-
 }

@@ -24,6 +24,7 @@ public class RegisterNewCalController {
         this.cal = null;
     }
 
+    /*
     public boolean createClinicalAnalysisLaboratory(String laboratoryID,
                                                     String name,
                                                     String address,
@@ -40,13 +41,15 @@ public class RegisterNewCalController {
         this.cal = this.company.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
         return this.company.validateClinicalAnalysisLaboratory(cal);
     }
-
-
-    /*
-    public createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
-
-    }
      */
+
+
+
+    public boolean createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
+        this.cal = this.company.createClinicalAnalysisLaboratory(calDto);
+        return this.company.validateClinicalAnalysisLaboratory(cal);
+    }
+
 
     public boolean saveClinicalAnalysisLaboratory(){
         return this.company.saveClinicalAnalysisLaboratory(cal);

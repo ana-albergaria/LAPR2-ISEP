@@ -2,6 +2,7 @@ package app.controller;
 
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
+import app.domain.store.ParameterCategoryStore;
 
 public class CreateParameterCategoryController {
 
@@ -18,12 +19,14 @@ public class CreateParameterCategoryController {
     }
 
     public boolean createParameterCategory(String code, String name){
-        this.pc = this.company.getParameterCategoryStore().createParameterCategory(code, name);
-        return this.company.getParameterCategoryStore().validateParameterCategory(pc);
+        ParameterCategoryStore store = this.company.getParameterCategoryStore();
+        this.pc = store.createParameterCategory(code, name);
+        return store.validateParameterCategory(pc);
     }
 
     public boolean saveParameterCategory(){
-        return this.company.getParameterCategoryStore().saveParameterCategory(pc);
+        ParameterCategoryStore store = this.company.getParameterCategoryStore();
+        return store.saveParameterCategory(pc);
     }
 
 }
