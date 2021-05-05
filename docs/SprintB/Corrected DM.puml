@@ -22,7 +22,7 @@ class Employee {
 - address
 - phoneNumber
 - e-Mail
-- standardOccupationalClassificationCode
+- socCode
 }
 
 class Test{
@@ -192,7 +192,7 @@ ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >
 
 
 
-Employee "1..*" - "1" Company : works for >
+Employee "*" - "1" Company : employ <
 Receptionist "1" -- "1" Employee : is of >
 MedicalLabTechnician "1" -- "1" Employee : is of >
 ClinicalChemistryTechnologist "1" -- "1" Employee : is of >

@@ -119,7 +119,7 @@ ORG -> EMP_DTO : getPhoneNumber()
 activate EMP_DTO
 deactivate EMP_DTO
 
-ORG -> EMP_DTO : getEmailAddress()
+ORG -> EMP_DTO : getEmail()
 activate EMP_DTO
 deactivate EMP_DTO
 
@@ -128,9 +128,15 @@ activate EMP_DTO
 deactivate EMP_DTO
 
 
-ORG --> EMPLOYEE**: create(role, employeeId, organizationRole, name, address, \nphoneNumber, email, socCode)
+ORG --> EMPLOYEE**: create(role, employeeId, name, address, \nphoneNumber, email, socCode)
 /'ORG -> ORG: validateTask(task)'/
+note over EMPLOYEE
+**emp** might be an instance of __Employee__ or of __SpecialistDoctor__.
+It depends of the **role** object receiving this message.
 
+**Important**: An instance of __Specialist Doctor__ will have the extra attribute:
+DoctorIndexNumber.
+end note
 
 note over ORG
 end note

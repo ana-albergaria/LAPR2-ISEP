@@ -66,8 +66,6 @@ public class CompanyWithDtoTest {
 
         //Act
         ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory(calDto);
-        System.out.println(expObj);
-        System.out.println(obj);
 
         //Assert
         Assert.assertEquals(expObj, obj);
