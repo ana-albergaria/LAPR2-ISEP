@@ -1,11 +1,35 @@
 package app.domain.model;
 
+import app.controller.RegisterEmployeeController;
+import app.mappers.dto.EmployeeDTO;
+import app.mappers.dto.SpecialistDoctorDTO;
 import app.ui.console.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    /*
+    private RegisterEmployeeController ctrl;
+
+    public Main() {
+        ctrl = new RegisterEmployeeController();
+    }
+
+    @Override
+    public void run() {
+        //SpecialistDoctorDTO sdDTO = new SpecialistDoctorDTO("Specialist Doctor","12345","Manuel","Lisboa","123","email","254645653","12345");
+        EmployeeDTO empDTO = new EmployeeDTO("Receptionist","12345","Manuel","Lisboa","123","email","254645653");
+
+        boolean sd1 = this.ctrl.createEmployee(empDTO);
+
+
+
+    }
+
+ */
+
+
     public static void main(String[] args) {
         List<ParameterCategory> pcList = new ArrayList<>();
         ParameterCategory p1 = new ParameterCategory("CODE1","Descriptio");
@@ -23,7 +47,7 @@ public class Main {
 
         System.out.println(instance4);
          */
-        
+        /*
         boolean invalidData = true;
 
         do {
@@ -42,5 +66,16 @@ public class Main {
             }
         } while(invalidData);
 
+         */
+
+        OrgRole r1 = new OrgRole("Specialist Doctor");
+        SpecialistDoctor expObj = new SpecialistDoctor(r1,"12345",
+                "Afonso","Lisboa","123456","afonso@gmail.com",
+                "socCode12","344444444");
+
+        System.out.println(expObj);
+
     }
+
+
 }

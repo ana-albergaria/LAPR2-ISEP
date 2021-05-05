@@ -20,8 +20,27 @@ public class SpecialistDoctor extends Employee {
         return doctorIndexNumber;
     }
 
+<<<<<<< HEAD
     private void checkDoctorIndexNumberRules(String doctorIndexNumber){
 
     }
 
+=======
+    @Override
+    public String toString() {
+        return super.toString() + "SpecialistDoctor{" +
+                "doctorIndexNumber='" + doctorIndexNumber + '\'' +
+                '}' + getClass().getSimpleName();
+    }
+
+    @Override
+    public boolean equals (Object otherObject){
+        if (!super.equals(otherObject))
+            return false;
+
+        SpecialistDoctor instance = (SpecialistDoctor) otherObject;
+
+        return this.doctorIndexNumber.equalsIgnoreCase(instance.doctorIndexNumber);
+    }
+>>>>>>> 912e56986f2646e9c60296d74eb06232694235bd
 }

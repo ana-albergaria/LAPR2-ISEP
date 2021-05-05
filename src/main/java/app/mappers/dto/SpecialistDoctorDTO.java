@@ -1,11 +1,10 @@
 package app.mappers.dto;
 
-import app.domain.model.OrgRole;
 
 public class SpecialistDoctorDTO extends EmployeeDTO {
     private String doctorIndexNumber;
 
-    public SpecialistDoctorDTO(OrgRole role,
+    public SpecialistDoctorDTO(String roleDesignation,
                             String employeeID,
                             String name,
                             String address,
@@ -13,7 +12,7 @@ public class SpecialistDoctorDTO extends EmployeeDTO {
                             String email,
                             String socCode,
                             String doctorIndexNumber) {
-        super(role, employeeID, name, address, phoneNumber, email, socCode);
+        super(roleDesignation, employeeID, name, address, phoneNumber, email, socCode);
         this.doctorIndexNumber = doctorIndexNumber;
     }
 
