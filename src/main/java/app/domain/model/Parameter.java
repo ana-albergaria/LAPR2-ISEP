@@ -46,10 +46,16 @@ public class Parameter {
         checkParameterCodeRules(parameterCode);
         checkShortNameRules(shortName);
         checkDescriptionRules(description);
+        checkParameterCategory(pc);
         this.parameterCode = parameterCode;
         this.shortName = shortName;
         this.description = description;
         this.pc = pc;
+    }
+
+    public void checkParameterCategory(ParameterCategory pc){
+        if (pc == null)
+            throw new IllegalArgumentException("The inserted parameter category code doesn't exist.");
     }
 
     /*public ParameterCategory getPc() {
