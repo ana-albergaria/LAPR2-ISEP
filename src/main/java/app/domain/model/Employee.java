@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Employee {
     private String employeeID;
     private String name;
@@ -16,6 +18,13 @@ public class Employee {
                     String phoneNumber,
                     String email,
                     String socCode) {
+        /*checkRoleRules(role);*/
+        checkEmployeeIDRules(employeeID);
+        checkNameRules(name);
+        checkAdressRules(address);
+        checkPhoneNumberRules(phoneNumber);
+        checkEmailRules(email);
+        checkSocCodeRules(socCode);
         this.role = role;
         this.employeeID = employeeID;
         this.name = name;
@@ -23,6 +32,37 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.socCode = socCode;
+    }
+
+    /*private void checkRoleRules(OrgRole role){
+        if (StringUtils.isBlank(role))
+            throw new IllegalArgumentException("Organization Role cannot be blank.");
+        if (role.length()>15)
+            throw new IllegalArgumentException("Organization Role must have up to 15 chars.");
+    }*/
+
+    private void checkEmployeeIDRules(String employeeID){
+
+    }
+
+    private void checkNameRules(String name){
+
+    }
+
+    private void checkAdressRules(String address){
+
+    }
+
+    private void checkPhoneNumberRules(String phoneNumber){
+
+    }
+
+    private void checkEmailRules(String email){
+
+    }
+
+    private void checkSocCodeRules(String socCode){
+
     }
 
     public String getEmployeeID() {

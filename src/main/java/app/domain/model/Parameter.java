@@ -53,7 +53,7 @@ public class Parameter {
         this.pc = pc;
     }
 
-    public void checkParameterCategory(ParameterCategory pc){
+    private void checkParameterCategory(ParameterCategory pc){
         if (pc == null)
             throw new IllegalArgumentException("The inserted parameter category code doesn't exist.");
     }

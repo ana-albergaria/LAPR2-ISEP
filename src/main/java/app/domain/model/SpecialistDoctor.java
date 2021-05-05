@@ -12,10 +12,16 @@ public class SpecialistDoctor extends Employee {
                             String socCode,
                             String doctorIndexNumber) {
         super(role, employeeID, name, address, phoneNumber, email, socCode);
+        checkDoctorIndexNumberRules(doctorIndexNumber);
         this.doctorIndexNumber = doctorIndexNumber;
     }
 
     public String getDoctorIndexNumber() {
         return doctorIndexNumber;
     }
+
+    private void checkDoctorIndexNumberRules(String doctorIndexNumber){
+
+    }
+
 }
