@@ -47,6 +47,7 @@ public class Company {
         return authFacade;
     }
 
+    //US10 SD: 5
     public ParameterCategoryStore getParameterCategoryStore() {
         return parameterCategoryStore;
     }
