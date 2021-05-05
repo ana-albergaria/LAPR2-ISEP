@@ -40,9 +40,25 @@ class TestTypeStore {
 +saveTestType(tt)
 }
 
+class CategoryMapper {
++List<CategoryDtoDto> toDTO(List<ParameterCategory> parameterCategories)
++CategoryDto toDTO(ParameterCategory tt)
+}
+
+
+class CategoryDto {
+-code
+-name
++CategoryDto(code, description, collectingMethod, selectedCategories)
+}
 
 CreateTestTypeUI ..> CreateTestTypeController
+CreateTestTypeUI ..> CategoryDto
+CategoryMapper ..> CategoryDto
+CategoryMapper ..> ParameterCategory
 CreateTestTypeController ..> Company
+CreateTestTypeController ..> CategoryMapper
+CreateTestTypeController ..> CategoryDto
 CreateTestTypeController ..> ParameterCategoryStore
 CreateTestTypeController ..> TestTypeStore
 TestTypeStore ..> TestType
