@@ -94,17 +94,15 @@ public class RegisterNewCalUI implements Runnable {
             success = true;
         } else {
             for (TestTypeDTO tt : listTestType) {
-                selectedTT.add(tt.getCode());
+                if(verifyIfTestTypeIsNotInList(selectedTT,tt))
+                    selectedTT.add(tt.getCode());
             }
         }
         return success;
     }
 
     private void addSelectedTestTypeToList(List<TestTypeDTO> listTestType, TestTypeDTO testTypeToAdd) {
-        if(verifyIfTestTypeAlreadyInList(listTestType, testTypeToAdd))
-            System.out.println("This type of test was already selected! Please, choose a different one.");
-        else
-            listTestType.add(testTypeToAdd);
+        listTestType.add(testTypeToAdd);
         boolean addMore = Utils.confirm("If you want to add more types of test please type 's', otherwise type 'n'");
         if (addMore)
             showTestTypeListAndSelectingThem(listTestType);
@@ -117,9 +115,9 @@ public class RegisterNewCalUI implements Runnable {
         return menu;
     }
 
-    private boolean verifyIfTestTypeAlreadyInList(List<TestTypeDTO> listTestType, TestTypeDTO testTypeToAdd) {
-        for (TestTypeDTO tt : listTestType) {
-            if(testTypeToAdd.getCode().equalsIgnoreCase(tt.getCode()))
+    private boolean verifyIfTestTypeIsNotInList(List<String> selectedTT, TestTypeDTO testTypeToAdd) {
+        for (String tt : selectedTT) {
+            if(testTypeToAdd.getCode().equalsIgnoreCase(tt))
                 return false;
         }
         return true;
