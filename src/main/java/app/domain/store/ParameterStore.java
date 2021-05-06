@@ -33,10 +33,6 @@ public class ParameterStore {
         return new Parameter(parameterCode, shortName, description, pc);
     }
 
-    /*public List<Parameter> getPrmList(){
-        return new ArrayList<>(prmList);
-    }*/
-
     /**
      * Validates parameter instance globally,
      * checking if the parameter is null or duplicated.
@@ -67,6 +63,20 @@ public class ParameterStore {
         return this.prmList.add(prm);
     }
 
+    /**
+     * Transforms the parameter list into an array.
+     *
+     * @return parameter store list contents as an array.
+     */
+    public Parameter[] toArray() {
+        Parameter[] array = new Parameter[this.prmList.size()];
+        return this.prmList.toArray(array);
+    }
+
+    /*public List<Parameter> getPrmList(){
+        return new ArrayList<>(prmList);
+    }*/
+
     /*public Parameter getParameterByCode(String code){
         for (Parameter prm : prmList){
             if (prm.getPrmCode().equalsIgnoreCase(code)){
@@ -76,10 +86,4 @@ public class ParameterStore {
         throw new UnsupportedOperationException("There's no parameter with code: " + code);
     }*/
 
-    /* Transforms the parameter list into an array.
-    @return parameter store list contents as an array. */
-    public Parameter[] toArray() {
-        Parameter[] array = new Parameter[this.prmList.size()];
-        return this.prmList.toArray(array);
-    }
 }

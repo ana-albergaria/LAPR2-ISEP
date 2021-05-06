@@ -53,22 +53,47 @@ public class Parameter {
         this.pc = pc;
     }
 
+    /**
+     * Returns the parameter code.
+     *
+     * @return parameter code.
+     */
     public String getPrmCode(){
         return parameterCode;
     }
 
+    /**
+     * Returns the parameter name.
+     *
+     * @return parameter name.
+     */
     public String getShortName(){
         return shortName;
     }
 
+    /**
+     * Returns the parameter description.
+     *
+     * @return parameter description.
+     */
     public String getDescription(){
         return description;
     }
 
+    /**
+     * Returns the parameter category os the parameter.
+     *
+     * @return parameter category of the parameter.
+     */
     public ParameterCategory getPc(){
         return pc;
     }
 
+    /**
+     * Returns the textual description of the parameter instance.
+     *
+     * @return characteristics of the parameter.
+     */
     @Override
     public String toString(){
         return "Parameter{" +
@@ -79,23 +104,23 @@ public class Parameter {
                 '}';
     }
 
+    /**
+     * Checks if the parameter category is valid:
+     * - it isn't null.
+     *
+     * @param pc the parameter category.
+     */
     private void checkParameterCategory(ParameterCategory pc){
         if (pc == null)
             throw new IllegalArgumentException("The inserted parameter category code doesn't exist.");
     }
 
-    /*public ParameterCategory getPc() {
-        return pc;
-    }*/
-
     /**
-     * Checks if the parameter code received respects all the rules.
+     * Checks if the parameter code received respects all the rules:
+     * - it isn't blank;
+     * - it has a length of 5 chars.
      *
      * @param parameterCode the parameter code.
-     *
-     * @return true if the parameter code received respects all the rules
-     * (it isn't blank and it has a length of 5),
-     * otherwise returns false.
      */
     private void checkParameterCodeRules(String parameterCode){
         if (StringUtils.isBlank(parameterCode))
@@ -105,13 +130,11 @@ public class Parameter {
     }
 
     /**
-     * Checks if the parameter name received respects all the rules.
+     * Checks if the parameter name received respects all the rules:
+     * - it isn't blank;
+     * it hasn't a length longer than 8.
      *
      * @param shortName the parameter name.
-     *
-     * @return true if the parameter name received respects all the rules
-     * (it isn't blank and it hasn't a length longer than 8),
-     * otherwise returns false.
      */
     private void checkShortNameRules(String shortName){
         if (StringUtils.isBlank(shortName))
@@ -121,13 +144,11 @@ public class Parameter {
     }
 
     /**
-     * Checks if the parameter description respects all the rules.
+     * Checks if the parameter description respects all the rules:
+     * - it isn't blank;
+     * . it hasn't a length longer than 20.
      *
      * @param description the parameter description.
-     *
-     * @return true if the parameter description received respects all the rules
-     * (it isn't blank and it hasn't a length longer than 20),
-     * otherwise returns false.
      */
     private void checkDescriptionRules(String description){
         if (StringUtils.isBlank(description))
@@ -136,6 +157,14 @@ public class Parameter {
             throw new IllegalArgumentException("Description must have up to 20 chars.");
     }
 
+    /**
+     * Compares two parameters with each other.
+     *
+     * @param parameterObject the parameter to be compared to.
+     *
+     * @return true if the two parameters are equal,
+     * otherwise it returns false.
+     */
     @Override
     public boolean equals(Object parameterObject) {
         if (this == parameterObject) return true;
@@ -143,5 +172,9 @@ public class Parameter {
         Parameter parameterToCompare = (Parameter) parameterObject;
         return parameterToCompare.getPrmCode().equals(this.getPrmCode());
     }
+
+    /*public ParameterCategory getPc() {
+        return pc;
+    }*/
 
 }
