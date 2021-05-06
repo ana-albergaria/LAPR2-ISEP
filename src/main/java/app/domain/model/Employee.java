@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Employee {
     private String employeeID;
@@ -95,12 +96,17 @@ public class Employee {
     }
 
     private void checkEmailRules(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+
         if (StringUtils.isBlank(email))
             throw new IllegalArgumentException("Email cannot be blank.");
-        String[] emailArray = email.split("@");
-        String word = emailArray[1];
-        if (!email.contains("@") || email.indexOf("@")==email.lastIndexOf("@") || !word.contains("."))
-            throw new IllegalArgumentException("Email address doesn't exist.");
+        if(!pat.matcher(email).matches())
+            throw new IllegalArgumentException("Invalid Email format.");
     }
 
     //SEGUNDO A INTERNET ACHO QUE SÃO 6 DIGITS, MAS NAS PERGUNTAS ALGUÉM DISSE 4 E O CLIENTE NÃO CORRIGIU
