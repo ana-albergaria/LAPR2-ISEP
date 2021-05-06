@@ -97,7 +97,9 @@ public class Employee {
     private void checkEmailRules(String email){
         if (StringUtils.isBlank(email))
             throw new IllegalArgumentException("Email cannot be blank.");
-        if (email.indexOf('@') == -1)
+        String[] emailArray = email.split("@");
+        String word = emailArray[1];
+        if (!email.contains("@") || email.indexOf("@")==email.lastIndexOf("@") || !word.contains("."))
             throw new IllegalArgumentException("Email address doesn't exist.");
     }
 

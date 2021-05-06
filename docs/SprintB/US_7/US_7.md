@@ -164,8 +164,17 @@ The Specialist Doctor has an additional attribute: Doctor Index Number."
 
 ### 1.3. Acceptance Criteria
 
-* **AC1**:  "Each user must have a single role defined in the system."
+* **AC1:**  "Each user must have a single role defined in the system."
 * **AC2:**  "The "auth" component available on the repository must be reused (without modifications)"
+* **AC3:**  "The employee ID should be generated from the initials of the employee name and should include a number. 
+  The number has 5 digits and is increases automatically when a new employee is registered in the system."
+* **AC4:**  "The administrator should write the role when he is registering a new employee."
+* **AC5:**  "The roles are typed but should be valid roles that exist (are known) in the system."
+* **AC6:**  "Organization Role: a string with no more than 15 characters."
+* **AC7:**  "Whenever the Administrator selects to create a Specialist Doctor, the application should ask for the Doctor Index Number."
+* **AC8:**  "Employee Name: a string with no more than 35 characters."
+* **AC9:**  Phone Number must have a 11-digit number.
+* **AC10:** Email address should contain "@".
 
 ### 1.4. Found out Dependencies
 
