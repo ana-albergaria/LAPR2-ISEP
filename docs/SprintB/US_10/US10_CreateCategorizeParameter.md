@@ -206,8 +206,8 @@ The application can have more than one administrator."
 | Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 1 is classified in one Category.  |
 | 			  	 |	... validating all data (local validation)? | Parameter |  IE: owns its data.|
 | Step 6: shows all data and requests confirmation | ... showing all data and requesting confirmation? | CreateParameterUI | IE: is responsible for user interactions.|
-| Step 7: confirms the data | ... validating all data (global validation)? | Company | IE: knows all its parameters.|
-| 			  	 |	... saving the created parameter? | Company |  IE: owns all its parameters.|
+| Step 7: confirms the data | ... validating all data (global validation)? | ParameterStore | IE: knows all its parameters.|
+| 			  	 |	... saving the created parameter? | ParameterStore |  IE: owns all its parameters.|
 | Step 8: informs operation	success | ... informing operation success?| CreateParameterUI  | IE: is responsible for user interactions.  |
 
 ### Systematization ##
@@ -240,12 +240,62 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **_DO NOT COPY ALL DEVELOPED TESTS HERE_**
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+## 4.1. Parameter
+
+**Test 1:** Check that it is not possible to create an instance of the Parameter class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+    public void ensureNullIsNotAllowed(){
+        Parameter prm = new Parameter(null, null, null, null);
+    }
+
+**Test 2:** Check that it is not possible to create an instance of the Parameter class with null parameter code.
+
+**Test 3:** Check that it is not possible to create an instance of the Parameter class with empty parameter code.
+
+**Test 4:** Check that it is not possible to create an instance of the Parameter class with parameter code with less than 5 chars.
+
+**Test 5:** Check that it is not possible to create an instance of the Parameter class with parameter code with more than 5 chars.
+
+**Test 6:** Check that it is not possible to create an instance of the Parameter class with parameter code full os spaces.
+
+**Test 7:** Check that it is not possible to create an instance of the Parameter class with null name.
+
+**Test 8:** Check that it is not possible to create an instance of the Parameter class with empty name.
+
+**Test 9:** Check that it is not possible to create an instance of the Parameter class with name with more than 8 chars.
+
+**Test 10:** Check that it is not possible to create an instance of the Parameter class with name full of spaces.
+
+**Test 11:** Check that it is not possible to create an instance of the Parameter class with null description.
+
+**Test 12:** Check that it is not possible to create an instance of the Parameter class with empty description.
+
+**Test 13:** Check that it is not possible to create an instance of the Parameter class with description with more than 20 chars.
+
+**Test 14:** Check that it is not possible to create an instance of the Parameter class with description full of spaces.
+
+**Test 15:** Check that it is not possible to create an instance of the Parameter class with null parameter category.
+
+**Test 16:** Check that the equals method returns true if the two compared parameters are equal.
+
+**Test 17:** Check that the equals method returns false if the two compared parameters are different.
+
+**Test 18:** Check that the equals method returns true if the two compared parameters are the same.
+
+**Test 19:** Check that the equals method returns false if one of the two compared parameters is null.
+
+## 4.2. ParameterStore
+
+**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+
+	@Test(expected = IllegalArgumentException.class)
+    public void ensureNullIsNotAllowed(){
+        Parameter prm = new Parameter(null, null, null, null);
+    }
+
+**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+
 
 *It is also recommended to organize this content by subsections.* 
 
