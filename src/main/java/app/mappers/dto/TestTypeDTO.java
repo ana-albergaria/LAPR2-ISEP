@@ -74,5 +74,14 @@ public class TestTypeDTO {
         return selectedCategories;
     }
 
+    @Override
+    public String toString() {
+        return "TestTypeDTO{" +
+                "code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", collectingMethod='" + collectingMethod + '\'' +
+                ", selectedCategories=" + selectedCategories +
+                '}';
+    }
 }
 
