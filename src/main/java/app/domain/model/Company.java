@@ -96,7 +96,8 @@ public class Company {
 
     public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
         if (cal == null)
-            return false;
+            throw new IllegalArgumentException("The Clinical Analysis Laboratory cannot be null.");
+            //return false;
         checkCalDuplicates(cal);
         return ! this.calList.contains(cal);
     }
@@ -120,6 +121,7 @@ public class Company {
                 throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
     }
+
 
     //to be used in US7
 
