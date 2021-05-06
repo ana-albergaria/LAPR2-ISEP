@@ -305,7 +305,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 24:** Check that it is not possible to save a null parameter.
 
-
 *It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)

@@ -3,7 +3,6 @@ package app.domain.store;
 import app.domain.model.Company;
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
-import app.domain.store.ParameterStore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
