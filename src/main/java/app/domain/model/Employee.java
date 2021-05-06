@@ -5,6 +5,9 @@ import auth.AuthFacade;
 import auth.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Employee {
     private String employeeID;
     private String name;
@@ -14,6 +17,11 @@ public class Employee {
     private String socCode;
     private OrgRole role;
     private User user;
+
+    /**
+     * List of existing employees.
+     */
+    private List<Employee> empList = new ArrayList<>();
 
     public Employee(OrgRole role,
                     String employeeID,
@@ -36,6 +44,27 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.socCode = socCode;
+    }
+
+    /**
+     * Generates an employee ID based on the employee name
+     * and the number of employees in the company.
+     *
+     * @param name the employee name.
+     *
+     * @return generated employee ID.
+     */
+    private String generateEmployeeID(String name){ //+nr de employees criados
+        String employeeID = "";
+        String[] nameArray = name.split(" ");
+        for (int i = 0; i < nameArray.length; i++) {
+            String word = nameArray[i];
+            employeeID = employeeID + word.charAt(0);
+        }
+        int num = this.empList.size() + 1;
+        String str = String.format("%05d", num);
+        employeeID = employeeID + str;
+        return employeeID;
     }
 
     //E SE COLOCAREM LETRAS?

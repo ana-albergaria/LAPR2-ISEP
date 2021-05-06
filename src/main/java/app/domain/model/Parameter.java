@@ -2,8 +2,6 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 /**
  * Represents a Parameter through:
  * a code, a name, a description and a parameter category.
