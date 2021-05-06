@@ -1,15 +1,19 @@
 package app.controller;
 
+import app.domain.model.ClinicalAnalysisLaboratory;
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
 import app.domain.shared.Constants;
+import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import auth.AuthFacade;
 import auth.UserSession;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -80,7 +84,12 @@ public class App {
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
-        this.company.getTestTypeStore().saveTestType(new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore()));
+        TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore());
+        this.company.getTestTypeStore().saveTestType(t1);
+        List<TestType> selectedTT = new ArrayList<>();
+        selectedTT.add(t1);
+        this.company.saveClinicalAnalysisLaboratory(new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT));
     }
 
     // Extracted from https://www.javaworld.com/article/2073352/core-java/core-java-simply-singleton.html?page=2

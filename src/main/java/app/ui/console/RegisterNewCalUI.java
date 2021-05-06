@@ -17,10 +17,15 @@ public class RegisterNewCalUI implements Runnable {
 
     public void run() {
         boolean success = true;
+        List<String> menu = menuToContinueOrCancel();
 
-        System.out.print("To register a new Clinical Analysis Laboratory, please insert the requested data.");
+        System.out.print("To register a new Clinical Analysis Laboratory, please insert the requested data.\n");
         do {
-            success = registerClinicalAnalysisLaboratory();
+            int index = Utils.showAndSelectIndex(menu, "");
+            if(index == -1)
+                success = true;
+            else
+                success = registerClinicalAnalysisLaboratory();
         } while (!success);
 
 
@@ -56,13 +61,11 @@ public class RegisterNewCalUI implements Runnable {
                     if (save) {
                         success = true;
                         System.out.println("\nClinical Analysis Laboratory successfully created!");
-                    } else {
-                        throw new IllegalArgumentException("That Clinical Analysis Laboratory is already registered in the system.");
                     }
                 }
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + " Please, try again.");
         }
 
 
@@ -101,5 +104,12 @@ public class RegisterNewCalUI implements Runnable {
         boolean addMore = Utils.confirm("If you want to add more types of test please type 's', otherwise type 'n'");
         if (addMore)
             showTestTypeListAndSelectingThem(listTestType);
+    }
+
+    private List<String> menuToContinueOrCancel() {
+        List<String> menu = new ArrayList<>();
+        menu.add("Insert the data");
+
+        return menu;
     }
 }
