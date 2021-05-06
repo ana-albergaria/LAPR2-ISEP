@@ -61,7 +61,8 @@ public class RegisterNewCalUI implements Runnable {
                     if (save) {
                         success = true;
                         System.out.println("\nClinical Analysis Laboratory successfully created!");
-                    }
+                    } else
+                        throw new IllegalArgumentException("\nERROR: Clinical Analysis Laboratory Null or Already Registered in the System!");
                 }
             }
         } catch (IllegalArgumentException e) {

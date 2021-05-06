@@ -106,9 +106,10 @@ public class Company {
     }
 
     public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
-        checkCalNotNullOrAlreadyRegisted(cal);
+        if(cal == null)
+            return false;
         checkCalDuplicates(cal);
-        return true;
+        return ! this.calList.contains(cal);
     }
 
     public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
@@ -118,7 +119,7 @@ public class Company {
         return this.calList.add(cal);
     }
 
-    private void checkCalDuplicates(ClinicalAnalysisLaboratory cal) {
+    public void checkCalDuplicates(ClinicalAnalysisLaboratory cal) {
         for (ClinicalAnalysisLaboratory item : calList) {
             if(cal.getLaboratoryID().equalsIgnoreCase(item.getLaboratoryID()))
                 throw new IllegalArgumentException("Laboratory ID already registered in the system.");
@@ -129,13 +130,6 @@ public class Company {
             if(cal.getNumTIN().equals(item.getNumTIN()))
                 throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
-    }
-
-    private void checkCalNotNullOrAlreadyRegisted(ClinicalAnalysisLaboratory cal) {
-        if (cal == null)
-            throw new IllegalArgumentException("The Clinical Analysis Laboratory cannot be null.");
-        if(this.calList.contains(cal))
-            throw new IllegalArgumentException("The Clinical Analysis Laboratory is already registered in the system.");
     }
 
 
