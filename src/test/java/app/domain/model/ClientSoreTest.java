@@ -1,11 +1,24 @@
 package app.domain.model;
 
 import app.domain.store.ClientSore;
-import app.domain.utils.Data;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.Date;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ClientSoreTest {
+    public Date d1;
+
+    @Before
+    public void setUp() throws ParseException {
+        d1 = new SimpleDateFormat("dd/MM/yyyy").parse("08/08/2001");
+    }
 
     @Test
     public void createsClientStore() {
@@ -16,12 +29,8 @@ public class ClientSoreTest {
         Assert.assertEquals(0, result.length); // check array
     }
 
-
-
     @Test
     public void createClientStoreWithSomeElements() {
-
-        Data d1 = new Data (2002,1,5);
 
         ClientSore cs1 = new ClientSore();
 
@@ -44,7 +53,7 @@ public class ClientSoreTest {
     /*@Test
     public void createClientStoreWithSomeElementsButTwoAreTheSame() {
 
-        Data d1 = new Data (2002,1,5);
+        Date d1 = new Date (2002,1,5);
 
         ClientSore cs1 = new ClientSore();
 
@@ -66,7 +75,7 @@ public class ClientSoreTest {
 
 
     @Test
-    public void validateClient() {
+    public void valiDateeClient() {
     }
 
     @Test

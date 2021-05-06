@@ -1,5 +1,8 @@
 package app.domain.model;
 
+import app.controller.App;
+import auth.AuthFacade;
+import auth.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
 
 public class Employee {
@@ -10,6 +13,7 @@ public class Employee {
     private String email;
     private String socCode;
     private OrgRole role;
+    private User user;
 
     public Employee(OrgRole role,
                     String employeeID,

@@ -1,20 +1,17 @@
 package app.domain.model;
 
-import auth.domain.model.Email;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
-import app.domain.utils.Data;
-
 public class Client {
-
 
     /**
      * The Phone Number by Omission
      */
-    private static final String PHONE_NUMBER_POR_OMISSAO = "sem numero";
+    private static final String OMITTED_PHONE_NUMBER = "0000000000";
 
     /**
      * The clients Citizen Card Number.
@@ -29,7 +26,7 @@ public class Client {
     /**
      * The clients Birth Date
      */
-    private final Data birthDate; // talvez seja melhorar criar um objeto do tipo data por composiçao nao ?
+    private final Date birthDate;
 
     /**
      * The clients Sex.
@@ -44,8 +41,7 @@ public class Client {
     /**
      * The clients E-mail.
      */
-    private final Email email;
-
+    private final String email;
 
     /**
      * The clients Name.
@@ -59,39 +55,19 @@ public class Client {
 
     private final String psw;
 
-
-    public String getClientsCitizenCardNumber() {
-        return clientsCitizenCardNumber;
-    }
-
-
-    public Email getEmail() {
-
-        return email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-
-    public String getPsw() {
-        return psw;
-    }
-
     /**
      * Constructs an instance of Client receiving as a parameter the clients Citizen Card Number, NHS Number, Birth Date, Sex, TIN Number, E-mail, Name and Phone Number.
      *
      * @param clientsCitizenCardNumber clients Citizen Card Number.
-     * @param nhsNumber clients NHS Number.
-     * @param birthDate clients Birth Date
-     * @param sex clients Sex.
-     * @param tinNumber clients TIN Number.
-     * @param email clients E-mail.
-     * @param name clients Name.
-     * @param phoneNumber clients Phone Number.
+     * @param nhsNumber                clients NHS Number.
+     * @param birthDate                clients Birth Date
+     * @param sex                      clients Sex.
+     * @param tinNumber                clients TIN Number.
+     * @param email                    clients E-mail.
+     * @param name                     clients Name.
+     * @param phoneNumber              clients Phone Number.
      */
-    public Client(String clientsCitizenCardNumber, String nhsNumber, Data birthDate, String sex,
+    public Client(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                   String tinNumber, String email, String name, String phoneNumber) {
 
         checkClientsCitizenCardNumber(clientsCitizenCardNumber);
@@ -107,102 +83,91 @@ public class Client {
 
         this.clientsCitizenCardNumber = clientsCitizenCardNumber;
         this.nhsNumber = nhsNumber;
-        this.birthDate = new Data(birthDate);
+        this.birthDate = birthDate;
         this.sex = sex;
         this.tinNumber = tinNumber;
-        this.email = new Email(email);
+        this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.psw = generatepsw(salt,rnd);
+        this.psw = generatepsw(salt, rnd);
     }
-
 
     /**
      * Constructs an instance of Client receiving as a parameter the clients Citizen Card Number, NHS Number, Birth Date, Sex, TIN Number, E-mail, and Name.
      *
      * @param clientsCitizenCardNumber clients Citizen Card Number.
-     * @param nhsNumber clients NHS Number.
-     * @param birthDate clients Birth Date
-     * @param sex clients Sex.
-     * @param tinNumber clients TIN Number.
-     * @param email clients E-mail.
-     * @param name clients Name.
-
+     * @param nhsNumber                clients NHS Number.
+     * @param birthDate                clients Birth Date
+     * @param sex                      clients Sex.
+     * @param tinNumber                clients TIN Number.
+     * @param email                    clients E-mail.
+     * @param name                     clients Name.
      */
-    public Client(String clientsCitizenCardNumber, String nhsNumber, Data birthDate, String sex,
+    public Client(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                   String tinNumber, String email, String name) {
-
-        checkClientsCitizenCardNumber(clientsCitizenCardNumber);
-        checknhsNumber(nhsNumber);
-        checkSex(sex);
-        checkTinNumber(tinNumber);
-        checkEmail(email);
-        checkName(name);
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-
-        this.clientsCitizenCardNumber = clientsCitizenCardNumber;
-        this.nhsNumber = nhsNumber;
-        this.birthDate = new Data(birthDate);
-        this.sex = sex;
-        this.tinNumber = tinNumber;
-        this.email = new Email(email);
-        this.name = name;
-        this.phoneNumber = PHONE_NUMBER_POR_OMISSAO;
-        this.psw = generatepsw(salt,rnd);
+        this(clientsCitizenCardNumber, nhsNumber, birthDate, sex, tinNumber, email, name, OMITTED_PHONE_NUMBER);
     }
 
+    public String getClientsCitizenCardNumber() {
+        return clientsCitizenCardNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPsw() {
+        return psw;
+    }
 
     /**
      * Checks if the Clients citizan card number is correct, and if not throws an error message
-     * @param clientsCitizenCardNumber
      *
+     * @param clientsCitizenCardNumber
      */
     private void checkClientsCitizenCardNumber(String clientsCitizenCardNumber) {
         if (StringUtils.isBlank(clientsCitizenCardNumber))
             throw new IllegalArgumentException("Clients Citizen Card Number cannot be blank");
+        if ((!clientsCitizenCardNumber.matches("[0-9]+")))
+            throw new IllegalArgumentException("Clients Citizen Card Number must be only digits");
         if ((clientsCitizenCardNumber).length() != 16)
             throw new IllegalArgumentException("Clients Citizen Card Number must be 16 digits");
-
-        checkDigits(clientsCitizenCardNumber, "Clients Citizen Card Number must be only digits");
-
     }
-    // falta para o caso de ele por letras e nao numeros - tem de dar erro
-
 
     /**
      * Checks if the NHS number is correct, and if not throws an error message
-     * @param nhsNumber
      *
+     * @param nhsNumber
      */
     private void checknhsNumber(String nhsNumber) {
         if (StringUtils.isBlank(nhsNumber))
             throw new IllegalArgumentException("NHS number cannot be blank");
+        if ((!nhsNumber.matches("[0-9]+")))
+            throw new IllegalArgumentException("NHS Number must be only digits");
         if ((nhsNumber).length() != 10)
             throw new IllegalArgumentException("NHS number must be 10 digits");
-
-        checkDigits(nhsNumber, "NHS Number must be only digits");
-
     }
 
     /**
      * Checks if the Birth Date is correct, and if not throws an error message
-     * @param birthDate
      *
+     * @param birthDate
      */
-    private void checkBirthDate(String birthDate) {
-        if (StringUtils.isBlank(birthDate))
+    private void checkBirthDate(Date birthDate) {
+        if (birthDate == null)
             throw new IllegalArgumentException("Birth Date cannot be blank");
-        if ((birthDate).length() != 7)
-            throw new IllegalArgumentException("Birth Date must be 7 digits");
-        // falta para o caso de ele por letras e nao numeros - tem de dar erro
-
+        if (birthDate.getYear() < 1870)
+            throw new IllegalArgumentException("Client cannot be 150 years or older");
     }
 
     /**
      * Checks if the Sex is correct, and if not throws an error message
-     * @param sex
      *
+     * @param sex
      */
     private void checkSex(String sex) {
         if (StringUtils.isBlank(sex))
@@ -213,23 +178,25 @@ public class Client {
 
     /**
      * Checks if the Tin number is correct, and if not throws an error message
-     * @param tinNumber
      *
+     * @param tinNumber
      */
     private void checkTinNumber(String tinNumber) {
         if (StringUtils.isBlank(tinNumber))
             throw new IllegalArgumentException("TIN number cannot be blank");
+        if ((!tinNumber.matches("[0-9]+")))
+            throw new IllegalArgumentException("TIN Number must be only digits");
         if ((tinNumber).length() != 10)
             throw new IllegalArgumentException("TIN number must be 10 digits");
+
         // falta para o caso de ele por letras e nao numeros - tem de dar erro
 
-        checkDigits(tinNumber, "TIN Number must be only digits");
     }
 
     /**
      * Checks if the E-mail is correct, and if not throws an error message
-     * @param email
      *
+     * @param email
      */
     private void checkEmail(String email) {
 
@@ -239,8 +206,8 @@ public class Client {
 
     /**
      * Checks if the Name is correct, and if not throws an error message
-     * @param name
      *
+     * @param name
      */
     private void checkName(String name) {
         if (StringUtils.isBlank(name))
@@ -250,16 +217,16 @@ public class Client {
 
     /**
      * Checks if the Phone number is correct, and if not throws an error message
-     * @param phoneNumber
      *
+     * @param phoneNumber
      */
     private void checkPhoneNumber(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
-            throw new IllegalArgumentException("Phone number cannot be blacket");
+            throw new IllegalArgumentException("Phone number cannot be blank");
+        if ((!phoneNumber.matches("[0-9]+")))
+            throw new IllegalArgumentException("phone number must be only digits");
         if ((phoneNumber).length() != 11)
             throw new IllegalArgumentException("Phone number must be 10 digits");
-
-        checkDigits(phoneNumber, "Phone Number must be only digits");
     }
 
     /**
@@ -282,21 +249,6 @@ public class Client {
                 '}';
     }
 
-    /**
-     * Checks if the String has any characters that are not digits, and if so throws an error message
-     * @param str
-     * @param message
-     */
-    private void checkDigits(String str, String message) {
-        char[] c = str.toCharArray();
-
-        for (int i = 0; i < c.length; i++)
-            // verifica se o char não é um dígito
-            if (!Character.isDigit(c[i])) {
-                throw new IllegalArgumentException(message);
-            }
-    }
-
     private String generatepsw(StringBuilder salt, Random rnd) {
         String SALTCHARS = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -315,7 +267,6 @@ public class Client {
         Client client = (Client) o;
 
 
-
         return Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) ||
                 Objects.equals(nhsNumber, client.nhsNumber) ||
                 Objects.equals(tinNumber, client.tinNumber) ||
@@ -323,10 +274,10 @@ public class Client {
                 equalsPhoneNumber(client);
     }
 
-    private boolean equalsPhoneNumber (Client client) {
-        if (!phoneNumber.equals("sem numero")){
+    private boolean equalsPhoneNumber(Client client) {
+        if (!phoneNumber.equals("sem numero")) {
             return false;
-        }else{
+        } else {
             return Objects.equals(phoneNumber, client.phoneNumber);
         }
 
