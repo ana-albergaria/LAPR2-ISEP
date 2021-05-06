@@ -33,9 +33,9 @@ public class ParameterStore {
         return new Parameter(parameterCode, shortName, description, pc);
     }
 
-    public List<Parameter> getPrmList(){
+    /*public List<Parameter> getPrmList(){
         return new ArrayList<>(prmList);
-    }
+    }*/
 
     /**
      * Validates parameter instance globally,
@@ -67,14 +67,14 @@ public class ParameterStore {
         return this.prmList.add(prm);
     }
 
-    public Parameter getParameterByCode(String code){
+    /*public Parameter getParameterByCode(String code){
         for (Parameter prm : prmList){
             if (prm.getPrmCode().equalsIgnoreCase(code)){
                 return prm;
             }
         }
         throw new UnsupportedOperationException("There's no parameter with code: " + code);
-    }
+    }*/
 
     /* Transforms the parameter list into an array.
     @return parameter store list contents as an array. */

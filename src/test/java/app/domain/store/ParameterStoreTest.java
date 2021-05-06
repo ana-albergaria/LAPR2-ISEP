@@ -30,7 +30,8 @@ public class ParameterStoreTest {
     }
 
     @Test
-    public void createsParameterStore() {
+    public void createParameterStore() {
+        System.out.println("ensureParameterStoreIsBeingCreatedCorrectly");
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(0, result.length);
@@ -38,6 +39,7 @@ public class ParameterStoreTest {
 
     @Test
     public void createParameterStoreWithSomeElements() {
+        System.out.println("createParameterStoreWithSomeElements");
         ParameterStore ps1 = new ParameterStore();
         Parameter parameter1 = ps1.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         ps1.saveParameter(parameter1);
@@ -53,6 +55,7 @@ public class ParameterStoreTest {
 
     @Test
     public void createParameter() {
+        System.out.println("createParameter");
         Parameter expected = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         ParameterStore parameterStore = company.getParameterStore();
         Parameter actual = parameterStore.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
@@ -61,6 +64,7 @@ public class ParameterStoreTest {
 
     @Test
     public void ensureParameterIsNotSavedRepeatedWithSameObject() {
+        System.out.println("ensureParameterIsNotSavedRepeatedWithSameObject");
         Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         Parameter parameter2 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         ParameterStore parameterStore = company.getParameterStore();
@@ -71,10 +75,11 @@ public class ParameterStoreTest {
 
     @Test
     public void ensureParameterIsNotSavedIfNull() {
+        System.out.println("ensureParameterIsNotSavedIfNull");
         assertFalse(company.getTestTypeStore().saveTestType(null));
     }
 
-    @Test
+    /*@Test
     public void validateParameter() {
 
     }
@@ -82,7 +87,7 @@ public class ParameterStoreTest {
     @Test
     public void saveParameter() {
 
-    }
+    }*/
 
 
 

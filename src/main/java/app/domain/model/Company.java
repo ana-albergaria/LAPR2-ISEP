@@ -43,6 +43,7 @@ public class Company {
         this.calList = new ArrayList<>();
         this.empList = new ArrayList<>();
         this.roles = new ArrayList<>();
+        this.parameterStore = new ParameterStore();
     }
 
     public String getDesignation() {
