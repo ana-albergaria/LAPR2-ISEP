@@ -2,16 +2,20 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class Client {
 
     /**
      * The Phone Number by Omission
      */
-    private static final String OMITTED_PHONE_NUMBER = "0000000000";
+    private static final String OMITTED_PHONE_NUMBER = "00000000000";
 
     /**
      * The clients Citizen Card Number.
@@ -77,6 +81,7 @@ public class Client {
         checkEmail(email);
         checkName(name);
         checkPhoneNumber(phoneNumber);
+        checkBirthDate(birthDate);
 
         StringBuilder salt = new StringBuilder();
         Random rnd = new Random();
@@ -158,11 +163,12 @@ public class Client {
      * @param birthDate
      */
     private void checkBirthDate(Date birthDate) {
+        Date date = new Date();
+
         if (birthDate == null)
             throw new IllegalArgumentException("Birth Date cannot be blank");
-        if (birthDate.getYear() < 1870)
-            throw new IllegalArgumentException("Client cannot be 150 years or older");
     }
+
 
     /**
      * Checks if the Sex is correct, and if not throws an error message
@@ -199,9 +205,18 @@ public class Client {
      * @param email
      */
     private void checkEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
 
         if (StringUtils.isBlank(email))
             throw new IllegalArgumentException("Email cannot be blank");
+        if(!pat.matcher(email).matches())
+            throw new IllegalArgumentException("Invalid Email format");
+
     }
 
     /**
@@ -226,7 +241,7 @@ public class Client {
         if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("phone number must be only digits");
         if ((phoneNumber).length() != 11)
-            throw new IllegalArgumentException("Phone number must be 10 digits");
+            throw new IllegalArgumentException("Phone number must be 11 digits");
     }
 
     /**
