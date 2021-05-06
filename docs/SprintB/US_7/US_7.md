@@ -16,7 +16,7 @@ As an ***administrator***, I want to **register** a new **employee**
 >Q: "Hello,
       What kind of information does the company store about their employees and owned laboratories?
       Are there common attributes between the roles below? If so, which ones? (i.e. employee ID, TIN, contact info, etc.)
-      Receptionist,cClinical Chemistry Technologist, Medical Lab Technician, Specialist Doctor, Lab Coordinator, Administrator"
+      Receptionist,Clinical Chemistry Technologist, Medical Lab Technician, Specialist Doctor, Lab Coordinator, Administrator"
 >
 >A: "All the roles that exist in the Many Labs company are characterized by the following attributes:  
       Employee ID;  

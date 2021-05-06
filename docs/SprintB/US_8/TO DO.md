@@ -13,3 +13,5 @@ PERGUNTAR PROF
 * Mudar lista totalTT para testTypeStore em todos os sítios
 
 * Será que temos de possibilitar os nomes terem acentos?
+
+* US7 - corrigir metodo validateEmployee!! Não valida o Specialist Doctor supostamente
