@@ -53,6 +53,10 @@ public class Parameter {
         this.pc = pc;
     }
 
+    public String getPrmCode(){
+        return parameterCode;
+    }
+
     private void checkParameterCategory(ParameterCategory pc){
         if (pc == null)
             throw new IllegalArgumentException("The inserted parameter category code doesn't exist.");
@@ -108,6 +112,13 @@ public class Parameter {
             throw new IllegalArgumentException("Description cannot be blank.");
         if (description.length()>20)
             throw new IllegalArgumentException("Description must have up to 20 chars.");
+    }
+
+    public boolean equals(Object parameterObject) {
+        if (this == parameterObject) return true;
+        if (parameterObject == null || getClass() != parameterObject.getClass()) return false;
+        Parameter parameterToCompare = (Parameter) parameterObject;
+        return parameterToCompare.getPrmCode().equals(this.getPrmCode());
     }
 
 }
