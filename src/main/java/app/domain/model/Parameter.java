@@ -57,6 +57,28 @@ public class Parameter {
         return parameterCode;
     }
 
+    public String getShortName(){
+        return shortName;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public ParameterCategory getPc(){
+        return pc;
+    }
+
+    @Override
+    public String toString(){
+        return "Parameter{" +
+                "code='" + parameterCode + '\'' +
+                ", name='" + shortName + '\'' +
+                ", description='" + description + '\'' +
+                ", selectedParameterCategory='" + pc +
+                '}';
+    }
+
     private void checkParameterCategory(ParameterCategory pc){
         if (pc == null)
             throw new IllegalArgumentException("The inserted parameter category code doesn't exist.");
@@ -114,6 +136,7 @@ public class Parameter {
             throw new IllegalArgumentException("Description must have up to 20 chars.");
     }
 
+    @Override
     public boolean equals(Object parameterObject) {
         if (this == parameterObject) return true;
         if (parameterObject == null || getClass() != parameterObject.getClass()) return false;

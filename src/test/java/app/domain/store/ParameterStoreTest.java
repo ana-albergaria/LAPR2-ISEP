@@ -3,9 +3,13 @@ package app.domain.store;
 import app.domain.model.Company;
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
+import app.domain.store.ParameterStore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -14,14 +18,18 @@ public class ParameterStoreTest {
     private ParameterCategory p1;
     private ParameterCategory p2;
     private Company company = new Company("Many Labs");
+    private List<ParameterCategory> pcList;
 
     @Before
     public void setUp() {
+        pcList = new ArrayList<>();
         p1 = new ParameterCategory("HEM01","Hemogram");
         p2 = new ParameterCategory("COD01","Name");
+        pcList.add(p1);
+        pcList.add(p2);
     }
 
-    /*@Test
+    @Test
     public void createsParameterStore() {
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
@@ -41,7 +49,7 @@ public class ParameterStoreTest {
         ps1.saveParameter(parameter4);
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(4, result.length);
-    }*/
+    }
 
     @Test
     public void createParameter() {

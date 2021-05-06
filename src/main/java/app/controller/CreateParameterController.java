@@ -24,6 +24,10 @@ public class CreateParameterController {
         this.prm = null;
     }
 
+    public Parameter getPrm(){
+        return prm;
+    }
+
     //US10 SD: 4-8
     public List<ParameterCategory> getParameterCategories() {
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
