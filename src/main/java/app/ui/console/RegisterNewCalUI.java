@@ -101,7 +101,10 @@ public class RegisterNewCalUI implements Runnable {
     }
 
     private void addSelectedTestTypeToList(List<TestTypeDTO> listTestType, TestTypeDTO testTypeToAdd) {
-        listTestType.add(testTypeToAdd);
+        if(verifyIfTestTypeAlreadyInList(listTestType, testTypeToAdd))
+            System.out.println("This type of test was already selected! Please, choose a different one.");
+        else
+            listTestType.add(testTypeToAdd);
         boolean addMore = Utils.confirm("If you want to add more types of test please type 's', otherwise type 'n'");
         if (addMore)
             showTestTypeListAndSelectingThem(listTestType);
@@ -112,5 +115,13 @@ public class RegisterNewCalUI implements Runnable {
         menu.add("Insert the data");
 
         return menu;
+    }
+
+    private boolean verifyIfTestTypeAlreadyInList(List<TestTypeDTO> listTestType, TestTypeDTO testTypeToAdd) {
+        for (TestTypeDTO tt : listTestType) {
+            if(testTypeToAdd.getCode().equalsIgnoreCase(tt.getCode()))
+                return false;
+        }
+        return true;
     }
 }
