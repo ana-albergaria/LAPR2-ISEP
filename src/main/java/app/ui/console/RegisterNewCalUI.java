@@ -24,7 +24,6 @@ public class RegisterNewCalUI implements Runnable {
     }
     private boolean registerClinicalAnalysisLaboratory() {
         boolean invalidData = true;
-        boolean confirm = true;
         System.out.printf("To register a new Clinical Analysis Laboratory, please insert the requested data.");
 
         do {
@@ -41,8 +40,14 @@ public class RegisterNewCalUI implements Runnable {
 
                 ctrl.createClinicalAnalysisLaboratory(calDto);
 
+                boolean confirm = Utils.confirm("Please, confirm the data (type `s` if its correct, `n` if it is not):");
 
 
+
+
+            }
+            catch(IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
         } while(invalidData);
 
