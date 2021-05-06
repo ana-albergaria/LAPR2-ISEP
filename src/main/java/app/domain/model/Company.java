@@ -24,7 +24,6 @@ public class Company {
     private ParameterCategoryStore parameterCategoryStore;
     private ParameterStore parameterStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
-    private List<Laboratory> laboratories; //Company owns Laboratory
     private List<ClinicalAnalysisLaboratory> calList;
     private List<Employee> empList;
     private List<OrgRole> roles;
@@ -44,6 +43,18 @@ public class Company {
         this.empList = new ArrayList<>();
         this.roles = new ArrayList<>();
         this.parameterStore = new ParameterStore();
+        OrgRole r1 = new OrgRole("Administrator");
+        OrgRole r2 = new OrgRole("Receptionist");
+        OrgRole r3 = new OrgRole("Med Lab Tech");
+        OrgRole r4 = new OrgRole("Lab Coordinator");
+        OrgRole r5 = new OrgRole("Spec Doctor");
+        OrgRole r6 = new OrgRole("C. Chem Techn");
+        this.roles.add(r1);
+        this.roles.add(r2);
+        this.roles.add(r3);
+        this.roles.add(r4);
+        this.roles.add(r5);
+        this.roles.add(r6);
     }
 
     public String getDesignation() {
@@ -141,19 +152,6 @@ public class Company {
      */
     private OrgRole getRoleByDescription(String roleDescription) {
         //PASSAR ESTE CÓDIGO PARA O CONSTRUTOR DA COMPANY
-        OrgRole r1 = new OrgRole("Administrator");
-        OrgRole r2 = new OrgRole("Receptionist");
-        OrgRole r3 = new OrgRole("Medical Lab Technician");
-        OrgRole r4 = new OrgRole("Laboratory Coordinator");
-        OrgRole r5 = new OrgRole("Specialist Doctor");
-        OrgRole r6 = new OrgRole("Clinical Chemistry Technologist");
-        this.roles.add(r1);
-        this.roles.add(r2);
-        this.roles.add(r3);
-        this.roles.add(r4);
-        this.roles.add(r5);
-        this.roles.add(r6);
-
         for (OrgRole role : roles) {
             if(role.getDescription().equalsIgnoreCase(roleDescription)){
                 return role;
@@ -191,5 +189,7 @@ public class Company {
 
         return this.empList.add(emp);
     }
+
+
 
 }

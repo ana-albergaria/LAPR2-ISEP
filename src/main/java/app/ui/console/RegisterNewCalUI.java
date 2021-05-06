@@ -30,7 +30,7 @@ public class RegisterNewCalUI implements Runnable {
 
 
     }
-
+    //FALTA VERIFICAR SE O TESTE QUE QUER ADICIONAR JÁ FOI ADICIONADO ANTES
     private boolean registerClinicalAnalysisLaboratory() {
         boolean success = false;
 

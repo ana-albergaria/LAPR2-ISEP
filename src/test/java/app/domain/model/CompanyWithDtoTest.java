@@ -36,9 +36,14 @@ public class CompanyWithDtoTest {
         selectedTT.add(t1);
         selectedTT.add(t2);
         company = new Company("Many Labs");
+
         testTypeCodes = new ArrayList<>();
         testTypeCodes.add("CODE3");
         testTypeCodes.add("CODE4");
+        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
+        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
+        company.getTestTypeStore().saveTestType(t1);
+        company.getTestTypeStore().saveTestType(t2);
 
         c1 = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -54,11 +59,6 @@ public class CompanyWithDtoTest {
         System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
 
         //Arrange
-        TestType testType1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
-        TestType testType2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
-        company.getTestTypeStore().saveTestType(testType1);
-        company.getTestTypeStore().saveTestType(testType2);
-
         ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
         ClinicalAnalysisLaboratoryDTO calDto = new ClinicalAnalysisLaboratoryDTO("CAL12",
@@ -69,6 +69,8 @@ public class CompanyWithDtoTest {
 
         //Assert
         Assert.assertEquals(expObj, obj);
+
+
     }
 /*
     @Test
