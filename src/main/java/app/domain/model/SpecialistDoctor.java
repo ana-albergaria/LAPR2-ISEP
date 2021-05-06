@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SpecialistDoctor extends Employee {
     private String doctorIndexNumber;
 
@@ -21,7 +23,10 @@ public class SpecialistDoctor extends Employee {
     }
 
     private void checkDoctorIndexNumberRules(String doctorIndexNumber){
-
+        if (StringUtils.isBlank(doctorIndexNumber))
+            throw new IllegalArgumentException("Doctor Index Number cannot be blank.");
+        if (doctorIndexNumber.length()!=6)
+            throw new IllegalArgumentException("Doctor Index Number must have 6 digits.");
     }
 
     @Override
@@ -40,5 +45,5 @@ public class SpecialistDoctor extends Employee {
 
         return this.doctorIndexNumber.equalsIgnoreCase(instance.doctorIndexNumber);
     }
-    
+
 }
