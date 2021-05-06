@@ -57,7 +57,7 @@ public class CompanyTest {
         c3 = company.createClinicalAnalysisLaboratory(c3Dto);
     }
 
-
+    //for US8
     @Test
     public void createClinicalAnalysisLaboratory() {
         System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
@@ -205,5 +205,6 @@ public class CompanyTest {
 
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
+
 
 }
