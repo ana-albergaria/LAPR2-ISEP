@@ -277,9 +277,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 15:** Check that it is not possible to create an instance of the Parameter class with null parameter category.
 
-**Test 16:** Check that the equals method returns true if the two compared parameters are equal.
+**Test 16:** Check that the equals method returns true if the two compared parameters have equal objects.
 
-**Test 17:** Check that the equals method returns false if the two compared parameters are different.
+**Test 17:** Check that the equals method returns false if the two compared parameters have different objects.
 
 **Test 18:** Check that the equals method returns true if the two compared parameters are the same.
 
@@ -287,14 +287,23 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 4.2. ParameterStore
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 20:** Check if the parameter store is being created correctly with no elements.
 
-	@Test(expected = IllegalArgumentException.class)
-    public void ensureNullIsNotAllowed(){
-        Parameter prm = new Parameter(null, null, null, null);
+	@Test
+    public void createParameterStore() {
+        System.out.println("ensureParameterStoreIsBeingCreatedCorrectly");
+        ParameterStore ps1 = new ParameterStore();
+        Parameter[] result = ps1.toArray();
+        Assert.assertEquals(0, result.length);
     }
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+**Test 21:** Check if the parameter store is being created correctly with some elements.
+
+**Test 22:** Check if the parameter is being created correctly.
+
+**Test 23:** Check that it is not possible to save a parameter with repeated objects.
+
+**Test 24:** Check that it is not possible to save a null parameter.
 
 
 *It is also recommended to organize this content by subsections.* 
