@@ -46,7 +46,8 @@ public class ParameterStoreTest {
     @Test
     public void createParameter() {
         Parameter expected = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
-        Parameter actual = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        Parameter actual = parameterStore.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         Assert.assertEquals(expected, actual);
     }
 
@@ -54,8 +55,9 @@ public class ParameterStoreTest {
     public void ensureParameterIsNotSavedRepeatedWithSameObject() {
         Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         Parameter parameter2 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
-        company.getParameterStore().saveParameter(parameter1);
-        boolean result = company.getParameterStore().saveParameter(parameter2);
+        ParameterStore parameterStore = company.getParameterStore();
+        parameterStore.saveParameter(parameter1);
+        boolean result = parameterStore.saveParameter(parameter2);
         assertFalse(result);
     }
 

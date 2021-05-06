@@ -3,6 +3,7 @@ package app.domain.store;
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +63,8 @@ public class ParameterStore {
         return this.prmList.add(prm);
     }
 
+    /* Transforms the parameter list into an array.
+    @return parameter store list contents as an array. */
     /*public Parameter[] toArray() {
         Parameter[] array = new Parameter[this.prmList.size()];
         return this.prmList.toArray(array);
