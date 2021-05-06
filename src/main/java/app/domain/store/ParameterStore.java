@@ -17,7 +17,7 @@ public class ParameterStore {
     /**
      * List of existing parameters.
      */
-    private List<Parameter> prmList;
+    private List<Parameter> prmList = new ArrayList<>();
 
     /**
      * Creates parameter reference.
@@ -63,10 +63,27 @@ public class ParameterStore {
         return this.prmList.add(prm);
     }
 
-    /* Transforms the parameter list into an array.
-    @return parameter store list contents as an array. */
-    /*public Parameter[] toArray() {
+    /**
+     * Transforms the parameter list into an array.
+     *
+     * @return parameter store list contents as an array.
+     */
+    public Parameter[] toArray() {
         Parameter[] array = new Parameter[this.prmList.size()];
         return this.prmList.toArray(array);
+    }
+
+    /*public List<Parameter> getPrmList(){
+        return new ArrayList<>(prmList);
     }*/
+
+    /*public Parameter getParameterByCode(String code){
+        for (Parameter prm : prmList){
+            if (prm.getPrmCode().equalsIgnoreCase(code)){
+                return prm;
+            }
+        }
+        throw new UnsupportedOperationException("There's no parameter with code: " + code);
+    }*/
+
 }

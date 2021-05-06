@@ -3,9 +3,13 @@ package app.domain.store;
 import app.domain.model.Company;
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
+import app.domain.store.ParameterStore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -14,15 +18,20 @@ public class ParameterStoreTest {
     private ParameterCategory p1;
     private ParameterCategory p2;
     private Company company = new Company("Many Labs");
+    private List<ParameterCategory> pcList;
 
     @Before
     public void setUp() {
+        pcList = new ArrayList<>();
         p1 = new ParameterCategory("HEM01","Hemogram");
         p2 = new ParameterCategory("COD01","Name");
+        pcList.add(p1);
+        pcList.add(p2);
     }
 
-    /*@Test
-    public void createsParameterStore() {
+    @Test
+    public void createParameterStore() {
+        System.out.println("ensureParameterStoreIsBeingCreatedCorrectly");
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(0, result.length);
@@ -30,6 +39,7 @@ public class ParameterStoreTest {
 
     @Test
     public void createParameterStoreWithSomeElements() {
+        System.out.println("createParameterStoreWithSomeElements");
         ParameterStore ps1 = new ParameterStore();
         Parameter parameter1 = ps1.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         ps1.saveParameter(parameter1);
@@ -41,10 +51,11 @@ public class ParameterStoreTest {
         ps1.saveParameter(parameter4);
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(4, result.length);
-    }*/
+    }
 
     @Test
     public void createParameter() {
+        System.out.println("createParameter");
         Parameter expected = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         ParameterStore parameterStore = company.getParameterStore();
         Parameter actual = parameterStore.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
@@ -53,6 +64,7 @@ public class ParameterStoreTest {
 
     @Test
     public void ensureParameterIsNotSavedRepeatedWithSameObject() {
+        System.out.println("ensureParameterIsNotSavedRepeatedWithSameObject");
         Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         Parameter parameter2 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         ParameterStore parameterStore = company.getParameterStore();
@@ -63,10 +75,11 @@ public class ParameterStoreTest {
 
     @Test
     public void ensureParameterIsNotSavedIfNull() {
+        System.out.println("ensureParameterIsNotSavedIfNull");
         assertFalse(company.getTestTypeStore().saveTestType(null));
     }
 
-    @Test
+    /*@Test
     public void validateParameter() {
 
     }
@@ -74,7 +87,7 @@ public class ParameterStoreTest {
     @Test
     public void saveParameter() {
 
-    }
+    }*/
 
 
 
