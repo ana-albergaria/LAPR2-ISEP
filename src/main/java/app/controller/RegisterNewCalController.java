@@ -10,7 +10,6 @@ import java.util.List;
 
 public class RegisterNewCalController {
     private Company company;
-    private TestType tt;
     private ClinicalAnalysisLaboratory cal;
 
     public RegisterNewCalController() {
@@ -19,7 +18,6 @@ public class RegisterNewCalController {
 
     public RegisterNewCalController(Company company) {
         this.company = company;
-        this.tt = null;
         this.cal = null;
     }
 
