@@ -94,7 +94,8 @@ public class RegisterNewCalUI implements Runnable {
             success = true;
         } else {
             for (TestTypeDTO tt : listTestType) {
-                selectedTT.add(tt.getCode());
+                if(verifyIfTestTypeIsNotInList(selectedTT,tt))
+                    selectedTT.add(tt.getCode());
             }
         }
         return success;
@@ -112,5 +113,13 @@ public class RegisterNewCalUI implements Runnable {
         menu.add("Insert the data");
 
         return menu;
+    }
+
+    private boolean verifyIfTestTypeIsNotInList(List<String> selectedTT, TestTypeDTO testTypeToAdd) {
+        for (String tt : selectedTT) {
+            if(testTypeToAdd.getCode().equalsIgnoreCase(tt))
+                return false;
+        }
+        return true;
     }
 }
