@@ -130,14 +130,14 @@ public class ClientTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithTinNumberFullOfSpaces() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithTinNumberFullOfSpaces");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "   ", "alex@gmail.com", "Alex");
     }
 
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithEmailEmpty() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithEmailEmpty");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "", "Alex");
     }
 
@@ -152,69 +152,66 @@ public class ClientTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithEmailFullOfSpaces() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithEmailFullOfSpaces");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "  ", "Alex");
     }
 
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithEmptyName() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithEmptyName");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "");
     }
 
-
-    @Test(expected = IllegalArgumentException.class)
-    public void createClientWithNameWrong() {
-        System.out.println("createSexFullOfSpaces");
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "");
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithNameFullOfSpaces() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithNameFullOfSpaces");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "  ");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithPhoneNumberEmpty() throws ParseException {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithPhoneNumberEmpty");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "");
     }
 
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithPhoneNumberWith12Digits() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithPhoneNumberWith12Digits");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "123456789012");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithPhoneNumberWith10Digits() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithPhoneNumberWith10Digits");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "1234567890");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithPhoneNumberFullOfSpaces() {
-        System.out.println("createSexFullOfSpaces");
+        System.out.println("createClientWithPhoneNumberFullOfSpaces");
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", " ");
     }
 
-    /*@Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void createClient150yearsOld() {
         System.out.println("createClient150yearsOld");
         try{
-            Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse("02/04/1873");
+            Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse("02/05/1870");
             Client client = new Client("1234567891222222", "1234567890", d2, "Male", "1234567890", "alex@gmail.com", "Alex");
-        }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
 
-    }*/
+    @Test(expected = IllegalArgumentException.class)
+    public void createClientWithNullDate() {
+        System.out.println("createClientWithNullDate");
+        Client client = new Client("1234567891222222", "1234567890", null, "Male", "1234567890", "alex@gmail.com", "Alex");
 
+    }
 
     @Test
     public void equalsTrue() {

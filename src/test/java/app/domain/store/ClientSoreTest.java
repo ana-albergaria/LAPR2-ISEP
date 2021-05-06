@@ -51,10 +51,10 @@ public class ClientSoreTest {
 
     }
 
-    /*@Test
-    public void createClientStoreWithSomeElementsButTwoAreTheSame() {
+    @Test
+    public void createClientStoreWithSomeElementsButTwoAreTheSame() throws ParseException {
 
-        Date d1 = new Date (2002,1,5);
+        Date d1 = new SimpleDateFormat("dd/MM/yyyy").parse("08/08/2001");
 
         ClientSore cs1 = new ClientSore();
 
@@ -72,18 +72,6 @@ public class ClientSoreTest {
         Assert.assertEquals(2, result.length);
 
     }
-*/
 
 
-    @Test
-    public void valiDateeClient() {
-    }
-
-    @Test
-    public void saveClient() {
-    }
-
-    @Test
-    public void getClient() {
-    }
 }

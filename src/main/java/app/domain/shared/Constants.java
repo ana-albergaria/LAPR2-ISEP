@@ -6,7 +6,6 @@ package app.domain.shared;
  */
 public class Constants {
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
-    //Ana - Adicionei o resto das roles
     public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
     public static final String ROLE_MED_LAB_TECHNICIAN = "MEDICAL LAB TECHNICIAN";
     public static final String ROLE_CLINICAL_CHEM_TECHNOLOGIST = "CLINICAL CHEMISTRY TECHNOLOGIST";

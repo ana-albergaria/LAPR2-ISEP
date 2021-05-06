@@ -36,13 +36,20 @@ public class RegisterEmployeeController {
         return this.company.validateEmployee(emp);
     }
 
-
-
     public List<OrgRoleDTO> getRoles() {
         List<OrgRole> roles = this.company.getRoles();
         OrgRoleMapper mapper = new OrgRoleMapper();
         return mapper.toDTO(roles);
 
     }
+
+    public boolean addUserRole(){
+        return this.company.getAuthFacade().addUserRole(emp.getRole().getDescription(),emp.getRole().getDescription());
+    }
+
+
+/*    public boolean makeEmployeeAUser(){
+        return this.company.getAuthFacade().addUserWithRole(emp.getName(), emp.getEmail(),)
+    }*/
 
 }

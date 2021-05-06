@@ -163,13 +163,22 @@ public class Client {
      * @param birthDate
      */
     private void checkBirthDate(Date birthDate) {
-        Date date = new Date();
 
         if (birthDate == null)
-            throw new IllegalArgumentException("Birth Date cannot be blank");
+            throw new IllegalArgumentException("Birth Date cannot be blank!");
+        if(getYearsDiff(birthDate) > 150){
+            throw new IllegalArgumentException("Invalid birth date, the max age is 150 years!");
+        }
     }
 
-
+    public int getYearsDiff(Date birthDate){
+        Date today = new Date();
+        long diffInTime = today.getTime() - birthDate.getTime();
+        long difference_In_Years
+                = (diffInTime
+                / (1000l * 60 * 60 * 24 * 365));
+        return (int) difference_In_Years;
+    }
     /**
      * Checks if the Sex is correct, and if not throws an error message
      *
@@ -265,14 +274,13 @@ public class Client {
     }
 
     private String generatepsw(StringBuilder salt, Random rnd) {
-        String SALTCHARS = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        String saltChars = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
         while (salt.length() < 10) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
+            int index = (int) (rnd.nextFloat() * saltChars.length());
+            salt.append(saltChars.charAt(index));
         }
-        String saltStr = salt.toString();
-        return saltStr;
+        return salt.toString();
     }
 
     @Override
