@@ -206,5 +206,16 @@ public class CompanyTest {
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
 
+    @Test
+    public void validateClinicalAnalysisLaboratory() {
+        System.out.println("validateClinicalAnalysisLaboratory");
+
+        ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
+
+        boolean result = company.validateClinicalAnalysisLaboratory(c0);
+    }
+
 
 }
