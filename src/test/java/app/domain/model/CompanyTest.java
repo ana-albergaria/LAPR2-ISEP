@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-/*
+
 public class CompanyTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
@@ -17,9 +18,13 @@ public class CompanyTest {
     private TestType t1;
     private TestType t2;
     private Company company;
+    private ClinicalAnalysisLaboratoryDTO c1Dto;
+    private ClinicalAnalysisLaboratoryDTO c2Dto;
+    private ClinicalAnalysisLaboratoryDTO c3Dto;
     private ClinicalAnalysisLaboratory c1;
     private ClinicalAnalysisLaboratory c2;
     private ClinicalAnalysisLaboratory c3;
+    private List<String> testTypeCodes;
 
     @Before
     public void setUp() {
@@ -28,21 +33,31 @@ public class CompanyTest {
         p2 = new ParameterCategory("CODE2","Name");
         pcList.add(p1);
         pcList.add(p2);
-        t1 = new TestType("CODE3","Description","swab", pcList);
-        t2 = new TestType("CODE4","Description","swab", pcList);
+        company = new Company("Many Labs");
+        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
+        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
+        company.getTestTypeStore().saveTestType(t1);
+        company.getTestTypeStore().saveTestType(t2);
         selectedTT = new ArrayList<>();
         selectedTT.add(t1);
         selectedTT.add(t2);
-        company = new Company("Many Labs");
-        c1 = new ClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
-        c2 = new ClinicalAnalysisLaboratory("LAB23",
-                "Laboratorio","Porto","91899998811","1239999890", selectedTT);
-        c3 = new ClinicalAnalysisLaboratory("SON55",
-                "SYNLAB","Guarda","00899998811","0039999890", selectedTT);
+        testTypeCodes = new ArrayList<>();
+        testTypeCodes.add("CODE3");
+        testTypeCodes.add("CODE4");
+
+
+        c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        c2Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
+                "Laboratorio","Porto","91899998811","1239999890", testTypeCodes);
+        c3Dto = new ClinicalAnalysisLaboratoryDTO("SON55",
+                "SYNLAB","Guarda","00899998811","0039999890", testTypeCodes);
+        c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        c2 = company.createClinicalAnalysisLaboratory(c2Dto);
+        c3 = company.createClinicalAnalysisLaboratory(c3Dto);
     }
 
-
+    //for US8
     @Test
     public void createClinicalAnalysisLaboratory() {
         System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
@@ -50,13 +65,16 @@ public class CompanyTest {
         //Arrange
         ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO calDto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
 
         //Act
-        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory(calDto);
 
         //Assert
         Assert.assertEquals(expObj, obj);
+
+
     }
 
     @Test
@@ -64,28 +82,30 @@ public class CompanyTest {
         System.out.println("ensureDifferentClinicalAnalysisLaboratoryIsSaved (CompanyTest)");
 
         //Arrange
-        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
         company.saveClinicalAnalysisLaboratory(c1);
 
         //Act
-        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory("LAB23",
-                "Laboratorio","Outeiro","91841378810","1234467890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c2Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
+                "Laboratorio","Outeiro","91841378810","1234467890", testTypeCodes);
+        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory(c2Dto);
         boolean result = company.saveClinicalAnalysisLaboratory(c2);
 
         //Assert
         Assert.assertTrue(result);
     }
 
- */
-/* TESTES DE VALIDAÇÃO
-    @Test
+    //TESTES DE VALIDAÇÃO
+    @Test(expected = IllegalArgumentException.class)
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
         System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject (CompanyTest)");
 
         //Arrange
-        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
         company.saveClinicalAnalysisLaboratory(c1);
 
         //Act
@@ -95,15 +115,17 @@ public class CompanyTest {
         Assert.assertFalse(result);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject() {
         System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject (CompanyTest)");
 
         //Arrange
-        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
-        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        ClinicalAnalysisLaboratoryDTO c2Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory(c2Dto);
         company.saveClinicalAnalysisLaboratory(c1);
 
         //Act
@@ -112,10 +134,8 @@ public class CompanyTest {
         //Assert
         Assert.assertFalse(result);
     }
-    FIM TESTES VALIDAÇÃO
+    //FIM TESTES VALIDAÇÃO
 
- */
-/*
     @Test
     public void ensureNullClinicalAnalysisLaboratoryIsNotSaved() {
         System.out.println("ensureNullClinicalAnalysisLaboratoryIsNotSaved (CompanyTest)");
@@ -135,8 +155,9 @@ public class CompanyTest {
         company.saveClinicalAnalysisLaboratory(c2);
         company.saveClinicalAnalysisLaboratory(c3);
 
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("LAB23",
-                "BMAC","Bragança","97777378811","1777767890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
+                "BMAC","Bragança","97777378811","1777767890", testTypeCodes);
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
 
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
@@ -149,8 +170,9 @@ public class CompanyTest {
         company.saveClinicalAnalysisLaboratory(c2);
         company.saveClinicalAnalysisLaboratory(c3);
 
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("MEL23",
-                "BMAC","guarda","97777378811","1777767890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
+                "BMAC","guarda","97777378811","1777767890", testTypeCodes);
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
 
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
@@ -163,8 +185,9 @@ public class CompanyTest {
         company.saveClinicalAnalysisLaboratory(c2);
         company.saveClinicalAnalysisLaboratory(c3);
 
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("MEL23",
-                "BMAC","Bragança","91899998811","1777767890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
+                "BMAC","Bragança","91899998811","1777767890", testTypeCodes);
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
 
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
@@ -177,13 +200,13 @@ public class CompanyTest {
         company.saveClinicalAnalysisLaboratory(c2);
         company.saveClinicalAnalysisLaboratory(c3);
 
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory("MEL23",
-                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
 
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
 
- */
 
-//} tirar chaveta do comentário
 
+}

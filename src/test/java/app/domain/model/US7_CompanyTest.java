@@ -14,47 +14,47 @@ public class US7_CompanyTest {
     @Before
     public void setUp() {
         company = new Company("Many Labs");
-        r1 = new OrgRole("Specialist Doctor");
-        r2 = new OrgRole("Medical Lab Technician");
+        r1 = new OrgRole("Spec Doctor");
+        r2 = new OrgRole("Med Lab Tech");
     }
 
-   /* @Test
+   @Test
     public void createSpecialistDoctor() {
         System.out.println("createEmployee (CompanyTest)");
 
         //Arrange
         SpecialistDoctor expObj = new SpecialistDoctor(r1,"12345",
-                "Afonso","Lisboa","123456","afonso@gmail.com",
-                "socCode12","344444444");
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234","123456");
 
-        SpecialistDoctorDTO empDTO = new SpecialistDoctorDTO("Specialist Doctor","12345",
-                "Afonso","Lisboa","123456","afonso@gmail.com",
-                "socCode12","344444444");
+        SpecialistDoctorDTO empDTO = new SpecialistDoctorDTO("Spec Doctor","12345",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234","123456");
 
         //Act
         Employee obj = company.createSpecialistDoctor(empDTO);
 
         //Assert
         Assert.assertEquals(expObj, obj);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void createEmployee() {
         System.out.println("createEmployee (CompanyTest)");
 
         //Arrange
         Employee expObj = new Employee(r2,"12345",
-                "Afonso","Lisboa","123456","afonso@gmail.com",
-                "socCode12");
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
 
-        EmployeeDTO empDTO = new EmployeeDTO("Medical Lab Technician","12345",
-                "Afonso","Lisboa","123456","afonso@gmail.com",
-                "socCode12");
+        EmployeeDTO empDTO = new EmployeeDTO("Med Lab Tech","12345",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
 
         //Act
         Employee obj = company.createEmployee(empDTO);
 
         //Assert
         Assert.assertEquals(expObj, obj);
-    }*/
+    }
 }

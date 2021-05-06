@@ -41,7 +41,6 @@ public class RegisterClientController {
 
     public boolean makeClientAnUser() {
         return this.company.getAuthFacade().addUser(cl.getName(), cl.getEmail(), cl.getPsw());
-
     }
 
 
