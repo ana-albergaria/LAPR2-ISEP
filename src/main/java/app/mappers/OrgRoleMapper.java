@@ -1,9 +1,7 @@
 package app.mappers;
 
 import app.domain.model.OrgRole;
-import app.domain.model.TestType;
 import app.mappers.dto.OrgRoleDTO;
-import app.mappers.dto.TestTypeDTO;
 
 import java.util.ArrayList;
 import java.util.List;

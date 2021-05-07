@@ -1,7 +1,5 @@
 package app.mappers.dto;
 
-import app.domain.model.OrgRole;
-
 public class EmployeeDTO {
     private String employeeID;
     private String name;

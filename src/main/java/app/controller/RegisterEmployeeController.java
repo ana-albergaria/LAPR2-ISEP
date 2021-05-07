@@ -5,7 +5,6 @@ import app.domain.model.Employee;
 import app.domain.model.OrgRole;
 import app.domain.model.SpecialistDoctor;
 import app.mappers.OrgRoleMapper;
-import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.OrgRoleDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
