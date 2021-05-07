@@ -28,7 +28,7 @@ public class Company {
     private List<Employee> empList;
     private List<OrgRole> roles;
 
-    private ClientStore clientSore;
+    private ClientStore clientStore;
 
     public Company(String designation)
     {
@@ -79,7 +79,7 @@ public class Company {
         return testTypeStore;
     }
 
-    public ClientStore getClientSore(){
+    public ClientStore getClientStore(){
         return clientStore;
     }
 

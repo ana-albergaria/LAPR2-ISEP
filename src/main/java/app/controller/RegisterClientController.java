@@ -22,21 +22,21 @@ public class RegisterClientController {
 
     public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                                   String tinNumber, String email, String name, String phoneNumber) {
-        this.cl = this.company.getClientSore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
+        this.cl = this.company.getClientStore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name, phoneNumber);
-        return this.company.getClientSore().validateClient(cl);
+        return this.company.getClientStore().validateClient(cl);
     }
 
     public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                                   String tinNumber, String email, String name) {
-        this.cl = this.company.getClientSore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
+        this.cl = this.company.getClientStore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name);
-        return this.company.getClientSore().validateClient(cl);
+        return this.company.getClientStore().validateClient(cl);
     }
 
     public boolean saveClient() {
 
-        return this.company.getClientSore().saveClient(cl);
+        return this.company.getClientStore().saveClient(cl);
     }
 
     public boolean makeClientAnUser() {
