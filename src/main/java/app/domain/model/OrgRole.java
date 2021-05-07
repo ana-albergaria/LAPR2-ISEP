@@ -1,10 +1,26 @@
 package app.domain.model;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrgRole {
+
     private String description;
 
     public OrgRole(String description) {
+        checkDescription(description);
         this.description = description;
+    }
+
+    private void checkDescription(String description){
+        if (StringUtils.isBlank(description))
+            throw new IllegalArgumentException("Organization Role cannot be blank.");
+        if (description.length()>15)
+            throw new IllegalArgumentException("Organization Role Description must have up to 15 chars.");
+        if (!description.contains("[a-zA-Z]+"))
+            throw new IllegalArgumentException("Organization Role Description can only have letters.");
     }
 
     public String getDescription() {
