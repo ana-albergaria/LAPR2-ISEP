@@ -39,6 +39,7 @@ public class Company {
         this.designation = designation;
         this.authFacade = new AuthFacade();
         this.testTypeStore = new TestTypeStore();
+        this.clientStore = new ClientStore();
         this.parameterCategoryStore = new ParameterCategoryStore();
         this.calList = new ArrayList<>();
         this.empList = new ArrayList<>();
@@ -166,9 +167,8 @@ public class Company {
         String roleDesignation = sdDTO.getRoleDesignation();
         OrgRole role = getRoleByDescription(roleDesignation);
 
-        return new SpecialistDoctor(role, sdDTO.getEmployeeID(), sdDTO.getName(),
-                sdDTO.getAddress(), sdDTO.getPhoneNumber(), sdDTO.getEmail(),
-                sdDTO.getSocCode(), sdDTO.getDoctorIndexNumber());
+        return new SpecialistDoctor(role, sdDTO.getName(), sdDTO.getAddress(),
+                sdDTO.getPhoneNumber(), sdDTO.getEmail(), sdDTO.getSocCode(), sdDTO.getDoctorIndexNumber());
     }
 
     public boolean validateEmployee(Employee emp) {

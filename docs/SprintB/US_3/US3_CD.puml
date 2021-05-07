@@ -13,7 +13,14 @@ class Client {
 +Client(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber )
 }
 
-class UserSession{
+class ClientStore{
++createClient(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber)
++validateClient(cl)
++saveClient(cl)
+}
+
+
+class AuthFacade{
 +addUser(String name, String email, String pwd)
 +existsUser(String email)
 }
@@ -22,6 +29,7 @@ class UserSession{
 
 class Company {
 -designation
++getTestTypeStore()
 }
 
 
@@ -39,10 +47,12 @@ class CreateTaskUI {
 
 CreateTaskUI ..> CreateTaskController
 CreateTaskController ..> Company
-CreateTaskController ..> Client
-CreateTaskController ..> UserSession
+CreateTaskController ..> AuthFacade
+CreateTaskController ..> ClientStore
 '/Client ..> UserSession'/
 Company "1" --> "*" Client : knows
-
+Company "1" -- "1" ClientStore : uses >
+Company  --  AuthFacade : knows >
+ClientStore ..> Client
 
 @enduml

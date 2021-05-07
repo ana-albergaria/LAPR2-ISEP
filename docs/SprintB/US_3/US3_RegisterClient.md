@@ -59,7 +59,7 @@ available on the repository must be reused (without modifications);
 * **AC5:** The Birth day format must be DD/MM/YY;
 * **AC6:** The Sex options must be Male/Female;
 * **AC7:** The Phone number must be 11 digit;
-* **AC8:** The phone number is opcional. All other fields are required.
+* **AC8:** The sex is opcional. All other fields are required.
 
 
 
@@ -78,11 +78,11 @@ available on the repository must be reused (without modifications);
 	* a clients citizen card number;
 	* a NHS number;
 	* a birth date;
-	* the Sex;
+	* the Sex (optional);
 	* a Tax Identification Number (TIN);
 	* an e-mail;
     * a name;
-    * a phone number (optional);
+    * a phone number;
 
 
 **Output Data:**
@@ -123,13 +123,13 @@ n/a
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1  		 |	... interacting with the actor? | RegisterClientUI   |  Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.           |
 | 			  		 |	... coordinating the US? | RegisterClientController | Controller                             |
-|Step 2: starts new Client | ... instanting a new Client ? | Company | Creator: R1/2|
+|Step 2: starts new Client | ... instanting a new Client ? | ClientStore | Creator: R1/2|
 |Step 3: resquest data | ... n/a | | |
 |Step 4: types requested data ? | ... saving the input data ?| Client | IE: The object created in step 2 has its own data|
 |Step 5: showns the data and requests a confirmation | ... validating the data locally ? | Client| IE: knows its own data |
-| | validating the data globally | Company | IE: knows all the Client objects|
-|Step 6: confirms data | ... saving the created client ? | Company | IE: adopts/records all the Clients objects|
-|Step 7| ... making the client a user of the system ? | UserSession | IE: cf. A&A component documentation.|
+| | validating the data globally | ClientStore | IE: knows all the Client objects|
+|Step 6: confirms data | ... saving the created client ? | ClientStore | IE: adopts/records all the Clients objects|
+|Step 7| ... making the client a user of the system ? | AuthFacade | IE: cf. A&A component documentation.|
 |Step 8: informs operation success| ... informing operation success ?| UI| IE:responsible for user interactions |
 
 ### Systematization ##

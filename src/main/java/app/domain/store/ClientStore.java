@@ -1,6 +1,7 @@
 package app.domain.store;
 
 import app.domain.model.Client;
+import app.domain.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +13,16 @@ public class ClientStore {
     private ArrayList<Client> clientList = new ArrayList<>();
 
 
-    public app.domain.model.Client registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
+    public Client registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                                                   String tinNumber, String email, String name, String phoneNumber) {
-        return new app.domain.model.Client(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
+        return new Client(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name, phoneNumber);
     }
 
-    public app.domain.model.Client registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
-                                                  String tinNumber, String email, String name) {
-        return new app.domain.model.Client(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
-                tinNumber, email, name);
+    public Client registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate,
+                                                  String tinNumber, String email, String name, String phoneNumber) {
+        return new Client(clientsCitizenCardNumber, nhsNumber, birthDate,
+                tinNumber, email, name, phoneNumber);
     }
 
     public boolean validateClient(app.domain.model.Client cl) {
@@ -34,7 +35,6 @@ public class ClientStore {
     public boolean saveClient(app.domain.model.Client cl) {
         if (!validateClient(cl))
             return false;
-
         return this.clientList.add(cl);
     }
 
@@ -44,7 +44,7 @@ public class ClientStore {
     }
 
     public List<app.domain.model.Client> getClients() {
-
         return clientList;
     }
+
 }

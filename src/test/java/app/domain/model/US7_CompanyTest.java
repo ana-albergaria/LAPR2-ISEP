@@ -20,14 +20,13 @@ public class US7_CompanyTest {
 
    @Test
     public void createSpecialistDoctor() {
-        System.out.println("createEmployee (CompanyTest)");
 
         //Arrange
-        SpecialistDoctor expObj = new SpecialistDoctor(r1,"12345",
+        SpecialistDoctor expObj = new SpecialistDoctor(r1,
                 "Afonso","Lisboa","1234567890","afonso@gmail.com",
                 "1234","123456");
 
-        SpecialistDoctorDTO empDTO = new SpecialistDoctorDTO("Spec Doctor","12345",
+        SpecialistDoctorDTO empDTO = new SpecialistDoctorDTO("Spec Doctor",
                 "Afonso","Lisboa","1234567890","afonso@gmail.com",
                 "1234","123456");
 
@@ -40,14 +39,13 @@ public class US7_CompanyTest {
 
     @Test
     public void createEmployee() {
-        System.out.println("createEmployee (CompanyTest)");
 
         //Arrange
-        Employee expObj = new Employee(r2,"12345",
+        Employee expObj = new Employee(r2,
                 "Afonso","Lisboa","1234567890","afonso@gmail.com",
                 "1234");
 
-        EmployeeDTO empDTO = new EmployeeDTO("Med Lab Tech","12345",
+        EmployeeDTO empDTO = new EmployeeDTO("Med Lab Tech",
                 "Afonso","Lisboa","1234567890","afonso@gmail.com",
                 "1234");
 

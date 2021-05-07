@@ -6,7 +6,6 @@ public class SpecialistDoctor extends Employee {
     private String doctorIndexNumber;
 
     public SpecialistDoctor(OrgRole role,
-                            String employeeID,
                             String name,
                             String address,
                             String phoneNumber,
