@@ -158,7 +158,7 @@ public class Company {
         String roleDesignation = empDTO.getRoleDesignation();
         OrgRole role = getRoleByDescription(roleDesignation);
 
-        return new Employee(role, empDTO.getEmployeeID(), empDTO.getName(),
+        return new Employee(role, empDTO.getName(),
                 empDTO.getAddress(), empDTO.getPhoneNumber(), empDTO.getEmail(), empDTO.getSocCode());
     }
 

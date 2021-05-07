@@ -65,9 +65,9 @@ public class Employee {
     /**
      * Builds an employee instance receiveing:
      * the employee role, ID, name, address, phone number, email and SOC code.
+     * It also generates an employee ID.
      *
      * @param role the employee role.
-     * @param employeeID the employee ID.
      * @param name the employee name.
      * @param address the employee address.
      * @param phoneNumber the employee phone number.
@@ -75,7 +75,6 @@ public class Employee {
      * @param socCode the employee SOC code.
      */
     public Employee(OrgRole role,
-                    String employeeID,
                     String name,
                     String address,
                     String phoneNumber,
@@ -87,7 +86,7 @@ public class Employee {
         checkEmailRules(email);
         checkSocCodeRules(socCode);
         this.role = role;
-        this.employeeID = employeeID;
+        this.employeeID = generateEmployeeID(name);
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -103,7 +102,7 @@ public class Employee {
      *
      * @return generated employee ID.
      */
-    private String generateEmployeeID(String name){ //+nr de employees criados
+    public String generateEmployeeID(String name){ //+nr de employees criados
         String employeeID = "";
         String[] nameArray = name.split(" ");
         for (int i = 0; i < nameArray.length; i++) {

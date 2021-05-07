@@ -13,7 +13,7 @@ public class SpecialistDoctor extends Employee {
                             String email,
                             String socCode,
                             String doctorIndexNumber) {
-        super(role, employeeID, name, address, phoneNumber, email, socCode);
+        super(role, name, address, phoneNumber, email, socCode);
         checkDoctorIndexNumberRules(doctorIndexNumber);
         this.doctorIndexNumber = doctorIndexNumber;
     }
