@@ -2,13 +2,8 @@ package app.ui.console;
 
 import app.controller.CreateParameterController;
 import app.domain.model.Parameter;
-import app.domain.model.ParameterCategory;
 import app.mappers.dto.CategoriesDTO;
 import app.ui.console.utils.Utils;
-import auth.domain.store.UserRoleStore;
-import sun.security.krb5.internal.crypto.Aes128CtsHmacSha1EType;
-
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +18,19 @@ public class CreateParameterUI implements Runnable {
     public void run(){
         boolean successA;
         boolean confirm;
-        List<Parameter> prmToValidate = new ArrayList<>();
+        List<Parameter> prmToConfirm = new ArrayList<>();
         Parameter prm;
         do {
             do {
                 successA = createParameter(); //shows parameter categories list and asks to select one
             } while (!successA);
             prm = ctrl.getParameter(); //PROBLEMA: COMO IGUALAR AO PARAMETRO CRIADO ?
-            prmToValidate = allParametersToValidate(prmToValidate, prm);
+            prmToConfirm = allParametersToConfirm(prmToConfirm, prm);
             confirm = Utils.confirm("Do you intend to create more parameters?\n[Type 's' for yes or 'n' for no.]");
         } while(confirm);
         do{
-            prmToValidate = confirmParameters(prmToValidate);
-        } while (prmToValidate.size() != 0); //fazer a validação e o save de todos
+            prmToConfirm = confirmParameters(prmToConfirm);
+        } while (prmToConfirm.size() != 0); //fazer a validação e o save de todos
         System.out.println("Parameter successfully created!");
     }
 
@@ -48,14 +43,16 @@ public class CreateParameterUI implements Runnable {
         return ctrl.createParameter(parameterCode, shortName, description, category.getCode()); //US10 SD: 19 a 25
     }
 
-    private List<Parameter> allParametersToValidate(List<Parameter> listPrmToValidate, Parameter prm){
+    private List<Parameter> allParametersToConfirm(List<Parameter> listPrmToValidate, Parameter prm){
         listPrmToValidate.add(prm);
         return listPrmToValidate;
     }
 
     private List<Parameter> confirmParameters(List<Parameter> listPrmToValidate){
         boolean success;
+        boolean successA;
         boolean confirmation;
+        Parameter prm;
         List<Parameter> review = new ArrayList<>();
         for (int i = 0; i < listPrmToValidate.size(); i++) {
             confirmation = Utils.confirm(String.format(">> PARAMETER <<" +
@@ -71,19 +68,20 @@ public class CreateParameterUI implements Runnable {
             //ESTÁ SEMPRE A VALIDAR O MESMO
             //POR ISSO DÁ SEMPRE QUE A PARTIR DO 1 JÁ EXISTEM
             try {
-                if (listPrmToValidate.size() == 1) {
-                    if (!confirmation) throw new Exception("Please enter the correct data.");
-                    if (!success) throw new Exception("Parameter either already exists or is null. Please try again.");
-                } else {
-                    if (!confirmation)
-                        throw new Exception("Please enter the correct data after confirming all the parameters.");
-                    if (!success)
-                        throw new Exception("Parameter either already exists or is null. Please try again after confirming all the parameters.");
-                }
+                if (!confirmation) throw new Exception("Please enter the correct data.");
+                if (!success) throw new Exception("Parameter either already exists or is null. Please try again.");
             }catch (IllegalArgumentException exception){ //validações
                 System.out.println(exception.getMessage()); //recebe a mensagem
             }catch(Exception e){ //exceptions do try
                 System.out.println(e.getMessage());
+            }
+            if (!confirmation || !success){
+                review.remove(listPrmToValidate.get(i));
+                do {
+                    successA = createParameter(); //shows parameter categories list and asks to select one
+                } while (!successA);
+                prm = ctrl.getParameter(); //PROBLEMA: COMO IGUALAR AO PARAMETRO CRIADO ?
+                review = allParametersToConfirm(review, prm);
             }
             if(confirmation && success){
                 review.remove(listPrmToValidate.get(i));
