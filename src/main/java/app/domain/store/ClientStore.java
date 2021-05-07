@@ -1,6 +1,7 @@
 package app.domain.store;
 
 import app.domain.model.Client;
+import app.domain.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public class ClientStore {
     public boolean saveClient(app.domain.model.Client cl) {
         if (!validateClient(cl))
             return false;
-
         return this.clientList.add(cl);
     }
 
@@ -44,7 +44,7 @@ public class ClientStore {
     }
 
     public List<app.domain.model.Client> getClients() {
-
         return clientList;
     }
+
 }

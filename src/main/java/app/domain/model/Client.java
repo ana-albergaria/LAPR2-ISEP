@@ -4,16 +4,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.Random;
 import java.util.regex.Pattern;
 
 public class Client {
-
     /**
-     * The Phone Number by Omission
+     * Sex by omission
      */
-    private static final String OMITTED_PHONE_NUMBER = "00000000000";
 
+    private final static String OMITTED_SEX = "Omitted";
     /**
      * The clients Citizen Card Number.
      */
@@ -54,8 +52,6 @@ public class Client {
      */
     private final String phoneNumber;
 
-    private final String psw;
-
     /**
      * Constructs an instance of Client receiving as a parameter the clients Citizen Card Number, NHS Number, Birth Date, Sex, TIN Number, E-mail, Name and Phone Number.
      *
@@ -80,9 +76,6 @@ public class Client {
         checkPhoneNumber(phoneNumber);
         checkBirthDate(birthDate);
 
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-
         this.clientsCitizenCardNumber = clientsCitizenCardNumber;
         this.nhsNumber = nhsNumber;
         this.birthDate = birthDate;
@@ -91,7 +84,6 @@ public class Client {
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.psw = generatepsw(salt, rnd);
     }
 
     /**
@@ -100,14 +92,14 @@ public class Client {
      * @param clientsCitizenCardNumber clients Citizen Card Number.
      * @param nhsNumber                clients NHS Number.
      * @param birthDate                clients Birth Date
-     * @param sex                      clients Sex.
      * @param tinNumber                clients TIN Number.
      * @param email                    clients E-mail.
      * @param name                     clients Name.
+     * @param phoneNumber              clients Phone Number.
      */
-    public Client(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
-                  String tinNumber, String email, String name) {
-        this(clientsCitizenCardNumber, nhsNumber, birthDate, sex, tinNumber, email, name, OMITTED_PHONE_NUMBER);
+    public Client(String clientsCitizenCardNumber, String nhsNumber, Date birthDate,
+                  String tinNumber, String email, String name, String phoneNumber) {
+        this(clientsCitizenCardNumber, nhsNumber, birthDate, OMITTED_SEX, tinNumber, email, name, phoneNumber);
     }
 
     public String getClientsCitizenCardNumber() {
@@ -120,10 +112,6 @@ public class Client {
 
     public String getName() {
         return name;
-    }
-
-    public String getPsw() {
-        return psw;
     }
 
     /**
@@ -163,12 +151,12 @@ public class Client {
 
         if (birthDate == null)
             throw new IllegalArgumentException("Birth Date cannot be blank!");
-        if(getYearsDiff(birthDate) > 150){
+        if (getYearsDiff(birthDate) > 150) {
             throw new IllegalArgumentException("Invalid birth date, the max age is 150 years!");
         }
     }
 
-    public int getYearsDiff(Date birthDate){
+    public int getYearsDiff(Date birthDate) {
         Date today = new Date();
         long diffInTime = today.getTime() - birthDate.getTime();
         long difference_In_Years
@@ -176,6 +164,7 @@ public class Client {
                 / (1000l * 60 * 60 * 24 * 365));
         return (int) difference_In_Years;
     }
+
     /**
      * Checks if the Sex is correct, and if not throws an error message
      *
@@ -184,7 +173,7 @@ public class Client {
     private void checkSex(String sex) {
         if (StringUtils.isBlank(sex))
             throw new IllegalArgumentException("Sex cannot be blank");
-        if (!sex.equals("Male") && !sex.equals("Female"))
+        if (!sex.equals("Male") && !sex.equals("Female") && !sex.equals(OMITTED_SEX))
             throw new IllegalArgumentException("Sex must be Male or Female");
     }
 
@@ -211,7 +200,7 @@ public class Client {
      * @param email
      */
     private void checkEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
                 "A-Z]{2,7}$";
@@ -220,7 +209,7 @@ public class Client {
 
         if (StringUtils.isBlank(email))
             throw new IllegalArgumentException("Email cannot be blank");
-        if(!pat.matcher(email).matches())
+        if (!pat.matcher(email).matches())
             throw new IllegalArgumentException("Invalid Email format");
 
     }
@@ -233,7 +222,8 @@ public class Client {
     private void checkName(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank");
-
+        if (name.length() > 35)
+            throw new IllegalArgumentException("Name cannot have more then 35 characteres");
     }
 
     /**
@@ -266,19 +256,9 @@ public class Client {
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", psw='" + psw + '\'' +
                 '}';
     }
 
-    private String generatepsw(StringBuilder salt, Random rnd) {
-        String saltChars = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-
-        while (salt.length() < 10) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * saltChars.length());
-            salt.append(saltChars.charAt(index));
-        }
-        return salt.toString();
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -4,29 +4,18 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.OrgRole;
 import app.domain.model.SpecialistDoctor;
+import app.domain.shared.utils.PasswordUtils;
 import app.mappers.OrgRoleMapper;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.OrgRoleDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
-import app.domain.shared.Constants;
-import auth.AuthFacade;
-import auth.UserSession;
-import auth.domain.model.UserRole;
-import auth.domain.store.UserRoleStore;
-import auth.mappers.dto.UserRoleDTO;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
-import java.util.Random;
+
 
 public class RegisterEmployeeController {
     private Company company;
     private Employee emp;
     private SpecialistDoctor sd;
-    private Random rnd = new Random();
     private String generatedPassword;
 
     public RegisterEmployeeController() {
@@ -48,16 +37,6 @@ public class RegisterEmployeeController {
         return this.company.validateEmployee(emp);
     }
 
-    private String generateRandomPassword(){
-        StringBuilder salt = new StringBuilder();
-        String saltChars = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-
-        while (salt.length() < 10) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * saltChars.length());
-            salt.append(saltChars.charAt(index));
-        }
-        return salt.toString();
-    }
 
     public List<OrgRoleDTO> getRoles() {
         List<OrgRole> roles = this.company.getRoles();
@@ -67,32 +46,16 @@ public class RegisterEmployeeController {
     }
 
     public boolean makeEmployeeAUser(){
-        this.generatedPassword = generateRandomPassword();
-        return this.company.makeEmployeeAUser(emp, generatedPassword);
+        this.generatedPassword = PasswordUtils.generateRandomPassword();
+        if(this.generatedPassword != null)
+            return this.company.makeEmployeeAUser(emp, generatedPassword);
+        return false;
     }
 
-    public boolean writePassword(){
-        BufferedWriter bw = null;
-        try {
-            bw = new BufferedWriter(new FileWriter(emp.getEmployeeID()));
-            bw.write(String.format("Employee email: %s%nEmplooye Password: %s", emp.getEmail(), generatedPassword));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }finally {
-            try {
-                if (bw != null)
-                    bw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public boolean makeEmployeeAnUserAndSendPassword() {
         if(!makeEmployeeAUser())
             return false;
-        return writePassword();
+        return PasswordUtils.writePassword(generatedPassword, emp.getEmail());
     }
 }
