@@ -1,7 +1,5 @@
 package app.domain.model;
 
-import app.controller.App;
-import auth.AuthFacade;
 import auth.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
 
@@ -174,6 +172,11 @@ public class Employee {
             throw new IllegalArgumentException("Phone Number must only have numbers.");
     }
 
+    /**
+     * Cheks if the employee email is valid:
+     *
+     * @param email the employee email.
+     */
     private void checkEmailRules(String email){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
@@ -189,6 +192,15 @@ public class Employee {
     }
 
     //SEGUNDO A INTERNET ACHO QUE SÃO 6 DIGITS, MAS NAS PERGUNTAS ALGUÉM DISSE 4 E O CLIENTE NÃO CORRIGIU
+
+    /**
+     * Checks if the SOC code is valid:
+     * - the SOC code cannot be blank;
+     * - the SOC code must have 4 digits;
+     * - the SOC code must only have numbers.
+     *
+     * @param socCode the employee SOC code.
+     */
     private void checkSocCodeRules(String socCode){
         if (StringUtils.isBlank(socCode))
             throw new IllegalArgumentException("SOC Code cannot be blank.");
@@ -198,34 +210,74 @@ public class Employee {
             throw new IllegalArgumentException("SOC Code must only have numbers.");
     }
 
+    /**
+     * Gets the employee ID.
+     *
+     * @return the employee ID.
+     */
     public String getEmployeeID() {
         return employeeID;
     }
 
+    /**
+     * Gets the employee name.
+     *
+     * @return the employee name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the employee address.
+     *
+     * @return the employee address.
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Gets the employee phone number.
+     *
+     * @return the employee phone number.
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Gets the employee email.
+     *
+     * @return the employee email.
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Gets the employee SOC code.
+     *
+     * @return the employee SOC code.
+     */
     public String getSocCode() {
         return socCode;
     }
 
+    /**
+     * Gets the employee role.
+     *
+     * @return the employee role.
+     */
     public OrgRole getRole() {
         return role;
     }
 
+    /**
+     * Returns the textual description of the employee instance.
+     *
+     * @return characteristics of the employee.
+     */
     @Override
     public String toString() {
         return "Employee{" +
@@ -239,6 +291,14 @@ public class Employee {
                 '}';
     }
 
+    /**
+     * Compares two employees with each other.
+     *
+     * @param otherObject the employee to be compared to.
+     *
+     * @return true if the two employees are equal,
+     * otherwise it returns false.
+     */
     @Override
     public boolean equals(Object otherObject) {
         if(this == otherObject)
