@@ -194,14 +194,104 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 4. Tests 
 *In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+**_DO NOT COPY ALL DEVELOPED TESTS HERE_**  
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+###ClinicalAnalysisLaboratoryTest  
 
+**Test 1:** Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory class with null values.  
+
+```
 @Test(expected = IllegalArgumentException.class)
-    public void ensureNullIsNotAllowed() {
-    Exemplo instance = new Exemplo(null, null);
-}
+public void ensureNullIsNotAllowed() {
+    System.out.println("ensureNullIsNotAllowed");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(null,
+                null,null,null,null,null);
+    }  
+```  
+**For each attribute** of the Clinical Analysis Laboratory (laboratory ID, name address, phone number, TIN number), I checked **it is not possible for them to be blank**.  
+This encompasses three situations:  
+* Null  
+* Empty  
+* Whitespace  
+
+For the list containing the types of test the Clinical Analysis Laboratory operates, it wasn't necessary to verifiy for the whitespace.  
+
+**Test 2**: Check that it is not possible to create a Clinical Analysis Laboratory with a null laboratory ID.  
+```
+@Test(expected = IllegalArgumentException.class)
+public void ensureLaboratoryIDNotNull() {
+System.out.println("ensureAC2LaboratoryIDNotNull");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(null,
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+    }  
+```
+
+**Test 3**: Check that it is not possible to create a Clinical Analysis Laboratory with an empty laboratory ID.  
+```
+@Test(expected = IllegalArgumentException.class)
+public void ensureLaboratoryIDNotEmpty() {
+System.out.println("ensureAC2LaboratoryIDNotEmpty");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+    }  
+```    
+  
+**Test 4**: Check that it is not possible to create a Clinical Analysis Laboratory with a whitespace laboratory ID.  
+
+```
+@Test(expected = IllegalArgumentException.class)
+    public void ensureLaboratoryIDNotWhiteSpace() {
+        System.out.println("ensureAC2LaboratoryIDNotWhiteSpace");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(" ",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+    }
+```  
+
+**For each attribute** of the Clinical Analysis Laboratory, I checked **they have the right length**.  
+
+**Test 5**: Check that the it is not possible to create a Clinical Analysis Laboratory with a name with the wrong length (more than 20 characters).
+
+```
+@Test(expected = IllegalArgumentException.class)
+public void ensureNameWithRightLength() {
+System.out.println("ensureAC3NameWithRightLength");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "Clinical Laboratory ManyLabs ","Lisboa","91841378811","1234567890", selectedTT);
+    }  
+```  
+
+**For each attribute** of the Clinical Analysis Laboratory, I checked they **only contain the allowed characters.**
+* Laboratory ID: alphanumeric
+* Name: letters  
+* Phone and TIN number: digits  
+
+**Test 6**: Check that it is not possible to create a Clinical Analysis Laboratory with a laboratory ID that doesn't contain only alphanumeric characters.  
+```
+@Test(expected = IllegalArgumentException.class)
+    public void ensureLaboratoryIDIsAlphanumeric() {
+        System.out.println("ensureAC2LaboratoryIDIsAlphanumeric");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("C.L1@",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+    }
+```  
+
+**Test 7**: Check that it is not possible to create a Clinical Analysis Laboratory with a phone number that doesn't contain only digits.  
+```
+@Test(expected = IllegalArgumentException.class)
+    public void ensurePhoneNumberOnlyDigits() {
+        System.out.println("ensureAC5PhoneNumberOnlyDigits");
+
+        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","918413a7881","1234567890", selectedTT);
+    }
+```
+
 
 *It is also recommended to organize this content by subsections.* 
 

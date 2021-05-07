@@ -14,4 +14,9 @@ PERGUNTAR PROF
 
 * Será que temos de possibilitar os nomes terem acentos?
 
-* US7 - corrigir metodo validateEmployee!! Não valida o Specialist Doctor supostamente
+* US7 - corrigir metodo validateEmployee!! Não valida o Specialist Doctor supostamente  
+
+
+
+TESTES UNITÁRIOS US8.md  
+* FALTA FALAR DO MÉTODO EQUALS!  
