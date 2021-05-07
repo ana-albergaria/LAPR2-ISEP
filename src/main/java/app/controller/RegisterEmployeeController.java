@@ -4,6 +4,7 @@ import app.domain.model.Company;
 import app.domain.model.Employee;
 import app.domain.model.OrgRole;
 import app.domain.model.SpecialistDoctor;
+import app.domain.shared.Constants;
 import app.domain.shared.utils.PasswordUtils;
 import app.mappers.OrgRoleMapper;
 import app.mappers.dto.EmployeeDTO;
@@ -29,12 +30,15 @@ public class RegisterEmployeeController {
     }
 
     public boolean createEmployee(EmployeeDTO empDTO) {
-        if (empDTO.getRoleDesignation().equalsIgnoreCase("Spec Doctor"))
-            this.sd = this.company.createSpecialistDoctor((SpecialistDoctorDTO) empDTO);
+        if (empDTO.getRoleDesignation().equalsIgnoreCase(Constants.ROLE_SPECIALIST_DOCTOR))
+            this.emp = this.company.createSpecialistDoctor((SpecialistDoctorDTO) empDTO);
         else
             this.emp = this.company.createEmployee(empDTO);
-
         return this.company.validateEmployee(emp);
+    }
+
+    public boolean saveEmployee(){
+        return this.company.saveEmployee(emp);
     }
 
 
