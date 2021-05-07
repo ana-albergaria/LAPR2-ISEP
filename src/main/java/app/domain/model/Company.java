@@ -45,12 +45,12 @@ public class Company {
         this.empList = new ArrayList<>();
         this.roles = new ArrayList<>();
         this.parameterStore = new ParameterStore();
-        OrgRole r1 = new OrgRole("Administrator");
-        OrgRole r2 = new OrgRole("Receptionist");
-        OrgRole r3 = new OrgRole("Med Lab Tech");
-        OrgRole r4 = new OrgRole("Lab Coordinator");
-        OrgRole r5 = new OrgRole("Spec Doctor");
-        OrgRole r6 = new OrgRole("C Chem Techn");
+        OrgRole r1 = new OrgRole("ADMINISTRATOR");
+        OrgRole r2 = new OrgRole("RECEPTIONIST");
+        OrgRole r3 = new OrgRole("MED LAB TECH");
+        OrgRole r4 = new OrgRole("LAB COORDINATOR");
+        OrgRole r5 = new OrgRole("SPEC DOCTOR");
+        OrgRole r6 = new OrgRole("C CHEM TECH");
         this.roles.add(r1);
         this.roles.add(r2);
         this.roles.add(r3);
@@ -83,6 +83,10 @@ public class Company {
 
     public ClientStore getClientStore(){
         return clientStore;
+    }
+
+    public List<Employee> getEmpList() {
+        return empList;
     }
 
     //to be used in US8
@@ -178,8 +182,9 @@ public class Company {
     }
 
     public boolean saveEmployee(Employee emp) {
-        if(!validateEmployee(emp))
+        if(!validateEmployee(emp)) {
             return false;
+        }
         return this.empList.add(emp);
     }
 

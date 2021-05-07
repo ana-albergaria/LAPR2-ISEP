@@ -23,7 +23,6 @@ public class CreateClientUI implements Runnable{
         do{
             success = createClient();
         }while (!success);
-        System.out.println(App.getInstance().getCompany().getClientStore().getClients());
         System.out.println("\n Client successfully created!");
     }
 
@@ -42,13 +41,13 @@ public class CreateClientUI implements Runnable{
                 String sex = Utils.readLineFromConsole("Enter your sex (Male or Female): ");
                 ctrl.registerClient(citizenCard, nhsNumber, birthDate,sex, tinNumber, email, name, phoneNumber);
                 confirm = Utils.confirm(String.format("Please confirm the data (type `s` if its correct, `n` if it is not):" +
-                                "%n Citizen card: %s%n Nhs number: %s%n Birth date: %s%n Tin number: %s%n, Email: %s%n, " +
+                                "%n Citizen card: %s%n Nhs number: %s%n Birth date: %s%n Tin number: %s%n Email: %s%n " +
                                 "Name: %s%n Phone number: %s%n Sex: %s%n",
                         citizenCard, nhsNumber, birthDate.toString(), tinNumber, email, name, phoneNumber, sex));
             }else{
                 ctrl.registerClient(citizenCard, nhsNumber, birthDate, tinNumber, email, name, phoneNumber);
                 confirm = Utils.confirm(String.format("Please confirm the data (type `s` if its correct, `n` if it is not):" +
-                                "%n Citizen card: %s%n Nhs number: %s%n Birth date: %s%n Tin number: %s%n, Email: %s%n, Name: %s%n Phone number: %s%n",
+                                "%n Citizen card: %s%n Nhs number: %s%n Birth date: %s%n Tin number: %s%n Email: %s%n Name: %s%n Phone number: %s%n",
                         citizenCard, nhsNumber, birthDate.toString(), tinNumber, email, name, phoneNumber));
             }
             if(!confirm) throw new Exception("Please enter the correct data");
