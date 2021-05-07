@@ -59,11 +59,11 @@ The application can have more than one administrator.
 
 -
 
->Q - Are there any other employee roles than the ones specified in the documents?
+>Q: Are there any other employee roles than the ones specified in the documents?
 >
 >A: No.
 >
->Q - Do these roles have different contracts with ManyLabs (i.e. temporary contract, permanent contract, freelance, etc...)? If so, should this be registered in the system together with the employee role information?
+>Q: Do these roles have different contracts with ManyLabs (i.e. temporary contract, permanent contract, freelance, etc...)? If so, should this be registered in the system together with the employee role information?
 >
 >A: Many Labs is known for making only permanent full-time contracts.Therefore, there is no need to register this type of information.
 >

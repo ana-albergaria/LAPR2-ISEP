@@ -3,10 +3,6 @@ package app.controller;
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
 import app.domain.store.ParameterCategoryStore;
-import app.mappers.CategoriesMapper;
-import app.mappers.dto.CategoriesDTO;
-
-import java.util.List;
 
 public class CreateParameterCategoryController {
 

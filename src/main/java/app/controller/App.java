@@ -5,7 +5,6 @@ import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
 import app.domain.shared.Constants;
-import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import auth.AuthFacade;
 import auth.UserSession;
 

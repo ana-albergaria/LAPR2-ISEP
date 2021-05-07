@@ -1,6 +1,5 @@
 package app.controller;
 
-import auth.domain.model.UserRole;
 import auth.mappers.dto.UserRoleDTO;
 
 import java.util.List;
