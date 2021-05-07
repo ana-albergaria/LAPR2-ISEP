@@ -292,6 +292,116 @@ System.out.println("ensureAC3NameWithRightLength");
     }
 ```
 
+###CompanyTest  
+
+**Test 1**: Check that createClinicalAnalysisLaboratory method returns an instance of Clinical Analysis Laboratory correctly.
+
+```
+@Test
+public void createClinicalAnalysisLaboratory() {
+System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
+
+        ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratoryDTO calDto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+
+        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory(calDto);
+
+        Assert.assertEquals(expObj, obj);
+    }
+```
+
+**Test 2**: Check that a non registered Clinical Analysis Laboratory is saved.  
+This means the Clinical Analysis Laboratory must have all the attributes different, besides its name. 
+```
+@Test
+public void ensureDifferentClinicalAnalysisLaboratoryIsSaved() {
+System.out.println("ensureDifferentClinicalAnalysisLaboratoryIsSaved (CompanyTest)");
+
+        ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        company.saveClinicalAnalysisLaboratory(c1);
+
+        ClinicalAnalysisLaboratoryDTO c2Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
+                "Laboratorio","Outeiro","91841378810","1234467890", testTypeCodes);
+        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory(c2Dto);
+        boolean result = company.saveClinicalAnalysisLaboratory(c2);
+
+        Assert.assertTrue(result);
+    }
+```
+
+**Test 3**: Check that it ts not possible to save the same Clinical Analysis Laboratory more than once.
+```
+@Test(expected = IllegalArgumentException.class)
+public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
+System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject (CompanyTest)");
+
+        ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        company.saveClinicalAnalysisLaboratory(c1);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c1);
+        
+        Assert.assertFalse(result);
+    }
+```
+
+**Test 4**: Check that it is not possible to register a Clinical Analysis Laboratory equal to a already registered Clinical Analysis Laboratory.
+```
+@Test(expected = IllegalArgumentException.class)
+public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject() {
+System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject (CompanyTest)");
+
+        ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        ClinicalAnalysisLaboratoryDTO c2Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory(c2Dto);
+        company.saveClinicalAnalysisLaboratory(c1);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c2);
+
+        Assert.assertFalse(result);
+    }
+```
+
+**Test 5**: Check that it is not possible to save a null Clinical Analysis Laboratory.
+```
+@Test
+public void ensureNullClinicalAnalysisLaboratoryIsNotSaved() {
+System.out.println("ensureNullClinicalAnalysisLaboratoryIsNotSaved (CompanyTest)");
+
+        boolean result = company.saveClinicalAnalysisLaboratory(null);
+
+        Assert.assertFalse(result);
+    }
+```
+
+The goal of the following tests I implemented was to check that **no Clinical Analysis Laboratory is saved** if it has the **same attribute** as an already registered Clinical Analysis Laboratory.  
+This does **not** apply to the **name** or **type of tests** attribute.  
+
+**Test 6**: Check that it is not possible to save a Clinical Analysis Laboratory with a Phone Number already registered in the system.  
+```
+@Test(expected = IllegalArgumentException.class)
+public void ensureNoCalWithDuplicatedPhoneNumberIsNotSaved() {
+System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
+
+        company.saveClinicalAnalysisLaboratory(c1);
+        company.saveClinicalAnalysisLaboratory(c2);
+        company.saveClinicalAnalysisLaboratory(c3);
+
+        ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
+                "BMAC","Bragança","91899998811","1777767890", testTypeCodes);
+        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
+
+        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+    }
+```
 
 *It is also recommended to organize this content by subsections.* 
 

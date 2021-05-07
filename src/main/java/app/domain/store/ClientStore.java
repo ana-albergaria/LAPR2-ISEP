@@ -7,7 +7,7 @@ import java.util.List;
 
 import java.util.Date;
 
-public class ClientSore {
+public class ClientStore {
 
     private ArrayList<Client> clientList = new ArrayList<>();
 
