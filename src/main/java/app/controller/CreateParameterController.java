@@ -44,7 +44,7 @@ public class CreateParameterController {
     //US10 SD: 19-25
     public boolean createParameter(String parameterCode, String shortName, String description, String pcCode){
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
-        ParameterCategory pc = parameterCategoryStore.getCategoryByCode(pcCode); //seleciona a cat através do code | o getCategoryByCode está na store
+        ParameterCategory pc = parameterCategoryStore.getCategoryByCode(pcCode); //vai buscar a cat através do code | o getCategoryByCode está na store
         ParameterStore parameterStore = this.company.getParameterStore();
         this.prm = parameterStore.createParameter(parameterCode, shortName, description, pc);
         return parameterStore.validateParameter(prm);
