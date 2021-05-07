@@ -26,7 +26,7 @@ public class RegisterEmployeeController {
     private Company company;
     private Employee emp;
     private SpecialistDoctor sd;
-    private Random rnd;
+    private Random rnd = new Random();
     private String generatedPassword;
 
     public RegisterEmployeeController() {
@@ -35,7 +35,6 @@ public class RegisterEmployeeController {
 
     public RegisterEmployeeController(Company company) {
         this.company = company;
-        rnd = new Random();
         this.emp = null;
         this.sd = null;
     }
