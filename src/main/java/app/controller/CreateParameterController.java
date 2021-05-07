@@ -24,7 +24,7 @@ public class CreateParameterController {
         this.prm = null;
     }
 
-    public Parameter getPrm(){
+    public Parameter getParameter() {
         return prm;
     }
 
@@ -52,7 +52,8 @@ public class CreateParameterController {
 
     //US10 SD: 30-32
     public boolean saveParameter(){
-        return this.company.getParameterStore().saveParameter(prm);
+        ParameterStore parameterStore = this.company.getParameterStore();
+        return parameterStore.saveParameter(prm);
     }
 
 }

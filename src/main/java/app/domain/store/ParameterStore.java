@@ -45,12 +45,12 @@ public class ParameterStore {
     public boolean validateParameter(Parameter prm){
         if (prm == null)
             return false;
-        return ! this.prmList.contains(prm);
+        return !this.prmList.contains(prm);
     }
 
     /**
      * Saves parameter instance the parameter store list,
-     * validating the parameter before doing so.
+     * validating the parameter globally before doing so.
      *
      * @param prm the parameter.
      *

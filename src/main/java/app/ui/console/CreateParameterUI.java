@@ -6,6 +6,7 @@ import app.domain.model.ParameterCategory;
 import app.mappers.dto.CategoriesDTO;
 import app.ui.console.utils.Utils;
 import auth.domain.store.UserRoleStore;
+import sun.security.krb5.internal.crypto.Aes128CtsHmacSha1EType;
 
 import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class CreateParameterUI implements Runnable {
     }
 
     public void run(){
-        boolean successA = true;
+        boolean successA;
         boolean confirm;
         List<Parameter> prmToValidate = new ArrayList<>();
         Parameter prm;
@@ -28,11 +29,14 @@ public class CreateParameterUI implements Runnable {
             do {
                 successA = createParameter(); //shows parameter categories list and asks to select one
             } while (!successA);
-            prm = ; //PROBLEMA: COMO IGUALAR AO PARAMETRO CRIADO ?
+            prm = ctrl.getParameter(); //PROBLEMA: COMO IGUALAR AO PARAMETRO CRIADO ?
             prmToValidate = allParametersToValidate(prmToValidate, prm);
             confirm = Utils.confirm("Do you intend to create more parameters?\n[Type 's' for yes or 'n' for no.]");
         } while(confirm);
-        //fazer a validação e o save de todos
+        do{
+            prmToValidate = confirmParameters(prmToValidate);
+        } while (prmToValidate.size() != 0); //fazer a validação e o save de todos
+        System.out.println("Parameter successfully created!");
     }
 
     private boolean createParameter(){
@@ -49,32 +53,43 @@ public class CreateParameterUI implements Runnable {
         return listPrmToValidate;
     }
 
-    private boolean confirmAndSaveParameters(List<Parameter> listPrmToValidate){
+    private List<Parameter> confirmParameters(List<Parameter> listPrmToValidate){
         boolean success;
         boolean confirmation;
+        List<Parameter> review = new ArrayList<>();
         for (int i = 0; i < listPrmToValidate.size(); i++) {
+            confirmation = Utils.confirm(String.format(">> PARAMETER <<" +
+                            "%nPlease confirm the following data:" +
+                            "%n> Parameter code: %s;" +
+                            "%n> Name: %s;" +
+                            "%n> Description: %s;" +
+                            "%n> Desired parameter category: %s." +
+                            "%n[Type 's' for correct or 'n' for wrong.]",
+                    listPrmToValidate.get(i).getPrmCode(), listPrmToValidate.get(i).getShortName(),
+                    listPrmToValidate.get(i).getDescription(), listPrmToValidate.get(i).getPc().getName())); //vai repetir isto se não colocar 's' nem 'n'
+            success = ctrl.saveParameter(); //ver se já existe ou é null
+            //ESTÁ SEMPRE A VALIDAR O MESMO
+            //POR ISSO DÁ SEMPRE QUE A PARTIR DO 1 JÁ EXISTEM
             try {
-                confirmation = Utils.confirm(String.format(">> PARAMETER " + i+1 + " <<" +
-                                "%nPlease confirm the following data:" +
-                                "%n> Parameter code: %s;" +
-                                "%n> Name: %s;" +
-                                "%n> Description: %s;" +
-                                "%n> Desired parameter category: %s." +
-                                "%n[Type 's' for correct or 'n' for wrong.]",
-                        listPrmToValidate.get(i).getPrmCode(), listPrmToValidate.get(i).getShortName(),
-                        listPrmToValidate.get(i).getDescription(), listPrmToValidate.get(i).getPc().getName())); //show
-                if (!confirmation) throw new Exception("Please enter the correct data."); //PROBLEMA: SE ESTIVER ERRADA COMO É QUE ELE VOLTA A INSERIR ?
-                success = ctrl.saveParameter();
-                if (!success) throw new Exception("Parameter either already exists or is null. Please try again."); //PROBLEMA: COMO É QUE ELE FAZ O TRY AGAIN ?
-            //PROBLEMA: NÃO PERCEBI O QUE ACONTECE A PARTIR DAQUI
-            }catch (IllegalArgumentException exception){
-                System.out.println(exception.getMessage());
-                success = false;
-            }catch(Exception e){
+                if (listPrmToValidate.size() == 1) {
+                    if (!confirmation) throw new Exception("Please enter the correct data.");
+                    if (!success) throw new Exception("Parameter either already exists or is null. Please try again.");
+                } else {
+                    if (!confirmation)
+                        throw new Exception("Please enter the correct data after confirming all the parameters.");
+                    if (!success)
+                        throw new Exception("Parameter either already exists or is null. Please try again after confirming all the parameters.");
+                }
+            }catch (IllegalArgumentException exception){ //validações
+                System.out.println(exception.getMessage()); //recebe a mensagem
+            }catch(Exception e){ //exceptions do try
                 System.out.println(e.getMessage());
-                success = false;
+            }
+            if(confirmation && success){
+                review.remove(listPrmToValidate.get(i));
             }
         }
+        return review;
     }
 
     private CategoriesDTO showListAndSelectOneObject(){
