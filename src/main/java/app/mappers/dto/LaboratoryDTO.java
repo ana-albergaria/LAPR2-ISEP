@@ -41,7 +41,6 @@ public class LaboratoryDTO {
         this.numTIN = numTIN;
     }
 
-
     public String getName() {
         return name;
     }
@@ -50,11 +49,10 @@ public class LaboratoryDTO {
         return address;
     }
 
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    
+
     public String getNumTIN() {
         return numTIN;
     }
