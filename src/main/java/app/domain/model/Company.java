@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.domain.store.ClientSore;
+import app.domain.store.ClientStore;
 import app.domain.store.ParameterCategoryStore;
 import app.domain.store.ParameterStore;
 import app.domain.store.TestTypeStore;
@@ -28,7 +28,7 @@ public class Company {
     private List<Employee> empList;
     private List<OrgRole> roles;
 
-    private ClientSore clientSore;
+    private ClientStore clientSore;
 
     public Company(String designation)
     {
@@ -79,8 +79,8 @@ public class Company {
         return testTypeStore;
     }
 
-    public ClientSore getClientSore(){
-        return clientSore;
+    public ClientStore getClientSore(){
+        return clientStore;
     }
 
     //to be used in US8
