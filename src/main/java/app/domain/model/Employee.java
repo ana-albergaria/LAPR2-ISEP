@@ -138,6 +138,9 @@ public class Employee {
             throw new IllegalArgumentException("Name cannot be blank.");
         if (name.length()>35)
             throw new IllegalArgumentException("Name must have up to 35 chars.");
+        if ((!name.matches("^[ A-Za-z]+$")))
+        //if ((!name.chars().allMatch(Character::isLetter)))
+            throw new IllegalArgumentException("Name must only have letters.");
     }
 
     /**

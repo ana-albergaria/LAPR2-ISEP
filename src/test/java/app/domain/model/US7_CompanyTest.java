@@ -20,7 +20,6 @@ public class US7_CompanyTest {
 
    @Test
     public void createSpecialistDoctor() {
-        System.out.println("createEmployee (CompanyTest)");
 
         //Arrange
         SpecialistDoctor expObj = new SpecialistDoctor(r1,
@@ -40,7 +39,6 @@ public class US7_CompanyTest {
 
     @Test
     public void createEmployee() {
-        System.out.println("createEmployee (CompanyTest)");
 
         //Arrange
         Employee expObj = new Employee(r2,
