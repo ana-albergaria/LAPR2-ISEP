@@ -33,7 +33,7 @@ class ClinicalAnalysisLaboratory{
 - laboratoryID
 }
 
-class Application{}
+/'class Application{}'/
 
 class TestType{
 - code
@@ -70,7 +70,7 @@ Company "1" -- "3..*" Laboratory : owns >
 Company "1" -- "*" TestType : conducts >
 
 /' MUDAR SENTIDO DA SETA? POR CAUSA DO RATIONALE '/
-Application "1" -- "1" Company : knows <
+/'Application "1" -- "1" Company : knows <'/
 Test "*" -- "1" TestType : classified as >
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
 ClinicalAnalysisLaboratory "1..*" -- "1" Administrator : registered by >
