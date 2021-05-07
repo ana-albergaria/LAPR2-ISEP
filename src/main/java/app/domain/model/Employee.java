@@ -9,14 +9,49 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Represents an Employee through:
+ * an employee ID, a name, an address, a phone number, an email,
+ * a SOC code and a role.
+ */
 public class Employee {
+
+    /**
+     * The employee ID.
+     */
     private String employeeID;
+
+    /**
+     * The employee name.
+     */
     private String name;
+
+    /**
+     * The employee address.
+     */
     private String address;
+
+    /**
+     * The employee phone number.
+     */
     private String phoneNumber;
+
+    /**
+     * The employee email.
+     */
     private String email;
+
+    /**
+     * The employee SOC code.
+     */
     private String socCode;
+
+    /**
+     * The employee role.
+     */
     private OrgRole role;
+
+//PORQUE É QUE TEMOS ISTO?
     private User user;
 
     /**
@@ -24,6 +59,23 @@ public class Employee {
      */
     private List<Employee> empList = new ArrayList<>();
 
+    /**
+     * List of existing roles.
+     */
+    private List<OrgRole> roles = new ArrayList<>();
+
+    /**
+     * Builds an employee instance receiveing:
+     * the employee role, ID, name, address, phone number, email and SOC code.
+     *
+     * @param role the employee role.
+     * @param employeeID the employee ID.
+     * @param name the employee name.
+     * @param address the employee address.
+     * @param phoneNumber the employee phone number.
+     * @param email the employee email.
+     * @param socCode the employee SOC code.
+     */
     public Employee(OrgRole role,
                     String employeeID,
                     String name,
@@ -67,11 +119,24 @@ public class Employee {
         return employeeID;
     }
 
+    /**
+     * Checks if the employee role is valid:
+     * - the role exists in the system.
+     *
+     * @param role the employee role.
+     */
     private void checkRoleRules(OrgRole role){
-        if (StringUtils.isBlank(role.getDescription()))
-            throw new IllegalArgumentException("Organization Role cannot be blank.");
+        if (!this.roles.contains(role))
+            throw new IllegalArgumentException("The typed role doesn't exist in the system.");
     }
 
+    /**
+     * Checks if the employee name is valid:
+     * - the name cannot be blank;
+     * - the name most have up to 35 chars.
+     *
+     * @param name the employee name.
+     */
     private void checkNameRules(String name){
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
@@ -79,6 +144,13 @@ public class Employee {
             throw new IllegalArgumentException("Name must have up to 35 chars.");
     }
 
+    /**
+     * Checks if the employee address is valid:
+     * - the address cannot be blank;
+     * - the address must have up to 30 chars.
+     *
+     * @param address the employee address.
+     */
     private void checkAddressRules(String address){
         if (StringUtils.isBlank(address))
             throw new IllegalArgumentException("Address cannot be blank.");
@@ -86,6 +158,14 @@ public class Employee {
             throw new IllegalArgumentException("Address must have up to 30 chars.");
     }
 
+    /**
+     * Checks if the employee phone number is valid:
+     * - the phone number cannot be blank;
+     * - the phone number must have 10 digits;
+     * - the phone number must only have numbers.
+     *
+     * @param phoneNumber the employee phone number.
+     */
     private void checkPhoneNumberRules(String phoneNumber){
         if (StringUtils.isBlank(phoneNumber))
             throw new IllegalArgumentException("Phone Number cannot be blank.");
