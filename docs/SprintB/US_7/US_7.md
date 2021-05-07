@@ -224,24 +224,34 @@ The Specialist Doctor has an additional attribute: Doctor Index Number."
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |              
+| Step 1: starts registering a new employee  		 |	...interacting with the actor?						 | RegisterEmployeeUI            | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                              |
+|  		 |	...coordinating the US?					 | RegisterEmployeeController            | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
+| 		 |	...instantianting a new Employee?						 | Company            | Creator (Rule 1): in the DM, Company employ Employee.                          |
+| Step 2: asks to type the employee role  		 |	...knowing the available Organization Roles?						 | Company            |   IE: in the DM, Company comprehends Organization Roles, therefore knows the available roles.                           |
+| 		 |	...validating the typed role?						 | Company            |   IE: in the DM, Company comprehends Organization Roles, therefore knows the available roles and is able to validate them.                                 |
+| Step 3: types the intended role 		 |	...saving the typed role?						 |  Employee           |    IE: object created in Step 1 has/plays a Organization Role.                      |
+| Step 4: requests data  		 |	...asking the user for this data?					 |   RegisterEmployeeUI          |   IE: responsible for user interaction.                           |
+| Step 5: types requested data   		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |    Employee         |    IE: knows its own data.                          |
+| 	 |	...saving the inputted data?						 |    Employee         |    IE: The object created in Step 1 has its own data.               |
+| Step 6: shows all data and requests confirmation  		 |	...validating the data globally (e.g.: duplicated)?						 |  Company           |  IE: knows all the Employee objects.                            |              
+| Step 7: confirms the data 		 |	...saving the created Employee?						 | Company            |  IE: saves all the ClinicalAnalysisLaboratory objects.                            |
+| 		 |	...making the created Employee a user of the system?						 | Company            |  IE: has access to the users data through the AuthFacade.                            |
+| Step 8: informs operation success	 |	...informing operation success?						 | RegisterEmployeeUI            |   	IE: responsible for user interaction                           |              
+
+
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+ * Employee
+ * Specialist Doctor
+ * Company  
+ * OrgRole
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+ * RegisterEmployeeUI  
+ * RegisterEmployeeController
 
 ## 3.2. Sequence Diagram (SD)
 

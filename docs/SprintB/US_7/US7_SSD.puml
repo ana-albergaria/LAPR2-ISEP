@@ -5,10 +5,10 @@ actor Administrator as A
 activate A
 A -> ":System" : starts registering a new employee
 activate ":System"
-":System" --> A : asks to select the employee role
+":System" --> A : asks to type the employee role
 deactivate ":System"
 
-A -> ":System" : selects the intended role
+A -> ":System" : types the intended role
 activate ":System"
 
 ":System" --> A : requests data (employeeId, organizationRole, name, address, phoneNumber, email, socCode, DoctorIndexNumber)
