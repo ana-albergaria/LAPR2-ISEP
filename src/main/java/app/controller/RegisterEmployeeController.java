@@ -27,7 +27,7 @@ public class RegisterEmployeeController {
     }
 
     public boolean createEmployee(EmployeeDTO empDTO) {
-        if (empDTO.getRoleDesignation().equalsIgnoreCase("Specialist Doctor"))
+        if (empDTO.getRoleDesignation().equalsIgnoreCase("Spec Doctor"))
             this.sd = this.company.createSpecialistDoctor((SpecialistDoctorDTO) empDTO);
         else
             this.emp = this.company.createEmployee(empDTO);
@@ -42,8 +42,8 @@ public class RegisterEmployeeController {
 
     }
 
-    public boolean addUserRole(){
-        return this.company.getAuthFacade().addUserRole(emp.getRole().getDescription(),emp.getRole().getDescription());
+    public boolean addUserRole() {
+        return this.company.getAuthFacade().addUserRole(emp.getRole().getDescription(), emp.getRole().getDescription());
     }
 
 
