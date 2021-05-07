@@ -7,10 +7,10 @@ package app.domain.shared;
 public class Constants {
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
     public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
-    public static final String ROLE_MED_LAB_TECHNICIAN = "MEDICAL LAB TECHNICIAN";
-    public static final String ROLE_CLINICAL_CHEM_TECHNOLOGIST = "CLINICAL CHEMISTRY TECHNOLOGIST";
-    public static final String ROLE_SPECIALIST_DOCTOR = "SPECIALIST DOCTOR";
-    public static final String ROLE_LAB_COORDINATOR = "LABORATORY COORDINATOR";
+    public static final String ROLE_MED_LAB_TECHNICIAN = "MED LAB TECHNICIAN";
+    public static final String ROLE_CLINICAL_CHEM_TECHNOLOGIST = "C CHEM TECH";
+    public static final String ROLE_SPECIALIST_DOCTOR = "SPEC DOCTOR";
+    public static final String ROLE_LAB_COORDINATOR = "LAB COORDINATOR";
     public static final String ROLE_CLIENT = "CLIENT";
 
 

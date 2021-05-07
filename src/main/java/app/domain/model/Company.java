@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -145,7 +146,6 @@ public class Company {
      * @return Organization Role reference
      */
     private OrgRole getRoleByDescription(String roleDescription) {
-        //PASSAR ESTE CÓDIGO PARA O CONSTRUTOR DA COMPANY
         for (OrgRole role : roles) {
             if(role.getDescription().equalsIgnoreCase(roleDescription)){
                 return role;
@@ -180,10 +180,20 @@ public class Company {
     public boolean saveEmployee(Employee emp) {
         if(!validateEmployee(emp))
             return false;
-
         return this.empList.add(emp);
     }
 
+    public boolean addUserRole(Employee emp) {
+        return this.getAuthFacade().addUserRole(emp.getRole().getDescription(), emp.getRole().getDescription());
+    }
 
+    public boolean makeEmployeeAUser(Employee emp, String generatedPassword){
+        boolean success = this.authFacade.addUserWithRole(emp.getName(), emp.getEmail(), generatedPassword, emp.getRole().getDescription());
+        if(!success){
+            addUserRole(emp);
+            return this.authFacade.addUserWithRole(emp.getName(), emp.getEmail(), generatedPassword, emp.getRole().getDescription());
+        }
+        return success;
+    }
 
 }

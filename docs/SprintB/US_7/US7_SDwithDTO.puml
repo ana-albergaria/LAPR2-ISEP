@@ -18,6 +18,7 @@ participant "empDto\n: EmployeeDto" as EMP_DTO
 participant "emp\n:Doctor" as DOCTOR'/
 participant "emp\n:Employee" as EMPLOYEE
 participant "role\n:OrgRole"
+participant "auth\n: AuthFacade" as AUTH
 /'participant "cat\n:Category" as CAT
 participant "lc\n:List<Category>" as LIST_CAT'/
 
@@ -160,6 +161,15 @@ activate ORG
 
 ORG -> ORG: validateEmployee(emp)
 ORG -> ORG: addEmployee(emp)
+
+CTRL -> ORG : makeEmployeeAnUserAndSendPassword(emp)
+ORG -> AUTH: addUserWithRole(name, email, generatedPassword)
+activate AUTH
+deactivate AUTH
+
+CTRL -> CTRL : sendPassword()
+activate CTRL
+deactivate CTRL
 
 /'PODIA COMENTAR'/
 /'CTRL --> UI: result'/
