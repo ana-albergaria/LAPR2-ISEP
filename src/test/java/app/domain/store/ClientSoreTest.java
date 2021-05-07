@@ -1,13 +1,9 @@
 package app.domain.store;
 
 import app.domain.model.Client;
-import app.domain.store.ClientSore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.Year;
-import java.util.Calendar;
 import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
