@@ -26,6 +26,7 @@ public class RegisterEmployeeController {
     private Company company;
     private Employee emp;
     private SpecialistDoctor sd;
+    private Random rnd;
     private String generatedPassword;
 
     public RegisterEmployeeController() {
@@ -34,6 +35,7 @@ public class RegisterEmployeeController {
 
     public RegisterEmployeeController(Company company) {
         this.company = company;
+        rnd = new Random();
         this.emp = null;
         this.sd = null;
     }
@@ -49,8 +51,6 @@ public class RegisterEmployeeController {
 
     private String generateRandomPassword(){
         StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-
         String saltChars = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
         while (salt.length() < 10) { // length of the random string.
