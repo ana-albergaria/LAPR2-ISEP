@@ -73,14 +73,22 @@ public class RegisterEmployeeController {
 
     public boolean writePassword(){
         FileWriter employeeData = null;
+        BufferedWriter bw = null;
         try {
             employeeData = new FileWriter(emp.getEmployeeID());
-            BufferedWriter bw = new BufferedWriter(employeeData);
+            bw = new BufferedWriter(employeeData);
             bw.write(String.format("Employee email: %s%nEmplooye Password: %s", emp.getEmail(), generatedPassword));
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }finally {
+            try {
+                employeeData.close();
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
