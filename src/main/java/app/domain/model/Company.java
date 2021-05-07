@@ -48,7 +48,7 @@ public class Company {
         OrgRole r3 = new OrgRole("Med Lab Tech");
         OrgRole r4 = new OrgRole("Lab Coordinator");
         OrgRole r5 = new OrgRole("Spec Doctor");
-        OrgRole r6 = new OrgRole("C. Chem Techn");
+        OrgRole r6 = new OrgRole("C Chem Techn");
         this.roles.add(r1);
         this.roles.add(r2);
         this.roles.add(r3);

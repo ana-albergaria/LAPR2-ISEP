@@ -19,7 +19,7 @@ public class OrgRole {
             throw new IllegalArgumentException("Organization Role cannot be blank.");
         if (description.length()>15)
             throw new IllegalArgumentException("Organization Role Description must have up to 15 chars.");
-        if (!description.contains("[a-zA-Z]+"))
+        if (!description.matches("[a-zA-Z\\s]*$"))
             throw new IllegalArgumentException("Organization Role Description can only have letters.");
     }
 

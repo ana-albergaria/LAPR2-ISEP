@@ -83,7 +83,6 @@ public class Employee {
                     String phoneNumber,
                     String email,
                     String socCode) {
-        checkRoleRules(role);
         checkNameRules(name);
         checkAddressRules(address);
         checkPhoneNumberRules(phoneNumber);
@@ -122,13 +121,13 @@ public class Employee {
     /**
      * Checks if the employee role is valid:
      * - the role exists in the system.
-     *
+     * Essa verificação esta estranaha, o employee não conhece todas roles do sistema o array vai ser sempre vazio
      * @param role the employee role.
      */
-    private void checkRoleRules(OrgRole role){
+   /* private void checkRoleRules(OrgRole role){
         if (!this.roles.contains(role))
             throw new IllegalArgumentException("The typed role doesn't exist in the system.");
-    }
+    }*/
 
     /**
      * Checks if the employee name is valid:
@@ -195,7 +194,7 @@ public class Employee {
             throw new IllegalArgumentException("SOC Code cannot be blank.");
         if (socCode.length()!=4)
             throw new IllegalArgumentException("SOC Code must have 4 digits.");
-        if (!phoneNumber.matches("[0-9]+"))
+        if (!socCode.matches("[0-9]+"))
             throw new IllegalArgumentException("SOC Code must only have numbers.");
     }
 
