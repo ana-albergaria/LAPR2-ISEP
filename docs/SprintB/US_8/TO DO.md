@@ -19,4 +19,5 @@ PERGUNTAR PROF
 
 
 TESTES UNITÁRIOS US8.md  
-* FALTA FALAR DO MÉTODO EQUALS!  
+* FALTA FALAR DO MÉTODO EQUALS na classe ClinicalAnalysisLaboratory!  
+* Mutações!!!!!
