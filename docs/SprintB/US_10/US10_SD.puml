@@ -100,7 +100,6 @@ CTRL -> PRMSTORE: validateParameter(prm)
 activate PRMSTORE
 |||
 deactivate PRMSTORE
-end
 
 
 CTRL --> UI: result
@@ -127,6 +126,7 @@ activate PRMSTORE
 deactivate PRMSTORE
 
 CTRL --> UI: result
+end
 
 UI --> ADM : informs operation success
 deactivate PCMAPPER
