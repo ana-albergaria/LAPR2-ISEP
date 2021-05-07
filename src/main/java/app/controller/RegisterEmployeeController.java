@@ -26,6 +26,7 @@ public class RegisterEmployeeController {
     private Company company;
     private Employee emp;
     private SpecialistDoctor sd;
+    private Random rnd = new Random();
     private String generatedPassword;
 
     public RegisterEmployeeController() {
@@ -49,8 +50,6 @@ public class RegisterEmployeeController {
 
     private String generateRandomPassword(){
         StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-
         String saltChars = "abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
         while (salt.length() < 10) { // length of the random string.
@@ -74,14 +73,22 @@ public class RegisterEmployeeController {
 
     public boolean writePassword(){
         FileWriter employeeData = null;
+        BufferedWriter bw = null;
         try {
             employeeData = new FileWriter(emp.getEmployeeID());
-            BufferedWriter bw = new BufferedWriter(employeeData);
+            bw = new BufferedWriter(employeeData);
             bw.write(String.format("Employee email: %s%nEmplooye Password: %s", emp.getEmail(), generatedPassword));
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }finally {
+            try {
+                employeeData.close();
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
