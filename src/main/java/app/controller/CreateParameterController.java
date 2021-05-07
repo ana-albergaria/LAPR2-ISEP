@@ -24,7 +24,7 @@ public class CreateParameterController {
         this.prm = null;
     }
 
-    public Parameter getPrm(){
+    public Parameter getParameter() {
         return prm;
     }
 

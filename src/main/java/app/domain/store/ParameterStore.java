@@ -50,7 +50,7 @@ public class ParameterStore {
 
     /**
      * Saves parameter instance the parameter store list,
-     * validating the parameter before doing so.
+     * validating the parameter globally before doing so.
      *
      * @param prm the parameter.
      *
