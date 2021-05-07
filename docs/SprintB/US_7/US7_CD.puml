@@ -1,0 +1,46 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class RegisterEmployeeUI {
+}
+
+class RegisterEmployeeController {
+}
+
+class Employee {
+- role
+- employeeID
+- name
+- address
+- phoneNumber
+- e-Mail
+- socCode
+}
+
+class SpecialistDoctor {
+- doctorIndexNumber
+}
+
+class OrgRole {
+- description
+}
+
+class OrgRoleDto {
+- description
++ getDescription()
+}
+
+class EmployeeDto {
+- roleDesignation
+- employeeID
+- name
+- address
+- phoneNumber
+- e-Mail
+- socCode
+}
+
+
+
+
+@enduml
