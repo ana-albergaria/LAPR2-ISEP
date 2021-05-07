@@ -19,6 +19,7 @@ public class CreateParameterUI implements Runnable {
         boolean success;
         boolean confirm;
         do {
+            System.out.println("To create a new Parameter, please insert the requested data.");
             do {
                 success = createParameter(); //shows parameter categories list and asks to select one
             } while (!success);
@@ -31,7 +32,6 @@ public class CreateParameterUI implements Runnable {
         boolean confirmation;
         boolean success;
         try {
-            System.out.println("To create a new Parameter, please insert the requested data.");
             String parameterCode = Utils.readLineFromConsole("Enter parameter code: ");
             String shortName = Utils.readLineFromConsole("Enter parameter name: ");
             String description = Utils.readLineFromConsole("Enter parameter description: ");
