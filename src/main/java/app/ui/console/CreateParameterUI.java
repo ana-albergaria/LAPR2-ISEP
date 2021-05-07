@@ -21,7 +21,7 @@ public class CreateParameterUI implements Runnable {
     }
 
     public void run(){
-        boolean successA = true;
+        boolean successA;
         boolean confirm;
         List<Parameter> prmToValidate = new ArrayList<>();
         Parameter prm;
@@ -40,15 +40,12 @@ public class CreateParameterUI implements Runnable {
     }
 
     private boolean createParameter(){
-        //boolean success;
-        //boolean confirmation;
         System.out.println("To create a new Parameter, please insert the requested data.");
         String parameterCode = Utils.readLineFromConsole("Enter parameter code: ");
         String shortName = Utils.readLineFromConsole("Enter parameter name: ");
         String description = Utils.readLineFromConsole("Enter parameter description: ");
         CategoriesDTO category = showListAndSelectOneObject(); //vai buscar a categoria pretendida
         return ctrl.createParameter(parameterCode, shortName, description, category.getCode()); //US10 SD: 19 a 25
-        //return success
     }
 
     private List<Parameter> allParametersToValidate(List<Parameter> listPrmToValidate, Parameter prm){
@@ -71,6 +68,8 @@ public class CreateParameterUI implements Runnable {
                     listPrmToValidate.get(i).getPrmCode(), listPrmToValidate.get(i).getShortName(),
                     listPrmToValidate.get(i).getDescription(), listPrmToValidate.get(i).getPc().getName())); //vai repetir isto se não colocar 's' nem 'n'
             success = ctrl.saveParameter(); //ver se já existe ou é null
+            //ESTÁ SEMPRE A VALIDAR O MESMO
+            //POR ISSO DÁ SEMPRE QUE A PARTIR DO 1 JÁ EXISTEM
             try {
                 if (listPrmToValidate.size() == 1) {
                     if (!confirmation) throw new Exception("Please enter the correct data.");

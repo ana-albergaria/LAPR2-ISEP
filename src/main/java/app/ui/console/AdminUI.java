@@ -23,6 +23,7 @@ public class AdminUI implements Runnable{
         options.add(new MenuItem("Register a Clinical Analysis Laboratory", new RegisterNewCalUI()));
         options.add(new MenuItem("Register a Client ", new CreateClientUI()));
         options.add(new MenuItem("Register a new Employee ", new CreateEmployeeUI()));
+        options.add(new MenuItem("Create Parameter", new CreateParameterUI()));
 
         int option = 0;
         do

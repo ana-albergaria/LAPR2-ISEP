@@ -45,7 +45,7 @@ public class ParameterStore {
     public boolean validateParameter(Parameter prm){
         if (prm == null)
             return false;
-        return ! this.prmList.contains(prm);
+        return !this.prmList.contains(prm);
     }
 
     /**
