@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -182,5 +183,7 @@ public class EmployeeTest {
         Employee instance = new Employee(r1, "employee", "qwertyuiopasdfghjkl zxcvbnmqwe",
                 "1234567890","joana@gmail.com","1234");
     }
+
+
 
 }
