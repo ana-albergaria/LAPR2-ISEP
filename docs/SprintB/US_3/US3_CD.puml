@@ -2,14 +2,14 @@
 skinparam classAttributeIconSize 0
 
 class Client {
--clientsCitizenCardNumber
--nhsNumber
--birthDate
--sex
--tinNumber
--email
--name
--phoneNumber
+-String clientsCitizenCardNumber
+-String nhsNumber
+-Date birthDate
+-String sex
+-String tinNumber
+-String email
+-String name
+-String phoneNumber
 +Client(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber )
 }
 
@@ -28,7 +28,7 @@ class AuthFacade{
 
 
 class Company {
--designation
+-String designation
 +getTestTypeStore()
 }
 

@@ -245,7 +245,6 @@ public class ClientTest {
         Assert.assertEquals(c1, c1);
     }
 
-
     @Test
     public void equalsFalseDueToNull() {
         Client c1 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
