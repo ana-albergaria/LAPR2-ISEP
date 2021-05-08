@@ -204,14 +204,7 @@ public class Employee {
             throw new IllegalArgumentException("SOC Code must only have numbers.");
     }
 
-    /**
-     * Gets the employee ID.
-     *
-     * @return the employee ID.
-     */
-    public String getEmployeeID() {
-        return employeeID;
-    }
+
 
     /**
      * Gets the employee name.
@@ -222,23 +215,6 @@ public class Employee {
         return name;
     }
 
-    /**
-     * Gets the employee address.
-     *
-     * @return the employee address.
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * Gets the employee phone number.
-     *
-     * @return the employee phone number.
-     */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
     /**
      * Gets the employee email.
@@ -247,15 +223,6 @@ public class Employee {
      */
     public String getEmail() {
         return email;
-    }
-
-    /**
-     * Gets the employee SOC code.
-     *
-     * @return the employee SOC code.
-     */
-    public String getSocCode() {
-        return socCode;
     }
 
     /**
