@@ -96,6 +96,8 @@ public class RegisterNewCalUI implements Runnable {
             for (TestTypeDTO tt : listTestType) {
                 if(verifyIfTestTypeIsNotInList(selectedTT,tt))
                     selectedTT.add(tt.getCode());
+                //else
+                    //System.out.println("This type of test was already selected! Please, choose a different one.");
             }
         }
         return success;
