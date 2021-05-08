@@ -116,9 +116,6 @@ public class Laboratory {
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if ((!name.matches("^[ A-Za-z]+$")))
-        //if ((!name.chars().allMatch(Character::isLetter)))
-            throw new IllegalArgumentException("Name must only contain letters.");
         if (name.length() > 20)
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
     }

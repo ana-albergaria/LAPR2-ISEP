@@ -132,8 +132,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
          * @return true if the received object represents other Clinical Analysis Laboratory
          * equivalent to the Clinical Analysis Laboratory. Otherwise, returns false.
          */
-
-
         @Override
         public boolean equals (Object otherObject){
             if (!super.equals(otherObject))

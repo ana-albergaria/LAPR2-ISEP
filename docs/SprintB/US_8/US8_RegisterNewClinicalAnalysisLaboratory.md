@@ -192,11 +192,64 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![USXX-CD](USXX-CD.svg)
 
 # 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**  
+Before starting to implement the tests, it was practical to **create a text fixture**, because most tests require a commmon set of objects. Therefore:
+ * I declared instance variables for the common objects.  
+ * I initialized these objects in a public void SetUp method annotated with  @Before, so that JUnit framework invokes that method before each test runs.  
 
-###ClinicalAnalysisLaboratoryTest  
+**Class**: ClinicalAnalysisLaboratoryTest  
+```
+@Before
+    public void setUp() {
+        pcList = new ArrayList<>();
+        p1 = new ParameterCategory("CODE1","Name");
+        p2 = new ParameterCategory("CODE2","Name");
+        pcList.add(p1);
+        pcList.add(p2);
+        t1 = new TestType("CODE3","Description","swab",pcList);
+        t2 = new TestType("CODE4","Description","swab",pcList);
+        selectedTT = new ArrayList<>();
+        selectedTT.add(t1);
+        selectedTT.add(t2);
+    }
+```
+
+**Class**: CompanyTest  
+```
+@Before
+    public void setUp() {
+        pcList = new ArrayList<>();
+        p1 = new ParameterCategory("CODE1","Name");
+        p2 = new ParameterCategory("CODE2","Name");
+        pcList.add(p1);
+        pcList.add(p2);
+        company = new Company("Many Labs");
+        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
+        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
+        company.getTestTypeStore().saveTestType(t1);
+        company.getTestTypeStore().saveTestType(t2);
+        selectedTT = new ArrayList<>();
+        selectedTT.add(t1);
+        selectedTT.add(t2);
+        testTypeCodes = new ArrayList<>();
+        testTypeCodes.add("CODE3");
+        testTypeCodes.add("CODE4");
+
+
+        c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
+        c2Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
+                "Laboratorio","Porto","91899998811","1239999890", testTypeCodes);
+        c3Dto = new ClinicalAnalysisLaboratoryDTO("SON55",
+                "SYNLAB","Guarda","00899998811","0039999890", testTypeCodes);
+        c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        c2 = company.createClinicalAnalysisLaboratory(c2Dto);
+        c3 = company.createClinicalAnalysisLaboratory(c3Dto);
+    }
+```
+
+
+###**Class**: ClinicalAnalysisLaboratoryTest  
 
 **Test 1:** Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory class with null values.  
 
@@ -209,11 +262,14 @@ public void ensureNullIsNotAllowed() {
                 null,null,null,null,null);
     }  
 ```  
+
 **For each attribute** of the Clinical Analysis Laboratory (laboratory ID, name address, phone number, TIN number), I checked **it is not possible for them to be blank**.  
 This encompasses three situations:  
-* Null  
-* Empty  
-* Whitespace  
+
+ * Null  
+ * Empty  
+ * Whitespace  
+
 
 For the list containing the types of test the Clinical Analysis Laboratory operates, it wasn't necessary to verifiy for the whitespace.  
 
@@ -265,10 +321,11 @@ System.out.println("ensureAC3NameWithRightLength");
     }  
 ```  
 
-**For each attribute** of the Clinical Analysis Laboratory, I checked they **only contain the allowed characters.**
-* Laboratory ID: alphanumeric
-* Name: letters  
-* Phone and TIN number: digits  
+**For each necessary attribute** of the Clinical Analysis Laboratory, I checked they **only contain the allowed characters.**  
+
+ * Laboratory ID: alphanumeric  
+ * Phone and TIN number: digits  
+
 
 **Test 6**: Check that it is not possible to create a Clinical Analysis Laboratory with a laboratory ID that doesn't contain only alphanumeric characters.  
 ```
@@ -292,7 +349,73 @@ System.out.println("ensureAC3NameWithRightLength");
     }
 ```
 
-###CompanyTest  
+####Equals Method  
+Finally, I checked if the **Equals method was functioning properly**.  
+
+In order to do that, I had an instance of Clinical Analysis Laboratory which would be compared to another instance of that class with every attribute the same **except one**.  
+Following next will be one of this tests.  
+
+**Test 8**: Check that two Clinical Analysis Laboratories are different only because they have a different address.  
+```
+@Test
+public void ensureNotEqualsObjectsWithDifferentAddress() {
+ClinicalAnalysisLaboratory object = new ClinicalAnalysisLaboratory("CAL12",
+"CAL","Lisboa","91841378811","1234567890", selectedTT);
+
+        ClinicalAnalysisLaboratory objectOnlyWithDifferentAddress = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Porto","91841378811","1234567890", selectedTT);
+
+        boolean resultDifferentAddress = object.equals(objectOnlyWithDifferentAddress);
+
+        Assert.assertFalse(resultDifferentAddress);
+
+    }
+```
+
+**Other tests to cover the rest of the branches of Equals method**
+
+**Test 9**: Check that two objects aren't equal if they are from different classes.
+
+
+```
+@Before
+public void setUp() {
+  ...
+  t1 = new TestType("CODE3","Description","swab",pcList);
+  ...
+}
+
+@Test
+public void ensureEqualsMethodObjectsFromDifferentClasses() {
+  ClinicalAnalysisLaboratory c1 = new ClinicalAnalysisLaboratory("CAL12",
+  "CAL","Lisboa","91841378811","1234567890", selectedTT);
+
+  boolean resultDifferentClasses = c1.equals(t1);
+
+  Assert.assertFalse(resultDifferentClasses);
+}
+```
+
+**Test 10**: Check that a non null object is not equal to a null one.  
+
+```
+@Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+    
+        ClinicalAnalysisLaboratory c1 = new ClinicalAnalysisLaboratory("CAL12",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratory c2 = null;
+    
+        boolean resultWithNull = c1.equals(c2);
+       
+        Assert.assertFalse(resultWithNull);
+    }
+```
+
+
+
+
+###**Class**: CompanyTest  
 
 **Test 1**: Check that createClinicalAnalysisLaboratory method returns an instance of Clinical Analysis Laboratory correctly.
 
@@ -402,6 +525,8 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
         boolean result = company.saveClinicalAnalysisLaboratory(c0);
     }
 ```
+
+
 
 *It is also recommended to organize this content by subsections.* 
 
