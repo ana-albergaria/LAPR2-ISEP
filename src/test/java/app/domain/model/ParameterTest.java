@@ -64,7 +64,7 @@ public class ParameterTest {
     //Test 9
     @Test(expected = IllegalArgumentException.class)
     public void createParameterWithShortNameWithMoreThan8Chars() {
-        Parameter parameter = new Parameter("RBC01", "RBC Count", "Red Blood Cells", p1);
+        Parameter parameter = new Parameter("RBC01", "RBC Count", "RedBloodC", p1);
     }
 
     //Test 10
@@ -89,7 +89,7 @@ public class ParameterTest {
     @Test(expected = IllegalArgumentException.class)
     public void createParameterWithDescriptionWithMoreThan20Chars() {
         Parameter parameter = new Parameter("RBC01", "RBC",
-                "This parameter corresponds to the counting of Red Blood Cells", p1);
+                "Counting of RedBloodC", p1);
     }
 
     //Test 14
