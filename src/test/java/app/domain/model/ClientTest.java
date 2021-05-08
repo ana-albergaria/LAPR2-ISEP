@@ -17,7 +17,12 @@ public class ClientTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createClientWithCitizenCardNumberEmpty(){
+    public void createClientWithNullEntries() {
+        new Client(null, null, null, null, null, null, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createClientWithCitizenCardNumberEmpty() {
 
         new Client("", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
     }
@@ -146,7 +151,7 @@ public class ClientTest {
         new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alexgmail.com", "Alex", "12345678901");
 
     }
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void createClientWithEmailFullOfSpaces() {
 
@@ -172,7 +177,7 @@ public class ClientTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createClientWithPhoneNumberEmpty(){
+    public void createClientWithPhoneNumberEmpty() {
 
         new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "");
     }
@@ -197,14 +202,9 @@ public class ClientTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createClient150yearsOld() {
-
-        try {
-            Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse("07/05/1870");
-            new Client("1234567891222222", "1234567890", d2, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void createClient150yearsOld() throws ParseException {
+        Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse("07/05/1870");
+        new Client("1234567891222222", "1234567890", d2, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -216,61 +216,39 @@ public class ClientTest {
 
     @Test
     public void equalsTrue() {
-
-        // Arrange
         Client c1 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-
         Client c2 = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        // Act
         boolean result = c1.equals(c2);
-        // Assert
         Assert.assertTrue(result);
     }
 
     @Test
     public void equalsFalse() {
-
-        // Arrange
         Client c1 = new Client("1234567890123457", "1234567891", d1, "Male", "1234567891", "alex2@gmail.com", "Alex", "12345678901");
-
         Client c2 = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex Dias", "12345678902");
-        // Act
         boolean result = c1.equals(c2);
-        // Assert
         Assert.assertFalse(result);
     }
 
 
     @Test
     public void equalsTrueWithJustCitizenCardDifferent() {
-
-        // Arrange
         Client c1 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-
         Client c2 = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        // Act
         boolean result = c1.equals(c2);
-        // Assert
         Assert.assertTrue(result);
     }
 
     @Test
     public void equalsTrueToItself() {
-
-        // Arrange
         Client c1 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        // Act
-
         Assert.assertEquals(c1, c1);
     }
 
 
     @Test
     public void equalsFalseDueToNull() {
-
-        // Arrange
         Client c1 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        // Act
         boolean result = c1.equals(null);
         Assert.assertFalse(result);
     }

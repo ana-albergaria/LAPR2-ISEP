@@ -23,21 +23,24 @@ As a receptionist of the laboratory, I want to register a client.
 
 **From the client clarifications:**
 
-> **Question:** "Are all the fields required/mandatory?"
+> **Question1:** "Are all the fields required/mandatory?"
 >  
-> **Answer:** "The phone number is opcional. All other fields are required."
-
+> **Answer:** "The sex is opcional. All other fields are required."
+>
+>Question 1 [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7563).
 -
 
-> **Question:**  Which type/format should all data have?"
+> **Question3:**  Which type/format should all data have?"
 >  
 > **Answer:** "Citizen Card" - 16 digit number; "NHS" - 10 digit number; "TIN" - 10 digit number; "Birth day - in which format?" - DD/MM/YY; "Sex - should only be Male/Female or include more options." -  Male/Female; "Phone number: which lenght/format?" - 11 digit number
 
 -
 
-> **Question:** "Since the client will become a system user, how should his password be generated ?"
+> **Question3:** "Since the client will become a system user, how should his password be generated ?"
 >  
-> **Answer:** 
+> **Answer:** "The password should be randomly generated. It should have ten alphanumeric characters"
+>
+>Question 3 [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7932).
 
 
 
@@ -60,6 +63,7 @@ available on the repository must be reused (without modifications);
 * **AC6:** The Sex options must be Male/Female;
 * **AC7:** The Phone number must be 11 digit;
 * **AC8:** The sex is opcional. All other fields are required.
+* **AC9** The name cannot have more than 35 characters.
 
 
 
@@ -137,6 +141,7 @@ n/a
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Client;
+ * ClientStore
  * Company
 
 Other software classes (i.e. Pure Fabrication) identified: 
@@ -160,74 +165,199 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+##Client Instances
+
+**Test 1:** Check that it is not possible to create an instance of the Client with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+        public void createClientWithNullEntries(){
+            new Client(null, null, null, null, null, null, null);
+        }
 	
+**Test 2:** Check if it's not possible to create a Client with empty field for each attribute.
+**For Example:**
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+    @Test(expected = IllegalArgumentException.class)
+        public void createClientWithCitizenCardNumberEmpty(){
+            new Client("", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+    }
+ 
+**Test 3:** Check if it is not possible to create a Client with each attribute's lenght criteria.
+>* **AC2:** The Citizen Card must have 16 digit number;
+>* **AC3:** The NHS number must have 10 digit;
+>* **AC4:** The TIN number must have 10 digit;
+>* **AC7:** The Phone number must be 11 digit;]
+>* **AC9** The name cannot have more than 35 characters.
+*Example (Tests of right and left limits):*
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+    @Test(expected = IllegalArgumentException.class)
+        public void createClientWithCitizenCardNumberWith17Digits() {
 
+        new Client("11111111111111111", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createClientWithCitizenCardNumberWith15Digits() {
+
+        new Client("111111111111111", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+    }
+**Test 4:** Check if it is not possible to create a Client with number attributes having letters.
+####Number attributes which are:
+>* Citizen Card;
+>* NHS number;
+>* TIN number;
+>* Phone number;
+*Example:*
+
+    @Test(expected = IllegalArgumentException.class)
+        public void clientWithNhsNumberWithLetters() {
+    
+            new Client("1234567890123456", "A123456789", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        }
+
+**Test 5:** Check if it is not possible to create a Client with sex with being nothing but Male of Female.
+
+*Example:*
+
+    @Test(expected = IllegalArgumentException.class)
+        public void createClientWithSexWithJustDigits() {
+    
+            new Client("1234567890123456", "1234567890", d1, "123124", "1111111111", "alex@gmail.com", "Alex", "12345678901");
+        }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void createClientWithSexOtherThanFemaleOrMaleJustLeters() {
+
+        new Client("1234567890123456", "1234567890", d1, "awodkwq", "1111111111", "alex@gmail.com", "Alex", "12345678901");
+    }
+    
+**Test 6:** Check if it is not possible to create a Client with wrong email format.
+
+*Example:*
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createClientWithEmailWrong() {
+        new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alexgmail.com", "Alex", "12345678901");
+
+   }
+       
+**Test 7:** Check if it is not possible to create a Client with more then 150 years.
+
+*Example:*
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createClient150yearsOld() throws ParseException {
+       Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse("07/05/1870");
+       new Client("1234567891222222", "1234567890", d2, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+    }
+   
+**Test 8:** Check if Equals method evaluates true for Clients with same citizen card number, tin number, nhs number, email or phone number.
+
+*Example:*
+
+    @Test
+    public void equalsTrue() {
+       Client c1 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+       Client c2 = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+       boolean result = c1.equals(c2);
+       Assert.assertTrue(result);
+    }
+   
+
+##Client Store
+**Test 9:** Check if it is not possible to add two repeated Clients in the Client store
+
+*Example:*
+
+    @Test
+        public void createClientStoreWithSomeElementsButTwoAreTheSame() throws ParseException {
+    
+            Date d1 = new SimpleDateFormat("dd/MM/yyyy").parse("08/08/2001");
+    
+            ClientStore cs1 = new ClientStore();
+    
+            Client cl1 = cs1.registerClient("1234567890123457","1234567890",d1,"Male","1234567891","alex1@gmail.com","Alex", "12345678901");
+            cs1.saveClient(cl1);
+    
+            Client cl2 = cs1.registerClient("1234567890123457","1234567891",d1,"Female","1234567892","alex2@gmail.com","Alex", "12345678901");
+            cs1.saveClient(cl2);
+    
+            Client cl3 =cs1.registerClient("1234567890123459","1234567892",d1,"Male","1234567893","alex3@gmail.com","Alex", "12345678901");
+            boolean c = cs1.saveClient(cl3);
+    
+    
+            Client [] result = cs1.toArray();
+            Assert.assertEquals(2, result.length);
+    
+        }
+   
 
 *It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)
 
 
-## Class CreateTaskController 
+## Class RegisterClientController 
 
-		public boolean createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Integer catId)() {
-		
-			Category cat = this.platform.getCategoryById(catId);
-			
-			Organization org;
-			// ... (omitted)
-			
-			this.task = org.createTask(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			
-			return (this.task != null);
-		}
+		public boolean registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
+                                      String tinNumber, String email, String name, String phoneNumber) {
+            ClientStore store = this.company.getClientStore();
+            this.cl = store.registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
+                    tinNumber, email, name, phoneNumber);
+            return store.validateClient(cl);
+        }
 
+        //...Omitted
+        
+        public boolean saveClient() {
+            ClientStore store = this.company.getClientStore();
+            return store.saveClient(cl);
+        }
+        
+        //...Omitted
+         
+        private boolean makeClientAnUser (){
+            this.generatedPassword = PasswordUtils.generateRandomPassword();
+            AuthFacade authFacade = this.company.getAuthFacade();
+            return authFacade.addUser(cl.getName(), cl.getEmail(), generatedPassword);
+        }
+            
+        public boolean makeClientAnUserAndSendPassword() throws IOException {
+            if(makeClientAnUser())
+                return PasswordUtils.writePassword(generatedPassword, cl.getEmail());
+            return false;
+        }
 
-## Class Organization
+## Class ClientStore
 
-
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
-
-
+       public Client registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
+                                                     String tinNumber, String email, String name, String phoneNumber) {
+           return new Client(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
+                   tinNumber, email, name, phoneNumber);
+       }
+       
+       public boolean validateClient(app.domain.model.Client cl) {
+           if (cl == null)
+               return false;
+   
+           return !this.clientList.contains(cl);
+       }
+   
+       public boolean saveClient(app.domain.model.Client cl) {
+           if (!validateClient(cl))
+               return false;
+           return this.clientList.add(cl);
+       }
+###
 
 # 6. Integration and Demo 
-
-* A new option on the Employee menu options was added.
-
-* Some demo purposes some tasks are bootstrapped while system starts.
-
+The password for the user is generated and sent(written in a file) by an method in PasswordUtils since it is
+not a responsability of any of domain classes to generate a password or send out data. Respecting Pure Fabrication.
+Also being reused in US7.
 
 # 7. Observations
 
-Platform and Organization classes are getting too many responsibilities due to IE pattern and, therefore, they are becoming huge and harder to maintain. 
-
-Is there any way to avoid this to happen?
-
-
+Client have to many arguments passed through layers, a DTO could make the maintenance easier.
 
 
 

@@ -5,7 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Date;
 import java.util.Objects;
 import java.util.regex.Pattern;
-
+/**
+ Class to instantiate a new client of the campany
+ @author Alexandre Dias and João Wolff
+ */
 public class Client {
     /**
      * Sex by omission
@@ -117,7 +120,7 @@ public class Client {
     /**
      * Checks if the Clients citizan card number is correct, and if not throws an error message
      *
-     * @param clientsCitizenCardNumber
+     * @param clientsCitizenCardNumber citizen card number of client
      */
     private void checkClientsCitizenCardNumber(String clientsCitizenCardNumber) {
         if (StringUtils.isBlank(clientsCitizenCardNumber))
@@ -131,7 +134,7 @@ public class Client {
     /**
      * Checks if the NHS number is correct, and if not throws an error message
      *
-     * @param nhsNumber
+     * @param nhsNumber clients NHS Number.
      */
     private void checknhsNumber(String nhsNumber) {
         if (StringUtils.isBlank(nhsNumber))
@@ -145,7 +148,7 @@ public class Client {
     /**
      * Checks if the Birth Date is correct, and if not throws an error message
      *
-     * @param birthDate
+     * @param birthDate clients Birth Date
      */
     private void checkBirthDate(Date birthDate) {
 
@@ -161,14 +164,14 @@ public class Client {
         long diffInTime = today.getTime() - birthDate.getTime();
         long difference_In_Years
                 = (diffInTime
-                / (1000l * 60 * 60 * 24 * 365));
+                / (1000L * 60 * 60 * 24 * 365));
         return (int) difference_In_Years;
     }
 
     /**
      * Checks if the Sex is correct, and if not throws an error message
      *
-     * @param sex
+     * @param sex clients Sex
      */
     private void checkSex(String sex) {
         if (StringUtils.isBlank(sex))
@@ -180,7 +183,7 @@ public class Client {
     /**
      * Checks if the Tin number is correct, and if not throws an error message
      *
-     * @param tinNumber
+     * @param tinNumber clients TIN Number.
      */
     private void checkTinNumber(String tinNumber) {
         if (StringUtils.isBlank(tinNumber))
@@ -197,7 +200,7 @@ public class Client {
     /**
      * Checks if the E-mail is correct, and if not throws an error message
      *
-     * @param email
+     * @param email clients email
      */
     private void checkEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
@@ -217,7 +220,7 @@ public class Client {
     /**
      * Checks if the Name is correct, and if not throws an error message
      *
-     * @param name
+     * @param name clients name
      */
     private void checkName(String name) {
         if (StringUtils.isBlank(name))
@@ -229,7 +232,7 @@ public class Client {
     /**
      * Checks if the Phone number is correct, and if not throws an error message
      *
-     * @param phoneNumber
+     * @param phoneNumber clients phone number
      */
     private void checkPhoneNumber(String phoneNumber) {
         if (StringUtils.isBlank(phoneNumber))
@@ -266,21 +269,12 @@ public class Client {
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
 
-
-        return Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) ||
-                Objects.equals(nhsNumber, client.nhsNumber) ||
+        return Objects.equals(email, client.email) ||
+                Objects.equals(phoneNumber, client.phoneNumber) ||
                 Objects.equals(tinNumber, client.tinNumber) ||
-                Objects.equals(email, client.email) ||
-                equalsPhoneNumber(client);
+                Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) ||
+                Objects.equals(nhsNumber, client.nhsNumber);
     }
 
-    private boolean equalsPhoneNumber(Client client) {
-        if (!phoneNumber.equals("sem numero")) {
-            return false;
-        } else {
-            return Objects.equals(phoneNumber, client.phoneNumber);
-        }
-
-    }
 
 }

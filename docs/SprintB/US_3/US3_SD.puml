@@ -7,7 +7,7 @@ participant ":RegisterClientUI" as UI
 participant ":RegisterClientController" as CTRL
 participant ":Company" as CP
 participant ": ClientStore" as CS
-participant "session\n:UserSession" as SESSAO
+participant "Auth\n:AuthFacade" as SESSAO
 participant "cl:\n Client" as CL
 
 
@@ -57,13 +57,21 @@ activate CS
 deactivate CS
 |||
 deactivate CS
+deactivate CTRL
+UI -> CTRL : makeClientAnUserAndSendPassword()
+activate CTRL
 
-CTRL -> SESSAO : addUser(String name, String email, String pwd)
+CTRL -> SESSAO : addUser(String name, String email, String generatedPassword)
 activate SESSAO
 SESSAO -> SESSAO : existsUser(String email)
 activate SESSAO
 deactivate SESSAO
 deactivate SESSAO
+
+CTRL -> CTRL : writePassword(generatedPassword)
+activate CTRL
+deactivate CTRL
+deactivate CTRL
 
 
 

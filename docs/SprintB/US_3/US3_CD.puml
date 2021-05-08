@@ -14,7 +14,7 @@ class Client {
 }
 
 class ClientStore{
-+createClient(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber)
++registerClient(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber)
 +validateClient(cl)
 +saveClient(cl)
 }
@@ -37,7 +37,7 @@ class Company {
 
 
 class CreateTaskController {
-  +createClient(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber)
+  +registerClient(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber)
   +saveClient()
 }
 
