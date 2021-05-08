@@ -1,10 +1,6 @@
 package app.domain.model;
 
-import auth.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -50,7 +46,7 @@ public class Employee {
     private OrgRole role;
 
     /**
-     * List of existing employees.
+     * Number of existing employees.
      */
     private static int totalEmployees = 0;
 
