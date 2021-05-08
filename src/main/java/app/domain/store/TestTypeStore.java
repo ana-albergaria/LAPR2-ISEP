@@ -14,13 +14,14 @@ public class TestTypeStore {
 
     /**
      * Test type class creator with full constructor
-     * @param code
-     * @param description
-     * @param collectingMethod
-     * @param selectedCategories
+     *
+     * @param code Test type's code
+     * @param description Test type's description
+     * @param collectingMethod Test type's collecting methods
+     * @param selectedCategories Test type's categories list
      * @return created test type reference
      */
-    public TestType createTestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories){
+    public TestType createTestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
         return new TestType(code, description, collectingMethod, selectedCategories);
     }
 
@@ -32,10 +33,11 @@ public class TestTypeStore {
 
     /**
      * Validation of test type instance relative to list of test types. checking for null and duplicity
-     * @param testType
+     *
+     * @param testType test type to be validated
      * @return true for success and false for fail
      */
-    public boolean validateTestType(TestType testType){
+    public boolean validateTestType(TestType testType) {
         if (testType == null)
             return false;
         return !this.testTypeList.contains(testType);
@@ -43,10 +45,11 @@ public class TestTypeStore {
 
     /**
      * Save of test type instance inside the list of test type store, checking for validation before
-     * @param testType
+     *
+     * @param testType test type to be saved to the list
      * @return true for success and false for fail
      */
-    public boolean saveTestType(TestType testType){
+    public boolean saveTestType(TestType testType) {
         if (!validateTestType(testType))
             return false;
         return this.testTypeList.add(testType);
@@ -54,7 +57,8 @@ public class TestTypeStore {
 
     /**
      * Method for geting test types in the store list relatively to list of test type codes
-     * @param testTypeCodes
+     *
+     * @param testTypeCodes List of test type codes to be gotten
      * @return List of test types
      */
     public List<TestType> getTestTypesByCode(List<String> testTypeCodes) {
@@ -67,12 +71,13 @@ public class TestTypeStore {
 
     /**
      * Get test acording to code of test type
-     * @param code
+     *
+     * @param code code of test type to be retrieved
      * @return test type reference
      */
     private TestType getSingleTestTypeByCode(String code) {
         for (TestType tt : testTypeList) {
-            if(tt.getCode().equalsIgnoreCase(code)){
+            if (tt.getCode().equalsIgnoreCase(code)) {
                 return tt;
             }
         }

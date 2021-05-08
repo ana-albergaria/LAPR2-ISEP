@@ -10,15 +10,16 @@ import java.io.IOException;
 import java.util.Date;
 
 /**
- Controller class for creating Clients and turning them into users of the system
- @author Alexandre Dias and João Wolff
+ * Controller class for creating Clients and turning them into users of the system
+ *
+ * @author Alexandre Dias and João Wolff
  */
 public class RegisterClientController {
 
     /**
      * Company instance of the session
      */
-    private Company company;
+    private final Company company;
 
     /**
      * Client to be regitered
@@ -39,6 +40,7 @@ public class RegisterClientController {
 
     /**
      * Construtor recieving the company as an argument
+     *
      * @param application company instance
      */
     public RegisterClientController(Company application) {
@@ -48,6 +50,7 @@ public class RegisterClientController {
 
     /**
      * Creates an client instance with all arguments
+     *
      * @param clientsCitizenCardNumber clients Citizen Card Number.
      * @param nhsNumber                clients NHS Number.
      * @param birthDate                clients Birth Date
@@ -68,6 +71,7 @@ public class RegisterClientController {
 
     /**
      * Creates an client instance with all arguments but sex(optional)
+     *
      * @param clientsCitizenCardNumber clients Citizen Card Number.
      * @param nhsNumber                clients NHS Number.
      * @param birthDate                clients Birth Date
@@ -87,6 +91,7 @@ public class RegisterClientController {
 
     /**
      * Saves the client in the store list
+     *
      * @return true if success, false if fails
      */
     public boolean saveClient() {
@@ -96,20 +101,22 @@ public class RegisterClientController {
 
     /**
      * Makes an client and user of the system and writes its generated password to a file.
+     *
      * @return true if success and false if fails.
      * @throws IOException if cannot write into the file.
      */
     public boolean makeClientAnUserAndSendPassword() throws IOException {
-        if(makeClientAnUser())
+        if (makeClientAnUser())
             return PasswordUtils.writePassword(generatedPassword, cl.getEmail());
         return false;
     }
 
     /**
      * Makes the client an user of the system
+     *
      * @return true if success and false if fails.
      */
-    private boolean makeClientAnUser (){
+    private boolean makeClientAnUser() {
         this.generatedPassword = PasswordUtils.generateRandomPassword();
         AuthFacade authFacade = this.company.getAuthFacade();
         return authFacade.addUser(cl.getName(), cl.getEmail(), generatedPassword);
