@@ -5,11 +5,23 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Date;
 import java.util.Objects;
 import java.util.regex.Pattern;
+
 /**
- Class to instantiate a new client of the campany
- @author Alexandre Dias and João Wolff
+ * Class to instantiate a new client of the campany
+ *
+ * @author Alexandre Dias and João Wolff
  */
 public class Client {
+
+    /**
+     * Validation constants
+     */
+    private final static int MAX_AGE = 150;
+    private final static int PHONE_NUMBER_LENGHT = 11;
+    private final static int CITIZEN_CARD_LENGTH = 16;
+    private final static int NHS_AND_TIN_LENGTH = 10;
+    private final static int NAME_LENGTH = 35;
+
     /**
      * Sex by omission
      */
@@ -127,7 +139,7 @@ public class Client {
             throw new IllegalArgumentException("Clients Citizen Card Number cannot be blank");
         if ((!clientsCitizenCardNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Clients Citizen Card Number must be only digits");
-        if ((clientsCitizenCardNumber).length() != 16)
+        if ((clientsCitizenCardNumber).length() != CITIZEN_CARD_LENGTH)
             throw new IllegalArgumentException("Clients Citizen Card Number must be 16 digits");
     }
 
@@ -141,7 +153,7 @@ public class Client {
             throw new IllegalArgumentException("NHS number cannot be blank");
         if ((!nhsNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("NHS Number must be only digits");
-        if ((nhsNumber).length() != 10)
+        if ((nhsNumber).length() != NHS_AND_TIN_LENGTH)
             throw new IllegalArgumentException("NHS number must be 10 digits");
     }
 
@@ -154,7 +166,7 @@ public class Client {
 
         if (birthDate == null)
             throw new IllegalArgumentException("Birth Date cannot be blank!");
-        if (getYearsDiff(birthDate) > 150) {
+        if (getYearsDiff(birthDate) > MAX_AGE) {
             throw new IllegalArgumentException("Invalid birth date, the max age is 150 years!");
         }
     }
@@ -190,7 +202,7 @@ public class Client {
             throw new IllegalArgumentException("TIN number cannot be blank");
         if ((!tinNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("TIN Number must be only digits");
-        if ((tinNumber).length() != 10)
+        if ((tinNumber).length() != NHS_AND_TIN_LENGTH)
             throw new IllegalArgumentException("TIN number must be 10 digits");
 
         // falta para o caso de ele por letras e nao numeros - tem de dar erro
@@ -225,7 +237,7 @@ public class Client {
     private void checkName(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank");
-        if (name.length() > 35)
+        if (name.length() > NAME_LENGTH)
             throw new IllegalArgumentException("Name cannot have more then 35 characteres");
     }
 
@@ -239,7 +251,7 @@ public class Client {
             throw new IllegalArgumentException("Phone number cannot be blank");
         if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("phone number must be only digits");
-        if ((phoneNumber).length() != 11)
+        if ((phoneNumber).length() != PHONE_NUMBER_LENGHT)
             throw new IllegalArgumentException("Phone number must be 11 digits");
     }
 

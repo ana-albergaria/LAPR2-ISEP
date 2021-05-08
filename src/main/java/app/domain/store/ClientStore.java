@@ -73,7 +73,7 @@ public class ClientStore {
             return false;
         return this.clientList.add(cl);
     }
-    
+
 
     public List<Client> getClients() {
         return new ArrayList<>(clientList);

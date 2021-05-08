@@ -120,12 +120,13 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
  * TestType
  * Company
- * Administrator
  * ParameterCategory
 
 Other software classes (i.e. Pure Fabrication) identified: 
+
  * CreateTestTypeUI  
  * CreateTestTypeController
+ * TestTypeStore
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -224,13 +225,46 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class CreateTestTypeController
 
+    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes){
+        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
+        this.testType = this.company.getTestTypeStore().createTestType(code, description, collectingMethod, selectedCategories);
+        return this.company.getTestTypeStore().validateTestType(testType);
+    }
+
+    //...Omitted
+    
+    public boolean saveTestType(){
+        return this.company.getTestTypeStore().saveTestType(testType);
+    }
+    
+## Class TestTypeStore
+
+    public TestType createTestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories){
+        return new TestType(code, description, collectingMethod, selectedCategories);
+    }
+
+    //...Omitted
+    
+    public boolean validateTestType(TestType testType){
+        if (testType == null)
+            return false;
+        return !this.testTypeList.contains(testType);
+    }
+
+    public boolean saveTestType(TestType testType){
+        if (!validateTestType(testType))
+            return false;
+        return this.testTypeList.add(testType);
+    }
 *It is also recommended to organize this content by subsections.* 
 
 # 6. Integration and Demo 
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+To create a Test type, it is necessary to know the list of parameter categories available in the system.
+Therefore, in order to reduce coupling, it was created a CategoriesDTO as well as a CategoriesMapper to process the data and convert the list of parameter cateogires to a Dto.
 
 
 # 7. Observations

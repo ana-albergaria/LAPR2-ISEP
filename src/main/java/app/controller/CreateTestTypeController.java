@@ -1,49 +1,94 @@
 package app.controller;
 
-import app.mappers.CategoriesMapper;
-import app.mappers.dto.CategoriesDTO;
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
-import app.domain.store.ParameterCategoryStore;
 import app.domain.model.TestType;
+import app.domain.store.ParameterCategoryStore;
+import app.domain.store.TestTypeStore;
+import app.mappers.CategoriesMapper;
+import app.mappers.dto.CategoriesDTO;
 
 import java.util.List;
 
+/**
+ * Controller for creating a type of test in
+ *
+ * @author João Wolff
+ */
 public class CreateTestTypeController {
 
-    private Company company;
+    /**
+     * Company instance of the session
+     */
+    private final Company company;
+
+    /**
+     * Test type to be created by the controller
+     */
     private TestType testType;
 
-    public CreateTestTypeController(){
+    /**
+     * Empty constructor for having the actual instance of the company when instantiated.
+     */
+    public CreateTestTypeController() {
         this(App.getInstance().getCompany());
     }
 
-    public CreateTestTypeController(Company company){
+    /**
+     * Construtor recieving the company as an argument
+     *
+     * @param company instance of company to be used
+     */
+    public CreateTestTypeController(Company company) {
         this.company = company;
         this.testType = null;
     }
 
-    public TestType getTestType() {
-        return testType;
-    }
-
-    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes){
+    /**
+     * Creates an instance of test type
+     *
+     * @param code                    Test type's code
+     * @param description             Test type's description
+     * @param collectingMethod        Test type's collecting methods
+     * @param selectedCategoriesCodes Test type's categories ids list
+     * @return True if succesfully created and false if not
+     */
+    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes) {
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+
         List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
-        this.testType = this.company.getTestTypeStore().createTestType(code, description, collectingMethod, selectedCategories);
-        return this.company.getTestTypeStore().validateTestType(testType);
+
+        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories);
+        return testTypeStore.validateTestType(testType);
     }
 
-    public boolean saveTestType(){
-        return this.company.getTestTypeStore().saveTestType(testType);
+    /**
+     * Saves current test type in the test type store
+     *
+     * @return True if successfully validated and saved false the otherway
+     */
+    public boolean saveTestType() {
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        return testTypeStore.saveTestType(testType);
     }
 
+    /**
+     * Retrieves actual parameter categories list
+     *
+     * @return parameter categories list
+     */
     public List<ParameterCategory> getParameterCategories() {
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
         return parameterCategoryStore.getParameterCategoriesStore();
     }
 
-    public List<CategoriesDTO> getParameterCategoriesDTO (){
+    /**
+     * Convert parameter categories list into a DTO
+     *
+     * @return Parameter categories DTO list
+     */
+    public List<CategoriesDTO> getParameterCategoriesDTO() {
         CategoriesMapper mapper = new CategoriesMapper();
         return mapper.toDTO(getParameterCategories());
     }

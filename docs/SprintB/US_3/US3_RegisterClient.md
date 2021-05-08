@@ -141,11 +141,11 @@ n/a
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Client;
- * ClientStore
  * Company
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
+ * ClientStore
  * RegisterClientUI  
  * RegisterClientController
 
