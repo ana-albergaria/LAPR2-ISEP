@@ -22,10 +22,7 @@ public class ParameterCategory {
 
     @Override
     public String toString() {
-        return "ParameterCategory{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return String.format("Code: %s%nName: %s%n", code, name);
     }
 
     private void checkCodeRules(String code){

@@ -242,15 +242,9 @@ public class Employee {
      */
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeID='" + employeeID + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", socCode='" + socCode + '\'' +
-                ", role=" + role +
-                '}';
+        return String.format("EMPLOYEE%n%s%nEmployee ID: %s%nName: %s%nAddress: %s%n" +
+                "Phone Number: %s%nE-mail: %10s%nStandard Occupational Classification (SOC) Code: %s%n",
+                role, employeeID, name, address, phoneNumber, email, socCode);
     }
 
     /**

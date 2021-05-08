@@ -30,9 +30,7 @@ public class SpecialistDoctor extends Employee {
 
     @Override
     public String toString() {
-        return super.toString() + "SpecialistDoctor{" +
-                "doctorIndexNumber='" + doctorIndexNumber + '\'' +
-                '}' + getClass().getSimpleName();
+        return String.format("%s%nDoctor Index Number%s%n", super.toString(), doctorIndexNumber);
     }
 
     @Override
