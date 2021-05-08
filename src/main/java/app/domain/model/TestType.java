@@ -56,6 +56,7 @@ public class TestType {
 
     //to be used for US8
 
+
     /**
      * Returns the code of the Test Type
      *
@@ -99,12 +100,20 @@ public class TestType {
      */
     @Override
     public String toString() {
-        return "TestType{" +
-                "code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", collectingMethod='" + collectingMethod + '\'' +
-                ", selectedCategories=" + selectedCategories +
-                '}';
+        List<ParameterCategory> copy = new ArrayList<>(selectedCategories);
+
+        StringBuilder s = new StringBuilder();
+        for (ParameterCategory pc : copy) {
+            s.append("\n- ");
+            s.append("Code: ");
+            s.append(pc.getCode());
+            s.append(", ");
+            s.append("Name: ");
+            s.append(pc.getName());
+        }
+
+        return String.format("%nCode: %s%nDescription: %s%nCollecting Method: %s%n" +
+                "Categories: %s", code, description, collectingMethod, s);
     }
 
     /**

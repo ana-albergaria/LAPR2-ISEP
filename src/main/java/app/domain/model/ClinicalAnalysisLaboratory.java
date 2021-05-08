@@ -68,10 +68,15 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
 
         StringBuilder s = new StringBuilder();
         for (TestType tt : copy) {
-            s.append(tt);
+            s.append("- ");
+            s.append("Code: ");
+            s.append(tt.getCode());
+            s.append(", ");
+            s.append("Description: ");
+            s.append(tt.getDescription());
             s.append("\n");
         }
-            return String.format("%sLaboratory ID: %s%nTest Types: %n%s",
+            return String.format("%sLaboratory ID: %s\nTest Types: \n%s",
                     super.toString(), laboratoryID, s);
         }
 
