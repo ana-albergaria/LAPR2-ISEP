@@ -29,7 +29,7 @@ public class Parameter {
     /**
      * The parameter category of the parameter.
      */
-    private ParameterCategory pc; //Parameter is presented under 1 ParameterCategory
+    private ParameterCategory pc;
 
     /**
      * Builds a parameter instance receiving:
