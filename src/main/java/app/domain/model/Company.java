@@ -14,13 +14,19 @@ import java.util.List;
 
 /**
  *
- * @author Paulo Maio <pam@isep.ipp.pt>
+ * @author Paulo Maio <pam@isep.ipp.pt> and SRC-Code-23
  */
 public class Company {
 
     private String designation;
     private AuthFacade authFacade;
+    /**
+     * The parameter category store.
+     */
     private ParameterCategoryStore parameterCategoryStore;
+    /**
+     * The parameter store.
+     */
     private ParameterStore parameterStore;
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<ClinicalAnalysisLaboratory> calList;
@@ -64,7 +70,12 @@ public class Company {
     public AuthFacade getAuthFacade() {
         return authFacade;
     }
-    
+
+    /**
+     * Calling the Parameter Category Store available in the system.
+     *
+     * @return the parameter category store.
+     */
     public ParameterCategoryStore getParameterCategoryStore() {
         return parameterCategoryStore;
     }
