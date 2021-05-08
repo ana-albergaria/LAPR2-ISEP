@@ -20,11 +20,11 @@ public class SpecialistDoctorTest {
                 null, null, null, null);
     }
 
-    /*@Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void ensureSpecDocWithNullRoleIsNotAllowed(){
         SpecialistDoctor sd1 = new SpecialistDoctor(null, "Joao Matos", "Morada",
                 "1234567890","joao@gmail.com","1234", "123456");
-    }*/
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureSpecDocWithNullNameIsNotAllowed(){

@@ -80,6 +80,7 @@ public class Employee {
                     String phoneNumber,
                     String email,
                     String socCode) {
+        checkRoleRules(role);
         checkNameRules(name);
         checkAddressRules(address);
         checkPhoneNumberRules(phoneNumber);
@@ -121,10 +122,12 @@ public class Employee {
      * Essa verificação esta estranaha, o employee não conhece todas roles do sistema o array vai ser sempre vazio
      * @param role the employee role.
      */
-   /* private void checkRoleRules(OrgRole role){
-        if (!this.roles.contains(role))
-            throw new IllegalArgumentException("The typed role doesn't exist in the system.");
-    }*/
+    private void checkRoleRules(OrgRole role){
+        /*if (!this.roles.contains(role))
+            throw new IllegalArgumentException("The typed role doesn't exist in the system.");*/
+        if (role == null)
+            throw new IllegalArgumentException("The organization role cannot be null.");
+    }
 
     /**
      * Checks if the employee name is valid:
