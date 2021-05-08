@@ -216,6 +216,19 @@ public class EmployeeTest {
     }
 
     @Test
+    public void ensureNotEqualsObjectsWithDifferentEmail() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manu@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
     public void ensureNotEqualsObjectsWithDifferentSocCode() {
         Employee object = new Employee(r1,
                 "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
@@ -261,9 +274,11 @@ public class EmployeeTest {
         Employee emp2 = null;
         //Act
         boolean resultWithNull = emp1.equals(emp2);
+
         //Assert
         Assert.assertFalse(resultWithNull);
     }
+
 
 
 

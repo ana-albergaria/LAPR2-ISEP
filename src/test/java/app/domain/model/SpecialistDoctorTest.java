@@ -60,6 +60,7 @@ public class SpecialistDoctorTest {
     public void ensureSpecDocWithNullDoctorIndexNumberIsNotAllowed(){
         SpecialistDoctor sd1 = new SpecialistDoctor(r1, "Joao Matos", "Morada",
                 "1234567890","joao@gmail.com","1234", null);
+
     }
 
     @Test(expected = IllegalArgumentException.class)
