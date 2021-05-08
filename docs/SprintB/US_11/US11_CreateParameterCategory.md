@@ -79,7 +79,7 @@ As an administrator, I want to specify a new parameter category.
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
+This US will be held mostly in the beginning of the business, but occasionally during it as well, probably when there's a necessity for creating a new test type.
 
 
 ## 2. OO Analysis
@@ -123,6 +123,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * ParameterCategory
 
 Other software classes (i.e. Pure Fabrication) identified: 
+
+ * ParameterCategoryStore
  * CreateParameterCategoryUI  
  * CreateParameterCategoryController
 
@@ -143,20 +145,179 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **_DO NOT COPY ALL DEVELOPED TESTS HERE_**
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the Parameter category with null values. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+	 @Test(expected = IllegalArgumentException.class)
+     public void ensureNullArgsNotAllowed() {
+        System.out.println("ensureNullArgsNotAllowed");
+        ParameterCategory pc = new ParameterCategory(null, null);
+     }
+	
+**Test 2:** Check if it's not possible to create a Parameter category with empty field for each attribute.
+**For Example:**
 
-*It is also recommended to organize this content by subsections.* 
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureCodeIsNotEmpty() {
+        System.out.println("ensureCodeIsNotEmpty");
+
+        ParameterCategory pc = new ParameterCategory("", "TESTE");
+    }
+    
+**Test 3:** Check if it is not possible to create a Client with each attribute's lenght not following the specified criteria.
+> **AC1:** Code is mandatory, unique and must have 5 alphanumeric characters.
+>
+> **AC2:** Name is a string with at maximum 10 characters.
+
+*Example (Tests of right and left limits):*
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureCodeIsNotMoreThan5Chars() {
+       System.out.println("ensureCodeIsNotMoreThan5Chars");
+
+       ParameterCategory pc = new ParameterCategory("MORETHEN5", "TESTE");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureCodeIsNotLessThan5Chars() {
+       System.out.println("ensureCodeIsNotLessThan5Chars");
+
+       ParameterCategory pc = new ParameterCategory("LESS", "TESTE");
+    }
+ 
+ **Test 4:** Check if it is not possible to create a parameter category with code having non alphanumeric characteres
+ 
+ *Namely aceptance criteria 1: Code is mandatory, unique and must have 5 alphanumeric characters.*
+ 
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureCodeIsAlphanumeric() {
+        System.out.println("ensureCodeIsAlphanumeric");
+    
+        ParameterCategory pc = new ParameterCategory("@!$%#", "TESTE");
+    } 
+
+**Test 5:** Check if it equals method is returning true for same code and false for other similarities
+
+ *For Example:*
+ 
+    @Test
+    public void equalsTrue(){
+        ParameterCategory pc1 = new ParameterCategory("HEM02", "Hemogram");
+        ParameterCategory pc2 = new ParameterCategory("HEM02", "Covid19");
+        boolean result = pc1.equals(pc2);
+        Assert.assertTrue(result);
+    }
+##Parameter category Store
+
+**Test 6:** Check if it is possible to create and save an parameter category in the store successfully
+
+ *For Example:*
+ 
+    @Test
+    public void createParameterCategory() {
+        ParameterCategory expObject = new ParameterCategory("code1","hemogram");
+        ParameterCategory obj = parameterCategoryStore.createParameterCategory("code1", "hemogram");
+
+        Assert.assertEquals(expObject, obj);
+
+    }
+
+    @Test
+    public void ensureDifferentParameterCategoriesAreSaved() {
+        ParameterCategory pc1 = new ParameterCategory("code1", "hemogram");
+        parameterCategoryStore.saveParameterCategory(pc1);
+        ParameterCategory pc2 = new ParameterCategory("code2","categorie2");
+
+        boolean result = parameterCategoryStore.saveParameterCategory(pc2);
+
+        Assert.assertTrue(result);
+    }
+
+**Test 7:** Check if it is not possible to save a repeated or null parameter category
+
+ *For Example:*
+ 
+     @Test
+     public void ensureNullParameterCategoryIsNotSaved() {
+    
+         boolean result = parameterCategoryStore.saveParameterCategory(null);
+    
+         Assert.assertFalse(result);
+     }
+     
+**Test 8:** Check if it is not possible to get an inexistent parameter category
+
+ *For Example:*
+
+     @Test(expected = UnsupportedOperationException.class)
+    public void ensureGetWithInvalidParameterCategoryCodeThrowsException() {
+        ParameterCategory pc1 = parameterCategoryStore.createParameterCategory("code1","categorie1");
+        ParameterCategory pc2 = parameterCategoryStore.createParameterCategory("code2","categorie2");
+        parameterCategoryStore.saveParameterCategory(pc1);
+        parameterCategoryStore.saveParameterCategory(pc2);
+        List<String> codeList = new ArrayList<String>();
+        codeList.add("code1");
+        codeList.add("codee");
+
+        parameterCategoryStore.getCategoriesByCode(codeList);
+    }
+
+
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class CreateParameterCategoryController  
+```
+public boolean createParameterCategory(String code, String name) {
+        ParameterCategoryStore store = this.company.getParameterCategoryStore();
+        this.pc = store.createParameterCategory(code, name);
+        return store.validateParameterCategory(pc);
+    }
 
-*It is also recommended to organize this content by subsections.* 
+    public boolean saveParameterCategory() {
+        ParameterCategoryStore store = this.company.getParameterCategoryStore();
+        return store.saveParameterCategory(pc);
+    }
+```
+
+## Class ParameterCategoryStore
+```
+public ParameterCategory createParameterCategory(String code, String name){
+        return new ParameterCategory(code, name);
+    }
+
+   
+    public boolean validateParameterCategory(ParameterCategory pc){
+        if (pc == null)
+            return false;
+        return !this.parameterCategoriesList.contains(pc);
+    }
+
+   
+    public boolean saveParameterCategory(ParameterCategory pc){
+        if (!validateParameterCategory(pc))
+            return false;
+        return this.parameterCategoriesList.add(pc);
+    }
+
+    
+    public List<ParameterCategory> getCategoriesByCode(List<String> parameterCategoryCodes) {
+        List<ParameterCategory> selectedCategories = new ArrayList<>();
+        for (String item : parameterCategoryCodes) {
+            selectedCategories.add(getCategoryByCode(item));
+        }
+        return selectedCategories;
+    }
+
+    
+    public ParameterCategory getCategoryByCode(String code) {
+        for (ParameterCategory pc : parameterCategoriesList) {
+            if(pc.getCode().equalsIgnoreCase(code)){
+                return pc;
+            }
+        }
+        throw new UnsupportedOperationException("Parameter Category not found!");
+    }
+```
 
 # 6. Integration and Demo 
 

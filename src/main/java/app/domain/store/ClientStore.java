@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * Class for storing Clients and its needed methods
+ *
  * @author João Wolff and Alexandre Dias
  */
 public class ClientStore {

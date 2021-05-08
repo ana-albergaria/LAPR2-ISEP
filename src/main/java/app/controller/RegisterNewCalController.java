@@ -8,9 +8,10 @@ import app.mappers.dto.TestTypeDTO;
 
 import java.util.List;
 
-/**
- Controller class for registering a new Clinical Analysis Laboratory
- @author Ana Albergaria
+/**Controller class for registering a new Clinical Analysis Laboratory
+ *
+ *  @author Ana Albergaria
+ *
  */
 public class RegisterNewCalController {
 

@@ -394,8 +394,6 @@ public class ClinicalAnalysisLaboratoryTest {
 
         String string = c1.toString();
 
-
-
         Assert.assertEquals(expString, string);
     }
 

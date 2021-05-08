@@ -24,6 +24,11 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
 
     /**
+     * The length of the laboratory ID.
+     */
+    private static final int LABORATORY_ID_LENGTH = 5;
+
+    /**
      * Builds a Clinical Analysis Laboratory's instance receiving:
      * the Laboratory ID, the name, the address, the phone number, the TIN number and
      * the type of tests
@@ -97,7 +102,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         private void checkLaboratoryIDRules (String laboratoryID){
             if (StringUtils.isBlank(laboratoryID))
                 throw new IllegalArgumentException("Laboratory ID cannot be blank.");
-            if ((laboratoryID.length() != 5))
+            if ((laboratoryID.length() != LABORATORY_ID_LENGTH))
                 throw new IllegalArgumentException("Laboratory ID cannot have more or less than five alphanumeric characters.");
             if (!StringUtils.isAlphanumeric(laboratoryID))
                 throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");

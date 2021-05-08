@@ -2,6 +2,7 @@ package app.ui.console;
 
 import app.controller.CreateParameterController;
 import app.mappers.dto.CategoriesDTO;
+import app.ui.console.utils.OurUtils;
 import app.ui.console.utils.Utils;
 import java.util.List;
 
@@ -16,10 +17,13 @@ public class CreateParameterUI implements Runnable {
     public void run() {
         boolean success;
         boolean confirm;
+        List<String> menu = OurUtils.menuToContinueOrCancel();
+
         do {
             System.out.println("To create a new Parameter, please insert the requested data.");
             do {
-                success = createParameter(); //shows parameter categories list and asks to select one
+                int index = Utils.showAndSelectIndex(menu, ""); //shows parameter categories list and asks to select one
+                success = (index == -1) ? true : createParameter();
             } while (!success);
             confirm = Utils.confirm("Do you intend to create more parameters?\n[Type 's' for yes or 'n' for no.]");
         } while (confirm);
@@ -34,6 +38,8 @@ public class CreateParameterUI implements Runnable {
             String shortName = Utils.readLineFromConsole("Enter parameter name: ");
             String description = Utils.readLineFromConsole("Enter parameter description: ");
             CategoriesDTO category = showListAndSelectOneObject(); //vai buscar a categoria pretendida
+            if(category == null)
+                throw new IllegalArgumentException("Operation canceled!");
             ctrl.createParameter(parameterCode, shortName, description, category.getCode()); //US10 SD: 19 a 25
             confirmation = Utils.confirm(String.format(">> PARAMETER <<" +
                             "%nPlease confirm the following data:" +
