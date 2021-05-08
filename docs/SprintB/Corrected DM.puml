@@ -183,9 +183,10 @@ Diagnosis -[hidden]right-> SpecialistDoctorReport
 
 /' END OF LAYOUT PURPOSES '/
 
+Laboratory <|-- ClinicalAnalysisLaboratory
 ChemicalLaboratory "1" -- "1" Laboratory : is of >
 Company "1" -- "3..*" Laboratory : owns >
-ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >
+/'ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >'/
 
 
 
@@ -266,6 +267,8 @@ Application "1" - "*" Notification : sends >
 /'OtherTest "*" -- "1..*" Parameter : characterized by >'/
 
 TestType "*" -- "1..*" Parameter : characterized by >
+
+ClinicalAnalysisLaboratory "1..*" -- "1" Administrator : registered by >
 
 /' US8 '/
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
