@@ -1,31 +1,37 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class RegisterEmployeeUI {
+class CreateEmployeeUI {
 }
 
 class RegisterEmployeeController {
++createEmployee(empDTO)
++saveEmployee()
++getRoles()
++makeEmployeeAUser()
++makeEmployeeAnUserAndSendPassword()
 }
 
 class Employee {
-- role
-- employeeID
-- name
-- address
-- phoneNumber
-- e-Mail
-- socCode
-+Employee(role, employeeID, name, address, phoneNumber, email, socCode)
+-OrgRole role
+-String employeeID
+-String name
+-String address
+-String phoneNumber
+-String email
+-String socCode
+-List<Employee> empList
++Employee(role,name,address,phoneNumber,email,socCode)
 +getEmployeeId()
 +getName()
 +getAddress()
 +getPhoneNumber()
 +getEmail()
-+getSocCode()
 +getRole()
 +toString()
 +equals(otherObject)
 +generateEmployeeID(name)
++checkRoleRules()
 +checkNameRules()
 +checkAddressRules()
 +checkPhoneNumberRules()
@@ -36,61 +42,66 @@ class Employee {
 }
 
 class SpecialistDoctor {
-- doctorIndexNumber
+-String doctorIndexNumber
++SpecialistDoctor(role,name,address,phoneNumber,email,socCode,doctorIndexNumber)
++checkDoctorIndexNumberRules(doctorIndexNumber)
++toString()
++equals(otherObject)
 }
 
 class OrgRole {
-- description
+-String description
++OrgRole(description)
++checkDescription(description)
++getDescription()
++toString()
++equals(otherObject)
 }
 
-class OrgRoleDto {
-- description
-+ getDescription()
+class OrgRoleDTO {
+-String description
++OrgRoleDTO(description)
++getDescription()
++toString()
 }
 
-class EmployeeDto {
-- roleDesignation
-- employeeID
-- name
-- address
-- phoneNumber
-- e-Mail
-- socCode
+class EmployeeDTO {
+-String roleDesignation
+-String name
+-String address
+-String phoneNumber
+-String email
+-String socCode
++EmployeeDTO(roleDesignation, name, address, phoneNumber, email, socCode)
 +getName()
 +getAddress()
 +getPhoneNumber()
 +getEmail()
-+getSocCode()
 +getRoleDesignation()
-+Employee(roleDesignation, employeeID, name, address, phoneNumber, e-Mail, socCode)
-+getEmployeeId()
-+getName()
-+getAddress()
-+getPhoneNumber()
-+getEmail()
-+getSocCode()
 }
 
-class SpecialistDoctorDto {
+class SpecialistDoctorDTO {
+-String doctorIndexNumber
++SpecialistDoctorDTO(roleDesignation, name, address, phoneNumber, email, socCode, doctorIndexNumber)
 }
 
 class User {
 }
 
-RegisterEmployeeUI ..> RegisterEmployeeController
+CreateEmployeeUI ..> RegisterEmployeeController
 Employee <|-- SpecialistDoctor
 RegisterEmployeeController ..> Employee
 RegisterEmployeeController ..> SpecialistDoctor
-RegisterEmployeeUI ..> EmployeeDto
-RegisterEmployeeUI ..> SpecialistDoctorDto
-RegisterEmployeeController ..> EmployeeDto
-RegisterEmployeeController ..> SpecialistDoctorDto
-RegisterEmployeeController ..> OrgRoleDto
-RegisterEmployeeUI ..> OrgRoleDto
+CreateEmployeeUI ..> EmployeeDTO
+CreateEmployeeUI ..> SpecialistDoctorDTO
+RegisterEmployeeController ..> EmployeeDTO
+RegisterEmployeeController ..> SpecialistDoctorDTO
+RegisterEmployeeController ..> OrgRoleDTO
+CreateEmployeeUI ..> OrgRoleDTO
 RegisterEmployeeController ..> Company
 RegisterEmployeeController ..> OrgRole
 
-EmployeeDto <|-- SpecialistDoctorDto
+EmployeeDTO <|-- SpecialistDoctorDTO
 
 Employee "*" -- "1" OrgRole : has/plays >
 Company "1" -- "*" OrgRole : comprehends >

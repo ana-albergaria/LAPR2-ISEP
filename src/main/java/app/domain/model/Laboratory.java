@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  * Specifies common characteristics to all the
  * hierarchy classes.
  *
- * @author Ana Albergaria 1201518
+ * @author Ana Albergaria
  */
 
 public class Laboratory {

@@ -159,7 +159,7 @@ The present US is held mainly in the beginning of the business a couple of times
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
 |               	 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
-| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  LC: Company uses TestTypeStore.                     |
+| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  HC+LC: Company uses TestTypeStore.                     |
 |                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for low coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
 | Step 6: shows all data and requests confirmation            		 |	...validating the data globally (e.g.: duplicated)?						 |  Company           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
@@ -181,13 +181,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
-
 ![US8_SD](US8_SD.svg)
 
 ## 3.3. Class Diagram (CD)
-
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
 ![US8_CD](US8_CD.svg)
 
@@ -250,7 +246,7 @@ Before starting to implement the tests, it was practical to **create a text fixt
 ```
 
 
-###**Class**: ClinicalAnalysisLaboratoryTest ###  
+### **Class**: ClinicalAnalysisLaboratoryTest ###  
 
 **Test 1:** Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory class with null values.  
 
@@ -522,20 +518,77 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
 
 
 
-*It is also recommended to organize this content by subsections.* 
-
 # 5. Construction (Implementation)
 
 *In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
 
 *It is also recommended to organize this content by subsections.* 
 
-# 6. Integration and Demo 
+## Class RegisterNewCalController
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+		public boolean createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
+        this.cal = this.company.createClinicalAnalysisLaboratory(calDto);
+        return this.company.validateClinicalAnalysisLaboratory(cal);
+      }
+
+
+      public boolean saveClinicalAnalysisLaboratory(){
+          return this.company.saveClinicalAnalysisLaboratory(cal);
+      }
+
+      public List<TestTypeDTO> getTestTypes() {
+          TestTypeStore storeTest = this.company.getTestTypeStore();
+          List<TestType> listTestType = storeTest.getTestTypes();
+  
+          TestTypeMapper mapper = new TestTypeMapper();
+          return mapper.toDTO(listTestType);
+        }
+
+## Class Company
+
+
+		public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDTO) {
+        TestTypeStore storeTest = getTestTypeStore();
+        List<TestType> selectedTT = storeTest.getTestTypesByCode(calDTO.getTestTypeCodes());
+
+        return new ClinicalAnalysisLaboratory(calDTO.getLaboratoryID(), calDTO.getName(),
+                calDTO.getAddress(), calDTO.getPhoneNumber(), calDTO.getNumTIN(), selectedTT);
+    }
+
+    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if(cal == null)
+            return false;
+        checkCalDuplicates(cal);
+        return ! this.calList.contains(cal);
+    }
+
+    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if (!validateClinicalAnalysisLaboratory(cal))
+            return false;
+
+        return this.calList.add(cal);
+    }
+
+    public void checkCalDuplicates(ClinicalAnalysisLaboratory cal) {
+        for (ClinicalAnalysisLaboratory item : calList) {
+            if(cal.getLaboratoryID().equalsIgnoreCase(item.getLaboratoryID()))
+                throw new IllegalArgumentException("Laboratory ID already registered in the system.");
+            if(cal.getAddress().equalsIgnoreCase(item.getAddress()))
+                throw new IllegalArgumentException("Address already registered in the system.");
+            if(cal.getPhoneNumber().equals(item.getPhoneNumber()))
+                throw new IllegalArgumentException("Phone Number already registered in the system.");
+            if(cal.getNumTIN().equals(item.getNumTIN()))
+                throw new IllegalArgumentException("TIN Number already registered in the system.");
+        }
+    }
+
+
+# 6. Integration and Demo
+
+To create a Clinical Analysis Laboratory, it is necessary to know the list of test types available in the system.  
+Therefore, in order to reduce coupling, it was created a TestTypeDto as well as a TestTypeMapper to process the data and convert the list of test types to a Dto.
 
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
-  
+Clinical Analysis Laboratory has many arguments passing through layers, therefore a DTO could make the maintenance easier.

@@ -9,7 +9,7 @@ import java.util.List;
  * Represents a Clinical Analysis Laboratory through:
  * a Laboratory ID, a name, an address, a phone number, a TIN number and the type of tests
  *
- * @author Ana Albergaria 1201518
+ * @author Ana Albergaria
  */
 
 public class ClinicalAnalysisLaboratory extends Laboratory {
