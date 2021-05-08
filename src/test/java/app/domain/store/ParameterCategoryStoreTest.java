@@ -2,9 +2,13 @@ package app.domain.store;
 
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
+import app.domain.model.TestType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -66,6 +70,19 @@ public class ParameterCategoryStoreTest {
         boolean result = parameterCategoryStore.saveParameterCategory(null);
 
         Assert.assertFalse(result);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureGetWithInvalidParameterCategoryCodeThrowsException() {
+        ParameterCategory pc1 = parameterCategoryStore.createParameterCategory("code1","categorie1");
+        ParameterCategory pc2 = parameterCategoryStore.createParameterCategory("code2","categorie2");
+        parameterCategoryStore.saveParameterCategory(pc1);
+        parameterCategoryStore.saveParameterCategory(pc2);
+        List<String> codeList = new ArrayList<String>();
+        codeList.add("code1");
+        codeList.add("codee");
+
+        parameterCategoryStore.getCategoriesByCode(codeList);
     }
 
 }
