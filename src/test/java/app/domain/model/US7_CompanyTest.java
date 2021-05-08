@@ -55,4 +55,63 @@ public class US7_CompanyTest {
         //Assert
         Assert.assertEquals(expObj, obj);
     }
+
+    @Test
+    public void saveEmployee() {
+
+        //Arrange
+        Employee expObj = new Employee(r2,
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
+
+        EmployeeDTO empDTO = new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
+
+        //Act
+        Employee obj = company.createEmployee(empDTO);
+        company.saveEmployee(obj);
+
+        Employee savedObj = company.getEmpList().get(0);
+        //Assert
+        Assert.assertEquals(expObj, savedObj);
+    }
+
+    @Test
+    public void ensureSaveNullObjectNotAllowed() {
+
+        boolean save = company.saveEmployee(null);
+        //Assert
+        Assert.assertFalse(save);
+    }
+
+    @Test
+    public void ensureSaveRepeatedEmpNotAllowed() {
+
+        //Act
+        Employee obj = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+        company.saveEmployee(obj);
+        boolean save = company.saveEmployee(obj);
+        //Assert
+        Assert.assertFalse(save);
+    }
+
+    @Test
+    public void ensureSaveEmpWithRepeatedAttributesNotAllowed() {
+
+        //Act
+        Employee obj = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+        company.saveEmployee(obj);
+        Employee obj2 = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+        boolean save = company.saveEmployee(obj2);
+        //Assert
+        Assert.assertFalse(save);
+    }
+
 }

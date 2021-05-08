@@ -197,7 +197,7 @@ public class Company {
     public boolean validateEmployee(Employee emp) {
         if(emp == null)
             return false;
-        return ! this.empList.contains(emp);
+        return !this.empList.contains(emp);
     }
 
     public boolean saveEmployee(Employee emp) {
