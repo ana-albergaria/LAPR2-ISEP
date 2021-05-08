@@ -122,22 +122,22 @@ There is a dependency to "US009 To specify a new type of test and its collecting
 
 ### 1.6. System Sequence Diagram (SSD)
 
-*Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
 
-![USXX-SSD](USXX-SSD.svg)
+![US8_SSD](US8_SSD.svg)
 
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
+
+The present US is held mainly in the beginning of the business a couple of times, as Clinical Analysis Laboratories are required for the business functioning in its very beginning. Apart from that, it will be held scarcely.  
+
 
 
 ## 2. OO Analysis
 
-### 2.1. Relevant Domain Model Excerpt 
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
+### 2.1. Relevant Domain Model Excerpt
 
-![USXX-MD](USXX-MD.svg)
+![US8_DM](US8_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -183,17 +183,18 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 *In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
 
-![USXX-SD](USXX-SD.svg)
+![US8_SD](US8_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 *In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
-![USXX-CD](USXX-CD.svg)
+![US8_CD](US8_CD.svg)
 
 # 4. Tests 
 
-Before starting to implement the tests, it was practical to **create a text fixture**, because most tests require a commmon set of objects. Therefore:
+Before starting to implement the tests, it was practical to **create a text fixture**, because most tests require a commmon set of objects. Therefore:  
+
  * I declared instance variables for the common objects.  
  * I initialized these objects in a public void SetUp method annotated with  @Before, so that JUnit framework invokes that method before each test runs.  
 
@@ -249,14 +250,13 @@ Before starting to implement the tests, it was practical to **create a text fixt
 ```
 
 
-###**Class**: ClinicalAnalysisLaboratoryTest  
+###**Class**: ClinicalAnalysisLaboratoryTest ###  
 
 **Test 1:** Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory class with null values.  
 
 ```
 @Test(expected = IllegalArgumentException.class)
 public void ensureNullIsNotAllowed() {
-    System.out.println("ensureNullIsNotAllowed");
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(null,
                 null,null,null,null,null);
@@ -276,8 +276,7 @@ For the list containing the types of test the Clinical Analysis Laboratory opera
 **Test 2**: Check that it is not possible to create a Clinical Analysis Laboratory with a null laboratory ID.  
 ```
 @Test(expected = IllegalArgumentException.class)
-public void ensureLaboratoryIDNotNull() {
-System.out.println("ensureAC2LaboratoryIDNotNull");
+public void ensureAC2LaboratoryIDNotNull() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(null,
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -287,8 +286,7 @@ System.out.println("ensureAC2LaboratoryIDNotNull");
 **Test 3**: Check that it is not possible to create a Clinical Analysis Laboratory with an empty laboratory ID.  
 ```
 @Test(expected = IllegalArgumentException.class)
-public void ensureLaboratoryIDNotEmpty() {
-System.out.println("ensureAC2LaboratoryIDNotEmpty");
+public void ensureAC2LaboratoryIDNotEmpty() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -299,8 +297,7 @@ System.out.println("ensureAC2LaboratoryIDNotEmpty");
 
 ```
 @Test(expected = IllegalArgumentException.class)
-    public void ensureLaboratoryIDNotWhiteSpace() {
-        System.out.println("ensureAC2LaboratoryIDNotWhiteSpace");
+    public void ensureAC2LaboratoryIDNotWhiteSpace() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory(" ",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -313,8 +310,7 @@ System.out.println("ensureAC2LaboratoryIDNotEmpty");
 
 ```
 @Test(expected = IllegalArgumentException.class)
-public void ensureNameWithRightLength() {
-System.out.println("ensureAC3NameWithRightLength");
+public void ensureAC3NameWithRightLength() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "Clinical Laboratory ManyLabs ","Lisboa","91841378811","1234567890", selectedTT);
@@ -330,8 +326,7 @@ System.out.println("ensureAC3NameWithRightLength");
 **Test 6**: Check that it is not possible to create a Clinical Analysis Laboratory with a laboratory ID that doesn't contain only alphanumeric characters.  
 ```
 @Test(expected = IllegalArgumentException.class)
-    public void ensureLaboratoryIDIsAlphanumeric() {
-        System.out.println("ensureAC2LaboratoryIDIsAlphanumeric");
+    public void ensureAC2LaboratoryIDIsAlphanumeric() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("C.L1@",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -341,15 +336,14 @@ System.out.println("ensureAC3NameWithRightLength");
 **Test 7**: Check that it is not possible to create a Clinical Analysis Laboratory with a phone number that doesn't contain only digits.  
 ```
 @Test(expected = IllegalArgumentException.class)
-    public void ensurePhoneNumberOnlyDigits() {
-        System.out.println("ensureAC5PhoneNumberOnlyDigits");
+    public void ensureAC5PhoneNumberOnlyDigits() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","918413a7881","1234567890", selectedTT);
     }
 ```
 
-####Equals Method  
+####Equals Method ####
 Finally, I checked if the **Equals method was functioning properly**.  
 
 In order to do that, I had an instance of Clinical Analysis Laboratory which would be compared to another instance of that class with every attribute the same **except one**.  
@@ -359,8 +353,8 @@ Following next will be one of this tests.
 ```
 @Test
 public void ensureNotEqualsObjectsWithDifferentAddress() {
-ClinicalAnalysisLaboratory object = new ClinicalAnalysisLaboratory("CAL12",
-"CAL","Lisboa","91841378811","1234567890", selectedTT);
+        ClinicalAnalysisLaboratory object = new ClinicalAnalysisLaboratory("CAL12",
+        "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
         ClinicalAnalysisLaboratory objectOnlyWithDifferentAddress = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Porto","91841378811","1234567890", selectedTT);
@@ -415,7 +409,7 @@ public void ensureEqualsMethodObjectsFromDifferentClasses() {
 
 
 
-###**Class**: CompanyTest  
+### **Class**: CompanyTest 
 
 **Test 1**: Check that createClinicalAnalysisLaboratory method returns an instance of Clinical Analysis Laboratory correctly.
 

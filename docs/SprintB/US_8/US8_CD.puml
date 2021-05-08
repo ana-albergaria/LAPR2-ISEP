@@ -19,27 +19,54 @@ class Laboratory {
 -address : String
 -phoneNumber : int
 -numTIN : int
-+Laboratory(name : String, address : String, phoneNumber : int, numTIN : int)
++Laboratory(name, address, phoneNumber, numTIN)
++getName()
++getAddress()
++getPhoneNumber()
++getNumTIN()
++toString()
+/'+checkNameRules()
++checkAddressRules()
++checkPhoneNumberRules()
++checkTINNumberRules()'/
++equals()
 }
 
 class ClinicalAnalysisLaboratory {
 -laboratoryID : String
-+ClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, selectedTT)
++ClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
++getLaboratoryID()
++getSelectedTT()
++toString()
+/'+checkLaboratoryIDRules()
++checkTestTypesRules()'/
++equals()
 }
 
 class TestType {
 - code : String
 - description : String
-- collectingMethod : String
+- collectingMethod :
++TestType(code, description, collectingMethod, selectedCategories)
++getString()
++getDescription()
++getCollectingMethod()
++getSelectedCategories()
++toString()
+/'+checkCode()
++checkDescription()
++checkCollectingMethod()'/
++equals()
 }
 
 class Company {
 -designation : String
 +getTestTypeStore()
-+createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, tt)
++createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, tt)
 +saveClinicalAnalysisLaboratory(cal)
 -addClinicalAnalysisLaboratory(cal)
 +validateClinicalAnalysisLaboratory(cal)
+/'+checkCalDuplicates()'/
 /'+getTestTypes()
 +getTestTypesByDesignation(selectedTestTypes)'/
 }
@@ -47,6 +74,7 @@ class Company {
 class TestTypeStore {
 +getTestTypes()
 +getTestTypesByCode(testTypesCodes)
++getSingleTestTypeByCode(code)
 }
 
 /'
@@ -58,9 +86,9 @@ class LaboratoryStore {
 }'/
 
 class RegisterNewCalController {
-+getTestTypes()
-+createClinicalAnalysisLaboratory(laboratoryID : String, name : String, address : String, phoneNumber : int, numTIN : int, testTypesDesignations)
++createClinicalAnalysisLaboratory(calDto)
 +saveClinicalAnalysisLaboratory()
++getTestTypes()
 }
 
 class RegisterNewCalUI {}

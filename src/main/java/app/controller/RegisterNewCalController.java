@@ -21,26 +21,6 @@ public class RegisterNewCalController {
         this.cal = null;
     }
 
-    /*
-    public boolean createClinicalAnalysisLaboratory(String laboratoryID,
-                                                    String name,
-                                                    String address,
-                                                    String phoneNumber,
-                                                    String numTIN,
-                                                    List<String> testTypeCodes){
-
-
-        TestTypeStore storeTest = this.company.getTestTypeStore();
-        List<TestType> selectedTT = storeTest.getTestTypesByCode(testTypeCodes);
-
-
-
-        this.cal = this.company.createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT);
-        return this.company.validateClinicalAnalysisLaboratory(cal);
-    }
-     */
-
-
 
     public boolean createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
         this.cal = this.company.createClinicalAnalysisLaboratory(calDto);
@@ -55,6 +35,7 @@ public class RegisterNewCalController {
     public List<TestTypeDTO> getTestTypes() {
         TestTypeStore storeTest = this.company.getTestTypeStore();
         List<TestType> listTestType = storeTest.getTestTypes();
+
         TestTypeMapper mapper = new TestTypeMapper();
         return mapper.toDTO(listTestType);
     }

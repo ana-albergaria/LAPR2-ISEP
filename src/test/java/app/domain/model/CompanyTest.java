@@ -58,8 +58,6 @@ public class CompanyTest {
     //for US8
     @Test
     public void createClinicalAnalysisLaboratory() {
-        System.out.println("createClinicalAnalysisLaboratory (CompanyTest)");
-
         //Arrange
         ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -77,7 +75,6 @@ public class CompanyTest {
 
     @Test
     public void ensureDifferentClinicalAnalysisLaboratoryIsSaved() {
-        System.out.println("ensureDifferentClinicalAnalysisLaboratoryIsSaved (CompanyTest)");
 
         //Arrange
         ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
@@ -98,7 +95,6 @@ public class CompanyTest {
     //TESTES DE VALIDAÇÃO
     @Test(expected = IllegalArgumentException.class)
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
-        System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject (CompanyTest)");
 
         //Arrange
         ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
@@ -115,7 +111,6 @@ public class CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject() {
-        System.out.println("ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject (CompanyTest)");
 
         //Arrange
         ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
@@ -136,7 +131,6 @@ public class CompanyTest {
 
     @Test
     public void ensureNullClinicalAnalysisLaboratoryIsNotSaved() {
-        System.out.println("ensureNullClinicalAnalysisLaboratoryIsNotSaved (CompanyTest)");
 
         //Act
         boolean result = company.saveClinicalAnalysisLaboratory(null);
@@ -147,7 +141,6 @@ public class CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedLaboratoryIDIsNotSaved() {
-        System.out.println("ensureNoCalWithDuplicatedLaboratoryIDIsNotSaved");
 
         company.saveClinicalAnalysisLaboratory(c1);
         company.saveClinicalAnalysisLaboratory(c2);
@@ -162,7 +155,6 @@ public class CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedAddressIsNotSaved() {
-        System.out.println("ensureNoCalWithDuplicatedAddressIsNotSaved");
 
         company.saveClinicalAnalysisLaboratory(c1);
         company.saveClinicalAnalysisLaboratory(c2);
@@ -177,7 +169,6 @@ public class CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedPhoneNumberIsNotSaved() {
-        System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
 
         company.saveClinicalAnalysisLaboratory(c1);
         company.saveClinicalAnalysisLaboratory(c2);
@@ -192,7 +183,6 @@ public class CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedTINNumberIsNotSaved() {
-        System.out.println("ensureNoCalWithDuplicatedTINNumberIsNotSaved");
 
         company.saveClinicalAnalysisLaboratory(c1);
         company.saveClinicalAnalysisLaboratory(c2);

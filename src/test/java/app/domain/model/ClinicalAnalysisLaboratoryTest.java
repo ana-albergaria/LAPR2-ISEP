@@ -123,13 +123,6 @@ public class ClinicalAnalysisLaboratoryTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void ensureAC3NameOnlyLetters() {
-
-        ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",
-                "Ana24","Lisboa","91841378811","1234567890", selectedTT);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void ensureAC3NameWithRightLength() {
 
         ClinicalAnalysisLaboratory instance = new ClinicalAnalysisLaboratory("CAL12",

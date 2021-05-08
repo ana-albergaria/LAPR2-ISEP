@@ -18,6 +18,7 @@ participant "objDto\n: TestTypeDto" as OBJ_DTO
 /'participant ":Platform" as PLAT'/
 /'participant ":Laboratory" as ORG'/
 /'participant "storeLab\n:LaboratoryStore" as LAB_STORE'/
+participant "calDto\n: ClinicalAnalysisLaboratoryDto" as CAL_DTO
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
 participant "selectedTT\n:List<TestType>" as CAT
 
@@ -61,7 +62,7 @@ activate MAPPER
 
 MAPPER --> LIST_DTO** : create()
 
-loop for each object in listTestType
+/'loop for each object in listTestType
 MAPPER -> LIST : obj = get(i)
 activate LIST
 deactivate LIST
@@ -76,7 +77,8 @@ deactivate MAPPER
 MAPPER -> LIST_DTO : add(objDto)
 activate LIST_DTO
 deactivate LIST_DTO
-end
+end'/
+
 
 MAPPER --> CTRL : listTestTypeDto
 deactivate MAPPER
@@ -94,19 +96,22 @@ ADM -> UI : selects type of test
 activate UI
 end
 
-UI -> CTRL : createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, testTypesCodes)
+
+UI -> CTRL : createClinicalAnalysisLaboratory(calDto)
 activate CTRL
 
+/'
 CTRL -> PLAT : storeTest = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
 
-/'MODIFICAR - COLOCAR UM LOOP + DTO!!!!!!!!'/
+
+
 CTRL -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypesCodes)
 activate TEST_TYPE_STORE
 |||
-deactivate TEST_TYPE_STORE
+deactivate TEST_TYPE_STORE'/
 
 /'CTRL -> ORG : storeLab = getLaboratoryStore()
 activate ORG
@@ -142,9 +147,50 @@ activate PLAT
 |||
 deactivate PLAT'/
 
-
-CTRL -> PLAT: cal = createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+note over CTRL, PLAT
+calDto has all required data, including the 'codes' of the selected test types
+end note
+CTRL -> PLAT: cal = createClinicalAnalysisLaboratory(calDto)
 activate PLAT
+
+PLAT -> CAL_DTO : testTypeCodes = getTestTypeCodes()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> TEST_TYPE_STORE : storeTest = getTestTypeStore()
+activate TEST_TYPE_STORE
+|||
+deactivate TEST_TYPE_STORE
+
+PLAT -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypesCodes)
+activate TEST_TYPE_STORE
+|||
+deactivate TEST_TYPE_STORE
+
+
+PLAT -> CAL_DTO : laboratoryID = getLaboratoryID()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> CAL_DTO : name = getName()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> CAL_DTO : address = getAddress()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> CAL_DTO : phoneNumber = getPhoneNumber()
+activate CAL_DTO
+deactivate CAL_DTO
+
+PLAT -> CAL_DTO : numTIN = getNumTIN()
+activate CAL_DTO
+deactivate CAL_DTO
+
+/'PLAT -> CAL_DTO : selectedTT = getSelectedTT()
+activate CAL_DTO
+deactivate CAL_DTO'/
 
 PLAT --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
 PLAT -> PLAT: validateClinicalAnalysisLaboratory(cal)

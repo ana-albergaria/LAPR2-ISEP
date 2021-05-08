@@ -90,18 +90,6 @@ public class Company {
 
     //to be used in US8
 
-    /*
-    public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(String laboratoryID,
-                                                                       String name,
-                                                                       String address,
-                                                                       String phoneNumber,
-                                                                       String numTIN,
-                                                                       List<TestType> selectedTT) {
-        return new ClinicalAnalysisLaboratory(laboratoryID, name, address,
-                phoneNumber, numTIN, selectedTT);
-    }
-     */
-
     public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDTO) {
         TestTypeStore storeTest = getTestTypeStore();
         List<TestType> selectedTT = storeTest.getTestTypesByCode(calDTO.getTestTypeCodes());
