@@ -22,10 +22,7 @@ public class ParameterCategory {
 
     @Override
     public String toString() {
-        return "ParameterCategory{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return String.format("Code: %s%nName: %s%n", code, name);
     }
 
     private void checkCodeRules(String code){
@@ -40,6 +37,20 @@ public class ParameterCategory {
             throw new IllegalArgumentException("Name cannot be blank.");
         if (name.length() > 10)
             throw new IllegalArgumentException("Name cannot have more then 10 characters.");
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        ParameterCategory otherParameterCategory = (ParameterCategory) otherObject;
+
+        return  this.code.equalsIgnoreCase(otherParameterCategory.code) &&
+                this.name.equalsIgnoreCase(otherParameterCategory.name);
     }
 
 }

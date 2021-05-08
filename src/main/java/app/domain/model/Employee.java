@@ -52,7 +52,7 @@ public class Employee {
     /**
      * List of existing employees.
      */
-    private List<Employee> empList = new ArrayList<>();
+    private static int totalEmployees = 0;
 
     /**
      * Builds an employee instance receiveing:
@@ -85,6 +85,7 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.socCode = socCode;
+        totalEmployees++;
     }
 
     /**
@@ -102,7 +103,7 @@ public class Employee {
             String word = nameArray[i];
             employeeID = employeeID + word.charAt(0);
         }
-        int num = this.empList.size() + 1;
+        int num = totalEmployees + 1;
         String str = String.format("%05d", num);
         employeeID = employeeID + str;
         return employeeID;
@@ -241,15 +242,9 @@ public class Employee {
      */
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeID='" + employeeID + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", socCode='" + socCode + '\'' +
-                ", role=" + role +
-                '}';
+        return String.format("EMPLOYEE%n%s%nEmployee ID: %s%nName: %s%nAddress: %s%n" +
+                "Phone Number: %s%nE-mail: %10s%nStandard Occupational Classification (SOC) Code: %s%n",
+                role, employeeID, name, address, phoneNumber, email, socCode);
     }
 
     /**
@@ -270,8 +265,7 @@ public class Employee {
 
         Employee otherEmployee = (Employee) otherObject;
 
-        return this.employeeID.equalsIgnoreCase(otherEmployee.employeeID) &&
-                this.name.equalsIgnoreCase(otherEmployee.name) &&
+        return  this.name.equalsIgnoreCase(otherEmployee.name) &&
                 this.address.equalsIgnoreCase(otherEmployee.address) &&
                 this.phoneNumber.equalsIgnoreCase(otherEmployee.phoneNumber) &&
                 this.email.equalsIgnoreCase(otherEmployee.email) &&

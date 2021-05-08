@@ -57,9 +57,7 @@ public class OrgRole {
      */
     @Override
     public String toString() {
-        return "OrgRole{" +
-                "description='" + description + '\'' +
-                '}';
+        return String.format("Organization Role: %s", description);
     }
 
     /**

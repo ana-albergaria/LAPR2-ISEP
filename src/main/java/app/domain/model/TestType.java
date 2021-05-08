@@ -8,23 +8,6 @@ import java.util.List;
 public class TestType {
 
     /**
-     * Test Type unique code
-     */
-    private String code;
-    /**
-     * Test Type description
-     */
-    private String description;
-    /**
-     * Test Type collecting method
-     */
-    private String collectingMethod;
-    /**
-     * List of Categories assigned to test type
-     */
-    private List<ParameterCategory> selectedCategories;
-
-    /**
      * Max lenght of description field
      */
     private static final int DESCRIPTION_MAXLENGTH = 15;
@@ -36,13 +19,30 @@ public class TestType {
      * Max lenght of collecting method field
      */
     private static final int COLLECTING_METHOD_MAXLENGTH = 20;
+    /**
+     * Test Type unique code
+     */
+    private final String code;
+    /**
+     * Test Type description
+     */
+    private final String description;
+    /**
+     * Test Type collecting method
+     */
+    private final String collectingMethod;
+    /**
+     * List of Categories assigned to test type
+     */
+    private final List<ParameterCategory> selectedCategories;
 
     /**
      * Full constructor of test type
-     * @param code
-     * @param description
-     * @param collectingMethod
-     * @param selectedCategories
+     *
+     * @param code Test type's code
+     * @param description Test type's description
+     * @param collectingMethod Test type's collecting methods
+     * @param selectedCategories Test type's categories list
      */
     public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
         checkCode(code);
@@ -55,6 +55,7 @@ public class TestType {
     }
 
     //to be used for US8
+
     /**
      * Returns the code of the Test Type
      *
@@ -63,6 +64,7 @@ public class TestType {
     public String getCode() {
         return code;
     }
+
     /**
      * Returns the description of the Test Type
      *
@@ -107,22 +109,24 @@ public class TestType {
 
     /**
      * Code attribute validation for having non alphanumeric characters, more or less then 5 characters or blank
-     * @param code
+     *
+     * @param code Test type's code
      */
-    private void checkCode(String code){
+    private void checkCode(String code) {
         if (StringUtils.isBlank(code))
             throw new IllegalArgumentException("Code cannot be blank.");
         if ((code.length() != CODE_MAXLENGTH))
             throw new IllegalArgumentException("Code must hold 5 alphanumeric characters");
-        if(!StringUtils.isAlphanumeric(code))
+        if (!StringUtils.isAlphanumeric(code))
             throw new IllegalArgumentException("Code must only have alphanumeric characters.");
     }
 
     /**
      * Decription attribute validation for having more then 15 characters or being blank
-     * @param description
+     *
+     * @param description Test type's description
      */
-    private void checkDescription(String description){
+    private void checkDescription(String description) {
         if (StringUtils.isBlank(description))
             throw new IllegalArgumentException("Description cannot be blank.");
         if ((description.length() > DESCRIPTION_MAXLENGTH))
@@ -131,12 +135,13 @@ public class TestType {
 
     /**
      * Collecting method attribute validation for having more then 20 characters or being blank
-     * @param atributte
+     *
+     * @param collectingMethod Test type's collecting methods
      */
-    private void checkCollectingMethod(String atributte){
-        if (StringUtils.isBlank(atributte))
+    private void checkCollectingMethod(String collectingMethod) {
+        if (StringUtils.isBlank(collectingMethod))
             throw new IllegalArgumentException("Collecting method cannot be blank.");
-        if ((atributte.length() > COLLECTING_METHOD_MAXLENGTH))
+        if ((collectingMethod.length() > COLLECTING_METHOD_MAXLENGTH))
             throw new IllegalArgumentException("Collecting method cannot have more than 20 alphanumeric characters.");
     }
 

@@ -58,15 +58,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     }
 
     /**
-     * Returns the test types of the Clinical Analysis Laboratory
-     *
-     * @return test types of the Clinical Analysis Laboratory
-     */
-    public List<TestType> getSelectedTT() {
-        return new ArrayList<>(selectedTT);
-    }
-
-    /**
      * It returns the textual description of the Clinical Analysis Laboratory instance.
      *
      * @return characteristics of the Clinical Analysis Laboratory

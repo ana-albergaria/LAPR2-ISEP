@@ -285,14 +285,19 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 *It is also recommended to organize this content by subsections.* 
 
-# 6. Integration and Demo 
+# 6. Integration and Demo
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+ * To create an Employee, it is necessary to know the roles available in the system.  
+ * Therefore, in order to reduce coupling, it was created a OrgRoleDto.    
+ * Employee also has many arguments passing through layers, therefore a DTO could make the maintenance easier.  
+ * The password for the user is generated and sent (written in a file) by an method in PasswordUtils since it is
+not a responsability of any of domain classes to generate a password or send out data. Respecting Pure Fabrication.
+Also being reused in US3.
 
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
+The Company class is getting too much responsability assigned to it. Therefore, creating an EmployeeStore will be taken into consideration in the future to reduce coupling.
 
 
 

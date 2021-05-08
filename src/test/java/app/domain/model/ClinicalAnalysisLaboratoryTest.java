@@ -383,4 +383,7 @@ public class ClinicalAnalysisLaboratoryTest {
         //Assert
         Assert.assertFalse(resultWithNull);
     }
+
+
+
 }

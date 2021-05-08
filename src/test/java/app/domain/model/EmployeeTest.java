@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -174,6 +175,112 @@ public class EmployeeTest {
         Employee instance = new Employee(r1, "employee", "qwertyuiopasdfghjkl zxcvbnmqwe",
                 "1234567890","joana@gmail.com","1234");
     }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentName() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Jessica","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentAddress() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Manuel","Porto","9184137881","manuel@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentPhoneNumber() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Manuel","Lisboa","9184137882","manuel@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentEmail() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manu@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentSocCode() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1233");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentRole() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r2,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
+    }
+
+    @Test
+    public void ensureEqualsMethodObjectsFromDifferentClasses() {
+        //Arrange
+        Employee emp = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+        ParameterCategory p = new ParameterCategory("code1","hemogram");
+        //Act
+        boolean resultDifferentClasses = emp.equals(p);
+        //Assert
+        Assert.assertFalse(resultDifferentClasses);
+    }
+
+    @Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+        //Arrange
+        Employee emp1 = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+        Employee emp2 = null;
+        //Act
+        boolean resultWithNull = emp1.equals(emp2);
+
+        //Assert
+        Assert.assertFalse(resultWithNull);
+    }
+
+
+
 
 
 

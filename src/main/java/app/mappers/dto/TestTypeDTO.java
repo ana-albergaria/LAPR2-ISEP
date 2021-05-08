@@ -1,6 +1,7 @@
 package app.mappers.dto;
 
 import app.domain.model.ParameterCategory;
+import app.domain.model.TestType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +44,18 @@ public class TestTypeDTO {
 
     @Override
     public String toString() {
-        return "TestTypeDTO{" +
-                "code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", collectingMethod='" + collectingMethod + '\'' +
-                ", selectedCategories=" + selectedCategories +
-                '}';
+        List<ParameterCategory> copy = new ArrayList<>(selectedCategories);
+
+        StringBuilder s = new StringBuilder();
+        for (ParameterCategory pc : copy) {
+            s.append("\n- ");
+            s.append("Name: ");
+            s.append(pc.getName());
+            s.append("\n");
+        }
+
+        return String.format("%nCode: %s%nDescription: %s%nCollecting Method: %s%n" +
+                "Categories: %s", code, description, collectingMethod, s);
     }
 }
 
