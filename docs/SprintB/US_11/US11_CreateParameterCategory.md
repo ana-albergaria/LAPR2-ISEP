@@ -79,7 +79,7 @@ As an administrator, I want to specify a new parameter category.
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
+This US will be held mostly in the beginning of the business, but occasionally during it as well, probably when there's a necessity for creating a new test type.
 
 
 ## 2. OO Analysis

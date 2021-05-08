@@ -33,6 +33,27 @@ public class Laboratory {
     private String numTIN;
 
     /**
+     * Maximum length the name can have.
+     */
+    private static final int NAME_MAX_LENGTH = 20;
+
+    /**
+     * Maximum length the address can have.
+     */
+    private static final int ADDRESS_MAX_LENGTH = 30;
+
+    /**
+     * Length of the phone number.
+     */
+    private static final int PHONE_NUMBER_LENGTH = 11;
+
+    /**
+     * Length of the TIN number.
+     */
+    private static final int TIN_NUMBER_LENGTH = 10;
+
+
+    /**
      * Builds a Laboratory's instance receiving:
      * the name, the address, the phone number, the TIN number
      *
@@ -108,7 +129,7 @@ public class Laboratory {
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if (name.length() > 20)
+        if (name.length() > NAME_MAX_LENGTH)
             throw new IllegalArgumentException("Name cannot have more than 20 characters.");
     }
 
@@ -128,7 +149,7 @@ public class Laboratory {
     public void checkAddressRules(String address) {
         if (StringUtils.isBlank(address))
             throw new IllegalArgumentException("Address cannot be blank.");
-        if (address.length() > 30)
+        if (address.length() > ADDRESS_MAX_LENGTH)
             throw new IllegalArgumentException("Address cannot have more than 30 characters.");
     }
 
@@ -152,7 +173,7 @@ public class Laboratory {
         //if ((!phoneNumber.chars().allMatch(Character::isDigit)))
         if ((!phoneNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Phone Number must only contain digits.");
-        if (phoneNumber.length() != 11)
+        if (phoneNumber.length() != PHONE_NUMBER_LENGTH)
             throw new IllegalArgumentException("Phone Number must contain exactly 11 digits.");
 
     }
@@ -177,7 +198,7 @@ public class Laboratory {
         //if ((!numTIN.chars().allMatch(Character::isDigit)))
         if ((!numTIN.matches("[0-9]+")))
             throw new IllegalArgumentException("TIN Number must only contain digits.");
-        if (numTIN.length() != 10)
+        if (numTIN.length() != TIN_NUMBER_LENGTH)
             throw new IllegalArgumentException("TIN Number must contain exactly 10 digits.");
     }
 
