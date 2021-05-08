@@ -70,7 +70,11 @@ public class Company {
         return parameterCategoryStore;
     }
 
-    //to be used in US10
+    /**
+     * Calling the Parameter Store available in the system.
+     *
+     * @return the parameter store.
+     */
     public ParameterStore getParameterStore(){
         return parameterStore;
     }
@@ -84,6 +88,11 @@ public class Company {
         return clientStore;
     }
 
+    /**
+     * Calling the employee list available in the system.
+     *
+     * @return the employee list.
+     */
     public List<Employee> getEmpList() {
         return empList;
     }
@@ -157,9 +166,11 @@ public class Company {
         }
     }
 
-
-    //to be used in US7
-
+    /**
+     * Calling the roles list available in the system.
+     *
+     * @return the roles list.
+     */
     public List<OrgRole> getRoles() {
         return new ArrayList<>(roles);
     }
@@ -178,6 +189,15 @@ public class Company {
         throw new UnsupportedOperationException("Organization Role not found with given description: " + roleDescription);
     }
 
+    /**
+     * Called method through the RegisterEmployeeController to create a new employee
+     * through a DTO containing all the requested data:
+     * the name, address, phone number and email.
+     *
+     * @param empDTO the employee DTO.
+     * @return instance of Employee Class with the information provided by the Dto
+     * received by parameter.
+     */
     public Employee createEmployee(EmployeeDTO empDTO) {
         String roleDesignation = empDTO.getRoleDesignation();
         OrgRole role = getRoleByDescription(roleDesignation);
@@ -186,6 +206,15 @@ public class Company {
                 empDTO.getAddress(), empDTO.getPhoneNumber(), empDTO.getEmail(), empDTO.getSocCode());
     }
 
+    /**
+     * Called method through the RegisterEmployeeController to create a new employee
+     * through a DTO containing all the requested data:
+     * the name, address, phone number, email and doctor index number.
+     *
+     * @param sdDTO the specialist doctor DTO.
+     * @return instance of SpecialistDoctor Class with the information provided by the Dto
+     * received by parameter.
+     */
     public SpecialistDoctor createSpecialistDoctor(SpecialistDoctorDTO sdDTO) {
         String roleDesignation = sdDTO.getRoleDesignation();
         OrgRole role = getRoleByDescription(roleDesignation);
@@ -194,12 +223,26 @@ public class Company {
                 sdDTO.getPhoneNumber(), sdDTO.getEmail(), sdDTO.getSocCode(), sdDTO.getDoctorIndexNumber());
     }
 
+    /**
+     * Called method through the RegisterEmployeeController to validate a new employee.
+     *
+     * @param emp the employee to be validated.
+     * @return true if the employee was successfully validated,
+     * otherwise return false.
+     */
     public boolean validateEmployee(Employee emp) {
         if(emp == null)
             return false;
         return ! this.empList.contains(emp);
     }
 
+    /**
+     * Called method through the RegisterEmployeeController to save a new employee.
+     *
+     * @param emp the employee to be saved.
+     * @return true if the employee was successfully saved,
+     * otherwise return false.
+     */
     public boolean saveEmployee(Employee emp) {
         if(!validateEmployee(emp)) {
             return false;
@@ -207,10 +250,25 @@ public class Company {
         return this.empList.add(emp);
     }
 
+    /**
+     * Called method through the RegisterEmployeeController to add the employee to the desired role.
+     *
+     * @param emp the employee ti be added to the role.
+     * @return true if the employee was successfully added to the desired role,
+     * otherwise return false.
+     */
     public boolean addUserRole(Employee emp) {
         return this.getAuthFacade().addUserRole(emp.getRole().getDescription(), emp.getRole().getDescription());
     }
 
+    /**
+     * Called method through the RegisterEmployeeController to make the employee a user.
+     *
+     * @param emp the employee to be turned into a user.
+     * @param generatedPassword the employee's password.
+     * @return true if the employee was successfully turned into a user,
+     * otherwise return false.
+     */
     public boolean makeEmployeeAUser(Employee emp, String generatedPassword){
         boolean success = this.authFacade.addUserWithRole(emp.getName(), emp.getEmail(), generatedPassword, emp.getRole().getDescription());
         if(!success){
