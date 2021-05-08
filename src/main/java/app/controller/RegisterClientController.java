@@ -4,6 +4,7 @@ import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.shared.utils.PasswordUtils;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class RegisterClientController {
@@ -40,7 +41,7 @@ public class RegisterClientController {
         return this.company.getClientStore().saveClient(cl);
     }
 
-    public boolean makeClientAnUserAndSendPassword() {
+    public boolean makeClientAnUserAndSendPassword() throws IOException {
         if(makeClientAnUser())
             return PasswordUtils.writePassword(generatedPassword, cl.getEmail());
         return false;

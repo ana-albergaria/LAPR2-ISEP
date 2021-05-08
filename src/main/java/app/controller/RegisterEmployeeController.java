@@ -10,6 +10,8 @@ import app.mappers.OrgRoleMapper;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.OrgRoleDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -57,7 +59,7 @@ public class RegisterEmployeeController {
     }
 
 
-    public boolean makeEmployeeAnUserAndSendPassword() {
+    public boolean makeEmployeeAnUserAndSendPassword() throws IOException {
         if(!makeEmployeeAUser())
             return false;
         return PasswordUtils.writePassword(generatedPassword, emp.getEmail());
