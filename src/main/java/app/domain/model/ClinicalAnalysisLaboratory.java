@@ -76,7 +76,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
             s.append(tt.getDescription());
             s.append("\n");
         }
-            return String.format("%sLaboratory ID: %s\nTest Types: \n%s",
+            return String.format("%sLaboratory ID: %s%nTest Types: %n%s",
                     super.toString(), laboratoryID, s);
         }
 
