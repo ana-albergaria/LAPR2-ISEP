@@ -49,8 +49,7 @@ public class ParameterCategory {
 
         ParameterCategory otherParameterCategory = (ParameterCategory) otherObject;
 
-        return  this.code.equalsIgnoreCase(otherParameterCategory.code) &&
-                this.name.equalsIgnoreCase(otherParameterCategory.name);
+        return  this.code.equalsIgnoreCase(otherParameterCategory.code);
     }
 
 }
