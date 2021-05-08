@@ -61,33 +61,6 @@ public class Parameter {
     }
 
     /**
-     * Returns the parameter name.
-     *
-     * @return parameter name.
-     */
-    public String getShortName(){
-        return shortName;
-    }
-
-    /**
-     * Returns the parameter description.
-     *
-     * @return parameter description.
-     */
-    public String getDescription(){
-        return description;
-    }
-
-    /**
-     * Returns the parameter category os the parameter.
-     *
-     * @return parameter category of the parameter.
-     */
-    public ParameterCategory getPc(){
-        return pc;
-    }
-
-    /**
      * Returns the textual description of the parameter instance.
      *
      * @return characteristics of the parameter.
