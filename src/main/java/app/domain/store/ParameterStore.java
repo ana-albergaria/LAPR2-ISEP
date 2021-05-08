@@ -2,7 +2,6 @@ package app.domain.store;
 
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +44,12 @@ public class ParameterStore {
     public boolean validateParameter(Parameter prm){
         if (prm == null)
             return false;
-        return ! this.prmList.contains(prm);
+        return !this.prmList.contains(prm);
     }
 
     /**
      * Saves parameter instance the parameter store list,
-     * validating the parameter before doing so.
+     * validating the parameter globally before doing so.
      *
      * @param prm the parameter.
      *
@@ -72,18 +71,5 @@ public class ParameterStore {
         Parameter[] array = new Parameter[this.prmList.size()];
         return this.prmList.toArray(array);
     }
-
-    /*public List<Parameter> getPrmList(){
-        return new ArrayList<>(prmList);
-    }*/
-
-    /*public Parameter getParameterByCode(String code){
-        for (Parameter prm : prmList){
-            if (prm.getPrmCode().equalsIgnoreCase(code)){
-                return prm;
-            }
-        }
-        throw new UnsupportedOperationException("There's no parameter with code: " + code);
-    }*/
 
 }

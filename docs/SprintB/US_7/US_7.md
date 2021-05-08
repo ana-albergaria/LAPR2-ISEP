@@ -14,6 +14,25 @@ As an ***administrator***, I want to **register** a new **employee**
 
 **From the client clarifications:**
 
+>Q: "Hello,
+What kind of information does the company store about their employees and owned laboratories?
+Are there common attributes between the roles below? If so, which ones? (i.e. employee ID, TIN, contact info, etc.)
+Receptionist,Clinical Chemistry Technologist, Medical Lab Technician, Specialist Doctor, Lab Coordinator, Administrator"
+>
+>A: "All the roles that exist in the Many Labs company are characterized by the following attributes:  
+Employee ID;  
+Organization Role;  
+Name;  
+Address;  
+Phone Number;  
+E-Mail;  
+Standard Occupational Classification (SOC) code.  
+The Specialist Doctor has an additional attribute: Doctor Index Number."
+
+>You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7123).
+
+-
+
 >Q: Relative to registering a new user, how should the system respond in the event of creating a new user with the same attributes of an already existing user?
 >
 >A: This should be treated as an error. A subset of the attributes of any client are unique.
@@ -142,25 +161,6 @@ Employee ID; Organization Role; Name; Address; Phone Number; E-Mail; Standard Oc
 >A: The format of an e-mail address is well known. Attribute validation is always a good practice.
 
 >You can read the whole discussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7973).
-
--
-
->Q: "Hello,
-What kind of information does the company store about their employees and owned laboratories?
-Are there common attributes between the roles below? If so, which ones? (i.e. employee ID, TIN, contact info, etc.)
-Receptionist,Clinical Chemistry Technologist, Medical Lab Technician, Specialist Doctor, Lab Coordinator, Administrator"
->
->A: "All the roles that exist in the Many Labs company are characterized by the following attributes:  
-Employee ID;  
-Organization Role;  
-Name;  
-Address;  
-Phone Number;  
-E-Mail;  
-Standard Occupational Classification (SOC) code.  
-The Specialist Doctor has an additional attribute: Doctor Index Number."
-
->You can read the whole discussion [here]().
 
 ### 1.3. Acceptance Criteria
 

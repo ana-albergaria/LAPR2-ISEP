@@ -1,8 +1,6 @@
 package app.ui.console;
 
-import app.controller.App;
 import app.controller.CreateParameterCategoryController;
-import app.mappers.dto.CategoriesDTO;
 import app.ui.console.utils.Utils;
 
 public class ParameterCategoryUI implements Runnable{

@@ -171,8 +171,4 @@ public class Parameter {
         return parameterToCompare.getPrmCode().equals(this.getPrmCode());
     }
 
-    /*public ParameterCategory getPc() {
-        return pc;
-    }*/
-
 }

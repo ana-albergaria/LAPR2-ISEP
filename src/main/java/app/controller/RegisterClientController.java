@@ -4,6 +4,7 @@ import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.shared.utils.PasswordUtils;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class RegisterClientController {
@@ -22,14 +23,14 @@ public class RegisterClientController {
     }
 
 
-    public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
+    public boolean registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                                   String tinNumber, String email, String name, String phoneNumber) {
         this.cl = this.company.getClientStore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name, phoneNumber);
         return this.company.getClientStore().validateClient(cl);
     }
 
-    public boolean RegisterClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate,
+    public boolean registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate,
                                   String tinNumber, String email, String name, String phoneNumber) {
         this.cl = this.company.getClientStore().registerClient(clientsCitizenCardNumber, nhsNumber, birthDate,
                 tinNumber, email, name, phoneNumber);
@@ -40,13 +41,13 @@ public class RegisterClientController {
         return this.company.getClientStore().saveClient(cl);
     }
 
-    public boolean makeClientAnUserAndSendPassword() {
+    public boolean makeClientAnUserAndSendPassword() throws IOException {
         if(makeClientAnUser())
             return PasswordUtils.writePassword(generatedPassword, cl.getEmail());
         return false;
     }
 
-    public boolean makeClientAnUser (){
+    private boolean makeClientAnUser (){
         this.generatedPassword = PasswordUtils.generateRandomPassword();
         if(this.generatedPassword != null)
             return this.company.getAuthFacade().addUser(cl.getName(), cl.getEmail(), generatedPassword);

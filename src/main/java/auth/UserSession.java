@@ -2,7 +2,6 @@ package auth;
 
 import auth.domain.model.Email;
 import auth.domain.model.User;
-import auth.domain.model.UserRole;
 import auth.mappers.UserRoleMapper;
 import auth.mappers.dto.UserRoleDTO;
 
