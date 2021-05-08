@@ -85,6 +85,11 @@ class SpecialistDoctorDTO {
 }
 
 class User {
+-Email id
+-Password password
+-String name
+-Set<UserRole> roles
+
 }
 
 CreateEmployeeUI ..> RegisterEmployeeController
