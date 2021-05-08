@@ -21,3 +21,10 @@ PERGUNTAR PROF
 TESTES UNITÁRIOS US8.md  
 * FALTA FALAR DO MÉTODO EQUALS na classe ClinicalAnalysisLaboratory!  
 * Mutações!!!!!
+
+
+
+* Relevant commits
+* Mapper, Dto no rationale!!
+* Mutações testes unitários
+* Rever UI (exceção global + msg)

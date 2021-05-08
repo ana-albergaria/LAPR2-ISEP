@@ -159,7 +159,7 @@ The present US is held mainly in the beginning of the business a couple of times
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
 |               	 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
-| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  LC: Company uses TestTypeStore.                     |
+| Step 4: shows types of test list and asks to select at least one   		 |	...knowing who has the responsability to show the types of test?					 |   Company      |  HC+LC: Company uses TestTypeStore.                     |
 |                                 		 |	...knowing the types of test to show?						 |   TestTypeStore       |  Pure Fabrication: for low coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                          |
 | Step 5: selects type(s) of test  		 | ...saving the selected type(s) of test?							 | ClinicalAnalysisLaboratory            |   IE: object created in Step 1 operates a certain number of types of test.                           |
 | Step 6: shows all data and requests confirmation            		 |	...validating the data globally (e.g.: duplicated)?						 |  Company           |   IE: knows all the ClinicalAnalysisLaboratory objects.                           |
@@ -246,7 +246,7 @@ Before starting to implement the tests, it was practical to **create a text fixt
 ```
 
 
-###**Class**: ClinicalAnalysisLaboratoryTest ###  
+### **Class**: ClinicalAnalysisLaboratoryTest ###  
 
 **Test 1:** Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory class with null values.  
 
@@ -517,8 +517,6 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
 ```
 
 
-
-*It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)
 
