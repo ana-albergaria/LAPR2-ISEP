@@ -56,6 +56,16 @@ public class US7_CompanyTest {
         Assert.assertEquals(expObj, obj);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureCreateEmpWithInexistentRole() {
+
+        EmployeeDTO empDTO = new EmployeeDTO("Jenitor",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
+
+        company.createEmployee(empDTO);
+    }
+
     @Test
     public void saveEmployee() {
 
@@ -112,6 +122,52 @@ public class US7_CompanyTest {
         boolean save = company.saveEmployee(obj2);
         //Assert
         Assert.assertFalse(save);
+    }
+
+    @Test
+    public void makeClientAnUserWithNewRoleToTheSystem() {
+
+        //Act
+        Employee obj = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+        Employee obj2 = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","0987654321","afonso@gmail.com",
+                "1234"));
+
+        boolean save = company.makeEmployeeAUser(obj, "1234567890");
+        //Assert
+        Assert.assertTrue(save);
+    }
+
+    @Test
+    public void ensureItsNotPossibleToHaveTwoUsersWithSameEmail() {
+
+        //Act
+        Employee obj = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+        Employee obj2 = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","0987654321","afonso@gmail.com",
+                "1234"));
+
+        company.makeEmployeeAUser(obj, "1234567890");
+        boolean save = company.makeEmployeeAUser(obj2, "1234567890");
+        //Assert
+        Assert.assertFalse(save);
+    }
+
+    @Test
+    public void makeClientAnUserWithExistentRole() {
+
+        //Act
+        Employee obj = company.createEmployee(new EmployeeDTO("Administrator",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+
+        boolean save = company.makeEmployeeAUser(obj, "1234567890");
+        //Assert
+        Assert.assertTrue(save);
     }
 
 }
