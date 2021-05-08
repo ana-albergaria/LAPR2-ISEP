@@ -1,7 +1,6 @@
 package app.ui.console;
 
 import app.controller.CreateTestTypeController;
-import app.domain.model.ParameterCategory;
 import app.mappers.dto.CategoriesDTO;
 import app.ui.console.utils.Utils;
 

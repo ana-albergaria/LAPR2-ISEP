@@ -1,12 +1,9 @@
 package app.ui.console;
 
-import app.controller.App;
 import app.controller.RegisterClientController;
 import app.ui.console.utils.Utils;
-import auth.AuthFacade;
 
 import java.util.Date;
-import java.util.List;
 
 public class CreateClientUI implements Runnable{
 

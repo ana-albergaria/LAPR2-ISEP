@@ -1,11 +1,8 @@
 package app.domain.store;
 
 import app.domain.model.Client;
-import app.domain.model.Employee;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Date;
 
 public class ClientStore {

@@ -1,6 +1,5 @@
 package app.ui.console;
 
-import app.controller.App;
 import app.controller.RegisterEmployeeController;
 import app.domain.shared.Constants;
 import app.mappers.dto.EmployeeDTO;

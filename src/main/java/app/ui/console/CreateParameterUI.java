@@ -1,10 +1,8 @@
 package app.ui.console;
 
 import app.controller.CreateParameterController;
-import app.domain.model.Parameter;
 import app.mappers.dto.CategoriesDTO;
 import app.ui.console.utils.Utils;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateParameterUI implements Runnable {
