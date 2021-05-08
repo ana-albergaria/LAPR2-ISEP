@@ -5,6 +5,10 @@ class CreateEmployeeUI {
 }
 
 class RegisterEmployeeController {
+-Company company
+-Employee emp
+-SpecialistDoctor sd
+-String generatedPassword
 +createEmployee(empDTO)
 +saveEmployee()
 +getRoles()
