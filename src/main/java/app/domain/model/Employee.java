@@ -224,7 +224,7 @@ public class Employee {
     public String getEmail() {
         return email;
     }
-    
+
     /**
      * Gets the employee role.
      *
