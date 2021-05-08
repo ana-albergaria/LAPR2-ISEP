@@ -13,21 +13,20 @@ class RegisterEmployeeController {
 }
 
 class Employee {
-- OrgRole role
-- String employeeID
-- String name
-- String address
-- String phoneNumber
-- String email
-- String socCode
-- List<Employee> empList
-+Employee(role, name, address, phoneNumber, email, socCode)
+-OrgRole role
+-String employeeID
+-String name
+-String address
+-String phoneNumber
+-String email
+-String socCode
+-List<Employee> empList
++Employee(role,name,address,phoneNumber,email,socCode)
 +getEmployeeId()
 +getName()
 +getAddress()
 +getPhoneNumber()
 +getEmail()
-+getSocCode()
 +getRole()
 +toString()
 +equals(otherObject)
@@ -43,42 +42,47 @@ class Employee {
 }
 
 class SpecialistDoctor {
-- doctorIndexNumber
+-String doctorIndexNumber
++SpecialistDoctor(role,name,address,phoneNumber,email,socCode,doctorIndexNumber)
++checkDoctorIndexNumberRules(doctorIndexNumber)
++toString()
++equals(otherObject)
 }
 
 class OrgRole {
-- description
+-String description
++OrgRole(description)
++checkDescription(description)
++getDescription()
++toString()
++equals(otherObject)
 }
 
-class OrgRoleDto {
-- description
-+ getDescription()
+class OrgRoleDTO {
+-String description
++OrgRoleDTO(description)
++getDescription()
++toString()
 }
 
-class EmployeeDto {
-- roleDesignation
-- employeeID
-- name
-- address
-- phoneNumber
-- e-Mail
-- socCode
+class EmployeeDTO {
+-String roleDesignation
+-String name
+-String address
+-String phoneNumber
+-String email
+-String socCode
++EmployeeDTO(roleDesignation, name, address, phoneNumber, email, socCode)
 +getName()
 +getAddress()
 +getPhoneNumber()
 +getEmail()
-+getSocCode()
 +getRoleDesignation()
-+Employee(roleDesignation, employeeID, name, address, phoneNumber, e-Mail, socCode)
-+getEmployeeId()
-+getName()
-+getAddress()
-+getPhoneNumber()
-+getEmail()
-+getSocCode()
 }
 
-class SpecialistDoctorDto {
+class SpecialistDoctorDTO {
+-String doctorIndexNumber
++SpecialistDoctorDTO(roleDesignation, name, address, phoneNumber, email, socCode, doctorIndexNumber)
 }
 
 class User {
@@ -88,16 +92,16 @@ CreateEmployeeUI ..> RegisterEmployeeController
 Employee <|-- SpecialistDoctor
 RegisterEmployeeController ..> Employee
 RegisterEmployeeController ..> SpecialistDoctor
-CreateEmployeeUI ..> EmployeeDto
-CreateEmployeeUI ..> SpecialistDoctorDto
-RegisterEmployeeController ..> EmployeeDto
-RegisterEmployeeController ..> SpecialistDoctorDto
-RegisterEmployeeController ..> OrgRoleDto
-CreateEmployeeUI ..> OrgRoleDto
+CreateEmployeeUI ..> EmployeeDTO
+CreateEmployeeUI ..> SpecialistDoctorDTO
+RegisterEmployeeController ..> EmployeeDTO
+RegisterEmployeeController ..> SpecialistDoctorDTO
+RegisterEmployeeController ..> OrgRoleDTO
+CreateEmployeeUI ..> OrgRoleDTO
 RegisterEmployeeController ..> Company
 RegisterEmployeeController ..> OrgRole
 
-EmployeeDto <|-- SpecialistDoctorDto
+EmployeeDTO <|-- SpecialistDoctorDTO
 
 Employee "*" -- "1" OrgRole : has/plays >
 Company "1" -- "*" OrgRole : comprehends >
