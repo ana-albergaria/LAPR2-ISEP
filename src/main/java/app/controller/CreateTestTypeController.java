@@ -11,7 +11,7 @@ import app.mappers.dto.CategoriesDTO;
 import java.util.List;
 
 /**
- * Controller for creating a type of test in
+ * Controller for creating a type of test
  *
  * @author João Wolff
  */

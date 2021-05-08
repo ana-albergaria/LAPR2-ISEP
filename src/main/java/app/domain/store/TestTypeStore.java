@@ -6,6 +6,11 @@ import app.domain.model.TestType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Store of test types
+ *
+ * @author João Wolff
+ */
 public class TestTypeStore {
     /**
      * List of test types performed by the company

@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Store of parameter cateogories
+ *
  * @author João Wolff
  */
 public class ParameterCategoryStore {

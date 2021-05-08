@@ -70,7 +70,7 @@ public class ParameterCategoryTest {
     @Test
     public void equalsTrue(){
         ParameterCategory pc1 = new ParameterCategory("HEM02", "Hemogram");
-        ParameterCategory pc2 = new ParameterCategory("HEM02", "Hemogram");
+        ParameterCategory pc2 = new ParameterCategory("HEM02", "Covid19");
         boolean result = pc1.equals(pc2);
         Assert.assertTrue(result);
     }
