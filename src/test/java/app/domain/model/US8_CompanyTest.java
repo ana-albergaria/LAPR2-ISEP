@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompanyTest {
+public class US8_CompanyTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
     private ParameterCategory p2;

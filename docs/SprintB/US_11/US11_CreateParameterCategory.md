@@ -262,13 +262,62 @@ Other software classes (i.e. Pure Fabrication) identified:
     }
 
 
-*It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class CreateParameterCategoryController  
+```
+public boolean createParameterCategory(String code, String name) {
+        ParameterCategoryStore store = this.company.getParameterCategoryStore();
+        this.pc = store.createParameterCategory(code, name);
+        return store.validateParameterCategory(pc);
+    }
 
-*It is also recommended to organize this content by subsections.* 
+    public boolean saveParameterCategory() {
+        ParameterCategoryStore store = this.company.getParameterCategoryStore();
+        return store.saveParameterCategory(pc);
+    }
+```
+
+## Class ParameterCategoryStore
+```
+public ParameterCategory createParameterCategory(String code, String name){
+        return new ParameterCategory(code, name);
+    }
+
+   
+    public boolean validateParameterCategory(ParameterCategory pc){
+        if (pc == null)
+            return false;
+        return !this.parameterCategoriesList.contains(pc);
+    }
+
+   
+    public boolean saveParameterCategory(ParameterCategory pc){
+        if (!validateParameterCategory(pc))
+            return false;
+        return this.parameterCategoriesList.add(pc);
+    }
+
+    
+    public List<ParameterCategory> getCategoriesByCode(List<String> parameterCategoryCodes) {
+        List<ParameterCategory> selectedCategories = new ArrayList<>();
+        for (String item : parameterCategoryCodes) {
+            selectedCategories.add(getCategoryByCode(item));
+        }
+        return selectedCategories;
+    }
+
+    
+    public ParameterCategory getCategoryByCode(String code) {
+        for (ParameterCategory pc : parameterCategoriesList) {
+            if(pc.getCode().equalsIgnoreCase(code)){
+                return pc;
+            }
+        }
+        throw new UnsupportedOperationException("Parameter Category not found!");
+    }
+```
 
 # 6. Integration and Demo 
 

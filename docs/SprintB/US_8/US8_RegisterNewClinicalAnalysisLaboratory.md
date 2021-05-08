@@ -141,7 +141,7 @@ The present US is held mainly in the beginning of the business a couple of times
 
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
+n/a
 
 
 ## 3. Design - User Story Realization 
@@ -155,7 +155,6 @@ The present US is held mainly in the beginning of the business a couple of times
 | Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
 | 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Company | Creator (Rule 1): in the DM, Company owns Laboratory (and a Clinical Analysis Laboratory is part of Laboratory)                           |
-| 			  		 |	...knowing the user using the system? |      UserSession                          | According to A&A component documentation.
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
 |               	 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
@@ -177,7 +176,12 @@ According to the taken rationale, the conceptual classes promoted to software cl
 Other software classes (i.e. Pure Fabrication) identified:  
 
 * RegisterNewCalUI  
-* RegisterNewCalController
+* RegisterNewCalController  
+* TestTypeStore
+* TestTypeDto  
+* TestTypeMapper    
+* ClinicalAnalysisLaboratoryDto  
+* LaboratoryDto
 
 ## 3.2. Sequence Diagram (SD)
 

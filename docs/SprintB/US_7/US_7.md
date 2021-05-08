@@ -212,7 +212,7 @@ Employee ID; Organization Role; Name; Address; Phone Number; E-Mail; Standard Oc
 
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
+n/a
 
 
 
