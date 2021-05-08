@@ -67,12 +67,11 @@ public class Parameter {
      */
     @Override
     public String toString(){
-        return "Parameter{" +
-                "code='" + parameterCode + '\'' +
-                ", name='" + shortName + '\'' +
-                ", description='" + description + '\'' +
-                ", selectedParameterCategory='" + pc +
-                '}';
+        return ">> PARAMETER <<" +
+                "%n> Parameter code: " + parameterCode + ";" +
+                "%n> Name: " + shortName + ";" +
+                "%n> Description: " + description + ";" +
+                "%n> Desired parameter category code: " + pc + ".";
     }
 
     /**
