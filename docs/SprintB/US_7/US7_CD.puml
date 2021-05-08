@@ -24,16 +24,7 @@ class Employee {
 -String phoneNumber
 -String email
 -String socCode
--List<Employee> empList
 +Employee(role,name,address,phoneNumber,email,socCode)
-+getEmployeeId()
-+getName()
-+getAddress()
-+getPhoneNumber()
-+getEmail()
-+getRole()
-+toString()
-+equals(otherObject)
 +generateEmployeeID(name)
 +checkRoleRules()
 +checkNameRules()
@@ -41,8 +32,11 @@ class Employee {
 +checkPhoneNumberRules()
 +checkEmailRules()
 +checkSocCodeRules()
-
-
++getName()
++getEmail()
++getRole()
++toString()
++equals(otherObject)
 }
 
 class SpecialistDoctor {
@@ -77,16 +71,17 @@ class EmployeeDTO {
 -String email
 -String socCode
 +EmployeeDTO(roleDesignation, name, address, phoneNumber, email, socCode)
++getRoleDesignation()
 +getName()
 +getAddress()
 +getPhoneNumber()
 +getEmail()
-+getRoleDesignation()
 }
 
 class SpecialistDoctorDTO {
 -String doctorIndexNumber
 +SpecialistDoctorDTO(roleDesignation, name, address, phoneNumber, email, socCode, doctorIndexNumber)
++getDoctorIndexNumber()
 }
 
 class User {
