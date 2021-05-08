@@ -49,18 +49,10 @@ public class Employee {
      */
     private OrgRole role;
 
-//PORQUE É QUE TEMOS ISTO?
-    private User user;
-
     /**
      * List of existing employees.
      */
     private List<Employee> empList = new ArrayList<>();
-
-    /**
-     * List of existing roles.
-     */
-    private List<OrgRole> roles = new ArrayList<>();
 
     /**
      * Builds an employee instance receiveing:

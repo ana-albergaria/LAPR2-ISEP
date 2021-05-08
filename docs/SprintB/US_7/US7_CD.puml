@@ -1,21 +1,27 @@
 @startuml
 skinparam classAttributeIconSize 0
 
-class RegisterEmployeeUI {
+class CreateEmployeeUI {
 }
 
 class RegisterEmployeeController {
++createEmployee(empDTO)
++saveEmployee()
++getRoles()
++makeEmployeeAUser()
++makeEmployeeAnUserAndSendPassword()
 }
 
 class Employee {
-- role
-- employeeID
-- name
-- address
-- phoneNumber
-- e-Mail
-- socCode
-+Employee(role, employeeID, name, address, phoneNumber, email, socCode)
+- OrgRole role
+- String employeeID
+- String name
+- String address
+- String phoneNumber
+- String email
+- String socCode
+- List<Employee> empList
++Employee(role, name, address, phoneNumber, email, socCode)
 +getEmployeeId()
 +getName()
 +getAddress()
@@ -26,6 +32,7 @@ class Employee {
 +toString()
 +equals(otherObject)
 +generateEmployeeID(name)
++checkRoleRules()
 +checkNameRules()
 +checkAddressRules()
 +checkPhoneNumberRules()
@@ -77,16 +84,16 @@ class SpecialistDoctorDto {
 class User {
 }
 
-RegisterEmployeeUI ..> RegisterEmployeeController
+CreateEmployeeUI ..> RegisterEmployeeController
 Employee <|-- SpecialistDoctor
 RegisterEmployeeController ..> Employee
 RegisterEmployeeController ..> SpecialistDoctor
-RegisterEmployeeUI ..> EmployeeDto
-RegisterEmployeeUI ..> SpecialistDoctorDto
+CreateEmployeeUI ..> EmployeeDto
+CreateEmployeeUI ..> SpecialistDoctorDto
 RegisterEmployeeController ..> EmployeeDto
 RegisterEmployeeController ..> SpecialistDoctorDto
 RegisterEmployeeController ..> OrgRoleDto
-RegisterEmployeeUI ..> OrgRoleDto
+CreateEmployeeUI ..> OrgRoleDto
 RegisterEmployeeController ..> Company
 RegisterEmployeeController ..> OrgRole
 
