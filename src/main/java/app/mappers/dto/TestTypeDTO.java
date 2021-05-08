@@ -41,18 +41,6 @@ public class TestTypeDTO {
         return code;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getCollectingMethod() {
-        return collectingMethod;
-    }
-
-    public List<ParameterCategory> getSelectedCategories() {
-        return selectedCategories;
-    }
-
     @Override
     public String toString() {
         return "TestTypeDTO{" +

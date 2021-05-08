@@ -151,31 +151,74 @@ Other software classes (i.e. Pure Fabrication) identified:
 		public void ensureNullIsNotAllowed() {
 		Exemplo instance = new Exemplo(null, null);
 	}
-**Test 2:** Check that it is not possible to create an instance of the TestType class with code being an empty String.	
+**Test 2:** Check if it's not possible to create a Test Type with empty field for each attribute.
+**For Example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCodeIsNotEmpty() {
+        TestType instance = new TestType("", "blood analysis", "needle", pcList);
+    }
+
+ 
+**Test 3:** Check if it is not possible to create a Test type with each attribute's lenght not following the specified criteria.
+>* **AC1:** The code must have 5 alphanumeric characters
+>* **AC2:** Description must be a string with no more than 15 characters.
+>* **AC3:** Collecting Method must be a string with no more than 20 characters.
+
+**For Example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCodeIsNotMoreThanFiveCharacteres() {
+        TestType instance = new TestType("AAA123", "blood analysis", "needle", pcList);
+    }
 	
-**Test 3:** Check that it is not possible to create an instance of the TestType class with code holding more than 5 characters.  
-
-**Test 4:** Check that it is not possible to create an instance of the TestType class with code holding less than 5 characters. 
-	
-**Test 5:** Check that it is not possible to create an instance of the TestType class with code holding not alphanumeric characters. 
-
-**Test 6:** Check that it is not possible to create an instance of the TestType class with description holding more than 15 characters. 
-
-**Test 7:** Check that it is not possible to create an instance of the TestType class with description being an empty String.
-
-**Test 8:** Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters. 
-
-**Test 9:** Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
+**Test 4:** Check that it is not possible to create an instance of the TestType class with code holding not alphanumeric characters.
+ 
+    @Test(expected = IllegalArgumentException.class)
+     public void ensureTestTypeCodeIsAlphanumeric() {
+        TestType instance = new TestType("AA23@", "blood analysis", "needle", pcList);
+     }
 
 ##4.2 TestTypeStore
 
 **Test 10:** Check that it is not possible to save a repeated Test Type in the store
 * Same Object
 * Different Object, same code
+**For Example:**
+
+
+    @Test
+    public void ensureTestTypeIsNotSavedRepeatedWithSameObject() {
+        TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
+        company.getTestTypeStore().saveTestType(t1);
+        boolean actual = company.getTestTypeStore().saveTestType(t1);
+        assertFalse(actual);
+    }
 
 **Test 11:** Check that it is not possible to save a null Test Type in the store
 
+    @Test
+    public void ensureTestTypeIsNotSavedIfNull() {
+        System.out.println("ensureTestTypeIsNotSavedIfNull");
+        assertFalse(company.getTestTypeStore().saveTestType(null));
+    }
+
 **Test 12:** Check that it is not possible to get the test types by code with not assigned codes 
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureGetWithInvalidTestTypeCodeThrowsException() {
+        System.out.println("ensureGetWithInvalidTestTypeCodeThrowsException");
+        TestTypeStore testTypeStore = company.getTestTypeStore();
+        TestType t1 = testTypeStore.createTestType("AAAA1", "blood analysis", "needle", pcList);
+        TestType t2 = testTypeStore.createTestType("AAAA2", "blood analysis", "needle", pcList);
+        testTypeStore.saveTestType(t1);
+        testTypeStore.saveTestType(t2);
+        List<String> codeList = new ArrayList<String>();
+        codeList.add("AAAA1");
+        codeList.add("AAAAA");
+
+        testTypeStore.getTestTypesByCode(codeList);
+    }
 
 *It is also recommended to organize this content by subsections.* 
 
