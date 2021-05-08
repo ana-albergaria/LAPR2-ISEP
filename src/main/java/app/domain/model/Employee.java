@@ -102,7 +102,7 @@ public class Employee {
      *
      * @return generated employee ID.
      */
-    public String generateEmployeeID(String name){ //+nr de employees criados
+    public String generateEmployeeID(String name){
         String employeeID = "";
         String[] nameArray = name.split(" ");
         for (int i = 0; i < nameArray.length; i++) {
