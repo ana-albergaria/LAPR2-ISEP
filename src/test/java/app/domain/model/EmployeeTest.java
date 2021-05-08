@@ -177,19 +177,6 @@ public class EmployeeTest {
     }
 
     @Test
-    public void ensureNotEqualsObjectsWithDifferentEmployeeID() {
-        Employee object = new Employee(r1,
-                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
-
-        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
-                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
-
-        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
-
-        Assert.assertFalse(resultDifferentAddresses);
-    }
-
-    @Test
     public void ensureNotEqualsObjectsWithDifferentName() {
         Employee object = new Employee(r1,
                 "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
