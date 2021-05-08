@@ -184,10 +184,41 @@ Other software classes (i.e. Pure Fabrication) identified:
 **Test 10:** Check that it is not possible to save a repeated Test Type in the store
 * Same Object
 * Different Object, same code
+**For Example:**
+
+
+    @Test
+    public void ensureTestTypeIsNotSavedRepeatedWithSameObject() {
+        TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
+        company.getTestTypeStore().saveTestType(t1);
+        boolean actual = company.getTestTypeStore().saveTestType(t1);
+        assertFalse(actual);
+    }
 
 **Test 11:** Check that it is not possible to save a null Test Type in the store
 
+    @Test
+    public void ensureTestTypeIsNotSavedIfNull() {
+        System.out.println("ensureTestTypeIsNotSavedIfNull");
+        assertFalse(company.getTestTypeStore().saveTestType(null));
+    }
+
 **Test 12:** Check that it is not possible to get the test types by code with not assigned codes 
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureGetWithInvalidTestTypeCodeThrowsException() {
+        System.out.println("ensureGetWithInvalidTestTypeCodeThrowsException");
+        TestTypeStore testTypeStore = company.getTestTypeStore();
+        TestType t1 = testTypeStore.createTestType("AAAA1", "blood analysis", "needle", pcList);
+        TestType t2 = testTypeStore.createTestType("AAAA2", "blood analysis", "needle", pcList);
+        testTypeStore.saveTestType(t1);
+        testTypeStore.saveTestType(t2);
+        List<String> codeList = new ArrayList<String>();
+        codeList.add("AAAA1");
+        codeList.add("AAAAA");
+
+        testTypeStore.getTestTypesByCode(codeList);
+    }
 
 *It is also recommended to organize this content by subsections.* 
 
