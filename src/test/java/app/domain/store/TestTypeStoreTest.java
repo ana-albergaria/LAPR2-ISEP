@@ -17,6 +17,7 @@ public class TestTypeStoreTest {
     private ParameterCategory p1;
     private ParameterCategory p2;
     private Company company = new Company("many labs");
+
     @Before
     public void setUp() {
         pcList = new ArrayList<>();
@@ -37,7 +38,6 @@ public class TestTypeStoreTest {
     //Test 11: Check that it is not possible to save a repeated Test Type in the store
     @Test
     public void ensureTestTypeIsNotSavedRepeatedWithSameObject() {
-        System.out.println("ensureTestTypeIsNotSavedRepeatedWithSameObject");
         TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
         company.getTestTypeStore().saveTestType(t1);
         boolean actual = company.getTestTypeStore().saveTestType(t1);
@@ -47,7 +47,6 @@ public class TestTypeStoreTest {
     //Test 11(with different objects with same attributes): Check that it is not possible to save a repeated Test Type in the store
     @Test
     public void ensureTestTypeIsNotSavedRepeatedWithAlikeObject() {
-        System.out.println("ensureTestTypeIsNotSavedRepeatedWithAlikeObject");
         TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
         TestType t2 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
         company.getTestTypeStore().saveTestType(t1);
@@ -78,10 +77,4 @@ public class TestTypeStoreTest {
         testTypeStore.getTestTypesByCode(codeList);
     }
 
-   /* //Test 14: Check that it is not possible to save a null Test Type in the store
-    @Test
-    public void ensureTestTypeIsNotSavedIfNull() {
-        System.out.println("ensureTestTypeIsNotSavedIfNull");
-        assertFalse(company.getTestTypeStore().saveTestType(null));
-    }*/
 }
