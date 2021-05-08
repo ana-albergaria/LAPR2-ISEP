@@ -123,6 +123,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * ParameterCategory
 
 Other software classes (i.e. Pure Fabrication) identified: 
+ * ParameterCategoryStore
  * CreateParameterCategoryUI  
  * CreateParameterCategoryController
 
