@@ -103,6 +103,22 @@ public class ParameterCategoryStoreTest {
 
 
         Assert.assertEquals(expList, list);
+    }
+
+    @Test
+    public void getParameterCategoriesList() {
+        ParameterCategory pc1 = parameterCategoryStore.createParameterCategory("code1","categorie1");
+        ParameterCategory pc2 = parameterCategoryStore.createParameterCategory("code2","categorie2");
+        parameterCategoryStore.saveParameterCategory(pc1);
+        parameterCategoryStore.saveParameterCategory(pc2);
+
+        List<ParameterCategory> expList = new ArrayList<>();
+        expList.add(pc1);
+        expList.add(pc2);
+
+        List<ParameterCategory> list = parameterCategoryStore.getParameterCategoriesStore();
+
+        Assert.assertEquals(expList, list);
 
     }
 
