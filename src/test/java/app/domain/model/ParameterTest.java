@@ -138,6 +138,4 @@ public class ParameterTest {
         Assert.assertFalse(result);
     }
 
-    //equalsTrueWithXDifferent
-
 }

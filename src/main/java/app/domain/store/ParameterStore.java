@@ -2,7 +2,6 @@ package app.domain.store;
 
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,18 +71,5 @@ public class ParameterStore {
         Parameter[] array = new Parameter[this.prmList.size()];
         return this.prmList.toArray(array);
     }
-
-    /*public List<Parameter> getPrmList(){
-        return new ArrayList<>(prmList);
-    }*/
-
-    /*public Parameter getParameterByCode(String code){
-        for (Parameter prm : prmList){
-            if (prm.getPrmCode().equalsIgnoreCase(code)){
-                return prm;
-            }
-        }
-        throw new UnsupportedOperationException("There's no parameter with code: " + code);
-    }*/
 
 }
