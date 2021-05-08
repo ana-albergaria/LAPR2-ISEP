@@ -151,21 +151,33 @@ Other software classes (i.e. Pure Fabrication) identified:
 		public void ensureNullIsNotAllowed() {
 		Exemplo instance = new Exemplo(null, null);
 	}
-**Test 2:** Check that it is not possible to create an instance of the TestType class with code being an empty String.	
+**Test 2:** Check if it's not possible to create a Test Type with empty field for each attribute.
+**For Example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCodeIsNotEmpty() {
+        TestType instance = new TestType("", "blood analysis", "needle", pcList);
+    }
+
+ 
+**Test 3:** Check if it is not possible to create a Test type with each attribute's lenght not following the specified criteria.
+>* **AC1:** The code must have 5 alphanumeric characters
+>* **AC2:** Description must be a string with no more than 15 characters.
+>* **AC3:** Collecting Method must be a string with no more than 20 characters.
+
+**For Example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCodeIsNotMoreThanFiveCharacteres() {
+        TestType instance = new TestType("AAA123", "blood analysis", "needle", pcList);
+    }
 	
-**Test 3:** Check that it is not possible to create an instance of the TestType class with code holding more than 5 characters.  
-
-**Test 4:** Check that it is not possible to create an instance of the TestType class with code holding less than 5 characters. 
-	
-**Test 5:** Check that it is not possible to create an instance of the TestType class with code holding not alphanumeric characters. 
-
-**Test 6:** Check that it is not possible to create an instance of the TestType class with description holding more than 15 characters. 
-
-**Test 7:** Check that it is not possible to create an instance of the TestType class with description being an empty String.
-
-**Test 8:** Check that it is not possible to create an instance of the TestType class with collecting method holding more than 20 characters. 
-
-**Test 9:** Check that it is not possible to create an instance of the TestType class with collecting method being an empty String.
+**Test 4:** Check that it is not possible to create an instance of the TestType class with code holding not alphanumeric characters.
+ 
+    @Test(expected = IllegalArgumentException.class)
+     public void ensureTestTypeCodeIsAlphanumeric() {
+        TestType instance = new TestType("AA23@", "blood analysis", "needle", pcList);
+     }
 
 ##4.2 TestTypeStore
 

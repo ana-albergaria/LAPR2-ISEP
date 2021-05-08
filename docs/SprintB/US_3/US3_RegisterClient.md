@@ -182,7 +182,7 @@ Other software classes (i.e. Pure Fabrication) identified:
             new Client("", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
     }
  
-**Test 3:** Check if it is not possible to create a Client with each attribute's lenght criteria.
+**Test 3:** Check if it is not possible to create a Client with each attribute's lenght not following the specified criteria.
 >* **AC2:** The Citizen Card must have 16 digit number;
 >* **AC3:** The NHS number must have 10 digit;
 >* **AC4:** The TIN number must have 10 digit;
