@@ -22,14 +22,12 @@ public class PasswordUtils {
     }
 
     public static boolean writePassword(String generatedPassword, String email) throws IOException {
-        BufferedWriter bw;
         File file = new File("emailAndSMSMessages.txt");
         if(!file.exists())
             file.createNewFile();
-        bw = new BufferedWriter(new FileWriter(file, true));
-        bw.write(String.format("%n%nEmployee email: %s%nEmplooye Password: %s", email, generatedPassword));
-        if (bw != null)
-            bw.close();
-        return true;
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
+            bw.write(String.format("%n%nEmployee email: %s%nEmplooye Password: %s", email, generatedPassword));
+            return true;
+        }
     }
 }
