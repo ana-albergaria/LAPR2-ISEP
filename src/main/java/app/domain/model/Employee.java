@@ -271,8 +271,7 @@ public class Employee {
 
         Employee otherEmployee = (Employee) otherObject;
 
-        return this.employeeID.equalsIgnoreCase(otherEmployee.employeeID) &&
-                this.name.equalsIgnoreCase(otherEmployee.name) &&
+        return  this.name.equalsIgnoreCase(otherEmployee.name) &&
                 this.address.equalsIgnoreCase(otherEmployee.address) &&
                 this.phoneNumber.equalsIgnoreCase(otherEmployee.phoneNumber) &&
                 this.email.equalsIgnoreCase(otherEmployee.email) &&
