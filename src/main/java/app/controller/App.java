@@ -87,6 +87,9 @@ public class App {
         this.company.getTestTypeStore().saveTestType(t1);
         List<TestType> selectedTT = new ArrayList<>();
         selectedTT.add(t1);
+        TestType t2 = new TestType("COD22","blabla","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore());
+        this.company.getTestTypeStore().saveTestType(t2);
+        selectedTT.add(t2);
         this.company.saveClinicalAnalysisLaboratory(new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT));
     }

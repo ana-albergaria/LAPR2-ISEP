@@ -1,6 +1,7 @@
 package app.ui.console;
 
 import app.controller.RegisterNewCalController;
+import app.domain.model.TestType;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.TestTypeDTO;
 import app.ui.console.utils.OurUtils;
@@ -20,7 +21,7 @@ public class RegisterNewCalUI implements Runnable {
         boolean success = true;
         List<String> menu = OurUtils.menuToContinueOrCancel();
 
-        System.out.print("To register a new Clinical Analysis Laboratory, please insert the requested data.%n%n");
+        System.out.println("To register a new Clinical Analysis Laboratory, please insert the requested data.");
         do {
             int index = Utils.showAndSelectIndex(menu, "");
             success = (index == -1) ? true : registerClinicalAnalysisLaboratory();
@@ -30,42 +31,52 @@ public class RegisterNewCalUI implements Runnable {
     }
     private boolean registerClinicalAnalysisLaboratory() {
         boolean success = false;
-        System.out.println("To register a new Clinical Analysis Laboratory, please insert the requested data.\n");
 
-        do {
-            try {
-                String laboratoryID = Utils.readLineFromConsole("Laboratory ID: ");
-                String name = Utils.readLineFromConsole("Name: ");
-                String address = Utils.readLineFromConsole("Address: ");
-                String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
-                String numTIN = Utils.readLineFromConsole("TIN Number: ");
-                List<String> selectedTT = getTypesOfTestToCode();
+        try {
+            String laboratoryID = Utils.readLineFromConsole("Laboratory ID: ");
+            String name = Utils.readLineFromConsole("Name: ");
+            String address = Utils.readLineFromConsole("Address: ");
+            String phoneNumber = Utils.readLineFromConsole("Phone Number: ");
+            String numTIN = Utils.readLineFromConsole("TIN Number: ");
+            List<String> selectedTT = getTypesOfTestToCode();
 
-                ClinicalAnalysisLaboratoryDTO calDto = new ClinicalAnalysisLaboratoryDTO(laboratoryID,
+            ClinicalAnalysisLaboratoryDTO calDto = new ClinicalAnalysisLaboratoryDTO(laboratoryID,
                         name, address, phoneNumber, numTIN, selectedTT);
 
-                ctrl.createClinicalAnalysisLaboratory(calDto);
+            ctrl.createClinicalAnalysisLaboratory(calDto);
 
-                boolean confirm = Utils.confirm(String.format("Please, confirm the data (type `s` if its correct, `n` if it is not):" +
-                                "%nCLINICAL ANALYSIS LABORATORY%nLaboratory ID: %s%nName: %s%nAddress: %s%nPhone Number: %s%nTIN Number: %s%nTypes Of Test: %s%n",
-                        calDto.getLaboratoryID(), calDto.getName(), calDto.getAddress(),
-                        calDto.getPhoneNumber(), calDto.getNumTIN(), calDto.getTestTypeCodes()));
+            List<String> copy = new ArrayList<>(calDto.getTestTypeCodes());
 
-                if (!confirm) {
-                    System.out.print("Please, insert again the data you wish.");
-                } else {
-                    boolean save = ctrl.saveClinicalAnalysisLaboratory();
-                    if (save) {
-                        success = true;
-                        System.out.println("\nClinical Analysis Laboratory successfully created!");
-                    } else
-                        throw new IllegalArgumentException("\nERROR: Clinical Analysis Laboratory Null or Already Registered in the System!");
+            StringBuilder codes = new StringBuilder();
+            for (String code : copy) {
+                codes.append("\n- ");
+                codes.append("Code: ");
+                codes.append(code);
+            }
+
+            boolean confirm = Utils.confirm(String.format("Please, confirm the data (type `s` if its correct, `n` if it is not):" +
+                            "%n%nCLINICAL ANALYSIS LABORATORY%nLaboratory ID: %s%nName: %s%nAddress: %s%nPhone Number: %s%nTIN Number: %s%nCodes Of The Types Of Test: %s%n",
+                    calDto.getLaboratoryID(), calDto.getName(), calDto.getAddress(),
+                    calDto.getPhoneNumber(), calDto.getNumTIN(), codes));
+
+            if (!confirm) {
+                System.out.print("Please, insert again the data you wish.");
+            } else {
+                boolean save = ctrl.saveClinicalAnalysisLaboratory();
+                if (save) {
+                    success = true;
+                    System.out.println("\nClinical Analysis Laboratory successfully created!");
+                } else
+                    throw new IllegalArgumentException("\nERROR: Clinical Analysis Laboratory Null or Already Registered in the System!");
                 }
             }
             catch(IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            }
-        } while(success);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                success = false;
+        }
+
 
         return success;
 

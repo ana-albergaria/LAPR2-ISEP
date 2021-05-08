@@ -22,9 +22,10 @@ public class CreateEmployeeUI implements Runnable{
         boolean success;
         List<String> menu = OurUtils.menuToContinueOrCancel();
 
-        System.out.println("To register a new Employee, please insert the requested data.\n");
+        System.out.println("To register a new Employee, please insert the requested data.");
         do{
-            success = createEmployee();
+            int index = Utils.showAndSelectIndex(menu, "");
+            success = (index == -1) ? true : createEmployee();
         }while (!success);
         System.out.println("\nEmployee successfully created!");
     }
@@ -50,18 +51,17 @@ public class CreateEmployeeUI implements Runnable{
                 SpecialistDoctorDTO specDto = new SpecialistDoctorDTO(roleDesignation, name, address, phoneNumber, email, socNumber, doctorIndexNumber);
                 ctrl.createEmployee(specDto);
                 confirm = Utils.confirm(String.format("Please confirm the data (type `s` if its correct, `n` if it is not):" +
-                                "%n Organization role: %s%n Name: %s%n Address: %s%n Phone Number: %s%n Email: %s%n " +
-                                "SOC number: %s%n Doctor index number: %s%n",
+                                "%nOrganization role: %s%nName: %s%nAddress: %s%nPhone Number: %s%nEmail: %s%n" +
+                                "SOC number: %s%nDoctor index number: %s%n",
                                 roleDesignation, name, address, phoneNumber, email, socNumber, doctorIndexNumber));
             }else{
                 EmployeeDTO empDto = new EmployeeDTO(roleDesignation, name, address, phoneNumber, email, socNumber);
                 ctrl.createEmployee(empDto);
                 confirm = Utils.confirm(String.format("Please confirm the data (type `s` if its correct, `n` if it is not):" +
-                                "%n Organization role: %s%n Name: %s%n Address: %s%n Phone Number: %s%n Email: %s%n " +
-                                "SOC number: %s%n",
+                                "%nOrganization role: %s%nName: %s%nAddress: %s%nPhone Number: %s%nEmail: %s%nSOC number: %s%n",
                         roleDesignation, name, address, phoneNumber, email, socNumber));
             }
-            if(!confirm) throw new Exception("Please enter the correct data");
+            if(!confirm) throw new Exception("Please, insert again the data you wish.");
             success = ctrl.saveEmployee();
             if(!success) throw new Exception("Error: Employee either already existent or null, please try again");
             success = ctrl.makeEmployeeAnUserAndSendPassword();

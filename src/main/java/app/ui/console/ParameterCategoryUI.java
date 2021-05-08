@@ -18,7 +18,7 @@ public class ParameterCategoryUI implements Runnable{
         boolean success;
         List<String> menu = OurUtils.menuToContinueOrCancel();
 
-        System.out.println("To create a new Parameter Category, please insert the requested data.\n");
+        System.out.println("To create a new Parameter Category, please insert the requested data.");
         do{
             int index = Utils.showAndSelectIndex(menu, "");
             success = (index == -1) ? true : createParameterCategory();

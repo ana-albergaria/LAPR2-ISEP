@@ -51,7 +51,6 @@ public class TestTypeDTO {
             s.append("\n- ");
             s.append("Name: ");
             s.append(pc.getName());
-            s.append("\n");
         }
 
         return String.format("%nCode: %s%nDescription: %s%nCollecting Method: %s%n" +

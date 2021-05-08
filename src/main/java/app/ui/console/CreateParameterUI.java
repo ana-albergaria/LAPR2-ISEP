@@ -20,7 +20,7 @@ public class CreateParameterUI implements Runnable {
         List<String> menu = OurUtils.menuToContinueOrCancel();
 
         do {
-            System.out.println("To create a new Parameter, please insert the requested data.\n");
+            System.out.println("To create a new Parameter, please insert the requested data.");
             do {
                 int index = Utils.showAndSelectIndex(menu, ""); //shows parameter categories list and asks to select one
                 success = (index == -1) ? true : createParameter();

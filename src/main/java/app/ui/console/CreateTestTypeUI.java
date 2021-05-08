@@ -18,7 +18,7 @@ public class CreateTestTypeUI implements Runnable{
     @Override
     public void run() {
         boolean success;
-        System.out.println("To create a new Test Type, please insert the requested data.\n");
+        System.out.println("To create a new Test Type, please insert the requested data.");
         List<String> menu = menuToContinueOrCancel();
 
         do{
@@ -69,7 +69,8 @@ public class CreateTestTypeUI implements Runnable{
         parameterCategories = showListAndSelectObjects(parameterCategories);
         List<String> parameterCategoriesCodes = new ArrayList<>();
         for(CategoriesDTO p: parameterCategories){
-            parameterCategoriesCodes.add(p.getCode());
+            if(!parameterCategoriesCodes.contains(p.getCode()))
+                parameterCategoriesCodes.add(p.getCode());
         }
         return parameterCategoriesCodes;
     }
