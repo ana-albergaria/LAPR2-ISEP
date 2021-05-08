@@ -39,4 +39,18 @@ public class ParameterCategory {
             throw new IllegalArgumentException("Name cannot have more then 10 characters.");
     }
 
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        ParameterCategory otherParameterCategory = (ParameterCategory) otherObject;
+
+        return  this.code.equalsIgnoreCase(otherParameterCategory.code) &&
+                this.name.equalsIgnoreCase(otherParameterCategory.name);
+    }
+
 }
