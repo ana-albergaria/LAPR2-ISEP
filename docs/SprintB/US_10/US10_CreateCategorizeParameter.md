@@ -285,9 +285,11 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 19:** Check that the equals method returns false if one of the two compared parameters is null.
 
+**Test 20:** Check that the equals method returns true if the two compared parameters have the same parameter code.
+
 ## 4.2. ParameterStore
 
-**Test 20:** Check if the parameter store is being created correctly with no elements.
+**Test 21:** Check if the parameter store is being created correctly with no elements.
 
 	@Test
     public void createParameterStore() {
@@ -297,15 +299,13 @@ Other software classes (i.e. Pure Fabrication) identified:
         Assert.assertEquals(0, result.length);
     }
 
-**Test 21:** Check if the parameter store is being created correctly with some elements.
+**Test 22:** Check if the parameter store is being created correctly with some elements.
 
-**Test 22:** Check if the parameter is being created correctly.
+**Test 23:** Check if the parameter is being created correctly.
 
-**Test 23:** Check that it is not possible to save a parameter with repeated objects.
+**Test 24:** Check that it is not possible to save a parameter with repeated objects.
 
-**Test 24:** Check that it is not possible to save a null parameter.
-
-*It is also recommended to organize this content by subsections.* 
+**Test 25:** Check that it is not possible to save a null parameter.
 
 # 5. Construction (Implementation)
 

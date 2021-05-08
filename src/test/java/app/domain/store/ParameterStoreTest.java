@@ -26,7 +26,7 @@ public class ParameterStoreTest {
         pcList.add(p2);
     }
 
-    //Test 20
+    //Test 21
     @Test
     public void ensureParameterStoreIsBeingCreatedCorrectlyWithNoElements() {
         System.out.println("ensureParameterStoreIsBeingCreatedCorrectlyWithNoElements");
@@ -35,7 +35,7 @@ public class ParameterStoreTest {
         Assert.assertEquals(0, result.length);
     }
 
-    //Test 21
+    //Test 22
     @Test
     public void ensureParameterStoreIsBeingCreatedCorrectlyWithSomeElements() {
         System.out.println("ensureParameterStoreIsBeingCreatedCorrectlyWithSomeElements");
@@ -52,7 +52,7 @@ public class ParameterStoreTest {
         Assert.assertEquals(4, result.length);
     }
 
-    //Test 22
+    //Test 23
     @Test
     public void ensureParameterIsBeingCreatedCorrectly() {
         System.out.println("ensureParameterIsBeingCreatedCorrectly");
@@ -62,7 +62,7 @@ public class ParameterStoreTest {
         Assert.assertEquals(expected, actual);
     }
 
-    //Test 23
+    //Test 24
     @Test
     public void ensureParameterIsNotSavedRepeatedWithSameObject() {
         System.out.println("ensureParameterIsNotSavedRepeatedWithSameObject");
@@ -74,7 +74,7 @@ public class ParameterStoreTest {
         assertFalse(result);
     }
 
-    //Test 24
+    //Test 25
     @Test
     public void ensureParameterIsNotSavedIfNull() {
         System.out.println("ensureParameterIsNotSavedIfNull");
