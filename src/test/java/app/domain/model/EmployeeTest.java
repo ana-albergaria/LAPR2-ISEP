@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -173,6 +174,19 @@ public class EmployeeTest {
     public void ensureAddressWithLengthOf30() {
         Employee instance = new Employee(r1, "employee", "qwertyuiopasdfghjkl zxcvbnmqwe",
                 "1234567890","joana@gmail.com","1234");
+    }
+
+    @Test
+    public void ensureNotEqualsObjectsWithDifferentEmployeeID() {
+        Employee object = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        Employee objectOnlyWithDifferentEmployeeID = new Employee(r1,
+                "Manuel","Lisboa","9184137881","manuel@gmail.com", "1234");
+
+        boolean resultDifferentAddresses = object.equals(objectOnlyWithDifferentEmployeeID);
+
+        Assert.assertFalse(resultDifferentAddresses);
     }
 
 

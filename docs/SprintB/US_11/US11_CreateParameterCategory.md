@@ -107,7 +107,6 @@ As an administrator, I want to specify a new parameter category.
 | Step 1: asks to create a new parameter category |	... interacting with the actor? | CreateParameterCategoryUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 |       	   	 |	... coordinating the US? | CreateParameterCategoryController | Controller |
 |       	   	 |	... instantiating a new Parameter Category? | Administrator | Creator: in the DM Company adopts a Parameter Category. |
-|       	   	 |	... knowing the user using the system? | UserSession | According to A&A component documentation. |
 | Step 2: request data(i.e., code, name) |	...asking the user for this data? | CreateParameterCategoryUI | IE: Responsable for user interaction. |
 | Step 3: types requested data | ...validating the input data locally? | ParameterCategory | IE: Knows its own data. |
 |                | ...saving the input data? | ParameterCategory | IE: It has its own data. |
@@ -161,12 +160,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 6. Integration and Demo 
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+
+To reduce the responsabilities assigned to the Company, it was created a ParameterCategoryStore in order to reduce coupling.
 
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
+No relevant observations.
 
 
 

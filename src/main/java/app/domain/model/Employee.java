@@ -52,7 +52,7 @@ public class Employee {
     /**
      * List of existing employees.
      */
-    private List<Employee> empList = new ArrayList<>();
+    private static int totalEmployees = 0;
 
     /**
      * Builds an employee instance receiveing:
@@ -85,6 +85,7 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.socCode = socCode;
+        totalEmployees++;
     }
 
     /**
@@ -102,7 +103,7 @@ public class Employee {
             String word = nameArray[i];
             employeeID = employeeID + word.charAt(0);
         }
-        int num = this.empList.size() + 1;
+        int num = totalEmployees + 1;
         String str = String.format("%05d", num);
         employeeID = employeeID + str;
         return employeeID;
