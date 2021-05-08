@@ -21,25 +21,15 @@ public class PasswordUtils {
         return salt.toString();
     }
 
-    public static boolean writePassword(String generatedPassword, String email){
-        BufferedWriter bw = null;
-        try {
-            File file = new File("emailAndSMSMessages.txt");
-            if(!file.exists())
-                file.createNewFile();
-            bw = new BufferedWriter(new FileWriter(file, true));
-            bw.write(String.format("%n%nEmployee email: %s%nEmplooye Password: %s", email, generatedPassword));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }finally {
-            try {
-                if (bw != null)
-                    bw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public static boolean writePassword(String generatedPassword, String email) throws IOException {
+        BufferedWriter bw;
+        File file = new File("emailAndSMSMessages.txt");
+        if(!file.exists())
+            file.createNewFile();
+        bw = new BufferedWriter(new FileWriter(file, true));
+        bw.write(String.format("%n%nEmployee email: %s%nEmplooye Password: %s", email, generatedPassword));
+        if (bw != null)
+            bw.close();
+        return true;
     }
 }
