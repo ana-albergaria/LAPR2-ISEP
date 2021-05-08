@@ -181,13 +181,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
-
 ![US8_SD](US8_SD.svg)
 
 ## 3.3. Class Diagram (CD)
-
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
 ![US8_CD](US8_CD.svg)
 
@@ -529,6 +525,40 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
 *In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
 
 *It is also recommended to organize this content by subsections.* 
+
+## Class RegisterNewCalController
+
+		public boolean createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
+        this.cal = this.company.createClinicalAnalysisLaboratory(calDto);
+        return this.company.validateClinicalAnalysisLaboratory(cal);
+      }
+
+
+      public boolean saveClinicalAnalysisLaboratory(){
+          return this.company.saveClinicalAnalysisLaboratory(cal);
+      }
+
+      public List<TestTypeDTO> getTestTypes() {
+          TestTypeStore storeTest = this.company.getTestTypeStore();
+          List<TestType> listTestType = storeTest.getTestTypes();
+  
+          TestTypeMapper mapper = new TestTypeMapper();
+          return mapper.toDTO(listTestType);
+        }
+
+## Class Organization
+
+
+		public Task createTask(String ref, String designation, String informalDesc, 
+			String technicalDesc, Integer duration, Double cost, Category cat)() {
+		
+	
+			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
+			if (this.validateTask(task))
+				return task;
+			return null;
+		}
+
 
 # 6. Integration and Demo 
 
