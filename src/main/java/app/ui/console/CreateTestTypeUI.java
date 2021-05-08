@@ -18,11 +18,14 @@ public class CreateTestTypeUI implements Runnable{
     @Override
     public void run() {
         boolean success;
-        System.out.println("\nCreate a test type category:");
+        System.out.println("To create a new Test Type, please insert the requested data.\n");
+        List<String> menu = menuToContinueOrCancel();
+
         do{
-            success = createTestType();
+            int index = Utils.showAndSelectIndex(menu, "");
+            success = (index == -1) ? true : createTestType();
         }while (!success);
-        System.out.println("\n Test type successfully created!");
+        System.out.println("\nTest type successfully created!");
     }
 
     private boolean createTestType(){
@@ -53,7 +56,10 @@ public class CreateTestTypeUI implements Runnable{
         List<CategoriesDTO> categoriesDTO =  ctrl.getParameterCategoriesDTO();
         CategoriesDTO categoryToAdd = (CategoriesDTO) Utils.showAndSelectOne(categoriesDTO,
                 "Please type the number of the category you want to associate to the test type:");
-        parameterCategories.add(categoryToAdd);
+        if(categoryToAdd != null)
+            parameterCategories.add(categoryToAdd);
+        else
+            throw new IllegalArgumentException("Operation canceled!");
         boolean addMore = Utils.confirm("If you want to add more categories please type 's', otherwise type 'n'");
         return addMore ? showListAndSelectObjects(parameterCategories) : parameterCategories;
     }
@@ -66,5 +72,12 @@ public class CreateTestTypeUI implements Runnable{
             parameterCategoriesCodes.add(p.getCode());
         }
         return parameterCategoriesCodes;
+    }
+
+    private List<String> menuToContinueOrCancel() {
+        List<String> menu = new ArrayList<>();
+        menu.add("Insert the data");
+
+        return menu;
     }
 }

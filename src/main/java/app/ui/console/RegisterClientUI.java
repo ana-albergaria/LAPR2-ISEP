@@ -1,26 +1,31 @@
 package app.ui.console;
 
 import app.controller.RegisterClientController;
+import app.ui.console.utils.OurUtils;
 import app.ui.console.utils.Utils;
 
 import java.util.Date;
+import java.util.List;
 
-public class CreateClientUI implements Runnable{
+public class RegisterClientUI implements Runnable{
 
     private RegisterClientController ctrl;
 
-    public CreateClientUI(){
+    public RegisterClientUI(){
         ctrl = new RegisterClientController();
     }
 
     @Override
     public void run() {
         boolean success;
-        System.out.println("\nCreate a client category:");
+        List<String> menu = OurUtils.menuToContinueOrCancel();
+
+        System.out.println("To register a new Client, please insert the requested data.%n%n");
         do{
-            success = createClient();
+            int index = Utils.showAndSelectIndex(menu, "");
+            success = (index == -1) ? true : createClient();
         }while (!success);
-        System.out.println("\n Client successfully created!");
+        System.out.println("\nClient successfully created!");
     }
 
     private boolean createClient(){

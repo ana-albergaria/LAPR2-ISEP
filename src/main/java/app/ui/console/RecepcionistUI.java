@@ -10,7 +10,7 @@ public class RecepcionistUI implements Runnable{
     public void run() {
 
         List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Register a client", new CreateClientUI()));
+        options.add(new MenuItem("Register a client", new RegisterClientUI()));
 
         int option = 0;
         do

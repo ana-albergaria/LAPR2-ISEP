@@ -20,9 +20,6 @@ public class CategoriesDTO {
 
     @Override
     public String toString() {
-        return "Category:" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                '}';
+        return String.format("Code: %s%nName: %s%n", code, name);
     }
 }

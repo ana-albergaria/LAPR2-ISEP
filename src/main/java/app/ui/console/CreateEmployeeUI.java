@@ -4,7 +4,10 @@ import app.controller.RegisterEmployeeController;
 import app.domain.shared.Constants;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
+import app.ui.console.utils.OurUtils;
 import app.ui.console.utils.Utils;
+
+import java.util.List;
 
 public class CreateEmployeeUI implements Runnable{
 
@@ -17,19 +20,25 @@ public class CreateEmployeeUI implements Runnable{
     @Override
     public void run() {
         boolean success;
-        System.out.println("\nRegister an employee :");
+        List<String> menu = OurUtils.menuToContinueOrCancel();
+
+        System.out.println("To register a new Employee, please insert the requested data.\n");
         do{
             success = createEmployee();
         }while (!success);
-        System.out.println("\n Employee successfully created!");
+        System.out.println("\nEmployee successfully created!");
     }
 
     private boolean createEmployee(){
         boolean success = false;
         boolean confirm;
         try {
-            Utils.showList(ctrl.getRoles() , "Available organization roles: ");
+            System.out.println("Available organization roles: ");
+            ctrl.getRoles().forEach(role -> System.out.println(role));
             String roleDesignation = Utils.readLineFromConsole("Please type in the name of the organization role: ");
+            if(roleDesignation.equals("0"))
+                success = true;
+
             String name = Utils.readLineFromConsole("Enter name: ");
             String address = Utils.readLineFromConsole("Enter address: ");
             String phoneNumber = Utils.readLineFromConsole("Enter phoneNumber: ");
