@@ -546,26 +546,51 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
           return mapper.toDTO(listTestType);
         }
 
-## Class Organization
+## Class Company
 
 
-		public Task createTask(String ref, String designation, String informalDesc, 
-			String technicalDesc, Integer duration, Double cost, Category cat)() {
-		
-	
-			Task task = new Task(ref, designation, informalDesc, technicalDesc, duration, cost, cat);
-			if (this.validateTask(task))
-				return task;
-			return null;
-		}
+		public ClinicalAnalysisLaboratory createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDTO) {
+        TestTypeStore storeTest = getTestTypeStore();
+        List<TestType> selectedTT = storeTest.getTestTypesByCode(calDTO.getTestTypeCodes());
+
+        return new ClinicalAnalysisLaboratory(calDTO.getLaboratoryID(), calDTO.getName(),
+                calDTO.getAddress(), calDTO.getPhoneNumber(), calDTO.getNumTIN(), selectedTT);
+    }
+
+    public boolean validateClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if(cal == null)
+            return false;
+        checkCalDuplicates(cal);
+        return ! this.calList.contains(cal);
+    }
+
+    public boolean saveClinicalAnalysisLaboratory(ClinicalAnalysisLaboratory cal){
+        if (!validateClinicalAnalysisLaboratory(cal))
+            return false;
+
+        return this.calList.add(cal);
+    }
+
+    public void checkCalDuplicates(ClinicalAnalysisLaboratory cal) {
+        for (ClinicalAnalysisLaboratory item : calList) {
+            if(cal.getLaboratoryID().equalsIgnoreCase(item.getLaboratoryID()))
+                throw new IllegalArgumentException("Laboratory ID already registered in the system.");
+            if(cal.getAddress().equalsIgnoreCase(item.getAddress()))
+                throw new IllegalArgumentException("Address already registered in the system.");
+            if(cal.getPhoneNumber().equals(item.getPhoneNumber()))
+                throw new IllegalArgumentException("Phone Number already registered in the system.");
+            if(cal.getNumTIN().equals(item.getNumTIN()))
+                throw new IllegalArgumentException("TIN Number already registered in the system.");
+        }
+    }
 
 
-# 6. Integration and Demo 
+# 6. Integration and Demo
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+To create a Clinical Analysis Laboratory, it is necessary to know the list of test types available in the system.  
+Therefore, in order to reduce coupling, it was created a TestTypeDto as well as a TestTypeMapper to process the data and convert the list of test types to a Dto.
 
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
-  
+Clinical Analysis Laboratory has many arguments passing through layers, therefore a DTO could make the maintenance easier.
