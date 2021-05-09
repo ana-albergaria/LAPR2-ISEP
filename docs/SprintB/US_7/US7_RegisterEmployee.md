@@ -395,6 +395,56 @@ I also verified two Employees are **not** equal either if they are from differen
     }
 
 
+### Class: CompanyTest  
+
+**Test 1**: Check that the Employee created successfully will be user of the system.  
+
+```
+@Test
+    public void makeEmployeeAnUserWithNewRoleToTheSystem() {
+        Employee obj = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234"));
+        Employee obj2 = company.createEmployee(new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","0987654321","afonso@gmail.com",
+                "1234"));
+
+        boolean save = company.makeEmployeeAUser(obj, "1234567890");
+        Assert.assertTrue(save);
+    }
+```
+
+An analogous test was made to make sure the Employee could also be created with an already **existent role** in the system.  
+
+**To save an Employee**, tests were made to make sure there aren't:  
+
+ * Employees with the same e-mail  
+ * Null Employees  
+ * Repeated Employees
+
+**Test 2**: Check that an Employee is created successfuly.  
+
+```
+@Test
+    public void createEmployee() {
+
+        Employee expObj = new Employee(r2,
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
+
+        EmployeeDTO empDTO = new EmployeeDTO("Med Lab Tech",
+                "Afonso","Lisboa","1234567890","afonso@gmail.com",
+                "1234");
+
+        Employee obj = company.createEmployee(empDTO);
+
+        Assert.assertEquals(expObj, obj);
+    }
+```
+
+
+
+An analagous test was made for the creation of a **Specialist Doctor**.
 
 # 5. Construction (Implementation)
 

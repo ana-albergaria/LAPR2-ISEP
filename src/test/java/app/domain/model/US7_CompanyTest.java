@@ -125,7 +125,7 @@ public class US7_CompanyTest {
     }
 
     @Test
-    public void makeClientAnUserWithNewRoleToTheSystem() {
+    public void makeEmployeeAnUserWithNewRoleToTheSystem() {
 
         //Act
         Employee obj = company.createEmployee(new EmployeeDTO("Med Lab Tech",
