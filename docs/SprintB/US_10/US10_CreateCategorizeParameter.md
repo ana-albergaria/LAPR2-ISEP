@@ -353,28 +353,81 @@ are on a list:
 		pcList.add(p2);
     }
 
-Since the parameter store tests (tests 21 to 25) are very different between them and don't 
-follow any model, there's no generic example to be shown.
+Since the parameter store tests (tests 21 to 25) are very different between them 
+and don't follow any model, there's no generic example to be shown.
 
 **Test 21:** Check if the parameter store is being created correctly with no elements.
 
+    @Test
+    public void ensureParameterStoreIsBeingCreatedCorrectlyWithNoElements() {
+        ParameterStore ps1 = new ParameterStore();
+        Parameter[] result = ps1.toArray();
+        Assert.assertEquals(0, result.length);
+    }
+
 **Test 22:** Check if the parameter store is being created correctly with some elements.
+
+    @Test
+    public void ensureParameterStoreIsBeingCreatedCorrectlyWithSomeElements() {
+        ParameterStore ps1 = new ParameterStore();
+        Parameter parameter1 = ps1.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ps1.saveParameter(parameter1);
+        Parameter parameter2 = ps1.createParameter("WBC01", "WBC", "White Blood Cells", p1);
+        ps1.saveParameter(parameter2);
+        Parameter parameter3 = ps1.createParameter("PLT01", "PLT", "Platelets", p1);
+        ps1.saveParameter(parameter3);
+        Parameter parameter4 = ps1.createParameter("PCOD1", "NAME", "Description", p2);
+        ps1.saveParameter(parameter4);
+        Parameter[] result = ps1.toArray();
+        Assert.assertEquals(4, result.length);
+    }
 
 **Test 23:** Check if the parameter is being created correctly.
 
+    @Test
+    public void ensureParameterIsBeingCreatedCorrectly() {
+        Parameter expected = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        Parameter actual = parameterStore.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Assert.assertEquals(expected, actual);
+    }
+
 **Test 24:** Check that it is not possible to save a parameter with repeated objects.
+
+    public void ensureParameterIsNotSavedRepeatedWithSameObject() {
+        Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Parameter parameter2 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        parameterStore.saveParameter(parameter1);
+        boolean result = parameterStore.saveParameter(parameter2);
+        assertFalse(result);
+    }
 
 **Test 25:** Check that it is not possible to save a null parameter.
 
+    @Test
+    public void ensureParameterIsNotSavedIfNull() {
+        ParameterStore parameterStore = company.getParameterStore();
+        assertFalse(parameterStore.saveParameter(null));
+    }
+
 # 5. Construction (Implementation)
+
+## Class CreateParameterController
+
+## Class Parameter
+
+## Class ParameterStore
+
+## Class Company
+
+## Class CreateParameterUI
 
 *In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
 
 *It is also recommended to organize this content by subsections.* 
 
-# 6. Integration and Demo 
-
-## 
+# 6. Integration and Demo
 
 To create a parameter, it is necessary to know the list of parameter categories available
 in the system. Therefore, in order to reduce coupling, it was created a CategoriesDTO 
