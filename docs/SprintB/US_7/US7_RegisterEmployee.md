@@ -649,7 +649,6 @@ public boolean createEmployee(EmployeeDTO empDTO) {
     }
 ```
 
-*It is also recommended to organize this content by subsections.* 
 
 # 6. Integration and Demo
 

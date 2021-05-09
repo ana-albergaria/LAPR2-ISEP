@@ -114,7 +114,9 @@ n/a
 | Step 5: confirms the data |	... validating the data globally (e.g.: duplicated)? | ParameterCategoryStore | IE: knows all the ParameterCategory objects |
 |       	   	 |	...saving the created parameter category? | ParameterCategoryStore | IE: adopts/records all the ParameterCategory objects |
 | Step 6: informs operation success |	... informing operation success? | CreateParameterCategoryUI | IE: responsible for user interaction |
-### Systematization ##
+
+
+### Systematization 
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
@@ -140,10 +142,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US011_CD](US011_CD.svg)
 
 
-# 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
-
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+# 4. Tests
 
 **Test 1:** Check that it is not possible to create an instance of the Parameter category with null values. 
 

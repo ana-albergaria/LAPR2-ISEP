@@ -27,7 +27,7 @@ As a receptionist of the laboratory, I want to register a client.
 >  
 > **Answer:** "The sex is opcional. All other fields are required."
 >
->Question 1 [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7563).
+> **Question 1** [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7563).
 -
 
 > **Question2:**  Which type/format should all data have?"
