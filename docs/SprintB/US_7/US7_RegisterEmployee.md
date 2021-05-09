@@ -442,8 +442,6 @@ An analogous test was made to make sure the Employee could also be created with 
     }
 ```
 
-
-
 An analagous test was made for the creation of a **Specialist Doctor**.
 
 # 5. Construction (Implementation)
