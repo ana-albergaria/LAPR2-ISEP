@@ -42,7 +42,9 @@ class ChemicalResult{}
 /'class ClinicalResult{}'/
 class Diagnosis{}
 class Parameter{
-- designation
+- code
+- shortName
+- description
 }
 class Notification{
 - textDescription
@@ -107,8 +109,6 @@ class TestType{
 class ParameterCategory{
 - name
 - code
-- description
-- nhsId
 }
 /'
 class Covid19Test{
