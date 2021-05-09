@@ -80,6 +80,7 @@ CreateParameterController ..> CategoriesMapper
 CategoriesMapper ..> ParameterCategory
 CategoriesMapper ..> CategoriesDto
 CreateParameterUI ..> CategoriesDto
+CreateParameterController ..> CategoriesDto
 ParameterCategoryStore -- ParameterCategory : adopts >
 Company "1" -- "1" ParameterCategoryStore : uses >
 Company "1" -- "1" ParameterStore : uses >
