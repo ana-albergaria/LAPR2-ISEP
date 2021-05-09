@@ -226,40 +226,46 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Administrator
- * Platform
  * Company
  * Parameter
 
 Other software classes (i.e. Pure Fabrication) identified: 
  * CreateParameterUI  
  * CreateParameterController
+ * CategoriesMapper
+ * CategoriesDTO
+ * ParameterCategoryStore
+ * ParameterStore
 
 ## 3.2. Sequence Diagram (SD)
-
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
 
 ![US010_SD](US010_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
-
 ![US010_CD](US010_CD.svg)
 
-# 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
-
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+# 4. Tests
 
 ## 4.1. Parameter
 
-**Test 1:** Check that it is not possible to create an instance of the Parameter class with null values. 
+Before starting the parameter tests, it's useful to create something like this, since the parameters need to be assigned to a parameter category:
+
+    @Before
+    public void setUp() {
+        p1 = new ParameterCategory(desiredParameterCategoryCode,desiredParameterCategoryName);
+    }
+
+Tests 1 to 15 follow this model:
 
 	@Test(expected = IllegalArgumentException.class)
-    public void ensureNullIsNotAllowed(){
-        Parameter prm = new Parameter(null, null, null, null);
+    public void testName(){
+        Parameter prm = new Parameter(parameterCodeToBeTested, shortNameToBeTested, descriptionToBeTested, parameterCategoryToBeTested);
     }
+
+The only changes are the testName and the attributes of prm.
+
+**Test 1:** Check that it is not possible to create an instance of the Parameter class with null values.
 
 **Test 2:** Check that it is not possible to create an instance of the Parameter class with null parameter code.
 
@@ -289,15 +295,38 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 15:** Check that it is not possible to create an instance of the Parameter class with null parameter category.
 
+Tests 16 to 18 follow this model:
+
+	@Test
+    public void testName(){
+		Parameter parameter1 = new Parameter(parameterCodeToBeTested1, shortNameToBeTested1, descriptionToBeTested1, parameterCategoryToBeTested1);
+		Parameter parameter2 = new Parameter(parameterCodeToBeTested2, shortNameToBeTested2, descriptionToBeTested2, parameterCategoryToBeTested2);
+		boolean result = parameter1.equals(parameter2);
+		Assert.assertExpectedResult(result);
+	}
+
+The only changes are the testName, the attributes of parameter1 and parameter2, and the ExpectedResult (True or False).
+
 **Test 16:** Check that the equals method returns true if the two compared parameters have equal objects.
 
 **Test 17:** Check that the equals method returns false if the two compared parameters have different objects.
 
-**Test 18:** Check that the equals method returns true if the two compared parameters are the same.
+**Test 18:** Check that the equals method returns true if the two compared parameters have the same parameter code.
 
-**Test 19:** Check that the equals method returns false if one of the two compared parameters is null.
+Tests 19 to 20 follow this model:
 
-**Test 20:** Check that the equals method returns true if the two compared parameters have the same parameter code.
+	@Test
+    public void testName(){
+		Parameter parameter1 = new Parameter(parameterCodeToBeTested1, shortNameToBeTested1, descriptionToBeTested1, parameterCategoryToBeTested1);
+		boolean result = parameter1.equals(x);
+		Assert.assertExpectedResult(result);
+	}
+
+The only changes are the testName, the x object (which is parameter1 for test 19 and null for test 20), and the ExpectedResult (True or False).
+
+**Test 19:** Check that the equals method returns true if the two compared parameters are the same.
+
+**Test 20:** Check that the equals method returns false if one of the two compared parameters is null.
 
 ## 4.2. ParameterStore
 
@@ -305,7 +334,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 	@Test
     public void createParameterStore() {
-        System.out.println("ensureParameterStoreIsBeingCreatedCorrectly");
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(0, result.length);

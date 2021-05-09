@@ -124,27 +124,27 @@ public class ParameterTest {
 
     //Test 18
     @Test
+    public void equalsTrueDueToSameCode(){
+        Parameter parameter1 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Parameter parameter2 = new Parameter("RBC01", "CRB", "Cells Red Blood", p1);
+        boolean result = parameter1.equals(parameter2);
+        Assert.assertTrue(result);
+    }
+
+    //Test 19
+    @Test
     public void equalsTrueToItself() {
         Parameter parameter1 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         boolean result = parameter1.equals(parameter1);
         Assert.assertTrue(result);
     }
 
-    //Test 19
+    //Test 20
     @Test
     public void equalsFalseDueToNull() {
         Parameter parameter1 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         boolean result = parameter1.equals(null);
         Assert.assertFalse(result);
-    }
-
-    //Test 20
-    @Test
-    public void equalsTrueDueToSameCode(){
-        Parameter parameter1 = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
-        Parameter parameter2 = new Parameter("RBC01", "CRB", "Cells Red Blood", p1);
-        boolean result = parameter1.equals(parameter2);
-        Assert.assertTrue(result);
     }
 
 }
