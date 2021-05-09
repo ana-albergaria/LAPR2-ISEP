@@ -10,8 +10,7 @@ As an administrator, I want to register a new clinical analysis laboratory stati
 kind of test(s) it operates.
  
 ### 1.2. Customer Specifications and Clarifications 
- 
-*Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*
+
 
 **From the specifications document:**
 >_Many Labs_ is an English company that (...) has a network of clinical analysis laboratories in England where analysis of blood (samples are collected) are performed, as well as Covid-19 tests.  
@@ -251,7 +250,7 @@ Before starting to implement the tests, it was practical to **create a text fixt
 ```
 
 
-### **Class**: ClinicalAnalysisLaboratoryTest ###  
+### **Class**: ClinicalAnalysisLaboratoryTest 
 
 **Test 1:** Check that it is not possible to create an instance of the ClinicalAnalysisLaboratory class with null values.  
 
@@ -344,7 +343,7 @@ public void ensureAC3NameWithRightLength() {
     }
 ```
 
-####Equals Method ####
+#### Equals Method 
 Finally, I checked if the **Equals method was functioning properly**.  
 
 In order to do that, I had an instance of Clinical Analysis Laboratory which would be compared to another instance of that class with every attribute the same **except one**.  
@@ -586,6 +585,7 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
                 throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
     }
+
 
 
 # 6. Integration and Demo
