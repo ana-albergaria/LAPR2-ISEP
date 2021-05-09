@@ -30,9 +30,9 @@ As a receptionist of the laboratory, I want to register a client.
 >Question 1 [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7563).
 -
 
-> **Question3:**  Which type/format should all data have?"
+> **Question2:**  Which type/format should all data have?"
 >  
-> **Answer:** "Citizen Card" - 16 digit number; "NHS" - 10 digit number; "TIN" - 10 digit number; "Birth day - in which format?" - DD/MM/YY; "Sex - should only be Male/Female or include more options." -  Male/Female; "Phone number: which lenght/format?" - 11 digit number
+> **Answer:** "Citizen Card" - 16 digit number; "NHS" - 10 digit number; "TIN" - 10 digit number; "Birth day - in which format?" - DD/MM/YYYY; "Sex - should only be Male/Female or include more options." -  Male/Female; "Phone number: which lenght/format?" - 11 digit number
 
 -
 

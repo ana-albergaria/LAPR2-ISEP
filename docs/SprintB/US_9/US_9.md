@@ -80,8 +80,7 @@ There is a dependency to "US 11 - to specify a new parameter category" since the
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
-
+The present US is held only a couple of times in the start of the business to address the current testing of blood and covid-19, Then it is rarely used.
 
 ## 2. OO Analysis
 
@@ -107,7 +106,8 @@ There is a dependency to "US 11 - to specify a new parameter category" since the
 | Step 1: Asks to specify a new test type	                          |	        ... instantiating a new test type?				                        | Test Type Store             | Creator: R1/2                                        |
 | Step 2: Request test type data(code, description, collectingMethod) |			n/a				                                                        |                             |                                                      |
 | Step 3: Types requested data		                                  |			...saving input data?				                                    | Test Type                   | IE: The object created in step 1 has its own data.   |
-| Step 4: Shows available categories and request to select one or more|			n/a				                                                        |                             |                                                      |              
+| Step 4: Shows available categories and request to select one or more|			...knowing the types of test to show?                                   | Parameter Category Store    | IE: The category store knows its parameter categories|              
+|                                                                     |			...Creating a parameter category dto                                    | Categories mapper           | LC: Pass a DTO to reduce coupling between layers     |              
 | Step 5: Selects requested data                                      |          ...saving the input data?				                                | Test Type                   | IE: Object created in step 1 has a set of categories.|         
 | Step 6: Shows test type data and requests confirmation              |			… validating the data locally (e.g.: mandatory vs. non-mandatory data)? | Test Type                   | IE: Knows its own data.                              |              
 |                                                                     |          … validating the data globally (e.g.: duplicated)?				        | Test Type Store             | IE: Knows all Test Type objects.                     |              
@@ -123,7 +123,9 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * ParameterCategory
 
 Other software classes (i.e. Pure Fabrication) identified: 
-
+ * ParameterCategoryStore
+ * ParameterCategoryDto
+ * ParameterCategoryMapper 
  * CreateTestTypeUI  
  * CreateTestTypeController
  * TestTypeStore
@@ -264,7 +266,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 6. Integration and Demo 
 
 To create a Test type, it is necessary to know the list of parameter categories available in the system.
-Therefore, in order to reduce coupling, it was created a CategoriesDTO as well as a CategoriesMapper to process the data and convert the list of parameter cateogires to a Dto.
+Therefore, in order to reduce coupling, it was created a CategoriesDTO as well as a CategoriesMapper to process the data and convert the list of parameter categories to a Dto.
 
 
 # 7. Observations
