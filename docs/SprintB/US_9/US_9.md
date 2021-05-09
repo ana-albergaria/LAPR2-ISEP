@@ -91,9 +91,7 @@ The present US is held only a couple of times in the start of the business to ad
 
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
-
-
+n/a
 
 ## 3. Design - User Story Realization 
 
