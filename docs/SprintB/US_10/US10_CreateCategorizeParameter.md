@@ -415,17 +415,50 @@ and don't follow any model, there's no generic example to be shown.
 
 ## Class CreateParameterController
 
-## Class Parameter
+	//...Omitted
+
+    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes) {
+        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
+        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories);
+        return testTypeStore.validateTestType(testType);
+    }
+
+	//...Omitted
+
+	public boolean saveTestType() {
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        return testTypeStore.saveTestType(testType);
+    }
+
+	//...Omitted
 
 ## Class ParameterStore
 
-## Class Company
+	//...Omitted	
 
-## Class CreateParameterUI
+    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory pc){
+        return new Parameter(parameterCode, shortName, description, pc);
+    }
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+	//...Omitted
 
-*It is also recommended to organize this content by subsections.* 
+	    public boolean validateParameter(Parameter prm){
+        if (prm == null)
+            return false;
+        return !this.prmList.contains(prm);
+    }
+
+	//...Omitted
+
+    public boolean saveParameter(Parameter prm){
+        if (!validateParameter(prm))
+            return false;
+        return this.prmList.add(prm);
+    }
+
+	//...Omitted
 
 # 6. Integration and Demo
 
