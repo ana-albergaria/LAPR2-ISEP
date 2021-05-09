@@ -135,12 +135,6 @@ public class SpecialistDoctorTest {
                 "1234567890","joao@gmail.com","1234", "      ");
     }
 
-    /*@Test(expected = IllegalArgumentException.class)
-    public void ensureSpecDocWithNameWithOtherCharsBesideLettersIsNotAllowed(){
-        SpecialistDoctor sd1 = new SpecialistDoctor(r1, "J0a0 M4t0s", "Morada",
-                "1234567890","joao@gmail.com","1234", "123456");
-    }*/
-
     @Test(expected = IllegalArgumentException.class)
     public void ensureSpecDocWithPhoneNumberWithOtherCharsBesideNumbersIsNotAllowed(){
         SpecialistDoctor sd1 = new SpecialistDoctor(r1, "Joao Matos", "Morada",

@@ -260,7 +260,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-### Class: EmployeeTest  
+## Class: EmployeeTest  
 
 **For each attribute** of the Employee, I checked **it is not possible for them to be blank**.  
 This encompasses three situations:
@@ -393,6 +393,117 @@ I also verified two Employees are **not** equal either if they are from differen
         boolean result = role1.equals(role2);
         Assert.assertTrue(result);
     }
+
+## Class: SpecialistDoctor
+
+Before starting the specialist doctor tests, it's useful to create something like this, since the specialist doctors need to be assigned to an organization role, which are known by the company:
+
+    private Company company;
+    private OrgRole r1;
+
+    @Before
+    public void setUp(){
+        company = new Company("Many Labs");
+        r1 = new OrgRole("Spec Doctor");
+    }
+
+Tests 1 to 29 follow this model:
+
+    @Test(expected = IllegalArgumentException.class)
+        public void testName(){
+        SpecialistDoctor sd1 = new SpecialistDoctor(specialistDoctorRoleToBeTested, specialistDoctorNameToBeTested, specialistDoctorAddressToBeTested, specialistDoctorPhoneNumberToBeTested, specialistDoctorEmailToBeTested, specialistDoctorSOCCodeToBeTested, specialistDoctorDoctorIndexNumberToBeTested)
+    }
+
+The only changes are the value of the sd1 attributes.
+
+**Test 1:** Check that it is not possible to create an instance of the SpecialistDoctor class with null values.
+
+**Test 2:** Check that it is not possible to create an instance of the SpecialistDoctor class with null role.
+
+**Test 3:** Check that it is not possible to create an instance of the SpecialistDoctor class with null name.
+
+**Test 4:** Check that it is not possible to create an instance of the SpecialistDoctor class with null address.
+
+**Test 5:** Check that it is not possible to create an instance of the SpecialistDoctor class with null phone number.
+
+**Test 6:** Check that it is not possible to create an instance of the SpecialistDoctor class with null email.
+
+**Test 7:** Check that it is not possible to create an instance of the SpecialistDoctor class with null SOC code.
+
+**Test 8:** Check that it is not possible to create an instance of the SpecialistDoctor class with null doctor index number.
+
+**Test 9:** Check that it is not possible to create an instance of the SpecialistDoctor class with empty name.
+
+**Test 10:** Check that it is not possible to create an instance of the SpecialistDoctor class with empty address.
+
+**Test 11:** Check that it is not possible to create an instance of the SpecialistDoctor class with empty phone number.
+
+**Test 12:** Check that it is not possible to create an instance of the SpecialistDoctor class with empty email.
+
+**Test 13:** Check that it is not possible to create an instance of the SpecialistDoctor class with emmpty SOC code.
+
+**Test 14:** Check that it is not possible to create an instance of the SpecialistDoctor class with empty doctor index number.
+
+**Test 15:** Check that it is not possible to create an instance of the SpecialistDoctor class with name full of spaces.
+
+**Test 16:** Check that it is not possible to create an instance of the SpecialistDoctor class with address full of spaces.
+
+**Test 17:** Check that it is not possible to create an instance of the SpecialistDoctor class with phone number full of spaces.
+
+**Test 18:** Check that it is not possible to create an instance of the SpecialistDoctor class with email full of spaces.
+
+**Test 19:** Check that it is not possible to create an instance of the SpecialistDoctor class with SOC code full of spaces.
+
+**Test 20:** Check that it is not possible to create an instance of the SpecialistDoctor class with doctor index number full of spaces.
+
+**Test 21:** Check that it is not possible to create an instance of the SpecialistDoctor class with phone number with other characters beside number.
+
+**Test 22:** Check that it is not possible to create an instance of the SpecialistDoctor class with email with invalid format.
+
+**Test 23:** Check that it is not possible to create an instance of the SpecialistDoctor class with SOC code with other characters beside numbers.
+
+**Test 24:** Check that it is not possible to create an instance of the SpecialistDoctor class with name with more than 35 characters.
+
+**Test 25:** Check that it is not possible to create an instance of the SpecialistDoctor class with address with more than 30 characters.
+
+**Test 26:** Check that it is not possible to create an instance of the SpecialistDoctor class with phone number with less than 10 characters.
+
+**Test 27:** Check that it is not possible to create an instance of the SpecialistDoctor class with phone number with more than 10 characters.
+
+**Test 28:** Check that it is not possible to create an instance of the SpecialistDoctor class with SOC code with less than 4 characters.
+
+**Test 29:** Check that it is not possible to create an instance of the SpecialistDoctor class with SOC code with more than 4 characters.
+
+Tests 30 to 31 follow this model:
+
+    @Test
+    public void testName(){
+	SpecialistDoctor sd1 = new SpecialistDoctor(specialistDoctorRoleToBeTested1, specialistDoctorNameToBeTested1, specialistDoctorAddressToBeTested1, specialistDoctorPhoneNumberToBeTested1, specialistDoctorEmailToBeTested1, specialistDoctorSOCCodeToBeTested1, specialistDoctorDoctorIndexNumberToBeTested1)
+	SpecialistDoctor sd2 = new SpecialistDoctor(specialistDoctorRoleToBeTested2, specialistDoctorNameToBeTested2, specialistDoctorAddressToBeTested2, specialistDoctorPhoneNumberToBeTested2, specialistDoctorEmailToBeTested2, specialistDoctorSOCCodeToBeTested2, specialistDoctorDoctorIndexNumberToBeTested2)
+	boolean result = sd1.equals(sd22);
+	Assert.assertExpectedResult(result);
+    }
+
+The only changes are the testName, the attributes of sd1 and sd2, and the ExpectedResult (True or False).
+
+**Test 30:** Check that the equals method returns true if the two compares specialist doctors have equal objects.
+
+**Test 31:** Check that the equals method returns false if the two compared specialist doctors have different objects.
+
+Tests 32 to 33 follow this mode:
+
+    @Test
+    public void testName(){
+	SpecialistDoctor sd1 = new SpecialistDoctor(specialistDoctorRoleToBeTested1, specialistDoctorNameToBeTested1, specialistDoctorAddressToBeTested1, specialistDoctorPhoneNumberToBeTested1, specialistDoctorEmailToBeTested1, specialistDoctorSOCCodeToBeTested1, specialistDoctorDoctorIndexNumberToBeTested1)
+	boolean result = sd1.equals(x);
+	Assert.assertExpectedResult(result);
+    }
+
+The only changes are the testName, the x object (which is sd1 for test 32 and null for test 33), and the ExpectedResult (True or False).
+
+**Test 32:** Check that the equals method returns true when the two compared specialist doctors are the same.
+
+**Test 33:** Check that the equals method returns false if one of the two compared specialist doctors is null.
 
 
 ### Class: CompanyTest  
