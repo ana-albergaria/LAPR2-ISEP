@@ -249,9 +249,12 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 4.1. Parameter
 
-Before starting the parameter tests, it's useful to create something like this, since the parameters need to be assigned to a parameter category:
+Before starting the parameter tests, it's useful to create something like this, 
+since the parameters need to be assigned to a parameter category:
 
-    @Before
+    private ParameterCategory p1;
+
+	@Before
     public void setUp() {
         p1 = new ParameterCategory(desiredParameterCategoryCode,desiredParameterCategoryName);
     }
@@ -263,7 +266,7 @@ Tests 1 to 15 follow this model:
         Parameter prm = new Parameter(parameterCodeToBeTested, shortNameToBeTested, descriptionToBeTested, parameterCategoryToBeTested);
     }
 
-The only changes are the testName and the attributes of prm.
+The only changes are the testName and the attributes of the prm.
 
 **Test 1:** Check that it is not possible to create an instance of the Parameter class with null values.
 
@@ -305,7 +308,8 @@ Tests 16 to 18 follow this model:
 		Assert.assertExpectedResult(result);
 	}
 
-The only changes are the testName, the attributes of parameter1 and parameter2, and the ExpectedResult (True or False).
+The only changes are the testName, the attributes of parameter1 and parameter2, 
+and the ExpectedResult (True or False).
 
 **Test 16:** Check that the equals method returns true if the two compared parameters have equal objects.
 
@@ -322,7 +326,8 @@ Tests 19 to 20 follow this model:
 		Assert.assertExpectedResult(result);
 	}
 
-The only changes are the testName, the x object (which is parameter1 for test 19 and null for test 20), and the ExpectedResult (True or False).
+The only changes are the testName, the x object (which is parameter1 for test 19 and null for test 20), 
+and the ExpectedResult (True or False).
 
 **Test 19:** Check that the equals method returns true if the two compared parameters are the same.
 
@@ -330,14 +335,28 @@ The only changes are the testName, the x object (which is parameter1 for test 19
 
 ## 4.2. ParameterStore
 
-**Test 21:** Check if the parameter store is being created correctly with no elements.
+Before starting the parameter store tests, it's useful to create something like 
+this, since the parameters need to be assigned to a parameter category, which
+are on a list:
+	
+	private ParameterCategory p1;
+	private ParameterCategory p2;
+	private Company company = new Company(companyName);
+	private List<ParameterCategory> pcList;
 
-	@Test
-    public void createParameterStore() {
-        ParameterStore ps1 = new ParameterStore();
-        Parameter[] result = ps1.toArray();
-        Assert.assertEquals(0, result.length);
+    @Before
+    public void setUp() {
+		pcList = new ArrayList<>();
+		p1 = new ParameterCategory(desiredParameterCategoryCode1,desiredParameterCategoryName1);
+		p2 = new ParameterCategory(desiredParameterCategoryCode2,desiredParameterCategoryName2);
+		pcList.add(p1);
+		pcList.add(p2);
     }
+
+Since the parameter store tests (tests 21 to 25) are very different between them and don't 
+follow any model, there's no generic example to be shown.
+
+**Test 21:** Check if the parameter store is being created correctly with no elements.
 
 **Test 22:** Check if the parameter store is being created correctly with some elements.
 
@@ -355,9 +374,13 @@ The only changes are the testName, the x object (which is parameter1 for test 19
 
 # 6. Integration and Demo 
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+## 
 
+To create a parameter, it is necessary to know the list of parameter categories available
+in the system. Therefore, in order to reduce coupling, it was created a CategoriesDTO 
+as well as a CategoriesMapper to process the data and convert the list of parameter 
+categories to a DTO.
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
+n/a
