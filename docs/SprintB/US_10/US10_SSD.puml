@@ -5,6 +5,7 @@ actor "Administrator" as Adm
 activate Adm
 Adm-> ":System" : asks to create a new parameter
 activate ":System"
+loop while administrator wants to create one more parameter
 ":System" --> Adm : requests data(i.e., parameterCode, shortName, description)
 deactivate ":System"
 
@@ -20,6 +21,7 @@ deactivate ":System"
 
 Adm-> ":System" : confirms the data
 activate ":System"
+end
 ":System" --> Adm : informs operation sucess
 deactivate ":System"
 

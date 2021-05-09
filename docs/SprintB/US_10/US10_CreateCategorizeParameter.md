@@ -29,7 +29,8 @@ As an administrator, I want to specify a new parameter and categorize it.
 
 > **Question:** "What is the data that characterize a parameter? Should we follow the same data as the parameter category, for example, would each parameter have its own code, description and NHS identifier?"
 >  
-> **Answer:** "Each parameter is associated with one category. Each parameter has a Code, a Short Name and a Description."
+> **Answer:** "Each parameter is associated with one category. Each parameter has a Code, a Short Name and a Description.
+> The Code are five alphanumeric characters. The Short Name is a String with no more than 8 characters. The Description is a String with no more than 20 characters."
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507#p10106).
 
@@ -108,37 +109,47 @@ The application can have more than one administrator."
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p10200).
 
 -
--
 
-> **Question:** "What data does the parameter have and what type / format should they have?"
->
-> **Answer:** yyyy.
+> **Question:** "Is the code of a parameter the same as its respective category? Or can they be different?"
+> 
+> **Answer:** "No, they are different things."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
-
--
-
-> **Question:** "Does the data (code, description, and National Health Service ID) in the parameter category have any acceptance criteria? If yes, what acceptance criteria."
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8041#p10534).
 
 -
 
-> **Question:** "When creating a new parameter, if the category does not exist in the system, should the administrator have the possibility to create a new one, or he must categorize it in the existing ones."
->
-> **Answer:** yyyy.
+> **Question:** "Will the administrator give the reference values for the new parameter?"
+> 
+> **Answer:** "In Sprint C we will make available an API that returns the reference values."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8041#p10534).
+
+-
+
+> **Question:** "In the lab order, the information displayed is indeed the Test Type and the Parameters or should it be Test Type and the Parameter Categories instead?"
+> 
+> **Answer:** "From a previous post: "Each Test type should have a set of categories. Each category should be choosen from a list of categories". From other previous post: "Each parameter is associated with one category"."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7842#p10410).
+
+-
+
+> **Question:** "When specifying more than one parameter at the same time, all that parameters will be categorized to one single category or should I ask the category to each parameter?"
+> 
+> **Answer:** "You should always ask the category of each parameter."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7888#p10394).
 
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** The Code are five alphanumeric characters.
-* **AC2:** The Short Name is a String with no more than 8 characters.
-* **AC3:** The Description is a String with no more than 20 characters.
+* **AC1:** "The Code are five alphanumeric characters."
+* **AC2:** "The Short Name is a String with no more than 8 characters."
+* **AC3:** "The Description is a String with no more than 20 characters."
+* **AC4:** "Each parameter has only one category."
+* **AC5:** The client wants to specify more than one new parameter at a time.
+* **AC6:** "You should always ask the category of each parameter."
 
 
 ### 1.4. Found out Dependencies
@@ -163,6 +174,7 @@ The application can have more than one administrator."
 
 **Output Data:**
 
+* List of existing parameter categories
 * (In)Sucess of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -173,21 +185,21 @@ The application can have more than one administrator."
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
+
+The present US is held mainly in the beginning of the business. As the Company works in the analysis/testing field, it's crucial to create the parameters to be analysed/tested, in order to start the business. Other than that, this US will play an important role everytime the company decides to start performing a new type of analysis or test.
 
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
+
 
 ![US010_MD](US010_MD.svg)
 
+
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
-
-
+n/a
 
 ## 3. Design - User Story Realization 
 
@@ -201,9 +213,9 @@ The application can have more than one administrator."
 |       	   	 |	... coordinating the US? | CreateParameterController | Controller |
 |       	   	 |	... instantiating a new Parameter? | Administrator | Creator: in the DM a Parameter is presented under a Parameter Category, which company adopts. |
 | Step 2: request data(i.e., parameterCode, shortName, description) | ...asking the user for this data? | CreateParameterCategoryUI | IE: Responsable for user interaction. |
-| Step 3: types requested data | ...saving the inputted data? | Parameter | IE: object created in step 1 has its own data.  |
+| Step 3: types requested data | ...saving the inputted data? | Parameter | IE: object has its own data.  |
 | Step 4: shows parameter categories list and asks to select one |	...knowing the parameter categories to show? | ParameterCategoryStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
-| Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 1 is classified in one Category.  |
+| Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 3 is classified in one parameter category.  |
 | 			  	 |	... validating all data (local validation)? | Parameter |  IE: owns its data.|
 | Step 6: shows all data and requests confirmation | ... showing all data and requesting confirmation? | CreateParameterUI | IE: is responsible for user interactions.|
 | Step 7: confirms the data | ... validating all data (global validation)? | ParameterStore | IE: knows all its parameters.|

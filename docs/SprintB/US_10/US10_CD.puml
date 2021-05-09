@@ -5,53 +5,71 @@ left to right direction
 skinparam classAttributeIconSize 0
 
 class CategoriesDto {
-    -code
-    -name
-    +ParameterCategory(code, name)
+    -String code
+    -String name
+    +CategoriesDto(name,code)
     +getCode()
 }
 
 class CategoriesMapper {
-    +List<CategoriesDto> toDto(List<ParameterCategory> parameterCategories)
-    +rCategoriesDto toDTO(ParameterCategory pc)
+    +toDTO(category)
+    +toDTO(categories)
 }
 
 class ParameterCategoryStore {
+    -List<ParameterCategory> parameterCategoriesList
+    +getParameterCategoriesStore()
     +getCategoryByCode(code)
 }
 
 class ParameterStore {
-    +createParameter(parameterCode, shortName, description, pc)
-    +validateParameter(parameter)
-    +saveParameter(parameter)
+    -list<Parameter> prmList
+    +createParameter(parameterCode,shortName,description,pc)
+    +validateParameter(prm)
+    +saveParameter(prm)
 }
 
 class Parameter {
-  -parameterCode: String
-  -shortName: String
-  -description: String
-  -pc: ParameterCategory
+  -int CODE_LENGTH
+  -int NAME_MAX_LENGTH
+  -int DESCRIPTION_MAX_LENGTH
+  -String parameterCode
+  -String shortName
+  -String description
+  -ParameterCategory pc
   +Parameter(parameterCode, shortName, description, pc)
+  +getPrmCode()
+  +checkParameterCategory(pc)
+  +checkParameterCodeRules(parameterCode)
+  +checkShortNameRules(shortName)
+  +checkDescriptionRules(description)
+  +equals(parameterObject)
 }
 
 class ParameterCategory {
-   -code: String
-   -name: String
+   -String code
+   -String name
+   +getCode()
 }
 
 class Company {
-  -designation: String
+  -String designation
+  -ParameterCategoryStore parameterCategoryStore
+  -ParameterStore parameterStore
   +getParameterStore()
   +getParameterCategoryStore()
 }
 
 class CreateParameterController {
-  +createParameter(parameterCode, shortName, description, pcCode)
+  -Company company
+  -Parameter prm
+  +createParameter(parameterCode,shortName,description,pcCode)
+  +getParameterCategories()
+  +getParameterCategoriesDTO()
   +saveParameter()
 }
 
 class CreateParameterUI {
-
 }
 
 CreateParameterUI ..> CreateParameterController

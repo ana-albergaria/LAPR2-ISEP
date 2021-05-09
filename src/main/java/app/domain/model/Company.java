@@ -18,16 +18,23 @@ import java.util.List;
  */
 public class Company {
 
+    /**
+     * The company designation.
+     */
     private String designation;
+
     private AuthFacade authFacade;
+
     /**
      * The parameter category store.
      */
     private ParameterCategoryStore parameterCategoryStore;
+
     /**
      * The parameter store.
      */
     private ParameterStore parameterStore;
+
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<ClinicalAnalysisLaboratory> calList;
     private List<Employee> empList;

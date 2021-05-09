@@ -8,8 +8,8 @@ import org.apache.commons.lang3.StringUtils;
  * @author João Wolff and Marta Ribeiro
  */
 public class ParameterCategory {
-    final static int CODE_LENGHT = 5;
-    final static int NAME_LENGHT = 10;
+    final static int CODE_LENGTH = 5;
+    final static int NAME_LENGTH = 10;
 
     /**
      * Code of the parameter category
@@ -48,7 +48,7 @@ public class ParameterCategory {
     private void checkCodeRules(String code) {
         if (StringUtils.isBlank(code))
             throw new IllegalArgumentException("Code cannot be blank.");
-        if ((code.length() != CODE_LENGHT || !StringUtils.isAlphanumeric(code)))
+        if ((code.length() != CODE_LENGTH || !StringUtils.isAlphanumeric(code)))
             throw new IllegalArgumentException("Code must have 5 alphanumeric characters.");
     }
 
@@ -59,7 +59,7 @@ public class ParameterCategory {
     public void checkNameRules(String name) {
         if (StringUtils.isBlank(name))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if (name.length() > NAME_LENGHT)
+        if (name.length() > NAME_LENGTH)
             throw new IllegalArgumentException("Name cannot have more then 10 characters.");
     }
 

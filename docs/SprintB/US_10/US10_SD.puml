@@ -17,6 +17,7 @@ participant "pc\n:ParameterCategory" as PC
 
 activate ADM
 ADM -> UI : asks to create a new parameter
+loop while administrator wants to create one more parameter
 activate UI
 UI --> ADM : requests data(i.e., parameterCode, shortName, description)
 deactivate UI
@@ -73,7 +74,6 @@ deactivate UI
 ADM -> UI : selects a parameter category
 activate UI
 
-loop while administrator wants to create one more parameter
 UI -> CTRL : createParameter(parameterCode, shortName, description, pcCode)
 activate CTRL
 
