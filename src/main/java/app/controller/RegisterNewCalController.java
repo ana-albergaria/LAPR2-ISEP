@@ -48,7 +48,7 @@ public class RegisterNewCalController {
      * through a Dto containing all the requested data:
      * laboratoryID, name, address, phone number, TIN number and the codes of the types of test
      *
-     * @param calDto
+     * @param calDto the Clinical Analysis Laboratory Dto
      * @return true if the new Clinical Analysis Laboratory was successfully created.
      *          Otherwise, returns false.
      */

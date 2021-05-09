@@ -352,16 +352,140 @@ I also verified two Employees are **not** equal either if they are from differen
 
 **Test 9**: Check that two objects aren't equal because they are from different classes.
 
-**Test 10**: Check that an Employee isn't equal because it is being compared to a null object.  
+**Test 10**: Check that an Employee isn't equal because it is being compared to a null object. 
+
+## Class: OrgRoleTest
+
+**Test 1:** Check it is not possible to create an instance of organization role with null or empty string values
+
+**For example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureDescriptionNotNull(){
+        OrgRole instance = new OrgRole(null);
+    }
+
+**Test 2:** Check it is not possible to create an organization role not following the current criterias.
+
+> * **AC6:**  "Organization Role: a string with no more than 15 characters."
+
+**For example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureDescriptionNoLongerThan15Chars(){
+        OrgRole instance = new OrgRole("The Person Who Talks To The Clients");
+    }
+
+**Test 3:** Check if equals method is returning correct values for each equality
+
+**Namely:**
+>Same object: true
+>Different object and same attributes: true
+>Null: false
+>Different object and different attributes: false
+
+**For example:**
+
+    @Test
+    public void equalsTrue(){
+        OrgRole role1 = new OrgRole("Recepcionist");
+        OrgRole role2 = new OrgRole("Recepcionist");
+        boolean result = role1.equals(role2);
+        Assert.assertTrue(result);
+    }
 
 
-
-
-*It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class RegisterEmployeeController  
+
+```
+public boolean createEmployee(EmployeeDTO empDTO) {
+        if (empDTO.getRoleDesignation().equalsIgnoreCase(Constants.ROLE_SPECIALIST_DOCTOR))
+            this.emp = this.company.createSpecialistDoctor((SpecialistDoctorDTO) empDTO);
+        else
+            this.emp = this.company.createEmployee(empDTO);
+        return this.company.validateEmployee(emp);
+    }
+
+    public boolean saveEmployee(){
+        return this.company.saveEmployee(emp);
+    }
+
+    public List<OrgRoleDTO> getRoles() {
+        List<OrgRole> roles = this.company.getRoles();
+        OrgRoleMapper mapper = new OrgRoleMapper();
+        return mapper.toDTO(roles);
+
+    }
+
+    public boolean makeEmployeeAUser(){
+        this.generatedPassword = PasswordUtils.generateRandomPassword();
+        if(this.generatedPassword != null)
+            return this.company.makeEmployeeAUser(emp, generatedPassword);
+        return false;
+    }
+
+    public boolean makeEmployeeAnUserAndSendPassword() throws IOException {
+        if(!makeEmployeeAUser())
+            return false;
+        return PasswordUtils.writePassword(generatedPassword, emp.getEmail());
+    }
+```
+
+## Class Company  
+
+```
+public boolean createEmployee(EmployeeDTO empDTO) {
+        if (empDTO.getRoleDesignation().equalsIgnoreCase(Constants.ROLE_SPECIALIST_DOCTOR))
+            this.emp = this.company.createSpecialistDoctor((SpecialistDoctorDTO) empDTO);
+        else
+            this.emp = this.company.createEmployee(empDTO);
+        return this.company.validateEmployee(emp);
+    }
+
+    public boolean saveEmployee(){
+        return this.company.saveEmployee(emp);
+    }
+    
+    public boolean validateEmployee(Employee emp) {
+        if(emp == null)
+            return false;
+        return !this.empList.contains(emp);
+    }
+    
+    public boolean addUserRole(Employee emp) {
+        return this.getAuthFacade().addUserRole(emp.getRole().getDescription(), emp.getRole().getDescription());
+    }
+    
+    public boolean makeEmployeeAUser(Employee emp, String generatedPassword){
+        boolean success = this.authFacade.addUserWithRole(emp.getName(), emp.getEmail(), generatedPassword, emp.getRole().getDescription());
+        if(!success){
+            addUserRole(emp);
+            return this.authFacade.addUserWithRole(emp.getName(), emp.getEmail(), generatedPassword, emp.getRole().getDescription());
+        }
+        return success;
+    }
+    
+    public List<OrgRole> getRoles() {
+        return new ArrayList<>(roles);
+    }
+
+    /**
+     * Get Organization Role according to the its description
+     * @param roleDescription
+     * @return Organization Role reference
+     */
+    private OrgRole getRoleByDescription(String roleDescription) {
+        for (OrgRole role : roles) {
+            if(role.getDescription().equalsIgnoreCase(roleDescription)){
+                return role;
+            }
+        }
+        throw new UnsupportedOperationException("Organization Role not found with given description: " + roleDescription);
+    }
+```
 
 *It is also recommended to organize this content by subsections.* 
 
