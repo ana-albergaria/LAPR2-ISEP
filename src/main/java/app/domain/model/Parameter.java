@@ -12,6 +12,21 @@ import org.apache.commons.lang3.StringUtils;
 public class Parameter {
 
     /**
+     * Reference value for checking parameter code length.
+     */
+    final static int CODE_LENGTH = 5;
+
+    /**
+     * Reference value for checking parameter name max length.
+     */
+    final static int NAME_MAX_LENGTH = 8;
+
+    /**
+     * Reference value for checking parameter description max length.
+     */
+    final static int DESCRIPTION_MAX_LENGTH = 20;
+
+    /**
      * The parameter code.
      */
     private String parameterCode;
@@ -29,7 +44,7 @@ public class Parameter {
     /**
      * The parameter category of the parameter.
      */
-    private ParameterCategory pc; //Parameter is presented under 1 ParameterCategory
+    private ParameterCategory pc;
 
     /**
      * Builds a parameter instance receiving:
@@ -95,7 +110,7 @@ public class Parameter {
     private void checkParameterCodeRules(String parameterCode){
         if (StringUtils.isBlank(parameterCode))
             throw new IllegalArgumentException("Code cannot be blank.");
-        if (parameterCode.length()!=5)
+        if (parameterCode.length()!=CODE_LENGTH)
             throw new IllegalArgumentException("Code must have 5 chars.");
     }
 
@@ -109,7 +124,7 @@ public class Parameter {
     private void checkShortNameRules(String shortName){
         if (StringUtils.isBlank(shortName))
             throw new IllegalArgumentException("Name cannot be blank.");
-        if (shortName.length()>8)
+        if (shortName.length()>NAME_MAX_LENGTH)
             throw new IllegalArgumentException("Name must have up to 8 chars.");
     }
 
@@ -123,7 +138,7 @@ public class Parameter {
     private void checkDescriptionRules(String description){
         if (StringUtils.isBlank(description))
             throw new IllegalArgumentException("Description cannot be blank.");
-        if (description.length()>20)
+        if (description.length()>DESCRIPTION_MAX_LENGTH)
             throw new IllegalArgumentException("Description must have up to 20 chars.");
     }
 

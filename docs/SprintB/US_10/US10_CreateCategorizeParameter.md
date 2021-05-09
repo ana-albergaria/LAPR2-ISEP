@@ -29,7 +29,8 @@ As an administrator, I want to specify a new parameter and categorize it.
 
 > **Question:** "What is the data that characterize a parameter? Should we follow the same data as the parameter category, for example, would each parameter have its own code, description and NHS identifier?"
 >  
-> **Answer:** "Each parameter is associated with one category. Each parameter has a Code, a Short Name and a Description."
+> **Answer:** "Each parameter is associated with one category. Each parameter has a Code, a Short Name and a Description.
+> The Code are five alphanumeric characters. The Short Name is a String with no more than 8 characters. The Description is a String with no more than 20 characters."
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7507#p10106).
 
@@ -108,37 +109,47 @@ The application can have more than one administrator."
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7666#p10200).
 
 -
--
 
-> **Question:** "What data does the parameter have and what type / format should they have?"
->
-> **Answer:** yyyy.
+> **Question:** "Is the code of a parameter the same as its respective category? Or can they be different?"
+> 
+> **Answer:** "No, they are different things."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
-
--
-
-> **Question:** "Does the data (code, description, and National Health Service ID) in the parameter category have any acceptance criteria? If yes, what acceptance criteria."
->
-> **Answer:** yyyy.
-
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8041#p10534).
 
 -
 
-> **Question:** "When creating a new parameter, if the category does not exist in the system, should the administrator have the possibility to create a new one, or he must categorize it in the existing ones."
->
-> **Answer:** yyyy.
+> **Question:** "Will the administrator give the reference values for the new parameter?"
+> 
+> **Answer:** "In Sprint C we will make available an API that returns the reference values."
 
->Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7678#p10003).
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8041#p10534).
+
+-
+
+> **Question:** "In the lab order, the information displayed is indeed the Test Type and the Parameters or should it be Test Type and the Parameter Categories instead?"
+> 
+> **Answer:** "From a previous post: "Each Test type should have a set of categories. Each category should be choosen from a list of categories". From other previous post: "Each parameter is associated with one category"."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7842#p10410).
+
+-
+
+> **Question:** "When specifying more than one parameter at the same time, all that parameters will be categorized to one single category or should I ask the category to each parameter?"
+> 
+> **Answer:** "You should always ask the category of each parameter."
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=7888#p10394).
 
 
 ### 1.3. Acceptance Criteria
 
 
-* **AC1:** The Code are five alphanumeric characters.
-* **AC2:** The Short Name is a String with no more than 8 characters.
-* **AC3:** The Description is a String with no more than 20 characters.
+* **AC1:** "The Code are five alphanumeric characters."
+* **AC2:** "The Short Name is a String with no more than 8 characters."
+* **AC3:** "The Description is a String with no more than 20 characters."
+* **AC4:** "Each parameter has only one category."
+* **AC5:** The client wants to specify more than one new parameter at a time.
+* **AC6:** "You should always ask the category of each parameter."
 
 
 ### 1.4. Found out Dependencies
@@ -163,6 +174,7 @@ The application can have more than one administrator."
 
 **Output Data:**
 
+* List of existing parameter categories
 * (In)Sucess of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -173,21 +185,21 @@ The application can have more than one administrator."
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
+
+The present US is held mainly in the beginning of the business. As the Company works in the analysis/testing field, it's crucial to create the parameters to be analysed/tested, in order to start the business. Other than that, this US will play an important role everytime the company decides to start performing a new type of analysis or test.
 
 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
+
 
 ![US010_MD](US010_MD.svg)
 
+
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
-
-
+n/a
 
 ## 3. Design - User Story Realization 
 
@@ -201,9 +213,9 @@ The application can have more than one administrator."
 |       	   	 |	... coordinating the US? | CreateParameterController | Controller |
 |       	   	 |	... instantiating a new Parameter? | Administrator | Creator: in the DM a Parameter is presented under a Parameter Category, which company adopts. |
 | Step 2: request data(i.e., parameterCode, shortName, description) | ...asking the user for this data? | CreateParameterCategoryUI | IE: Responsable for user interaction. |
-| Step 3: types requested data | ...saving the inputted data? | Parameter | IE: object created in step 1 has its own data.  |
+| Step 3: types requested data | ...saving the inputted data? | Parameter | IE: object has its own data.  |
 | Step 4: shows parameter categories list and asks to select one |	...knowing the parameter categories to show? | ParameterCategoryStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
-| Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 1 is classified in one Category.  |
+| Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 3 is classified in one parameter category.  |
 | 			  	 |	... validating all data (local validation)? | Parameter |  IE: owns its data.|
 | Step 6: shows all data and requests confirmation | ... showing all data and requesting confirmation? | CreateParameterUI | IE: is responsible for user interactions.|
 | Step 7: confirms the data | ... validating all data (global validation)? | ParameterStore | IE: knows all its parameters.|
@@ -214,40 +226,49 @@ The application can have more than one administrator."
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Administrator
- * Platform
  * Company
  * Parameter
 
 Other software classes (i.e. Pure Fabrication) identified: 
  * CreateParameterUI  
  * CreateParameterController
+ * CategoriesMapper
+ * CategoriesDTO
+ * ParameterCategoryStore
+ * ParameterStore
 
 ## 3.2. Sequence Diagram (SD)
-
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
 
 ![US010_SD](US010_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
-
 ![US010_CD](US010_CD.svg)
 
-# 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
-
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+# 4. Tests
 
 ## 4.1. Parameter
 
-**Test 1:** Check that it is not possible to create an instance of the Parameter class with null values. 
+Before starting the parameter tests, it's useful to create something like this, 
+since the parameters need to be assigned to a parameter category:
+
+    private ParameterCategory p1;
+
+	@Before
+    public void setUp() {
+        p1 = new ParameterCategory(desiredParameterCategoryCode,desiredParameterCategoryName);
+    }
+
+Tests 1 to 15 follow this model:
 
 	@Test(expected = IllegalArgumentException.class)
-    public void ensureNullIsNotAllowed(){
-        Parameter prm = new Parameter(null, null, null, null);
+    public void testName(){
+        Parameter prm = new Parameter(parameterCodeToBeTested, shortNameToBeTested, descriptionToBeTested, parameterCategoryToBeTested);
     }
+
+The only changes are the testName and the attributes of the prm.
+
+**Test 1:** Check that it is not possible to create an instance of the Parameter class with null values.
 
 **Test 2:** Check that it is not possible to create an instance of the Parameter class with null parameter code.
 
@@ -277,47 +298,175 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 15:** Check that it is not possible to create an instance of the Parameter class with null parameter category.
 
+Tests 16 to 18 follow this model:
+
+	@Test
+    public void testName(){
+		Parameter parameter1 = new Parameter(parameterCodeToBeTested1, shortNameToBeTested1, descriptionToBeTested1, parameterCategoryToBeTested1);
+		Parameter parameter2 = new Parameter(parameterCodeToBeTested2, shortNameToBeTested2, descriptionToBeTested2, parameterCategoryToBeTested2);
+		boolean result = parameter1.equals(parameter2);
+		Assert.assertExpectedResult(result);
+	}
+
+The only changes are the testName, the attributes of parameter1 and parameter2, 
+and the ExpectedResult (True or False).
+
 **Test 16:** Check that the equals method returns true if the two compared parameters have equal objects.
 
 **Test 17:** Check that the equals method returns false if the two compared parameters have different objects.
 
-**Test 18:** Check that the equals method returns true if the two compared parameters are the same.
+**Test 18:** Check that the equals method returns true if the two compared parameters have the same parameter code.
 
-**Test 19:** Check that the equals method returns false if one of the two compared parameters is null.
+Tests 19 to 20 follow this model:
+
+	@Test
+    public void testName(){
+		Parameter parameter1 = new Parameter(parameterCodeToBeTested1, shortNameToBeTested1, descriptionToBeTested1, parameterCategoryToBeTested1);
+		boolean result = parameter1.equals(x);
+		Assert.assertExpectedResult(result);
+	}
+
+The only changes are the testName, the x object (which is parameter1 for test 19 and null for test 20), 
+and the ExpectedResult (True or False).
+
+**Test 19:** Check that the equals method returns true if the two compared parameters are the same.
+
+**Test 20:** Check that the equals method returns false if one of the two compared parameters is null.
 
 ## 4.2. ParameterStore
 
-**Test 20:** Check if the parameter store is being created correctly with no elements.
+Before starting the parameter store tests, it's useful to create something like 
+this, since the parameters need to be assigned to a parameter category, which
+are on a list:
+	
+	private ParameterCategory p1;
+	private ParameterCategory p2;
+	private Company company = new Company(companyName);
+	private List<ParameterCategory> pcList;
 
-	@Test
-    public void createParameterStore() {
-        System.out.println("ensureParameterStoreIsBeingCreatedCorrectly");
+    @Before
+    public void setUp() {
+		pcList = new ArrayList<>();
+		p1 = new ParameterCategory(desiredParameterCategoryCode1,desiredParameterCategoryName1);
+		p2 = new ParameterCategory(desiredParameterCategoryCode2,desiredParameterCategoryName2);
+		pcList.add(p1);
+		pcList.add(p2);
+    }
+
+Since the parameter store tests (tests 21 to 25) are very different between them 
+and don't follow any model, there's no generic example to be shown.
+
+**Test 21:** Check if the parameter store is being created correctly with no elements.
+
+    @Test
+    public void ensureParameterStoreIsBeingCreatedCorrectlyWithNoElements() {
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(0, result.length);
     }
 
-**Test 21:** Check if the parameter store is being created correctly with some elements.
+**Test 22:** Check if the parameter store is being created correctly with some elements.
 
-**Test 22:** Check if the parameter is being created correctly.
+    @Test
+    public void ensureParameterStoreIsBeingCreatedCorrectlyWithSomeElements() {
+        ParameterStore ps1 = new ParameterStore();
+        Parameter parameter1 = ps1.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ps1.saveParameter(parameter1);
+        Parameter parameter2 = ps1.createParameter("WBC01", "WBC", "White Blood Cells", p1);
+        ps1.saveParameter(parameter2);
+        Parameter parameter3 = ps1.createParameter("PLT01", "PLT", "Platelets", p1);
+        ps1.saveParameter(parameter3);
+        Parameter parameter4 = ps1.createParameter("PCOD1", "NAME", "Description", p2);
+        ps1.saveParameter(parameter4);
+        Parameter[] result = ps1.toArray();
+        Assert.assertEquals(4, result.length);
+    }
 
-**Test 23:** Check that it is not possible to save a parameter with repeated objects.
+**Test 23:** Check if the parameter is being created correctly.
 
-**Test 24:** Check that it is not possible to save a null parameter.
+    @Test
+    public void ensureParameterIsBeingCreatedCorrectly() {
+        Parameter expected = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        Parameter actual = parameterStore.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Assert.assertEquals(expected, actual);
+    }
 
-*It is also recommended to organize this content by subsections.* 
+**Test 24:** Check that it is not possible to save a parameter with repeated objects.
+
+    public void ensureParameterIsNotSavedRepeatedWithSameObject() {
+        Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Parameter parameter2 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        parameterStore.saveParameter(parameter1);
+        boolean result = parameterStore.saveParameter(parameter2);
+        assertFalse(result);
+    }
+
+**Test 25:** Check that it is not possible to save a null parameter.
+
+    @Test
+    public void ensureParameterIsNotSavedIfNull() {
+        ParameterStore parameterStore = company.getParameterStore();
+        assertFalse(parameterStore.saveParameter(null));
+    }
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class CreateParameterController
 
-*It is also recommended to organize this content by subsections.* 
+	//...Omitted
 
-# 6. Integration and Demo 
+    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes) {
+        ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
+        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories);
+        return testTypeStore.validateTestType(testType);
+    }
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+	//...Omitted
 
+	public boolean saveTestType() {
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        return testTypeStore.saveTestType(testType);
+    }
+
+	//...Omitted
+
+## Class ParameterStore
+
+	//...Omitted	
+
+    public Parameter createParameter(String parameterCode, String shortName, String description, ParameterCategory pc){
+        return new Parameter(parameterCode, shortName, description, pc);
+    }
+
+	//...Omitted
+
+	    public boolean validateParameter(Parameter prm){
+        if (prm == null)
+            return false;
+        return !this.prmList.contains(prm);
+    }
+
+	//...Omitted
+
+    public boolean saveParameter(Parameter prm){
+        if (!validateParameter(prm))
+            return false;
+        return this.prmList.add(prm);
+    }
+
+	//...Omitted
+
+# 6. Integration and Demo
+
+To create a parameter, it is necessary to know the list of parameter categories available
+in the system. Therefore, in order to reduce coupling, it was created a CategoriesDTO 
+as well as a CategoriesMapper to process the data and convert the list of parameter 
+categories to a DTO.
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
+n/a

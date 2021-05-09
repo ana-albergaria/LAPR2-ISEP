@@ -26,19 +26,17 @@ public class ParameterStoreTest {
         pcList.add(p2);
     }
 
-    //Test 20
+    //Test 21
     @Test
     public void ensureParameterStoreIsBeingCreatedCorrectlyWithNoElements() {
-        System.out.println("ensureParameterStoreIsBeingCreatedCorrectlyWithNoElements");
         ParameterStore ps1 = new ParameterStore();
         Parameter[] result = ps1.toArray();
         Assert.assertEquals(0, result.length);
     }
 
-    //Test 21
+    //Test 22
     @Test
     public void ensureParameterStoreIsBeingCreatedCorrectlyWithSomeElements() {
-        System.out.println("ensureParameterStoreIsBeingCreatedCorrectlyWithSomeElements");
         ParameterStore ps1 = new ParameterStore();
         Parameter parameter1 = ps1.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         ps1.saveParameter(parameter1);
@@ -52,20 +50,18 @@ public class ParameterStoreTest {
         Assert.assertEquals(4, result.length);
     }
 
-    //Test 22
+    //Test 23
     @Test
     public void ensureParameterIsBeingCreatedCorrectly() {
-        System.out.println("ensureParameterIsBeingCreatedCorrectly");
         Parameter expected = new Parameter("RBC01", "RBC", "Red Blood Cells", p1);
         ParameterStore parameterStore = company.getParameterStore();
         Parameter actual = parameterStore.createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         Assert.assertEquals(expected, actual);
     }
 
-    //Test 23
+    //Test 24
     @Test
     public void ensureParameterIsNotSavedRepeatedWithSameObject() {
-        System.out.println("ensureParameterIsNotSavedRepeatedWithSameObject");
         Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         Parameter parameter2 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
         ParameterStore parameterStore = company.getParameterStore();
@@ -74,10 +70,9 @@ public class ParameterStoreTest {
         assertFalse(result);
     }
 
-    //Test 24
+    //Test 25
     @Test
     public void ensureParameterIsNotSavedIfNull() {
-        System.out.println("ensureParameterIsNotSavedIfNull");
         ParameterStore parameterStore = company.getParameterStore();
         assertFalse(parameterStore.saveParameter(null));
     }

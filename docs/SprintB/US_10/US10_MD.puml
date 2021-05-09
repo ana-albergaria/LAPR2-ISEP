@@ -29,7 +29,7 @@ Company "1" -- "*" ParameterCategory : adopts >
 Company "1" -- "*" Administrator : know >
 Parameter "*" -- "1" ParameterCategory: presented under >
 ParameterCategory "*" -- "1" Administrator: created by >
-
+Parameter "*" -- "1" Administrator: created by >
 
 
 @enduml
