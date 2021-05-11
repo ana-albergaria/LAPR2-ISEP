@@ -8,19 +8,62 @@ As a specialist doctor, I intend to make the diagnosis and write a report for a 
 
 ### 1.2. Customer Specifications and Clarifications
 
-*Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*
+**From the specifications document:**
+
+> "At the company's headquarters, the clinical chemistry technologist receives the samples (delivered
+by a courier) and performs the chemical analysis, recording the results in the software application.
+After completing the chemical analysis, the results of all chemical analyses are analysed by a
+specialist doctor who makes a diagnosis and writes a report that afterwards will be delivered to the
+client."
+
+
+> "To facilitate and simplify the validation work performed by the specialist doctor, the application
+uses an external module that is responsible for doing an automatic validation using test reference
+values."
+ 
+
+> "After the specialist doctor has completed the diagnosis, the results of the clinical analyses and the
+report become available in the system and must be validated by the laboratory coordinator."
+
+
+**From the client clarifications:**
+
+> **Question:**
+>
+> **Answer:**
+
+>Read the whole answer [here]().
+
+-
+
 
 ### 1.3. Acceptance Criteria
 
-*Insert here the client acceptance criteria.*
+* **AC1:** 
+
 
 ### 1.4. Found out Dependencies
 
-*Identify here any found out dependency to other US and/or requirements.*
+* There is a dependency to "US4: Register a test to be performed to a registered client" since the specialist doctor must associate the results of the clinical analyses and the report available in the system to the respective test.
+* There is a dependency to "US7 Register a new employee" since the specialist doctor must be registered in the application and login in order to make the results of the clinical analyses and the report available in the system.
+
 
 ### 1.5 Input and Output Data
 
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*
+**Input Data:**
+
+* Typed data:
+    * diagnosis
+    * report
+
+* Selected data:
+    * test to validate
+
+
+**Output Data:**
+
+* 
+* (In)Sucess of the operation
 
 
 ### 1.6. System Sequence Diagram (SSD)
