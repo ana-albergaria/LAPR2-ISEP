@@ -1,0 +1,2 @@
+Q: Is the Test mentioned in the lab order selected by the receptionist after she identifies it in the Order, or is it like a code that pertains to a specific test which must be entered by the receptionist?  
+A: The receptionist should read the lab order and should select the code using the application. In Sprint C we will introduce a user story that will clarify what the receptionist will do to register a test.

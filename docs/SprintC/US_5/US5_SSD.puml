@@ -1,0 +1,34 @@
+@startuml
+
+autonumber
+actor "Medical Lab Technician" as MLT
+
+activate MLT
+MLT -> ":System" : asks to record the samples
+/'Here below'/
+activate ":System"
+":System" --> MLT :
+deactivate ":System"
+
+MLT -> ":System" :
+activate ":System"
+
+loop
+":System" --> MLT :
+deactivate ":System"
+
+MLT -> ":System" :
+activate ":System"
+end
+
+":System" --> MLT : shows all data and requests confirmation
+deactivate ":System"
+
+MLT -> ":System" : confirms the data
+activate ":System"
+":System" --> MLT : informs operation success
+deactivate ":System"
+
+deactivate MLT
+
+@enduml
