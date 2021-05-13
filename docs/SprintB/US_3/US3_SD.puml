@@ -37,7 +37,7 @@ activate CS
 deactivate CS
 deactivate CTRL
 
-UI --> RC : informs operation sucess
+UI --> RC : requests to confirm the data
 deactivate CS
 deactivate UI
 
