@@ -81,9 +81,10 @@ report become available in the system and must be validated by the laboratory co
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.*
 
-![USXX-MD](USXX-MD.svg)
+
+![US014_DM](US014_DM.svg)
+
 
 ### 2.2. Other Remarks
 
