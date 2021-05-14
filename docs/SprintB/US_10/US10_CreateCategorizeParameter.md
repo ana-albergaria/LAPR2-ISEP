@@ -418,19 +418,19 @@ and don't follow any model, there's no generic example to be shown.
 
 	//...Omitted
 
-    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes) {
+    public boolean createParameter(String parameterCode, String shortName, String description, String pcCode){
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
-        TestTypeStore testTypeStore = this.company.getTestTypeStore();
-        List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
-        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories);
-        return testTypeStore.validateTestType(testType);
+        ParameterCategory pc = parameterCategoryStore.getCategoryByCode(pcCode); //vai buscar a cat através do code | o getCategoryByCode está na store
+        ParameterStore parameterStore = this.company.getParameterStore();
+        this.prm = parameterStore.createParameter(parameterCode, shortName, description, pc);
+        return parameterStore.validateParameter(prm);
     }
 
 	//...Omitted
 
-	public boolean saveTestType() {
-        TestTypeStore testTypeStore = this.company.getTestTypeStore();
-        return testTypeStore.saveTestType(testType);
+    public boolean saveParameter(){
+        ParameterStore parameterStore = this.company.getParameterStore();
+        return parameterStore.saveParameter(prm);
     }
 
 	//...Omitted
