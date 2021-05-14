@@ -7,14 +7,14 @@ activate MLT
 MLT -> ":System" : asks to record the samples
 /'Here below'/
 activate ":System"
-":System" --> MLT :
+":System" --> MLT : shows test list and asks to select one
 deactivate ":System"
 
-MLT -> ":System" :
+MLT -> ":System" : selects test
 activate ":System"
 
-loop
-":System" --> MLT :
+loop for each sample to be recorded
+":System" --> MLT : requests data (...)
 deactivate ":System"
 
 MLT -> ":System" :

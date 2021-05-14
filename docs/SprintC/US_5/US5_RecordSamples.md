@@ -37,6 +37,7 @@ defined by configuration.
 ### 1.4. Found out Dependencies
 
 There is a dependency to:  
+
  * **"US007 Register a new Employee"** since at least a Medical Lab Technician must be registered as a user in the system.  
  * **"US004 Register a test to be performed to a registered client"** since at least a test must be registered in the system in order to associate the samples to the test.  
 

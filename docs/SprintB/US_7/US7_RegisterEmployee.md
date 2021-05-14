@@ -205,7 +205,7 @@ It is relevant to mention that in this case there are one special case, if the r
 
 ### 2.1. Relevant Domain Model Excerpt
 
-![US7_MD](US7_MD.svg)
+![US7_MD](US7_MD1.svg)
 
 ### 2.2. Other Remarks
 
