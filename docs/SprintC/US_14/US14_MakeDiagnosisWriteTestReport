@@ -93,14 +93,12 @@ report become available in the system and must be validated by the laboratory co
 
 ### 1.6. System Sequence Diagram (SSD)
 
-*Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
-
-![USXX-SSD](USXX-SSD.svg)
+![US014_SSD](US014_SSD.svg)
 
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.*
+The present US is held many times during the business. As the Company works in the analysis/testing field, it's crucial to analyse the test results and make a report, with the diagnosis, for the client.
 
 
 ## 2. OO Analysis
@@ -113,8 +111,7 @@ report become available in the system and must be validated by the laboratory co
 
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).*
-
+n/a
 
 
 ## 3. Design - User Story Realization
@@ -148,13 +145,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 *In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.*
 
-![USXX-SD](USXX-SD.svg)
+![US014_SD](US014_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
 *In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
-![USXX-CD](USXX-CD.svg)
+![US014_CD](US014_CD.svg)
 
 # 4. Tests
 *In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.*
