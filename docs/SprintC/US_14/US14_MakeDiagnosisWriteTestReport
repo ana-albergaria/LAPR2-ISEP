@@ -63,7 +63,10 @@ report become available in the system and must be validated by the laboratory co
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** 
+* **AC1:** The system shows all the tests ready to make the diagnosis.
+* **AC2:** The specialist doctor selects one test.
+* **AC3:** The report contains the diagnosis.
+* **AC4:** The report is free text and should have no more than 400 words.
 
 
 ### 1.4. Found out Dependencies
