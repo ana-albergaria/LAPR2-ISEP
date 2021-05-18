@@ -124,12 +124,12 @@ n/a
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: asks to make a diagnosis and make a report |	... interacting with the actor? | WriteReportUI | Pure Fabrication: there is no reason to assign this responsability to any existing class in the Domain Model. |
 | | ... coordinating the US? | WriteReportController | Controller |
-| Step 2: shows list of tests ready to make a diagnosis and asks to selects one | ... knowing the tests to show? | (tests ready to make diagnosis store from US4) | Pure Fabrication: for coupling reasons. There is no reason to assign this responsability to any existing class in the Domain Model. |
-| Step 3: selects a test | ... saving the selected test? | TestFinalResult | IE: test is associated with one test final result. |
+| Step 2: shows list of tests ready to make a diagnosis and asks to selects one | ... knowing the tests to show? | TestStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsability to any existing class in the Domain Model. |
+| Step 3: selects a test | ... saving the selected test? | Report | IE: test is associated with the report object. |
 | Step 4: requests data(i.e., report) |	... asking the user for this data? | WriteReportUI | IE: is responsible for the user interaction. |
-| Step 5: types requested data | ... saving the inputted data? | TestFinalResult | IE: report is associated with one test final result. |
+| Step 5: types requested data | ... saving the inputted data? | Report | IE: report is associated with himself. |
 | Step 6: shows the data and requests a confirmation | ... showing all data and requesting a confirmation? | WriteReportUI | IE: is responsible for user interactions. |              
-| Step 7: confirms the data | ... saving the created report? | TestFinalResult | IE: owns all its test final results, which contain the report. | 
+| Step 7: confirms the data | ... saving the created report? | TestStore | IE: owns all its tests | 
 | Step 8: informs operation success | ... informing operation success? | WriteReportUI | IE: is responsible for user interactions. |
 
 ### Systematization ##
