@@ -137,23 +137,21 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Class1
-* Class2
-* Class3
+* Company
+* Report
 
 Other software classes (i.e. Pure Fabrication) identified:
-* xxxxUI
-* xxxxController
+* WriteReportUI
+* WriteReportController
+* TestsMapper
+* TestsDTO
+* TestStore
 
 ## 3.2. Sequence Diagram (SD)
-
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.*
 
 ![US014_SD](US014_SD.svg)
 
 ## 3.3. Class Diagram (CD)
-
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
 ![US014_CD](US014_CD.svg)
 
