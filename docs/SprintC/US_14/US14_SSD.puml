@@ -20,7 +20,7 @@ deactivate ":System"
 
 SpDt-> ":System" : confirms the data
 activate ":System"
-":System" --> SpDt : informs operation sucess
+":System" --> SpDt : informs operation success
 deactivate ":System"
 deactivate SpDt
 
