@@ -5,7 +5,7 @@ actor "Specialist Doctor" as SpDt
 activate SpDt
 SpDt-> ":System" : asks to make a diagnosis and write a report
 activate ":System"
-":System" --> SpDt : shows list with tests ready to make a diagnosis and asks to selects one
+":System" --> SpDt : shows list of tests ready to make a diagnosis and asks to selects one
 deactivate ":System"
 
 SpDt-> ":System" : selects a test
