@@ -20,7 +20,6 @@ public class CreateTestTypeUI implements Runnable{
         boolean success;
         System.out.println("To create a new Test Type, please insert the requested data.");
         List<String> menu = menuToContinueOrCancel();
-
         do{
             int index = Utils.showAndSelectIndex(menu, "");
             success = (index == -1) ? true : createTestType();
