@@ -1,6 +1,5 @@
 # US 04 - As a receptionist of the laboratory, I intend to register a test to be performed to a registered client.
 
-
 ## 1. Requirements Engineering
 
 *In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
