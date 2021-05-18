@@ -1,6 +1,5 @@
 # US 04 - As a receptionist of the laboratory, I intend to register a test to be performed to a registered client.
 
-
 ## 1. Requirements Engineering
 
 *In this section, it is suggested to capture the requirement description and specifications as provided by the client as well as any further clarification on it. It is also suggested to capture the requirements acceptance criteria and existing dependencies to other requirements. At last, identfy the involved input and output data and depicted an Actor-System interaction in order to fulfill the requirement.*
@@ -14,17 +13,32 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 *Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*
 
 **From the specifications document:**
-
- >
+ >"Typically, the client arrives at one of the clinical analysis laboratories with a lab order prescribed by
+  a doctor. Once there, a receptionist asks the client’s citizen card number, the lab order (which
+  contains the type of test and parameters to be measured), and registers in the application the test to
+  be performed to that client"
+>
  **From the client clarifications:**
- >Q1: Which client attribute should be used to search for a registered client?
+ >Q1: When the receptionist chooses the test type, should the categories appear, and then when selecting the category, the receptionist can choose the parameters for the test? Or when the Receptionist chooses the test type, should appear all the parameters that it includes immediately?
  >
- >A1:
+ >A1:Firstly, the receptionist should choose a test type. Then choose a category from a set of categories. Last, the receptionist should choose a parameter.
+>
+>Q1 Link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8181).
+>
+>Q2: What are the attributes of a test and the acceptance criteria?
+>
+>A2: A test has the following attributes:
+    Test code : Sequential number with 12 digits. The code is automatically generated.
+    NHS code: 12 alphanumeric characters.
+>
+>Q2 Link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8181).
 
 
 ### 1.3. Acceptance Criteria
 
 * **AC1**: The receptionist must select the parameters to be analysed from all possible parameters in accordance with the test type.
+* **AC2**: The test code must be sequential and have 12 digits.
+* **AC3**: The NHS code must hold 12 alphanumeric digits.
 
 ### 1.4. Found out Dependencies
 
@@ -34,8 +48,12 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 
 ### 1.5 Input and Output Data
 
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*
-
+* Typed data:
+    * NHS code
+    * Client citizen card number
+* Selected data:
+    * Test type
+    * Parameters
 
 ### 1.6. System Sequence Diagram (SSD)
 

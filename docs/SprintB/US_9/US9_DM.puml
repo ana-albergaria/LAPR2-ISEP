@@ -17,16 +17,9 @@ class TestType{
 - Description
 - Collecting method
 }
-class Test{
-- code
-- NhsCode
-- createdAt
-}
 
  TestType -[hidden]right-|> Company
 
-Test "*" -- "1" TestType : classified as >
-Test "*" -- "1..*" ParameterCategory : requested analysis of >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "*" ParameterCategory : capable of analysing >
 Company "1" -- "*" Administrator : know >

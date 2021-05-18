@@ -1,0 +1,32 @@
+@startuml
+
+autonumber
+actor "Receptionist" as MLT
+
+activate MLT
+MLT -> ":System" : Asks to register a test to be performed to a registered client
+activate ":System"
+":System" --> MLT :requests data (CitizenCardNumber, NHScode)
+deactivate ":System"
+
+MLT -> ":System" : Types requested data
+activate ":System"
+":System" --> MLT : Shows available test types and request to select one
+deactivate ":System"
+
+MLT -> ":System" : Selects test type
+activate ":System"
+loop while user adds parameters
+":System" --> MLT : Shows all parameters associated with tt category and request to select one
+deactivate ":System"
+MLT -> ":System" : Selects parameter
+activate ":System"
+end
+":System" --> MLT : Shows Test data and requests confirmation
+deactivate ":System"
+MLT -> ":System" : confirms the data
+activate ":System"
+
+deactivate MLT
+
+@enduml

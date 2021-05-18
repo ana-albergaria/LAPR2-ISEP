@@ -264,7 +264,7 @@ Application "1" - "*" Notification : sends >
 /'OtherTest "*" -- "1" TestType : part of >'/
 /'OtherTest "*" -- "1..*" Parameter : characterized by >'/
 
-TestType "*" -- "1..*" Parameter : characterized by >
+TestType "*" -- "1..*" ParameterCategory : characterized by >
 
 ClinicalAnalysisLaboratory "1..*" -- "1" Administrator : registered by >
 

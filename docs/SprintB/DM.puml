@@ -34,7 +34,6 @@ class Test{
 
 class Sample{
 - barCode
-
 }
 
 class FinalResult{}

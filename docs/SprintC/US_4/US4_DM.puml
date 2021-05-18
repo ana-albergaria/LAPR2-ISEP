@@ -1,0 +1,43 @@
+@startuml
+
+left to right direction
+skinparam classAttributeIconSize 0
+hide empty methods
+hide empty attributes
+
+class Test{
+- code
+- NhsCode
+- createdAt
+}
+
+class ParameterCategory{
+  -code
+  -name
+}
+
+class Receptionist{}
+
+class Sample{
+- barCode
+}
+
+class TestType{
+- Code
+- Description
+- Collecting methods
+}
+
+class Parameter{
+- code
+- shortName
+- description
+}
+
+Test "*" -- "1" TestType : classified as >
+Test "1" -- "1..*" Sample : collects >
+Test "*" -- "1..*" Parameter : requested analysis of >
+Receptionist "1" -- "*" Test : registers >
+Parameter "*" -- "1" ParameterCategory: presented under >
+TestType "1" -- "1..*" ParameterCategory : characterized by >
+@enduml
