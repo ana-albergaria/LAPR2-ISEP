@@ -8,6 +8,7 @@ participant ":RecordSamplesUI  " as UI
 participant ":RecordSamplesController" as CTRL
 participant ":Company" as COMPANY
 participant "testStore\n:TestStore" as TEST_STORE
+participant "selectedTest\n:Test" as SELECTED_TEST
 participant ":TestMapper" as TEST_MAPPER
 participant "listTestsNoSamples\n:List<TestType>" as LIST_TESTS_NO_SAMPLES
 participant "listTestsNoSamplesDto\n:List<TestTypeDto>" as LIST_TESTS_NO_SAMPLES_DTO
@@ -50,7 +51,109 @@ deactivate CTRL
 UI --> MLT : shows list with tests with no samples collected and asks to select one
 deactivate UI
 
+
 MLT -> UI : selects test
+activate UI
+
+/'UI -> UI : selectedTestDto = (TestDto) Utils.showAndSelectOne(listTestWithNoSamplesDto, "msg")
+activate UI
+deactivate UI'/
+
+/'note over UI, CTRL
+The **code** refers to the code of the TestDto
+selected by the Medical Lab Technician.
+end note
+UI -> CTRL : selectedTest = getTestByCode(code)
+activate CTRL
+
+CTRL -> COMPANY : testStore = getTestStore()
+activate COMPANY
+deactivate COMPANY
+
+CTRL -> TEST_STORE : selectedTest = getTestByCode(code)
+activate TEST_STORE
+TEST_STORE --> SELECTED_TEST** : create()
+TEST_STORE --> CTRL : selectedTest
+deactivate TEST_STORE
+
+CTRL --> UI : selectedTest'/
+
+deactivate CTRL
+
+
+UI --> MLT : asks the number of samples to collect
+deactivate UI
+
+MLT -> UI : types number
+activate UI
+
+loop for each Sample to be recorded
+UI -> CTRL : createSample()
+activate CTRL
+
+CTRL -> COMPANY : sample = createSample()
+activate COMPANY
+
+COMPANY --> SAMPLE** : create()
+
+
+activate SAMPLE
+
+
+SAMPLE -> SAMPLE : api = getExternalAPI()
+activate SAMPLE
+deactivate SAMPLE
+
+
+
+SAMPLE -> API : barcode = getBarCode()
+activate API
+
+API --> BARCODE** : create(String barcodeNumber)
+
+API --> SAMPLE : barcode
+deactivate SAMPLE
+deactivate COMPANY
+deactivate API
+
+CTRL --> UI : result
+deactivate CTRL
+
+end
+
+UI --> MLT : requests confirmation
+
+MLT -> UI : confirms the data
+
+loop for each Sample to be added to the test
+
+note over UI, CTRL
+The **code** refers to the code of the TestDto
+selected by the Medical Lab Technician.
+end note
+UI -> CTRL : addSample(code)
+activate CTRL
+
+CTRL -> COMPANY : testStore = getTestStore()
+activate COMPANY
+deactivate COMPANY
+
+CTRL -> TEST_STORE : selectedTest = getTestByCode(code)
+activate TEST_STORE
+deactivate TEST_STORE
+
+CTRL -> TEST_STORE : addSample(selectedTest)
+activate TEST_STORE
+deactivate TEST_STORE
+
+/'dentro do método addSample, vai-se verificar se a sample já está lá?'/
+
+CTRL --> UI : result
+
+end
+
+UI --> MLT : informs operation success
+
 
 
 

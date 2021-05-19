@@ -198,7 +198,8 @@ ClinicalChemistryTechnologist "1" -- "1" Employee : is of >
 SpecialistDoctor "1" -- "1" Employee : is of >
 LaboratoryCoordinator "1" -- "1" Employee : is of >
 Administrator "1" -- "1" Employee : is of >
-Company "1" -- "*" Parameter : capable of analysing >
+/'edited here below'/
+Company "1" - "*" Parameter : capable of analysing >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "*" Administrator : know >
 Company "1" -- "*" ParameterCategory : adopts >

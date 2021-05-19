@@ -44,6 +44,10 @@ class TestType{
   -description
 }'/
 
+class Company {
+-designation
+}
+
 class Config {}
 
 
@@ -62,16 +66,12 @@ Test "1" - "1..*" Sample : collects >
 /'LabOrder -- TestType : contains >'/
 /'LabOrder -- "1..*" Parameter : contains >'/
 
-
-
 ExternalAPI -- Config : defined by >
-
 Test "*" -- "1" Client : requested by >
-
 Sample "*" - "1" ExternalAPI : makes use of >
+Company "1" --- "*" Sample : manages >
 
-/'FALTA ADICIONAR ASSOCIAÇÕES: CLIENT <-> TEST , CLIENT <-> SAMPLE'/
-/'PORQUÊ QUE O TEST TEM 2 codes?'/
+
 
 
 @enduml
