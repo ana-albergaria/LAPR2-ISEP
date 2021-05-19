@@ -7,7 +7,7 @@ activate MLT
 MLT -> ":System" : asks to record the samples
 /'Here below'/
 activate ":System"
-":System" --> MLT : shows list with tests for which there are no samples collected and asks to select one
+":System" --> MLT : shows list with tests with no samples collected and asks to select one
 deactivate ":System"
 
 MLT -> ":System" : selects test

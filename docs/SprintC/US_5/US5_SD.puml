@@ -1,0 +1,57 @@
+@startuml
+
+autonumber
+
+actor "Medical Lab Technician" as MLT
+
+participant ":RecordSamplesUI  " as UI
+participant ":RecordSamplesController" as CTRL
+participant ":Company" as COMPANY
+participant "testStore\n:TestStore" as TEST_STORE
+participant ":TestMapper" as TEST_MAPPER
+participant "listTestsNoSamples\n:List<TestType>" as LIST_TESTS_NO_SAMPLES
+participant "listTestsNoSamplesDto\n:List<TestTypeDto>" as LIST_TESTS_NO_SAMPLES_DTO
+participant "sample\n:Sample" as SAMPLE
+participant "api\n:ExternalAPI" as API
+participant "barcode\n:Barcode" as BARCODE
+
+activate MLT
+MLT -> UI : asks to record the samples
+activate UI
+
+UI -> CTRL : listTestsNoSamplesDto = getTestsNoSamples()
+activate CTRL
+
+CTRL -> COMPANY : testStore = getTestStore()
+activate COMPANY
+|||
+deactivate COMPANY
+
+CTRL -> TEST_STORE : listTestsNoSamples = getTestsWithNoSamples()
+activate TEST_STORE
+
+TEST_STORE --> LIST_TESTS_NO_SAMPLES** : create()
+
+TEST_STORE --> CTRL : listTestsNoSamples
+deactivate TEST_STORE
+|||
+
+CTRL -> TEST_MAPPER : listTestsNoSamplesDto = toDTO(listTestsNoSamples)
+activate TEST_MAPPER
+
+TEST_MAPPER --> LIST_TESTS_NO_SAMPLES_DTO** : create()
+
+TEST_MAPPER --> CTRL : listTestsNoSamplesDto
+deactivate TEST_MAPPER
+
+CTRL --> UI : listTestsNoSamplesDto
+deactivate CTRL
+
+UI --> MLT : shows list with tests with no samples collected and asks to select one
+deactivate UI
+
+MLT -> UI : selects test
+
+
+
+@enduml
