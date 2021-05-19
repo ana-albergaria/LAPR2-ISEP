@@ -16,10 +16,10 @@ activate ":System"
 ":System" --> MLT : asks the number of samples to collect
 deactivate ":System"
 
-MLT -> ":System" : types the number
+MLT -> ":System" : types number
 activate ":System"
 
-":System" --> MLT : shows all data and requests confirmation
+":System" --> MLT : requests confirmation
 deactivate ":System"
 
 MLT -> ":System" : confirms the data
