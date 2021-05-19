@@ -1,0 +1,36 @@
+@startuml
+autonumber
+actor "Specialist Doctor" as SPDT
+
+participant ":WriteReportUI" as UI
+participant ":WriteReportController" as CTRL
+participant ":Company" as CMP
+participant "tstStore\n:TestStore" as TSTSTORE
+participant "rpt\n:Report" as RPT
+participant ":TestsMapper" as TSTMAPPER
+participant "objDTO\n:TestsDTO" as OBJ_DTO
+participant "tst\n:Test" as TST
+participant "lt\n:List<Test>" as LT
+participant "listTestDTO\n:List<TestDTO>" as LIST_DTO
+
+activate SPDT
+SPDT -> UI : asks to make diagnosis
+activate UI
+UI -> CTRL : lt = getTests()
+activate CTRL
+
+CTRL -> CMP : tstStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+
+CTRL -> TSTSTORE : lt = getTestsStore()
+activate TSTSTORE
+
+TSTSTORE --> LT** : create()
+TSTSTORE --> CTRL : lt
+deactivate TSTSTORE
+
+
+
+@enduml
