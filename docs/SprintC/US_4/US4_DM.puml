@@ -35,7 +35,6 @@ class Parameter{
 }
 
 Test "*" -- "1" TestType : classified as >
-Test "1" -- "1..*" Sample : collects >
 Test "*" -- "1..*" Parameter : requested analysis of >
 Receptionist "1" -- "*" Test : registers >
 Parameter "*" -- "1" ParameterCategory: presented under >
