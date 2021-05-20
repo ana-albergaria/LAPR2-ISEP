@@ -31,15 +31,14 @@ public class Company {
      * The parameter store.
      */
     private ParameterStore parameterStore;
-
     private TestStore testStore;
+    private ClientStore clientStore;
+    private TestTypeStore testTypeStore;
 
-    private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<ClinicalAnalysisLaboratory> calList;
     private List<Employee> empList;
     private List<OrgRole> roles;
 
-    private ClientStore clientStore;
 
     public Company(String designation)
     {

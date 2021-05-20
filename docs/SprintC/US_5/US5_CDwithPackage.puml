@@ -2,8 +2,8 @@
 
 skinparam classAttributeIconSize 0
 left to right direction
-
-
+hide empty methods
+hide empty attributes
 
 package UI {
 class RecordSamplesUI
@@ -123,7 +123,7 @@ RecordSamplesController ..> Test
 TestMapper ..> Test
 TestMapper .> TestDto
 RecordSamplesController ..> Sample
-Company "1" --> "1" SampleStore : uses >
+Company "1" ---> "1" SampleStore : uses >
 SampleStore "1" -- "*" Sample : manages >
 TestStore "1" -- "*" Test : conducts >
 Company "1" --> "1" TestStore : uses >
@@ -134,8 +134,6 @@ Sample "*" --- "1" ExternalAPI : makes use of >
 class BarbecueAdapter implements ExternalAPI
 
 BarbecueAdapter --> BarbecueAPI
-
-
 
 
 

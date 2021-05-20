@@ -11,8 +11,8 @@ participant "testStore\n:TestStore" as TEST_STORE
 participant "selectedTest\n:Test" as SELECTED_TEST
 participant "sampleStore\n:SampleStore" as SAMPLE_STORE
 participant ":TestMapper" as TEST_MAPPER
-participant "listTestsNoSamples\n:List<TestType>" as LIST_TESTS_NO_SAMPLES
-participant "listTestsNoSamplesDto\n:List<TestTypeDto>" as LIST_TESTS_NO_SAMPLES_DTO
+participant "listTestsNoSamples\n:List<Test>" as LIST_TESTS_NO_SAMPLES
+participant "listTestsNoSamplesDto\n:List<TestDto>" as LIST_TESTS_NO_SAMPLES_DTO
 participant "sample\n:Sample" as SAMPLE
 participant "api\n:ExternalAPI" as API
 participant "barcode\n:Barcode" as BARCODE
