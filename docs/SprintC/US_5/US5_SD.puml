@@ -168,9 +168,9 @@ CTRL -> TEST_STORE : selectedTest = getTestByCode(code)
 activate TEST_STORE
 deactivate TEST_STORE
 
-CTRL -> TEST_STORE : addSample(selectedTest)
-activate TEST_STORE
-deactivate TEST_STORE
+CTRL -> SELECTED_TEST : addSample(sample)
+activate SELECTED_TEST
+deactivate SELECTED_TEST
 
 
 /'dentro do método addSample, vai-se verificar se a sample já está lá?'/
