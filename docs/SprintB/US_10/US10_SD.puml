@@ -90,23 +90,26 @@ deactivate PCSTORE
 
 CTRL -> CMP: prmStore = getParameterStore()
 activate CMP
-|||
-deactivate CMP
-CTRL -> PRMSTORE: prm = createParameter(parameterCode, shortName, description, pc)
+'|||
+'deactivate CMP
+'CTRL -> PRMSTORE: prm = createParameter(parameterCode, shortName, description, pc)
+CMP -> PRMSTORE: prm = createParameter(parameterCode, shortName, description, pc)
 activate PRMSTORE
 
 PRMSTORE --> PRM**: create(parameterCode, shortName, description, pc)
 deactivate PRMSTORE
-CTRL -> PRMSTORE: validateParameter(prm)
+'CTRL -> PRMSTORE: validateParameter(prm)
+CMP -> PRMSTORE: validateParameter(prm)
 activate PRMSTORE
 |||
 deactivate PRMSTORE
+deactivate CMP
 
 
 CTRL --> UI: result
+deactivate CTRL
 
 UI --> ADM: shows all data and requests confirmation
-deactivate CTRL
 deactivate UI
 
 ADM -> UI : confirms the data
