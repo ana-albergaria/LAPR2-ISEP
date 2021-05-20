@@ -42,7 +42,7 @@ class TestStore {
     -list<Test> testsReadyToDiagnose
     +getTestsReadyToDiagnose()
     +getTestByCode(code)
-    +addReport(selectedTest)
+    +addReportToTest(selectedTest)
 }
 
 }
@@ -76,7 +76,7 @@ class WriteReportController {
     -Report report
     +getTeststoDiagnose()
     +createReport(reportText)
-    +addReport(testCode)
+    +addReportToTest(testCode)
 }
 
 }
