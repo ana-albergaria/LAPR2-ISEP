@@ -19,7 +19,7 @@ deactivate ":System"
 MLT -> ":System" : types number
 activate ":System"
 
-":System" --> MLT : requests confirmation
+":System" --> MLT : shows data and requests confirmation
 deactivate ":System"
 
 MLT -> ":System" : confirms the data

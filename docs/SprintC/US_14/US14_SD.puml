@@ -7,11 +7,11 @@ participant ":WriteReportController" as CTRL
 participant ":Company" as CMP
 participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
-participant ":TestsMapper" as TSTMAPPER
+participant ":TestMapper" as TSTMAPPER
 'participant "objDTO\n:TestsDTO" as OBJ_DTO
-'participant "tst\n:Test" as TST
 participant "listTestsToDiagnose\n:List<Test>" as LT
-participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
+'participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
+participant "tst\n:Test" as TST
 
 activate SPDT
 SPDT -> UI : asks to make diagnosis
@@ -35,7 +35,7 @@ deactivate TSTSTORE
 CTRL -> TSTMAPPER : listTestsToDiagnoseDTO = toDTO(listTestsToDiagnose)
 activate TSTMAPPER
 
-TSTMAPPER --> LIST_DTO** : create()
+ref over TSTMAPPER : US14_SD_TestMapper_toDTO_List
 
 TSTMAPPER --> CTRL : listTestsToDiagnoseDTO
 deactivate TSTMAPPER
@@ -58,13 +58,13 @@ deactivate UI
 SPDT -> UI : types requested data
 activate UI
 
-UI -> CTRL : createReport()
+UI -> CTRL : createReport(reportText)
 activate CTRL
 
-CTRL -> CMP : report = createReport()
+CTRL -> CMP : report = createReport(reportText)
 activate CMP
 
-CMP --> RPT** : create()
+CMP --> RPT** : create(reportText)
 deactivate CMP
 
 CTRL --> UI : result
@@ -75,23 +75,23 @@ deactivate UI
 SPDT -> UI : confirms the data
 activate UI
 
-UI -> CTRL : addReport(testCode)
+UI -> CTRL : addReportToTest(code)
 activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
 activate CMP
-
-CMP -> TSTSTORE : selectedTest = getTestByCode(testCode)
-activate TSTSTORE
 |||
-deactivate TSTSTORE
-
-CMP -> TSTSTORE : addReport(selectedTest)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-
 deactivate CMP
+
+CTRL -> TSTSTORE : selectedTest = getTestByCode(code)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL -> TSTSTORE : addReportToTest(selectedTest)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
 
 CTRL --> UI : result
 deactivate CMP

@@ -5,7 +5,11 @@ hide empty methods
 hide empty attributes
 left to right direction
 
-class FinalResult{}
+class Company{
+- designation
+}
+
+'class FinalResult{}
 
 'class ChemicalResult{}
 
@@ -23,11 +27,11 @@ class Test{
 - createdAt
 }
 
-class TestType{
+/'class TestType{
 - code
 - description
 - collectingMethod
-}
+}'/
 
 class TestParameter{}
 
@@ -45,14 +49,15 @@ class TestParameterResult{
 
 class ReferenceValue{}
 
+Company "1" -- "*" Test : conducts >
 'ChemicalResult "1" -- "1" Test : presented under >
 Test "*" -- "1" SpecialistDoctor : analysed by >
 'SpecialistDoctor "1" -- "*" Diagnosis : makes >
 SpecialistDoctor "1" -- "*" Report : writes >
 'Diagnosis "1" -- "1" FinalResult : receives <
-Report "1" -- "1" FinalResult : receives <
+'Report "1" -- "1" FinalResult : receives <
 Report "1" -- "1" Test : is of >
-Test "*" -- "1" TestType : is of >
+'Test "*" -- "1" TestType : is of >
 Test "1" -- "1..*" TestParameter : requests analysis of >
 TestParameter "*" -- "1" Parameter : refers to >
 TestParameter "1" -- "0..1" TestParameterResult : contains >
