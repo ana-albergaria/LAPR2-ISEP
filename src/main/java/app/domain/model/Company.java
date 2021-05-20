@@ -299,6 +299,8 @@ public class Company {
         return success;
     }
 
-
+    public Report createReport(String reportTest){
+        return new Report(reportTest);
+    }
 
 }

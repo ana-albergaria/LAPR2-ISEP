@@ -22,7 +22,7 @@ public class TestStore {
         throw new UnsupportedOperationException("Parameter Category not found!");
     }
 
-    /*public addReport(Test selectedTest) {
+    /*public boolean addReportToTest(Test selectedTest){
 
     }*/
 

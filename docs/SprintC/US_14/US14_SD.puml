@@ -75,7 +75,7 @@ deactivate UI
 SPDT -> UI : confirms the data
 activate UI
 
-UI -> CTRL : addReport(code)
+UI -> CTRL : addReportToTest(code)
 activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
@@ -88,7 +88,7 @@ activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL -> TSTSTORE : addReport(selectedTest)
+CTRL -> TSTSTORE : addReportToTest(selectedTest)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
