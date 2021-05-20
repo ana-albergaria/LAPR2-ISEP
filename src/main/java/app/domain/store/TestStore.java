@@ -1,10 +1,13 @@
 package app.domain.store;
 
+import app.domain.model.Test;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestStore {
 
-    /*private List<Test> testsReadyToDiagnose = new ArrayList<>();
+    private List<Test> testsReadyToDiagnose = new ArrayList<>();
 
     public List<Test> getTestsReadyToDiagnose(){
         return testsReadyToDiagnose;
@@ -19,7 +22,7 @@ public class TestStore {
         throw new UnsupportedOperationException("Parameter Category not found!");
     }
 
-    public addReport(Test selectedTest) {
+    /*public addReport(Test selectedTest) {
 
     }*/
 

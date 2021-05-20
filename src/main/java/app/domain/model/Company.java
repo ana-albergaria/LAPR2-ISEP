@@ -105,6 +105,10 @@ public class Company {
         return clientStore;
     }
 
+    public TestStore getTestStore(){
+        return testStore;
+    }
+
     /**
      * Calling the employee list available in the system.
      *
