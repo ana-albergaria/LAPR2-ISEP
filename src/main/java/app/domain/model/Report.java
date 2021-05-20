@@ -23,6 +23,8 @@ public class Report {
         return words.length;
     }
 
+
+
     private void checkReportTextRules(String reportText){
         if (StringUtils.isBlank(reportText))
             throw new IllegalArgumentException("Report cannot be blank.");

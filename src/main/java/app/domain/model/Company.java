@@ -1,9 +1,6 @@
 package app.domain.model;
 
-import app.domain.store.ClientStore;
-import app.domain.store.ParameterCategoryStore;
-import app.domain.store.ParameterStore;
-import app.domain.store.TestTypeStore;
+import app.domain.store.*;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
@@ -35,6 +32,8 @@ public class Company {
      */
     private ParameterStore parameterStore;
 
+    private TestStore testStore;
+
     private TestTypeStore testTypeStore; //Company uses TestTypeStore
     private List<ClinicalAnalysisLaboratory> calList;
     private List<Employee> empList;
@@ -52,6 +51,7 @@ public class Company {
         this.testTypeStore = new TestTypeStore();
         this.clientStore = new ClientStore();
         this.parameterCategoryStore = new ParameterCategoryStore();
+        this.testStore = new TestStore();
         this.calList = new ArrayList<>();
         this.empList = new ArrayList<>();
         this.roles = new ArrayList<>();
@@ -294,5 +294,7 @@ public class Company {
         }
         return success;
     }
+
+
 
 }
