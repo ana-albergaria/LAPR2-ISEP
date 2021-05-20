@@ -63,6 +63,7 @@ deactivate LIST_DTO
 end
 
 PCMAPPER --> CTRL : listCategoriesDto
+deactivate PCMAPPER
 CTRL --> UI : listCategoriesDto
 
 deactivate CTRL
@@ -126,11 +127,11 @@ activate PRMSTORE
 deactivate PRMSTORE
 
 CTRL --> UI: result
+deactivate PRMSTORE
+deactivate CTRL
 end
 
 UI --> ADM : informs operation success
-deactivate PCMAPPER
-deactivate PRMSTORE
 deactivate CTRL
 deactivate UI
 
