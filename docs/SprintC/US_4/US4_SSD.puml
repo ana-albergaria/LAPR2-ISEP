@@ -4,25 +4,30 @@ autonumber
 actor "Receptionist" as MLT
 
 activate MLT
-MLT -> ":System" : Asks to register a test to be performed to a registered client
+MLT -> ":System" : asks to register a test to be performed to a registered client
 activate ":System"
 ":System" --> MLT :requests data (CitizenCardNumber, NHScode) \n and shows test types to select one
 deactivate ":System"
 
-MLT -> ":System" : Types requested data and selects test type
+MLT -> ":System" : sypes requested data and selects test type
+activate ":System"
+
+":System" --> MLT : shows category(ies) associated with test type request to select one
+deactivate ":System"
+MLT -> ":System" : selects category
 activate ":System"
 
 loop while user adds parameters
-":System" --> MLT : Shows all parameters associated with tt category and request to select one
+":System" --> MLT : shows all parameters associated selected category
 deactivate ":System"
-MLT -> ":System" : Selects parameter
+MLT -> ":System" : selects parameter
 activate ":System"
 end
-":System" --> MLT : Shows Test data and requests confirmation
+":System" --> MLT : shows Test data and requests confirmation
 deactivate ":System"
 MLT -> ":System" : confirms the data
 activate ":System"
-":System" --> MLT : Informs operation success
+":System" --> MLT : informs operation success
 deactivate ":System"
 deactivate MLT
 
