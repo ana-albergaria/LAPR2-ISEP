@@ -14,7 +14,7 @@ class Company {
     -String designation
     -TestStore testStore
     +getTestStore()
-    +createReport()
+    +createReport(reportText)
 }
 
 class Report {
@@ -25,7 +25,7 @@ class Report {
     + checkReportTextRules(reportText)
     + countWords(reportText)
     + equals(reportObject)
-    + create()
+    + create(reportText)
 }
 
 class Test {
@@ -75,7 +75,7 @@ class WriteReportController {
     -Company company
     -Report report
     +getTeststoDiagnose()
-    +createReport()
+    +createReport(reportText)
     +addReport(testCode)
 }
 
@@ -85,7 +85,11 @@ class WriteReportController {
 
 package UI {
 
+package Console {
+
 class WriteReportUI {
+}
+
 }
 
 }

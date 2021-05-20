@@ -76,13 +76,13 @@ deactivate UI
 SPDT -> UI : types requested data
 activate UI
 
-UI -> CTRL : createReport()
+UI -> CTRL : createReport(reportText)
 activate CTRL
 
-CTRL -> CMP : report = createReport()
+CTRL -> CMP : report = createReport(reportText)
 activate CMP
 
-CMP --> RPT** : create()
+CMP --> RPT** : create(reportText)
 deactivate CMP
 
 CTRL --> UI : result
