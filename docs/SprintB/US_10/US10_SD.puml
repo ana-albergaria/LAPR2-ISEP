@@ -132,7 +132,6 @@ deactivate CTRL
 end
 
 UI --> ADM : informs operation success
-deactivate CTRL
 deactivate UI
 
 deactivate ADM
