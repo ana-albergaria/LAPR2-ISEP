@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TestStore {
 
-    private List<Test> testsReadyToDiagnose = new ArrayList<>();
+    /*private List<Test> testsReadyToDiagnose = new ArrayList<>();
 
     public List<Test> getTestsReadyToDiagnose(){
         return testsReadyToDiagnose;
@@ -12,14 +12,15 @@ public class TestStore {
 
     public Test getTestByCode(String code){
         for (Test tst : testsReadyToDiagnose) {
-            if (tst.getCode().equalsIgnoreCase){
-                return tst
+            if (tst.getCode().equalsIgnoreCase(code)){
+                return tst;
             }
         }
+        throw new UnsupportedOperationException("Parameter Category not found!");
     }
 
     public addReport(Test selectedTest) {
 
-    }
+    }*/
 
 }
