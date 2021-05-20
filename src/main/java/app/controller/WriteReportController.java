@@ -33,6 +33,4 @@ public class WriteReportController {
         return  testsToDiagnose;
     }
 
-    //addReport(testCode)
-
 }
