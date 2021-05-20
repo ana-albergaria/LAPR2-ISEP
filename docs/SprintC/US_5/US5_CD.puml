@@ -1,0 +1,48 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class RecordSamplesUI {}
+
+class RecordSamplesController {
++getTestsNoSamples()
++createSample()
++saveSample()
++addSample(code)
+}
+
+class Company {
+-designation
++getTestStore()
++getSampleStore()
+}
+
+class TestStore {
++getTestsWithNoSamples()
+}
+
+class TestMapper {
++List<TestDto> toDTO(List<Test> tests)
++TestDto toDTO(Test t)
+}
+
+class TestDto {
+- code
+- NhsCode
+- createdAt
++Test(code, NhsCode, createdAt)
++getCode()
++getNhsCode()
++getCreatedAt()
+}
+
+class Sample {}
+
+
+class SampleStore {
+
+}
+
+
+
+@enduml

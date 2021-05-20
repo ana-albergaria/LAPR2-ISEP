@@ -9,6 +9,7 @@ participant ":RecordSamplesController" as CTRL
 participant ":Company" as COMPANY
 participant "testStore\n:TestStore" as TEST_STORE
 participant "selectedTest\n:Test" as SELECTED_TEST
+participant "sampleStore\n:SampleStore" as SAMPLE_STORE
 participant ":TestMapper" as TEST_MAPPER
 participant "listTestsNoSamples\n:List<TestType>" as LIST_TESTS_NO_SAMPLES
 participant "listTestsNoSamplesDto\n:List<TestTypeDto>" as LIST_TESTS_NO_SAMPLES_DTO
@@ -119,20 +120,45 @@ deactivate API
 CTRL --> UI : result
 deactivate CTRL
 
-end
 
-UI --> MLT : requests confirmation
+
+UI --> MLT : shows data and requests confirmation
 
 MLT -> UI : confirms the data
 
-loop for each Sample to be added to the test
+UI -> CTRL : saveSample()
+activate CTRL
+
+CTRL -> COMPANY : sampleStore = getSampleStore()
+activate COMPANY
+deactivate COMPANY
+
+CTRL -> SAMPLE_STORE : saveSample(sample)
+activate SAMPLE_STORE
+
+
+SAMPLE_STORE -> SAMPLE_STORE : validateSample(sample)
+activate SAMPLE_STORE
+deactivate SAMPLE_STORE
+
+SAMPLE_STORE -> SAMPLE_STORE : addSample(sample)
+activate SAMPLE_STORE
+deactivate SAMPLE_STORE
+
+CTRL --> UI : result
+
+deactivate SAMPLE_STORE
+
+
 
 note over UI, CTRL
 The **code** refers to the code of the TestDto
-selected by the Medical Lab Technician.
+selected by the Medical Lab Technician in step 12.
 end note
 UI -> CTRL : addSample(code)
-activate CTRL
+
+
+
 
 CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
@@ -146,14 +172,20 @@ CTRL -> TEST_STORE : addSample(selectedTest)
 activate TEST_STORE
 deactivate TEST_STORE
 
+
 /'dentro do método addSample, vai-se verificar se a sample já está lá?'/
 
 CTRL --> UI : result
+
+deactivate CTRL
 
 end
 
 UI --> MLT : informs operation success
 
+
+/'colocar requests confirmation
+e confirms the data em cima'/
 
 
 
