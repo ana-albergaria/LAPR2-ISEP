@@ -34,6 +34,7 @@ public class Company {
     private TestStore testStore;
     private ClientStore clientStore;
     private TestTypeStore testTypeStore;
+    private SampleStore sampleStore;
 
     private List<ClinicalAnalysisLaboratory> calList;
     private List<Employee> empList;
@@ -95,7 +96,6 @@ public class Company {
         return parameterStore;
     }
 
-    //to be used in US8
     public TestTypeStore getTestTypeStore() {
         return testTypeStore;
     }
@@ -106,6 +106,10 @@ public class Company {
 
     public TestStore getTestStore(){
         return testStore;
+    }
+
+    public SampleStore getSampleStore() {
+        return sampleStore;
     }
 
     /**

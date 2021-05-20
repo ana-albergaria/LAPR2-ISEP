@@ -107,7 +107,7 @@ deactivate SAMPLE
 
 
 
-SAMPLE -> API : barcode = getBarCode(barcodeNumber)
+SAMPLE -> API : barcode = getBarcode(barcodeNumber)
 activate API
 
 API --> BARCODE** : create(barcodeNumber)

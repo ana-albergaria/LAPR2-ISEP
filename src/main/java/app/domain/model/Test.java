@@ -14,4 +14,9 @@ public class Test {
     public List<Sample> getSamples() {
         return samples;
     }
+
+    //Como mudar o estado do teste? Responsabilidade do test?
+    public boolean addSample(Sample sample) {
+        return this.samples.add(sample);
+    }
 }
