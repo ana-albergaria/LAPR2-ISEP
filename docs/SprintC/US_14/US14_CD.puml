@@ -23,6 +23,7 @@ class Report {
     - Report report
     + Report(reportText)
     + checkReportTextRules(reportText)
+    + countWords(reportText)
     + equals(reportObject)
     + create()
 }
