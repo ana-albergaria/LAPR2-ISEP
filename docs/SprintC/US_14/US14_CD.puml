@@ -4,6 +4,19 @@ hide empty attributes
 left to right direction
 skinparam classAttributeIconSize 0
 
+package Core {
+
+package Domain {
+
+package Model {
+
+class Company {
+    -String designation
+    -TestStore testStore
+    +getTestStore()
+    +createReport()
+}
+
 class Report {
     - int REPORTTEXT_MAX_LENGTH
     - String reportText
@@ -14,6 +27,16 @@ class Report {
     + create()
 }
 
+class Test {
+    -String NHSCode
+    -String code
+    +getCode()
+}
+
+}
+
+package Stores {
+
 class TestStore {
     -list<Test> testsReadyToDiagnose
     +getTestsReadyToDiagnose()
@@ -21,16 +44,20 @@ class TestStore {
     +addReport(selectedTest)
 }
 
-class Test {
-    -String NHSCode
-    -String code
-    +getCode()
 }
+
+}
+
+package Mappers {
 
 class TestMapper {
     +toDTO(listTestsToDiagnose)
     +toDTO(obj)
 }
+
+}
+
+package DTO {
 
 class TestDTO {
     -String NHSCode
@@ -39,12 +66,9 @@ class TestDTO {
     +getCode()
 }
 
-class Company {
-    -String designation
-    -TestStore testStore
-    +getTestStore()
-    +createReport()
 }
+
+package Controllers {
 
 class WriteReportController {
     -Company company
@@ -54,7 +78,15 @@ class WriteReportController {
     +addReport(testCode)
 }
 
+}
+
+}
+
+package UI {
+
 class WriteReportUI {
+}
+
 }
 
 WriteReportUI ..> WriteReportController
