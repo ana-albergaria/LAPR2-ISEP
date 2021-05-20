@@ -107,10 +107,10 @@ deactivate SAMPLE
 
 
 
-SAMPLE -> API : barcode = getBarCode()
+SAMPLE -> API : barcode = getBarCode(barcodeNumber)
 activate API
 
-API --> BARCODE** : create(String barcodeNumber)
+API --> BARCODE** : create(barcodeNumber)
 
 API --> SAMPLE : barcode
 deactivate SAMPLE

@@ -3,6 +3,7 @@
 skinparam classAttributeIconSize 0
 hide empty methods
 hide empty attributes
+left to right direction
 
 class MedicalLabTechnician{}
 
@@ -70,6 +71,7 @@ ExternalAPI -- Config : defined by >
 Test "*" -- "1" Client : requested by >
 Sample "*" - "1" ExternalAPI : makes use of >
 Company "1" --- "*" Sample : manages >
+Company "1" --- "*" Test : conducts >
 
 
 
