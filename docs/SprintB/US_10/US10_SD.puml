@@ -104,9 +104,9 @@ deactivate PRMSTORE
 
 
 CTRL --> UI: result
+deactivate CTRL
 
 UI --> ADM: shows all data and requests confirmation
-deactivate CTRL
 deactivate UI
 
 ADM -> UI : confirms the data

@@ -80,18 +80,18 @@ activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
 activate CMP
-
-CMP -> TSTSTORE : selectedTest = getTestByCode(testCode)
-activate TSTSTORE
 |||
-deactivate TSTSTORE
-
-CMP -> TSTSTORE : addReport(selectedTest)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-
 deactivate CMP
+
+CTRL -> TSTSTORE : selectedTest = getTestByCode(testCode)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL -> TSTSTORE : addReport(selectedTest)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
 
 CTRL --> UI : result
 deactivate CMP
