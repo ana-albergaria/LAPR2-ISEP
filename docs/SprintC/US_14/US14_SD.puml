@@ -7,8 +7,8 @@ participant ":WriteReportController" as CTRL
 participant ":Company" as CMP
 participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
-participant ":TestsMapper" as TSTMAPPER
-'participant "objDTO\n:TestsDTO" as OBJ_DTO
+participant ":TestMapper" as TSTMAPPER
+participant "objDTO\n:TestsDTO" as OBJ_DTO
 'participant "tst\n:Test" as TST
 participant "listTestsToDiagnose\n:List<Test>" as LT
 participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
@@ -35,7 +35,25 @@ deactivate TSTSTORE
 CTRL -> TSTMAPPER : listTestsToDiagnoseDTO = toDTO(listTestsToDiagnose)
 activate TSTMAPPER
 
+loop for each object in listTestsToDiagnose
 TSTMAPPER --> LIST_DTO** : create()
+TSTMAPPER -> LT : obj = get(i)
+activate LT
+|||
+deactivate LT
+
+TSTMAPPER -> TSTMAPPER : objDTO = toDTO(obj)
+activate TSTMAPPER
+|||
+deactivate TSTMAPPER
+
+TSTMAPPER --> OBJ_DTO** : create(NHSCode, code)
+
+TSTMAPPER --> LT : add(objDTO)
+activate LT
+|||
+deactivate LT
+end
 
 TSTMAPPER --> CTRL : listTestsToDiagnoseDTO
 deactivate TSTMAPPER
