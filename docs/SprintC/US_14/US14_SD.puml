@@ -8,15 +8,15 @@ participant ":Company" as CMP
 participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
 participant ":TestsMapper" as TSTMAPPER
-participant "objDTO\n:TestsDTO" as OBJ_DTO
-participant "tst\n:Test" as TST
-participant "lt\n:List<Test>" as LT
-participant "listTestDTO\n:List<TestDTO>" as LIST_DTO
+'participant "objDTO\n:TestsDTO" as OBJ_DTO
+'participant "tst\n:Test" as TST
+participant "listTestsToDiagnose\n:List<Test>" as LT
+participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
 
 activate SPDT
 SPDT -> UI : asks to make diagnosis
 activate UI
-UI -> CTRL : lt = getTests()
+UI -> CTRL : listTestsToDiagnoseDTO = getTestsToDiagnose()
 activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
@@ -24,13 +24,81 @@ activate CMP
 |||
 deactivate CMP
 
-CTRL -> TSTSTORE : lt = getTestsStore()
+CTRL -> TSTSTORE : listTestsToDiagnose = getTestsReadyToDiagnose()
 activate TSTSTORE
 
 TSTSTORE --> LT** : create()
-TSTSTORE --> CTRL : lt
+TSTSTORE --> CTRL : listTestsToDiagnose
+deactivate TSTSTORE
+|||
+
+CTRL -> TSTMAPPER : listTestsToDiagnoseDTO = toDTO(listTestsToDiagnose)
+activate TSTMAPPER
+
+TSTMAPPER --> LIST_DTO** : create()
+
+TSTMAPPER --> CTRL : listTestsToDiagnoseDTO
+deactivate TSTMAPPER
+
+CTRL --> UI : listTestsToDiagnoseDTO
+deactivate CTRL
+
+UI --> SPDT : shows list of tests ready to make a diagnosis and asks to selects one
+deactivate UI
+
+'spdt writes the test code in the UI
+'it uses the test code when adding the report
+
+SPDT -> UI : selects a test
+activate UI
+
+UI --> SPDT : requests data(i.e., report)
+deactivate UI
+
+SPDT -> UI : types requested data
+activate UI
+
+UI -> CTRL : createReport()
+activate CTRL
+
+CTRL -> CMP : report = createReport()
+activate CMP
+
+CMP --> RPT** : create()
+deactivate CMP
+
+CTRL --> UI : result
+deactivate CTRL
+UI --> SPDT : shows the data and requests a confirmation
+deactivate UI
+
+SPDT -> UI : confirms the data
+activate UI
+
+UI -> CTRL : addReport(testCode)
+activate CTRL
+
+CTRL -> CMP : tstStore = getTestStore()
+activate CMP
+
+CMP -> TSTSTORE : selectedTest = getTestByCode(testCode)
+activate TSTSTORE
+|||
 deactivate TSTSTORE
 
+CMP -> TSTSTORE : addReport(selectedTest)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
 
+deactivate CMP
+
+CTRL --> UI : result
+deactivate CMP
+deactivate CTRL
+
+UI --> SPDT : informs operation success
+deactivate UI
+deactivate SPDT
 
 @enduml
