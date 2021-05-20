@@ -1,0 +1,72 @@
+@startuml
+hide empty methods
+hide empty attributes
+left to right direction
+skinparam classAttributeIconSize 0
+
+class Report {
+    - int REPORTTEXT_MAX_LENGTH
+    - String reportText
+    - Report report
+    + Report(reportText)
+    + checkReportTextRules(reportText)
+    + equals(reportObject)
+    + create()
+}
+
+class TestStore {
+    -list<Test> testsReadyToDiagnose
+    +getTestsReadyToDiagnose()
+    +getTestByCode(code)
+    +addReport(selectedTest)
+}
+
+class Test {
+    -String NHSCode
+    -String code
+    +getCode()
+}
+
+class TestMapper {
+    +toDTO(listTestsToDiagnose)
+    +toDTO(obj)
+}
+
+class TestDTO {
+    -String NHSCode
+    -String code
+    +create(NHSCode, code)
+    +getCode()
+}
+
+class Company {
+    -String designation
+    -TestStore testStore
+    +getTestStore()
+    +createReport()
+}
+
+class WriteReportController {
+    -Company company
+    -Report report
+    +getTeststoDiagnose()
+    +createReport()
+    +addReport(testCode)
+}
+
+class WriteReportUI {
+}
+
+WriteReportUI ..> WriteReportController
+WriteReportUI ..> TestDTO
+WriteReportController ..> TestMapper
+WriteReportController ..> Company
+WriteReportController ..> TestStore
+WriteReportController ..> TestDTO
+TestStore "1" -> "*" Test : adopts >
+Company "1" --> "*" Report : knows >
+Report "1" --> "1" Test : is of >
+TestMapper ..> Test
+TestMapper ..> TestDTO
+
+@enduml

@@ -9,9 +9,9 @@ participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
 participant ":TestMapper" as TSTMAPPER
 participant "objDTO\n:TestsDTO" as OBJ_DTO
-'participant "tst\n:Test" as TST
 participant "listTestsToDiagnose\n:List<Test>" as LT
 participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
+participant "tst\n:Test" as TST
 
 activate SPDT
 SPDT -> UI : asks to make diagnosis
@@ -93,7 +93,7 @@ deactivate UI
 SPDT -> UI : confirms the data
 activate UI
 
-UI -> CTRL : addReport(testCode)
+UI -> CTRL : addReport(code)
 activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
@@ -101,7 +101,7 @@ activate CMP
 |||
 deactivate CMP
 
-CTRL -> TSTSTORE : selectedTest = getTestByCode(testCode)
+CTRL -> TSTSTORE : selectedTest = getTestByCode(code)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
