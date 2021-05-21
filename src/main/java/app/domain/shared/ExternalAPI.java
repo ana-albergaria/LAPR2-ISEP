@@ -1,8 +1,13 @@
 package app.domain.shared;
 
-import net.sourceforge.barbecue.Barcode;
+import app.domain.model.MyBarcode;
 import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.output.OutputException;
+
+import java.io.IOException;
 
 public interface ExternalAPI {
-    public abstract Barcode getBarcode(String barcodeNumber) throws BarcodeException;
+    public abstract MyBarcode getBarcode(String barcodeNumber) throws BarcodeException;
+
+    public abstract void saveImageBarcode(MyBarcode myBarcode) throws IOException, OutputException;
 }

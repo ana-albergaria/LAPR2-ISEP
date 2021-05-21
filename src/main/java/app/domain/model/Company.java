@@ -68,6 +68,8 @@ public class Company {
         this.roles.add(r4);
         this.roles.add(r5);
         this.roles.add(r6);
+        this.sampleStore = new SampleStore();
+
     }
 
     public String getDesignation() {
