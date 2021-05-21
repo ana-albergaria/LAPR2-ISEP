@@ -14,8 +14,9 @@ participant "listTestsToDiagnose\n:List<Test>" as LT
 participant "tst\n:Test" as TST
 
 activate SPDT
-SPDT -> UI : asks to make diagnosis
+SPDT -> UI : asks to make diagnosis and write a report
 activate UI
+loop while the specialist doctor wants to make a diagnosis and write a report for one more test
 UI -> CTRL : listTestsToDiagnoseDTO = getTestsToDiagnose()
 activate CTRL
 
@@ -52,7 +53,7 @@ deactivate UI
 SPDT -> UI : selects a test
 activate UI
 
-UI --> SPDT : requests data(i.e., report)
+UI --> SPDT : shows chemical results and reference values of the selected test and requests data(i.e., reportText)
 deactivate UI
 
 SPDT -> UI : types requested data
@@ -96,6 +97,8 @@ deactivate TSTSTORE
 CTRL --> UI : result
 deactivate CMP
 deactivate CTRL
+
+end
 
 UI --> SPDT : informs operation success
 deactivate UI
