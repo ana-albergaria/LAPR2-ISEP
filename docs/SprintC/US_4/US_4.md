@@ -57,9 +57,8 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 
 ### 1.6. System Sequence Diagram (SSD)
 
-*Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
 
-![USXX-SSD](USXX-SSD.svg)
+![US4-SSD](US4_SSD.svg)
 
 
 ### 1.7 Other Relevant Remarks
@@ -70,9 +69,8 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 ## 2. OO Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
 
-![USXX-MD](USXX-MD.svg)
+![US4-MD](US4_DM.svg)
 
 ### 2.2. Other Remarks
 
@@ -88,24 +86,41 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |              
-
+| Step 1: Asks to register a test to be performed to a registered client               |	...Instantiating a new Test?                                           | TestStore       | Creator: R1|
+| Step 2: requests data (CitizenCardNumber, NHScode) and shows test types to select one| ...knowing the types of test to show?                                   | TestTypeStore   | IE: The test type store knows its test types|
+|                                                                                      | ...Creating a test type dto                                             | TestTypeMapper  | LC: Pass a DTO to reduce coupling between layers|
+| Step 3: Types requested data and selects test type                                   |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+|                                                                                      |... Getting client to be associated from citizen card number           | ClientStore     | IE: The client store knows it's clients citizen card numbers.|
+| Step 4:  shows category(ies) associated with test type request to select one       | ...knowing which category(ies) to be shown?                             | TestType        | IE: The test type selected in step 3 has it's category of parameters|              
+| Step 5: Selects parameter                                                          |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+| Step 4: shows all parameters associated selected category                          | ...knowing which category of parameters to be shown?                    | TestType        | IE: The test type selected in step 5 has it's category of parameters|              
+|                                                                                    | ...knowing the parameters to show?                                      | ParameterStore  | IE: The parameter store knows its parameters|
+|                                                                                    | ...Creating a parameters dto	                                           | ParameterMapper | LC: Pass a DTO to reduce coupling between layers|
+| Step 5: Selects parameter                                                          |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+| Step 6: Shows Test data and requests confirmation                                  |... validating the data locally (e.g.: mandatory vs. non-mandatory data)?| Test            | IE: Knows its own data.|              
+|                                                                                    |... validating the data globally (e.g.: duplicated)?				       | TestStore       | IE: Knows all Test objects.|      
+| Step 7:  confirms the data                                                         |... saving the created test?				                               | TestStore       | IE: Records/adopts all the Test objects.|
+| Step 8: Informs operation success                                                 |... informing operation success?				                           | TestUI          | IE: responsible for user interaction                 |              
+  
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+* Test
+* TestType
+* Parameter
+* Client
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+* TestTypeStore
+* ClientStore
+* TestStore
+* ParameterStore
+* TestTypeDTO
+* ParameterDTO
+* TestTypeMapper
+* ParameterMapper
+* TestUI
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -117,7 +132,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 *In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
-![USXX-CD](USXX-CD.svg)
+![US4-CD](US4_CD.svg)
 
 # 4. Tests 
 *In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 

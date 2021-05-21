@@ -11,8 +11,8 @@ participant "testStore\n:TestStore" as TEST_STORE
 participant "selectedTest\n:Test" as SELECTED_TEST
 participant "sampleStore\n:SampleStore" as SAMPLE_STORE
 participant ":TestMapper" as TEST_MAPPER
-participant "listTestsNoSamples\n:List<TestType>" as LIST_TESTS_NO_SAMPLES
-participant "listTestsNoSamplesDto\n:List<TestTypeDto>" as LIST_TESTS_NO_SAMPLES_DTO
+participant "listTestsNoSamples\n:List<Test>" as LIST_TESTS_NO_SAMPLES
+participant "listTestsNoSamplesDto\n:List<TestDto>" as LIST_TESTS_NO_SAMPLES_DTO
 participant "sample\n:Sample" as SAMPLE
 participant "api\n:ExternalAPI" as API
 participant "barcode\n:Barcode" as BARCODE
@@ -107,7 +107,7 @@ deactivate SAMPLE
 
 
 
-SAMPLE -> API : barcode = getBarCode(barcodeNumber)
+SAMPLE -> API : barcode = getBarcode(barcodeNumber)
 activate API
 
 API --> BARCODE** : create(barcodeNumber)
@@ -168,9 +168,9 @@ CTRL -> TEST_STORE : selectedTest = getTestByCode(code)
 activate TEST_STORE
 deactivate TEST_STORE
 
-CTRL -> TEST_STORE : addSample(selectedTest)
-activate TEST_STORE
-deactivate TEST_STORE
+CTRL -> SELECTED_TEST : addSample(sample)
+activate SELECTED_TEST
+deactivate SELECTED_TEST
 
 
 /'dentro do método addSample, vai-se verificar se a sample já está lá?'/
