@@ -7,10 +7,10 @@ participant ":CreateTestUI  " as UI
 participant ":CreateTestController" as CTRL
 participant ":Company" as PLAT
 participant "store:TestType" as TEST_TYPE_STORE
+participant "store:Parameter" as PARAM_STORE
 participant ": TestTypeMapper" as TT_MAPPER
-participant "objDto\n: TestTypeDto" as TT_DTO
+participant ": CategoryMapper" as PC_MAPPER
 participant ": ParameterMapper" as PARAM_MAPPER
-participant "objDto\n: ParameterDto" as PARAM_DTO
 /'participant ":Platform" as PLAT'/
 participant "store:TestStore" as ORG
 participant "tt\n:Test" as TAREFA
@@ -18,6 +18,14 @@ participant "tt\n:Test" as TAREFA
 
 activate ADM
 ADM -> UI : Asks to register a test to be performed to a registered client
+activate UI
+
+
+UI --> ADM : requests data (CitizenCardNumber, NHScode)
+deactivate UI
+
+
+ADM -> UI : types requested data
 activate UI
 UI -> CTRL : testTypesList = getTestTypes()
 activate CTRL
@@ -39,16 +47,78 @@ deactivate TT_MAPPER
 
 CTRL --> UI : testTypesListDto
 deactivate CTRL
+UI -> ADM : shows test types and request to select one
+deactivate UI
 
-UI --> ADM : requests data (CitizenCardNumber, NHScode) \n and shows test types to select one
+ADM -> UI : selects requested data
+activate UI
+
+UI -> CTRL : parameters = getParametersListOfTestType(selectedTestTypeCode)
+activate CTRL
+CTRL -> PLAT : testTypeStore = getTestTypeStore()
+activate PLAT
+|||
+deactivate PLAT
+
+CTRL -> TEST_TYPE_STORE : ttCategoriesList = getCategoriesByTestTypeCode(selectedTestTypeCode)
+activate TEST_TYPE_STORE
+deactivate TEST_TYPE_STORE
+
+
+
+CTRL -> PC_MAPPER : toDTO(ttCategoriesList)
+activate PC_MAPPER
+PC_MAPPER --> CTRL : testTypesListDto
+deactivate PC_MAPPER
+
+
+CTRL --> UI : ttCategoriesListDto
+deactivate CTRL
+
+loop while user adds categories
+UI --> ADM : shows available categories and request to select one
+deactivate PLAT
 deactivate UI
 
 
-ADM -> UI : types requested data and selects test type
+ADM -> UI : selects requested data
 activate UI
-UI -> CTRL : createTest(citizenCardNumber, NHScode,selectedTestTypeCode)
-activate CTRL
+end
 
+UI -> CTRL : parameters = getParametersOfCategories(selectedCategoriesCodes)
+activate CTRL
+CTRL -> PLAT : parameterStore = getParameterStore()
+activate PLAT
+|||
+deactivate PLAT
+
+CTRL -> PARAM_STORE : filteredParamsList = getCategoriesByCategories(selectedCategoriesCodes)
+activate PARAM_STORE
+deactivate PARAM_STORE
+
+
+
+CTRL -> PARAM_MAPPER : toDTO(filteredParamsList)
+activate PARAM_MAPPER
+PARAM_MAPPER --> CTRL : filteredParamsList
+deactivate PARAM_MAPPER
+
+
+CTRL --> UI : filteredParamsList
+deactivate CTRL
+
+loop while user adds parameters
+UI --> ADM : shows available parameters and request to select one
+deactivate PLAT
+deactivate UI
+
+
+ADM -> UI : selects requested data
+activate UI
+end
+
+UI -> CTRL : createTest(NHScode, citizenCardNumber,\n selectedTestTypeCode, selectedParamCodes)
+activate CTRL
 CTRL -> PLAT : testTypeStore = getTestTypeStore()
 activate PLAT
 |||
@@ -56,105 +126,59 @@ deactivate PLAT
 
 CTRL -> TEST_TYPE_STORE : selectedTestType = getTestTypeByCode(selectedTestTypeCode)
 activate TEST_TYPE_STORE
-|||
 deactivate TEST_TYPE_STORE
 
-
-CTRL -> PLAT : TestStore = getTestStore()
-activate PLAT
-|||
-deactivate PLAT
-CTRL -> ORG: test = createTest(code, description, collectingMethod, selectedCategoriesList)
-activate ORG
-
-ORG --> TAREFA**: create(code, description, collectingMethod, selectedCategoriesList)
-deactivate ORG
-CTRL -> ORG: validateTestType(testType)
-activate ORG
-deactivate ORG
-CTRL --> UI: result
-
-UI --> ADM: show test type data and requests confirmation
-deactivate ORG
-deactivate PLAT
-deactivate CTRL
-
-UI -> ADM : shows all parameters associated with tt category \n and request to select one
-deactivate UI
-
-ADM -> UI : selects requested data
-activate UI
-
-UI -> CTRL : parameters = getParametersList()
-activate CTRL
-CTRL -> CTRL : testTypeCategories = getSelectedTestTypeCategories
-CTRL -> PLAT : testTypeStore = getTestTypeStore()
+CTRL -> PLAT : parameterStore = getParameterStore()
 activate PLAT
 |||
 deactivate PLAT
 
-CTRL -> TEST_TYPE_STORE : testTypesList = getTestTypes()
-activate TEST_TYPE_STORE
-deactivate TEST_TYPE_STORE
+CTRL -> PARAM_STORE : selectedParamsList = getParamsByCodes(selectedParamCodes)
+activate PARAM_STORE
+deactivate PARAM_STORE
 
 
-CTRL -> TT_MAPPER : toDTO(testTypesList)
-activate TT_MAPPER
-TT_MAPPER --> CTRL : testTypesListDto
-deactivate TT_MAPPER
-
-
-CTRL --> UI : testTypesListDto
-deactivate CTRL
-
-UI --> ADM : shows available test types and request to select one
-deactivate PLAT
-deactivate UI
-
-
-ADM -> UI : selects requested data
-activate UI
-UI -> CTRL : createTestType(code, description, collectingMethod, selectedCategoriesCodes)
-activate CTRL
-
-
-loop For each selected categorie code
-CTRL -> TEST_TYPE_STORE : selectedCategoriesList = getCategoriesByCode(selectedCategoriesCodes)
-activate TEST_TYPE_STORE
-|||
-deactivate TEST_TYPE_STORE
-end
-
-CTRL -> PLAT : TestTypeStore = getTestTypeStore()
+CTRL -> PLAT : testStore = getTestStore()
 activate PLAT
 |||
 deactivate PLAT
-CTRL -> ORG: testType = createTestType(code, description, collectingMethod, selectedCategoriesList)
-activate ORG
 
-ORG --> TAREFA**: create(code, description, collectingMethod, selectedCategoriesList)
+CTRL -> ORG : test = createTest(NHScode, citizenCardNumber,\n selectedTestType, selectedParamsList)
+activate ORG
+ORG -> TAREFA* : createTest(NHScode, citizenCardNumber,\n selectedTestType, selectedParamsList)
 deactivate ORG
-CTRL -> ORG: validateTestType(testType)
+
+TAREFA -> TAREFA : checkAttributes(NHScode, citizenCardNumber)
+activate TAREFA
+deactivate TAREFA
+
+CTRL -> ORG : result = validateTest(test)
 activate ORG
 deactivate ORG
-CTRL --> UI: result
 
-UI --> ADM: show test type data and requests confirmation
-deactivate ORG
-deactivate PLAT
+
+
+CTRL --> UI : result
 deactivate CTRL
+UI --> ADM : shows Test data and requests confirmation
+deactivate PLAT
 deactivate UI
+
 
 ADM -> UI : confirms the data
 activate UI
-UI -> CTRL : saveTestType()
+UI -> CTRL : saveTest()
 activate CTRL
+CTRL -> PLAT : testStore = getTestStore()
+activate PLAT
+|||
+deactivate PLAT
 
-CTRL -> ORG : saveTestType(testType)
+CTRL -> ORG : saveTest(test)
 activate ORG
 
-ORG -> ORG: validateTestType(testType)
-ORG -> ORG: addTestType(testType)
+ORG -> ORG: validateTest(test)
+ORG -> ORG: addTest(test)
 
 CTRL --> UI: result
 
