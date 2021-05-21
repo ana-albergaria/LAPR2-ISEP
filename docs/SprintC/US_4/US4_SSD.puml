@@ -6,19 +6,25 @@ actor "Receptionist" as MLT
 activate MLT
 MLT -> ":System" : asks to register a test to be performed to a registered client
 activate ":System"
-":System" --> MLT :requests data (CitizenCardNumber, NHScode) \n and shows test types to select one
+":System" --> MLT :requests data (CitizenCardNumber, NHScode)
 deactivate ":System"
 
-MLT -> ":System" : sypes requested data and selects test type
+MLT -> ":System" : types requested data
 activate ":System"
+":System" --> MLT : shows test types and requests to select one
+deactivate ":System"
+MLT -> ":System" : selects test type
 
-":System" --> MLT : shows category(ies) associated with test type request to select one
+activate ":System"
+loop while user adds categories
+":System" --> MLT : shows categories associated with test type request to select one
 deactivate ":System"
 MLT -> ":System" : selects category
 activate ":System"
+end
 
 loop while user adds parameters
-":System" --> MLT : shows all parameters associated selected category
+":System" --> MLT : shows all parameters associated selected categories
 deactivate ":System"
 MLT -> ":System" : selects parameter
 activate ":System"

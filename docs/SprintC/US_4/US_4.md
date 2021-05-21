@@ -32,6 +32,13 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
     NHS code: 12 alphanumeric characters.
 >
 >Q2 Link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8181).
+>
+>Q3:When the receptionist is registering a test for a client, the test can have more than one category and many parameters of the chosen categories or it only can have one category?
+>
+>A3: Each test can have more than one category.
+>
+>Q3 Link [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8522).
+
 
 
 ### 1.3. Acceptance Criteria
@@ -87,20 +94,22 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: Asks to register a test to be performed to a registered client               |	...Instantiating a new Test?                                           | TestStore       | Creator: R1|
-| Step 2: requests data (CitizenCardNumber, NHScode) and shows test types to select one| ...knowing the types of test to show?                                   | TestTypeStore   | IE: The test type store knows its test types|
-|                                                                                      | ...Creating a test type dto                                             | TestTypeMapper  | LC: Pass a DTO to reduce coupling between layers|
-| Step 3: Types requested data and selects test type                                   |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+| Step 2: requests data (CitizenCardNumber, NHScode)                                   |  n/a                                                                    |                           |               |
+| Step 3: Types requested data                                                         |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
 |                                                                                      |... Getting client to be associated from citizen card number           | ClientStore     | IE: The client store knows it's clients citizen card numbers.|
-| Step 4:  shows category(ies) associated with test type request to select one       | ...knowing which category(ies) to be shown?                             | TestType        | IE: The test type selected in step 3 has it's category of parameters|              
-| Step 5: Selects parameter                                                          |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
-| Step 4: shows all parameters associated selected category                          | ...knowing which category of parameters to be shown?                    | TestType        | IE: The test type selected in step 5 has it's category of parameters|              
+| Step 4: shows test types and request to select one                                   | ...knowing the types of test to show?                                 | TestTypeStore   | IE: The test type store knows its test types|
+|                                                                                      | ...Creating a test type dto                                           | TestTypeMapper  | LC: Pass a DTO to reduce coupling between layers|
+| Step 5: selects test type                                                            |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+| Step 6: shows categories associated with test type request to select one           | ...knowing which categories to be shown?                             | TestType        | IE: The test type selected in step 5 has it's category of parameters|              
+| Step 7: Selects category                                                            |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+| Step 8: shows all parameters associated selected category                          | ...knowing which category of parameters to be shown?                    | TestType        | IE: The test type selected in step 5 has it's category of parameters|              
 |                                                                                    | ...knowing the parameters to show?                                      | ParameterStore  | IE: The parameter store knows its parameters|
 |                                                                                    | ...Creating a parameters dto	                                           | ParameterMapper | LC: Pass a DTO to reduce coupling between layers|
-| Step 5: Selects parameter                                                          |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
-| Step 6: Shows Test data and requests confirmation                                  |... validating the data locally (e.g.: mandatory vs. non-mandatory data)?| Test            | IE: Knows its own data.|              
+| Step 9: Selects parameter                                                          |... Saving input data?	                                               | Test            | IE: The object created in step 1 has its own data.|
+| Step 10: Shows Test data and requests confirmation                                  |... validating the data locally (e.g.: mandatory vs. non-mandatory data)?| Test            | IE: Knows its own data.|              
 |                                                                                    |... validating the data globally (e.g.: duplicated)?				       | TestStore       | IE: Knows all Test objects.|      
-| Step 7:  confirms the data                                                         |... saving the created test?				                               | TestStore       | IE: Records/adopts all the Test objects.|
-| Step 8: Informs operation success                                                 |... informing operation success?				                           | TestUI          | IE: responsible for user interaction                 |              
+| Step 11: confirms the data                                                         |... saving the created test?				                               | TestStore       | IE: Records/adopts all the Test objects.|
+| Step 12: Informs operation success                                                 |... informing operation success?				                           | TestUI          | IE: responsible for user interaction                 |              
   
 ### Systematization ##
 
@@ -126,7 +135,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 *In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
 
-![USXX-SD](USXX-SD.svg)
+![US4-SD](US4_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
