@@ -7,16 +7,35 @@ import app.domain.store.TestStore;
 
 import java.util.List;
 
+/**
+ * Controller class for making a diagnosis and writing a report for a given test.
+ *
+ * @author Marta Ribeiro 1201592
+ */
 public class WriteReportController {
 
+    /**
+     * The company associated to the Controller.
+     */
     private Company company;
 
+    /**
+     * The report associated to the controller.
+     */
     private Report report;
 
+    /**
+     * Builds an empty constructor for having the actual instance of the company when instantiated.
+     */
     public WriteReportController(){
         this(App.getInstance().getCompany());
     }
 
+    /**
+     * Builds a Report Controller's instance receiving the company.
+     *
+     * @param company company associated to the Controller.
+     */
     public WriteReportController(Company company){
         this.company = company;
         this.report = null;
@@ -27,10 +46,17 @@ public class WriteReportController {
         return
     }*/
 
+    /**
+     * Retrieves actual tests to diagnose list.
+     *
+     * @return tests to diagnose list.
+     */
     public List<Test> getTestsToDiagnose(){
         TestStore testStore = this.company.getTestStore();
         List<Test> testsToDiagnose = testStore.getTestsReadyToDiagnose();
         return  testsToDiagnose;
     }
+
+    //+getListDTO
 
 }
