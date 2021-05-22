@@ -1,38 +1,29 @@
 package app.domain.model;
 
-import app.domain.shared.ExternalAPI;
-import net.sourceforge.barbecue.BarcodeException;
+
 
 public class Sample {
-    private Barcode barcode;
-
+    //private MyBarcode barcode;
+    private String barcodeNumber;
+    private static int totalSamples = 0;
 
     public Sample() {
-        //this.barcode = getBarcode();
-    }
-
-    public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        //no parâmetro do Class.forName, vai ser colocada a String retirada da leitura do ficheiro de configuração
-        Class<?> oClass = Class.forName("app.domain.shared.BarbecueAdapter");
-
-        return (ExternalAPI) oClass.newInstance();
+        //this.barcode = barcode;
+        this.barcodeNumber = generateBarcodeNumber();
+        totalSamples++;
     }
 
     /*
-    public Barcode getBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, BarcodeException {
-        ExternalAPI api = getExternalAPI();
-
-        String barcodeNumber = "";
-
-        net.sourceforge.barbecue.Barcode barcode = api.getBarcode(barcodeNumber);
-
+    public MyBarcode getMyBarcode() {
         return barcode;
-
     }
-
      */
 
+    public String getBarcodeNumber() {
+        return barcodeNumber;
+    }
 
-
-
+    public String generateBarcodeNumber() {
+        return String.format("%12d", totalSamples);
+    }
 }
