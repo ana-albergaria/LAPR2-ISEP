@@ -173,18 +173,21 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US014_CD](US014_CD.svg)
 
 # 4. Tests
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.*
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+Tests 1 to 3 follow this model:
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values.
+    @Test(expected = IllegalArgumentException.class)
+    public void testName(){
+        Report report = new Report(reportText);
+    }
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+The only changes are the testName and the attributes of the Report.
 
-*It is also recommended to organize this content by subsections.*
+**Test 1:** Check that it is not possible to create an instance of the Report class with null report text.
+
+**Test 2:** Check that it is not possible to create an instance of the Report class with empty report text.
+
+**Test 3:** Check that it is not possible to create an instance of the Report class with report text with more than 400 words.
 
 # 5. Construction (Implementation)
 
