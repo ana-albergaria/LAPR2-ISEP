@@ -75,6 +75,18 @@ public class Parameter {
         return parameterCode;
     }
 
+    public String getShortName() {
+        return shortName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ParameterCategory getPc() {
+        return pc;
+    }
+
     /**
      * Returns the textual description of the parameter instance.
      *

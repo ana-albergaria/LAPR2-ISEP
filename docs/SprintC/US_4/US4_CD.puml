@@ -48,9 +48,6 @@ package Domain <<Folder>> {
     }
     package Stores <<Folder>> {
         class ParameterStore {
-            +getParameterCategoriesStore()
-            +getCategoriesByCode(List<String> ParameterCodes)
-            +getCategoryByCode(String code)
             +getParamsByCategories(List<String> selectedCategoriesCodes)
             +getParamsByCategory(String category)
         }
