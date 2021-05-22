@@ -75,6 +75,14 @@ public class ClientStore {
         return this.clientList.add(cl);
     }
 
+    public Client getClientByCitizenCardNum(String citizenCardNum){
+        for (Client client : clientList){
+            if(client.getClientsCitizenCardNumber().equals(citizenCardNum)){
+                return client;
+            }
+        }
+        throw new UnsupportedOperationException("There are no client registered with given citizen card number: " + citizenCardNum);
+    }
 
     public List<Client> getClients() {
         return new ArrayList<>(clientList);

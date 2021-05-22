@@ -64,6 +64,23 @@ public class ParameterStore {
         return this.prmList.add(prm);
     }
 
+    public List<Parameter> getParamsByCodes(List<String> selectedParamCodes){
+        List<Parameter> selectedParameters = new ArrayList<>();
+        for (String item : selectedParamCodes) {
+            selectedParameters.add(getParamBycode(item));
+        }
+        return selectedParameters;
+    }
+
+    private Parameter getParamBycode(String paramCode) {
+        for (Parameter param : prmList) {
+            if (param.getPrmCode().equalsIgnoreCase(paramCode)) {
+                return param;
+            }
+        }
+        throw new UnsupportedOperationException("There are no parameters with given code: " + paramCode);
+    }
+
     public List<Parameter> getParamsByCategories(List<String> selectedCategoriesCodes){
         List<Parameter> selectedParameters = new ArrayList<>();
         for (String item : selectedCategoriesCodes) {

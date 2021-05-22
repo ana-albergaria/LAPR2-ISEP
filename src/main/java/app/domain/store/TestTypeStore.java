@@ -80,7 +80,7 @@ public class TestTypeStore {
      * @param code code of test type to be retrieved
      * @return test type reference
      */
-    private TestType getSingleTestTypeByCode(String code) {
+    public TestType getSingleTestTypeByCode(String code) {
         for (TestType tt : testTypeList) {
             if (tt.getCode().equalsIgnoreCase(code)) {
                 return tt;

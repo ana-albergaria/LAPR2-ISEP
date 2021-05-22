@@ -39,7 +39,7 @@ public class TestStore {
      * @param test test to be validated
      * @return true for success and false for fail
      */
-    public boolean validateTestType(Test test) {
+    public boolean validateTest(Test test) {
         if (test == null)
             return false;
         return !this.testList.contains(test);
@@ -51,8 +51,8 @@ public class TestStore {
      * @param test test to be saved to the list
      * @return true for success and false for fail
      */
-    public boolean saveTestType(Test test) {
-        if (!validateTestType(test))
+    public boolean saveTest(Test test) {
+        if (!validateTest(test))
             return false;
         return this.testList.add(test);
     }

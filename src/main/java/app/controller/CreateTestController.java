@@ -1,8 +1,18 @@
 package app.controller;
 
-import app.domain.model.Company;
-import app.domain.model.Test;
-import app.domain.model.TestType;
+import app.domain.model.*;
+import app.domain.store.ClientStore;
+import app.domain.store.ParameterStore;
+import app.domain.store.TestStore;
+import app.domain.store.TestTypeStore;
+import app.mappers.CategoriesMapper;
+import app.mappers.ParameterMapper;
+import app.mappers.TestTypeMapper;
+import app.mappers.dto.CategoriesDTO;
+import app.mappers.dto.ParameterDTO;
+import app.mappers.dto.TestTypeDTO;
+
+import java.util.List;
 
 /**
  * Controller for creating a new Test object
@@ -36,6 +46,98 @@ public class CreateTestController {
     public CreateTestController(Company company) {
         this.company = company;
         this.test = null;
+    }
+
+    /**
+     * Method for creating an instance of Test
+     * @param nhsCode National health system code of a given test
+     * @param citizenCardNumber client's citizen card number to be associated with test
+     * @param selectedTestTypeCode Type of test's code to be conduted
+     * @param selectedParamsCodes List of parameters codes to be measured of a given test
+     */
+    public boolean createTest(String nhsCode, String citizenCardNumber, String selectedTestTypeCode, List<String> selectedParamsCodes){
+        TestStore testStore = this.company.getTestStore();
+        ClientStore clientStore = this.company.getClientStore();
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        ParameterStore parameterStore = this.company.getParameterStore();
+
+        Client associatedClient = clientStore.getClientByCitizenCardNum(citizenCardNumber);
+        TestType testType = testTypeStore.getSingleTestTypeByCode(selectedTestTypeCode);
+        List<Parameter> parameters = parameterStore.getParamsByCodes(selectedParamsCodes);
+
+        this.test = testStore.createTest(nhsCode, associatedClient, testType, parameters);
+
+        return testStore.validateTest(test);
+    }
+
+    /**
+     * Saves current test in the test store
+     *
+     * @return True if successfully validated and saved false the otherway
+     */
+    public boolean saveTestType() {
+        TestStore testStore = this.company.getTestStore();
+        return testStore.saveTest(test);
+    }
+
+    /**
+     * Retrieves actual test types categories list
+     *
+     * @return test types list
+     */
+    public List<TestType> getTestTypes() {
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        return testTypeStore.getTestTypes();
+    }
+
+    /**
+     * Convert test types list into a DTO
+     *
+     * @return Test Types DTO list
+     */
+    public List<TestTypeDTO> getTestTypesDTO() {
+        TestTypeMapper mapper = new TestTypeMapper();
+        return mapper.toDTO(getTestTypes());
+    }
+
+    /**
+     * Retrieves parameter category list associated with a test type
+     *
+     * @return parameter category list
+     */
+    public List<ParameterCategory> getCategoriesListOfTestType(String selectedTestTypeCode) {
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        return testTypeStore.getCategoriesByTestTypeCode(selectedTestTypeCode);
+    }
+
+    /**
+     * Convert parameter categories list into a DTO
+     *
+     * @return Parameter category DTO list
+     */
+    public List<CategoriesDTO> getCategoriesListOfTestTypeDTO(String selectedTestTypeCode) {
+        CategoriesMapper mapper = new CategoriesMapper();
+        return mapper.toDTO(getCategoriesListOfTestType(selectedTestTypeCode));
+    }
+
+    /**
+     * Retrieves parameters of a category list
+     *
+     * @return parameters list
+     */
+    public List<Parameter> getParametersOfCategories(List<String> selectedCategoriesCodes) {
+        ParameterStore parameterStore = this.company.getParameterStore();
+        return parameterStore.getParamsByCategories(selectedCategoriesCodes);
+    }
+
+    /**
+     * Convert parameter list into a DTO
+     *
+     * @return Parameter DTO list
+     */
+    public List<ParameterDTO> getParametersOfCategoriesDTO(List<String> selectedCategoriesCodes) {
+        ParameterMapper mapper = new ParameterMapper();
+        return mapper.toDTO(getParametersOfCategories(selectedCategoriesCodes));
     }
 
 }
