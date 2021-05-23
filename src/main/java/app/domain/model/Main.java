@@ -21,6 +21,10 @@ public class Main {
 
         ctrl.saveImageBarcode();
 
+        boolean success1 = ctrl.createSample();
+
+        ctrl.saveImageBarcode();
+
 
 
 

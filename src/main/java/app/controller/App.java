@@ -78,7 +78,7 @@ public class App {
     //ACRESCENTEI
     public String getBarcodeClassNameConfig() {
         Properties props = getProperties();
-        String className = props.getProperty("name");
+        String className = props.getProperty("Company.ExternalAPI.Class");
         return className;
     }
 

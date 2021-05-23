@@ -11,52 +11,67 @@ package UI <<Folder>> {
 
 package Domain <<Folder>> {
     package Model <<Folder>> {
+
         class TestType {
         - code : String
         - description : String
         - collectingMethod : String
-        +TestType(code, description, collectingMethod, selectedCategoriesCodes)
         }
 
         class Test{
-        - NHSCode: String
-        - code: String
+            - NHSCode: String
+            - code: String
         }
 
         class Sample{
-        - barCode
+            - barCode
         }
 
-        class Parameter{
-        - name
-        - code
+        class Parameter {
+          -code
+          -shortName
+          -description
         }
 
         class Company {
-        -designation : String
-        +getTestTypeStore()
-        +getParameterStore()
+            -designation : String
+            +getTestTypeStore()
+            +getParameterStore()
+            +getTestStore()
         }
 
+        class ParameterCategory{
+            -code
+            -name
+        }
+        class Client{
+        - name
+        - citizenCardNum
+        - nhsNum
+        - birthDate
+        - sex
+        - taxIdNum
+        - phoneNum
+        - email
+        }
 
     }
     package Stores <<Folder>> {
         class ParameterStore {
-        +getParameterCategoriesStore()
-        +getCategoriesByCode(List<String> ParameterCodes)
-        +getCategoryByCode(String code)
+            +getParamsByCategories(List<String> selectedCategoriesCodes)
+            +getParamsByCategory(String category)
         }
 
         class TestTypeStore {
-        +createTestType(code, description, collectingMethod, selectedCategoriesCodes)
-        +validateTestType(tt)
-        +saveTestType(tt)
-        }
+               +getTestTypes()
+               +getTestTypeByCode(String code)
+               +getCategoriesByTestTypeCode(String selectedTestTypeCode)
+            }
 
         class TestStore {
-        +createTestType(code, description, collectingMethod, selectedCategoriesCodes)
-        +validateTestType(tt)
-        +saveTestType(tt)
+            +createTest(String NHScode, Client associatedClient,\n TestType selectedTestType, List<Parameter>selectedParamsList)
+            +validateTest(test)
+            +saveTest(test)
         }
 
     }
@@ -64,54 +79,72 @@ package Domain <<Folder>> {
 
 package Controller <<Folder>>{
     class CreateTestControler{
-    +createTestType(code, description, collectingMethod, selectedCategoriesCodes)
-    +saveTestType(tt)
-    +getCategories()
+    +createTest(NHScode, citizenCardNumber,selectedTestTypeCode, selectedParamCodes)
+    +saveTest(test)
+    +getTestTypes() : TestTypeDTO
+    +getCategoriesListOfTestType(selectedTestTypeCode): CategoriesDTO
+    +getParametersOfCategories(selectedCategoriesCodes): ParametersDTO
     }
 }
 
 package DTO <<Folder>>{
     class TestTypeDTO {
     -code
-    -name
-    +CategoryDto(code, description, collectingMethod, selectedCategories)
+    -description
+    -collectingMethod
+    -List<Category> selectedCategories
+    +TestTypeDTO(code, description, collectingMethod, selectedCategories)
     }
 
     class CategoryDto {
     -code
     -name
-    +CategoryDto(code, description, collectingMethod, selectedCategories)
+    +CategoryDto(code, name)
+    }
+
+    class ParameterDTO {
+    -code
+    -shortName
+    -description
+    -ParameterCategory
+    +ParameterDTO(code, shortName, description, ParameterCategory)'
     }
 
 }
 
 package Mappers <<Folder>>{
     class TestTypeMapper {
-    +List<CategoryDtoDto> toDTO(List<Parameter> parameterCategories)
-    +CategoryDto toDTO(Parameter tt)
+        +List<TestTypeDTO> toDTO(List<TestType> testTypes)
+        +TestTypeDTO toDTO(TestType tt)
     }
-
-
-    class CategoryMapper {
-    +List<CategoryDtoDto> toDTO(List<Parameter> parameterCategories)
-    +CategoryDto toDTO(Parameter tt)
+    class CategoryMapper{
+        +List<CategoryDto> toDTO(List<Category> parameterCategories)
+        +CategoryDto toDTO(Category category)
+    }
+    class ParameterMapper {
+        +List<ParameterDTO> toDTO(List<Parameter> parameters)
+        +ParameterDTO toDTO(Parameter parameter)
     }
 
 }
 
-
-
+Client -[hidden]-|> Test
 
 CreateTestUI ..> CreateTestControler
 CreateTestUI ..> CategoryDto
+CreateTestUI ..> ParameterDTO
 CreateTestUI ..> TestTypeDTO
 CategoryMapper ..> CategoryDto
-CategoryMapper ..> Parameter
+CategoryMapper ..> ParameterCategory
+ParameterMapper ..> ParameterDTO
+ParameterMapper ..> Parameter
 TestTypeMapper ..> TestTypeDTO
 TestTypeMapper ..> TestType
 CreateTestControler ..> Company
 CreateTestControler ..> CategoryMapper
 CreateTestControler ..> CategoryDto
+CreateTestControler ..> ParameterMapper
+CreateTestControler ..> ParameterDTO
 CreateTestControler ..> TestTypeMapper
 CreateTestControler ..> TestTypeDTO
 CreateTestControler ..> ParameterStore
@@ -130,7 +163,9 @@ Company "1" -- "*" Parameter : capable of analysing >
 Test "*" -- "1" TestType : classified as >
 Test "*" -- "1..*" Parameter : requested analysis of >
 Test "1" -- "1..*" Sample : collects >
-
+Client "1" -- "1" Test : performs
+Parameter "*" -- "1" ParameterCategory: presented under >
+TestType "1" -- "1..*" ParameterCategory : characterized by >
 
 
 @enduml

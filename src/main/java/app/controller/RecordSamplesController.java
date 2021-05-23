@@ -52,29 +52,16 @@ public class RecordSamplesController {
     }
      */
 
-    public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        //no parâmetro do Class.forName, vai ser colocada a String retirada da leitura do ficheiro de configuração
-        String className = App.getInstance().getBarcodeClassNameConfig();
-
-        Class<?> oClass = Class.forName(className);
-
-        return (ExternalAPI) oClass.newInstance();
-    }
-
 
     public MyBarcode getBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, BarcodeException {
-        ExternalAPI api = getExternalAPI();
-
+        ExternalAPI api = this.company.getExternalAPI();
         String barcodeNumber = BarcodeUtils.generateBarcodeNumber();
-
         return api.getBarcode(barcodeNumber);
     }
 
     public void saveImageBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException, OutputException {
-        ExternalAPI api = getExternalAPI();
-
+        ExternalAPI api = this.company.getExternalAPI();
         MyBarcode myBarcode = this.sample.getMyBarcode();
-
         api.saveImageBarcode(myBarcode);
     }
 }

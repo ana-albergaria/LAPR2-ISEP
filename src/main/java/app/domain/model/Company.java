@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import app.controller.App;
+import app.domain.shared.ExternalAPI;
 import app.domain.store.*;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.EmployeeDTO;
@@ -40,7 +42,6 @@ public class Company {
     private List<Employee> empList;
     private List<OrgRole> roles;
 
-
     public Company(String designation)
     {
         if (StringUtils.isBlank(designation))
@@ -69,7 +70,6 @@ public class Company {
         this.roles.add(r5);
         this.roles.add(r6);
         this.sampleStore = new SampleStore();
-
     }
 
     public String getDesignation() {
@@ -306,6 +306,12 @@ public class Company {
 
     public Report createReport(String reportTest){
         return new Report(reportTest);
+    }
+
+    public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        String className = App.getInstance().getBarcodeClassNameConfig();
+        Class<?> oClass = Class.forName(className);
+        return (ExternalAPI) oClass.newInstance();
     }
 
 }

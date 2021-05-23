@@ -80,12 +80,22 @@ public class TestTypeStore {
      * @param code code of test type to be retrieved
      * @return test type reference
      */
-    private TestType getSingleTestTypeByCode(String code) {
+    public TestType getSingleTestTypeByCode(String code) {
         for (TestType tt : testTypeList) {
             if (tt.getCode().equalsIgnoreCase(code)) {
                 return tt;
             }
         }
         throw new UnsupportedOperationException("Test Type not found with given code: " + code);
+    }
+
+    /**
+     * Method for getting the list of categories of a type of test by the code of the testtype object.
+     *
+     * @param code code of the test type to be found.
+     * @return a copy of the list of categories of the found test type.
+     */
+    public List<ParameterCategory> getCategoriesByTestTypeCode(String code){
+        return getSingleTestTypeByCode(code).getSelectedCategories();
     }
 }
