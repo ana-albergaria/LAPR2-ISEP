@@ -75,6 +75,13 @@ public class App {
         return props;
     }
 
+    //ACRESCENTEI
+    public String getBarcodeClassNameConfig() {
+        Properties props = getProperties();
+        String className = props.getProperty("name");
+        return className;
+    }
+
 
     private void bootstrap()
     {

@@ -1,9 +1,14 @@
 package app.domain.model;
 
 import app.controller.RecordSamplesController;
+import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.output.OutputException;
 
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Main {
@@ -14,12 +19,36 @@ public class Main {
 
         boolean success = ctrl.createSample();
 
-        MyBarcode myBarcode = ctrl.getBarcode();
+        ctrl.saveImageBarcode();
 
-        ctrl.saveImageBarcode(myBarcode);
 
-        String number = String.format("%12d", 1);
-        System.out.println(number);
+
+
+/*
+
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(barcode);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.pack();
+        frame.setLocation(500, 500);
+        frame.setVisible(true);
+
+ */
+
+        /*
+        BufferedImage img = BarcodeImageHandler.getImage(barcode);
+        barcode.print(img.createGraphics());
+
+         */
+
+
+
+
+
+
+
+
 
         /*
         Object barcode = myBarcode.getBarcode();

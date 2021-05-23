@@ -9,8 +9,8 @@ import java.util.List;
 public class SampleStore {
     private List<Sample> samplesList = new ArrayList<>();
 
-    public Sample createSample() {
-        return new Sample();
+    public Sample createSample(MyBarcode barcode) {
+        return new Sample(barcode);
     }
 
     public boolean validateSample(Sample sample) {

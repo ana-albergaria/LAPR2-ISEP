@@ -15,7 +15,7 @@ public class Test {
         return samples;
     }
 
-    //Como mudar o estado do teste? Responsabilidade do test?
+    //Como mudar o estado do teste? Responsabilidade do test? (if samples.size() == x)
     public boolean addSample(Sample sample) {
         return this.samples.add(sample);
     }

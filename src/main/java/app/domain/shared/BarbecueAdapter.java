@@ -21,10 +21,8 @@ public class BarbecueAdapter implements ExternalAPI {
     @Override
     public void saveImageBarcode(MyBarcode myBarcode) throws IOException, OutputException {
         Barcode barcode = (Barcode) myBarcode.getBarcode();
-
         barcode.setPreferredBarHeight(100);
-        File imgFile = new File("./Samples/barcode.jpeg");
-
+        File imgFile = new File("./Samples/barcode" + barcode.getData() + ".jpeg");
         BarcodeImageHandler.saveJPEG(barcode, imgFile);
     }
 
