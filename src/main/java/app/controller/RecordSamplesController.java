@@ -8,11 +8,14 @@ import app.domain.shared.ExternalAPI;
 import app.domain.shared.utils.BarcodeUtils;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
+import app.mappers.TestMapper;
+import app.mappers.dto.TestDTO;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.output.OutputException;
 
 
 import java.io.IOException;
+import java.util.List;
 
 public class RecordSamplesController {
 
@@ -42,7 +45,7 @@ public class RecordSamplesController {
         return selectedTest.addSample(sample);
     }
 
-    /*
+
     public List<TestDTO> getTestsNoSamples() {
         TestStore testStore = this.company.getTestStore();
         List<Test> listTestsNoSamples = testStore.getTestsWithNoSamples();
@@ -50,7 +53,7 @@ public class RecordSamplesController {
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTestsNoSamples);
     }
-     */
+
 
 
     public MyBarcode getBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, BarcodeException {

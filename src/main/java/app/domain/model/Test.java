@@ -2,6 +2,7 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,6 +67,7 @@ public class Test {
         this.client = client;
         this.testType = testType;
         this.parameters = parameters;
+        this.samples = new ArrayList<>();
     }
 
     public String getCode(){
@@ -73,9 +75,24 @@ public class Test {
     }
 
     public List<Sample> getSamples() {
-        return samples;
+        return new ArrayList<>(samples);
     }
 
+    public String getNhsCode() {
+        return nhsCode;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public TestType getTestType() {
+        return testType;
+    }
+
+    public List<Parameter> getParameters() {
+        return new ArrayList<>(parameters);
+    }
 
     //Como mudar o estado do teste? Responsabilidade do test? (if samples.size() == x)
     //Como mudar o estado do teste? Responsabilidade do test? sim
