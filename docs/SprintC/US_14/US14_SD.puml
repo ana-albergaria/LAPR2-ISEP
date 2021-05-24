@@ -8,9 +8,12 @@ participant ":Company" as CMP
 participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
 participant ":TestMapper" as TSTMAPPER
-'participant "objDTO\n:TestsDTO" as OBJ_DTO
 participant "listTestsToDiagnose\n:List<Test>" as LT
-'participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
+participant "testParam\n:TestParameter" as TP
+participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
+participant "listTestParams\n:List<TestParameter>" as LTP
+participant "listTestResults\n:List<TestParameterResult>" as LTPR
+participant "testResult\n:TestParameterResult" as TPR
 participant "tst\n:Test" as TST
 
 activate SPDT
@@ -52,6 +55,43 @@ deactivate UI
 
 SPDT -> UI : selects a test
 activate UI
+
+UI -> CTRL : listTestResults = getTestParametersResults()
+activate CTRL
+
+CTRL -> CMP : tstStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+
+CTRL -> TSTSTORE : tst = getTestByCode()
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL -> TSTSTORE : listTestParams = getTestParameters()
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL -> TP : listTestResults = getParametersResults()
+activate TP
+|||
+deactivate TP
+
+CTRL --> UI : listParameterResults
+deactivate CTRL
+
+'getTestByCode()
+'getTestParameters()
+'getTestParameterResult()
+'getParametersResults()
+'getValue()
+'getReferenceValue()
+'vai ter code.getTestByCode().getTestParameters().getParametersResults()
+'vai ter getParametersResults().getValues()
+'vai ter getParametersResults().getReferenceValues()
+
 
 UI --> SPDT : shows chemical results and reference values of the selected test and requests data(i.e., reportText)
 deactivate UI
