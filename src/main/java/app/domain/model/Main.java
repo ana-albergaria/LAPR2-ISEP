@@ -16,9 +16,13 @@ public class Main {
 
         boolean success = ctrl.createSample();
 
+        String code = "1234567890";
+
         ctrl.saveImageBarcode();
 
         boolean success1 = ctrl.createSample();
+
+        String code2 = "0987654321";
 
         ctrl.saveImageBarcode();
 

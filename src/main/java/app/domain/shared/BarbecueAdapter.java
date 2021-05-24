@@ -15,7 +15,7 @@ public class BarbecueAdapter implements ExternalAPI {
     @Override
     public MyBarcode getBarcode(String barcodeNumber) throws BarcodeException {
         Barcode barcode = BarcodeFactory.createUPCA(barcodeNumber);
-        return new MyBarcode(barcode);
+        return new MyBarcode(barcode, barcodeNumber);
     }
 
     @Override

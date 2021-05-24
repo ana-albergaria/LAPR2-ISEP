@@ -1,7 +1,14 @@
 package app.controller;
 
 import app.domain.model.Company;
+import app.domain.model.Parameter;
+import app.domain.model.Test;
 import app.domain.model.TestParameterResult;
+import app.domain.store.TestStore;
+import app.mappers.TestMapper;
+import app.mappers.dto.TestDTO;
+
+import java.util.List;
 
 public class ResultController {
 
@@ -36,4 +43,11 @@ public class ResultController {
 
     //public boolean createResult(...)
 
+    public List<Parameter> getTotalTestParameters() {
+        TestStore testStore = this.company.getTestStore();
+        List<Test> listTotalTestParameters = testStore.getTotalTestParameters();
+
+        TestMapper mapper = new TestMapper();
+        return mapper.toDTO(listTotalTestParameters);
+    }
 }

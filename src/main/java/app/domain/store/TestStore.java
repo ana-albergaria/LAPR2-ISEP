@@ -87,6 +87,11 @@ public class TestStore {
         return listTestsNoSamples;
     }
 
+    public List<Parameter> getTotalTestParameters() {
+        List<Parameter> listTotalTestParameters = new ArrayList<>();
+
+    }
+
 
 
 
