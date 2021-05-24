@@ -21,6 +21,8 @@ public class RecordSamplesController {
 
     private Company company;
     private Sample sample;
+    private SampleStore sampleStore;
+    private TestStore testStore;
 
 
     public RecordSamplesController() {
@@ -30,27 +32,23 @@ public class RecordSamplesController {
     public RecordSamplesController(Company company) {
         this.company = company;
         this.sample = null;
+        this.sampleStore = this.company.getSampleStore();
+        this.testStore = this.company.getTestStore();
     }
 
     public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
-        SampleStore sampleStore = this.company.getSampleStore();
         MyBarcode myBarcode = getBarcode();
         this.sample = sampleStore.createSample(myBarcode);
         return sampleStore.validateSample(sample);
     }
 
     public boolean addSample(String code) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException {
-        if(createSample()) {
-            TestStore testStore = this.company.getTestStore();
-            Test selectedTest = testStore.getTestByCode(code);
-            return selectedTest.addSample(sample);
-        }
-        return false;
+        Test selectedTest = testStore.getTestByCode(code);
+        return selectedTest.addSample(sample);
     }
 
 
     public List<TestDTO> getTestsNoSamples() {
-        TestStore testStore = this.company.getTestStore();
         List<Test> listTestsNoSamples = testStore.getTestsWithNoSamples();
 
         TestMapper mapper = new TestMapper();
