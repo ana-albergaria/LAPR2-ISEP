@@ -1,0 +1,41 @@
+@startuml
+
+autonumber
+actor "Clinical Chemistry Technologist" as MLT
+
+activate MLT
+MLT -> ":System" : asks record the results of a given test
+/'Here below'/
+activate ":System"
+":System" --> MLT : shows list with tests with sample(s) and asks to select one
+deactivate ":System"
+
+MLT -> ":System" : selects test
+activate ":System"
+
+loop for each test parameter being analysed
+
+":System" --> MLT : shows a list with test parameters
+deactivate ":System"
+
+MLT -> ":System" : selects test parameter
+activate ":System"
+
+":System" --> MLT : request the result value and metric
+deactivate ":System"
+
+MLT -> ":System" : types requested data
+activate ":System"
+
+end
+":System" --> MLT : shows all data and requests confirmation
+deactivate ":System"
+
+MLT -> ":System" : confirms the data
+activate ":System"
+":System" --> MLT : informs operation success
+deactivate ":System"
+
+deactivate MLT
+
+@enduml
