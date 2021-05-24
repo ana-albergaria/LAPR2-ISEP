@@ -3,7 +3,10 @@ package app.controller;
 import app.domain.model.Company;
 import app.domain.model.Report;
 import app.domain.model.Test;
+import app.domain.model.TestParameterResult;
 import app.domain.store.TestStore;
+import app.mappers.TestMapper;
+import app.mappers.dto.TestDTO;
 
 import java.util.List;
 
@@ -51,12 +54,15 @@ public class WriteReportController {
      *
      * @return tests to diagnose list.
      */
-    public List<Test> getTestsToDiagnose(){
+    public List<TestDTO> getTestsToDiagnose(){
         TestStore testStore = this.company.getTestStore();
         List<Test> testsToDiagnose = testStore.getTestsReadyToDiagnose();
-        return  testsToDiagnose;
+        TestMapper mapper = new TestMapper();
+        return mapper.toDTO(testsToDiagnose);
     }
 
-    //+getListDTO
+    public List<TestParameterResult> getTestParametersResults(){
+
+    }
 
 }
