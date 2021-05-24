@@ -65,6 +65,7 @@ public class TestDTO {
         this.samples = samples;
     }
 
-
-
+    public String getCode() {
+        return code;
+    }
 }

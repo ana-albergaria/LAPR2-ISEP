@@ -39,10 +39,13 @@ public class RecordSamplesController {
         return sampleStore.validateSample(sample);
     }
 
-    public boolean addSample(String code) {
-        TestStore testStore = this.company.getTestStore();
-        Test selectedTest = testStore.getTestByCode(code);
-        return selectedTest.addSample(sample);
+    public boolean addSample(String code) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException {
+        if(createSample()) {
+            TestStore testStore = this.company.getTestStore();
+            Test selectedTest = testStore.getTestByCode(code);
+            return selectedTest.addSample(sample);
+        }
+        return false;
     }
 
 
@@ -53,7 +56,6 @@ public class RecordSamplesController {
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTestsNoSamples);
     }
-
 
 
     public MyBarcode getBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, BarcodeException {

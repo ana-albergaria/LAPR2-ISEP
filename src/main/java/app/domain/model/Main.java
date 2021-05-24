@@ -1,14 +1,11 @@
 package app.domain.model;
 
 import app.controller.RecordSamplesController;
-import net.sourceforge.barbecue.Barcode;
+
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BarcodeFactory;
-import net.sourceforge.barbecue.BarcodeImageHandler;
+
 import net.sourceforge.barbecue.output.OutputException;
 
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Main {

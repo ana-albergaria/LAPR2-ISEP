@@ -1,18 +1,19 @@
 package app.domain.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Sample {
-    private MyBarcode barcode;
+    private MyBarcode myBarcode;
     private Date collectingDate;
 
-    public Sample(MyBarcode barcode) {
-        this.barcode = barcode;
-        this.collectingDate = new Date();
+    public Sample(MyBarcode myBarcode) {
+        this.myBarcode = myBarcode;
+        this.collectingDate = Calendar.getInstance().getTime();
     }
 
     public MyBarcode getMyBarcode() {
-        return barcode;
+        return myBarcode;
     }
 
     public Date getCollectingDate() {

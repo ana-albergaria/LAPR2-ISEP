@@ -88,6 +88,12 @@ deactivate UI
 MLT -> UI : types number
 activate UI
 
+UI --> MLT : requests confirmation
+deactivate UI
+
+MLT -> UI : confirms the data
+activate UI
+
 loop for each Sample to be recorded
 UI -> CTRL : createSample()
 activate CTRL
@@ -122,10 +128,11 @@ deactivate CTRL
 
 
 
-UI --> MLT : shows data and requests confirmation
+/'UI --> MLT : shows data and requests confirmation
 
-MLT -> UI : confirms the data
+MLT -> UI : confirms the data'/
 
+/' SAVESAMPLE()
 UI -> CTRL : saveSample()
 activate CTRL
 
@@ -148,7 +155,7 @@ deactivate SAMPLE_STORE
 CTRL --> UI : result
 
 deactivate SAMPLE_STORE
-
+'/
 
 
 note over UI, CTRL

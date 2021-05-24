@@ -16,6 +16,7 @@ public class SampleStore {
     public boolean validateSample(Sample sample) {
         if (sample == null)
             return false;
-        return !this.samplesList.contains(sample);
+        //return !this.samplesList.contains(sample);
+        return true;
     }
 }
