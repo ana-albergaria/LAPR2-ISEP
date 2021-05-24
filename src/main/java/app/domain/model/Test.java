@@ -45,7 +45,7 @@ public class Test {
     /**
      * List of parameters to be measured of a given test
      */
-    private List<Parameter> parameters;
+    private List<TestParameter> testParameters;
 
     /**
      * Number of existing tests.
@@ -66,7 +66,7 @@ public class Test {
         this.nhsCode = nhsCode;
         this.client = client;
         this.testType = testType;
-        this.parameters = parameters;
+        this.testParameters = addTestParameters(parameters);
         this.samples = new ArrayList<>();
     }
 
@@ -90,8 +90,8 @@ public class Test {
         return testType;
     }
 
-    public List<Parameter> getParameters() {
-        return new ArrayList<>(parameters);
+    public List<TestParameter> getParameters() {
+        return new ArrayList<>(testParameters);
     }
 
     //Como mudar o estado do teste? Responsabilidade do test? (if samples.size() == x)
@@ -108,6 +108,19 @@ public class Test {
      */
     public String generateCode(){
         return String.format("%012d", totalTests);
+    }
+
+    /**
+     * Method for turning a list of Parameter objects into test parameters object which are stored into the test
+     * @param parameters parameters to be tested
+     * @return list of test parameters objects
+     */
+    private List<TestParameter> addTestParameters(List<Parameter> parameters){
+        List<TestParameter> testParameters = new ArrayList<>();
+        for(Parameter parameter : parameters){
+            testParameters.add(new TestParameter(parameter));
+        }
+        return testParameters;
     }
 
     /**

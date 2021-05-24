@@ -1,17 +1,10 @@
 package app.mappers.dto;
 
-import app.domain.model.Client;
-import app.domain.model.Parameter;
-import app.domain.model.Sample;
-import app.domain.model.TestType;
+import app.domain.model.*;
 
 import java.util.List;
 
 public class TestDTO {
-    /**
-     * Max lenght of nhs code field
-     */
-    private static final int NHS_CODE_MAX_LENGTH = 12;
 
     /**
      * Auto generated sequencial number with 12 digits
@@ -41,7 +34,7 @@ public class TestDTO {
     /**
      * List of parameters to be measured of a given test
      */
-    private List<Parameter> parameters;
+    private List<TestParameter> testParameters;
 
     /**
      * Number of existing tests.
@@ -55,13 +48,13 @@ public class TestDTO {
      * @param testType Type of test to be conduted
      * @param parameters List of parameters to be measured of a given test
      */
-    public TestDTO(String code, String nhsCode, Client client, TestType testType, List<Parameter> parameters, List<Sample> samples) {
+    public TestDTO(String code, String nhsCode, Client client, TestType testType, List<TestParameter> parameters, List<Sample> samples) {
         totalTests++;
         this.code = code;
         this.nhsCode = nhsCode;
         this.client = client;
         this.testType = testType;
-        this.parameters = parameters;
+        this.testParameters = parameters;
         this.samples = samples;
     }
 
