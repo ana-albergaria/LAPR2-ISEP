@@ -22,6 +22,22 @@ class Sample{
 - barCode
 }
 
+class Client{
+- name
+- citizenCardNum
+- nhsNum
+- birthDate
+- sex
+- taxIdNum
+- phoneNum
+- email
+}
+class TestParameter{}
+class TestParameterResult{
+- createdAt
+- value
+- metric
+}
 class TestType{
 - Code
 - Description
@@ -35,9 +51,13 @@ class Parameter{
 }
 
 Test "*" -- "1" TestType : classified as >
+Test "*" -- "1" Client : requested by >
 Test "*" -- "1..*" Parameter : requested analysis of >
 Receptionist "1" -- "*" Test : registers >
 Parameter "*" -- "1" ParameterCategory: presented under >
 TestType "1" -- "1..*" ParameterCategory : characterized by >
 Test "1" -- "1..*" Sample : collects >
+Test "1" -- "1..*" TestParameter : requests analysis of >
+TestParameter "*" -- "1" Parameter : refers to >
+TestParameter "1" -- "0..1" TestParameterResult : contains >
 @enduml

@@ -11,7 +11,14 @@ package UI <<Folder>> {
 
 package Domain <<Folder>> {
     package Model <<Folder>> {
-
+        class TestParameter{
+            +TestParameter(parameter: Parameter)
+        }
+        class TestParameterResult{
+        - createdAt
+        - value
+        - metric
+        }
         class TestType {
         - code : String
         - description : String
@@ -161,9 +168,11 @@ Company "1" -- "*" TestType : conducts >
 Company "1" -- "*" Test : conducts >
 Company "1" -- "*" Parameter : capable of analysing >
 Test "*" -- "1" TestType : classified as >
-Test "*" -- "1..*" Parameter : requested analysis of >
+Test "1" -- "1..*" TestParameter : requests analysis of >
+TestParameter "*" -- "1" Parameter : refers to >
+TestParameter "1" -- "0..1" TestParameterResult : contains >
 Test "1" -- "1..*" Sample : collects >
-Client "1" -- "1" Test : performs
+Client "1" -- "1" Test : requested by <
 Parameter "*" -- "1" ParameterCategory: presented under >
 TestType "1" -- "1..*" ParameterCategory : characterized by >
 
