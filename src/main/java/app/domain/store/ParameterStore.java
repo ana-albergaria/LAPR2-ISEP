@@ -108,4 +108,7 @@ public class ParameterStore {
         return this.prmList.toArray(array);
     }
 
+    public List<Parameter> getPrmList() {
+        return prmList;
+    }
 }

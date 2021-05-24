@@ -171,7 +171,7 @@ CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
 deactivate COMPANY
 
-CTRL -> TEST_STORE : selectedTest = getTestByCode(code)
+CTRL -> TEST_STORE : selectedTest = getTestByCodeInTestList(code)
 activate TEST_STORE
 deactivate TEST_STORE
 

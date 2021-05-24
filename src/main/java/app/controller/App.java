@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.domain.model.ClinicalAnalysisLaboratory;
-import app.domain.model.Company;
-import app.domain.model.ParameterCategory;
-import app.domain.model.TestType;
+import app.domain.model.*;
 import app.domain.shared.Constants;
 import auth.AuthFacade;
 import auth.UserSession;
@@ -11,7 +8,10 @@ import auth.UserSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -24,8 +24,7 @@ public class App {
     private Company company;
     private AuthFacade authFacade;
 
-    private App()
-    {
+    private App() {
         Properties props = getProperties();
         this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION));
         this.authFacade = this.company.getAuthFacade();
@@ -83,13 +82,38 @@ public class App {
     }
 
 
-    private void bootstrap()
-    {
+    private void bootstrap() {
         this.authFacade.addUserRole(Constants.ROLE_ADMIN,Constants.ROLE_ADMIN);
 
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
 
+        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
+        TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore());
+        this.company.getTestTypeStore().saveTestType(t1);
+        List<TestType> selectedTT = new ArrayList<>();
+        selectedTT.add(t1);
+        TestType t2 = new TestType("COD22","blabla","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore());
+        this.company.getTestTypeStore().saveTestType(t2);
+        selectedTT.add(t2);
+        ParameterCategory p1 = new ParameterCategory("code1","descrip");
+        this.company.getParameterCategoryStore().saveParameterCategory(p1);
+        this.company.getTestTypeStore().saveTestType(new TestType("CODE3","Description","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore()));
+        Date d1 = new Date();
+        Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","carlos@gmail.com","Carlos","12345678901");
+        this.company.getClientStore().saveClient(c1);
+
+        this.company.getParameterStore().saveParameter(new Parameter("code1", "name", "descrip",p1));
+
+        ParameterCategory pc1 = this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0);
+
+        Parameter param1 = new Parameter("code1","dsg","descr",pc1);
+        List<Parameter> listParameter = new ArrayList<>();
+        listParameter.add(param1);
+        this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
+
     }
+
+
 
     // Extracted from https://www.javaworld.com/article/2073352/core-java/core-java-simply-singleton.html?page=2
     private static App singleton = null;

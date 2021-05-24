@@ -52,6 +52,6 @@ public class ResultController {
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTotalTestParameters);
     }
-    
+
      */
 }

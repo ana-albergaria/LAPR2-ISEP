@@ -9,5 +9,5 @@ import java.io.IOException;
 public interface ExternalAPI {
     public abstract MyBarcode getBarcode(String barcodeNumber) throws BarcodeException;
 
-    public abstract void saveImageBarcode(MyBarcode myBarcode) throws IOException, OutputException;
+    public abstract void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException;
 }

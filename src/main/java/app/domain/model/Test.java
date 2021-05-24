@@ -107,7 +107,7 @@ public class Test {
      * @return 12 digits sequencial number of current test.
      */
     public String generateCode(){
-        return String.format("%12d", totalTests);
+        return String.format("%012d", totalTests);
     }
 
     /**
