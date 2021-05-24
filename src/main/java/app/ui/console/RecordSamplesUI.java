@@ -19,11 +19,11 @@ public class RecordSamplesUI implements Runnable {
     @Override
     public void run() {
         boolean success;
-
-
-
-
+        do {
+            success = recordSamples();
+        } while (!success);
     }
+
     private boolean recordSamples() {
         boolean success = false;
 
@@ -32,19 +32,22 @@ public class RecordSamplesUI implements Runnable {
             TestDTO selectedTest = (TestDTO) Utils.showAndSelectOne(listTestsNoSamplesDto,
                     "To record the Samples collected of a Test, please selected a Test from the list:");
 
-            System.out.println("How many Samples are to be collected?");
-            int numSamples = Utils.readIntegerFromConsole("Number of Samples: ");
+            if(selectedTest != null) {
+                System.out.println("How many Samples are to be collected?");
+                int numSamples = Utils.readIntegerFromConsole("Number of Samples: ");
 
-            for (int i = 0; i < numSamples; i++) {
-                ctrl.createSample(); //ClassNotFoundException, InstantiationException, IllegalAccessException, Barcode Exception
-                boolean addSampleToTest = ctrl.addSample(selectedTest.getCode());
-                if(addSampleToTest)
-                    ctrl.saveImageBarcode(); //IOException, Output Exception (Barbecue)
+                for (int i = 0; i < numSamples; i++) {
+                    ctrl.createSample(); //ClassNotFoundException, InstantiationException, IllegalAccessException, Barcode Exception
+                    boolean addSampleToTest = ctrl.addSample(selectedTest.getCode());
+                    if(addSampleToTest)
+                        ctrl.saveImageBarcode(selectedTest.getCode()); //IOException, Output Exception (Barbecue)
+                    success = true;
+                }
+                System.out.println("\nSamples successfully recorded and added to the Test!\n" +
+                        "You can find the Samples Barcodes in the subfolder Test-Code" + selectedTest.getCode() + " in the folder Samples.");
+            } else {
+                success = true;
             }
-
-            success = true;
-            System.out.println("\nSamples successfully recorded and added to the Test!\n" +
-                    "You can find the Samples Barcodes in the subfolder Test-CodeXXXXXXXXXXXX in the folder Samples.");
         }
         catch(ClassNotFoundException cnde) {
             System.out.println(cnde.getMessage());
