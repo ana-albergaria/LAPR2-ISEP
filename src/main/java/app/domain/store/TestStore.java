@@ -87,10 +87,25 @@ public class TestStore {
         return listTestsNoSamples;
     }
 
-    public List<Parameter> getTotalTestParameters() {
+    /*
+    public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
 
+        for (Parameter parameter : test.getParameters())
+            listTotalTestParameters.add(parameter);
+
+        return listTotalTestParameters;
     }
+
+    public List<Test> getTestByBarcodeNumber(String barcodeNumber) {
+        for (Test test : testList) {
+            if(barcodeNumber.equals(test.))
+        }
+
+
+    }
+
+     */
 
 
 
