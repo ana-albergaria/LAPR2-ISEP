@@ -8,7 +8,6 @@ participant ":Company" as CMP
 participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
 participant ":TestMapper" as TSTMAPPER
-'participant "objDTO\n:TestsDTO" as OBJ_DTO
 participant "listTestsToDiagnose\n:List<Test>" as LT
 participant "testParam\n:TestParameter" as TP
 participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
@@ -57,7 +56,7 @@ deactivate UI
 SPDT -> UI : selects a test
 activate UI
 
-UI -> CTRL : listParameterResults = getTestParametersResults()
+UI -> CTRL : listTestResults = getTestParametersResults()
 activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
@@ -79,16 +78,6 @@ CTRL -> TP : listTestResults = getParametersResults()
 activate TP
 |||
 deactivate TP
-
-'CTRL -> TPR : listResultValues = getValues()
-'activate TPR
-'|||
-'deactivate TPR
-
-'CTRL -> TPR : listReferenceValues = getReferenceValues()
-'activate TPR
-'|||
-'deactivate TPR
 
 CTRL --> UI : listParameterResults
 deactivate CTRL
