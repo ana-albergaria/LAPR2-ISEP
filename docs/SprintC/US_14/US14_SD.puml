@@ -11,7 +11,19 @@ participant ":TestMapper" as TSTMAPPER
 'participant "objDTO\n:TestsDTO" as OBJ_DTO
 participant "listTestsToDiagnose\n:List<Test>" as LT
 'participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
+participant "testParam\n:TestParameter" as TP
+participant "testResult\n:TestParameterResult" as TPR
 participant "tst\n:Test" as TST
+
+participant "param\n:Parameter" as PRM
+participant "type\n:TestType" as TT
+participant "em\n:ExternalModule" as EM
+participant "refValue\n:ReferenceValue" as RV
+
+'lestTestParams
+'lestTestResults
+'listResultValues
+'listReferenceValues
 
 activate SPDT
 SPDT -> UI : asks to make diagnosis and write a report
@@ -52,6 +64,53 @@ deactivate UI
 
 SPDT -> UI : selects a test
 activate UI
+
+UI -> CTRL : listResultsAndReferences = getResultsAndReferences()
+activate CTRL
+
+CTRL -> CMP : tstStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+
+CTRL -> TSTSTORE : tst = getTestByCode()
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL -> TSTSTORE : listTestParams = getTestParameters()
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL -> TP : listTestResults = getTestParametersResults()
+activate TP
+|||
+deactivate TP
+
+CTRL -> TPR : listResultValues = getValues()
+activate TPR
+|||
+deactivate TPR
+
+CTRL -> TPR : listReferenceValues = getReferenceValues()
+activate TPR
+|||
+deactivate TPR
+
+CTRL --> UI : listResultsAndReferences
+deactivate CTRL
+
+'getTestByCode()
+'getTestParameters()
+'getTestParameterResult()
+'getTestParameterResults()
+'getValue()
+'getReferenceValue()
+'vai ter code.getTestByCode().getTestParameters().getTestParametersResults()
+'vai ter getTestParameterResults().getValues()
+'vai ter getTestParameterResults().getReferenceValues()
+
 
 UI --> SPDT : shows chemical results and reference values of the selected test and requests data(i.e., reportText)
 deactivate UI
