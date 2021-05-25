@@ -71,6 +71,14 @@ public class TestStore {
         throw new UnsupportedOperationException("Parameter Category not found!");
     }
 
+    public Test getTestByCodeInTestList(String code) {
+        for (Test test : testList) {
+            if(test.getCode().equalsIgnoreCase(code))
+                return test;
+        }
+        throw new UnsupportedOperationException("Test not found!");
+    }
+
 
     /*public boolean addReportToTest(Test selectedTest){
 
@@ -81,16 +89,31 @@ public class TestStore {
         List<Test> listTestsNoSamples = new ArrayList<>();
 
         for (Test test : testList) {
-            if(test.getSamples().size() > 0)
+            if(test.getSamples().size() == 0)
                 listTestsNoSamples.add(test);
         }
         return listTestsNoSamples;
     }
 
-    public List<Parameter> getTotalTestParameters() {
+    /*
+    public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
 
+        for (Parameter parameter : test.getParameters())
+            listTotalTestParameters.add(parameter);
+
+        return listTotalTestParameters;
     }
+
+    public List<Test> getTestByBarcodeNumber(String barcodeNumber) {
+        for (Test test : testList) {
+            if(barcodeNumber.equals(test.))
+        }
+
+
+    }
+
+     */
 
 
 

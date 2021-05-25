@@ -15,7 +15,7 @@ participant ": ParameterMapper" as PARAM_MAPPER
 /'participant ":Platform" as PLAT'/
 participant "store:TestStore" as ORG
 participant "tt\n:Test" as TAREFA
-
+participant ": TestParameter" as tp
 
 activate ADM
 ADM -> UI : asks to register a test to be performed to a registered client
@@ -164,6 +164,11 @@ deactivate ORG
 TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
 activate TAREFA
 deactivate TAREFA
+
+loop for each parameter of the list
+TAREFA -> tp*: testParameter =  create(parameter)
+TAREFA -> TAREFA: testParameters.add(testParameter)
+end
 
 TAREFA -> TAREFA : code = generateSequentialCode()
 activate TAREFA

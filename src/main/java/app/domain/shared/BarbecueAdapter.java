@@ -19,10 +19,17 @@ public class BarbecueAdapter implements ExternalAPI {
     }
 
     @Override
-    public void saveImageBarcode(MyBarcode myBarcode) throws IOException, OutputException {
+    public void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException {
+        File mainDirectory = new File("./Samples");
+        File secondaryDirectory = new File(mainDirectory + "/Test-Code" + code);
+        if(!mainDirectory.exists())
+            mainDirectory.mkdir();
+        if(!secondaryDirectory.exists())
+            secondaryDirectory.mkdir();
+
         Barcode barcode = (Barcode) myBarcode.getBarcode();
         barcode.setPreferredBarHeight(100);
-        File imgFile = new File("./Samples/barcode" + barcode.getData() + ".jpeg");
+        File imgFile = new File(secondaryDirectory + "/barcode" + barcode.getData() + ".jpeg");
         BarcodeImageHandler.saveJPEG(barcode, imgFile);
     }
 

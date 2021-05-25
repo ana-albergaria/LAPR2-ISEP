@@ -61,8 +61,11 @@ public class WriteReportController {
         return mapper.toDTO(testsToDiagnose);
     }
 
+    /*
     public List<TestParameterResult> getTestParametersResults(){
 
     }
+
+     */
 
 }

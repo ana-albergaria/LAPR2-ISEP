@@ -43,7 +43,7 @@ public class RecordSamplesController {
     }
 
     public boolean addSample(String code) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException {
-        Test selectedTest = testStore.getTestByCode(code);
+        Test selectedTest = testStore.getTestByCodeInTestList(code);
         return selectedTest.addSample(sample);
     }
 
@@ -62,9 +62,9 @@ public class RecordSamplesController {
         return api.getBarcode(barcodeNumber);
     }
 
-    public void saveImageBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException, OutputException {
+    public void saveImageBarcode(String code) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException, OutputException {
         ExternalAPI api = this.company.getExternalAPI();
         MyBarcode myBarcode = this.sample.getMyBarcode();
-        api.saveImageBarcode(myBarcode);
+        api.saveImageBarcode(myBarcode, code);
     }
 }

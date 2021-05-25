@@ -43,11 +43,15 @@ public class ResultController {
 
     //public boolean createResult(...)
 
-    public List<Parameter> getTotalTestParameters() {
+    /*
+    public List<Parameter> getTotalTestParameters(String barcodeNumber) {
         TestStore testStore = this.company.getTestStore();
-        List<Test> listTotalTestParameters = testStore.getTotalTestParameters();
+        Test selectedTest = testStore.getTestByBarcodeNumber(barcodeNumber);
+        List<Test> listTotalTestParameters = testStore.getTotalTestParameters(selectedTest);
 
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTotalTestParameters);
     }
+
+     */
 }

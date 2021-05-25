@@ -75,7 +75,7 @@ public class CreateTestController {
      *
      * @return True if successfully validated and saved false the otherway
      */
-    public boolean saveTestType() {
+    public boolean saveTest() {
         TestStore testStore = this.company.getTestStore();
         return testStore.saveTest(test);
     }
@@ -85,7 +85,7 @@ public class CreateTestController {
      *
      * @return test types list
      */
-    public List<TestType> getTestTypes() {
+    private List<TestType> getTestTypes() {
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
         return testTypeStore.getTestTypes();
     }
@@ -105,7 +105,7 @@ public class CreateTestController {
      *
      * @return parameter category list
      */
-    public List<ParameterCategory> getCategoriesListOfTestType(String selectedTestTypeCode) {
+    private List<ParameterCategory> getCategoriesListOfTestType(String selectedTestTypeCode) {
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
         return testTypeStore.getCategoriesByTestTypeCode(selectedTestTypeCode);
     }
@@ -125,7 +125,7 @@ public class CreateTestController {
      *
      * @return parameters list
      */
-    public List<Parameter> getParametersOfCategories(List<String> selectedCategoriesCodes) {
+    private List<Parameter> getParametersOfCategories(List<String> selectedCategoriesCodes) {
         ParameterStore parameterStore = this.company.getParameterStore();
         return parameterStore.getParamsByCategories(selectedCategoriesCodes);
     }
