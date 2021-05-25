@@ -1,9 +1,6 @@
 package app.domain.store;
 
-import app.domain.model.Client;
-import app.domain.model.Parameter;
-import app.domain.model.Test;
-import app.domain.model.TestType;
+import app.domain.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +91,9 @@ public class TestStore {
         }
         return listTestsNoSamples;
     }
+
+    //public List<TestParameter> getTestParameters(Test tst) {
+    //}
 
     /*
     public List<Parameter> getTotalTestParameters(Test test) {

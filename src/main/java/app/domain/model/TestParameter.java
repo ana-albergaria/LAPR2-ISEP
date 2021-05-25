@@ -1,6 +1,8 @@
 package app.domain.model;
 
 
+import java.util.List;
+
 /**
  * Container of one of the test parameters and its test result
  *
@@ -31,5 +33,9 @@ public class TestParameter {
     }
 
     //addResult(result, metric, refValue)
+
+    /*public List<TestParameterResult> getParametersResults(List<TestParameter> listTestParams){
+
+    }*/
 
 }

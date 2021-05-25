@@ -35,7 +35,7 @@ class Test {
 }
 
 class TestParameter {
-    +getParametersResults()
+    +getParametersResults(listTestParams)
 }
 
 }
@@ -46,7 +46,7 @@ class TestStore {
     -list<Test> testsReadyToDiagnose
     +getTestsReadyToDiagnose()
     +getTestByCode(code)
-    +getTestParameters()
+    +getTestParameters(tst)
     +addReportToTest(selectedTest)
 }
 
@@ -80,7 +80,7 @@ class WriteReportController {
     -Company company
     -Report report
     +getTeststoDiagnose()
-    +getTestParametersResults()
+    +getTestParametersResults(code)
     +createReport(reportText)
     +addReportToTest(code)
 }
