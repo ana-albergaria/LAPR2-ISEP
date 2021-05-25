@@ -69,12 +69,12 @@ activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL -> TSTSTORE : listTestParams = getTestParameters()
+CTRL -> TSTSTORE : listTestParams = getTestParameters(tst)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL -> TP : listTestResults = getParametersResults()
+CTRL -> TP : listTestResults = getParametersResults(listTestParams)
 activate TP
 |||
 deactivate TP

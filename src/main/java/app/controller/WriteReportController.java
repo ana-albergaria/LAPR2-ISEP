@@ -1,9 +1,6 @@
 package app.controller;
 
-import app.domain.model.Company;
-import app.domain.model.Report;
-import app.domain.model.Test;
-import app.domain.model.TestParameterResult;
+import app.domain.model.*;
 import app.domain.store.TestStore;
 import app.mappers.TestMapper;
 import app.mappers.dto.TestDTO;
@@ -61,11 +58,13 @@ public class WriteReportController {
         return mapper.toDTO(testsToDiagnose);
     }
 
-    /*
-    public List<TestParameterResult> getTestParametersResults(){
-
-    }
-
-     */
+    /*public List<TestParameterResult> getTestParametersResults(String code){
+        TestStore tstStore = this.company.getTestStore();
+        Test tst = tstStore.getTestByCode(code);
+        List<TestParameter> listTestParams = tstStore.getTestParameters(tst);
+        TestParameter tstParam;
+        List<TestParameterResult> listTestResults = tstParam.getParametersResults(listTestParams);
+        return listTestResults;
+    }*/
 
 }
