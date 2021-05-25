@@ -33,8 +33,8 @@ public class RecordSamplesController {
     }
 
     public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
-        SampleStore sampleStore = this.company.getSampleStore();
         MyBarcode myBarcode = getBarcode();
+        SampleStore sampleStore = this.company.getSampleStore();
         this.sample = sampleStore.createSample(myBarcode);
         return sampleStore.validateSample(sample);
     }
