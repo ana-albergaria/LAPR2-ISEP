@@ -58,13 +58,14 @@ package Mappers {
 
 class TestMapper {
     +toDTO(listTestsToDiagnose)
+    +toDTO(obj)
 }
 
 }
 
 package DTO {
 
-class TestDTO {
+class TestsDTO {
     -String NHSCode
     -String code
     +create(NHSCode, code)
