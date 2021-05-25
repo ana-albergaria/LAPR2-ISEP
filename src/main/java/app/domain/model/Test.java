@@ -137,6 +137,12 @@ public class Test {
             throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
     }
 
+    public boolean hasSamples() {
+        if(this.samples.size() > 0)
+            return true;
+        return false;
+    }
+
     /*
     public boolean addTestResult(String parameterCode, String result, String metric) {
         TestParameter testParameter = getTestParameterFor(parameterCode);
