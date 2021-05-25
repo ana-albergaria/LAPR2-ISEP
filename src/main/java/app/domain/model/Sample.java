@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class Sample {
     /**
-     * The MyBarcode of the Sample.
+     * The myBarcode of the Sample.
      */
     private MyBarcode myBarcode;
     /**
@@ -22,18 +22,30 @@ public class Sample {
     private Date collectingDate;
 
     /**
-     * 
-     * @param myBarcode
+     * Builds a Sample's instance receiving:
+     * the MyBarcode
+     *
+     * @param myBarcode the myBarcode of the Sample
      */
     public Sample(MyBarcode myBarcode) {
         this.myBarcode = myBarcode;
         this.collectingDate = Calendar.getInstance().getTime();
     }
 
+    /**
+     * Returns the myBarcode of the Sample
+     *
+     * @return myBarcode of the Sample
+     */
     public MyBarcode getMyBarcode() {
         return myBarcode;
     }
 
+    /**
+     * Returns the collecting date of the Sample
+     *
+     * @return collecting date of the Sample
+     */
     public Date getCollectingDate() {
         return collectingDate;
     }
