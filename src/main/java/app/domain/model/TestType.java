@@ -168,7 +168,7 @@ public class TestType {
     }
 
 
-
+    /*
     public ExternalModule getExternalModule() {
 
 
@@ -176,6 +176,8 @@ public class TestType {
         return (ExternalAPI) oClass.newInstance();
 
     }
+
+     */
 
 
 }

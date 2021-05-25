@@ -137,6 +137,7 @@ public class Test {
             throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
     }
 
+    /*
     public boolean addTestResult(String parameterCode, String result, String metric) {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();
