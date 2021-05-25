@@ -1,3 +1,4 @@
+/*
 package app.ui.console;
 
 import app.controller.RecordSamplesController;
@@ -84,3 +85,5 @@ public class RecordSamplesUI implements Runnable {
     }
 
 }
+
+ */

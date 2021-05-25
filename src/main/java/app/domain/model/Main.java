@@ -1,3 +1,4 @@
+/*
 package app.domain.model;
 
 import app.controller.RecordSamplesController;
@@ -50,6 +51,8 @@ public class Main {
         frame.setVisible(true);
 
 
+ */
+
 
 
 
@@ -78,8 +81,10 @@ public class Main {
 
          */
 
-
+/*
 
 
     }
 }
+
+ */

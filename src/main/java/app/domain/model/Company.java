@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import app.controller.App;
-import app.domain.shared.ExternalAPI;
+//import app.domain.shared.ExternalAPI;
 import app.domain.store.*;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.EmployeeDTO;
@@ -314,7 +314,7 @@ public class Company {
         Class<?> oClass = Class.forName(className);
         return (ExternalAPI) oClass.newInstance();
     }
-    
+
      */
 
 }
