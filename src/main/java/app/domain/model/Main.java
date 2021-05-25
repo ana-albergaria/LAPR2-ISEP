@@ -1,4 +1,3 @@
-/*
 package app.domain.model;
 
 import app.controller.RecordSamplesController;
@@ -36,6 +35,7 @@ public class Main {
 
 
         Barcode barcode = BarcodeFactory.createUPCA(code2);
+        barcode.setPreferredBarHeight(100);
 
 
 
@@ -49,9 +49,6 @@ public class Main {
         frame.pack();
         frame.setLocation(500, 500);
         frame.setVisible(true);
-
-
- */
 
 
 
@@ -81,10 +78,10 @@ public class Main {
 
          */
 
-/*
+
 
 
     }
 }
 
- */
+

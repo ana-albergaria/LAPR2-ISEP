@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import app.controller.App;
-//import app.domain.shared.ExternalAPI;
+import app.domain.shared.ExternalAPI;
 import app.domain.store.*;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.EmployeeDTO;
@@ -308,13 +308,22 @@ public class Company {
         return new Report(reportTest);
     }
 
-    /*
+
+    /**
+     * Called method to get the External API, using Java Reflection.
+     *
+     * @return a instance of the External API to be used.
+     *
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     */
     public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         String className = App.getInstance().getBarcodeClassNameConfig();
         Class<?> oClass = Class.forName(className);
         return (ExternalAPI) oClass.newInstance();
     }
 
-     */
+
 
 }

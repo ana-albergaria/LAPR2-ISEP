@@ -1,4 +1,3 @@
-/*
 package app.ui.console;
 
 import app.ui.console.utils.Utils;
@@ -27,4 +26,4 @@ public class MedLabTechUI implements Runnable {
     }
 }
 
- */
+
