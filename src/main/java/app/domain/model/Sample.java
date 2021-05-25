@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,4 +20,6 @@ public class Sample {
     public Date getCollectingDate() {
         return collectingDate;
     }
+
+
 }

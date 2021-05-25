@@ -309,7 +309,6 @@ public class Company {
     }
 
     public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-
         String className = App.getInstance().getBarcodeClassNameConfig();
         Class<?> oClass = Class.forName(className);
         return (ExternalAPI) oClass.newInstance();

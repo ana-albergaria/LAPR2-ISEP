@@ -38,7 +38,7 @@ public class TestType {
      */
     private final List<ParameterCategory> selectedCategories;
 
-    private final String className;
+    //private final String className;
 
 
     /**

@@ -25,7 +25,7 @@ public class Main {
 
         boolean success1 = ctrl.createSample();
 
-        String code2 = "098765432";
+        String code2 = "09876543212";
 
         ctrl.saveImageBarcode(code2);
 
@@ -33,7 +33,7 @@ public class Main {
 
         ctrl.saveImageBarcode(code2);
 
-        /*
+
         Barcode barcode = BarcodeFactory.createUPCA(code2);
 
 
@@ -49,7 +49,7 @@ public class Main {
         frame.setLocation(500, 500);
         frame.setVisible(true);
 
-         */
+
 
 
 
