@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import app.domain.shared.ExternalAPI;
+import app.domain.shared.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class TestType {
      * List of Categories assigned to test type
      */
     private final List<ParameterCategory> selectedCategories;
+
 
     /**
      * Full constructor of test type
@@ -161,5 +164,14 @@ public class TestType {
         TestType testTypeToCompare = (TestType) testTypeObject;
         return testTypeToCompare.getCode().equals(this.getCode());
     }
+
+
+    /*
+    public ExternalModule getExternalModule() {
+        Class<?> oClass = Class.forName(className);
+        return (ExternalAPI) oClass.newInstance();
+
+    }
+     */
 
 }

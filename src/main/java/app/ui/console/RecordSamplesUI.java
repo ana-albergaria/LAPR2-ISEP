@@ -60,10 +60,15 @@ public class RecordSamplesUI implements Runnable {
         }
         catch(IllegalAccessException iae) {
             System.out.println(iae.getMessage());
-        } catch (OutputException oe) {
+        }
+        catch (OutputException oe) {
             System.out.println(oe.getMessage());
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             System.out.println(ioe.getMessage());
+        }
+        catch(IllegalArgumentException iae) {
+            System.out.println(iae.getMessage());
         }
 
         return success;

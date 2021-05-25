@@ -5,7 +5,9 @@ import app.domain.model.Parameter;
 import app.domain.model.Test;
 import app.domain.model.TestParameterResult;
 import app.domain.store.TestStore;
+import app.mappers.ParameterMapper;
 import app.mappers.TestMapper;
+import app.mappers.dto.ParameterDTO;
 import app.mappers.dto.TestDTO;
 
 import java.util.List;
@@ -23,6 +25,8 @@ public class ResultController {
      * The test parameter result associated to the Controller.
      */
     private TestParameterResult result;
+
+    private Test test;
 
     /**
      * Builds an empty constructor for having the actual instance of the company when instanciated.
@@ -43,15 +47,20 @@ public class ResultController {
 
     //public boolean createResult(...)
 
-    /*
-    public List<Parameter> getTotalTestParameters(String barcodeNumber) {
-        TestStore testStore = this.company.getTestStore();
-        Test selectedTest = testStore.getTestByBarcodeNumber(barcodeNumber);
-        List<Test> listTotalTestParameters = testStore.getTotalTestParameters(selectedTest);
 
-        TestMapper mapper = new TestMapper();
+    public List<ParameterDTO> getTotalTestParameters(String barcodeNumber) {
+        TestStore testStore = this.company.getTestStore();
+        this.test = testStore.getTestByBarcodeNumber(barcodeNumber);
+        List<Parameter> listTotalTestParameters = testStore.getTotalTestParameters(test);
+
+        ParameterMapper mapper = new ParameterMapper();
         return mapper.toDTO(listTotalTestParameters);
     }
 
-     */
+    public boolean addTestResult(String parameterCode, String result, String metric) {
+        test.addTestResult(parameterCode, result, metric);
+
+    }
+
+
 }

@@ -1,9 +1,6 @@
 package app.domain.store;
 
-import app.domain.model.Client;
-import app.domain.model.Parameter;
-import app.domain.model.Test;
-import app.domain.model.TestType;
+import app.domain.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,25 +92,34 @@ public class TestStore {
         return listTestsNoSamples;
     }
 
-    /*
+
     public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
 
-        for (Parameter parameter : test.getParameters())
-            listTotalTestParameters.add(parameter);
+        for (TestParameter testParameter : test.getParameters())
+            listTotalTestParameters.add(testParameter.getParameter());
 
         return listTotalTestParameters;
     }
 
-    public List<Test> getTestByBarcodeNumber(String barcodeNumber) {
+    public Test getTestByBarcodeNumber(String barcodeNumber) {
         for (Test test : testList) {
-            if(barcodeNumber.equals(test.))
+            if(TestHasBarcodeNumber(test, barcodeNumber))
+                return test;
         }
+        throw new UnsupportedOperationException("Test not found!");
+    }
 
+    public boolean TestHasBarcodeNumber(Test test, String barcodeNumber) {
+        for (Sample sample : test.getSamples()) {
+            if(sample.getMyBarcode().getBarcodeNumber().equals(barcodeNumber))
+                return true;
+        }
+        return false;
 
     }
 
-     */
+
 
 
 

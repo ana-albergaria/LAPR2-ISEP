@@ -137,4 +137,19 @@ public class Test {
             throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
     }
 
+    public boolean addTestResult(String parameterCode, String result, String metric) {
+        TestParameter testParameter = getTestParameterFor(parameterCode);
+        Parameter selectedParameter = testParameter.getParameter();
+
+    }
+
+    private TestParameter getTestParameterFor(String parameterCode) {
+        for (TestParameter testParameter : this.testParameters) {
+            if(parameterCode.equals(testParameter.getParameter().getPrmCode())) {
+                return testParameter;
+            }
+        }
+        throw new UnsupportedOperationException("Test Parameter not found!");
+    }
+
 }
