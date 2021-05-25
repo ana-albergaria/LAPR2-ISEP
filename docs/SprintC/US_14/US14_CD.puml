@@ -34,6 +34,10 @@ class Test {
     +getCode()
 }
 
+class TestParameter {
+    +getParametersResults()
+}
+
 }
 
 package Stores {
@@ -42,6 +46,7 @@ class TestStore {
     -list<Test> testsReadyToDiagnose
     +getTestsReadyToDiagnose()
     +getTestByCode(code)
+    +getTestParameters()
     +addReportToTest(selectedTest)
 }
 
@@ -53,7 +58,6 @@ package Mappers {
 
 class TestMapper {
     +toDTO(listTestsToDiagnose)
-    +toDTO(obj)
 }
 
 }
@@ -75,8 +79,9 @@ class WriteReportController {
     -Company company
     -Report report
     +getTeststoDiagnose()
+    +getTestParametersResults()
     +createReport(reportText)
-    +addReportToTest(testCode)
+    +addReportToTest(code)
 }
 
 }
