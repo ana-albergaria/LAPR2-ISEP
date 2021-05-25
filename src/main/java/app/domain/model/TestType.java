@@ -38,6 +38,8 @@ public class TestType {
      */
     private final List<ParameterCategory> selectedCategories;
 
+    private final String className;
+
 
     /**
      * Full constructor of test type
@@ -166,12 +168,14 @@ public class TestType {
     }
 
 
-    /*
+
     public ExternalModule getExternalModule() {
+
+
         Class<?> oClass = Class.forName(className);
         return (ExternalAPI) oClass.newInstance();
 
     }
-     */
+
 
 }

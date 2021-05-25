@@ -2,10 +2,13 @@ package app.domain.model;
 
 import app.controller.RecordSamplesController;
 
+import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 
+import net.sourceforge.barbecue.BarcodeFactory;
 import net.sourceforge.barbecue.output.OutputException;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Main {
@@ -22,7 +25,7 @@ public class Main {
 
         boolean success1 = ctrl.createSample();
 
-        String code2 = "0987654321";
+        String code2 = "098765432";
 
         ctrl.saveImageBarcode(code2);
 
@@ -30,10 +33,13 @@ public class Main {
 
         ctrl.saveImageBarcode(code2);
 
+        /*
+        Barcode barcode = BarcodeFactory.createUPCA(code2);
 
 
 
-/*
+
+
 
         JFrame frame = new JFrame();
         frame.getContentPane().add(barcode);
@@ -43,7 +49,9 @@ public class Main {
         frame.setLocation(500, 500);
         frame.setVisible(true);
 
- */
+         */
+
+
 
         /*
         BufferedImage img = BarcodeImageHandler.getImage(barcode);
