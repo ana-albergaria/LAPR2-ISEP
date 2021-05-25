@@ -4,7 +4,7 @@ import app.domain.model.Company;
 import app.domain.model.MyBarcode;
 import app.domain.model.Sample;
 import app.domain.model.Test;
-import app.domain.shared.ExternalAPI;
+//import app.domain.shared.ExternalAPI;
 import app.domain.shared.utils.BarcodeUtils;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
@@ -31,13 +31,15 @@ public class RecordSamplesController {
         this.company = company;
         this.sample = null;
     }
-
+/*
     public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
         MyBarcode myBarcode = getBarcode();
         SampleStore sampleStore = this.company.getSampleStore();
         this.sample = sampleStore.createSample(myBarcode);
         return sampleStore.validateSample(sample);
     }
+
+ */
 
     public boolean addSample(String code) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException {
         TestStore testStore = this.company.getTestStore();
@@ -54,7 +56,7 @@ public class RecordSamplesController {
         return mapper.toDTO(listTestsNoSamples);
     }
 
-
+/*
     public MyBarcode getBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, BarcodeException {
         ExternalAPI api = this.company.getExternalAPI();
         String barcodeNumber = BarcodeUtils.generateBarcodeNumber();
@@ -66,4 +68,6 @@ public class RecordSamplesController {
         MyBarcode myBarcode = this.sample.getMyBarcode();
         api.saveImageBarcode(myBarcode, code);
     }
+
+ */
 }

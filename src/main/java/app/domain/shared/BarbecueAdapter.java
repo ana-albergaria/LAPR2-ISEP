@@ -1,3 +1,4 @@
+/*
 package app.domain.shared;
 
 import app.domain.model.MyBarcode;
@@ -34,3 +35,5 @@ public class BarbecueAdapter implements ExternalAPI {
     }
 
 }
+
+ */

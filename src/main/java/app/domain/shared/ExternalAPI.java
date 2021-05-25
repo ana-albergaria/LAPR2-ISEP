@@ -1,3 +1,4 @@
+/*
 package app.domain.shared;
 
 import app.domain.model.MyBarcode;
@@ -11,3 +12,5 @@ public interface ExternalAPI {
 
     public abstract void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException;
 }
+
+ */
