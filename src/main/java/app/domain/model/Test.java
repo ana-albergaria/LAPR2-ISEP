@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class of the Test to be performed to a client
@@ -202,4 +203,15 @@ public class Test {
 
      */
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Test)) return false;
+        Test test = (Test) o;
+        return code.equalsIgnoreCase(test.code) &&
+                nhsCode.equalsIgnoreCase(test.nhsCode) &&
+                client.equals(test.client) &&
+                testType.equals(test.testType) &&
+                dateOfTestRegistration.equals(test.dateOfTestRegistration);
+    }
 }
