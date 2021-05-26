@@ -150,16 +150,42 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US4-CD](US4_CD.svg)
 
 # 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
+###4.1 TestType instances values:
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
-
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+**Test 1:** Check that it is not possible to create an instance of the TestType class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
+		Test test = new Test(
 	}
+	
+**Test 2:** Check if it's not possible to create a Test with empty field for each attribute.
+**For Example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCodeIsNotEmpty() {
+        TestType instance = new TestType("", "blood analysis", "needle", pcList);
+    }
+
+ 
+**Test 3:** Check if it is not possible to create a Test with each attribute's lenght not following the specified criteria.
+> * **AC3**: The NHS code must hold 12 alphanumeric digits.
+
+**For Example:**
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCodeIsNotMoreThanFiveCharacteres() {
+        TestType instance = new TestType("AAA123", "blood analysis", "needle", pcList);
+    }
+
+**Test 4** Check if it is not possible to create a Test with NHS code containing non alphanumeric characteres
+
+**Test 6** Check if it is not possible to add two identical tests to the test store
+
+**Test 7** Check if it is not possible to create a Test with a not registered client's citizen card number
+
+**Test 4** Check if it is not possible to create a Test with a not registered client's citizen card number
+
 
 *It is also recommended to organize this content by subsections.* 
 
