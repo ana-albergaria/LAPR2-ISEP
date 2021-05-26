@@ -74,10 +74,12 @@ activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL -> TP : listTestResults = getParametersResults(listTestParams)
+loop for each testParam in listTestParams
+CTRL -> TP : listTestResults = getParameterResult(testParam)
 activate TP
 |||
 deactivate TP
+end
 
 CTRL --> UI : listParameterResults
 deactivate CTRL
