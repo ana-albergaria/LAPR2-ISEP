@@ -15,14 +15,14 @@ public class SampleStoreTest {
 
     @Before
     public void setUp() throws BarcodeException {
-        barcode = (Barcode) BarcodeFactory.createUPCA("12345678901");
+        barcode = BarcodeFactory.createUPCA("12345678901");
         myBarcode = new MyBarcode(barcode, barcode.getData());
     }
 
     @Test
     public void createSample() {
         SampleStore sampleStore = new SampleStore();
-        sampleStore.createSample()
+        sampleStore.createSample(myBarcode);
 
     }
 }

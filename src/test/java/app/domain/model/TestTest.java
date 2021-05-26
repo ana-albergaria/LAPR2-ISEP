@@ -1,6 +1,7 @@
 package app.domain.model;
 
 import app.controller.RecordSamplesController;
+import app.domain.shared.Constants;
 import app.domain.store.ClientStore;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
@@ -51,8 +52,8 @@ public class TestTest {
         parametersBlood.add(wbc);
         parametersCovid.add(igg);
 
-        t1 = new TestType("CODE3","blood test","blood",pcListBlood);
-        t2 = new TestType("CODE4","covid","swab",pcList);
+        t1 = new TestType("CODE3","blood test","blood",pcListBlood, Constants.BLOOD_EXTERNAL_ADAPTER_3);
+        t2 = new TestType("CODE4","covid","swab",pcList, Constants.COVID_EXTERNAL_ADAPTER);
 
         selectedTT = new ArrayList<>();
         selectedTT.add(t1);

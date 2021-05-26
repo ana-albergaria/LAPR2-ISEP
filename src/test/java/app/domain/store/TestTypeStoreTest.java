@@ -3,6 +3,7 @@ package app.domain.store;
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
+import app.domain.shared.Constants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,15 +31,15 @@ public class TestTypeStoreTest {
     //Test 10: Check if createTestType method returns TestType correctly
     @Test
     public void createTestType() {
-        TestType expected = new TestType("AAA23", "blood analysis", "needle", pcList);
-        TestType actual = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
+        TestType expected = new TestType("AAA23", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
+        TestType actual = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         Assert.assertEquals(expected,actual);
     }
 
     //Test 11: Check that it is not possible to save a repeated Test Type in the store
     @Test
     public void ensureTestTypeIsNotSavedRepeatedWithSameObject() {
-        TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
+        TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         company.getTestTypeStore().saveTestType(t1);
         boolean actual = company.getTestTypeStore().saveTestType(t1);
         assertFalse(actual);
@@ -47,8 +48,8 @@ public class TestTypeStoreTest {
     //Test 11(with different objects with same attributes): Check that it is not possible to save a repeated Test Type in the store
     @Test
     public void ensureTestTypeIsNotSavedRepeatedWithAlikeObject() {
-        TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
-        TestType t2 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList);
+        TestType t1 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
+        TestType t2 = company.getTestTypeStore().createTestType("AAA23", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         company.getTestTypeStore().saveTestType(t1);
         boolean actual = company.getTestTypeStore().saveTestType(t2);
         assertFalse(actual);
@@ -66,8 +67,8 @@ public class TestTypeStoreTest {
     public void ensureGetWithInvalidTestTypeCodeThrowsException() {
         System.out.println("ensureGetWithInvalidTestTypeCodeThrowsException");
         TestTypeStore testTypeStore = company.getTestTypeStore();
-        TestType t1 = testTypeStore.createTestType("AAAA1", "blood analysis", "needle", pcList);
-        TestType t2 = testTypeStore.createTestType("AAAA2", "blood analysis", "needle", pcList);
+        TestType t1 = testTypeStore.createTestType("AAAA1", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
+        TestType t2 = testTypeStore.createTestType("AAAA2", "blood analysis", "needle", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         testTypeStore.saveTestType(t1);
         testTypeStore.saveTestType(t2);
         List<String> codeList = new ArrayList<String>();
