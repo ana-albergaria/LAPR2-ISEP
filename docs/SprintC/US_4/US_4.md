@@ -150,21 +150,22 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US4-CD](US4_CD.svg)
 
 # 4. Tests 
-###4.1 TestType instances values:
+###4.1 Test instances values:
 
 **Test 1:** Check that it is not possible to create an instance of the TestType class with null values. 
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Test test = new Test(
-	}
+    public void createTestWithNullParameters(){
+        app.domain.model.Test test = new app.domain.model.Test(null, null, null, null);
+    }
 	
 **Test 2:** Check if it's not possible to create a Test with empty field for each attribute.
 **For Example:**
 
     @Test(expected = IllegalArgumentException.class)
-    public void ensureTestTypeCodeIsNotEmpty() {
-        TestType instance = new TestType("", "blood analysis", "needle", pcList);
+    public void createTestWithemptyNHScode(){
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("", client, t1, parametersBlood);
     }
 
  
@@ -174,17 +175,64 @@ Other software classes (i.e. Pure Fabrication) identified:
 **For Example:**
 
     @Test(expected = IllegalArgumentException.class)
-    public void ensureTestTypeCodeIsNotMoreThanFiveCharacteres() {
-        TestType instance = new TestType("AAA123", "blood analysis", "needle", pcList);
+    public void createTestWithMore12CharsNHScode(){
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood);
     }
 
 **Test 4** Check if it is not possible to create a Test with NHS code containing non alphanumeric characteres
 
-**Test 6** Check if it is not possible to add two identical tests to the test store
+**Test 5** Check if the auto generated code is sequencial and have 12 digits
+**For Example:**
 
-**Test 7** Check if it is not possible to create a Test with a not registered client's citizen card number
+    @Test //this test checks if the generated number is 12 digits long
+    public void ensureCodeis12digits(){
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
 
-**Test 4** Check if it is not possible to create a Test with a not registered client's citizen card number
+        Assert.assertTrue(test.getCode().length() == 12);
+    }
+**Test 6** Check if samples cannot be added as null
+**For Example:**
+
+      @Test 
+      public void ensureNotPossibleToAddNullSample() {
+         TestStore testStore = new TestStore();
+         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+         app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+ 
+         Assert.assertFalse(test.addSample(null));
+      }
+
+
+###4.1 Test Store:
+
+**Test 7** Check if it is not possible to add a test with being null
+
+**Test 8** Check if it is not possible to add two identical tests to the test store
+
+**Test 9** Check if tests with no samples are being found correctly
+**For Example:**
+
+     public void ensureTestsWithNoSamplesAreFound(){
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
+        Client client3 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex3@gmail.com", "Alex", "12345688901");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t2, parametersCovid);
+        app.domain.model.Test test3 = testStore.createTest("123456789012", client3, t1, parametersBlood);
+        testStore.saveTest(test);
+        testStore.saveTest(test2);
+        testStore.saveTest(test3);
+
+
+        Assert.assertEquals(testStore.getTestsWithNoSamples(), testStore.getTests());
+    }
+    
+**Test 10** Check if tests are being found by barcode number and by code
+
+**Test 10** Check if getting tests with not existent barcode numbers or codes are throwing exceptions
 
 
 *It is also recommended to organize this content by subsections.* 

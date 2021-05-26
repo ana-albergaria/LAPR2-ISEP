@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class of the Test to be performed to a client
@@ -98,6 +99,7 @@ public class Test {
         this.testParameters = addTestParameters(parameters);
         this.samples = new ArrayList<>();
         this.dateOfTestRegistration = generateNowDateAndTime();
+        this.diagnosisReport = null;
     }
 
     public String getCode(){
@@ -138,7 +140,7 @@ public class Test {
      * Generates a sequencial code based on the number of existing tests
      * @return 12 digits sequencial number of current test.
      */
-    public String generateCode(){
+    private String generateCode(){
         return String.format("%012d", totalTests);
     }
 
@@ -208,4 +210,15 @@ public class Test {
 
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Test)) return false;
+        Test test = (Test) o;
+        return code.equalsIgnoreCase(test.code) &&
+                nhsCode.equalsIgnoreCase(test.nhsCode) &&
+                client.equals(test.client) &&
+                testType.equals(test.testType) &&
+                dateOfTestRegistration.equals(test.dateOfTestRegistration);
+    }
 }

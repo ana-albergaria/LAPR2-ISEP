@@ -26,6 +26,7 @@ public class TestParameter {
      */
     public TestParameter(Parameter parameter){
         this.parameter = parameter;
+        testParameterResult = null;
     }
 
     public Parameter getParameter() {
