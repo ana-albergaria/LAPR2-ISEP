@@ -102,9 +102,9 @@ public class TestStore {
         return listTestsNoSamples;
     }
 
-
-    //public List<TestParameter> getTestParameters(Test tst) {
-    //}
+    public List<TestParameter> getTestParameters(Test tst) {
+        return new ArrayList<>(tst.getParameters());
+    }
 
     public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
