@@ -64,7 +64,7 @@ public class TestTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void findNotExistentClient(){
+    public void ensureNotPossibleToFindNotExistentClient(){
         ClientStore clientStore = new ClientStore();
         clientStore.getClientByCitizenCardNum("1234567890123456");
     }
@@ -107,7 +107,13 @@ public class TestTest {
         Assert.assertTrue(firstAndSecondCondition && secondAndThirdCondition);
     }
 
-    
+    @Test //this test checks if the generated number is 12 digits long
+    public void ensureCodeis12digits(){
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
+
+        Assert.assertTrue(test.getCode().length() == 12);
+    }
 
 
 }

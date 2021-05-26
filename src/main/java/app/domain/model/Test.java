@@ -139,7 +139,7 @@ public class Test {
      * Generates a sequencial code based on the number of existing tests
      * @return 12 digits sequencial number of current test.
      */
-    public String generateCode(){
+    private String generateCode(){
         return String.format("%012d", totalTests);
     }
 
