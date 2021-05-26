@@ -11,6 +11,7 @@ package UI <<Folder>> {
 
 package Domain <<Folder>> {
     package Model <<Folder>> {
+        class Report{}
         class TestParameter{
             +TestParameter(parameter: Parameter)
         }
@@ -26,8 +27,12 @@ package Domain <<Folder>> {
         }
 
         class Test{
-            - NHSCode: String
-            - code: String
+            - code
+            - NhsCode
+            - dateOfTestRegistration
+            - dateOfSamplesCollection
+            - dateOfChemicalAnalysis
+            - dateOfDiagnosis
         }
 
         class Sample{
@@ -175,6 +180,6 @@ Test "1" -- "1..*" Sample : collects >
 Client "1" -- "1" Test : requested by <
 Parameter "*" -- "1" ParameterCategory: presented under >
 TestType "1" -- "1..*" ParameterCategory : characterized by >
-
+Report "1" -- "1" Test : is of >
 
 @enduml
