@@ -83,38 +83,6 @@ CTRL --> UI : listTestParamsDTO
 
 deactivate CTRL
 
-UI -> CTRL : listTestResultsDTO = getTestParametersResults(listTestParamsDTO)
-activate CTRL
-
-CTRL --> LTPR** : create()
-loop for each testParam in listTestParams
-CTRL -> TP : listTestResults = getParameterResult(testParam)
-activate TP
-TP --> LTPR : add(testResult)
-end
-TP --> CTRL : listTestResults
-deactivate TP
-
-CTRL -> TRMAPPER : listTestResultsDTO = toDTO(listTestResults)
-activate TRMAPPER
-ref over TRMAPPER : US14_SD_TestResultsMapper_toDTO
-TRMAPPER --> CTRL : listTestResultsDTO
-deactivate TRMAPPER
-
-CTRL --> UI : listParameterResults
-deactivate CTRL
-
-'getTestByCode()
-'getTestParameters()
-'getTestParameterResult()
-'getParametersResults()
-'getValue()
-'getReferenceValue()
-'vai ter code.getTestByCode().getTestParameters().getParametersResults()
-'vai ter getParametersResults().getValues()
-'vai ter getParametersResults().getReferenceValues()
-
-
 UI --> SPDT : shows parameters and chemical results and reference values of each parameter of the selected test and requests data(i.e., reportText)
 deactivate UI
 
