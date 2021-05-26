@@ -39,7 +39,7 @@ public class TestType {
      */
     private final List<ParameterCategory> selectedCategories;
 
-    private final String className;
+/*    private final String className;*/
 
 
     /**
@@ -50,7 +50,7 @@ public class TestType {
      * @param collectingMethod Test type's collecting methods
      * @param selectedCategories Test type's categories list
      */
-    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories, String classname) {
+    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
         checkCode(code);
         checkDescription(description);
         checkCollectingMethod(collectingMethod);
@@ -58,7 +58,7 @@ public class TestType {
         this.description = description;
         this.collectingMethod = collectingMethod;
         this.selectedCategories = new ArrayList<>(selectedCategories);
-        this.className = classname;
+/*        this.className = classname;*/
     }
 
     //to be used for US8
@@ -170,6 +170,7 @@ public class TestType {
     }
 
 
+/*
     public ExternalModule getExternalModule() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
        String fullClassName = className.equalsIgnoreCase("covid") ?
@@ -179,6 +180,9 @@ public class TestType {
         Class<?> oClass = Class.forName(fullClassName);
         return (ExternalModule) oClass.newInstance();
     }
+*/
+
+
 
 
 }

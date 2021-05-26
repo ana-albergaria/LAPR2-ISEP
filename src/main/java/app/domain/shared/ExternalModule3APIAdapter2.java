@@ -1,6 +1,6 @@
 package app.domain.shared;
 
-public class ExternalModuleAdapter1 {
+public class ExternalModule3APIAdapter2 {
 
     //getReferenceValue(Parameter param)
 

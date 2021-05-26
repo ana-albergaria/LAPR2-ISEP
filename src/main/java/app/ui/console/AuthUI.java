@@ -55,6 +55,7 @@ public class AuthUI implements Runnable{
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(Constants.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(Constants.ROLE_RECEPTIONIST, new RecepcionistUI()));
+        rolesUI.add(new MenuItem(Constants.ROLE_MED_LAB_TECHNICIAN, new MedLabTechUI()));
         // To complete with other user roles and related RoleUI
 
         //

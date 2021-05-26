@@ -86,11 +86,12 @@ public class TestStore {
         List<Test> listTestsNoSamples = new ArrayList<>();
 
         for (Test test : testList) {
-            if(test.getSamples().size() == 0)
+            if(!test.hasSamples())
                 listTestsNoSamples.add(test);
         }
         return listTestsNoSamples;
     }
+
 
 
     //public List<TestParameter> getTestParameters(Test tst) {
