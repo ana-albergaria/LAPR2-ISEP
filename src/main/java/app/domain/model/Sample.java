@@ -2,6 +2,7 @@ package app.domain.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Represents a Sample through:
@@ -19,7 +20,7 @@ public class Sample {
     /**
      * The collecting date of the Sample.
      */
-    private Date collectingDate;
+    private String collectingDate;
 
     /**
      * Builds a Sample's instance receiving:
@@ -29,7 +30,7 @@ public class Sample {
      */
     public Sample(MyBarcode myBarcode) {
         this.myBarcode = myBarcode;
-        this.collectingDate = Calendar.getInstance().getTime();
+        this.collectingDate = null;
     }
 
     /**
@@ -46,8 +47,28 @@ public class Sample {
      *
      * @return collecting date of the Sample
      */
-    public Date getCollectingDate() {
+    public String getCollectingDate() {
         return collectingDate;
+    }
+
+    /**
+     * Compares the Sample with the received object.
+     *
+     * @param otherObject the object to be compared with the Sample
+     * @return true if the received object represents other Sample
+     * equivalent to the Sample. Otherwise, returns false.
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        Sample otherSample = (Sample) otherObject;
+
+        return this.myBarcode.equals(otherSample.myBarcode);
     }
 
 

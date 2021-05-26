@@ -67,5 +67,25 @@ public class MyBarcode {
     public static int getTotalBarcodes() {
         return totalBarcodes;
     }
+
+    /**
+     * Compares the MyBarcode with the received object.
+     *
+     * @param otherObject the object to be compared with the MyBarcode
+     * @return true if the received object represents other MyBarcode
+     * equivalent to the MyBarcode. Otherwise, returns false.
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        MyBarcode otherMyBarcode = (MyBarcode) otherObject;
+
+        return this.barcodeNumber.equals(otherMyBarcode.barcodeNumber);
+    }
 }
 
