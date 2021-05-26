@@ -32,8 +32,8 @@ public class US8_CompanyTest {
         pcList.add(p1);
         pcList.add(p2);
         company = new Company("Many Labs");
-        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
-        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
+        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList,"");
+        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList,"");
         company.getTestTypeStore().saveTestType(t1);
         company.getTestTypeStore().saveTestType(t2);
         selectedTT = new ArrayList<>();

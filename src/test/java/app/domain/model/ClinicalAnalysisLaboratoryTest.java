@@ -23,8 +23,8 @@ public class ClinicalAnalysisLaboratoryTest {
         p2 = new ParameterCategory("CODE2","Name");
         pcList.add(p1);
         pcList.add(p2);
-        t1 = new TestType("CODE3","Description","swab",pcList);
-        t2 = new TestType("CODE4","Description","swab",pcList);
+        t1 = new TestType("CODE3","Description","swab",pcList,"");
+        t2 = new TestType("CODE4","Description","swab",pcList,"");
         selectedTT = new ArrayList<>();
         selectedTT.add(t1);
         selectedTT.add(t2);
@@ -348,8 +348,8 @@ public class ClinicalAnalysisLaboratoryTest {
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
         List<TestType> differentSelectedTT = new ArrayList<>();
-        TestType t3 = new TestType("TEST3","Description","blood",pcList);
-        TestType t4 = new TestType("TEST4","Description","blood",pcList);
+        TestType t3 = new TestType("TEST3","Description","blood",pcList,"");
+        TestType t4 = new TestType("TEST4","Description","blood",pcList,"");
         differentSelectedTT.add(t3);
         differentSelectedTT.add(t4);
 
