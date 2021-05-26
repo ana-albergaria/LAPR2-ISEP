@@ -1,9 +1,11 @@
 package app.domain.model;
 
 public class MyReferenceValue {
-    private Object referenceValue;
+    private Double minValue;
+    private Double maxValue;
 
-    public MyReferenceValue(Object referenceValue) {
-        this.referenceValue = referenceValue;
+    public MyReferenceValue(Double minValue, Double maxValue) {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
     }
 }

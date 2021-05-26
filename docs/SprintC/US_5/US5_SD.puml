@@ -30,7 +30,7 @@ activate COMPANY
 |||
 deactivate COMPANY
 
-CTRL -> TEST_STORE : listTestsNoSamples = getTestsWithNoSamples()
+CTRL -> TEST_STORE : getTestsWithNoSamples()
 activate TEST_STORE
 
 ref over TEST_STORE
@@ -41,7 +41,7 @@ TEST_STORE --> CTRL : listTestsNoSamples
 deactivate TEST_STORE
 |||
 
-CTRL -> TEST_MAPPER : listTestsNoSamplesDto = toDTO(listTestsNoSamples)
+CTRL -> TEST_MAPPER : toDTO(listTestsNoSamples)
 activate TEST_MAPPER
 
 ref over TEST_MAPPER

@@ -122,8 +122,6 @@ public class Test {
         return new ArrayList<>(testParameters);
     }
 
-    //Como mudar o estado do teste? Responsabilidade do test? (if samples.size() == x)
-    //Como mudar o estado do teste? Responsabilidade do test? sim
     public boolean addSample(Sample sample) {
         if(sample != null)
             return this.samples.add(sample);
@@ -174,6 +172,12 @@ public class Test {
             throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
     }
 
+    /**
+     * Method to verify if the test has Samples collected.
+     *
+     * @return true if the test has samples collected.
+     *          Otherwise, it returns false.
+     */
     public boolean hasSamples() {
         return this.samples.size() > 0;
     }

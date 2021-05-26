@@ -81,7 +81,12 @@ public class TestStore {
 
     }*/
 
-    //to be used in US5
+    /**
+     * Method for getting list of tests in the store list with no samples collected.
+     *
+     *
+     * @return list of tests with no samples
+     */
     public List<Test> getTestsWithNoSamples() {
         List<Test> listTestsNoSamples = new ArrayList<>();
 

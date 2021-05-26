@@ -2,6 +2,9 @@ package app.domain.model;
 
 import app.controller.RecordSamplesController;
 
+import com.example1.ExternalModule3API;
+import com.example2.ExternalModule2API;
+import com.example3.CovidReferenceValues1API;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 
@@ -33,7 +36,27 @@ public class Main {
 
         ctrl.saveImageBarcode(code2);
 
+        ParameterCategory pc1 = new ParameterCategory("code1","name");
+        Parameter p1 = new Parameter("HB000","name","descrip",pc1);
 
+        ExternalModule2API em2api = new ExternalModule2API();
+        System.out.println(em2api.getReferenceFor(p1.getPrmCode()));
+
+        ExternalModule3API em3api = new ExternalModule3API();
+        Double minRefValue = em3api.getMinReferenceValue(p1.getPrmCode(), 12345);
+        Double maxRefValue = em3api.getMaxReferenceValue(p1.getPrmCode(), 12345);
+
+        System.out.println(minRefValue + "          " + maxRefValue);
+
+        Parameter p2 = new Parameter("IgGAN","name","descrip",pc1);
+
+        CovidReferenceValues1API crv1api = new CovidReferenceValues1API();
+        Double min = crv1api.getMinReferenceValue(p2.getPrmCode(), 12345);
+        Double max = crv1api.getMaxReferenceValue(p2.getPrmCode(), 12345);
+
+        System.out.println(min + "          " + max);
+
+        /*
         Barcode barcode = BarcodeFactory.createUPCA(code2);
         barcode.setPreferredBarHeight(100);
 
@@ -49,6 +72,8 @@ public class Main {
         frame.pack();
         frame.setLocation(500, 500);
         frame.setVisible(true);
+
+         */
 
 
 
