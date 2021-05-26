@@ -232,6 +232,7 @@ Other software classes (i.e. Pure Fabrication) identified:
     
 **Test 10** Check if tests are being found by barcode number and by code
 
+**Test 10** Check if getting tests with not existent barcode numbers or codes are throwing exceptions
 
 
 *It is also recommended to organize this content by subsections.* 
