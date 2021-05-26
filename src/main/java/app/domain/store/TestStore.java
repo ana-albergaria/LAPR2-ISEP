@@ -70,7 +70,7 @@ public class TestStore {
                 return tst;
             }
         }
-        throw new UnsupportedOperationException("Parameter Category not found!");
+        throw new UnsupportedOperationException("Test not found in ready to diagnosis list!");
     }
 
     public Test getTestByCodeInTestList(String code) {
@@ -112,13 +112,13 @@ public class TestStore {
 
     public Test getTestByBarcodeNumber(String barcodeNumber) {
         for (Test test : testList) {
-            if (TestHasBarcodeNumber(test, barcodeNumber))
+            if (testHasBarcodeNumber(test, barcodeNumber))
                 return test;
         }
         throw new UnsupportedOperationException("Test not found!");
     }
 
-    public boolean TestHasBarcodeNumber(Test test, String barcodeNumber) {
+    public boolean testHasBarcodeNumber(Test test, String barcodeNumber) {
         for (Sample sample : test.getSamples()) {
             if (sample.getMyBarcode().getBarcodeNumber().equals(barcodeNumber))
                 return true;

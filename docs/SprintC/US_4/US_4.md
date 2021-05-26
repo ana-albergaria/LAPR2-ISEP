@@ -230,7 +230,7 @@ Other software classes (i.e. Pure Fabrication) identified:
         Assert.assertEquals(testStore.getTestsWithNoSamples(), testStore.getTests());
     }
     
-**Test 10** Check if tests are being found by barcode number
+**Test 10** Check if tests are being found by barcode number and by code
 
 
 

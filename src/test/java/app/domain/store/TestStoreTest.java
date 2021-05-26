@@ -109,4 +109,47 @@ public class TestStoreTest {
         Assert.assertTrue(testStore.getTestByBarcodeNumber(myBarcode.getBarcodeNumber()) == test);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureNotExistentBarcodeNumThrowsException() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
+        TestStore testStore = new TestStore();
+        SampleStore sampleStore = new SampleStore();
+        RecordSamplesController recordSamplesController = new RecordSamplesController();
+
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        MyBarcode myBarcode = recordSamplesController.getBarcode();
+        Sample sample = sampleStore.createSample(myBarcode);
+
+        test.addSample(sample);
+
+        testStore.getTestByBarcodeNumber("012345678912");
+    }
+
+    @Test //checks if tests with no sample are being found correctly
+    public void ensureTestsAreFoundByCode()  {
+        TestStore testStore = new TestStore();
+        SampleStore sampleStore = new SampleStore();
+        RecordSamplesController recordSamplesController = new RecordSamplesController();
+
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+
+        Assert.assertTrue(testStore.getTestByCodeInTestList(test.getCode()) == test);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureNotExistentCodeThrowsException() {
+        TestStore testStore = new TestStore();
+
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        testStore.getTestByCodeInTestList("000000000002");
+    }
+
 }
