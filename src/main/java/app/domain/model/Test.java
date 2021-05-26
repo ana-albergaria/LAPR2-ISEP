@@ -2,7 +2,9 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +40,11 @@ public class Test {
     private TestType testType;
 
     /**
+     * Report of test results
+     */
+    private Report diagnosisReport;
+
+    /**
      * Samples which the test contains
      */
     private List<Sample> samples;
@@ -48,12 +55,32 @@ public class Test {
     private List<TestParameter> testParameters;
 
     /**
+     * Date of test registration
+     */
+    private final String dateOfTestRegistration;
+
+    /**
+     * Date of samples collection
+     */
+    private String dateOfSamplesCollection;
+
+    /**
+     * Date of chemical analysis
+     */
+    private String dateOfChemicalAnalysis;
+
+    /**
+     * Date of diagnosis
+     */
+    private String dateOfDiagnosis;
+
+    /**
      * Number of existing tests.
      */
     private static int totalTests = 0;
-
     /**
-     * Constructor only without samples, since in the business process they are added later on
+     * Constructor only without samples, since in the business process they are added later on,
+     * also generates the attribute code, test registration time and makes the list of parameter into test parameters
      * @param nhsCode National health system code of a given test
      * @param client Client object which has solicited a test
      * @param testType Type of test to be conduted
@@ -68,6 +95,7 @@ public class Test {
         this.testType = testType;
         this.testParameters = addTestParameters(parameters);
         this.samples = new ArrayList<>();
+        this.dateOfTestRegistration = generateNowDateAndTime();
     }
 
     public String getCode(){
@@ -102,12 +130,21 @@ public class Test {
         return false;
     }
 
+    public void addSampleCollectionDate(){
+        this.dateOfSamplesCollection = generateNowDateAndTime();
+    }
+
     /**
      * Generates a sequencial code based on the number of existing tests
      * @return 12 digits sequencial number of current test.
      */
     public String generateCode(){
         return String.format("%012d", totalTests);
+    }
+
+    private String generateNowDateAndTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return simpleDateFormat.format(new Date());
     }
 
     /**
@@ -138,9 +175,11 @@ public class Test {
     }
 
     public boolean hasSamples() {
-        if(this.samples.size() > 0)
-            return true;
-        return false;
+        return this.samples.size() > 0;
+    }
+
+    public String getDateOfTestRegistration() {
+        return dateOfTestRegistration;
     }
 
     /*
