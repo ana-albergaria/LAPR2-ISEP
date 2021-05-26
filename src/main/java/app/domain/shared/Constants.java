@@ -1,5 +1,8 @@
 package app.domain.shared;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
@@ -17,7 +20,12 @@ public class Constants {
     public static final String PARAMS_FILENAME = "config.properties";
     public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
 
+    public static final String BLOOD_MODULE_1_NAME = "BloodModule1 (for blood tests, requires a key access)";
+    public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";
+    public static final String COVID_MODULE_NAME = "CovidModule (for Covid 19 Tests)";
+
     public static final String BLOOD_EXTERNAL_ADAPTER_2 = "app.domain.model.ExternalModule2APIAdapter";
     public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.model.ExternalModule3APIAdapter";
     public static final String COVID_EXTERNAL_ADAPTER = "app.domain.model.CovidReferenceValues1APIAdapter";
+
 }

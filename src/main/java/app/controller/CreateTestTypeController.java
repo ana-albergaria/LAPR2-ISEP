@@ -3,6 +3,7 @@ package app.controller;
 import app.domain.model.Company;
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
+import app.domain.shared.Constants;
 import app.domain.store.ParameterCategoryStore;
 import app.domain.store.TestTypeStore;
 import app.mappers.CategoriesMapper;
@@ -53,13 +54,14 @@ public class CreateTestTypeController {
      * @param selectedCategoriesCodes Test type's categories ids list
      * @return True if succesfully created and false if not
      */
-    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes) {
+    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes, String nameOfExternalModule) {
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
 
         List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
+        String classNameOfApi = getExternalModuleNameByIndex(nameOfExternalModule);
 
-        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories);
+        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories, classNameOfApi);
         return testTypeStore.validateTestType(testType);
     }
 
@@ -71,6 +73,13 @@ public class CreateTestTypeController {
     public boolean saveTestType() {
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
         return testTypeStore.saveTestType(testType);
+    }
+
+    private String getExternalModuleNameByIndex(String nameOfExternalModule){
+        return nameOfExternalModule.equals(Constants.COVID_MODULE_NAME) ? Constants.COVID_EXTERNAL_ADAPTER :
+                nameOfExternalModule.equals(Constants.BLOOD_MODULE_1_NAME) ? Constants.BLOOD_EXTERNAL_ADAPTER_2 :
+                        nameOfExternalModule.equals(Constants.BLOOD_MODULE_2_NAME) ? Constants.BLOOD_EXTERNAL_ADAPTER_3 :
+                                null;
     }
 
     /**

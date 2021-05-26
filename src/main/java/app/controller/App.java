@@ -88,16 +88,16 @@ public class App {
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
-        TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore());
+        TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER);
         this.company.getTestTypeStore().saveTestType(t1);
         List<TestType> selectedTT = new ArrayList<>();
         selectedTT.add(t1);
-        TestType t2 = new TestType("COD22","blabla","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore());
+        TestType t2 = new TestType("COD22","blabla","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER);
         this.company.getTestTypeStore().saveTestType(t2);
         selectedTT.add(t2);
         ParameterCategory p1 = new ParameterCategory("code1","descrip");
         this.company.getParameterCategoryStore().saveParameterCategory(p1);
-        this.company.getTestTypeStore().saveTestType(new TestType("CODE3","Description","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore()));
+        this.company.getTestTypeStore().saveTestType(new TestType("CODE3","Description","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER));
         Date d1 = new Date();
         Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","carlos@gmail.com","Carlos","12345678901");
         this.company.getClientStore().saveClient(c1);

@@ -2,6 +2,7 @@ package app.domain.store;
 
 import app.controller.RecordSamplesController;
 import app.domain.model.*;
+import app.domain.shared.Constants;
 import net.sourceforge.barbecue.BarcodeException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,8 +51,8 @@ public class TestStoreTest {
         parametersBlood.add(wbc);
         parametersCovid.add(igg);
 
-        t1 = new TestType("CODE3","blood test","blood",pcListBlood);
-        t2 = new TestType("CODE4","covid","swab",pcList);
+        t1 = new TestType("CODE3","blood test","blood",pcListBlood, Constants.BLOOD_EXTERNAL_ADAPTER_2);
+        t2 = new TestType("CODE4","covid","swab",pcList, Constants.COVID_EXTERNAL_ADAPTER);
 
         selectedTT = new ArrayList<>();
         selectedTT.add(t1);
