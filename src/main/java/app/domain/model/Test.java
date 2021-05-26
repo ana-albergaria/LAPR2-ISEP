@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.shared.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
@@ -78,6 +79,7 @@ public class Test {
      * Number of existing tests.
      */
     private static int totalTests = 0;
+
     /**
      * Constructor only without samples, since in the business process they are added later on,
      * also generates the attribute code, test registration time and makes the list of parameter into test parameters
@@ -186,13 +188,13 @@ public class Test {
         return dateOfTestRegistration;
     }
 
-    /*
-    public boolean addTestResult(String parameterCode, String result, String metric) {
+    //void
+    public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();
-
-
-
+        ExternalModule api = this.testType.getExternalModule();
+        MyReferenceValue refValue = api.getReferenceValue(selectedParameter);
+        testParameter.addResult(result, metric, refValue);
     }
 
     private TestParameter getTestParameterFor(String parameterCode) {
@@ -204,6 +206,6 @@ public class Test {
         throw new UnsupportedOperationException("Test Parameter not found!");
     }
 
-     */
+
 
 }

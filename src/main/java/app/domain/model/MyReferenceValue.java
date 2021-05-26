@@ -8,4 +8,12 @@ public class MyReferenceValue {
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
+
+    public Double getMinValue() {
+        return minValue;
+    }
+
+    public Double getMaxValue() {
+        return maxValue;
+    }
 }

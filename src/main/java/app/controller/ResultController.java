@@ -57,13 +57,12 @@ public class ResultController {
         return mapper.toDTO(listTotalTestParameters);
     }
 
-    /*
-    public boolean addTestResult(String parameterCode, String result, String metric) {
-        test.addTestResult(parameterCode, result, metric);
-
+    //void?
+    public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        this.test.addTestResult(parameterCode, result, metric);
     }
 
-     */
+
 
 
 

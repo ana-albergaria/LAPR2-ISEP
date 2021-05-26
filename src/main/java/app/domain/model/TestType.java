@@ -39,7 +39,7 @@ public class TestType {
      */
     private final List<ParameterCategory> selectedCategories;
 
-/*    private final String className;*/
+    private String classNameOfApi;
 
 
     /**
@@ -50,7 +50,7 @@ public class TestType {
      * @param collectingMethod Test type's collecting methods
      * @param selectedCategories Test type's categories list
      */
-    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
+    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories, String classNameOfApi) {
         checkCode(code);
         checkDescription(description);
         checkCollectingMethod(collectingMethod);
@@ -58,7 +58,8 @@ public class TestType {
         this.description = description;
         this.collectingMethod = collectingMethod;
         this.selectedCategories = new ArrayList<>(selectedCategories);
-/*        this.className = classname;*/
+        this.classNameOfApi = classNameOfApi;
+
     }
 
     //to be used for US8
@@ -170,17 +171,18 @@ public class TestType {
     }
 
 
-/*
+
     public ExternalModule getExternalModule() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-
-       String fullClassName = className.equalsIgnoreCase("covid") ?
-                    Constants.COVID_EXTERNAL_ADAPTER : className.equalsIgnoreCase("blood") ?
-                    Constants.BLOOD_EXTERNAL_ADAPTER_2 : Constants.BLOOD_EXTERNAL_ADAPTER_3;
-
-        Class<?> oClass = Class.forName(fullClassName);
+        Class<?> oClass = Class.forName(classNameOfApi);
         return (ExternalModule) oClass.newInstance();
     }
-*/
+
+    /*
+    String fullClassName = className.equalsIgnoreCase("covid") ?
+                    Constants.COVID_EXTERNAL_ADAPTER : className.equalsIgnoreCase("blood") ?
+                    Constants.BLOOD_EXTERNAL_ADAPTER_2 : Constants.BLOOD_EXTERNAL_ADAPTER_3;
+     */
+
 
 
 
