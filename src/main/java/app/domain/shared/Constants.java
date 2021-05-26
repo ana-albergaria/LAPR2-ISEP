@@ -16,4 +16,8 @@ public class Constants {
 
     public static final String PARAMS_FILENAME = "config.properties";
     public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
+
+    public static final String BLOOD_EXTERNAL_ADAPTER_2 = "app.domain.model.ExternalModule2APIAdapter";
+    public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.model.ExternalModule3APIAdapter";
+    public static final String COVID_EXTERNAL_ADAPTER = "app.domain.model.CovidReferenceValues1APIAdapter";
 }

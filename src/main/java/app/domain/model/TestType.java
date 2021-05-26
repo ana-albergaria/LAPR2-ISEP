@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.shared.Constants;
 import app.domain.shared.ExternalAPI;
 import app.domain.shared.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
@@ -49,7 +50,7 @@ public class TestType {
      * @param collectingMethod Test type's collecting methods
      * @param selectedCategories Test type's categories list
      */
-    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
+    public TestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories, String classname) {
         checkCode(code);
         checkDescription(description);
         checkCollectingMethod(collectingMethod);
@@ -57,6 +58,7 @@ public class TestType {
         this.description = description;
         this.collectingMethod = collectingMethod;
         this.selectedCategories = new ArrayList<>(selectedCategories);
+        this.className = classname;
     }
 
     //to be used for US8
@@ -168,13 +170,14 @@ public class TestType {
     }
 
 
+    public ExternalModule getExternalModule() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
-    public ExternalModule getExternalModule() {
+       String fullClassName = className.equalsIgnoreCase("covid") ?
+                    Constants.COVID_EXTERNAL_ADAPTER : className.equalsIgnoreCase("blood") ?
+                    Constants.BLOOD_EXTERNAL_ADAPTER_2 : Constants.BLOOD_EXTERNAL_ADAPTER_3;
 
-
-        Class<?> oClass = Class.forName(className);
-        return (ExternalAPI) oClass.newInstance();
-
+        Class<?> oClass = Class.forName(fullClassName);
+        return (ExternalModule) oClass.newInstance();
     }
 
 
