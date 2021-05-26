@@ -39,8 +39,7 @@ public class TestParameter {
 
     //addResult(result, metric, refValue)
 
-    /*public List<TestParameterResult> getParameterResult(List<TestParameter> listTestParams){
-
-    }*/
-
+    public TestParameterResult getParameterResult() {
+        return testResult;
+    }
 }

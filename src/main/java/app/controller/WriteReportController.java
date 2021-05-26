@@ -59,7 +59,7 @@ public class WriteReportController {
         return mapper.toDTO(testsToDiagnose);
     }
 
-    /*public List<TestParameterResult> getTestParametersResults(String code){
+    public List<TestParameterResult> getTestParametersResults(String code){
         TestStore tstStore = this.company.getTestStore();
         Test tst = tstStore.getTestByCode(code);
         List<TestParameter> listTestParams = tstStore.getTestParameters(tst);
@@ -67,6 +67,6 @@ public class WriteReportController {
         for (TestParameter testParam : listTestParams )
             listTestResults.add(testParam.getParameterResult());
         return listTestResults;
-    }*/
+    }
 
 }
