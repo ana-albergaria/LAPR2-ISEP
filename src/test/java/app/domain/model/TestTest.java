@@ -1,6 +1,9 @@
 package app.domain.model;
 
+import app.controller.RecordSamplesController;
 import app.domain.store.ClientStore;
+import app.domain.store.SampleStore;
+import app.domain.store.TestStore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +12,6 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -113,6 +115,15 @@ public class TestTest {
         app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
 
         Assert.assertTrue(test.getCode().length() == 12);
+    }
+
+    @Test
+    public void ensureNotPossibleToAddNullSample() {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+
+        Assert.assertFalse(test.addSample(null));
     }
 
 

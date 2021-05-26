@@ -97,6 +97,7 @@ public class Test {
         this.testParameters = addTestParameters(parameters);
         this.samples = new ArrayList<>();
         this.dateOfTestRegistration = generateNowDateAndTime();
+        this.diagnosisReport = null;
     }
 
     public String getCode(){

@@ -1,9 +1,8 @@
 package app.domain.store;
 
-import app.domain.model.Client;
-import app.domain.model.Parameter;
-import app.domain.model.ParameterCategory;
-import app.domain.model.TestType;
+import app.controller.RecordSamplesController;
+import app.domain.model.*;
+import net.sourceforge.barbecue.BarcodeException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,6 +72,41 @@ public class TestStoreTest {
         app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
         testStore.saveTest(test);
         Assert.assertFalse(testStore.saveTest(test));
+    }
+
+    @Test //checks if tests with no sample are being found correctly
+    public void ensureTestsWithNoSamplesAreFound(){
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
+        Client client3 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex3@gmail.com", "Alex", "12345688901");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t2, parametersCovid);
+        app.domain.model.Test test3 = testStore.createTest("123456789012", client3, t1, parametersBlood);
+        testStore.saveTest(test);
+        testStore.saveTest(test2);
+        testStore.saveTest(test3);
+
+
+        Assert.assertEquals(testStore.getTestsWithNoSamples(), testStore.getTests());
+    }
+
+    @Test //checks if tests with no sample are being found correctly
+    public void ensureTestIsFoundByBarcodeNumber() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
+        TestStore testStore = new TestStore();
+        SampleStore sampleStore = new SampleStore();
+        RecordSamplesController recordSamplesController = new RecordSamplesController();
+
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        MyBarcode myBarcode = recordSamplesController.getBarcode();
+        Sample sample = sampleStore.createSample(myBarcode);
+
+        test.addSample(sample);
+
+        Assert.assertTrue(testStore.getTestByBarcodeNumber(myBarcode.getBarcodeNumber()) == test);
     }
 
 }

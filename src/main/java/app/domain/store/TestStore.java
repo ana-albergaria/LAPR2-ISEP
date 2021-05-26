@@ -55,6 +55,10 @@ public class TestStore {
         return this.testList.add(test);
     }
 
+    public List<Test> getTests() {
+        return new ArrayList<>(testList);
+    }
+
     public List<Test> getTestsReadyToDiagnose() {
         return testsReadyToDiagnose;
     }
