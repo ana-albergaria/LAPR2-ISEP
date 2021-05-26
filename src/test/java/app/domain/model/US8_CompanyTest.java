@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.shared.Constants;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,8 +33,10 @@ public class US8_CompanyTest {
         pcList.add(p1);
         pcList.add(p2);
         company = new Company("Many Labs");
-        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList);
-        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList);
+        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList,"");
+        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList,"");
+        t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
+        t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         company.getTestTypeStore().saveTestType(t1);
         company.getTestTypeStore().saveTestType(t2);
         selectedTT = new ArrayList<>();

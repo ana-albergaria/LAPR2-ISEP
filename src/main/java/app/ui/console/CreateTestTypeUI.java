@@ -1,6 +1,7 @@
 package app.ui.console;
 
 import app.controller.CreateTestTypeController;
+import app.domain.shared.Constants;
 import app.mappers.dto.CategoriesDTO;
 import app.ui.console.utils.Utils;
 
@@ -35,9 +36,11 @@ public class CreateTestTypeUI implements Runnable{
             String description = Utils.readLineFromConsole("Enter description: ");
             String collectingMethod = Utils.readLineFromConsole("Enter collecting method: ");
             List<String> categoriesCodes = getCategoriesToCodes();
-            ctrl.createTestType(code, description, collectingMethod, categoriesCodes);
+            String externalModuleName = getExternalModuleName();
+            ctrl.createTestType(code, description, collectingMethod, categoriesCodes, externalModuleName);
             confirm = Utils.confirm(String.format("Please confirm the data (type `s` if its correct, `n` if it is not):" +
-                    "%n code: %s%n description: %s%n collecting method: %s%n codes of the categories: %s%n", code, description, collectingMethod, categoriesCodes));
+                    "%n code: %s%n description: %s%n collecting method: %s%n codes of the categories: %s%n selected module: %s%n",
+                        code, description, collectingMethod, categoriesCodes, externalModuleName));
             if(!confirm) throw new Exception("Please enter the correct data");
             success = ctrl.saveTestType();
             if(!success) throw new Exception("Test type either already existent or null, please try again");
@@ -73,6 +76,16 @@ public class CreateTestTypeUI implements Runnable{
         }
         return parameterCategoriesCodes;
     }
+
+    private String getExternalModuleName(){
+        List<String> externalModulesList = new ArrayList<>();
+        externalModulesList.add(Constants.COVID_MODULE_NAME);
+        externalModulesList.add(Constants.BLOOD_MODULE_1_NAME);
+        externalModulesList.add(Constants.BLOOD_MODULE_2_NAME);
+
+        return (String) Utils.showAndSelectOne(externalModulesList, "Please select the module that should be used to analyse this type of test's parameters: ");
+    }
+
 
     private List<String> menuToContinueOrCancel() {
         List<String> menu = new ArrayList<>();
