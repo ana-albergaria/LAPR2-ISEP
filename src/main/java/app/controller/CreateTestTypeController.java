@@ -53,13 +53,13 @@ public class CreateTestTypeController {
      * @param selectedCategoriesCodes Test type's categories ids list
      * @return True if succesfully created and false if not
      */
-    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes) {
+    public boolean createTestType(String code, String description, String collectingMethod, List<String> selectedCategoriesCodes, String classNameOfApi) {
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
 
         List<ParameterCategory> selectedCategories = parameterCategoryStore.getCategoriesByCode(selectedCategoriesCodes);
 
-        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories);
+        this.testType = testTypeStore.createTestType(code, description, collectingMethod, selectedCategories, classNameOfApi);
         return testTypeStore.validateTestType(testType);
     }
 

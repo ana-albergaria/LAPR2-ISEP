@@ -26,8 +26,8 @@ public class TestTypeStore {
      * @param selectedCategories Test type's categories list
      * @return created test type reference
      */
-    public TestType createTestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories) {
-        return new TestType(code, description, collectingMethod, selectedCategories);
+    public TestType createTestType(String code, String description, String collectingMethod, List<ParameterCategory> selectedCategories, String classNameOfApi) {
+        return new TestType(code, description, collectingMethod, selectedCategories, classNameOfApi);
     }
 
 
