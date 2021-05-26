@@ -59,14 +59,14 @@ public class WriteReportController {
         return mapper.toDTO(testsToDiagnose);
     }
 
-    public List<TestParameterResult> getTestParametersResults(String code){
+    /*public List<TestParameterResult> getTestParametersResults(String code){
         TestStore tstStore = this.company.getTestStore();
         Test tst = tstStore.getTestByCode(code);
         List<TestParameter> listTestParams = tstStore.getTestParameters(tst);
         List<TestParameterResult> listTestResults = new ArrayList<>();
         for (TestParameter testParam : listTestParams )
-            listTestResults.add(testParam.getParameterResult()); //mudar o nome no TestParameter
+            listTestResults.add(testParam.getParameterResult());
         return listTestResults;
-    }
+    }*/
 
 }

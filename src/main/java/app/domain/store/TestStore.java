@@ -103,8 +103,9 @@ public class TestStore {
     }
 
 
-    //public List<TestParameter> getTestParameters(Test tst) {
-    //}
+    /*public List<TestParameter> getTestParameters(Test tst) {
+
+    }*/
 
     public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
