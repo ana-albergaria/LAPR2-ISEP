@@ -1,0 +1,41 @@
+@startuml
+title SD_getTestsWithNoSamples()
+
+autonumber
+
+participant ":TestStore" as TEST_STORE
+participant "testList\n:List<Test>" as LIST
+participant "listTestsNoSamples\n:List<Test>" as LIST_NO_SAMPLES
+participant "test\n :Test" as TEST_OBJ
+
+[o-> TEST_STORE : getTestsWithNoSamples()
+activate TEST_STORE
+
+TEST_STORE --> LIST_NO_SAMPLES** : create()
+
+loop for each object in testList
+TEST_STORE -> LIST : test = get(i)
+activate LIST
+deactivate LIST
+
+TEST_STORE -> TEST_OBJ : boolean = hasSamples()
+activate TEST_OBJ
+deactivate TEST_OBJ
+
+opt boolean = true
+
+
+TEST_STORE -> LIST_NO_SAMPLES : add(test)
+activate LIST_NO_SAMPLES
+deactivate LIST_NO_SAMPLES
+
+end
+end
+
+
+[<-- TEST_STORE : listTestsNoSamplesDto
+deactivate TEST_STORE
+
+
+
+@enduml

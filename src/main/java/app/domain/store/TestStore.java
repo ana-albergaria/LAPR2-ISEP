@@ -21,12 +21,13 @@ public class TestStore {
 
     /**
      * Method for creating an instance of Test
-     * @param nhsCode National health system code of a given test
+     *
+     * @param nhsCode          National health system code of a given test
      * @param associatedClient client object which has solicited a test
-     * @param testType Type of test to be conduted
-     * @param parameters List of parameters to be measured of a given test
+     * @param testType         Type of test to be conduted
+     * @param parameters       List of parameters to be measured of a given test
      */
-    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters){
+    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters) {
         return new Test(nhsCode, associatedClient, testType, parameters);
     }
 
@@ -54,23 +55,27 @@ public class TestStore {
         return this.testList.add(test);
     }
 
-    public List<Test> getTestsReadyToDiagnose(){
+    public List<Test> getTests() {
+        return new ArrayList<>(testList);
+    }
+
+    public List<Test> getTestsReadyToDiagnose() {
         return testsReadyToDiagnose;
     }
 
 
-    public Test getTestByCode(String code){
+    public Test getTestByCode(String code) {
         for (Test tst : testsReadyToDiagnose) {
-            if (tst.getCode().equalsIgnoreCase(code)){
+            if (tst.getCode().equalsIgnoreCase(code)) {
                 return tst;
             }
         }
-        throw new UnsupportedOperationException("Parameter Category not found!");
+        throw new UnsupportedOperationException("Test not found in ready to diagnosis list!");
     }
 
     public Test getTestByCodeInTestList(String code) {
         for (Test test : testList) {
-            if(test.getCode().equalsIgnoreCase(code))
+            if (test.getCode().equalsIgnoreCase(code))
                 return test;
         }
         throw new UnsupportedOperationException("Test not found!");
@@ -81,12 +86,17 @@ public class TestStore {
 
     }*/
 
-    //to be used in US5
+    /**
+     * Method for getting list of tests in the store list with no samples collected.
+     *
+     *
+     * @return list of tests with no samples
+     */
     public List<Test> getTestsWithNoSamples() {
         List<Test> listTestsNoSamples = new ArrayList<>();
 
         for (Test test : testList) {
-            if(test.getSamples().size() == 0)
+            if (!test.hasSamples())
                 listTestsNoSamples.add(test);
         }
         return listTestsNoSamples;
@@ -95,8 +105,6 @@ public class TestStore {
 
     //public List<TestParameter> getTestParameters(Test tst) {
     //}
-
-
 
     public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
@@ -109,24 +117,20 @@ public class TestStore {
 
     public Test getTestByBarcodeNumber(String barcodeNumber) {
         for (Test test : testList) {
-            if(TestHasBarcodeNumber(test, barcodeNumber))
+            if (testHasBarcodeNumber(test, barcodeNumber))
                 return test;
         }
         throw new UnsupportedOperationException("Test not found!");
     }
 
-    public boolean TestHasBarcodeNumber(Test test, String barcodeNumber) {
+    public boolean testHasBarcodeNumber(Test test, String barcodeNumber) {
         for (Sample sample : test.getSamples()) {
-            if(sample.getMyBarcode().getBarcodeNumber().equals(barcodeNumber))
+            if (sample.getMyBarcode().getBarcodeNumber().equals(barcodeNumber))
                 return true;
         }
         return false;
 
     }
-
-
-
-
 
 
 }

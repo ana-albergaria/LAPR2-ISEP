@@ -11,3 +11,5 @@ public interface ExternalAPI {
 
     public abstract void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException;
 }
+
+

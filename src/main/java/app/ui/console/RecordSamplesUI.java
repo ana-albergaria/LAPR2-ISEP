@@ -36,15 +36,23 @@ public class RecordSamplesUI implements Runnable {
                 System.out.println("How many Samples are to be collected?");
                 int numSamples = Utils.readIntegerFromConsole("Number of Samples: ");
 
-                for (int i = 0; i < numSamples; i++) {
-                    ctrl.createSample(); //ClassNotFoundException, InstantiationException, IllegalAccessException, Barcode Exception
-                    boolean addSampleToTest = ctrl.addSample(selectedTest.getCode());
-                    if(addSampleToTest)
-                        ctrl.saveImageBarcode(selectedTest.getCode()); //IOException, Output Exception (Barbecue)
+                boolean confirm = Utils.confirm(String.format("%d Samples will be added to the selected Test. (type `s` if its correct, `n` if it is not)", numSamples, selectedTest.getCode()));
+
+                if(confirm) {
+                    for (int i = 0; i < numSamples; i++) {
+                        ctrl.createSample(); //ClassNotFoundException, InstantiationException, IllegalAccessException, Barcode Exception
+                        boolean addSampleToTest = ctrl.addSample(selectedTest.getCode());
+                        if(addSampleToTest)
+                            ctrl.saveImageBarcode(selectedTest.getCode()); //IOException, Output Exception (Barbecue)
+                        success = true;
+                    }
+                    System.out.println("\nSamples successfully recorded and added to the Test!\n" +
+                            "You can find the Samples Barcodes in the subfolder Test-Code" + selectedTest.getCode() + " in the folder Samples.");
+                } else {
+                    System.out.println("\nOperation canceled!");
                     success = true;
                 }
-                System.out.println("\nSamples successfully recorded and added to the Test!\n" +
-                        "You can find the Samples Barcodes in the subfolder Test-Code" + selectedTest.getCode() + " in the folder Samples.");
+
             } else {
                 success = true;
             }
@@ -76,3 +84,5 @@ public class RecordSamplesUI implements Runnable {
     }
 
 }
+
+

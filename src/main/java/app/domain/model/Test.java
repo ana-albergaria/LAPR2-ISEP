@@ -1,9 +1,13 @@
 package app.domain.model;
 
+import app.domain.shared.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class of the Test to be performed to a client
@@ -38,6 +42,11 @@ public class Test {
     private TestType testType;
 
     /**
+     * Report of test results
+     */
+    private Report diagnosisReport;
+
+    /**
      * Samples which the test contains
      */
     private List<Sample> samples;
@@ -48,12 +57,33 @@ public class Test {
     private List<TestParameter> testParameters;
 
     /**
+     * Date of test registration
+     */
+    private final String dateOfTestRegistration;
+
+    /**
+     * Date of samples collection
+     */
+    private String dateOfSamplesCollection;
+
+    /**
+     * Date of chemical analysis
+     */
+    private String dateOfChemicalAnalysis;
+
+    /**
+     * Date of diagnosis
+     */
+    private String dateOfDiagnosis;
+
+    /**
      * Number of existing tests.
      */
     private static int totalTests = 0;
 
     /**
-     * Constructor only without samples, since in the business process they are added later on
+     * Constructor only without samples, since in the business process they are added later on,
+     * also generates the attribute code, test registration time and makes the list of parameter into test parameters
      * @param nhsCode National health system code of a given test
      * @param client Client object which has solicited a test
      * @param testType Type of test to be conduted
@@ -68,6 +98,8 @@ public class Test {
         this.testType = testType;
         this.testParameters = addTestParameters(parameters);
         this.samples = new ArrayList<>();
+        this.dateOfTestRegistration = generateNowDateAndTime();
+        this.diagnosisReport = null;
     }
 
     public String getCode(){
@@ -94,20 +126,27 @@ public class Test {
         return new ArrayList<>(testParameters);
     }
 
-    //Como mudar o estado do teste? Responsabilidade do test? (if samples.size() == x)
-    //Como mudar o estado do teste? Responsabilidade do test? sim
     public boolean addSample(Sample sample) {
         if(sample != null)
             return this.samples.add(sample);
         return false;
     }
 
+    public void addSampleCollectionDate(){
+        this.dateOfSamplesCollection = generateNowDateAndTime();
+    }
+
     /**
      * Generates a sequencial code based on the number of existing tests
      * @return 12 digits sequencial number of current test.
      */
-    public String generateCode(){
+    private String generateCode(){
         return String.format("%012d", totalTests);
+    }
+
+    private String generateNowDateAndTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return simpleDateFormat.format(new Date());
     }
 
     /**
@@ -137,12 +176,27 @@ public class Test {
             throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
     }
 
-    public boolean addTestResult(String parameterCode, String result, String metric) {
+    /**
+     * Method to verify if the test has Samples collected.
+     *
+     * @return true if the test has samples collected.
+     *          Otherwise, it returns false.
+     */
+    public boolean hasSamples() {
+        return this.samples.size() > 0;
+    }
+
+    public String getDateOfTestRegistration() {
+        return dateOfTestRegistration;
+    }
+
+    //void
+    public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();
-
-
-
+        ExternalModule api = this.testType.getExternalModule();
+        MyReferenceValue refValue = api.getReferenceValue(selectedParameter);
+        testParameter.addResult(result, metric, refValue);
     }
 
     private TestParameter getTestParameterFor(String parameterCode) {
@@ -154,4 +208,17 @@ public class Test {
         throw new UnsupportedOperationException("Test Parameter not found!");
     }
 
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Test)) return false;
+        Test test = (Test) o;
+        return code.equalsIgnoreCase(test.code) &&
+                nhsCode.equalsIgnoreCase(test.nhsCode) &&
+                client.equals(test.client) &&
+                testType.equals(test.testType) &&
+                dateOfTestRegistration.equals(test.dateOfTestRegistration);
+    }
 }

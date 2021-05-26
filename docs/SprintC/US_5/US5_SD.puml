@@ -16,6 +16,7 @@ participant "listTestsNoSamplesDto\n:List<TestDto>" as LIST_TESTS_NO_SAMPLES_DTO
 participant "sample\n:Sample" as SAMPLE
 participant "api\n:ExternalAPI" as API
 participant "barcode\n:Barcode" as BARCODE
+participant "myBarcode\n:MyBarcode" as MY_BARCODE
 
 activate MLT
 MLT -> UI : asks to record the samples
@@ -29,19 +30,23 @@ activate COMPANY
 |||
 deactivate COMPANY
 
-CTRL -> TEST_STORE : listTestsNoSamples = getTestsWithNoSamples()
+CTRL -> TEST_STORE : getTestsWithNoSamples()
 activate TEST_STORE
 
-TEST_STORE --> LIST_TESTS_NO_SAMPLES** : create()
+ref over TEST_STORE
+SD_getTestsWithNoSamples()
+end
 
 TEST_STORE --> CTRL : listTestsNoSamples
 deactivate TEST_STORE
 |||
 
-CTRL -> TEST_MAPPER : listTestsNoSamplesDto = toDTO(listTestsNoSamples)
+CTRL -> TEST_MAPPER : toDTO(listTestsNoSamples)
 activate TEST_MAPPER
 
-TEST_MAPPER --> LIST_TESTS_NO_SAMPLES_DTO** : create()
+ref over TEST_MAPPER
+SD_toDTO(listTestsNoSamples)
+end
 
 TEST_MAPPER --> CTRL : listTestsNoSamplesDto
 deactivate TEST_MAPPER
@@ -98,28 +103,47 @@ loop for each Sample to be recorded
 UI -> CTRL : createSample()
 activate CTRL
 
-CTRL -> COMPANY : sample = createSample()
+CTRL -> CTRL : getBarcode()
+activate CTRL
+ref over CTRL
+SD_getBarcode()
+end
+CTRL --> CTRL : myBarcode
+deactivate CTRL
+
+CTRL -> COMPANY : sampleStore = getSampleStore()
 activate COMPANY
+|||
+deactivate COMPANY
 
-COMPANY --> SAMPLE** : create()
 
+CTRL -> SAMPLE_STORE : sample = createSample(myBarcode)
+activate SAMPLE_STORE
 
+SAMPLE_STORE --> SAMPLE** : create(myBarcode)
+
+SAMPLE -> SAMPLE : collectingDate = Calendar.getInstance.getTime()
 activate SAMPLE
+deactivate SAMPLE
 
+deactivate SAMPLE_STORE
 
+/'
 SAMPLE -> SAMPLE : api = getExternalAPI()
 activate SAMPLE
 deactivate SAMPLE
+'/
 
 
-
+/'
 SAMPLE -> API : barcode = getBarcode(barcodeNumber)
 activate API
-
+'/
+/'
 API --> BARCODE** : create(barcodeNumber)
 
-API --> SAMPLE : barcode
-deactivate SAMPLE
+API --> SAMPLE : barcode'/
+/'deactivate SAMPLE'/
 deactivate COMPANY
 deactivate API
 
@@ -163,6 +187,7 @@ The **code** refers to the code of the TestDto
 selected by the Medical Lab Technician in step 12.
 end note
 UI -> CTRL : addSample(code)
+activate CTRL
 
 
 
@@ -171,16 +196,41 @@ CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
 deactivate COMPANY
 
-CTRL -> TEST_STORE : selectedTest = getTestByCodeInTestList(code)
+CTRL -> TEST_STORE : getTestByCodeInTestList(code)
 activate TEST_STORE
+ref over TEST_STORE
+SD_getTestByCodeInTestList()
+end
+TEST_STORE --> CTRL : selectedTest
 deactivate TEST_STORE
 
 CTRL -> SELECTED_TEST : addSample(sample)
 activate SELECTED_TEST
+
+SELECTED_TEST -> SELECTED_TEST : add(sample)
+activate SELECTED_TEST
+deactivate SELECTED_TEST
+
 deactivate SELECTED_TEST
 
 
 /'dentro do método addSample, vai-se verificar se a sample já está lá?'/
+
+CTRL --> UI : result
+
+UI -> CTRL : saveImageBarcode(code)
+
+CTRL -> COMPANY : api = getExternalApi()
+activate COMPANY
+deactivate COMPANY
+
+CTRL -> SAMPLE : myBarcode = getMyBarcode()
+activate SAMPLE
+deactivate SAMPLE
+
+CTRL -> API : saveImageBarcode(myBarcode, code)
+activate API
+deactivate API
 
 CTRL --> UI : result
 

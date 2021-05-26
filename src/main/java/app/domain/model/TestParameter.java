@@ -17,7 +17,7 @@ public class TestParameter {
     /**
      * Result of the parameter testing evaluation.
      */
-    private TestParameterResult testParameterResult;
+    private TestParameterResult testResult;
 
     /**
      * Constructor for a test parameter only contains the parameter cause the result of the testing
@@ -26,10 +26,15 @@ public class TestParameter {
      */
     public TestParameter(Parameter parameter){
         this.parameter = parameter;
+        testResult = null;
     }
 
     public Parameter getParameter() {
         return parameter;
+    }
+
+    public void addResult(Double result, String metric, MyReferenceValue refValue) {
+        this.testResult = new TestParameterResult(result, metric, refValue);
     }
 
     //addResult(result, metric, refValue)
