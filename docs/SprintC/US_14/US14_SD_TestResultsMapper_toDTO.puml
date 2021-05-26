@@ -1,0 +1,35 @@
+@startuml
+title US14_SD_TestResultsMapper_toDTO
+autonumber
+
+participant ":TestResultsMapper" as TRMAPPER
+participant "objDTO\n:TestResultsDTO" as OBJ_DTO
+participant "listTestResults\n:List<TestResults>" as LTR
+participant "listTestResultsDTO\n:List<TestResultsDTO>" as LIST_DTO
+
+[o-> TRMAPPER : listTestResultsDTO = toDTO(listTestResults)
+activate TRMAPPER
+
+loop for each object in listTestResults
+TRMAPPER --> LIST_DTO** : create()
+TRMAPPER -> LTR : obj = get(i)
+activate LTR
+|||
+deactivate LTR
+
+TRMAPPER -> TRMAPPER : objDTO = toDTO(obj)
+activate TRMAPPER
+|||
+deactivate TRMAPPER
+
+TRMAPPER --> OBJ_DTO** : create(value, metric, myReferenceValue)
+
+TRMAPPER --> LTR : add(objDTO)
+activate LTR
+|||
+deactivate LTR
+end
+
+[<-- TRMAPPER : listTestResultsDTO
+
+@enduml
