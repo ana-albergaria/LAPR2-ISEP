@@ -16,6 +16,7 @@ public class WriteReportUI implements Runnable {
         ctrl = new WriteReportController();
     }
 
+    @Override
     public void run() {
         boolean success;
         boolean confirm;
