@@ -11,8 +11,6 @@ participant "test\n :Test" as TEST_OBJ
 [o-> TEST_STORE : getTestByCodeInTestList(code)
 activate TEST_STORE
 
-TEST_STORE --> SELECTED_TEST** : create()
-
 loop for each object in testList
 TEST_STORE -> LIST : test = get(i)
 activate LIST

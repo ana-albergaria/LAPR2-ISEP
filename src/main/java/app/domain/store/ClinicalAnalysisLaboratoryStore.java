@@ -1,6 +1,7 @@
 package app.domain.store;
 
 import app.domain.model.ClinicalAnalysisLaboratory;
+import app.domain.model.Test;
 import app.domain.model.TestType;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 
@@ -72,5 +73,30 @@ public class ClinicalAnalysisLaboratoryStore {
             if(cal.getNumTIN().equals(item.getNumTIN()))
                 throw new IllegalArgumentException("TIN Number already registered in the system.");
         }
+    }
+
+    /**
+     * Method for getting list of tests in the store list with no samples collected.
+     *
+     *
+     * @return list of tests with no samples
+     */
+    public List<Test> getTestsWithNoSamples(String laboratoryID) {
+        ClinicalAnalysisLaboratory selectedCal = getCalByCode(laboratoryID);
+        List<Test> listTestsNoSamples = new ArrayList<>();
+
+        for (Test test : selectedCal.getCalTestList()) {
+            if (!test.hasSamples())
+                listTestsNoSamples.add(test);
+        }
+        return listTestsNoSamples;
+    }
+
+    public ClinicalAnalysisLaboratory getCalByCode(String laboratoryID) {
+        for (ClinicalAnalysisLaboratory cal : calList) {
+            if(cal.getLaboratoryID().equalsIgnoreCase(laboratoryID))
+                return cal;
+        }
+        throw new UnsupportedOperationException("Clinical Analysis Laboratory not found!");
     }
 }

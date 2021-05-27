@@ -38,12 +38,14 @@ public class SampleStoreTest {
         Assert.assertFalse(result);
     }
 
-   /* @Test
+    /*
+   @Test
     public void ensureNoSampleIsValidatedWithNullMyBarcode() {
         SampleStore sampleStore = new SampleStore();
         Sample obj = new Sample(null);
         boolean result = sampleStore.validateSample(obj);
 
         Assert.assertFalse(result);
-    }*/
+    }
+     */
 }

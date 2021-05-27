@@ -6,6 +6,7 @@ import app.domain.model.Sample;
 import app.domain.model.Test;
 import app.domain.shared.ExternalAPI;
 import app.domain.shared.utils.BarcodeUtils;
+import app.domain.store.ClinicalAnalysisLaboratoryStore;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
 import app.mappers.TestMapper;
@@ -94,9 +95,9 @@ public class RecordSamplesController {
      *
      * @return a List<TestDTO> if the list was successfully received.
      */
-    public List<TestDTO> getTestsNoSamples() {
-        TestStore testStore = this.company.getTestStore();
-        List<Test> listTestsNoSamples = testStore.getTestsWithNoSamples();
+    public List<TestDTO> getTestsNoSamples(String laboratoryID) {
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        List<Test> listTestsNoSamples = calStore.getTestsWithNoSamples(laboratoryID);
 
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTestsNoSamples);
