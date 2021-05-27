@@ -9,10 +9,12 @@ participant "tstStore\n:TestStore" as TSTSTORE
 participant "rpt\n:Report" as RPT
 participant ":TestMapper" as TSTMAPPER
 participant "listTestsToDiagnose\n:List<Test>" as LT
-participant "testParam\n:TestParameter" as TP
-participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
 participant "listTestParams\n:List<TestParameter>" as LTP
+participant ":TestParameterMapper" as TPMAPPER
+participant "testParam\n:TestParameter" as TP
 participant "listTestResults\n:List<TestParameterResult>" as LTPR
+participant ":TestResultsMapper" as TRMAPPER
+participant "listTestsToDiagnoseDTO\n:List<TestDTO>" as LIST_DTO
 participant "testResult\n:TestParameterResult" as TPR
 participant "tst\n:Test" as TST
 
@@ -34,7 +36,6 @@ activate TSTSTORE
 TSTSTORE --> LT** : create()
 TSTSTORE --> CTRL : listTestsToDiagnose
 deactivate TSTSTORE
-|||
 
 CTRL -> TSTMAPPER : listTestsToDiagnoseDTO = toDTO(listTestsToDiagnose)
 activate TSTMAPPER
@@ -50,13 +51,10 @@ deactivate CTRL
 UI --> SPDT : shows list of tests ready to make a diagnosis and asks to selects one
 deactivate UI
 
-'spdt writes the test code in the UI
-'it uses the test code when adding the report
-
 SPDT -> UI : selects a test
 activate UI
 
-UI -> CTRL : listTestParams = getTestParameters(code)
+UI -> CTRL : listTestParamsDTO = getTestParameters(code)
 activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
@@ -71,36 +69,19 @@ deactivate TSTSTORE
 
 CTRL -> TSTSTORE : listTestParams = getTestParameters(tst)
 activate TSTSTORE
-|||
+TSTSTORE --> LTP** : create()
+TSTSTORE --> CTRL : listTestParams
 deactivate TSTSTORE
 
-CTRL --> UI : listTestParams
+CTRL -> TPMAPPER : listTestParamsDTO = toDTO(listTestParams)
+activate TPMAPPER
+ref over TPMAPPER : US14_SD_TestParameterMapper_toDTO
+TPMAPPER --> CTRL : listTestParamsDTO
+deactivate TPMAPPER
+
+CTRL --> UI : listTestParamsDTO
 
 deactivate CTRL
-
-UI -> CTRL : listTestResults = getTestParametersResults(listTestParams)
-activate CTRL
-
-loop for each testParam in listTestParams
-CTRL -> TP : listTestResults = getParameterResult(testParam)
-activate TP
-|||
-deactivate TP
-end
-
-CTRL --> UI : listParameterResults
-deactivate CTRL
-
-'getTestByCode()
-'getTestParameters()
-'getTestParameterResult()
-'getParametersResults()
-'getValue()
-'getReferenceValue()
-'vai ter code.getTestByCode().getTestParameters().getParametersResults()
-'vai ter getParametersResults().getValues()
-'vai ter getParametersResults().getReferenceValues()
-
 
 UI --> SPDT : shows parameters and chemical results and reference values of each parameter of the selected test and requests data(i.e., reportText)
 deactivate UI

@@ -3,9 +3,10 @@ package app.controller;
 import app.domain.model.*;
 import app.domain.store.TestStore;
 import app.mappers.TestMapper;
+import app.mappers.TestParameterMapper;
 import app.mappers.dto.TestDTO;
+import app.mappers.dto.TestParametersDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,11 +66,9 @@ public class WriteReportController {
         return tstStore.getTestParameters(tst);
     }
 
-    public List<TestParameterResult> getTestParametersResults(List<TestParameter> listTestParams){
-        List<TestParameterResult> listTestResults = new ArrayList<>();
-        for (TestParameter testParam : listTestParams )
-            listTestResults.add(testParam.getParameterResult());
-        return listTestResults;
+    public List<TestParametersDTO> getTestParametersDTO(String code){
+        TestParameterMapper mapper = new TestParameterMapper();
+        return mapper.toDTO(getTestParameters(code));
     }
 
 }

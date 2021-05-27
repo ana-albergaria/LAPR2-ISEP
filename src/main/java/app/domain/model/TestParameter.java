@@ -33,13 +33,13 @@ public class TestParameter {
         return parameter;
     }
 
+    public TestParameterResult getTestParameterResult(){
+        return testResult;
+    }
+
     public void addResult(Double result, String metric, MyReferenceValue refValue) {
         this.testResult = new TestParameterResult(result, metric, refValue);
     }
 
     //addResult(result, metric, refValue)
-
-    public TestParameterResult getParameterResult() {
-        return testResult;
-    }
 }
