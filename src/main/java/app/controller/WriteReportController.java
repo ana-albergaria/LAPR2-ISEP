@@ -65,11 +65,4 @@ public class WriteReportController {
         return tstStore.getTestParameters(tst);
     }
 
-    public List<TestParameterResult> getTestParametersResults(List<TestParameter> listTestParams){
-        List<TestParameterResult> listTestResults = new ArrayList<>();
-        for (TestParameter testParam : listTestParams )
-            listTestResults.add(testParam.getParameterResult());
-        return listTestResults;
-    }
-
 }

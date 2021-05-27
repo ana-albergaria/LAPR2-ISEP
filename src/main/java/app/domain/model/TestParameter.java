@@ -38,8 +38,4 @@ public class TestParameter {
     }
 
     //addResult(result, metric, refValue)
-
-    public TestParameterResult getParameterResult() {
-        return testResult;
-    }
 }
