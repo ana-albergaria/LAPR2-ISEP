@@ -41,6 +41,15 @@ class TestParameter {
     +getParameterResult()
 }
 
+class TestParameterResult {
+    -Double value
+    -String metric
+    -MyReferenceValue myReferenceValue
+    +getResultValue()
+    +getResultMetric()
+    +getResultReferenceValue()
+}
+
 }
 
 package Stores {

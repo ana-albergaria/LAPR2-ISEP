@@ -37,15 +37,20 @@ class TestParameter {
     +getParameterResult()
 }
 
-package Stores {
+class TestParameterResult {
+    -Double value
+    -String metric
+    -MyReferenceValue myReferenceValue
+    +getResultValue()
+    +getResultMetric()
+    +getResultReferenceValue()
+}
 
 class TestStore {
     -list<Test> testList
     +getTestsReadyToDiagnose()
     +getTestByCode(code)
     +getTestParameters(tst)
-}
-
 }
 
 }
@@ -116,6 +121,7 @@ TestStore "1" -> "*" Test : adopts >
 Company "1" --> "*" Report : knows >
 Report "1" --> "1" Test : is of >
 TestParameter "1..*" --> "1" Test : is of >
+TestParameterResult "1" --> "1" TestParameter : is of >
 TestMapper ..> Test
 TestParameterMapper ..> TestParameter
 TestMapper ..> TestDTO
