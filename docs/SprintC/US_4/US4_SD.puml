@@ -6,12 +6,10 @@ actor "Receptionist" as ADM
 participant ":CreateTestUI  " as UI
 participant ":CreateTestController" as CTRL
 participant ":Company" as PLAT
-participant "store:TestType" as TEST_TYPE_STORE
 participant "store:Client" as CLIENT_STORE
+participant "store:TestType" as TEST_TYPE_STORE
 participant "store:Parameter" as PARAM_STORE
-participant ": TestTypeMapper" as TT_MAPPER
-participant ": CategoryMapper" as PC_MAPPER
-participant ": ParameterMapper" as PARAM_MAPPER
+
 /'participant ":Platform" as PLAT'/
 participant "store:TestStore" as ORG
 participant "tt\n:Test" as TAREFA
@@ -22,30 +20,17 @@ ADM -> UI : asks to register a test to be performed to a registered client
 activate UI
 
 
-UI --> ADM : requests data (CitizenCardNumber, NHScode)
+UI --> ADM : requests data (tinNumber, NHScode)
 deactivate UI
 
 
 ADM -> UI : types requested data
 activate UI
-UI -> CTRL : testTypesList = getTestTypes()
+UI -> CTRL : testTypesList = getTestTypes(clinicalAnalysisLabCode)
 activate CTRL
-CTRL -> PLAT : testTypeStore = getTestTypeStore()
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> TEST_TYPE_STORE : testTypesList = getTestTypes()
-activate TEST_TYPE_STORE
-deactivate TEST_TYPE_STORE
-
-
-CTRL -> TT_MAPPER : toDTO(testTypesList)
-activate TT_MAPPER
-TT_MAPPER --> CTRL : testTypesListDto
-deactivate TT_MAPPER
-
-
+ref over CTRL
+SD_getTestTypes(calCode)
+end
 CTRL --> UI : testTypesListDto
 deactivate CTRL
 UI -> ADM : shows test types and request to select one
@@ -56,22 +41,9 @@ activate UI
 
 UI -> CTRL : categories = getCategoriesListOfTestType(selectedTestTypeCode)
 activate CTRL
-CTRL -> PLAT : testTypeStore = getTestTypeStore()
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> TEST_TYPE_STORE : ttCategoriesList = getCategoriesByTestTypeCode(selectedTestTypeCode)
-activate TEST_TYPE_STORE
-deactivate TEST_TYPE_STORE
-
-
-
-CTRL -> PC_MAPPER : toDTO(ttCategoriesList)
-activate PC_MAPPER
-PC_MAPPER --> CTRL : testTypesListDto
-deactivate PC_MAPPER
-
+ref over CTRL
+SD_getCategoriesOfTestType(selectedTestTypeCode)
+end
 
 CTRL --> UI : ttCategoriesListDto
 deactivate CTRL
@@ -89,22 +61,9 @@ end
 
 UI -> CTRL : parameters = getParametersOfCategories(selectedCategoriesCodes)
 activate CTRL
-CTRL -> PLAT : parameterStore = getParameterStore()
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> PARAM_STORE : filteredParamsList = getParamsByCategories(selectedCategoriesCodes)
-activate PARAM_STORE
-deactivate PARAM_STORE
-
-
-
-CTRL -> PARAM_MAPPER : toDTO(filteredParamsList)
-activate PARAM_MAPPER
-PARAM_MAPPER --> CTRL : filteredParamsList
-deactivate PARAM_MAPPER
-
+ref over CTRL
+SD_getParameterOfCategories(selectedCategoriesCodes)
+end
 
 CTRL --> UI : filteredParamsList
 deactivate CTRL
@@ -120,16 +79,18 @@ activate UI
 UI -> UI : selectedParamCodes.add(selectedParamCode)
 end
 
-UI -> CTRL : createTest(NHScode, citizenCardNumber,\n selectedTestTypeCode, selectedParamCodes)
+UI -> CTRL : createTest(NHScode, tinNumber,\n selectedTestTypeCode, selectedParamCodes)
 activate CTRL
 CTRL -> PLAT : clientStore = getClientStore()
 activate PLAT
 |||
 deactivate PLAT
 
-CTRL -> CLIENT_STORE : associatedClient = getClientByCitizenNum(citizenCardNumber)
+
+CTRL -> CLIENT_STORE : associatedClient = getClientByTinNumber(tinNumber)
 activate CLIENT_STORE
 deactivate CLIENT_STORE
+
 
 
 CTRL -> PLAT : testTypeStore = getTestTypeStore()
@@ -153,7 +114,7 @@ deactivate PARAM_STORE
 
 CTRL -> PLAT : testStore = getTestStore()
 activate PLAT
-|||
+PLAT -> ORG* : create()
 deactivate PLAT
 
 CTRL -> ORG : test = createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
@@ -175,7 +136,7 @@ activate TAREFA
 deactivate TAREFA
 
 
-TAREFA -> TAREFA : dateOfTestRegistration = generateNowDateAndTime()
+TAREFA -> TAREFA : dateOfTestRegistration = generateNowDateAndTime ()
 activate TAREFA
 deactivate TAREFA
 

@@ -53,6 +53,10 @@ class Parameter{
 - description
 }
 
+class ClinicalAnalysisLaboratory{
+- laboratoryID
+}
+
 Test "*" -- "1" TestType : classified as >
 Report "1" -- "1" Test : is of >
 Test "*" -- "1" Client : requested by >
@@ -64,4 +68,7 @@ Test "1" -- "1..*" Sample : collects >
 Test "1" -- "1..*" TestParameter : requests analysis of >
 TestParameter "*" -- "1" Parameter : refers to >
 TestParameter "1" -- "0..1" TestParameterResult : contains >
+ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
+ClinicalAnalysisLaboratory "1" -- "1..*" Test : performs >
+
 @enduml

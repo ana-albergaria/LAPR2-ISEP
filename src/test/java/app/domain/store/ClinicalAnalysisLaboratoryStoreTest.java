@@ -1,6 +1,11 @@
-package app.domain.model;
+package app.domain.store;
 
+import app.domain.model.ClinicalAnalysisLaboratory;
+import app.domain.model.Company;
+import app.domain.model.ParameterCategory;
+import app.domain.model.TestType;
 import app.domain.shared.Constants;
+import app.domain.store.ClinicalAnalysisLaboratoryStore;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +14,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class US8_CompanyTest {
+public class ClinicalAnalysisLaboratoryStoreTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
     private ParameterCategory p2;
@@ -24,6 +29,7 @@ public class US8_CompanyTest {
     private ClinicalAnalysisLaboratory c2;
     private ClinicalAnalysisLaboratory c3;
     private List<String> testTypeCodes;
+    private ClinicalAnalysisLaboratoryStore calStore;
 
     @Before
     public void setUp() {
@@ -53,14 +59,16 @@ public class US8_CompanyTest {
                 "Laboratorio","Porto","91899998811","1239999890", testTypeCodes);
         c3Dto = new ClinicalAnalysisLaboratoryDTO("SON55",
                 "SYNLAB","Guarda","00899998811","0039999890", testTypeCodes);
-        c1 = company.createClinicalAnalysisLaboratory(c1Dto);
-        c2 = company.createClinicalAnalysisLaboratory(c2Dto);
-        c3 = company.createClinicalAnalysisLaboratory(c3Dto);
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
+        c1 = calStore.createClinicalAnalysisLaboratory(c1Dto, selectedTT);
+        c2 = calStore.createClinicalAnalysisLaboratory(c2Dto, selectedTT);
+        c3 = calStore.createClinicalAnalysisLaboratory(c3Dto, selectedTT);
     }
 
     //for US8
     @Test
     public void createClinicalAnalysisLaboratory() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
         //Arrange
         ClinicalAnalysisLaboratory expObj = new ClinicalAnalysisLaboratory("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
@@ -68,7 +76,7 @@ public class US8_CompanyTest {
                 "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
 
         //Act
-        ClinicalAnalysisLaboratory obj = company.createClinicalAnalysisLaboratory(calDto);
+        ClinicalAnalysisLaboratory obj = calStore.createClinicalAnalysisLaboratory(calDto, selectedTT);
 
         //Assert
         Assert.assertEquals(expObj, obj);
@@ -78,18 +86,18 @@ public class US8_CompanyTest {
 
     @Test
     public void ensureDifferentClinicalAnalysisLaboratoryIsSaved() {
-
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
         //Arrange
         ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
-        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
-        company.saveClinicalAnalysisLaboratory(c1);
+        ClinicalAnalysisLaboratory c1 = calStore.createClinicalAnalysisLaboratory(c1Dto, selectedTT);
+        calStore.saveClinicalAnalysisLaboratory(c1);
 
         //Act
         ClinicalAnalysisLaboratoryDTO c2Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
                 "Laboratorio","Outeiro","91841378810","1234467890", testTypeCodes);
-        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory(c2Dto);
-        boolean result = company.saveClinicalAnalysisLaboratory(c2);
+        ClinicalAnalysisLaboratory c2 = calStore.createClinicalAnalysisLaboratory(c2Dto, selectedTT);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c2);
 
         //Assert
         Assert.assertTrue(result);
@@ -98,15 +106,16 @@ public class US8_CompanyTest {
     //TESTES DE VALIDAÇÃO
     @Test(expected = IllegalArgumentException.class)
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingAlreadyTheSameObject() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
         //Arrange
         ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
-        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
-        company.saveClinicalAnalysisLaboratory(c1);
+        ClinicalAnalysisLaboratory c1 = calStore.createClinicalAnalysisLaboratory(c1Dto, selectedTT);
+        calStore.saveClinicalAnalysisLaboratory(c1);
 
         //Act
-        boolean result = company.saveClinicalAnalysisLaboratory(c1);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c1);
 
         //Assert
         Assert.assertFalse(result);
@@ -114,18 +123,19 @@ public class US8_CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureClinicalAnalysisLaboratoryIsNotSavedExistingEqualObject() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
         //Arrange
         ClinicalAnalysisLaboratoryDTO c1Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
-        ClinicalAnalysisLaboratory c1 = company.createClinicalAnalysisLaboratory(c1Dto);
+        ClinicalAnalysisLaboratory c1 = calStore.createClinicalAnalysisLaboratory(c1Dto, selectedTT);
         ClinicalAnalysisLaboratoryDTO c2Dto = new ClinicalAnalysisLaboratoryDTO("CAL12",
                 "CAL","Lisboa","91841378811","1234567890", testTypeCodes);
-        ClinicalAnalysisLaboratory c2 = company.createClinicalAnalysisLaboratory(c2Dto);
-        company.saveClinicalAnalysisLaboratory(c1);
+        ClinicalAnalysisLaboratory c2 = calStore.createClinicalAnalysisLaboratory(c2Dto, selectedTT);
+        calStore.saveClinicalAnalysisLaboratory(c1);
 
         //Act
-        boolean result = company.saveClinicalAnalysisLaboratory(c2);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c2);
 
         //Assert
         Assert.assertFalse(result);
@@ -134,9 +144,10 @@ public class US8_CompanyTest {
 
     @Test
     public void ensureNullClinicalAnalysisLaboratoryIsNotSaved() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
         //Act
-        boolean result = company.saveClinicalAnalysisLaboratory(null);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(null);
 
         //Assert
         Assert.assertFalse(result);
@@ -144,58 +155,62 @@ public class US8_CompanyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedLaboratoryIDIsNotSaved() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
-        company.saveClinicalAnalysisLaboratory(c1);
-        company.saveClinicalAnalysisLaboratory(c2);
-        company.saveClinicalAnalysisLaboratory(c3);
+        calStore.saveClinicalAnalysisLaboratory(c1);
+        calStore.saveClinicalAnalysisLaboratory(c2);
+        calStore.saveClinicalAnalysisLaboratory(c3);
 
         ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("LAB23",
                 "BMAC","Bragança","97777378811","1777767890", testTypeCodes);
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
+        ClinicalAnalysisLaboratory c0 = calStore.createClinicalAnalysisLaboratory(c0Dto, selectedTT);
 
-        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedAddressIsNotSaved() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
-        company.saveClinicalAnalysisLaboratory(c1);
-        company.saveClinicalAnalysisLaboratory(c2);
-        company.saveClinicalAnalysisLaboratory(c3);
+        calStore.saveClinicalAnalysisLaboratory(c1);
+        calStore.saveClinicalAnalysisLaboratory(c2);
+        calStore.saveClinicalAnalysisLaboratory(c3);
 
         ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
                 "BMAC","guarda","97777378811","1777767890", testTypeCodes);
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
+        ClinicalAnalysisLaboratory c0 = calStore.createClinicalAnalysisLaboratory(c0Dto, selectedTT);
 
-        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedPhoneNumberIsNotSaved() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
-        company.saveClinicalAnalysisLaboratory(c1);
-        company.saveClinicalAnalysisLaboratory(c2);
-        company.saveClinicalAnalysisLaboratory(c3);
+        calStore.saveClinicalAnalysisLaboratory(c1);
+        calStore.saveClinicalAnalysisLaboratory(c2);
+        calStore.saveClinicalAnalysisLaboratory(c3);
 
         ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
                 "BMAC","Bragança","91899998811","1777767890", testTypeCodes);
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
+        ClinicalAnalysisLaboratory c0 = calStore.createClinicalAnalysisLaboratory(c0Dto, selectedTT);
 
-        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ensureNoCalWithDuplicatedTINNumberIsNotSaved() {
+        ClinicalAnalysisLaboratoryStore calStore = new ClinicalAnalysisLaboratoryStore();
 
-        company.saveClinicalAnalysisLaboratory(c1);
-        company.saveClinicalAnalysisLaboratory(c2);
-        company.saveClinicalAnalysisLaboratory(c3);
+        calStore.saveClinicalAnalysisLaboratory(c1);
+        calStore.saveClinicalAnalysisLaboratory(c2);
+        calStore.saveClinicalAnalysisLaboratory(c3);
 
         ClinicalAnalysisLaboratoryDTO c0Dto = new ClinicalAnalysisLaboratoryDTO("MEL23",
                 "BMAC","Bragança","97777378811","1234567890", testTypeCodes);
-        ClinicalAnalysisLaboratory c0 = company.createClinicalAnalysisLaboratory(c0Dto);
+        ClinicalAnalysisLaboratory c0 = calStore.createClinicalAnalysisLaboratory(c0Dto, selectedTT);
 
-        boolean result = company.saveClinicalAnalysisLaboratory(c0);
+        boolean result = calStore.saveClinicalAnalysisLaboratory(c0);
     }
 
 

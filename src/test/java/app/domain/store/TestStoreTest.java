@@ -74,7 +74,7 @@ public class TestStoreTest {
         testStore.saveTest(test);
         Assert.assertFalse(testStore.saveTest(test));
     }
-
+/*
     @Test //checks if tests with no sample are being found correctly
     public void ensureTestsWithNoSamplesAreFound(){
         TestStore testStore = new TestStore();
@@ -91,6 +91,8 @@ public class TestStoreTest {
 
         Assert.assertEquals(testStore.getTestsWithNoSamples(), testStore.getTests());
     }
+
+ */
 
     @Test //checks if tests with no sample are being found correctly
     public void ensureTestIsFoundByBarcodeNumber() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {

@@ -25,29 +25,30 @@ MLT -> UI : asks to record the samples
 activate UI
 
 note over UI, CTRL
-The **laboratoryCode** refers to the code of the ClinicalAnalysisLaboratoryDto
+The **laboratoryID** refers to the laboratory ID of the ClinicalAnalysisLaboratoryDto
 selected by the Medical Lab Technician when he/she logs in.
 end note
-UI -> CTRL : listTestsNoSamplesDto = getTestsNoSamples(laboratoryCode)
+UI -> CTRL : listTestsNoSamplesDto = getTestsNoSamples(laboratoryID)
 activate CTRL
 
 CTRL -> COMPANY : calStore = getCalStore()
 activate COMPANY
 deactivate COMPANY
 
-CTRL -> CAL_STORE : getCalByCode(laboratoryCode)
+CTRL -> CAL_STORE : getTestsWithNoSamples(laboratoryID)
 activate CAL_STORE
 ref over CAL_STORE
-SD_getCalByCode(laboratoryCode)
+SD_getTestsWithNoSamples(laboratoryID)
 end
-CAL_STORE --> CTRL : selectedCal
+CAL_STORE --> CTRL : listTestsNoSamples
 deactivate CAL_STORE
 |||
+/'
 CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
 |||
-deactivate COMPANY
-
+deactivate COMPANY'/
+/'
 CTRL -> TEST_STORE : getTestsWithNoSamples(selectedCal)
 activate TEST_STORE
 
@@ -57,7 +58,7 @@ end
 
 TEST_STORE --> CTRL : listTestsNoSamples
 deactivate TEST_STORE
-|||
+|||'/
 
 CTRL -> TEST_MAPPER : toDTO(listTestsNoSamples)
 activate TEST_MAPPER

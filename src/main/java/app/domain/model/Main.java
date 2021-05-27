@@ -14,6 +14,7 @@ import net.sourceforge.barbecue.output.OutputException;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -21,6 +22,7 @@ public class Main {
     private static RecordSamplesController ctrl = new RecordSamplesController();
 
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException, IOException, OutputException {
+
 
         boolean success = ctrl.createSample();
 
@@ -37,6 +39,8 @@ public class Main {
         boolean success2 = ctrl.createSample();
 
         ctrl.saveImageBarcode(code2);
+
+
 
         ParameterCategory pc1 = new ParameterCategory("code1","name");
         Parameter p1 = new Parameter("HB000","name","descrip",pc1);
@@ -59,11 +63,20 @@ public class Main {
         System.out.println(min + "          " + max);
 
 
-        /*
-        Barcode barcode = BarcodeFactory.createUPCA(code2);
+
+        Barcode barcode = BarcodeFactory.createUPCA("01234567890");
+
+        MyBarcode myBarcode = new MyBarcode(barcode,"01234567890");
+        Sample sample = new Sample(myBarcode);
+        Barcode barcode1 = (Barcode) myBarcode.getBarcode();
+
         barcode.setPreferredBarHeight(100);
 
+        File imgFile = new File("barcode.jpeg");
 
+        BarcodeImageHandler.saveJPEG(barcode1, imgFile);
+
+        /*
         JFrame frame = new JFrame();
         frame.getContentPane().add(barcode);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
