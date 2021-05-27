@@ -117,8 +117,8 @@ public class Client {
         this(clientsCitizenCardNumber, nhsNumber, birthDate, OMITTED_SEX, tinNumber, email, name, phoneNumber);
     }
 
-    public String getClientsCitizenCardNumber() {
-        return clientsCitizenCardNumber;
+    public String getTinNumber() {
+        return tinNumber;
     }
 
     public String getEmail() {

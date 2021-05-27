@@ -69,36 +69,36 @@ public class TestTest {
     @Test(expected = UnsupportedOperationException.class)
     public void ensureNotPossibleToFindNotExistentClient(){
         ClientStore clientStore = new ClientStore();
-        clientStore.getClientByCitizenCardNum("1234567890123456");
+        clientStore.getClientByTinNumber("1234567890");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithUnder12CharsNHScode(){
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("12345678901", client, t1, parametersBlood);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithMore12CharsNHScode(){
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNotAlphanumericNHScode(){
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("!@#456789012", client, t1, parametersBlood);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithemptyNHScode(){
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("", client, t1, parametersBlood);
     }
 
     @Test //this test checks if the generated number is truly sequential, making the boolean conditions for this purpouse.
     public void ensureTestCodeIsSequencial(){
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
         Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
         Client client3 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex3@gmail.com", "Alex", "12345688901");
         app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);

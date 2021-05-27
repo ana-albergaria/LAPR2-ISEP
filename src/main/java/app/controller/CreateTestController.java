@@ -1,10 +1,7 @@
 package app.controller;
 
 import app.domain.model.*;
-import app.domain.store.ClientStore;
-import app.domain.store.ParameterStore;
-import app.domain.store.TestStore;
-import app.domain.store.TestTypeStore;
+import app.domain.store.*;
 import app.mappers.CategoriesMapper;
 import app.mappers.ParameterMapper;
 import app.mappers.TestTypeMapper;
@@ -31,6 +28,8 @@ public class CreateTestController {
      */
     private Test test;
 
+    private ClinicalAnalysisLaboratory currentCal;
+
     /**
      * Empty constructor for having the actual instance of the company when instantiated.
      */
@@ -51,17 +50,17 @@ public class CreateTestController {
     /**
      * Method for creating an instance of Test
      * @param nhsCode National health system code of a given test
-     * @param citizenCardNumber client's citizen card number to be associated with test
+     * @param tinNumber client's TIN number to be associated with test
      * @param selectedTestTypeCode Type of test's code to be conduted
      * @param selectedParamsCodes List of parameters codes to be measured of a given test
      */
-    public boolean createTest(String nhsCode, String citizenCardNumber, String selectedTestTypeCode, List<String> selectedParamsCodes){
+    public boolean createTest(String nhsCode, String tinNumber, String selectedTestTypeCode, List<String> selectedParamsCodes){
         TestStore testStore = this.company.getTestStore();
         ClientStore clientStore = this.company.getClientStore();
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
         ParameterStore parameterStore = this.company.getParameterStore();
 
-        Client associatedClient = clientStore.getClientByCitizenCardNum(citizenCardNumber);
+        Client associatedClient = clientStore.getClientByTinNumber(tinNumber);
         TestType testType = testTypeStore.getSingleTestTypeByCode(selectedTestTypeCode);
         List<Parameter> parameters = parameterStore.getParamsByCodes(selectedParamsCodes);
 
@@ -77,7 +76,7 @@ public class CreateTestController {
      */
     public boolean saveTest() {
         TestStore testStore = this.company.getTestStore();
-        return testStore.saveTest(test);
+        return testStore.saveTest(test) && currentCal.addTest(test);
     }
 
     /**
@@ -85,9 +84,10 @@ public class CreateTestController {
      *
      * @return test types list
      */
-    private List<TestType> getTestTypes() {
-        TestTypeStore testTypeStore = this.company.getTestTypeStore();
-        return testTypeStore.getTestTypes();
+    private List<TestType> getTestTypes(String selectedCalCode) {
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        currentCal = calStore.getCalByCode(selectedCalCode);
+        return currentCal.getSelectedTT();
     }
 
     /**
@@ -95,9 +95,9 @@ public class CreateTestController {
      *
      * @return Test Types DTO list
      */
-    public List<TestTypeDTO> getTestTypesDTO() {
+    public List<TestTypeDTO> getTestTypesDTO(String selectedCalCode) {
         TestTypeMapper mapper = new TestTypeMapper();
-        return mapper.toDTO(getTestTypes());
+        return mapper.toDTO(getTestTypes(selectedCalCode));
     }
 
     /**
