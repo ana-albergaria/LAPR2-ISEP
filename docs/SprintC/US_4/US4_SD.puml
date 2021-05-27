@@ -7,6 +7,7 @@ participant ":CreateTestUI  " as UI
 participant ":CreateTestController" as CTRL
 participant ":Company" as PLAT
 participant "store:TestType" as TEST_TYPE_STORE
+participant "store: \nClinical Analysis Laboratory" as CALSTORE
 participant "store:Client" as CLIENT_STORE
 participant "store:Parameter" as PARAM_STORE
 participant ": TestTypeMapper" as TT_MAPPER
@@ -22,15 +23,15 @@ ADM -> UI : asks to register a test to be performed to a registered client
 activate UI
 
 
-UI --> ADM : requests data (CitizenCardNumber, NHScode)
+UI --> ADM : requests data (TINNumber, NHScode)
 deactivate UI
 
 
 ADM -> UI : types requested data
 activate UI
-UI -> CTRL : testTypesList = getTestTypes()
+UI -> CTRL : testTypesList = getTestTypes(clinicalAnalysisLabCode)
 activate CTRL
-CTRL -> PLAT : testTypeStore = getTestTypeStore()
+CTRL -> PLAT : clinicalAnalysisLaboratoryStore = getCalStore()
 activate PLAT
 |||
 deactivate PLAT
@@ -175,7 +176,7 @@ activate TAREFA
 deactivate TAREFA
 
 
-TAREFA -> TAREFA : dateOfTestRegistration = generateNowDateAndTime()
+TAREFA -> TAREFA : dateOfTestRegistration = generateNowDateAndTime ()
 activate TAREFA
 deactivate TAREFA
 
