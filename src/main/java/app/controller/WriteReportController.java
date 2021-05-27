@@ -43,10 +43,20 @@ public class WriteReportController {
         this.report = null;
     }
 
-    /*public boolean createReport(String reportText){
+    /**
+     * Creates an instance of report type.
+     *
+     * @param reportText the report text.
+     *
+     * @return true is the report is successfully created
+     * otherwise return false.
+     */
+    public boolean createReport(String reportText){
         this.report = company.createReport(reportText);
-        return
-    }*/
+        return (report != null);
+    }
+
+    //addReportToTest(code)
 
     /**
      * Retrieves actual tests to diagnose list.

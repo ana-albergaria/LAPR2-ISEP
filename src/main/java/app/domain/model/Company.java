@@ -304,10 +304,16 @@ public class Company {
         return success;
     }
 
-    public Report createReport(String reportTest){
-        return new Report(reportTest);
+    /**
+     * Called method through the WriteReportController to create a new report
+     * through a String containing the report text.
+     *
+     * @param reportText the report text.
+     * @return instance of Report Class with the report text.
+     */
+    public Report createReport(String reportText){
+        return new Report(reportText);
     }
-
 
     /**
      * Called method to get the External API, using Java Reflection.
