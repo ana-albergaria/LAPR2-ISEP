@@ -2,6 +2,7 @@ package app.ui.console;
 
 import app.controller.RecordSamplesController;
 import app.controller.SelectCalController;
+import app.domain.model.ClinicalAnalysisLaboratory;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.ui.console.utils.Utils;
 
@@ -19,12 +20,11 @@ public class MedLabTechUI implements Runnable {
     @Override
     public void run() {
 
-
-        List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Record the Samples collected of a Test", new RecordSamplesUI(laboratoryID)));
-
         laboratoryID = getSelectedCalID();
         if(laboratoryID != null) {
+            List<MenuItem> options = new ArrayList<MenuItem>();
+            options.add(new MenuItem("Record the Samples collected of a Test", new RecordSamplesUI(laboratoryID)));
+
             int option = 0;
             do
             {
@@ -39,10 +39,10 @@ public class MedLabTechUI implements Runnable {
         }
 
 
-
     }
 
     private String getSelectedCalID() {
+
         ClinicalAnalysisLaboratoryDTO selectedCalDto = (ClinicalAnalysisLaboratoryDTO) Utils.showAndSelectOne(ctrl.getCalListDTO(),
                 "Please selected in which Clinical Analysis Laboratory you are working: ");
 

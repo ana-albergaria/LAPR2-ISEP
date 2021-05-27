@@ -82,9 +82,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
      *
      * @return characteristics of the Clinical Analysis Laboratory
      */
-
-
-
     @Override
     public String toString() {
         List<TestType> copy = new ArrayList<>(selectedTT);

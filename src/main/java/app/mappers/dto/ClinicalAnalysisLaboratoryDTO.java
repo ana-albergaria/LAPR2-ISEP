@@ -16,6 +16,14 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
      */
     private String laboratoryID;
 
+    private String name;
+
+    private String address;
+
+    private String phoneNumber;
+
+    private String numTIN;
+
     /**
      * The type of tests the Clinical Analysis Laboratory operates.
      */
@@ -66,5 +74,17 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
      */
     public List<String> getTestTypeCodes() {
         return new ArrayList<>(testTypeCodes);
+    }
+
+    @Override
+    public String toString() {
+        return "ClinicalAnalysisLaboratoryDTO{" +
+                "laboratoryID='" + laboratoryID + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", numTIN='" + numTIN + '\'' +
+                ", testTypeCodes=" + testTypeCodes +
+                '}';
     }
 }
