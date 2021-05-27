@@ -12,9 +12,12 @@ import java.util.List;
 public class CreateTestUI implements Runnable{
     private CreateTestController ctrl;
 
-    public CreateTestUI()
+    private String selectedCal;
+
+    public CreateTestUI(String selectedCal)
     {
         ctrl = new CreateTestController();
+        this.selectedCal = selectedCal;
     }
 
     @Override
@@ -33,14 +36,14 @@ public class CreateTestUI implements Runnable{
         boolean success = false;
         boolean confirm;
         try {
-            String citizenCardNumber = Utils.readLineFromConsole("Enter client's citizen card number: ");
+            String tinNumber = Utils.readLineFromConsole("Enter client's TIN number: ");
             String nhsCode = Utils.readLineFromConsole("Enter test NHS code: ");
-            TestTypeDTO testTypeDTO = (TestTypeDTO) Utils.showAndSelectOne(ctrl.getTestTypesDTO(), "Please select the type of test to be performed: ");
+            TestTypeDTO testTypeDTO = (TestTypeDTO) Utils.showAndSelectOne(ctrl.getTestTypesDTO(selectedCal), "Please select the type of test to be performed: ");
             List<String> categoriesCodes = getCategoriesToCodes(testTypeDTO.getCode());
             List<String> selectedParameters = getParametersToCode(categoriesCodes);
-            ctrl.createTest(nhsCode, citizenCardNumber, testTypeDTO.getCode(), selectedParameters);
+            ctrl.createTest(nhsCode, tinNumber, testTypeDTO.getCode(), selectedParameters);
             confirm = Utils.confirm(String.format("Please confirm the data (type `s` if its correct, `n` if it is not):" +
-                    "%n Citizen card number: %s%n NHS code: %s%n Type of test: %s%n codes of the selected parameters: %s%n", citizenCardNumber, nhsCode, testTypeDTO, selectedParameters));
+                    "%n TIN number: %s%n NHS code: %s%n Type of test: %s%n codes of the selected parameters: %s%n", tinNumber, nhsCode, testTypeDTO, selectedParameters));
             if(!confirm) throw new Exception("Please enter the correct data");
             success = ctrl.saveTest();
             if(!success) throw new Exception("Test either already existent or null, please try again");

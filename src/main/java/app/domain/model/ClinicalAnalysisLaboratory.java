@@ -127,6 +127,27 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         }
 
         /**
+        * Method for adding tests to the current clinical analysis laboratory object
+        * @param test test to be added to the list
+        * @return true if successfully added false otherwise
+        */
+        public boolean addTest(Test test){
+            if (!validateTest(test))
+                return false;
+            return this.calTestList.add(test);
+        }
+
+        /**
+         * Validates the test to be added into the clinical analysis laboratory
+         * @param test test to be validated
+         * @return true if not null nor contained in the list, false otherwise
+         */
+        public boolean validateTest(Test test){
+            if(test == null)
+                return false;
+            return !this.calTestList.contains(test);
+        }
+        /**
          * Returns true if the list of the Test Types received in the parameter respects
          * all the rules.
          * It returns false as soon as one of these conditions are not verified
