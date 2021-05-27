@@ -21,7 +21,13 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     /**
      * The type of tests the Clinical Analysis Laboratory operates.
      */
-    private List<TestType> selectedTT; //ClinicalAnalysisLaboratory operates * TestType
+    private List<TestType> selectedTT;
+
+    /**
+     * The tests the Clinical Analysis Laboratory performs.
+     */
+    private List<Test> calTestList;
+
 
     /**
      * The length of the laboratory ID.
@@ -51,6 +57,7 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         checkSelectedTestTypesRules(selectedTT);
         this.laboratoryID = laboratoryID;
         this.selectedTT = new ArrayList<>(selectedTT);
+        this.calTestList = new ArrayList<>();
     }
 
     /**
