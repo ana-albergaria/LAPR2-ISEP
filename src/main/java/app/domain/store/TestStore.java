@@ -86,11 +86,6 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found!");
     }
 
-
-    /*public boolean addReportToTest(Test selectedTest){
-
-    }*/
-
     public List<TestParameter> getTestParameters(Test tst) {
         return new ArrayList<>(tst.getParameters());
     }

@@ -4,7 +4,11 @@ hide empty attributes
 'left to right direction
 skinparam classAttributeIconSize 0
 
+package Core {
+
 package Domain {
+
+package Model {
 
 class Company {
     -String designation
@@ -46,11 +50,17 @@ class TestParameterResult {
     +getResultReferenceValue()
 }
 
+}
+
+package Stores {
+
 class TestStore {
     -list<Test> testList
     +getTestsReadyToDiagnose()
     +getTestByCode(code)
     +getTestParameters(tst)
+}
+
 }
 
 }
@@ -69,7 +79,7 @@ class TestParameterMapper {
 
 }
 
-package DTOs {
+package DTO {
 
 class TestDTO {
     -String code
@@ -101,30 +111,17 @@ class WriteReportController {
 
 }
 
+}
+
 package UI {
+
+package Console {
 
 class WriteReportUI {
 }
 
 }
 
-WriteReportUI ..> WriteReportController
-WriteReportUI ..> TestDTO
-WriteReportUI ..> TestParametersDTO
-WriteReportController ..> TestMapper
-WriteReportController ..> TestParameterMapper
-WriteReportController ..> Company
-WriteReportController ..> TestStore
-WriteReportController ..> TestDTO
-WriteReportController ..> TestParametersDTO
-TestStore "1" -> "*" Test : adopts >
-Company "1" --> "*" Report : knows >
-Report "1" --> "1" Test : is of >
-TestParameter "1..*" --> "1" Test : is of >
-TestParameterResult "1" --> "1" TestParameter : is of >
-TestMapper ..> Test
-TestParameterMapper ..> TestParameter
-TestMapper ..> TestDTO
-TestParameterMapper ..> TestParametersDTO
+}
 
 @enduml
