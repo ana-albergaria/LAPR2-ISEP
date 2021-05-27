@@ -75,14 +75,29 @@ public class Parameter {
         return parameterCode;
     }
 
+    /**
+     * Returns the parameter name.
+     *
+     * @return parameter name.
+     */
     public String getShortName() {
         return shortName;
     }
 
+    /**
+     * Returns the parameter description.
+     *
+     * @return parameter description.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the parameter category of the parameter.
+     *
+     * @return parameter category of the parameter.
+     */
     public ParameterCategory getPc() {
         return pc;
     }

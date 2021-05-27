@@ -56,6 +56,12 @@ public class WriteReportController {
         return (report != null);
     }
 
+    /**
+     * Calling method to add a report to the selected test by the Specialist Doctor,
+     * receiving the code of the selected test by parameter.
+     *
+     * @param code the code of the selected test.
+     */
     public void addReportToTest(String code){
         TestStore tstStore = this.company.getTestStore();
         Test tst = tstStore.getTestByCode(code);

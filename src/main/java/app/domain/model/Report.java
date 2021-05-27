@@ -60,6 +60,11 @@ public class Report {
             throw new IllegalArgumentException("Report must have up to 400 words.");
     }
 
+    /**
+     * Returns the textual description of the report instance.
+     *
+     * @return characteristics of the report.
+     */
     @Override
     public String toString(){
         return ">> REPORT <<" +

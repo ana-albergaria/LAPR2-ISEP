@@ -186,6 +186,12 @@ public class Test {
         return this.samples.size() > 0;
     }
 
+    /**
+     * Method to verify if the test has Samples analysed.
+     *
+     * @return true if the test has samples analysed,
+     * otherwise return false.
+     */
     public boolean hasSamplesAnalysed(){
         int f = 0;
         List<TestParameter> testParameters = this.getParameters();
@@ -197,6 +203,11 @@ public class Test {
         return f == 0;
     }
 
+    /**
+     * Method to store the test report object into the test.
+     *
+     * @param report the test report.
+     */
     public void addReport(Report report) {
         this.diagnosisReport = report;
     }
