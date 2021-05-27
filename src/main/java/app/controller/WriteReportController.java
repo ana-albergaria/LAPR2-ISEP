@@ -56,7 +56,11 @@ public class WriteReportController {
         return (report != null);
     }
 
-    //addReportToTest(code)
+    public void addReportToTest(String code){
+        TestStore tstStore = this.company.getTestStore();
+        Test tst = tstStore.getTestByCode(code);
+        tst.addReport(report);
+    }
 
     /**
      * Retrieves actual tests to diagnose list.
@@ -64,8 +68,8 @@ public class WriteReportController {
      * @return tests to diagnose list.
      */
     public List<TestDTO> getTestsToDiagnose(){
-        TestStore testStore = this.company.getTestStore();
-        List<Test> testsToDiagnose = testStore.getTestsReadyToDiagnose();
+        TestStore tstStore = this.company.getTestStore();
+        List<Test> testsToDiagnose = tstStore.getTestsReadyToDiagnose();
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(testsToDiagnose);
     }

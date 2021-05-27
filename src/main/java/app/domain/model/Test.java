@@ -197,6 +197,10 @@ public class Test {
         return f == 0;
     }
 
+    public void addReport(Report report) {
+        this.diagnosisReport = report;
+    }
+
     public String getDateOfTestRegistration() {
         return dateOfTestRegistration;
     }
