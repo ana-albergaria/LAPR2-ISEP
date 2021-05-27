@@ -1,9 +1,7 @@
 package app.mappers;
 
 import app.domain.model.ClinicalAnalysisLaboratory;
-import app.domain.model.Test;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
-import app.mappers.dto.TestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ public class ClinicalAnalysisLaboratoryMapper {
     }
 
     public List<ClinicalAnalysisLaboratoryDTO> toDTO(List<ClinicalAnalysisLaboratory> calTestList) {
-        List<ClinicalAnalysisLaboratoryDTO> calTestListDTOS = new ArrayList<>();
+        List<ClinicalAnalysisLaboratoryDTO> calTestListDTOS = new ArrayList();
         for (ClinicalAnalysisLaboratory cal : calTestList) {
             calTestListDTOS.add(this.toDTO(cal));
         }
