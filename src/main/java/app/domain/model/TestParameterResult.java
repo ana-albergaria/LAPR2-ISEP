@@ -11,6 +11,16 @@ public class TestParameterResult {
         this.myReferenceValue = myReferenceValue;
     }
 
-    //TestParameterResult(value, metric, refValue)
+    public Double getResultValue(){
+        return value;
+    }
+
+    public String getResultMetric(){
+        return metric;
+    }
+
+    public MyReferenceValue getResultReferenceValue(){
+        return myReferenceValue;
+    }
 
 }

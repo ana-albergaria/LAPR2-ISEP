@@ -6,6 +6,9 @@ import app.mappers.dto.TestParametersDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Marta Ribeiro 1201592
+ */
 public class TestParameterMapper {
 
     public TestParametersDTO toDTO(TestParameter testParameter){
