@@ -6,14 +6,18 @@ import app.domain.model.Sample;
 import app.domain.model.Test;
 import app.domain.shared.ExternalAPI;
 import app.domain.shared.utils.BarcodeUtils;
+import app.domain.store.ClinicalAnalysisLaboratoryStore;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
 import app.mappers.TestMapper;
 import app.mappers.dto.TestDTO;
+import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.output.OutputException;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -59,7 +63,7 @@ public class RecordSamplesController {
      * @throws BarcodeException  if the data to be encoded in the barcode is invalid
      * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      */
-    public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
+    public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException, IOException, OutputException {
         MyBarcode myBarcode = getBarcode();
         SampleStore sampleStore = this.company.getSampleStore();
         this.sample = sampleStore.createSample(myBarcode);
@@ -91,9 +95,9 @@ public class RecordSamplesController {
      *
      * @return a List<TestDTO> if the list was successfully received.
      */
-    public List<TestDTO> getTestsNoSamples() {
-        TestStore testStore = this.company.getTestStore();
-        List<Test> listTestsNoSamples = testStore.getTestsWithNoSamples();
+    public List<TestDTO> getTestsNoSamples(String laboratoryID) {
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        List<Test> listTestsNoSamples = calStore.getTestsWithNoSamples(laboratoryID);
 
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTestsNoSamples);

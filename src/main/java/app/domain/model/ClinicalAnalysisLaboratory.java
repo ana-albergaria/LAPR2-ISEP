@@ -69,11 +69,18 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         return laboratoryID;
     }
 
+    public List<Test> getCalTestList() {
+        return new ArrayList<>(calTestList);
+    }
+
     /**
      * It returns the textual description of the Clinical Analysis Laboratory instance.
      *
      * @return characteristics of the Clinical Analysis Laboratory
      */
+
+
+
     @Override
     public String toString() {
         List<TestType> copy = new ArrayList<>(selectedTT);

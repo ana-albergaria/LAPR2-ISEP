@@ -16,9 +16,10 @@ public class BarcodeUtils {
     }
 
     public static File imageFolderPath(String code) {
+        //File path = new File("./Samples/Test-Code" + code);
         File path = new File("./Samples/Test-Code" + code);
         if(!path.exists())
-            path.mkdir();
+            path.mkdirs();
 
         return path;
     }

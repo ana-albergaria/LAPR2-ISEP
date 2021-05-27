@@ -91,22 +91,6 @@ public class TestStore {
 
     }*/
 
-    /**
-     * Method for getting list of tests in the store list with no samples collected.
-     *
-     *
-     * @return list of tests with no samples
-     */
-    public List<Test> getTestsWithNoSamples() {
-        List<Test> listTestsNoSamples = new ArrayList<>();
-
-        for (Test test : testList) {
-            if (!test.hasSamples())
-                listTestsNoSamples.add(test);
-        }
-        return listTestsNoSamples;
-    }
-
     public List<TestParameter> getTestParameters(Test tst) {
         return new ArrayList<>(tst.getParameters());
     }
