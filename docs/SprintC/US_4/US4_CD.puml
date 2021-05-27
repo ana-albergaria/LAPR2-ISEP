@@ -12,6 +12,11 @@ package UI <<Folder>> {
 package Domain <<Folder>> {
     package Model <<Folder>> {
         class Report{}
+
+        class ClinicalAnalysisLaboratory{
+        - laboratoryID
+        }
+
         class TestParameter{
             +TestParameter(parameter: Parameter)
         }
@@ -80,6 +85,11 @@ package Domain <<Folder>> {
                +getCategoriesByTestTypeCode(String selectedTestTypeCode)
             }
 
+    class ClientStore {
+       +getClientByTinNumber(tinNumber)
+    }
+
+
         class TestStore {
             +createTest(String NHScode, Client associatedClient,\n TestType selectedTestType, List<Parameter>selectedParamsList)
             +validateTest(test)
@@ -141,6 +151,8 @@ package Mappers <<Folder>>{
 }
 
 Client -[hidden]-|> Test
+CreateTestControler -[hidden]-|> Test
+ClinicalAnalysisLaboratory -[hidden]-|> Test
 
 CreateTestUI ..> CreateTestControler
 CreateTestUI ..> CategoryDto
@@ -163,11 +175,13 @@ CreateTestControler ..> ParameterStore
 CreateTestControler ..> TestTypeStore
 CreateTestControler ..> TestStore
 TestTypeStore "1" -- "*" TestType : stores >
+ClientStore "1" -- "*" Client : stores >
 TestStore "1" -- "*" Test : stores >
 ParameterStore "1" -- "*" Parameter : stores >
 Company "1" -- "1" ParameterStore : uses >
 Company "1" -- "1" TestTypeStore : uses >
 Company "1" -- "1" TestStore : uses >
+Company "1" -- "1" ClientStore : uses >
 TestType "1" -- "1..*" Parameter : characterized by >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "*" Test : conducts >
@@ -181,5 +195,7 @@ Client "1" -- "1" Test : requested by <
 Parameter "*" -- "1" ParameterCategory: presented under >
 TestType "1" -- "1..*" ParameterCategory : characterized by >
 Report "1" -- "1" Test : is of >
+ClinicalAnalysisLaboratory "1" - "1..*" TestType : operates >
+ClinicalAnalysisLaboratory "1" - "1..*" Test : performs >
 
 @enduml

@@ -10,8 +10,6 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 
 ### 1.2. Customer Specifications and Clarifications 
 
-*Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*
-
 **From the specifications document:**
  >"Typically, the client arrives at one of the clinical analysis laboratories with a lab order prescribed by
   a doctor. Once there, a receptionist asks the client’s citizen card number, the lab order (which
@@ -89,8 +87,7 @@ As a **receptionist** of the **laboratory**, I intend to register a **test** to 
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
-
+The present US has a high utilization rate since it is the main existent business transaction.
 
 ## 2. OO Analysis
 
@@ -117,7 +114,7 @@ n/a
 | Step 4: shows test types and request to select one                                   | ...knowing the types of test to show?                                 | ClinicalAnalisysLaboratory         | IE: The clinical analysis laboratory in which the receptionist works knows which tests it supports|
 |                                                                                      | ...Creating a test type dto                                           | TestTypeMapper                     | LC: Pass a DTO to reduce coupling between layers|
 | Step 5: selects test type                                                            |... Saving input data?	                                               | Test                                | IE: The object created in step 1 has its own data.|
-| Step 6: shows categories associated with test type request to select one           | ...knowing which categories to be shown?                                | TestType                              | IE: The test type selected in step 5 has it's category of parameters|              
+| Step 6: shows categories associated with test type request to select one            | ...knowing which categories to be shown?                                | TestType                              | IE: The test type selected in step 5 has it's category of parameters|              
 | Step 7: Selects category                                                            |... Saving input data?	                                               | Test                               | IE: The object created in step 1 has its own data.|
 | Step 8: shows all parameters associated selected category                          | ...knowing which category of parameters to be shown?                    | TestType                           | IE: The test type selected in step 5 has it's category of parameters|              
 |                                                                                    | ...knowing the parameters to show?                                      | ParameterStore                     | IE: The parameter store knows its parameters|
@@ -139,6 +136,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
 * ClinicalAnalysisLaboratory
 
 Other software classes (i.e. Pure Fabrication) identified: 
+
 * TestTypeStore
 * ClientStore
 * TestStore
@@ -251,14 +249,88 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class CreateTestController
 
-*It is also recommended to organize this content by subsections.* 
+    public boolean createTest(String nhsCode, String citizenCardNumber, String selectedTestTypeCode, List<String> selectedParamsCodes){
+        TestStore testStore = this.company.getTestStore();
+        ClientStore clientStore = this.company.getClientStore();
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        ParameterStore parameterStore = this.company.getParameterStore();
+
+        Client associatedClient = clientStore.getClientByCitizenCardNum(citizenCardNumber);
+        TestType testType = testTypeStore.getSingleTestTypeByCode(selectedTestTypeCode);
+        List<Parameter> parameters = parameterStore.getParamsByCodes(selectedParamsCodes);
+
+        this.test = testStore.createTest(nhsCode, associatedClient, testType, parameters);
+
+        return testStore.validateTest(test);
+    }
+
+    //...Omitted
+    
+    public boolean saveTest() {
+        TestStore testStore = this.company.getTestStore();
+        return testStore.saveTest(test);
+    }
+    
+## Class TestStore
+
+    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters) {
+        return new Test(nhsCode, associatedClient, testType, parameters);
+    }
+
+    //...Omitted
+    
+    public boolean validateTest(Test test) {
+        if (test == null)
+            return false;
+        return !this.testList.contains(test);
+    }
+
+    public boolean saveTest(Test test) {
+        if (!validateTest(test))
+            return false;
+        return this.testList.add(test);
+    }
+
+## Class TestStore
+
+    public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters) {
+        checkNhsCode(nhsCode);
+        totalTests++;
+        this.code = generateCode();
+        this.nhsCode = nhsCode;
+        this.client = client;
+        this.testType = testType;
+        this.testParameters = addTestParameters(parameters);
+        this.samples = new ArrayList<>();
+        this.dateOfTestRegistration = generateNowDateAndTime();
+        this.diagnosisReport = null;
+    }
+
+    //...Omitted
+    
+    private String generateCode(){
+        return String.format("%012d", totalTests);
+    }
+    
+    private String generateNowDateAndTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return simpleDateFormat.format(new Date());
+    }
+    
+    private List<TestParameter> addTestParameters(List<Parameter> parameters){
+        List<TestParameter> testParameters = new ArrayList<>();
+        for(Parameter parameter : parameters){
+            testParameters.add(new TestParameter(parameter));
+        }
+        return testParameters;
+    }
 
 # 6. Integration and Demo 
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
-
+To create a Test several lists of existent participants of the system are needed, such as: TestTypes, ParameterCategories and Parameters. 
+Therefor in order to reduce coupling all of those objects are passed to the UI layer through DTO's, with the assistance of Mappers for each to convert the data objects.
 
 # 7. Observations
 
