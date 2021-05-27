@@ -56,4 +56,10 @@ public class LaboratoryDTO {
     public String getNumTIN() {
         return numTIN;
     }
+
+    @Override
+    public String toString() {
+        return String.format("CLINICAL ANALYSIS LABORATORY%nName: %s%n"
+                + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
+    }
 }

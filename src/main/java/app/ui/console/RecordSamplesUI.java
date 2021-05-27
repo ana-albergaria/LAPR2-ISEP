@@ -80,6 +80,12 @@ public class RecordSamplesUI implements Runnable {
         catch(IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
         }
+        catch(UnsupportedOperationException uoe) {
+            System.out.println(uoe.getMessage());
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         return success;
 

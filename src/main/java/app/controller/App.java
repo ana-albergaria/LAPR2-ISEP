@@ -116,9 +116,12 @@ public class App {
         this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
 
         Test test1 = new Test("123456789012",c1,t1,listParameter);
+        this.company.getTestStore().saveTest(test1);
+
         ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
         cal1.getCalTestList().add(test1);
+
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
 
 

@@ -4,6 +4,7 @@ import app.domain.model.Test;
 import app.domain.model.TestType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,14 +16,6 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
      * The laboratory ID of the Clinical Analysis Laboratory.
      */
     private String laboratoryID;
-
-    private String name;
-
-    private String address;
-
-    private String phoneNumber;
-
-    private String numTIN;
 
     /**
      * The type of tests the Clinical Analysis Laboratory operates.
@@ -76,15 +69,28 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
         return new ArrayList<>(testTypeCodes);
     }
 
+    /**
+     * It returns the textual description of the Clinical Analysis Laboratory instance.
+     *
+     * @return characteristics of the Clinical Analysis Laboratory
+     */
     @Override
     public String toString() {
-        return "ClinicalAnalysisLaboratoryDTO{" +
-                "laboratoryID='" + laboratoryID + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", numTIN='" + numTIN + '\'' +
-                ", testTypeCodes=" + testTypeCodes +
-                '}';
+        List<TestType> copy = new ArrayList<>(selectedTT);
+
+        StringBuilder s = new StringBuilder();
+        for (TestType tt : copy) {
+            s.append("- ");
+            s.append("Code: ");
+            s.append(tt.getCode());
+            s.append(", ");
+            s.append("Description: ");
+            s.append(tt.getDescription());
+            s.append("\n");
+        }
+
+
+        return String.format("%sLaboratory ID: %s%nTest Types: %n%s%n%s",
+                super.toString(), laboratoryID, s, calTestList);
     }
 }

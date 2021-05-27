@@ -69,12 +69,14 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         return laboratoryID;
     }
 
+    //alterei
     public List<TestType> getSelectedTT() {
-        return new ArrayList<>(selectedTT);
+        return selectedTT;
     }
 
+    //alterei
     public List<Test> getCalTestList() {
-        return new ArrayList<>(calTestList);
+        return calTestList;
     }
 
     /**

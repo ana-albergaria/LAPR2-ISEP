@@ -25,7 +25,27 @@ public class SampleTest {
         //the Collecting Date of the Sample starts null and only will be added after all the samples are created.
 
         Assert.assertEquals(expCollectingDate, obj.getCollectingDate());
+    }
 
+    @Test
+    public void ensureEqualsMethodObjectsFromDifferentClasses() {
+
+        Sample s1 = new Sample(myBarcode);
+        //Act
+        boolean resultDifferentClasses = s1.equals(myBarcode);
+        //Assert
+        Assert.assertFalse(resultDifferentClasses);
+    }
+
+    @Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+
+        Sample s1 = new Sample(myBarcode);
+        Sample s2 = null;
+
+        boolean resultWithNull = s1.equals(s2);
+
+        Assert.assertFalse(resultWithNull);
     }
 
 
