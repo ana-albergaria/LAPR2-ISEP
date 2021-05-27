@@ -11,7 +11,7 @@ deactivate ":System"
 
 SpDt-> ":System" : selects a test
 activate ":System"
-":System" --> SpDt : shows chemical results and reference values of the selected test and requests data(i.e., reportText)
+":System" --> SpDt : shows parameters and chemical results and reference values of each parameter of the selected test and requests data(i.e., reportText)
 deactivate ":System"
 
 SpDt-> ":System" : types requested data
