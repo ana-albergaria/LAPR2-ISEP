@@ -36,6 +36,7 @@ public class BarcodeUtils {
      */
     public static File imageFolderPath(String code) {
         //File path = new File("./Samples/Test-Code" + code);
+        //ACRESCENTAR TRY CATCH
         File path = new File("./Samples/Test-Code" + code);
         if(!path.exists())
             path.mkdirs();
