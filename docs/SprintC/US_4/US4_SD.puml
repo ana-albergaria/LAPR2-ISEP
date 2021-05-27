@@ -12,6 +12,7 @@ participant "store:Parameter" as PARAM_STORE
 
 /'participant ":Platform" as PLAT'/
 participant "store:TestStore" as ORG
+participant ":ClinicalAnalisysLaboratory" as CAL
 participant "tt\n:Test" as TAREFA
 participant ": TestParameter" as tp
 
@@ -167,6 +168,14 @@ activate ORG
 
 ORG -> ORG: validateTest(test)
 ORG -> ORG: addTest(test)
+deactivate ORG
+
+CTRL -> CAL : addTest(test)
+activate CAL
+
+CAL -> CAL : validateTest(test)
+
+deactivate CAL
 
 CTRL --> UI: result
 
