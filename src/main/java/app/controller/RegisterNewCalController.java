@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.domain.model.*;
+import app.domain.store.ClinicalAnalysisLaboratoryStore;
 import app.domain.store.TestTypeStore;
 import app.mappers.TestTypeMapper;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
@@ -53,8 +54,11 @@ public class RegisterNewCalController {
      *          Otherwise, returns false.
      */
     public boolean createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
-        this.cal = this.company.createClinicalAnalysisLaboratory(calDto);
-        return this.company.validateClinicalAnalysisLaboratory(cal);
+        TestTypeStore testTypeStore = this.company.getTestTypeStore();
+        List<TestType> selectedTT = testTypeStore.getTestTypesByCode(calDto.getTestTypeCodes());
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        this.cal = calStore.createClinicalAnalysisLaboratory(calDto, selectedTT);
+        return calStore.validateClinicalAnalysisLaboratory(cal);
     }
 
     /**
@@ -64,7 +68,8 @@ public class RegisterNewCalController {
      *          Otherwise, returns false.
      */
     public boolean saveClinicalAnalysisLaboratory(){
-        return this.company.saveClinicalAnalysisLaboratory(cal);
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        return calStore.saveClinicalAnalysisLaboratory(cal);
     }
 
     /**
