@@ -75,6 +75,10 @@ public class ClinicalAnalysisLaboratoryStore {
         }
     }
 
+    public List<ClinicalAnalysisLaboratory> getCalList() {
+        return new ArrayList<>(calList);
+    }
+
     /**
      * Method for getting list of tests in the store list with no samples collected.
      *

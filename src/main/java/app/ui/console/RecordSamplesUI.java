@@ -11,9 +11,11 @@ import java.util.List;
 
 public class RecordSamplesUI implements Runnable {
     private RecordSamplesController ctrl;
+    private String laboratoryID;
 
-    public RecordSamplesUI() {
+    public RecordSamplesUI(String laboratoryID) {
         ctrl = new RecordSamplesController();
+        this.laboratoryID = laboratoryID;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class RecordSamplesUI implements Runnable {
         boolean success = false;
 
         try {
-            List<TestDTO> listTestsNoSamplesDto = ctrl.getTestsNoSamples();
+            List<TestDTO> listTestsNoSamplesDto = ctrl.getTestsNoSamples(laboratoryID);
             TestDTO selectedTest = (TestDTO) Utils.showAndSelectOne(listTestsNoSamplesDto,
                     "To record the Samples collected of a Test, please selected a Test from the list:");
 

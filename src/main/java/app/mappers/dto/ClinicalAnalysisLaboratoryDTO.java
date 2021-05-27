@@ -1,5 +1,8 @@
 package app.mappers.dto;
 
+import app.domain.model.Test;
+import app.domain.model.TestType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,10 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
      */
     private List<String> testTypeCodes;
 
+    private List<TestType> selectedTT;
+
+    private List<Test> calTestList;
+
     /**
      * Builds a Clinical Analysis Laboratory's instance receiving:
      * the Laboratory ID, the name, the address, the phone number, the TIN number and
@@ -34,6 +41,13 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
         super(name, address, phoneNumber, numTIN);
         this.laboratoryID = laboratoryID;
         this.testTypeCodes = new ArrayList<>(testTypeCodes);
+    }
+
+    public ClinicalAnalysisLaboratoryDTO(String laboratoryID, String name, String address, String phoneNumber, String numTIN, List<TestType> selectedTT, List<Test> calTestList) {
+        super(name, address, phoneNumber, numTIN);
+        this.laboratoryID = laboratoryID;
+        this.selectedTT = selectedTT;
+        this.calTestList = calTestList;
     }
 
     /**

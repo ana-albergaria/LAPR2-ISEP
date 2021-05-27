@@ -73,6 +73,14 @@ public class Laboratory {
         this.numTIN = numTIN;
     }
 
+    /**
+     * Returns the name of the Laboratory
+     *
+     * @return name of the Laboratory
+     */
+    public String getName() {
+        return name;
+    }
 
     /**
      * Returns the address of the Laboratory

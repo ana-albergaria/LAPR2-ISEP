@@ -84,8 +84,10 @@ public class App {
 
     private void bootstrap() {
         this.authFacade.addUserRole(Constants.ROLE_ADMIN,Constants.ROLE_ADMIN);
+        this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
 
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
+        this.authFacade.addUserWithRole("Med Lab Technician","medlabtech@gmail.com","1",Constants.ROLE_MED_LAB_TECHNICIAN);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
         TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER);
@@ -110,6 +112,13 @@ public class App {
         List<Parameter> listParameter = new ArrayList<>();
         listParameter.add(param1);
         this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
+
+        Test test1 = new Test("123456789012",c1,t1,listParameter);
+        ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+        cal1.getCalTestList().add(test1);
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
+
 
     }
 
