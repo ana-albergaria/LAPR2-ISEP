@@ -68,6 +68,8 @@ Company "1" -- "3..*" Laboratory : owns >
 /'ClinicalAnalysisLaboratory "1" -- "1" Laboratory : is of >'/
 /'Employee "1..*" - "1" Company : works for >'/
 Company "1" -- "*" TestType : conducts >
+ClinicalAnalysisLaboratory "1" -- "1..*" Test : performs
+Company "1" -- "*" ParameterCategory : capable of analysing >
 
 /' MUDAR SENTIDO DA SETA? POR CAUSA DO RATIONALE '/
 /'Application "1" -- "1" Company : knows <'/

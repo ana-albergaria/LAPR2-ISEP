@@ -13,6 +13,8 @@ participant "sampleStore\n:SampleStore" as SAMPLE_STORE
 participant ":TestMapper" as TEST_MAPPER
 participant "listTestsNoSamples\n:List<Test>" as LIST_TESTS_NO_SAMPLES
 participant "listTestsNoSamplesDto\n:List<TestDto>" as LIST_TESTS_NO_SAMPLES_DTO
+participant "calStore\n:ClinicalAnalysisLaboratoryStore" as CAL_STORE
+participant "selectedCal\n:ClinicalAnalysisLaboratory" as CAL
 participant "sample\n:Sample" as SAMPLE
 participant "api\n:ExternalAPI" as API
 participant "barcode\n:Barcode" as BARCODE
@@ -22,19 +24,35 @@ activate MLT
 MLT -> UI : asks to record the samples
 activate UI
 
-UI -> CTRL : listTestsNoSamplesDto = getTestsNoSamples()
+note over UI, CTRL
+The **laboratoryCode** refers to the code of the ClinicalAnalysisLaboratoryDto
+selected by the Medical Lab Technician when he/she logs in.
+end note
+UI -> CTRL : listTestsNoSamplesDto = getTestsNoSamples(laboratoryCode)
 activate CTRL
 
+CTRL -> COMPANY : calStore = getCalStore()
+activate COMPANY
+deactivate COMPANY
+
+CTRL -> CAL_STORE : getCalByCode(laboratoryCode)
+activate CAL_STORE
+ref over CAL_STORE
+SD_getCalByCode(laboratoryCode)
+end
+CAL_STORE --> CTRL : selectedCal
+deactivate CAL_STORE
+|||
 CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
 |||
 deactivate COMPANY
 
-CTRL -> TEST_STORE : getTestsWithNoSamples()
+CTRL -> TEST_STORE : getTestsWithNoSamples(selectedCal)
 activate TEST_STORE
 
 ref over TEST_STORE
-SD_getTestsWithNoSamples()
+SD_getTestsWithNoSamples(selectedCal)
 end
 
 TEST_STORE --> CTRL : listTestsNoSamples
