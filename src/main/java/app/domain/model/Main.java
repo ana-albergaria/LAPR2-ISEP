@@ -9,9 +9,11 @@ import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 
 import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.output.OutputException;
 
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Main {
@@ -22,7 +24,7 @@ public class Main {
 
         boolean success = ctrl.createSample();
 
-        String code = "1234567890";
+        String code = "12345678901";
 
         ctrl.saveImageBarcode(code);
 
@@ -56,13 +58,10 @@ public class Main {
 
         System.out.println(min + "          " + max);
 
+
         /*
         Barcode barcode = BarcodeFactory.createUPCA(code2);
         barcode.setPreferredBarHeight(100);
-
-
-
-
 
 
         JFrame frame = new JFrame();

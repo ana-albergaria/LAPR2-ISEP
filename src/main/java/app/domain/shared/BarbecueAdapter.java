@@ -1,6 +1,7 @@
 package app.domain.shared;
 
 import app.domain.model.MyBarcode;
+import app.domain.shared.utils.BarcodeUtils;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -20,16 +21,10 @@ public class BarbecueAdapter implements ExternalAPI {
 
     @Override
     public void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException {
-        File mainDirectory = new File("./Samples");
-        File secondaryDirectory = new File(mainDirectory + "/Test-Code" + code);
-        if(!mainDirectory.exists())
-            mainDirectory.mkdir();
-        if(!secondaryDirectory.exists())
-            secondaryDirectory.mkdir();
-
+        File imageFolderPath = BarcodeUtils.imageFolderPath(code);
         Barcode barcode = (Barcode) myBarcode.getBarcode();
         barcode.setPreferredBarHeight(100);
-        File imgFile = new File(secondaryDirectory + "/barcode" + barcode.getData() + ".jpeg");
+        File imgFile = new File(imageFolderPath + "/barcode" + barcode.getData() + ".jpeg");
         BarcodeImageHandler.saveJPEG(barcode, imgFile);
     }
 

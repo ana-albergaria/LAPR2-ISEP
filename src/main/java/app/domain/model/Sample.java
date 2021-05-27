@@ -29,7 +29,7 @@ public class Sample {
      * @param myBarcode the myBarcode of the Sample
      */
     public Sample(MyBarcode myBarcode) {
-        this.myBarcode = myBarcode;
+        this.myBarcode = new MyBarcode(myBarcode);
         this.collectingDate = null;
     }
 
@@ -39,7 +39,7 @@ public class Sample {
      * @return myBarcode of the Sample
      */
     public MyBarcode getMyBarcode() {
-        return myBarcode;
+        return new MyBarcode(myBarcode);
     }
 
     /**
