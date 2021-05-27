@@ -186,6 +186,17 @@ public class Test {
         return this.samples.size() > 0;
     }
 
+    public boolean hasSamplesAnalysed(){
+        int f = 0;
+        List<TestParameter> testParameters = this.getParameters();
+        for (TestParameter testParameter : testParameters){
+            if (testParameter.getTestParameterResult() == null){
+                f++;
+            }
+        }
+        return f == 0;
+    }
+
     public String getDateOfTestRegistration() {
         return dateOfTestRegistration;
     }

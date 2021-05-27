@@ -17,8 +17,6 @@ public class TestStore {
      */
     private List<Test> testList = new ArrayList<>();
 
-    private List<Test> testsReadyToDiagnose = new ArrayList<>();
-
     /**
      * Method for creating an instance of Test
      *
@@ -60,12 +58,19 @@ public class TestStore {
     }
 
     public List<Test> getTestsReadyToDiagnose() {
-        return testsReadyToDiagnose;
+        List<Test> listTestsReadyToDiagnose = new ArrayList<>();
+
+        for (Test test : testList) {
+            if (test.hasSamplesAnalysed())
+                listTestsReadyToDiagnose.add(test);
+        }
+        return listTestsReadyToDiagnose;
     }
 
 
     public Test getTestByCode(String code) {
-        for (Test tst : testsReadyToDiagnose) {
+        List<Test> listTestsReadyToDiagnose = new ArrayList<>();
+        for (Test tst : listTestsReadyToDiagnose) {
             if (tst.getCode().equalsIgnoreCase(code)) {
                 return tst;
             }

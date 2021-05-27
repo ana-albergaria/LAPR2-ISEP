@@ -60,15 +60,18 @@ public class WriteReportController {
         return mapper.toDTO(testsToDiagnose);
     }
 
-    public List<TestParameter> getTestParameters(String code){
+    /**
+     * Retrieves all the parameters of a given test.
+     *
+     * @param code the test code.
+     * @return parameters of a given test list.
+     */
+    public List<TestParametersDTO> getTestParameters(String code){
         TestStore tstStore = this.company.getTestStore();
         Test tst = tstStore.getTestByCode(code);
-        return tstStore.getTestParameters(tst);
-    }
-
-    public List<TestParametersDTO> getTestParametersDTO(String code){
+        List<TestParameter> testParameters = tstStore.getTestParameters(tst);
         TestParameterMapper mapper = new TestParameterMapper();
-        return mapper.toDTO(getTestParameters(code));
+        return mapper.toDTO(testParameters);
     }
 
 }
