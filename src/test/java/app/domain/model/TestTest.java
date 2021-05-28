@@ -5,6 +5,8 @@ import app.domain.shared.Constants;
 import app.domain.store.ClientStore;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -126,6 +128,29 @@ public class TestTest {
 
         Assert.assertFalse(test.addSample(null));
     }
+
+    @Test
+    public void ensureTestWithNoSampleIsFound() {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
+
+        Assert.assertFalse(test.hasSamples());
+    }
+
+    @Test
+    public void ensureTestWithSampleIsFound() throws BarcodeException {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+
+        Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+
+        test.addSample(sample);
+
+        Assert.assertTrue(test.hasSamples());
+    }
+
 
 
 }

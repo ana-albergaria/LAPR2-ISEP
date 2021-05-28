@@ -85,15 +85,19 @@ package UI <<Folder>> {
                +getCategoriesByTestTypeCode(String selectedTestTypeCode)
             }
 
-    class ClientStore {
-       +getClientByTinNumber(tinNumber)
-/'    }'/
+        class ClientStore {
+           +getClientByTinNumber(tinNumber)
+        }
 
 
         class TestStore {
             +createTest(String NHScode, Client associatedClient,\n TestType selectedTestType, List<Parameter>selectedParamsList)
             +validateTest(test)
             +saveTest(test)
+        }
+
+        class ClinicalAnalysisLaboratoryStore {
+            +getCalByCode(clinicalAnalysisLabCode)
         }
 
 /'    }
@@ -178,10 +182,12 @@ TestTypeStore "1" -- "*" TestType : stores >
 ClientStore "1" -- "*" Client : stores >
 TestStore "1" -- "*" Test : stores >
 ParameterStore "1" -- "*" Parameter : stores >
+ClinicalAnalysisLaboratoryStore "1" -- "*" ClinicalAnalysisLaboratory : stores >
 Company "1" -- "1" ParameterStore : uses >
 Company "1" -- "1" TestTypeStore : uses >
 Company "1" -- "1" TestStore : uses >
 Company "1" -- "1" ClientStore : uses >
+Company "1" -- "1" ClinicalAnalysisLaboratoryStore : uses >
 TestType "1" -- "1..*" Parameter : characterized by >
 Company "1" -- "*" TestType : conducts >
 Company "1" -- "*" Test : conducts >

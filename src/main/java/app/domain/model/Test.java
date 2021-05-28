@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Class of the Test to be performed to a client
@@ -24,22 +23,22 @@ public class Test {
     /**
      * Auto generated sequencial number with 12 digits
      */
-    private String code;
+    private final String code;
 
     /**
      * National health system code of a given test
      */
-    private String nhsCode;
+    private final String nhsCode;
 
     /**
      * Client object which has solicited a test
      */
-    private Client client;
+    private final Client client;
 
     /**
      * Type of test to be conduted
      */
-    private TestType testType;
+    private final TestType testType;
 
     /**
      * Report of test results
@@ -54,7 +53,7 @@ public class Test {
     /**
      * List of parameters to be measured of a given test
      */
-    private List<TestParameter> testParameters;
+    private final List<TestParameter> testParameters;
 
     /**
      * Date of test registration
@@ -215,10 +214,6 @@ public class Test {
     public void addReport(Report report) {
         this.diagnosisReport = report;
         this.dateOfDiagnosis = generateNowDateAndTime();
-    }
-
-    public String getDateOfTestRegistration() {
-        return dateOfTestRegistration;
     }
 
     //void

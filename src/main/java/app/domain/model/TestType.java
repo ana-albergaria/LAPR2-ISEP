@@ -1,7 +1,5 @@
 package app.domain.model;
 
-import app.domain.shared.Constants;
-import app.domain.shared.ExternalAPI;
 import app.domain.shared.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,7 +37,7 @@ public class TestType {
      */
     private final List<ParameterCategory> selectedCategories;
 
-    private String classNameOfApi;
+    private final String classNameOfApi;
 
 
     /**
@@ -176,12 +174,6 @@ public class TestType {
         Class<?> oClass = Class.forName(classNameOfApi);
         return (ExternalModule) oClass.newInstance();
     }
-
-    /*
-    String fullClassName = className.equalsIgnoreCase("covid") ?
-                    Constants.COVID_EXTERNAL_ADAPTER : className.equalsIgnoreCase("blood") ?
-                    Constants.BLOOD_EXTERNAL_ADAPTER_2 : Constants.BLOOD_EXTERNAL_ADAPTER_3;
-     */
 
 
 
