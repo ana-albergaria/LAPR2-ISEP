@@ -4,8 +4,9 @@ left to right direction
 
 /'skinparam linetype ortho'/
 package UI <<Folder>> {
-  class CreateTestUI{
-  }
+   class CreateTestUI{
+    -selectedCal: String
+    }
 }
 
 
@@ -55,6 +56,7 @@ package UI <<Folder>> {
             +getTestTypeStore()
             +getParameterStore()
             +getTestStore()
+            +getCalStore()
         }
 
         class ParameterCategory{

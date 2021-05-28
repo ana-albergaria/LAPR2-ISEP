@@ -153,10 +153,13 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US4-SD](US4_SD.svg)
 
-## 3.3. Class Diagram (CD)
+## 3.3. Packages Diagram - Low in details
+![US4-PD_nivel1](US4_PD_nivel1.svg)
 
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
+### 3.4. Packages Diagram with classes
+![US4-PD_nivel1](US4_PD_nivel2.svg)
 
+## 3.5. Class Diagram (CD)
 ![US4-CD](US4_CD.svg)
 
 # 4. Tests 
@@ -190,9 +193,9 @@ Other software classes (i.e. Pure Fabrication) identified:
         app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood);
     }
 
-**Test 4** Check if it is not possible to create a Test with NHS code containing non alphanumeric characteres
+**Test 4:** Check if it is not possible to create a Test with NHS code containing non alphanumeric characteres
 
-**Test 5** Check if the auto generated code is sequencial and have 12 digits
+**Test 5:** Check if the auto generated code is sequencial and have 12 digits
 **For Example:**
 
     @Test //this test checks if the generated number is 12 digits long
@@ -202,7 +205,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
         Assert.assertTrue(test.getCode().length() == 12);
     }
-**Test 6** Check if samples cannot be added as null
+**Test 6:** Check if samples cannot be added as null
 **For Example:**
 
       @Test 
@@ -213,15 +216,16 @@ Other software classes (i.e. Pure Fabrication) identified:
  
          Assert.assertFalse(test.addSample(null));
       }
+**Test 7:** Check if tests with of without samples are being evaluated correctly by hasSamples method
 
 
 ###4.1 Test Store:
 
-**Test 7** Check if it is not possible to add a test with being null
+**Test 8:** Check if it is not possible to add a test with being null
 
-**Test 8** Check if it is not possible to add two identical tests to the test store
+**Test 9:** Check if it is not possible to add two identical tests to the test store
 
-**Test 9** Check if tests with no samples are being found correctly
+**Test 10:** Check if tests with no samples are being found correctly
 **For Example:**
 
      public void ensureTestsWithNoSamplesAreFound(){
@@ -240,9 +244,11 @@ Other software classes (i.e. Pure Fabrication) identified:
         Assert.assertEquals(testStore.getTestsWithNoSamples(), testStore.getTests());
     }
     
-**Test 10** Check if tests are being found by barcode number and by code
+**Test 11:** Check if tests are being found by barcode number and by code
 
-**Test 10** Check if getting tests with not existent barcode numbers or codes are throwing exceptions
+**Test 12:** Check if getting tests with not existent barcode numbers or codes are throwing exceptions
+
+**Test 13:** Check if tests ready to be diagnosed are being evaluated correctly
 
 
 *It is also recommended to organize this content by subsections.* 
