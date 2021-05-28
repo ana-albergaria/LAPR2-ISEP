@@ -15,16 +15,18 @@ class Company{
 
 'class Diagnosis{}
 
-class Report{}
+class Report{
+- reportText
+}
 
 class SpecialistDoctor{
 - doctorIndexNumber
 }
 
 class Test{
-- code
 - NhsCode
-- createdAt
+- code
+- dateOfTestRegistration
 }
 
 /'class TestType{
@@ -42,7 +44,6 @@ class Parameter{
 }
 
 class TestParameterResult{
-- createdAt
 - value
 - metric
 }
