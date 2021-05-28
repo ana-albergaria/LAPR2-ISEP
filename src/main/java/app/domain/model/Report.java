@@ -41,7 +41,7 @@ public class Report {
     private int countWords(String reportText){
         if((reportText == null) || (reportText.isEmpty()))
             return 0;
-        //Save words on an array:
+        //Save words in an array:
         String[] words = reportText.split("\\s+"); //"\\s+" will find one or more spaces and split the String accordingly
         return words.length;
     }

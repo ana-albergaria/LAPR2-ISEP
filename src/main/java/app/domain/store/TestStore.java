@@ -86,7 +86,7 @@ public class TestStore {
                 return tst;
             }
         }
-        throw new UnsupportedOperationException("Test not found in ready to diagnosis list!");
+        throw new UnsupportedOperationException("Test not found in ready to diagnose list!");
     }
 
     public Test getTestByCodeInTestList(String code) {
