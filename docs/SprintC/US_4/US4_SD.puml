@@ -12,7 +12,7 @@ participant "store:Parameter" as PARAM_STORE
 
 /'participant ":Platform" as PLAT'/
 participant "store:TestStore" as ORG
-participant ":ClinicalAnalisysLaboratory" as CAL
+participant "currentCal\n:ClinicalAnalisysLaboratory" as CAL
 participant "tt\n:Test" as TAREFA
 participant ": TestParameter" as tp
 
@@ -123,9 +123,10 @@ activate ORG
 ORG -> TAREFA* : createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
 deactivate ORG
 
-TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
 activate TAREFA
-deactivate TAREFA
+TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
+
+
 
 loop for each parameter of the list
 TAREFA -> tp*: testParameter =  create(parameter)
@@ -133,12 +134,11 @@ TAREFA -> TAREFA: testParameters.add(testParameter)
 end
 
 TAREFA -> TAREFA : code = generateSequentialCode()
-activate TAREFA
-deactivate TAREFA
+
+
 
 
 TAREFA -> TAREFA : dateOfTestRegistration = generateNowDateAndTime ()
-activate TAREFA
 deactivate TAREFA
 
 CTRL -> ORG : result = validateTest(test)
@@ -170,7 +170,7 @@ ORG -> ORG: validateTest(test)
 ORG -> ORG: addTest(test)
 deactivate ORG
 
-CTRL -> CAL : addTest(test)
+CTRL -> CAL : currentCal.addTest(test)
 activate CAL
 
 CAL -> CAL : validateTest(test)

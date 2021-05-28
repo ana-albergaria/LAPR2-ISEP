@@ -132,6 +132,7 @@ public class App {
         test1.addSample(s1);
 
 
+
         ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
         cal1.getCalTestList().add(test1);
