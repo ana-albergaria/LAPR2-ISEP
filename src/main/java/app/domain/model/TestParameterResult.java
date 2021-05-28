@@ -23,4 +23,8 @@ public class TestParameterResult {
         return myReferenceValue;
     }
 
+    @Override
+    public String toString() {
+        return String.format("TEST RESULT:%nValue: %s%nMetric: %s%nRef.Value: %s%n", value, metric, myReferenceValue);
+    }
 }

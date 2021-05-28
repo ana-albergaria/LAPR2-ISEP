@@ -4,6 +4,7 @@ import app.controller.RecordSamplesController;
 import app.domain.model.*;
 import app.domain.shared.Constants;
 import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,25 +75,7 @@ public class TestStoreTest {
         testStore.saveTest(test);
         Assert.assertFalse(testStore.saveTest(test));
     }
-/*
-    @Test //checks if tests with no sample are being found correctly
-    public void ensureTestsWithNoSamplesAreFound(){
-        TestStore testStore = new TestStore();
-        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
-        Client client3 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex3@gmail.com", "Alex", "12345688901");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
-        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t2, parametersCovid);
-        app.domain.model.Test test3 = testStore.createTest("123456789012", client3, t1, parametersBlood);
-        testStore.saveTest(test);
-        testStore.saveTest(test2);
-        testStore.saveTest(test3);
 
-
-        Assert.assertEquals(testStore.getTestsWithNoSamples(), testStore.getTests());
-    }
-
- */
 
     @Test //checks if tests with no sample are being found correctly
     public void ensureTestIsFoundByBarcodeNumber() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
@@ -109,7 +92,7 @@ public class TestStoreTest {
 
         test.addSample(sample);
 
-        Assert.assertTrue(testStore.getTestByBarcodeNumber(myBarcode.getBarcodeNumber()) == test);
+        assertSame(testStore.getTestByBarcodeNumber(myBarcode.getBarcodeNumber()), test);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -141,7 +124,7 @@ public class TestStoreTest {
         testStore.saveTest(test);
 
 
-        Assert.assertTrue(testStore.getTestByCodeInTestList(test.getCode()) == test);
+        assertSame(testStore.getTestByCodeInTestList(test.getCode()), test);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -153,6 +136,37 @@ public class TestStoreTest {
         testStore.saveTest(test);
 
         testStore.getTestByCodeInTestList("000000000002");
+    }
+
+    @Test
+    public void ensureTestNotReadyToDiagnosisFalse() throws BarcodeException {
+        TestStore testStore = new TestStore();
+
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        test.addSample(sample);
+
+        assertSame(testStore.getTestsReadyToDiagnose().size(),0);
+    }
+
+    @Test
+    public void ensureTestReadyToDiagnosisTrue() throws BarcodeException, IllegalAccessException, ClassNotFoundException, InstantiationException {
+        TestStore testStore = new TestStore();
+
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        test.addSample(sample);
+
+        test.addTestResult("RBC12", 23.45, "ug");
+        test.addTestResult("WBC12", 23.45, "ug");
+
+        assertEquals(1, testStore.getTestsReadyToDiagnose().size());
     }
 
 }

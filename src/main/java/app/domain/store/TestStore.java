@@ -52,7 +52,6 @@ public class TestStore {
             return false;
         return this.testList.add(test);
     }
-
     public List<Test> getTests() {
         return new ArrayList<>(testList);
     }
@@ -107,7 +106,7 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found!");
     }
 
-    public boolean testHasBarcodeNumber(Test test, String barcodeNumber) {
+    private boolean testHasBarcodeNumber(Test test, String barcodeNumber) {
         for (Sample sample : test.getSamples()) {
             if (sample.getMyBarcode().getBarcodeNumber().equals(barcodeNumber))
                 return true;
