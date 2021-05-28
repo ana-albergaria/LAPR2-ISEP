@@ -1,3 +1,4 @@
+/*
 package app.domain.model;
 
 import app.controller.RecordSamplesController;
@@ -76,7 +77,8 @@ public class Main {
 
         BarcodeImageHandler.saveJPEG(barcode1, imgFile);
 
-        /*
+        */
+/*
         JFrame frame = new JFrame();
         frame.getContentPane().add(barcode);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,16 +87,18 @@ public class Main {
         frame.setLocation(500, 500);
         frame.setVisible(true);
 
-         */
+         *//*
 
 
 
 
-        /*
+
+        */
+/*
         BufferedImage img = BarcodeImageHandler.getImage(barcode);
         barcode.print(img.createGraphics());
 
-         */
+         *//*
 
 
 
@@ -104,7 +108,9 @@ public class Main {
 
 
 
-        /*
+
+        */
+/*
         Object barcode = myBarcode.getBarcode();
 
         File imgFile = new File("barcode.jpeg");
@@ -113,7 +119,8 @@ public class Main {
 
         BarcodeImageHandler.saveJPEG((Barcode) barcode, imgFile);
 
-         */
+         *//*
+
 
 
 
@@ -122,3 +129,4 @@ public class Main {
 }
 
 
+*/
