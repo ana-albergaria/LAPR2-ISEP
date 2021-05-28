@@ -40,6 +40,4 @@ public class TestParameter {
     public void addResult(Double result, String metric, MyReferenceValue refValue) {
         this.testResult = new TestParameterResult(result, metric, refValue);
     }
-
-    //addResult(result, metric, refValue)
 }
