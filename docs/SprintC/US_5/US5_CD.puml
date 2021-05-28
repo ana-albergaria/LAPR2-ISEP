@@ -154,6 +154,7 @@ Company "*" -- "1" ExternalAPI : makes use of >
 MyBarcode "1" -- "1" BarbecueAdapter : given by >
 
 
+
 class BarbecueAdapter implements ExternalAPI
 
 BarbecueAdapter --> BarbecueAPI
