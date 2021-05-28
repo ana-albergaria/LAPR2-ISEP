@@ -11,7 +11,7 @@ import java.util.List;
 /*
 FALTA:
 - Não deixar o utilizador selecionar o mesmo parâmetro duas vezes
-- Criar o ClinicalChemistryLaboratoryUI
+- Criar o ClinicalChemistryTechnologistUI
 - Tratar melhor, ver se faltam exceções
  */
 
@@ -44,9 +44,9 @@ public class RecordResultsUI implements Runnable {
             for (int i = 0; i < listTotalParameters.size(); i++) {
                 ParameterDTO selectedParameter = (ParameterDTO) Utils.showAndSelectOne(listTotalParameters,
                         "Choose the parameter of the test for which you want to record the result:");
-                Double resultValue = Utils.readDoubleFromConsole("Result Value: ");
+                String resultValue = Utils.readLineFromConsole("Result Value: ");
                 String metric = Utils.readLineFromConsole("Metric: ");
-                ctrl.addTestResult(selectedParameter.getParameterCode(), resultValue, metric);
+                ctrl.addTestResult(selectedParameter.getParameterCode(), Double.parseDouble(resultValue), metric);
             }
             success = true;
             System.out.println("\nResults successfully recorded!");
