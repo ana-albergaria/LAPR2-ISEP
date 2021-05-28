@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import app.controller.App;
-import app.domain.thirdparty.interfaces.ExternalAPI;
+import app.domain.interfaces.ExternalAPI;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;

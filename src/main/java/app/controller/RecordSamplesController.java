@@ -4,7 +4,7 @@ import app.domain.model.Company;
 import app.domain.model.MyBarcode;
 import app.domain.model.Sample;
 import app.domain.model.Test;
-import app.domain.thirdparty.interfaces.ExternalAPI;
+import app.domain.interfaces.ExternalAPI;
 import app.domain.shared.utils.BarcodeUtils;
 import app.domain.store.ClinicalAnalysisLaboratoryStore;
 import app.domain.store.SampleStore;

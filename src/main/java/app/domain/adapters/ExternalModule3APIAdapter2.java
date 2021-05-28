@@ -1,8 +1,8 @@
-package app.domain.thirdparty.adapters;
+package app.domain.adapters;
 
 import app.domain.model.MyReferenceValue;
 import app.domain.model.Parameter;
-import app.domain.thirdparty.interfaces.ExternalModule;
+import app.domain.interfaces.ExternalModule;
 import com.example1.ExternalModule3API;
 
 public class ExternalModule3APIAdapter2 implements ExternalModule {

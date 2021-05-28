@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.domain.thirdparty.interfaces.ExternalModule;
+import app.domain.interfaces.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
