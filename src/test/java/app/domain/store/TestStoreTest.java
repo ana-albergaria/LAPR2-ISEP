@@ -165,8 +165,29 @@ public class TestStoreTest {
 
         test.addTestResult("RBC12", 23.45, "ug");
         test.addTestResult("WBC12", 23.45, "ug");
+        test.addChemicalAnalysisDate();
 
         assertEquals(1, testStore.getTestsReadyToDiagnose().size());
     }
 
+    @Test
+    public void ensureGetTestParametersByTestReturnsCorrectly() {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        Assert.assertEquals(parametersBlood, testStore.getTotalTestParameters(test));
+    }
+
+
+    @Test
+    public void ensureGetTestParametersReturnsCorrectly() {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        testStore.saveTest(test);
+
+        Assert.assertEquals(test.getParameters(), testStore.getTestParameters(test));
+    }
 }

@@ -52,10 +52,19 @@ public class TestStore {
             return false;
         return this.testList.add(test);
     }
+
+    /**
+     * Gets all tests stored in the store
+     * @return list of tests
+     */
     public List<Test> getTests() {
         return new ArrayList<>(testList);
     }
 
+    /**
+     * gets the tests which are ready to be diagnosed
+     * @return list of ready to diagnosis tests
+     */
     public List<Test> getTestsReadyToDiagnose() {
         List<Test> listTestsReadyToDiagnose = new ArrayList<>();
 
@@ -66,7 +75,11 @@ public class TestStore {
         return listTestsReadyToDiagnose;
     }
 
-
+    /**
+     * Gets the tests by its code
+     * @param code code of the test to be found
+     * @return Found test
+     */
     public Test getTestByCode(String code) {
         List<Test> listTestsReadyToDiagnose = new ArrayList<>();
         for (Test tst : listTestsReadyToDiagnose) {
@@ -85,10 +98,20 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found!");
     }
 
+    /**
+     * Gets a list of test parameters of a test
+     * @param tst test to retrieve list
+     * @return list of test parameters
+     */
     public List<TestParameter> getTestParameters(Test tst) {
         return new ArrayList<>(tst.getParameters());
     }
 
+    /**
+     * Gets a list of the parameters of the test parameters of an specified test object
+     * @param test test object to find parameters
+     * @return list of parameters
+     */
     public List<Parameter> getTotalTestParameters(Test test) {
         List<Parameter> listTotalTestParameters = new ArrayList<>();
 
@@ -98,6 +121,11 @@ public class TestStore {
         return listTotalTestParameters;
     }
 
+    /**
+     * Gets a test object by its sample barcode number
+     * @param barcodeNumber barcode number to find in the tests
+     * @return found test
+     */
     public Test getTestByBarcodeNumber(String barcodeNumber) {
         for (Test test : testList) {
             if (testHasBarcodeNumber(test, barcodeNumber))
@@ -106,6 +134,12 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found!");
     }
 
+    /**
+     * Checks if an specified test has a given barcode number
+     * @param test test to search barcode number
+     * @param barcodeNumber barcode number to be searched
+     * @return true if has barcode number, false otherwise
+     */
     private boolean testHasBarcodeNumber(Test test, String barcodeNumber) {
         for (Sample sample : test.getSamples()) {
             if (sample.getMyBarcode().getBarcodeNumber().equals(barcodeNumber))

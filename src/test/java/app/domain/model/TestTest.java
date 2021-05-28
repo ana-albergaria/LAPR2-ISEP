@@ -147,6 +147,7 @@ public class TestTest {
         Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
 
         test.addSample(sample);
+        test.addSampleCollectionDate();
 
         Assert.assertTrue(test.hasSamples());
     }

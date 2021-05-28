@@ -37,6 +37,12 @@ public class TestParameter {
         return testResult;
     }
 
+    /**
+     * Method for creating and associating an TestParameterResult to the current TestParameter
+     * @param result Testing result value
+     * @param metric Metric of the result evaluated
+     * @param refValue reference value gotten in external module
+     */
     public void addResult(Double result, String metric, MyReferenceValue refValue) {
         this.testResult = new TestParameterResult(result, metric, refValue);
     }
