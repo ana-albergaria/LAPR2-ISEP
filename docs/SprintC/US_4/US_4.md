@@ -293,7 +293,7 @@ Other software classes (i.e. Pure Fabrication) identified:
         return this.testList.add(test);
     }
 
-## Class TestStore
+## Class Test
 
     public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters) {
         checkNhsCode(nhsCode);
@@ -330,7 +330,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 # 6. Integration and Demo 
 
 To create a Test several lists of existent participants of the system are needed, such as: TestTypes, ParameterCategories and Parameters. 
-Therefor in order to reduce coupling all of those objects are passed to the UI layer through DTO's, with the assistance of Mappers for each to convert the data objects.
+Therefore in order to reduce coupling all of those objects are passed to the UI layer through DTO's, with the assistance of Mappers for each to convert the data objects.
 
 # 7. Observations
 
