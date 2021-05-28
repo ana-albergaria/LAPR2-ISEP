@@ -2,15 +2,15 @@
 skinparam classAttributeIconSize 0
 left to right direction
 
-
+/'skinparam linetype ortho'/
 package UI <<Folder>> {
   class CreateTestUI{
   }
 }
 
 
-package Domain <<Folder>> {
-    package Model <<Folder>> {
+/'package Domain <<Folder>> {
+    package Model <<Folder>> {'/
         class Report{}
 
         class ClinicalAnalysisLaboratory{
@@ -72,8 +72,8 @@ package Domain <<Folder>> {
         - email
         }
 
-    }
-    package Stores <<Folder>> {
+/'    }'/
+/'    package Stores <<Folder>> {'/
         class ParameterStore {
             +getParamsByCategories(List<String> selectedCategoriesCodes)
             +getParamsByCategory(String category)
@@ -87,7 +87,7 @@ package Domain <<Folder>> {
 
     class ClientStore {
        +getClientByTinNumber(tinNumber)
-    }
+/'    }'/
 
 
         class TestStore {
@@ -96,10 +96,10 @@ package Domain <<Folder>> {
             +saveTest(test)
         }
 
-    }
-}
+/'    }
+}'/
 
-package Controller <<Folder>>{
+/'package Controller <<Folder>>{'/
     class CreateTestControler{
     +createTest(NHScode, citizenCardNumber,selectedTestTypeCode, selectedParamCodes)
     +saveTest(test)
@@ -107,9 +107,9 @@ package Controller <<Folder>>{
     +getCategoriesListOfTestType(selectedTestTypeCode): CategoriesDTO
     +getParametersOfCategories(selectedCategoriesCodes): ParametersDTO
     }
-}
+/'}'/
 
-package DTO <<Folder>>{
+/'package DTO <<Folder>>{'/
     class TestTypeDTO {
     -code
     -description
@@ -132,9 +132,9 @@ package DTO <<Folder>>{
     +ParameterDTO(code, shortName, description, ParameterCategory)'
     }
 
-}
+/'}'/
 
-package Mappers <<Folder>>{
+/'package Mappers <<Folder>>{'/
     class TestTypeMapper {
         +List<TestTypeDTO> toDTO(List<TestType> testTypes)
         +TestTypeDTO toDTO(TestType tt)
@@ -148,7 +148,7 @@ package Mappers <<Folder>>{
         +ParameterDTO toDTO(Parameter parameter)
     }
 
-}
+/'}'/
 
 Client -[hidden]-|> Test
 CreateTestControler -[hidden]-|> Test

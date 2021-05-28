@@ -44,7 +44,7 @@ public class WriteReportUI implements Runnable {
 
             for (TestParametersDTO testParameter : ctrl.getTestParameters(tst.getCode())){
                 System.out.printf(">> TEST PARAMETER \"" + testParameter.getParameter().getShortName() + "\" <<" +
-                        "%n> Result: " + testParameter.getTestParameterResult() + " " + testParameter.getResultMetric() + ";" +
+                        "%n> Result: " + testParameter.getResultValue() + " " + testParameter.getResultMetric() + ";" +
                         "%n> Reference Value: " + testParameter.getResultReferenceValue() + " " + testParameter.getResultMetric() + ";");
             }
 

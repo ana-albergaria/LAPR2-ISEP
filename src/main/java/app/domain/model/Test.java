@@ -138,6 +138,10 @@ public class Test {
         this.dateOfSamplesCollection = generateNowDateAndTime();
     }
 
+    public void addChemicalAnalysisDate(){
+        this.dateOfChemicalAnalysis = generateNowDateAndTime();
+    }
+
     /**
      * Generates a sequencial code based on the number of existing tests
      * @return 12 digits sequencial number of current test.
@@ -212,6 +216,7 @@ public class Test {
      */
     public void addReport(Report report) {
         this.diagnosisReport = report;
+        this.dateOfDiagnosis = generateNowDateAndTime();
     }
 
     public String getDateOfTestRegistration() {

@@ -134,6 +134,7 @@ public class App {
         Test test2 = new Test("123456789012",c1,t1,listParameter);
         this.company.getTestStore().saveTest(test2);
 
+
         ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
         cal1.getCalTestList().add(test2);

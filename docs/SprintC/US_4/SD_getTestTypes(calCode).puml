@@ -6,6 +6,7 @@ participant ":CreateTestController" as CTRL
 participant ":Company" as PLAT
 participant "store: \nClinical Analysis Laboratory" as CALSTORE
 participant ": TestTypeMapper" as TT_MAPPER
+participant "currentCal\n:ClinicalAnalisysLaboratory" as CAL
 
 activate CTRL
 CTRL -> PLAT : clinicalAnalysisLaboratoryStore = getCalStore()
@@ -15,6 +16,10 @@ deactivate PLAT
 
 
 CTRL -> CALSTORE : testTypesList = getCalTestTypesByCode(clinicalAnalysisLabCode)
+activate CALSTORE
+deactivate CALSTORE
+
+CTRL -> CAL : testTypesList = getCalTestTypesByCode(clinicalAnalysisLabCode)
 activate CALSTORE
 deactivate CALSTORE
 

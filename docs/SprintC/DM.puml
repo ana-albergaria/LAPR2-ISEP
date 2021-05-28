@@ -36,9 +36,13 @@ class Sample{
 }
 
 class FinalResult{}
-class ChemicalResult{}
+class TestParameterResult{
+-value
+-metric
+}
+class ReferenceValue{}
+class TestParameter{}
 /'class ClinicalResult{}'/
-class Diagnosis{}
 class Parameter{
 - code
 - shortName
@@ -48,7 +52,9 @@ class Notification{
 - textDescription
 }
 /'class Courier{}'/
-class SpecialistDoctorReport{}
+class Report{
+- reportText
+}
 class NHSReport{}
 class Forecast{
 - totalCovidNextDay
@@ -170,13 +176,7 @@ NHSAPI -[hidden]down-|> NHSReport
 /'Receptionist -[hidden]up-|> Client'/
 Employee -[hidden]right-|> Company
 
-together {
-class Diagnosis
-class SpecialistDoctorReport
-}
-
 /'LabOrder -[hidden]down-> Client'/
-Diagnosis -[hidden]right-> SpecialistDoctorReport
 
 
 /' END OF LAYOUT PURPOSES '/
@@ -206,6 +206,7 @@ Company "1" -- "*" ParameterCategory : adopts >
 /'Company "1" -- "1" ChemicalLaboratory : owns >'/
 /'Company "1" -- "1..*" ClinicalAnalysisLaboratory : owns >'/
 Company "1" -- "1..*" NHSReport : reports >
+Company "1" -- "*" Test : conducts >
 Parameter "*" -- "1" ParameterCategory : presented under >
 /'ACRESCENTEI LINHA ABAIXO'/
 Parameter "*" -- "1" Administrator : created by >
@@ -216,7 +217,6 @@ ParameterCategory "*" -- "1" Administrator : created by >
 /'Test -- Application : is known by >'/
 Test "*" -- "1" TestType : classified as >
 Test "1" -- "1..*" Sample : collects >
-Test "*" -- "1..*" Parameter : requested analysis of >
 /'PROFFESSOR CORREÇÃO'/
 /'Test "*" --- "1..*" MedicalLabTechnician : registered locally by >'/
 Test "1" --- "1" LabOrder : originates <
@@ -233,17 +233,19 @@ MedicalLabTechnician "1" -- "*" Sample : records >
 ClinicalChemistryTechnologist "1..*" -- "1" ChemicalLaboratory : works for >
 /'ClinicalChemistryTechnologist "1" -- "*" Sample : receives >'/
 ClinicalChemistryTechnologist "1" - "*" ChemicalAnalysis : performs >
-ClinicalChemistryTechnologist "1" -- "*" ChemicalResult : records >
+ClinicalChemistryTechnologist "1" -- "*" TestParameterResult : records >
 /'LabOrder -- Doctor : prescribed by >'/
-ChemicalResult "*" -- "1" SpecialistDoctor : analysed by >
-SpecialistDoctor "1" -- "*" Diagnosis : makes >
-SpecialistDoctor "1" -- "*" SpecialistDoctorReport : writes >
-/'SpecialistDoctorReport -- Client : delivered to >'/
-/'SpecialistDoctorReport -- Application : known by >'/
-SpecialistDoctorReport "*" -- "1" LaboratoryCoordinator : validated by >
+TestParameterResult "0..1" -- "1" TestParameter : contains <
+TestParameterResult "1" -- "1" ReferenceValue : records >
+TestParameter "*" -- "1" Parameter : refers to >
+TestParameter "1..*" -- "1" Test : requests analysis of <
+SpecialistDoctor "1" -- "*" Report : writes >
+/'Report -- Client : delivered to >'/
+/'Report -- Application : known by >'/
+Report "*" -- "1" LaboratoryCoordinator : validated by >
+Report "1" -- "1" Test : is of >
 /'ClinicalResult -- Application : known by >'/
 /'ClinicalResult -- LaboratoryCoordinator : validated by >'/
-Diagnosis "*" --- "1" LaboratoryCoordinator : validated by >
 LaboratoryCoordinator "1" -- "*" FinalResult : confirms >
 Client "1" -- "1..*" Notification : receives >
 FinalResult "1..*" -- "1" Client : known by >
@@ -271,20 +273,5 @@ ClinicalAnalysisLaboratory "1..*" -- "1" Administrator : registered by >
 
 /' US8 '/
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
-
-
-/'Changed specialist doctor diagnosis line 244 and 251 cause its implicit by specialist doc report'/
-
-
-
-
-
-
-
-
-
-
-
-
 
 @enduml

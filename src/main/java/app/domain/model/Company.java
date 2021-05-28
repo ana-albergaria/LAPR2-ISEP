@@ -32,10 +32,30 @@ public class Company {
      * The parameter store.
      */
     private ParameterStore parameterStore;
+
+    /**
+     * The test store.
+     */
     private TestStore testStore;
+
+    /**
+     * The client store.
+     */
     private ClientStore clientStore;
+
+    /**
+     * The test type store.
+     */
     private TestTypeStore testTypeStore;
+
+    /**
+     * The sample store.
+     */
     private SampleStore sampleStore;
+
+    /**
+     * The clinical analysis laboratory store.
+     */
     private ClinicalAnalysisLaboratoryStore calStore;
 
     private List<Employee> empList;
@@ -97,22 +117,47 @@ public class Company {
         return parameterStore;
     }
 
+    /**
+     * Calling the Test Type Store available in the system.
+     *
+     * @return the test type store.
+     */
     public TestTypeStore getTestTypeStore() {
         return testTypeStore;
     }
 
+    /**
+     * Calling the Client Store available in the system.
+     *
+     * @return the client store.
+     */
     public ClientStore getClientStore(){
         return clientStore;
     }
 
+    /**
+     * Calling the Test Store available in the system.
+     *
+     * @return the test store.
+     */
     public TestStore getTestStore(){
         return testStore;
     }
 
+    /**
+     * Calling the Sample Store available in the system.
+     *
+     * @return the sample store.
+     */
     public SampleStore getSampleStore() {
         return sampleStore;
     }
 
+    /**
+     * Calling the Clinical Analysis Laboratory Store available in the system.
+     *
+     * @return the clinical analysis laboratory store.
+     */
     public ClinicalAnalysisLaboratoryStore getCalStore() {
         return calStore;
     }
@@ -126,8 +171,6 @@ public class Company {
         return empList;
     }
 
-
-
     /**
      * Calling the roles list available in the system.
      *
@@ -139,7 +182,7 @@ public class Company {
 
     /**
      * Get Organization Role according to the its description
-     * @param roleDescription
+     * @param roleDescription the role description.
      * @return Organization Role reference
      */
     private OrgRole getRoleByDescription(String roleDescription) {

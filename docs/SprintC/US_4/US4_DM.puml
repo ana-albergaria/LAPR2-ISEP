@@ -14,6 +14,10 @@ class Test{
 - dateOfDiagnosis
 }
 
+class Company {
+-designation
+}
+
 class ParameterCategory{
   -code
   -name
@@ -70,5 +74,5 @@ TestParameter "*" -- "1" Parameter : refers to >
 TestParameter "1" -- "0..1" TestParameterResult : contains >
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
 ClinicalAnalysisLaboratory "1" -- "1..*" Test : performs >
-
+Company "1" --- "*" Test : conducts >
 @enduml
