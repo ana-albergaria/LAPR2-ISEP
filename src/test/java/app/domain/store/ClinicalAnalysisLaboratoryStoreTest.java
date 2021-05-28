@@ -255,6 +255,17 @@ public class ClinicalAnalysisLaboratoryStoreTest {
         Assert.assertEquals(calTestList, expectedCalTestList);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureNoCalIsFoundWithInexistentLabID() {
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+
+        ClinicalAnalysisLaboratory cal = new ClinicalAnalysisLaboratory("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+
+        calStore.getCalByCode(cal.getLaboratoryID());
+
+    }
+
 
 
 

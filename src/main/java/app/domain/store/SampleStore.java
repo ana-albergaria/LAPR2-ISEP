@@ -34,7 +34,7 @@ public class SampleStore {
      *          Otherwise, returns false.
      */
     public boolean validateSample(Sample sample) {
-        if (sample == null || sample.getMyBarcode() == null)
+        if (sample == null)
             return false;
         return true;
     }
