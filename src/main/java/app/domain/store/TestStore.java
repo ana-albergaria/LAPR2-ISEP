@@ -81,8 +81,7 @@ public class TestStore {
      * @return Found test
      */
     public Test getTestByCode(String code) {
-        List<Test> listTestsReadyToDiagnose = new ArrayList<>();
-        for (Test tst : listTestsReadyToDiagnose) {
+        for (Test tst : getTestsReadyToDiagnose()) {
             if (tst.getCode().equalsIgnoreCase(code)) {
                 return tst;
             }
