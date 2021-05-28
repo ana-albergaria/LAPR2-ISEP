@@ -2,6 +2,8 @@ package app.domain.model;
 
 /**
  * Class of a Test parameter result which stores also the metric used and the reference value for the parameter
+ *
+ * @author SRC-Code-23
  */
 public class TestParameterResult {
 
@@ -32,14 +34,29 @@ public class TestParameterResult {
         this.myReferenceValue = myReferenceValue;
     }
 
+    /**
+     * Get the result value of the test parameter result.
+     *
+     * @return result value of the test parameter result.
+     */
     public Double getResultValue(){
         return value;
     }
 
+    /**
+     * Get the result metric of the test parameter result.
+     *
+     * @return result metric of the test parameter result.
+     */
     public String getResultMetric(){
         return metric;
     }
 
+    /**
+     * Get the reference value of the test parameter result.
+     *
+     * @return reference value of the test parameter result.
+     */
     public MyReferenceValue getResultReferenceValue(){
         return myReferenceValue;
     }
