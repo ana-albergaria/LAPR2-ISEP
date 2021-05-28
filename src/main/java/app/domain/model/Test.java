@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.domain.shared.ExternalModule;
+import app.domain.thirdparty.interfaces.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
@@ -131,6 +131,9 @@ public class Test {
         return false;
     }
 
+    /**
+     * Adds the Sample Collecting Date to the Test for which the samples where collected.
+     */
     public void addSampleCollectionDate(){
         this.dateOfSamplesCollection = generateNowDateAndTime();
     }
@@ -216,7 +219,6 @@ public class Test {
         this.dateOfDiagnosis = generateNowDateAndTime();
     }
 
-    //void
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();

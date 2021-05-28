@@ -18,14 +18,6 @@ public class SampleTest {
         myBarcode = new MyBarcode(barcode, "12345678901");
     }
 
-    @Test
-    public void getCollectingDate() {
-        Sample obj = new Sample(myBarcode);
-        String expCollectingDate = null;
-        //the Collecting Date of the Sample starts null and only will be added after all the samples are created.
-
-        Assert.assertEquals(expCollectingDate, obj.getCollectingDate());
-    }
 
     @Test
     public void ensureEqualsMethodObjectsFromDifferentClasses() {

@@ -13,10 +13,7 @@ public class Sample {
      * The myBarcode of the Sample.
      */
     private MyBarcode myBarcode;
-    /**
-     * The collecting date of the Sample.
-     */
-    private String collectingDate;
+
 
     /**
      * Builds a Sample's instance receiving:
@@ -26,7 +23,6 @@ public class Sample {
      */
     public Sample(MyBarcode myBarcode) {
         this.myBarcode = new MyBarcode(myBarcode);
-        this.collectingDate = null;
     }
 
     /**
@@ -36,15 +32,6 @@ public class Sample {
      */
     public MyBarcode getMyBarcode() {
         return new MyBarcode(myBarcode);
-    }
-
-    /**
-     * Returns the collecting date of the Sample
-     *
-     * @return collecting date of the Sample
-     */
-    public String getCollectingDate() {
-        return collectingDate;
     }
 
     /**

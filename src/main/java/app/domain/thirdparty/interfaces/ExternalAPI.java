@@ -1,4 +1,4 @@
-package app.domain.shared;
+package app.domain.thirdparty.interfaces;
 
 import app.domain.model.MyBarcode;
 import net.sourceforge.barbecue.BarcodeException;
