@@ -131,10 +131,12 @@ public class App {
         Sample s1 = new Sample(mb1);
         test1.addSample(s1);
 
+        Test test2 = new Test("123456789012",c1,t1,listParameter);
+        this.company.getTestStore().saveTest(test2);
 
         ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
-        cal1.getCalTestList().add(test1);
+        cal1.getCalTestList().add(test2);
 
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
 

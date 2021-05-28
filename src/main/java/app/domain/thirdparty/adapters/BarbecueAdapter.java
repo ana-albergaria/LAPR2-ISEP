@@ -1,7 +1,8 @@
-package app.domain.shared;
+package app.domain.thirdparty.adapters;
 
 import app.domain.model.MyBarcode;
 import app.domain.shared.utils.BarcodeUtils;
+import app.domain.thirdparty.interfaces.ExternalAPI;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;

@@ -1,9 +1,8 @@
 package app.domain.model;
 
 import app.controller.App;
-import app.domain.shared.ExternalAPI;
+import app.domain.thirdparty.interfaces.ExternalAPI;
 import app.domain.store.*;
-import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
 import auth.AuthFacade;

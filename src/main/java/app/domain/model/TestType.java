@@ -1,8 +1,6 @@
 package app.domain.model;
 
-import app.domain.shared.Constants;
-import app.domain.shared.ExternalAPI;
-import app.domain.shared.ExternalModule;
+import app.domain.thirdparty.interfaces.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

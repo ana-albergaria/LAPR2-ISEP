@@ -4,20 +4,17 @@ import app.domain.model.Company;
 import app.domain.model.MyBarcode;
 import app.domain.model.Sample;
 import app.domain.model.Test;
-import app.domain.shared.ExternalAPI;
+import app.domain.thirdparty.interfaces.ExternalAPI;
 import app.domain.shared.utils.BarcodeUtils;
 import app.domain.store.ClinicalAnalysisLaboratoryStore;
 import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
 import app.mappers.TestMapper;
 import app.mappers.dto.TestDTO;
-import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BarcodeImageHandler;
 import net.sourceforge.barbecue.output.OutputException;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -36,6 +33,11 @@ public class RecordSamplesController {
      * The sample associated to the Controller.
      */
     private Sample sample;
+
+    /**
+     * The Test for which the samples will be collected.
+     */
+    private Test selectedTest;
 
     /**
      * Builds an empty constructor for having the actual instance of the company when instantiated.
@@ -85,7 +87,7 @@ public class RecordSamplesController {
      */
     public boolean addSample(String code) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException {
         TestStore testStore = this.company.getTestStore();
-        Test selectedTest = testStore.getTestByCodeInTestList(code);
+        this.selectedTest = testStore.getTestByCodeInTestList(code);
         return selectedTest.addSample(sample);
     }
 
@@ -136,6 +138,10 @@ public class RecordSamplesController {
         ExternalAPI api = this.company.getExternalAPI();
         MyBarcode myBarcode = this.sample.getMyBarcode();
         api.saveImageBarcode(myBarcode, code);
+    }
+
+    public void addSampleCollectionDateToTest() {
+        this.selectedTest.addSampleCollectionDate();
     }
 
 

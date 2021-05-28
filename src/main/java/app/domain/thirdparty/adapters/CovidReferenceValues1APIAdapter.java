@@ -1,7 +1,8 @@
-package app.domain.shared;
+package app.domain.thirdparty.adapters;
 
 import app.domain.model.MyReferenceValue;
 import app.domain.model.Parameter;
+import app.domain.thirdparty.interfaces.ExternalModule;
 import com.example3.CovidReferenceValues1API;
 
 public class CovidReferenceValues1APIAdapter implements ExternalModule {

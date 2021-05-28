@@ -1,13 +1,12 @@
 package app.domain.model;
 
-import app.domain.shared.ExternalModule;
+import app.domain.thirdparty.interfaces.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Class of the Test to be performed to a client
@@ -132,6 +131,9 @@ public class Test {
         return false;
     }
 
+    /**
+     * Adds the Sample Collecting Date to the Test for which the samples where collected.
+     */
     public void addSampleCollectionDate(){
         this.dateOfSamplesCollection = generateNowDateAndTime();
     }
@@ -216,7 +218,7 @@ public class Test {
         return dateOfTestRegistration;
     }
 
-    //void
+
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();

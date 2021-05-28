@@ -222,7 +222,7 @@ SD_getTestByCodeInTestList()
 end
 TEST_STORE --> CTRL : selectedTest
 deactivate TEST_STORE
-
+|||
 CTRL -> SELECTED_TEST : addSample(sample)
 activate SELECTED_TEST
 
@@ -233,11 +233,14 @@ deactivate SELECTED_TEST
 deactivate SELECTED_TEST
 
 
+
 /'dentro do método addSample, vai-se verificar se a sample já está lá?'/
 
-CTRL --> UI : result
+deactivate CTRL
+
 
 UI -> CTRL : saveImageBarcode(code)
+activate CTRL
 
 CTRL -> COMPANY : api = getExternalApi()
 activate COMPANY
@@ -256,6 +259,17 @@ CTRL --> UI : result
 deactivate CTRL
 
 end
+deactivate CTRL
+|||
+UI -> CTRL : addSampleCollectingDateToTest()
+activate CTRL
+
+CTRL -> SELECTED_TEST : addSampleCollectingDate()
+activate SELECTED_TEST
+deactivate SELECTED_TEST
+deactivate CTRL
+
+
 
 UI --> MLT : informs operation success
 
