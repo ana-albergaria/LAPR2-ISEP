@@ -84,18 +84,18 @@ public class ParameterStore {
     public List<Parameter> getParamsByCategories(List<String> selectedCategoriesCodes){
         List<Parameter> selectedParameters = new ArrayList<>();
         for (String item : selectedCategoriesCodes) {
-            selectedParameters.add(getParamByCategory(item));
+            getParamByCategory(item,selectedParameters);
         }
         return selectedParameters;
     }
 
-    private Parameter getParamByCategory(String categoryCode) {
+    private void getParamByCategory(String categoryCode, List<Parameter> selectedParameters) {
         for (Parameter param : prmList) {
             if (param.getPc().getCode().equalsIgnoreCase(categoryCode)) {
-                return param;
+                 selectedParameters.add(param);
             }
         }
-        throw new UnsupportedOperationException("There are no parameters in parameter category code: " + categoryCode);
+
     }
 
     /**

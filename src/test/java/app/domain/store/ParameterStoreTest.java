@@ -70,6 +70,45 @@ public class ParameterStoreTest {
         assertFalse(result);
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureParameterSearchThrowsNotFound() {
+        ParameterStore parameterStore = company.getParameterStore();
+        List<String> list = new ArrayList<>();
+        list.add("CODEC");
+        parameterStore.getParamsByCodes(list);
+    }
+
+    @Test
+    public void ensureParametersAreFoundByCode() {
+        Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Parameter parameter2 = company.getParameterStore().createParameter("RBC02", "RCC", "Red clood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        parameterStore.saveParameter(parameter1);
+        parameterStore.saveParameter(parameter2);
+
+        List<String> list = new ArrayList<>();
+        list.add(parameter1.getPrmCode());
+        list.add(parameter2.getPrmCode());
+        List<Parameter> actual = parameterStore.getParamsByCodes(list);
+
+        Assert.assertEquals(actual, parameterStore.getPrmList());
+    }
+
+    @Test
+    public void ensureParametersAreFoundByCategories() {
+        Parameter parameter1 = company.getParameterStore().createParameter("RBC01", "RBC", "Red Blood Cells", p1);
+        Parameter parameter2 = company.getParameterStore().createParameter("RBC02", "RCC", "Red clood Cells", p1);
+        ParameterStore parameterStore = company.getParameterStore();
+        parameterStore.saveParameter(parameter1);
+        parameterStore.saveParameter(parameter2);
+
+        List<String> list = new ArrayList<>();
+        list.add(parameter1.getPc().getCode());
+        List<Parameter> actual = parameterStore.getParamsByCategories(list);
+
+        Assert.assertEquals(actual, parameterStore.getPrmList());
+    }
+
     //Test 25
     @Test
     public void ensureParameterIsNotSavedIfNull() {

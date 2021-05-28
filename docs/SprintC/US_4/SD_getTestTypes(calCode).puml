@@ -15,11 +15,11 @@ activate PLAT
 deactivate PLAT
 
 
-CTRL -> CALSTORE : testTypesList = getCalTestTypesByCode(clinicalAnalysisLabCode)
+CTRL -> CALSTORE : currentCal = getCalByCode(clinicalAnalysisLabCode)
 activate CALSTORE
 deactivate CALSTORE
 
-CTRL -> CAL : testTypesList = getCalTestTypesByCode(clinicalAnalysisLabCode)
+CTRL -> CAL : testTypesList = currentCal.getSelectedTT()
 activate CALSTORE
 deactivate CALSTORE
 

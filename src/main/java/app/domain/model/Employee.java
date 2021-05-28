@@ -13,37 +13,37 @@ public class Employee {
     /**
      * The employee ID.
      */
-    private String employeeID;
+    private final String employeeID;
 
     /**
      * The employee name.
      */
-    private String name;
+    private final String name;
 
     /**
      * The employee address.
      */
-    private String address;
+    private final String address;
 
     /**
      * The employee phone number.
      */
-    private String phoneNumber;
+    private final String phoneNumber;
 
     /**
      * The employee email.
      */
-    private String email;
+    private final String email;
 
     /**
      * The employee SOC code.
      */
-    private String socCode;
+    private final String socCode;
 
     /**
      * The employee role.
      */
-    private OrgRole role;
+    private final OrgRole role;
 
     /**
      * Number of existing employees.

@@ -23,22 +23,22 @@ public class Test {
     /**
      * Auto generated sequencial number with 12 digits
      */
-    private String code;
+    private final String code;
 
     /**
      * National health system code of a given test
      */
-    private String nhsCode;
+    private final String nhsCode;
 
     /**
      * Client object which has solicited a test
      */
-    private Client client;
+    private final Client client;
 
     /**
      * Type of test to be conduted
      */
-    private TestType testType;
+    private final TestType testType;
 
     /**
      * Report of test results
@@ -53,7 +53,7 @@ public class Test {
     /**
      * List of parameters to be measured of a given test
      */
-    private List<TestParameter> testParameters;
+    private final List<TestParameter> testParameters;
 
     /**
      * Date of test registration
@@ -218,11 +218,6 @@ public class Test {
         this.diagnosisReport = report;
         this.dateOfDiagnosis = generateNowDateAndTime();
     }
-
-    public String getDateOfTestRegistration() {
-        return dateOfTestRegistration;
-    }
-
 
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
