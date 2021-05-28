@@ -60,7 +60,7 @@ public class RecordSamplesUI implements Runnable {
             }
         }
         catch(ClassNotFoundException cnde) {
-            System.out.println(cnde.getMessage());
+            System.out.println("The API Adapter Class was not found!");
         }
         catch(InstantiationException ie) {
             System.out.println(ie.getMessage());
@@ -79,6 +79,12 @@ public class RecordSamplesUI implements Runnable {
         }
         catch(IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
+        }
+        catch(UnsupportedOperationException uoe) {
+            System.out.println(uoe.getMessage());
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
         }
 
         return success;

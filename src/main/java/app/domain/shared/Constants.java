@@ -24,8 +24,8 @@ public class Constants {
     public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";
     public static final String COVID_MODULE_NAME = "CovidModule (for Covid 19 Tests)";
 
-    public static final String BLOOD_EXTERNAL_ADAPTER_2 = "app.domain.model.ExternalModule2APIAdapter";
-    public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.model.ExternalModule3APIAdapter";
-    public static final String COVID_EXTERNAL_ADAPTER = "app.domain.model.CovidReferenceValues1APIAdapter";
+    public static final String BLOOD_EXTERNAL_ADAPTER_2 = "app.domain.shared.ExternalModule2APIAdapter";
+    public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.shared.ExternalModule3APIAdapter";
+    public static final String COVID_EXTERNAL_ADAPTER = "app.domain.shared.CovidReferenceValues1APIAdapter";
 
 }

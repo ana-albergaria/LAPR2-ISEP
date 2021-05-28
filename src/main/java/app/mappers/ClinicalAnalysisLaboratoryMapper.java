@@ -13,7 +13,7 @@ public class ClinicalAnalysisLaboratoryMapper {
     }
 
     public List<ClinicalAnalysisLaboratoryDTO> toDTO(List<ClinicalAnalysisLaboratory> calTestList) {
-        List<ClinicalAnalysisLaboratoryDTO> calTestListDTOS = new ArrayList();
+        List<ClinicalAnalysisLaboratoryDTO> calTestListDTOS = new ArrayList<>();
         for (ClinicalAnalysisLaboratory cal : calTestList) {
             calTestListDTOS.add(this.toDTO(cal));
         }

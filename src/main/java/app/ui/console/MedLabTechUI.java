@@ -20,15 +20,16 @@ public class MedLabTechUI implements Runnable {
     @Override
     public void run() {
 
-        laboratoryID = getSelectedCalID();
-        if(laboratoryID != null) {
+        try {
+            laboratoryID = getSelectedCalID();
             List<MenuItem> options = new ArrayList<MenuItem>();
             options.add(new MenuItem("Record the Samples collected of a Test", new RecordSamplesUI(laboratoryID)));
+
 
             int option = 0;
             do
             {
-                option = Utils.showAndSelectIndex(options, "\n\nMedical Lab Technician Menu:");
+                option = Utils.showAndSelectIndex(options, "\n\nMedical Lab Technician Menu:\n");
 
                 if ( (option >= 0) && (option < options.size()))
                 {
@@ -36,20 +37,19 @@ public class MedLabTechUI implements Runnable {
                 }
             }
             while (option != -1 );
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
-
 
     }
 
     private String getSelectedCalID() {
 
         ClinicalAnalysisLaboratoryDTO selectedCalDto = (ClinicalAnalysisLaboratoryDTO) Utils.showAndSelectOne(ctrl.getCalListDTO(),
-                "Please selected in which Clinical Analysis Laboratory you are working: ");
+                "Please select in which Clinical Analysis Laboratory you are working: ");
 
-        if(selectedCalDto != null)
-            return selectedCalDto.getLaboratoryID();
-        else
-            return null;
+        if(selectedCalDto == null) throw new IllegalArgumentException("Operation canceled!");
+        return selectedCalDto.getLaboratoryID();
     }
 }
 

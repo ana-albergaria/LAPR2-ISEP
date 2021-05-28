@@ -6,13 +6,11 @@ import app.domain.model.Test;
 import app.domain.model.TestParameterResult;
 import app.domain.store.TestStore;
 import app.mappers.ParameterMapper;
-import app.mappers.TestMapper;
 import app.mappers.dto.ParameterDTO;
-import app.mappers.dto.TestDTO;
 
 import java.util.List;
 
-public class ResultController {
+public class RecordResultsController {
 
     //addTestResult(parameterCode, result, metric)
 
@@ -31,7 +29,7 @@ public class ResultController {
     /**
      * Builds an empty constructor for having the actual instance of the company when instanciated.
      */
-    public ResultController(){
+    public RecordResultsController(){
         this(App.getInstance().getCompany());
     }
 
@@ -40,7 +38,7 @@ public class ResultController {
      *
      * @param company company associated to the Controller.
      */
-    public ResultController(Company company){
+    public RecordResultsController(Company company){
         this.company = company;
         this.result = null;
     }

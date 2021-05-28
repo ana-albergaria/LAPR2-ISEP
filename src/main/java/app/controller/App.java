@@ -4,6 +4,9 @@ import app.domain.model.*;
 import app.domain.shared.Constants;
 import auth.AuthFacade;
 import auth.UserSession;
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -113,14 +116,26 @@ public class App {
         ParameterCategory pc1 = this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0);
 
         Parameter param1 = new Parameter("code1","dsg","descr",pc1);
+        Parameter param2 = new Parameter("code1","dsg","descr",pc1);
         List<Parameter> listParameter = new ArrayList<>();
         listParameter.add(param1);
+        listParameter.add(param2);
         this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
 
         Test test1 = new Test("123456789012",c1,t1,listParameter);
+        this.company.getTestStore().saveTest(test1);
+        //RETIRAR BARCODE EXCEPTION DO CONSTRUTOR, BOOTSTRAP E SINGLETON EM BAIXO
+
+        MyBarcode mb1 = new MyBarcode(c1, "12345678901");
+
+        Sample s1 = new Sample(mb1);
+        test1.addSample(s1);
+
+
         ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
         cal1.getCalTestList().add(test1);
+
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
 
 
@@ -130,8 +145,7 @@ public class App {
 
     // Extracted from https://www.javaworld.com/article/2073352/core-java/core-java-simply-singleton.html?page=2
     private static App singleton = null;
-    public static App getInstance()
-    {
+    public static App getInstance() {
         if(singleton == null)
         {
             synchronized(App.class)
