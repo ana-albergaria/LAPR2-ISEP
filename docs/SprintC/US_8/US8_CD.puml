@@ -62,10 +62,7 @@ class TestType {
 class Company {
 -designation : String
 +getTestTypeStore()
-+createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, tt)
-+saveClinicalAnalysisLaboratory(cal)
--addClinicalAnalysisLaboratory(cal)
-+validateClinicalAnalysisLaboratory(cal)
++getCalStore()
 /'+checkCalDuplicates()'/
 /'+getTestTypes()
 +getTestTypesByDesignation(selectedTestTypes)'/
@@ -128,6 +125,13 @@ class ClinicalAnalysisLaboratoryDto {
 +getTestTypesCode()
 }
 
+class ClinicalAnalysisLaboratoryStore {
++createClinicalAnalysisLaboratory(laboratoryID, name, address, phoneNumber, numTIN, tt)
++saveClinicalAnalysisLaboratory(cal)
+-addClinicalAnalysisLaboratory(cal)
++validateClinicalAnalysisLaboratory(cal)
+}
+
 RegisterNewCalUI ..> RegisterNewCalController
 RegisterNewCalController ..> Laboratory
 RegisterNewCalController ..> TestType
@@ -151,13 +155,15 @@ RegisterNewCalUI ..> ClinicalAnalysisLaboratoryDto
 
 
 
+
 Company "1" -> "1" TestTypeStore : uses >
 TestTypeStore "1" -> "*" TestType : conducts >
 /'VERIFICAR MULTIPLICIDADE LINHA ABAIXO'/
 /'ClinicalAnalysisLaboratory "1" --> "1" Laboratory : is of >'/
 /'Laboratory "1" --> "1" LaboratoryStore : uses >'/
-Company "1" --> "3..*" Laboratory : owns >
+Company "1" --> "1" ClinicalAnalysisLaboratoryStore : uses >
 ClinicalAnalysisLaboratory "1" -> "1..*" TestType : operates >
+ClinicalAnalysisLaboratoryStore "1" --> "2..*" ClinicalAnalysisLaboratory : owns >
 
 /'TestTypeStore -[hidden]-> LaboratoryStore'/
 

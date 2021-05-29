@@ -54,8 +54,9 @@ public class RegisterNewCalController {
      *          Otherwise, returns false.
      */
     public boolean createClinicalAnalysisLaboratory(ClinicalAnalysisLaboratoryDTO calDto) {
+        List<String> testTypeCodes = calDto.getTestTypeCodes();
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
-        List<TestType> selectedTT = testTypeStore.getTestTypesByCode(calDto.getTestTypeCodes());
+        List<TestType> selectedTT = testTypeStore.getTestTypesByCode(testTypeCodes);
         ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
         this.cal = calStore.createClinicalAnalysisLaboratory(calDto, selectedTT);
         return calStore.validateClinicalAnalysisLaboratory(cal);

@@ -153,7 +153,8 @@ n/a
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: asks to register a new Clinical Analysis Laboratory 		 |  ...interacting with the actor?							 |  RegisterNewCalUI           |   Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                           |
 | 			  		 |	...coordinating the US? | RegisterNewCalController | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                             |
-| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | Company | Creator (Rule 1): in the DM, Company owns Laboratory (and a Clinical Analysis Laboratory is part of Laboratory)                           |
+| 			  		 |	...knowing who instantiates a new Clinical Analysis Laboratory? | Company | Creator (Rule 1): in the DM, Company owns Laboratory (and a Clinical Analysis Laboratory is part of Laboratory)                           |
+| 			  		 |	...instantiating a new Clinical Analysis Laboratory? | ClinicalAnalysisLaboratoryStore | Creator (Rule 2): ClinicalAnalysisLaboratoryStore records/stores all Clinical Analysis Laboratory objects.                          |
 | Step 2: requests data (laboratory ID, name, address, phone number, TIN number)  		 |	...asking the user for this data?						 | RegisterNewCalUI            | IE: responsible for user interaction.                             |
 | Step 3: types requested data		 |	...validating the data locally (e.g.: mandatory vs. non-mandatory data)?						 |  ClinicalAnalysisLaboratory           |   IE: knows its own data.                           |
 |               	 |	...saving the inputted data?						 |   ClinicalAnalysisLaboratory          | IE: The object created in Step 1 has its own data as well as inherits attributes from Laboratory class.                             |
@@ -181,11 +182,12 @@ Other software classes (i.e. Pure Fabrication) identified:
 * TestTypeDto  
 * TestTypeMapper    
 * ClinicalAnalysisLaboratoryDto  
-* LaboratoryDto
+* LaboratoryDto  
+* ClinicalAnalysisLaboratoryStore
 
 ## 3.2. Sequence Diagram (SD)
 
-![US8_SD](US8_SD.svg)
+![US8_SD](../../SprintB/US_8/US8_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 
@@ -591,7 +593,9 @@ System.out.println("ensureNoCalWithDuplicatedPhoneNumberIsNotSaved");
 # 6. Integration and Demo
 
 To create a Clinical Analysis Laboratory, it is necessary to know the list of test types available in the system.  
-Therefore, in order to reduce coupling, it was created a TestTypeDto as well as a TestTypeMapper to process the data and convert the list of test types to a Dto.
+Therefore, in order to reduce coupling, it was created a TestTypeDto as well as a TestTypeMapper to process the data and convert the list of test types to a Dto.  
+
+**In Sprint C, it was added a ClinicalAnalysisLaboratoryStore** to reduce the responsabilities the Company has.  
 
 
 # 7. Observations

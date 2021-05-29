@@ -96,6 +96,13 @@ public class ClinicalAnalysisLaboratoryStore {
         return listTestsNoSamples;
     }
 
+    /**
+     * Method for getting the Clinical Analysis Laboratory by its laboratory ID.
+     *
+     * @param laboratoryID the laboratory ID of the Clinical Analysis Laboratory
+     *
+     * @return a Clinical Analysis Laboratory Object which has the laboratory ID received by parameter
+     */
     public ClinicalAnalysisLaboratory getCalByCode(String laboratoryID) {
         for (ClinicalAnalysisLaboratory cal : calList) {
             if(cal.getLaboratoryID().equalsIgnoreCase(laboratoryID))
