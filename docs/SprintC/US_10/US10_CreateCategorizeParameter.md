@@ -213,13 +213,13 @@ n/a
 |       	   	 |	... coordinating the US? | CreateParameterController | Controller |
 |       	   	 |	... instantiating a new Parameter? | Administrator | Creator: in the DM a Parameter is presented under a Parameter Category, which company adopts. |
 | Step 2: request data(i.e., parameterCode, shortName, description) | ...asking the user for this data? | CreateParameterUI | IE: Responsable for user interaction. |
-| Step 3: types requested data | ...saving the inputted data? | Parameter | IE: object has its own data.  |
+| Step 3: types requested data | ...temporarily keeping the inputted data? | CreateParameterUI | The data needs to be temporarily saved, since it will only be used later.  |
 | Step 4: shows parameter categories list and asks to select one |	...knowing the parameter categories to show? | ParameterCategoryStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
 | | ... knowing the parameterCategoryStore | Company | Pure Fabrication: company knows the parameterCategoryStore.
-| Step 5: selects a	parameter category | ... saving the selected category? | Parameter | IE: object created in step 3 is classified in one parameter category.  |
-| 			  	 |	... validating all data (local validation)? | Parameter |  IE: owns its data.|
+| Step 5: selects a	parameter category | ... temporarily keeping the selected category? | CreateParameterUI | The parameter category needs to be temporarily saved, since it will only be used later.  |
+| | ... saving all the inputed data? | Parameter | IE: owns its data.
 | Step 6: shows all data and requests confirmation | ... showing all data and requesting confirmation? | CreateParameterUI | IE: is responsible for user interactions.|
-| Step 7: confirms the data | ... validating all data (global validation)? | ParameterStore | IE: knows all its parameters.|
+| Step 7: confirms the data | ... validating all data? | ParameterStore | IE: knows all its parameters.|
 | 			  	 |	... saving the created parameter? | ParameterStore |  IE: owns all its parameters.|
 | Step 8: informs operation	success | ... informing operation success?| CreateParameterUI  | IE: is responsible for user interactions.  |
 

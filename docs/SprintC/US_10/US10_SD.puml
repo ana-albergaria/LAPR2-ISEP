@@ -97,10 +97,10 @@ activate PRMSTORE
 
 PRMSTORE --> PRM**: create(parameterCode, shortName, description, pc)
 deactivate PRMSTORE
-CTRL -> PRMSTORE: validateParameter(prm)
+/'CTRL -> PRMSTORE: validateParameter(prm)
 activate PRMSTORE
 |||
-deactivate PRMSTORE
+deactivate PRMSTORE'/
 
 
 CTRL --> UI: result

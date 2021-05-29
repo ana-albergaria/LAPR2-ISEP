@@ -65,7 +65,7 @@ public class CreateParameterController {
         return mapper.toDTO(getParameterCategories());
     }
 
-    //US10 SD: 19-25
+    //US10 SD: 19-24
     /**
      * Creates an instance of parameter type.
      *
@@ -73,18 +73,15 @@ public class CreateParameterController {
      * @param shortName the parameter name.
      * @param description the parameter description.
      * @param pcCode the code of the parameter category of the parameter.
-     * @return true if the parameter is successfully created,
-     * otherwise return false.
      */
-    public boolean createParameter(String parameterCode, String shortName, String description, String pcCode){
+    public void createParameter(String parameterCode, String shortName, String description, String pcCode){
         ParameterCategoryStore parameterCategoryStore = this.company.getParameterCategoryStore();
         ParameterCategory pc = parameterCategoryStore.getCategoryByCode(pcCode); //vai buscar a cat através do code | o getCategoryByCode está na store
         ParameterStore parameterStore = this.company.getParameterStore();
         this.prm = parameterStore.createParameter(parameterCode, shortName, description, pc);
-        return parameterStore.validateParameter(prm);
     }
 
-    //US10 SD: 30-32
+    //US10 SD: 29-31
     /**
      * Saves current parameter in the parameter store.
      *
