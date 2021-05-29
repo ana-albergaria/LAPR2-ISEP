@@ -50,7 +50,9 @@ public class RecordResultsUI implements Runnable {
                         "Choose the parameter of the test for which you want to record the result:");
                 String resultValue = Utils.readLineFromConsole("Result Value: ");
                 String metric = Utils.readLineFromConsole("Metric: ");
-                if(resultValue != null) {
+                boolean confirm = Utils.confirm(String.format("Please, confirm that the data is correct (type `s` if its correct, `n` if it is not): %n%n> Result Value: %s%n> Metric: %s%n",
+                        resultValue, metric));
+                if(resultValue != null && confirm) {
                     ctrl.addTestResult(selectedParameter.getParameterCode(), Double.parseDouble(resultValue), metric);
                 }
 
