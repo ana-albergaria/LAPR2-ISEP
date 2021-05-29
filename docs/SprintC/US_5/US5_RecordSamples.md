@@ -194,18 +194,171 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![USXX-CD](USXX-CD.svg)
 
 # 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+Before starting to implement the tests, it was practical to **create a text fixture**, because most tests require a commmon set of objects. Therefore:
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+* I declared instance variables for the common objects.
+* I initialized these objects in a public void SetUp method annotated with  @Before, so that JUnit framework invokes that method before each test runs.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+###**Class**: SampleTest  
 
-*It is also recommended to organize this content by subsections.* 
+```
+@Before
+    public void setUp() throws BarcodeException {
+        barcode = BarcodeFactory.createUPCA("12345678901");
+        myBarcode = new MyBarcode(barcode, "12345678901");
+        otherMyBarcode = new MyBarcode(barcode, "0000000000");
+    }
+``´  
+```
+
+**Test 1:** Check that a Sample is different from an object of a different class.  
+
+```
+@Test
+    public void ensureEqualsMethodObjectsFromDifferentClasses() {
+
+        Sample s1 = new Sample(myBarcode);
+        boolean resultDifferentClasses = s1.equals(myBarcode);
+        Assert.assertFalse(resultDifferentClasses);
+    }
+```
+
+**Test 2:** Check that a Sample is different from Null.  
+
+```
+@Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+        Sample s1 = new Sample(myBarcode);
+        Sample s2 = null;
+        boolean resultWithNull = s1.equals(s2);
+        Assert.assertFalse(resultWithNull);
+    }
+```  
+
+**Test 3:** Check that two Samples are equal.  
+
+```
+@Test
+    public void twoDifferentSamples() {
+
+        Sample s1 = new Sample(myBarcode);
+        Sample s2 = new Sample(otherMyBarcode);
+
+        boolean result = s1.equals(s2);
+
+        Assert.assertFalse(result);
+    }
+```  
+
+###**Class**: MyBarcodeTest  
+
+The test for the class MyBarcode were **similar** to the class Sample.  
+
+###**Class**: SampleStoreTest  
+
+```
+@Before
+    public void setUp() throws BarcodeException {
+        barcode = BarcodeFactory.createUPCA("12345678901");
+        myBarcode = new MyBarcode(barcode, "12345678901");
+    }
+```
+
+**Test 1:** Check that it creates correctly the Sample.  
+
+```
+@Test
+    public void createSample() {
+        SampleStore sampleStore = new SampleStore();
+        Sample expObj = new Sample(myBarcode);
+        Sample obj = sampleStore.createSample(myBarcode);
+
+        Assert.assertEquals(expObj, obj);
+    }
+```  
+
+**Test 2:** Check that a null Sample is not validated.
+
+```
+@Test
+    public void ensureNotPossibleNullSample() {
+        SampleStore sampleStore = new SampleStore();
+        Sample obj = null;
+        boolean result = sampleStore.validateSample(obj);
+
+        Assert.assertFalse(result);
+    }
+```  
+
+**Test 3:** Check that a valid Sample is saved.
+
+```
+@Test
+    public void ensureAValidSampleIsSaved() {
+        SampleStore sampleStore = new SampleStore();
+        Sample obj = sampleStore.createSample(myBarcode);
+
+        boolean result = sampleStore.validateSample(obj);
+
+        Assert.assertTrue(result);
+
+    }
+```
+
+###**Class**: ClinicalAnalysisLaboratoryStoreTest  
+
+In this class, it was tested the useful method for this US - **getTestsWithNoSamples** and **getCalByCode**.  
+
+**Test 1:** Checks if tests with no samples are being found correctly.
+```
+@Test 
+    public void ensureTestsWithNoSamplesAreFound(){
+        TestStore testStore = this.company.getTestStore();
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        
+        //omitted...
+  
+        testStore.saveTest(test);
+        testStore.saveTest(test2);
+        testStore.saveTest(test3);
+  
+        ClinicalAnalysisLaboratory cal = new ClinicalAnalysisLaboratory("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+        cal.getCalTestList().add(test);
+        cal.getCalTestList().add(test2);
+        cal.getCalTestList().add(test3);
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal);
+
+
+        List<app.domain.model.Test> calTestList = calStore.getTestsWithNoSamples(cal.getLaboratoryID());
+        List<app.domain.model.Test> expectedCalTestList = new ArrayList<>();
+        expectedCalTestList.add(test);
+        expectedCalTestList.add(test2);
+        expectedCalTestList.add(test3);
+
+
+        Assert.assertEquals(calTestList, expectedCalTestList);
+    }
+```
+
+**Test 2:** Checks that the exception is thrown if no Clinical Analysis Laboratory with the provided laboratory ID exists.  
+
+```
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureNoCalIsFoundWithInexistentLabID() {
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+
+        ClinicalAnalysisLaboratory cal = new ClinicalAnalysisLaboratory("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+
+        calStore.getCalByCode(cal.getLaboratoryID());
+
+    }
+```
+
+
+
 
 # 5. Construction (Implementation)
 

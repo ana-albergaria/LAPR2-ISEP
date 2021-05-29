@@ -25,9 +25,9 @@ public class SampleTest {
     public void ensureEqualsMethodObjectsFromDifferentClasses() {
 
         Sample s1 = new Sample(myBarcode);
-        //Act
+
         boolean resultDifferentClasses = s1.equals(myBarcode);
-        //Assert
+
         Assert.assertFalse(resultDifferentClasses);
     }
 

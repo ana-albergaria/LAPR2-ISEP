@@ -226,7 +226,7 @@ public class ClinicalAnalysisLaboratoryStoreTest {
 
     @Test //checks if tests with no sample are being found correctly
     public void ensureTestsWithNoSamplesAreFound(){
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
         Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
