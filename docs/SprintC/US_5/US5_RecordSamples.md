@@ -10,9 +10,7 @@
 As a Medical Lab Technician, I want to record the samples collected in the scope of a
 given test.
 
-### 1.2. Customer Specifications and Clarifications 
-
-*Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*  
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**  
 
@@ -91,8 +89,6 @@ There is a dependency to:
 
 ### 1.5 Input and Output Data
 
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*  
-
 **Input Data:**
 
 * Typed data:
@@ -142,23 +138,24 @@ There is a dependency to:
 |:-------------  |:--------------------- |:------------|:---------------------------- |
 | Step 1: asks to record the samples  		                                                              |	...interacting with the actor?						                                                                      | RecordSamplesUI                    | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                             |
 |                                                                                                         |	...coordinating the US?						                                                                              | RecordSamplesController            | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model.                                                |
-|                                                                                                         |	...knowing who instantiates a new Sample?					                                                              | Company                            | HC+LC: Company uses SampleStore.                                                                                                                                                          |
-|                                                                                                         |	...instantiating a new Sample?						                                                                      | SampleStore                        | Pure Fabrication: for low coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                                                   |
-| Step 2: shows list with tests for which there are no samples collected and asks to select one  		  |	...knowing who has the responsability to show the tests?						                                          | Company                            | HC+LC: Company uses TestStore.                                                                                                                                                            |
-|                                                                                                  		  |	...knowing the tests for which there are no samples collected?						                                      | TestStore                          | Pure Fabrication: for low coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model.                                                   |
+|                                                                                                         |	...knowing who instantiates a new Sample?					                                                              | Company                            | Pure fabrication (to achieve High Coesion + Low Coupling): Company uses SampleStore.                                                                                                      |
+|                                                                                                         |	...instantiating a new Sample?						                                                                      | SampleStore                        | IE: ClinicalAnalysisLaboratoryStore stores/records all the Sample objects.                                                                                                                |
+| Step 2: shows list with tests for which there are no samples collected and asks to select one  		  |	...knowing who has the responsability to show the tests?						                                          | Company                            | Pure fabrication (to achieve High Coesion + Low Coupling): Company uses ClinicalAnalysisLaboratoryStore.                                                                                  |
+|                                                                                                  		  |	...knowing the tests for which there are no samples collected?						                                      | ClinicalAnalysisLaboratoryStore    | IE: ClinicalAnalysisLaboratoryStore stores all of the Clinical Analysis Laboratory objects.                                                                                               |
+|                                                                                                  		  |	...knowing in which Clinical Analysis Laboratory the Med Lab Technician works?					                          | ClinicalAnalysisLaboratoryStore    | IE: ClinicalAnalysisLaboratoryStore stores all of the Clinical Analysis Laboratory objects.                                                                                               |
 |                                                                                                  		  |	...knowing who has the responsability to process the data and convert the Types of Test to Dto?						      | TestMapper                         | Pure Fabrication: to reduce coupling. There is no reason to assign this responsibility to any existing class in the Domain Model.                                                         |
 | Step 3: selects test  		                                                                          |	...saving the selected Test Dto?				                                                                          | RecordSamplesUI                    | HC+LC: to reduce coupling, the selected Test is saved in a Dto in the UI, whose code will be used to get the corresponding Test object from the Domain Model.                             |
 | Step 4: asks the number of samples to collect                                                    		  |	...asking the user for this data?						                                                                  | RecordSamplesUI                    | IE: responsible for user interaction.                                                                                                                                                     |
 | Step 5: types the number                                             		                              |						                                                                                                      |                                    |                                                                                                                                                                                           |
 | Step 6: requests confirmation                                        		                              |	...asking the user for this data?					                                                                      | RecordSamplesUI                    | IE: responsible for user interaction.                                                                                                                                                     |
-| Step 7: confirms the data                                    		                                      |	...generating the barcodes for the samples?						                                                          | ExternalAPI                        | IE: in the DM, a BarCode is generated by an ExternalAPI.                                                                                                                                  |
+| Step 7: confirms the data                                    		                                      |	...generating the barcodes for the samples?						                                                          | ExternalAPI                        | IE: in the DM, a Barcode is generated by an ExternalAPI.                                                                                                                                  |
 |                                                        	                                         	  |	...generating the barcode number?				                                                                          | BarcodeUtils                       | Pure Fabrication: this functionality is external to our system.                                                                                                                           |   
 |                                                        	                                         	  |	...saving the generated barcodes?				                                                                          | MyBarcode                          | Adapter Pattern: to allow every Adapter class to return the same type of object.                                                                                                          |   
 |                                                        	                                         	  |	...knowing which API generates the barcode?					                                                              | Company                            | IE: in the DM, Company makes use of an ExternalAPI.                                                                                                                                       |   
 |                                                        	                                         	  |	...making the system support several barcode APIs?			                                                              | ExternalAPI                        | Protected Variations: to create a stable interface around the point of variation - the existence of different APIs.                                                                       |  
 |                                                        	                                         	  |	...making different barcode APIs compatible?			                                                                  | ExternalAPIAdapterX                | Adapter Pattern: to convert requests made in accordance to our system. One adapter per ExternalAPI.                                                                                       |
 |                                                                                                         |	...adding the samples to the selected Test?						                                                    	  | Test                               | IE: in the DM, Test collects Samples.                                                                                                                                                     |
-|                                                                                                         |	...saving the barcode images into a folder?					                                                    	      | ExternalAPI                        | IE: in the DM, a BarCode is generated by an ExternalAPI.                                                                                                                                  |
+|                                                                                                         |	...saving the barcode images into a folder?					                                                    	      | ExternalAPI                        | IE: in the DM, a Barcode is generated by an ExternalAPI.                                                                                                                                  |
 | Step 8: informs operation success  		                                                              |	...informing operation success?						                                                                      | RecordSamplesUI                    | IE: responsible for user interaction.                                                                                                                                                     |              
 
 
@@ -362,18 +359,159 @@ In this class, it was tested the useful method for this US - **getTestsWithNoSam
 
 # 5. Construction (Implementation)
 
-*In this section, it is suggested to provide, if necessary, some evidence that the construction/implementation is in accordance with the previously carried out design. Furthermore, it is recommeded to mention/describe the existence of other relevant (e.g. configuration) files and highlight relevant commits.*
+## Class RecordSamplesController  
 
-*It is also recommended to organize this content by subsections.* 
+```
+    public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException, IOException, OutputException {
+    MyBarcode myBarcode = getBarcode();
+    SampleStore sampleStore = this.company.getSampleStore();
+    this.sample = sampleStore.createSample(myBarcode);
+    return sampleStore.validateSample(sample);
+    }
+
+    public boolean addSample(String code) throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException {
+        TestStore testStore = this.company.getTestStore();
+        this.selectedTest = testStore.getTestByCodeInTestList(code);
+        return selectedTest.addSample(sample);
+    }
+
+    public List<TestDTO> getTestsNoSamples(String laboratoryID) {
+        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
+        List<Test> listTestsNoSamples = calStore.getTestsWithNoSamples(laboratoryID);
+
+        TestMapper mapper = new TestMapper();
+        return mapper.toDTO(listTestsNoSamples);
+    }
+
+    public MyBarcode getBarcode() throws IllegalAccessException, ClassNotFoundException, InstantiationException, BarcodeException {
+        ExternalAPI api = this.company.getExternalAPI();
+        String barcodeNumber = BarcodeUtils.generateBarcodeNumber();
+        return api.getBarcode(barcodeNumber);
+    }
+
+    public void saveImageBarcode(String code) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException, OutputException {
+        ExternalAPI api = this.company.getExternalAPI();
+        MyBarcode myBarcode = this.sample.getMyBarcode();
+        api.saveImageBarcode(myBarcode, code);
+    }
+
+    public void addSampleCollectionDateToTest() {
+        this.selectedTest.addSampleCollectionDate();
+    }
+```
+
+## Class SampleStore  
+
+```
+    public Sample createSample(MyBarcode myBarcode) {
+    return new Sample(myBarcode);
+    }
+
+    public boolean validateSample(Sample sample) {
+        if (sample == null)
+            return false;
+        return true;
+    }
+```    
+
+## Class Company  
+
+```
+//omitted...
+
+public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+String className = App.getInstance().getBarcodeClassNameConfig();
+Class<?> oClass = Class.forName(className);
+return (ExternalAPI) oClass.newInstance();
+}
+```
+
+## Class Sample  
+
+```
+    private MyBarcode myBarcode;
+
+    public Sample(MyBarcode myBarcode) {
+        this.myBarcode = new MyBarcode(myBarcode);
+    }
+
+    public MyBarcode getMyBarcode() {
+        return new MyBarcode(myBarcode);
+    }
+
+    //omitted equals...
+``` 
+
+## Class MyBarcode  
+
+```
+    private Object barcode;
+    private String barcodeNumber;
+    private static int totalBarcodes = 1;
+    
+    public MyBarcode(Object barcode, String barcodeNumber) {
+        this.barcode = barcode;
+        this.barcodeNumber = barcodeNumber;
+        totalBarcodes++;
+    }
+
+    public MyBarcode(MyBarcode otherMyBarcode) {
+        barcode = otherMyBarcode.barcode;
+        barcodeNumber = otherMyBarcode.barcodeNumber;
+    }
+
+    public Object getBarcode() {
+        return barcode;
+    }
+
+    public String getBarcodeNumber() {
+        return barcodeNumber;
+    }
+
+    //omitted... 
+```    
+
+## Class ExternalAPI  
+```
+public interface ExternalAPI {
+    public abstract MyBarcode getBarcode(String barcodeNumber) throws BarcodeException;
+
+    public abstract void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException;
+}
+```  
+
+## Class BarbecueAdapter  
+```
+    @Override
+    public MyBarcode getBarcode(String barcodeNumber) throws BarcodeException {
+        Barcode barcode = BarcodeFactory.createUPCA(barcodeNumber);
+        return new MyBarcode(barcode, barcodeNumber);
+    }
+
+    @Override
+    public void saveImageBarcode(MyBarcode myBarcode, String code) throws IOException, OutputException {
+        File imageFolderPath = BarcodeUtils.imageFolderPath(code);
+        Barcode barcode = (Barcode) myBarcode.getBarcode();
+        barcode.setPreferredBarHeight(100);
+        File imgFile = new File(imageFolderPath + "/barcode" + barcode.getData() + ".jpeg");
+        BarcodeImageHandler.saveJPEG(barcode, imgFile);
+    }
+```
+
+In this class, it was used a method from **BarcodeUtils** which returns de path for which the barcodes will be saved in.  
+
 
 # 6. Integration and Demo 
 
-*In this section, it is suggested to describe the efforts made to integrate this functionality with the other features of the system.*
+To record the Samples Collected of a Test, it is necessary to know the list of tests for which there are no samples collected in the Clinical Analysis Laboratory the Medical Lab Technician works.
+Therefore, in order to reduce coupling, it was created a TestDto as well as a TestMapper to process the data and convert the list of tests with no samples to a Dto.  
+
 
 
 # 7. Observations
 
-*In this section, it is suggested to present a critical perspective on the developed work, pointing, for example, to other alternatives and or future related work.*
+A more specific care will be taken in the future for the exceptions which can be thrown by the methods from the APIs and for using them through Java Reflection.
+
 
 
 
