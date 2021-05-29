@@ -81,8 +81,8 @@ public class WriteReportUI implements Runnable {
 
     private TestDTO showListAndSelectOneObject() {
         List<TestDTO> testDTO = ctrl.getTestsToDiagnose();
-        if(testDTO.isEmpty())
-            System.out.println("There aren't any more available tests!");
+        if (testDTO.isEmpty())
+            return (TestDTO) Utils.showAndSelectOne(testDTO, "There aren't any tests ready for diagnoses!");
         return (TestDTO) Utils.showAndSelectOne(testDTO, "Enter the number of the test for which you want to make a diagnosis and write a report: ");
     }
 
