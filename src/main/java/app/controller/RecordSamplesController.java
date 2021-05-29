@@ -140,6 +140,9 @@ public class RecordSamplesController {
         api.saveImageBarcode(myBarcode, code);
     }
 
+    /**
+     * Calling method to add the Sample Collecting Date to the Selected Test.
+     */
     public void addSampleCollectionDateToTest() {
         this.selectedTest.addSampleCollectionDate();
     }

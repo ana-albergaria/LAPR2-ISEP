@@ -61,16 +61,16 @@ public class RecordSamplesUI implements Runnable {
             }
         }
         catch(ClassNotFoundException cnde) {
-            System.out.println("The API Adapter Class was not found!");
+            System.out.println("The API Adapter Class was not found!\n");
         }
         catch(InstantiationException ie) {
-            System.out.println(ie.getMessage());
+            System.out.println("The specified class of the External API cannot be instantiated!\n");
         }
         catch(BarcodeException be) {
-            System.out.println(be.getMessage());
+            System.out.println("The barcode number should be 12 digits and the length of the generated number should be 11!\n");
         }
         catch(IllegalAccessException iae) {
-            System.out.println(iae.getMessage());
+            System.out.println("The method invoked to be executed from the Class of the API Adapter defined doesn't have access to that Class!\n");
         }
         catch (OutputException oe) {
             System.out.println(oe.getMessage());
