@@ -63,6 +63,6 @@ public class TestParameterResult {
 
     @Override
     public String toString() {
-        return String.format("TEST RESULT:%nValue: %s%nMetric: %s%nRef.Value: %s%n", value, metric, myReferenceValue);
+        return String.format("TEST RESULT:%nValue: %s%nMetric: %s%nRef.Value Min: %s%n Ref.Value Max: %s%n", value, metric, myReferenceValue.getMinValue(), myReferenceValue.getMaxValue());
     }
 }
