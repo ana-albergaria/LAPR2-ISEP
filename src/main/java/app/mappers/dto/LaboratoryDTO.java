@@ -59,7 +59,7 @@ public class LaboratoryDTO {
 
     @Override
     public String toString() {
-        return String.format("CLINICAL ANALYSIS LABORATORY%nName: %s%n"
-                + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
+        return String.format("CLINICAL ANALYSIS LABORATORY%n> Name: %s%n"
+                + "> Address: %s%n> PhoneNumber: %s%n> TIN Number: %s%n", name, address, phoneNumber, numTIN);
     }
 }
