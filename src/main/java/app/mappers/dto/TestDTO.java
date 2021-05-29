@@ -64,7 +64,7 @@ public class TestDTO {
 
     @Override
     public String toString() {
-        return String.format("TEST CODE %s%n* NHS Code: %s%n* Client name: %s%n* Test Type: %s%n* Collection Method: %s%n* Parameters: %s",
-                code, nhsCode, client.getName(), testType, testType.getCollectingMethod(), testParameters);
+        return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n",
+                code, nhsCode, client.getName(), testType);
     }
 }

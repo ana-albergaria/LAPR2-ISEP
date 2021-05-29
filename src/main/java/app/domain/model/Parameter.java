@@ -109,11 +109,11 @@ public class Parameter {
      */
     @Override
     public String toString(){
-        return ">> PARAMETER <<" +
-                "\n> Parameter code: " + parameterCode + ";" +
-                "\n> Name: " + shortName + ";" +
-                "\n> Description: " + description + ";" +
-                "\n> Desired parameter category code: " + pc + ".";
+        return ">> PARAMETER \"" + shortName + "\" <<" +
+                "\n   > Parameter code: " + parameterCode + ";" +
+                "\n   > Description: " + description + ";" +
+                "\n   > Parameter category code: " + pc.getCode() + ";" +
+                "\n   > Parameter category name: " + pc.getName() + ".";
     }
 
     /**

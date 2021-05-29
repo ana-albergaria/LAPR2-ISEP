@@ -109,16 +109,16 @@ public class TestType {
 
         StringBuilder s = new StringBuilder();
         for (ParameterCategory pc : copy) {
-            s.append("\n- ");
+            s.append("\n      > ");
             s.append("Code: ");
             s.append(pc.getCode());
-            s.append(", ");
+            s.append(" ; ");
             s.append("Name: ");
             s.append(pc.getName());
         }
 
-        return String.format("%nCode: %s%nDescription: %s%nCollecting Method: %s%n" +
-                "Categories: %s", code, description, collectingMethod, s);
+        return String.format("%n   > Code: %s%n   > Description: %s%n   > Collecting Method: %s%n" +
+                "   > Categories: %s", code, description, collectingMethod, s);
     }
 
     /**

@@ -65,7 +65,7 @@ public class CreateParameterUI implements Runnable {
 
     private CategoriesDTO showListAndSelectOneObject() {
         List<CategoriesDTO> categoriesDTO = ctrl.getParameterCategoriesDTO();
-        CategoriesDTO category = (CategoriesDTO) Utils.showAndSelectOne(categoriesDTO, "Enter the number of the category you want to associate with the parameter: ");
+        CategoriesDTO category = (CategoriesDTO) Utils.showAndSelectOne(categoriesDTO, "\nEnter the number of the category you want to associate with the parameter: ");
         return category;
     }
 

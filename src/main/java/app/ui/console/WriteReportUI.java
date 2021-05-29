@@ -46,10 +46,10 @@ public class WriteReportUI implements Runnable {
                 System.out.printf(">> TEST PARAMETER \"" + testParameter.getParameter().getShortName() + "\" <<" +
                         "%n> Result: " + testParameter.getResultValue() + " " + testParameter.getResultMetric() + ";" +
                         "%n> Reference Value Min: " + testParameter.getResultReferenceValueMin() + " " + testParameter.getResultMetric() + ";" +
-                        "%n> Reference Value Max: " + testParameter.getResultReferenceValueMax() + " " + testParameter.getResultMetric() + ";%n");
+                        "%n> Reference Value Max: " + testParameter.getResultReferenceValueMax() + " " + testParameter.getResultMetric() + ".%n");
             }
 
-            String reportText = Utils.readLineFromConsole("Write the report bellow.\n[you can use SHIFT + ENTER for paragraphs]");
+            String reportText = Utils.readLineFromConsole("Write the report bellow:");
 
             ctrl.createReport(reportText);
             //ctrl.addReportToTest(tst.getCode());
