@@ -57,14 +57,14 @@ public class RecordResultsController {
             throw new UnsupportedOperationException("Searched test already has results of samples!");
     }
 
-    //void?
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         this.test.addTestResult(parameterCode, result, metric);
     }
 
 
-
-
+    public void addChemicalAnalysisDate() {
+        this.test.addChemicalAnalysisDate();
+    }
 
 
 }

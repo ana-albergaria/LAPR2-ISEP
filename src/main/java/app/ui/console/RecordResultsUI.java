@@ -55,6 +55,7 @@ public class RecordResultsUI implements Runnable {
                 }
 
             }
+            ctrl.addChemicalAnalysisDate();
             success = true;
             System.out.println("\nResults successfully recorded!");
 

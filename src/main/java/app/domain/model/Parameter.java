@@ -110,10 +110,10 @@ public class Parameter {
     @Override
     public String toString(){
         return ">> PARAMETER <<" +
-                "%n> Parameter code: " + parameterCode + ";" +
-                "%n> Name: " + shortName + ";" +
-                "%n> Description: " + description + ";" +
-                "%n> Desired parameter category code: " + pc + ".";
+                "\n> Parameter code: " + parameterCode + ";" +
+                "\n> Name: " + shortName + ";" +
+                "\n> Description: " + description + ";" +
+                "\n> Desired parameter category code: " + pc + ".";
     }
 
     /**
