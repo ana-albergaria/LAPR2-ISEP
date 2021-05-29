@@ -247,6 +247,15 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US010_CD](US010_CD.svg)
 
+![US010_CD_WithPackages](US010_CD_WithPackages.svg)
+
+## 3.4. Package Diagram (PD)
+
+![US010_PD_WithAssociations](US010_PD_WithAssociations.svg)
+
+![US010_PD](US010_PD.SVG)
+
+
 # 4. Tests
 
 ## 4.1. Parameter
