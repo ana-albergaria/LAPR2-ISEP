@@ -112,6 +112,10 @@ public class Test {
         return new ArrayList<>(samples);
     }
 
+    public Report getDiagnosisReport(){
+        return diagnosisReport;
+    }
+
     public String getNhsCode() {
         return nhsCode;
     }

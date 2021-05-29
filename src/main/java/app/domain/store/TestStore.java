@@ -69,7 +69,7 @@ public class TestStore {
         List<Test> listTestsReadyToDiagnose = new ArrayList<>();
 
         for (Test test : testList) {
-            if (test.hasSamplesAnalysed())
+            if (test.hasSamplesAnalysed() && (test.getDiagnosisReport() == null))
                 listTestsReadyToDiagnose.add(test);
         }
         return listTestsReadyToDiagnose;
