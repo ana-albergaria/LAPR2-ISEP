@@ -188,11 +188,17 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US014_CD](US014_CD.svg)
 
+![US014_CD_WithPackages](US014_CD_WithPackages.svg)
+
 # 3.4. Package Diagram (PD)
+
+![US014_PD_WithAssociations](US014_PD_WithAssociations.svg)
 
 ![US014_PD](US014_PD.svg)
 
 # 4. Tests
+
+# 4.1 Report
 
 Tests 1 to 3 follow this model:
 
@@ -208,6 +214,33 @@ The only changes are the testName and the attributes of the Report.
 **Test 2:** Check that it is not possible to create an instance of the Report class with empty report text.
 
 **Test 3:** Check that it is not possible to create an instance of the Report class with report text with more than 400 words.
+
+**Test 4:** Check that it is possible to create an instance of the Report class with report text with 400 words.
+
+# 4.2 Company
+
+Before starting the parameter tests, it's useful to create something like this,
+since the company needs to be created:
+
+    private Company company;
+
+    @Before
+    public void setUp() {
+        company = new Company("Many Labs");
+    }
+
+**Test 5:** Check that the report is created correctly when the reportText isn't null or empty.
+
+    @Test
+    public void createReport(){
+        String reportText = "Everything is good.";
+
+        Report reportExpected = new Report(reportText);
+
+        Report reportActual = company.createReport(reportText);
+
+        Assert.assertEquals(reportExpected, reportActual);
+    }
 
 # 5. Construction (Implementation)
 

@@ -13,6 +13,7 @@ public class US14_CompanyTest {
         company = new Company("Many Labs");
     }
 
+    //Test 5
     @Test
     public void createReport(){
         String reportText = "Everything is good.";
