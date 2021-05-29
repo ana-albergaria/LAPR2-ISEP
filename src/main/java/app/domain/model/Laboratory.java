@@ -110,17 +110,6 @@ public class Laboratory {
     }
 
     /**
-     * It returns the textual description of the Laboratory instance.
-     *
-     * @return characteristics of the Laboratory
-     */
-    @Override
-    public String toString() {
-        return String.format("LABORATORY%nName: %s%n"
-                + "Address: %s%nPhoneNumber: %s%nTIN Number: %s%n", name, address, phoneNumber, numTIN);
-    }
-
-    /**
      * Returns true if the name received in the parameter respects
      * all the rules.
      * It returns false as soon as one of these conditions are not verified

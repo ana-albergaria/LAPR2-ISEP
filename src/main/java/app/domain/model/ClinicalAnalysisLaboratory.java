@@ -77,29 +77,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         return calTestList;
     }
 
-    /**
-     * It returns the textual description of the Clinical Analysis Laboratory instance.
-     *
-     * @return characteristics of the Clinical Analysis Laboratory
-     */
-    @Override
-    public String toString() {
-        List<TestType> copy = new ArrayList<>(selectedTT);
-
-        StringBuilder s = new StringBuilder();
-        for (TestType tt : copy) {
-            s.append("- ");
-            s.append("Code: ");
-            s.append(tt.getCode());
-            s.append(", ");
-            s.append("Description: ");
-            s.append(tt.getDescription());
-            s.append("\n");
-        }
-            return String.format("%sLaboratory ID: %s%nTest Types: %n%s",
-                    super.toString(), laboratoryID, s);
-        }
-
         /**
          * Returns true if the laboratory ID received in the parameter respects
          * all the rules.

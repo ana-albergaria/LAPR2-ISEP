@@ -13,6 +13,7 @@ class Test{
 - code
 - nhsCode
 - dateOfTestRegistration
+- dateOfSamplesCollection
 - dateOfChemicalAnalysis
 - dateOfDiagnosis
 }
