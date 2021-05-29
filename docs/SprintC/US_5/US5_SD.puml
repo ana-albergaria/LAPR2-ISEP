@@ -33,6 +33,8 @@ activate CTRL
 
 CTRL -> COMPANY : calStore = getCalStore()
 activate COMPANY
+
+COMPANY --> CAL_STORE** : create()
 deactivate COMPANY
 
 CTRL -> CAL_STORE : getTestsWithNoSamples(laboratoryID)
@@ -132,7 +134,7 @@ deactivate CTRL
 
 CTRL -> COMPANY : sampleStore = getSampleStore()
 activate COMPANY
-|||
+COMPANY --> SAMPLE_STORE** : create()
 deactivate COMPANY
 
 
@@ -141,9 +143,6 @@ activate SAMPLE_STORE
 
 SAMPLE_STORE --> SAMPLE** : create(myBarcode)
 
-SAMPLE -> SAMPLE : collectingDate = Calendar.getInstance.getTime()
-activate SAMPLE
-deactivate SAMPLE
 
 deactivate SAMPLE_STORE
 
@@ -213,6 +212,9 @@ activate CTRL
 
 CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
+
+COMPANY --> TEST_STORE** : create()
+
 deactivate COMPANY
 
 CTRL -> TEST_STORE : getTestByCodeInTestList(code)

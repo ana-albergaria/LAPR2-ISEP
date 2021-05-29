@@ -105,14 +105,13 @@ There is a dependency to:
 
 ### 1.6. System Sequence Diagram (SSD)
 
-*Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
-
-![USXX-SSD](USXX-SSD.svg)
+![US5_SSD](US5_SSD.svg)
 
 
-### 1.7 Other Relevant Remarks
+### 1.7 Other Relevant Remarks  
+ 
+* The barcode identifier is a UPC code.
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
 
 
 ## 2. OO Analysis
@@ -120,11 +119,11 @@ There is a dependency to:
 ### 2.1. Relevant Domain Model Excerpt 
 *In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
 
-![USXX-MD](USXX-MD.svg)
+![US5_DM](US5_DM.svg)
 
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
+n/a
 
 
 
@@ -165,13 +164,16 @@ There is a dependency to:
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
  * Sample
- * Company
+ * Company  
+ * Test  
 
 Other software classes (i.e. Pure Fabrication) identified:  
 
  * RecordSamplesUI  
  * RecordSamplesController  
  * TestStore  
+ * SampleStore 
+ * ClinicalAnalysisLaboratoryStore    
  * TestMapper  
  * ExternalAPI  
  * ExternalAPIAdapterX
@@ -180,15 +182,40 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-*In this section, it is suggested to present an UML dynamic view stating the sequence of domain related software objects' interactions that allows to fulfill the requirement.* 
+![US5_SD](US5_SD.svg)  
 
-![USXX-SD](USXX-SD.svg)
+### 3.2.1 Partial Sequence Diagrams  
 
-## 3.3. Class Diagram (CD)
+#### 3.2.1.1 SD_getTestsWithNoSamples(laboratoryCode)  
 
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
+![SD_getTestsWithNoSamples(laboratoryCode)](SD_getTestsWithNoSamples(laboratoryCode).svg)  
 
-![USXX-CD](USXX-CD.svg)
+#### 3.2.1.2 SD_toDTO(listTestsNoSamples)  
+
+![SD_toDTO(listTestsNoSamples](SD_toDTO(listTestsNoSamples).svg)  
+
+#### 3.2.1.3 SD_getBarcode()  
+
+![SD_getBarcode()](SD_getBarcode().svg)  
+
+#### 3.2.1.4 SD_getTestByCodeInTestList()  
+
+![SD_getTestByCodeInTestList()](SD_getTestByCodeInTestList().svg)
+
+
+## 3.3 Packages Diagrams  
+
+### 3.3.1 Package Diagram - low in details with main associations  
+
+![US5_PackagesWithMainAssociations](US5_PackagesWithMainAssociations.svg)  
+
+### 3.3.2 Package Diagram - classes in packages  
+
+![US5_Packages](US5_Packages.svg)  
+
+## 3.4. Class Diagram (CD)
+
+![US5_CD](US5_CD.svg)
 
 # 4. Tests 
 
