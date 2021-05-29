@@ -10,6 +10,9 @@ import app.mappers.dto.ParameterDTO;
 
 import java.util.List;
 
+/**
+ * Class of the mvc controller of the functionality of recording results of a test.
+ */
 public class RecordResultsController {
 
     //addTestResult(parameterCode, result, metric)
@@ -43,9 +46,12 @@ public class RecordResultsController {
         this.result = null;
     }
 
-    //public boolean createResult(...)
 
-
+    /**
+     * Gets all the parameters of a specific Test by the barcode number of it's sample
+     * @param barcodeNumber barcode of the sample of a test to be searched
+     * @return lsit of Dto of the parameters of the found test
+     */
     public List<ParameterDTO> getTotalTestParameters(String barcodeNumber) {
         TestStore testStore = this.company.getTestStore();
         this.test = testStore.getTestByBarcodeNumber(barcodeNumber);
@@ -57,11 +63,22 @@ public class RecordResultsController {
             throw new UnsupportedOperationException("Searched test already has results of samples!");
     }
 
+    /**
+     * Method for adding a test result to the current test
+     * @param parameterCode code of the parameter to being analysed
+     * @param result result of the analysis
+     * @param metric metric being used in the analysis
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     */
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         this.test.addTestResult(parameterCode, result, metric);
     }
 
-
+    /**
+     * Method for adding the date of the chemical analysis after adding all the results of a test.
+     */
     public void addChemicalAnalysisDate() {
         this.test.addChemicalAnalysisDate();
     }
