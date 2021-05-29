@@ -183,21 +183,35 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
+### 3.2.1 Sequence Diagram
+
 ![US014_SD](US014_SD.svg)
 
+### 3.2.2 Partial Sequence Diagram I
+
 ![US014_SD_TestMapper_toDTO_List](US014_SD_TestMapper_toDTO_List.svg)
+
+### 3.2.3 Partial Sequence Diagram II
 
 ![US014_SD_TestParameterMapper_toDTO_List](US014_SD_TestParameterMapper_toDTO_List.svg)
 
 ## 3.3. Class Diagram (CD)
 
+### 3.3.1 Class Diagram
+
 ![US014_CD](US014_CD.svg)
+
+### 3.3.2 Class Diagran With Packages
 
 ![US014_CD_WithPackages](US014_CD_WithPackages.svg)
 
-# 3.4. Package Diagram (PD)
+## 3.4. Package Diagram (PD)
+
+### 3.4.1 Package Diagram With Associations
 
 ![US014_PD_WithAssociations](US014_PD_WithAssociations.svg)
+
+### 3.4.2 Package Diagram
 
 ![US014_PD](US014_PD.svg)
 
@@ -242,6 +256,53 @@ The only changes are the testName and the attributes of the Report.
     }
 
     //...Omitted
+
+    public List<TestDTO> getTestsToDiagnose(){
+        TestStore tstStore = this.company.getTestStore();
+        List<Test> testsToDiagnose = tstStore.getTestsReadyToDiagnose();
+        TestMapper mapper = new TestMapper();
+        return mapper.toDTO(testsToDiagnose);
+    }
+
+    //...Omitted
+
+    public List<TestParametersDTO> getTestParameters(String code){
+        TestStore tstStore = this.company.getTestStore();
+        Test tst = tstStore.getTestByCode(code);
+        List<TestParameter> testParameters = tstStore.getTestParameters(tst);
+        TestParameterMapper mapper = new TestParameterMapper();
+        return mapper.toDTO(testParameters);
+    }
+
+    //...Omitted
+
+## Class TestStore
+
+    //...Omitted
+
+    public List<Test> getTestsReadyToDiagnose() {
+        List<Test> listTestsReadyToDiagnose = new ArrayList<>();
+
+        for (Test test : testList) {
+            if (test.hasSamplesAnalysed() && (test.getDiagnosisReport() == null))
+                listTestsReadyToDiagnose.add(test);
+        }
+        return listTestsReadyToDiagnose;
+    }
+
+    //...Omitted
+
+    public Test getTestByCode(String code) {
+        for (Test tst : getTestsReadyToDiagnose()) {
+            if (tst.getCode().equalsIgnoreCase(code)) {
+                return tst;
+            }
+        }
+        throw new UnsupportedOperationException("Test not found in ready to diagnose list!");
+    }
+
+    //...Omitted
+
 
 # 6. Integration and Demo
 
