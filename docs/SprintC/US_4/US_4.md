@@ -172,7 +172,7 @@ Other software classes (i.e. Pure Fabrication) identified:
         app.domain.model.Test test = new app.domain.model.Test(null, null, null, null);
     }
 	
-**Test 2:** Check if it's not possible to create a Test with empty field for each attribute.
+**Test 2:** Check if it's not possible to create a Test with empty field for each attribute.  
 **For Example:**
 
     @Test(expected = IllegalArgumentException.class)
@@ -195,7 +195,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 4:** Check if it is not possible to create a Test with NHS code containing non alphanumeric characteres
 
-**Test 5:** Check if the auto generated code is sequencial and have 12 digits
+**Test 5:** Check if the auto generated code is sequencial and have 12 digits  
 **For Example:**
 
     @Test //this test checks if the generated number is 12 digits long
@@ -205,7 +205,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
         Assert.assertTrue(test.getCode().length() == 12);
     }
-**Test 6:** Check if samples cannot be added as null
+**Test 6:** Check if samples cannot be added as null  
 **For Example:**
 
       @Test 
@@ -225,7 +225,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **Test 9:** Check if it is not possible to add two identical tests to the test store
 
-**Test 10:** Check if tests with no samples are being found correctly
+**Test 10:** Check if tests with no samples are being found correctly  
 **For Example:**
 
      public void ensureTestsWithNoSamplesAreFound(){

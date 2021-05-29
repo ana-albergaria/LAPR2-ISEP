@@ -224,7 +224,7 @@ Before starting to implement the tests, it was practical to **create a text fixt
 * I declared instance variables for the common objects.
 * I initialized these objects in a public void SetUp method annotated with  @Before, so that JUnit framework invokes that method before each test runs.
 
-###**Class**: SampleTest  
+### **Class**: SampleTest  
 
 ```
 @Before
@@ -275,11 +275,11 @@ Before starting to implement the tests, it was practical to **create a text fixt
     }
 ```  
 
-###**Class**: MyBarcodeTest  
+### **Class**: MyBarcodeTest  
 
 The test for the class MyBarcode were **similar** to the class Sample.  
 
-###**Class**: SampleStoreTest  
+### **Class**: SampleStoreTest  
 
 ```
 @Before
@@ -330,7 +330,7 @@ The test for the class MyBarcode were **similar** to the class Sample.
     }
 ```
 
-###**Class**: ClinicalAnalysisLaboratoryStoreTest  
+### **Class**: ClinicalAnalysisLaboratoryStoreTest  
 
 In this class, it was tested the useful method for this US - **getTestsWithNoSamples** and **getCalByCode**.  
 
@@ -530,8 +530,9 @@ In this class, it was used a method from **BarcodeUtils** which returns de path 
 
 # 6. Integration and Demo 
 
-To record the Samples Collected of a Test, it is necessary to know the list of tests for which there are no samples collected in the Clinical Analysis Laboratory the Medical Lab Technician works.
-Therefore, in order to reduce coupling, it was created a TestDto as well as a TestMapper to process the data and convert the list of tests with no samples to a Dto.  
+To record the Samples Collected of a Test, it is necessary to know the list of tests for which there are no samples collected in the Clinical Analysis Laboratory the Medical Lab Technician works.  
+
+Therefore, in order to reduce coupling, it was created a TestDto as well as a TestMapper to process the data and convert the list of tests with no samples to a Dto.    
 
 
 

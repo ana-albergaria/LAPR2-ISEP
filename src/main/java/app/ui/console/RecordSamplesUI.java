@@ -50,7 +50,7 @@ public class RecordSamplesUI implements Runnable {
                     ctrl.addSampleCollectionDateToTest();
                     success = true;
                     System.out.println("\nSamples successfully recorded and added to the Test!\n" +
-                            "You can find the Samples Barcodes in the subfolder Test-Code" + selectedTest.getCode() + " in the folder Samples.");
+                            "You can find the Samples Barcodes in the subfolder \"Test-Code" + selectedTest.getCode() + "\" in the folder \"Samples Barcodes\".");
                 } else {
                     System.out.println("\nOperation canceled!");
                     success = true;

@@ -115,12 +115,12 @@ deactivate PARAM_STORE
 
 CTRL -> PLAT : testStore = getTestStore()
 activate PLAT
-PLAT -> ORG* : create()
+PLAT -> ORG** : create()
 deactivate PLAT
 
 CTRL -> ORG : test = createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
 activate ORG
-ORG -> TAREFA* : createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
+ORG -> TAREFA** : createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
 deactivate ORG
 
 activate TAREFA
@@ -129,7 +129,7 @@ TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
 
 
 loop for each parameter of the list
-TAREFA -> tp*: testParameter =  create(parameter)
+TAREFA -> tp**: testParameter =  create(parameter)
 TAREFA -> TAREFA: testParameters.add(testParameter)
 end
 

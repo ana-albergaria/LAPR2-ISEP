@@ -35,9 +35,7 @@ public class BarcodeUtils {
      * @return path of the folder each barcode image will be saved into
      */
     public static File imageFolderPath(String code) {
-        //File path = new File("./Samples/Test-Code" + code);
-        //ACRESCENTAR TRY CATCH
-        File path = new File("./Samples/Test-Code" + code);
+        File path = new File("./Samples Barcodes/Test-Code" + code);
         if(!path.exists())
             path.mkdirs();
 

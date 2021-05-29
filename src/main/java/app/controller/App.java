@@ -144,7 +144,7 @@ public class App {
          */
 
 
-        Test test2 = new Test("123456789012",c1,t1,listParameter);
+        Test test2 = new Test("123456789000",c1,t1,listParameter);
         this.company.getTestStore().saveTest(test2);
 
 
@@ -153,6 +153,12 @@ public class App {
         cal1.getCalTestList().add(test2);
 
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
+
+        ClinicalAnalysisLaboratory cal2 = new ClinicalAnalysisLaboratory("llll1",
+                "CAL","fff","91841373811","1234537890", selectedTT);
+        cal2.getCalTestList().add(test1);
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal2);
+
 
 
     }
