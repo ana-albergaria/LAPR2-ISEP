@@ -1,10 +1,8 @@
 @startuml
 hide empty methods
 hide empty attributes
-'left to right direction
+left to right direction
 skinparam classAttributeIconSize 0
-
-package Core {
 
 package Domain {
 
@@ -111,17 +109,30 @@ class WriteReportController {
 
 }
 
-}
-
 package UI {
-
-package Console {
 
 class WriteReportUI {
 }
 
 }
 
-}
+WriteReportUI ..> WriteReportController
+WriteReportUI ..> TestDTO
+WriteReportUI ..> TestParametersDTO
+WriteReportController ..> TestMapper
+WriteReportController ..> TestParameterMapper
+WriteReportController ..> Company
+WriteReportController ..> TestStore
+WriteReportController ..> TestDTO
+WriteReportController ..> TestParametersDTO
+TestStore "1" -> "*" Test : adopts >
+Company "1" --> "*" Report : knows >
+Report "1" --> "1" Test : is of >
+TestParameter "1..*" --> "1" Test : is of >
+TestParameterResult "1" --> "1" TestParameter : is of >
+TestMapper ..> Test
+TestParameterMapper ..> TestParameter
+TestMapper ..> TestDTO
+TestParameterMapper ..> TestParametersDTO
 
 @enduml
