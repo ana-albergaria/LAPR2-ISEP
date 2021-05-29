@@ -72,12 +72,26 @@ public class Report {
                 "%n> Report text: " + reportText;
     }
 
+    /**
+     * Returns the report text.
+     *
+     * @return the report text.
+     */
+    public String getReportText(){
+        return reportText;
+    }
+
+    /**
+     * Compares two reports with each other.
+     *
+     * @param o the report to be compares to.
+     *
+     * @return true is the two reports are equal,
+     * otherwise it returns false.
+     */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Report)) return false;
-        Report report = (Report) o;
-        return reportText.equals(report.reportText);
+        return this == o;
     }
 
 }
