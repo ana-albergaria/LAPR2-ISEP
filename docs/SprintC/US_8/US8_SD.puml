@@ -9,7 +9,7 @@ participant ":RegisterNewCalController" as CTRL
 /'participant "app\n:App" as APP'/
 /'participant "session\n:UserSession" as SESSAO'/
 participant ":Company" as PLAT
-participant "storeTest\n:TestTypeStore" as TEST_TYPE_STORE
+participant "testTypeStore\n:TestTypeStore" as TEST_TYPE_STORE
 participant "obj\n :TestType" as TEST_TYPE_OBJ
 participant ": TestTypeMapper" as MAPPER
 participant "listTestType\n: List<TestType>" as LIST
@@ -18,6 +18,7 @@ participant "objDto\n: TestTypeDto" as OBJ_DTO
 /'participant ":Platform" as PLAT'/
 /'participant ":Laboratory" as ORG'/
 /'participant "storeLab\n:LaboratoryStore" as LAB_STORE'/
+participant "calStore\n:ClinicalAnalysisLaboratoryStore" as CAL_STORE
 participant "calDto\n: ClinicalAnalysisLaboratoryDto" as CAL_DTO
 participant "cal\n:ClinicalAnalysisLaboratory" as TAREFA
 participant "selectedTT\n:List<TestType>" as CAT
@@ -38,7 +39,7 @@ activate UI
 UI -> CTRL : listTestType = getTestTypes()
 activate CTRL
 
-CTRL -> PLAT : storeTest = getTestTypeStore()
+CTRL -> PLAT : testTypeStore = getTestTypeStore()
 activate PLAT
 |||
 deactivate PLAT
@@ -147,44 +148,49 @@ activate PLAT
 |||
 deactivate PLAT'/
 
-note over CTRL, PLAT
+
+CTRL -> CAL_DTO : testTypeCodes = getTestTypeCodes()
+activate CAL_DTO
+deactivate CAL_DTO
+
+CTRL -> PLAT : testTypeStore = getTestTypeStore()
+activate PLAT
+deactivate PLAT
+
+loop for each code of the list
+CTRL -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypeCodes)
+activate TEST_TYPE_STORE
+deactivate
+end
+
+CTRL -> CAL_STORE : calStore = getCalStore()
+activate CAL_STORE
+deactivate CAL_STORE
+
+
+note over CTRL, TEST_TYPE_STORE
 calDto has all required data, including the 'codes' of the selected test types
 end note
-CTRL -> PLAT: cal = createClinicalAnalysisLaboratory(calDto)
-activate PLAT
+CTRL -> CAL_STORE: cal = createClinicalAnalysisLaboratory(calDto, selectedTT)
+activate CAL_STORE
 
-PLAT -> CAL_DTO : testTypeCodes = getTestTypeCodes()
+CAL_STORE -> CAL_DTO : laboratoryID = getLaboratoryID()
 activate CAL_DTO
 deactivate CAL_DTO
 
-PLAT -> TEST_TYPE_STORE : storeTest = getTestTypeStore()
-activate TEST_TYPE_STORE
-|||
-deactivate TEST_TYPE_STORE
-
-PLAT -> TEST_TYPE_STORE : selectedTT = getTestTypesByCode(testTypesCodes)
-activate TEST_TYPE_STORE
-|||
-deactivate TEST_TYPE_STORE
-
-
-PLAT -> CAL_DTO : laboratoryID = getLaboratoryID()
+CAL_STORE -> CAL_DTO : name = getName()
 activate CAL_DTO
 deactivate CAL_DTO
 
-PLAT -> CAL_DTO : name = getName()
+CAL_STORE -> CAL_DTO : address = getAddress()
 activate CAL_DTO
 deactivate CAL_DTO
 
-PLAT -> CAL_DTO : address = getAddress()
+CAL_STORE -> CAL_DTO : phoneNumber = getPhoneNumber()
 activate CAL_DTO
 deactivate CAL_DTO
 
-PLAT -> CAL_DTO : phoneNumber = getPhoneNumber()
-activate CAL_DTO
-deactivate CAL_DTO
-
-PLAT -> CAL_DTO : numTIN = getNumTIN()
+CAL_STORE -> CAL_DTO : numTIN = getNumTIN()
 activate CAL_DTO
 deactivate CAL_DTO
 
@@ -192,10 +198,12 @@ deactivate CAL_DTO
 activate CAL_DTO
 deactivate CAL_DTO'/
 
-PLAT --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
-PLAT -> PLAT: validateClinicalAnalysisLaboratory(cal)
-activate PLAT
-deactivate PLAT
+CAL_STORE --> TAREFA**: create(laboratoryID, name, address, phoneNumber, numTIN, selectedTT)
+CAL_STORE -> CAL_STORE: validateClinicalAnalysisLaboratory(cal)
+activate CAL_STORE
+deactivate CAL_STORE
+
+deactivate CAL_STORE
 
 CTRL --> UI: result
 
@@ -210,15 +218,19 @@ activate UI
 UI -> CTRL : saveClinicalAnalysisLaboratory()
 activate CTRL
 
-CTRL -> PLAT : saveClinicalAnalysisLaboratory(cal)
+CTRL -> PLAT : calStore = getCalStore()
 activate PLAT
+deactivate PLAT
 
-PLAT -> PLAT: validateClinicalAnalysisLaboratory(cal)
-activate PLAT
-deactivate PLAT
-PLAT -> PLAT: addClinicalAnalysisLaboratory(cal)
-activate PLAT
-deactivate PLAT
+CTRL -> CAL_STORE : saveClinicalAnalysisLaboratory(cal)
+activate CAL_STORE
+
+CAL_STORE -> CAL_STORE: validateClinicalAnalysisLaboratory(cal)
+activate CAL_STORE
+deactivate CAL_STORE
+CAL_STORE -> CAL_STORE: addClinicalAnalysisLaboratory(cal)
+activate CAL_STORE
+deactivate CAL_STORE
 
 CTRL --> UI: result
 

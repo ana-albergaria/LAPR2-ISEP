@@ -185,7 +185,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-![US8_SD](US8_SD.svg)
+![US8_SD](../../SprintC/US_8/US8_SD.svg)
 
 ## 3.3. Class Diagram (CD)
 

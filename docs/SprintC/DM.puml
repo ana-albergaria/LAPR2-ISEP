@@ -133,7 +133,7 @@ class Company{
 class NHSAPI{}
 /'class ExternalModule{}'/
 
-class LabOrder{}
+/'class LabOrder{}'/
 
 
 /'LAYOUT PURPOSES'/
