@@ -41,16 +41,22 @@ public class RecordResultsUI implements Runnable {
             String barcodeNumber = Utils.readLineFromConsole("Barcode Number: ");
             List<ParameterDTO> listTotalParameters = ctrl.getTotalTestParameters(barcodeNumber);
             System.out.println("The Test was found.");
+            ParameterDTO selectedParameter = null;
             for (int i = 0; i < listTotalParameters.size(); i++) {
-                ParameterDTO selectedParameter = (ParameterDTO) Utils.showAndSelectOne(listTotalParameters,
+                if(selectedParameter != null) {
+                    listTotalParameters.remove(selectedParameter);
+                }
+                selectedParameter = (ParameterDTO) Utils.showAndSelectOne(listTotalParameters,
                         "Choose the parameter of the test for which you want to record the result:");
                 String resultValue = Utils.readLineFromConsole("Result Value: ");
                 String metric = Utils.readLineFromConsole("Metric: ");
-                ctrl.addTestResult(selectedParameter.getParameterCode(), Double.parseDouble(resultValue), metric);
+                if(resultValue != null) {
+                    ctrl.addTestResult(selectedParameter.getParameterCode(), Double.parseDouble(resultValue), metric);
+                }
+
             }
             success = true;
             System.out.println("\nResults successfully recorded!");
-
 
         }
         catch(UnsupportedOperationException uoe) {

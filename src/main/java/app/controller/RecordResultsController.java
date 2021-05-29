@@ -49,10 +49,12 @@ public class RecordResultsController {
     public List<ParameterDTO> getTotalTestParameters(String barcodeNumber) {
         TestStore testStore = this.company.getTestStore();
         this.test = testStore.getTestByBarcodeNumber(barcodeNumber);
-        List<Parameter> listTotalTestParameters = testStore.getTotalTestParameters(test);
-
-        ParameterMapper mapper = new ParameterMapper();
-        return mapper.toDTO(listTotalTestParameters);
+        if(!this.test.hasSamplesAnalysed()) {
+            List<Parameter> listTotalTestParameters = testStore.getTotalTestParameters(test);
+            ParameterMapper mapper = new ParameterMapper();
+            return mapper.toDTO(listTotalTestParameters);
+        }else
+            throw new UnsupportedOperationException("Searched test already has results of samples!");
     }
 
     //void?

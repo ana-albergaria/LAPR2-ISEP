@@ -119,7 +119,6 @@ public class TestStore {
 
         return listTotalTestParameters;
     }
-
     /**
      * Gets a test object by its sample barcode number
      * @param barcodeNumber barcode number to find in the tests
