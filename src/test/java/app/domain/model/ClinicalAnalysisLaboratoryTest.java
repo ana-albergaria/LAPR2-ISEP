@@ -389,19 +389,6 @@ public class ClinicalAnalysisLaboratoryTest {
         Assert.assertFalse(resultWithNull);
     }
 
-    @Test
-    public void testingToString() {
-        ClinicalAnalysisLaboratory c1 = new ClinicalAnalysisLaboratory("CAL12",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
-
-        String expString = String.format("LABORATORY%nName: CAL%nAddress: Lisboa%nPhoneNumber: 91841378811%nTIN Number: 1234567890%nLaboratory ID: CAL12%n" +
-                "Test Types: %n- Code: CODE3, Description: Description\n- Code: CODE4, Description: Description\n");
-
-        String string = c1.toString();
-
-        Assert.assertEquals(expString, string);
-    }
-
 
 
 }
