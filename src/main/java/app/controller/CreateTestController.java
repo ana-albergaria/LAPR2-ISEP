@@ -28,6 +28,9 @@ public class CreateTestController {
      */
     private Test test;
 
+    /**
+     * Current clinical analysis laboratory that holds the test
+     */
     private ClinicalAnalysisLaboratory currentCal;
 
     /**

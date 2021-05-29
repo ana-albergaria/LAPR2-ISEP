@@ -132,6 +132,20 @@ public class Test {
         return new ArrayList<>(testParameters);
     }
 
+    private TestParameter getTestParameterFor(String parameterCode) {
+        for (TestParameter testParameter : this.testParameters) {
+            if(parameterCode.equals(testParameter.getParameter().getPrmCode())) {
+                return testParameter;
+            }
+        }
+        throw new UnsupportedOperationException("Test Parameter not found!");
+    }
+
+    /**
+     * Method for adding a sample object to the Test
+     * @param sample sample to be added
+     * @return true if successfully added false otherwise
+     */
     public boolean addSample(Sample sample) {
         if(sample != null)
             return this.samples.add(sample);
@@ -145,6 +159,9 @@ public class Test {
         this.dateOfSamplesCollection = generateNowDateAndTime();
     }
 
+    /**
+     * Adds the current date to the dateOfChemicalAnalysis attribute
+     */
     public void addChemicalAnalysisDate(){
         this.dateOfChemicalAnalysis = generateNowDateAndTime();
     }
@@ -157,6 +174,10 @@ public class Test {
         return String.format("%012d", totalTests);
     }
 
+    /**
+     * Method for generating the now date and time, used for the needed date attributes
+     * @return the String format of the generated date
+     */
     private String generateNowDateAndTime(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return simpleDateFormat.format(new Date());
@@ -226,6 +247,15 @@ public class Test {
         this.dateOfDiagnosis = generateNowDateAndTime();
     }
 
+    /**
+     * Adds the test result object to a given test parameter of the test
+     * @param parameterCode code of the parameter to being analysed
+     * @param result result of the analysis
+     * @param metric metric being used in the analysis
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     */
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();
@@ -234,14 +264,6 @@ public class Test {
         testParameter.addResult(result, metric, refValue);
     }
 
-    private TestParameter getTestParameterFor(String parameterCode) {
-        for (TestParameter testParameter : this.testParameters) {
-            if(parameterCode.equals(testParameter.getParameter().getPrmCode())) {
-                return testParameter;
-            }
-        }
-        throw new UnsupportedOperationException("Test Parameter not found!");
-    }
 
     @Override
     public String toString() {
@@ -250,7 +272,6 @@ public class Test {
                 code, nhsCode, client.getName(), testType, testType.getCollectingMethod(), testParameters,
                 dateOfTestRegistration, dateOfSamplesCollection, dateOfChemicalAnalysis, dateOfDiagnosis);
     }
-
 
 
     @Override
