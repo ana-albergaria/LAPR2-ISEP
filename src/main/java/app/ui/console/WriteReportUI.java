@@ -21,16 +21,20 @@ public class WriteReportUI implements Runnable {
         boolean success;
         boolean confirm;
         List<String> menu = OurUtils.menuToContinueOrCancel();
+        int cont = 0;
 
         do {
             System.out.println("To make a new diagnosis and write a report, please insert the requested data.");
             do {
                 int index = Utils.showAndSelectIndex(menu, ""); //shows list of tests ready to diagnose and asks to select one
                 success = (index == -1) ? true : createAndAddReport();
+                if(index != -1 && success)
+                    cont++;
             } while (!success);
             confirm = Utils.confirm("Do you intend to make more diagnosis and write more reports?\n[Type 's' for yes or 'n' for no.]");
+            if(cont > 0)
+                System.out.println("Reports successfully made!");
         } while (confirm);
-        System.out.println("Reports successfully made!");
     }
 
     private boolean createAndAddReport() {
@@ -59,6 +63,7 @@ public class WriteReportUI implements Runnable {
                     reportText));
             if (!confirmation) throw new Exception("Please enter the correct data.");
 
+
             success = ctrl.createReport(reportText);
             if (!success) throw new Exception("Report is null. Please try again.");
 
@@ -76,6 +81,8 @@ public class WriteReportUI implements Runnable {
 
     private TestDTO showListAndSelectOneObject() {
         List<TestDTO> testDTO = ctrl.getTestsToDiagnose();
+        if(testDTO.isEmpty())
+            System.out.println("There aren't any more available tests!");
         return (TestDTO) Utils.showAndSelectOne(testDTO, "Enter the number of the test for which you want to make a diagnosis and write a report: ");
     }
 
