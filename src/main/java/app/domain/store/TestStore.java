@@ -89,6 +89,11 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found in ready to diagnose list!");
     }
 
+    /**
+     * Method for getting a test by it's code in the tests list stored in the testStore
+     * @param code code of the test to be found
+     * @return found Test object with given code
+     */
     public Test getTestByCodeInTestList(String code) {
         for (Test test : testList) {
             if (test.getCode().equalsIgnoreCase(code))
