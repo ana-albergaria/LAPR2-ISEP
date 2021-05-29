@@ -2,6 +2,7 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+
 /**
  * Represents a Report through:
  * a report text.
@@ -69,6 +70,14 @@ public class Report {
     public String toString(){
         return ">> REPORT <<" +
                 "%n> Report text: " + reportText;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Report)) return false;
+        Report report = (Report) o;
+        return reportText.equals(report.reportText);
     }
 
 }
