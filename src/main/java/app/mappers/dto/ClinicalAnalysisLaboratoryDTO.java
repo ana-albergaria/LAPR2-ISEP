@@ -80,7 +80,7 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
 
         StringBuilder s = new StringBuilder();
         for (TestType tt : copy) {
-            s.append("- ");
+            s.append("  >> ");
             s.append("Code: ");
             s.append(tt.getCode());
             s.append(", ");
@@ -89,8 +89,25 @@ public class ClinicalAnalysisLaboratoryDTO extends LaboratoryDTO {
             s.append("\n");
         }
 
+        List<Test> copyCalTestsList = new ArrayList<>(calTestList);
 
-        return String.format("%sLaboratory ID: %s%nTest Types: %n%s%n%s",
-                super.toString(), laboratoryID, s, calTestList);
+        StringBuilder sCalTestsList = new StringBuilder();
+        for (Test test : copyCalTestsList) {
+            sCalTestsList.append("  >> ");
+            sCalTestsList.append("Code: ");
+            sCalTestsList.append(test.getCode());
+            sCalTestsList.append(", ");
+            sCalTestsList.append("Nhs Code: ");
+            sCalTestsList.append(test.getNhsCode());
+            sCalTestsList.append(", ");
+            sCalTestsList.append("Test Type: ");
+            sCalTestsList.append(test.getTestType().getCode());
+            sCalTestsList.append("\n");
+        }
+
+
+
+        return String.format("%s> Laboratory ID: %s%n> Test Types: %n%s> Tests: %n%s",
+                super.toString(), laboratoryID, s, sCalTestsList);
     }
 }

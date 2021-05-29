@@ -89,6 +89,7 @@ Company "*" - "1" ExternalAPI : makes use of >
 Company "1" --- "*" Sample : manages >
 Company "1" --- "*" Test : conducts >
 MedicalLabTechnician "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
+Company "1" -- "2..*" ClinicalAnalysisLaboratory : owns >
 
 ClinicalAnalysisLaboratory --|> Laboratory
 

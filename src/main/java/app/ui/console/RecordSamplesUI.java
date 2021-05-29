@@ -32,7 +32,7 @@ public class RecordSamplesUI implements Runnable {
         try {
             List<TestDTO> listTestsNoSamplesDto = ctrl.getTestsNoSamples(laboratoryID);
             TestDTO selectedTest = (TestDTO) Utils.showAndSelectOne(listTestsNoSamplesDto,
-                    "To record the Samples collected of a Test, please selected a Test from the list:");
+                    "To record the Samples collected of a Test, please selected a Test from the list:\n");
 
             if(selectedTest != null) {
                 System.out.println("How many Samples are to be collected?");

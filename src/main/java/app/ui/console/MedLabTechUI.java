@@ -44,7 +44,7 @@ public class MedLabTechUI implements Runnable {
     private String getSelectedCalID() {
 
         ClinicalAnalysisLaboratoryDTO selectedCalDto = (ClinicalAnalysisLaboratoryDTO) Utils.showAndSelectOne(ctrl.getCalListDTO(),
-                "Please select in which Clinical Analysis Laboratory you are working: ");
+                "Please select in which Clinical Analysis Laboratory you are working: \n");
 
         if(selectedCalDto == null) throw new IllegalArgumentException("Operation canceled!");
         return selectedCalDto.getLaboratoryID();
