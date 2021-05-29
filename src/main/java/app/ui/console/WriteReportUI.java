@@ -52,7 +52,7 @@ public class WriteReportUI implements Runnable {
             String reportText = Utils.readLineFromConsole("Write the report bellow:");
 
             ctrl.createReport(reportText);
-            //ctrl.addReportToTest(tst.getCode());
+            
             confirmation = Utils.confirm(String.format(">> REPORT <<" +
                             "%n%s" +
                             "%n[Type 's' for correct or 'n' for wrong.]",
