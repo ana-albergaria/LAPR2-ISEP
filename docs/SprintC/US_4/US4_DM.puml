@@ -64,7 +64,6 @@ class ClinicalAnalysisLaboratory{
 Test "*" -- "1" TestType : classified as >
 Report "1" -- "1" Test : is of >
 Test "*" -- "1" Client : requested by >
-Test "*" -- "1..*" Parameter : requested analysis of >
 Receptionist "1" -- "*" Test : registers >
 Parameter "*" -- "1" ParameterCategory: presented under >
 TestType "1" -- "1..*" ParameterCategory : characterized by >
