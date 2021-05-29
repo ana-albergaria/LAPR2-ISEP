@@ -243,6 +243,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US010_SD](US010_SD.svg)
 
+![US010_SD_CategoriesMapper_toDTO_List](US010_SD_CategoriesMapper_toDTO_List.svg)
+
 ## 3.3. Class Diagram (CD)
 
 ![US010_CD](US010_CD.svg)

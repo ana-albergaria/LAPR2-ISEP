@@ -43,27 +43,11 @@ deactivate PCSTORE
 CTRL -> PCMAPPER : toDTO(lc)
 activate PCMAPPER
 
-PCMAPPER --> LIST_DTO** : create()
-
-loop for each object in lc
-PCMAPPER -> LC : obj = get(i)
-activate LC
-|||
-deactivate LC
-
-PCMAPPER -> PCMAPPER : objDTO = toDTO(obj)
-activate PCMAPPER
-
-PCMAPPER --> OBJ_DTO** : create(code, name)
-deactivate PCMAPPER
-
-PCMAPPER --> LIST_DTO : add(objDTO)
-activate LIST_DTO
-deactivate LIST_DTO
-end
+ref over PCMAPPER : US10_SD_CategoriesMapper_toDTO_List
 
 PCMAPPER --> CTRL : listCategoriesDto
 deactivate PCMAPPER
+
 CTRL --> UI : listCategoriesDto
 
 deactivate CTRL

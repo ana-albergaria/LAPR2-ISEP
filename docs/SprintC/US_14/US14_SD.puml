@@ -75,7 +75,7 @@ deactivate TSTSTORE
 
 CTRL -> TPMAPPER : listTestParamsDTO = toDTO(listTestParams)
 activate TPMAPPER
-ref over TPMAPPER : US14_SD_TestParameterMapper_toDTO
+ref over TPMAPPER : US14_SD_TestParameterMapper_toDTO_List
 TPMAPPER --> CTRL : listTestParamsDTO
 deactivate TPMAPPER
 
