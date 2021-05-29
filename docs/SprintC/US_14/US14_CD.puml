@@ -1,10 +1,8 @@
 @startuml
 hide empty methods
 hide empty attributes
-'left to right direction
+left to right direction
 skinparam classAttributeIconSize 0
-
-package Domain {
 
 class Company {
     -String designation
@@ -53,10 +51,6 @@ class TestStore {
     +getTestParameters(tst)
 }
 
-}
-
-package Mappers {
-
 class TestMapper {
     +toDTO(tests)
     +toDTO(test)
@@ -66,10 +60,6 @@ class TestParameterMapper {
     +toDTO(testParameter)
     +toDTO(testParameters)
 }
-
-}
-
-package DTOs {
 
 class TestDTO {
     -String code
@@ -86,10 +76,6 @@ class TestParametersDTO {
     +getResultReferenceValue()
 }
 
-}
-
-package Controllers {
-
 class WriteReportController {
     -Company company
     -Report report
@@ -99,13 +85,7 @@ class WriteReportController {
     +getTestParameters(code)
 }
 
-}
-
-package UI {
-
 class WriteReportUI {
-}
-
 }
 
 WriteReportUI ..> WriteReportController

@@ -90,11 +90,13 @@ public class App {
         this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
         this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserRole(Constants.ROLE_SPECIALIST_DOCTOR, Constants.ROLE_SPECIALIST_DOCTOR);
+        this.authFacade.addUserRole(Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST, Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
 
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
         this.authFacade.addUserWithRole("Med Lab Technician","medlabtech@gmail.com","1",Constants.ROLE_MED_LAB_TECHNICIAN);
         this.authFacade.addUserWithRole("rece","rec@gmail.com","1",Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
+        this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
         TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER);
@@ -116,10 +118,11 @@ public class App {
         ParameterCategory pc1 = this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0);
 
         Parameter param1 = new Parameter("code1","dsg","descr",pc1);
-        Parameter param2 = new Parameter("code1","dsg","descr",pc1);
+        Parameter param2 = new Parameter("code2","dag","descr",pc1);
         List<Parameter> listParameter = new ArrayList<>();
         listParameter.add(param1);
         listParameter.add(param2);
+
         this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
 
         Test test1 = new Test("123456789012",c1,t1,listParameter);
@@ -130,6 +133,13 @@ public class App {
 
         Sample s1 = new Sample(mb1);
         test1.addSample(s1);
+        try{
+            test1.addTestResult("code1", 23.45, "ug");
+            test1.addTestResult("code2", 23.45, "ug");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
 
         Test test2 = new Test("123456789012",c1,t1,listParameter);
         this.company.getTestStore().saveTest(test2);

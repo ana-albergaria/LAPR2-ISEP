@@ -81,13 +81,12 @@ public class TestStore {
      * @return Found test
      */
     public Test getTestByCode(String code) {
-        List<Test> listTestsReadyToDiagnose = new ArrayList<>();
-        for (Test tst : listTestsReadyToDiagnose) {
+        for (Test tst : getTestsReadyToDiagnose()) {
             if (tst.getCode().equalsIgnoreCase(code)) {
                 return tst;
             }
         }
-        throw new UnsupportedOperationException("Test not found in ready to diagnosis list!");
+        throw new UnsupportedOperationException("Test not found in ready to diagnose list!");
     }
 
     public Test getTestByCodeInTestList(String code) {
@@ -120,7 +119,6 @@ public class TestStore {
 
         return listTotalTestParameters;
     }
-
     /**
      * Gets a test object by its sample barcode number
      * @param barcodeNumber barcode number to find in the tests

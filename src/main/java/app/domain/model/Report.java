@@ -2,6 +2,7 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+
 /**
  * Represents a Report through:
  * a report text.
@@ -41,7 +42,7 @@ public class Report {
     private int countWords(String reportText){
         if((reportText == null) || (reportText.isEmpty()))
             return 0;
-        //Save words on an array:
+        //Save words in an array:
         String[] words = reportText.split("\\s+"); //"\\s+" will find one or more spaces and split the String accordingly
         return words.length;
     }
@@ -69,6 +70,14 @@ public class Report {
     public String toString(){
         return ">> REPORT <<" +
                 "%n> Report text: " + reportText;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Report)) return false;
+        Report report = (Report) o;
+        return reportText.equals(report.reportText);
     }
 
 }

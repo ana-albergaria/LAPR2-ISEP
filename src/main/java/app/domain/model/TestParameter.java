@@ -46,4 +46,9 @@ public class TestParameter {
     public void addResult(Double result, String metric, MyReferenceValue refValue) {
         this.testResult = new TestParameterResult(result, metric, refValue);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Test Parameter:%s%nTest result: %s%n", parameter, testResult);
+    }
 }

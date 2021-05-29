@@ -96,9 +96,12 @@ public class Test {
         this.client = client;
         this.testType = testType;
         this.testParameters = addTestParameters(parameters);
-        this.samples = new ArrayList<>();
         this.dateOfTestRegistration = generateNowDateAndTime();
         this.diagnosisReport = null;
+        this.samples = new ArrayList<>();
+        this.dateOfSamplesCollection = "n/a";
+        this.dateOfChemicalAnalysis = "n/a";
+        this.dateOfDiagnosis = "n/a";
     }
 
     public String getCode(){
@@ -238,8 +241,10 @@ public class Test {
 
     @Override
     public String toString() {
-        return String.format("TEST CODE %s%n* NHS Code: %s%n* Client name: %s%n* Test Type: %s%n* Collection Method: %s%n* Parameters: ",
-                code, nhsCode, client.getName(), testType, testType.getCollectingMethod(), testParameters);
+        return String.format("TEST CODE %s%n* NHS Code: %s%n* Client name: %s%n* Test Type: %s%n* Collection Method: %s%n* " +
+                        "Parameters: %s%nDate of test registration:%s%n Date of sample collection:%s%nDate of chemical analysis: %s%nDate of diagnosis: %s%n",
+                code, nhsCode, client.getName(), testType, testType.getCollectingMethod(), testParameters,
+                dateOfTestRegistration, dateOfSamplesCollection, dateOfChemicalAnalysis, dateOfDiagnosis);
     }
 
 

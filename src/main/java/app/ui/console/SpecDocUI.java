@@ -18,7 +18,7 @@ public class SpecDocUI implements Runnable {
     @Override
     public void run() {
 
-        List<MenuItem> options = new ArrayList<MenuItem>();
+        List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Make a diagnosis and write a report for a given test", new WriteReportUI()));
 
         int option = 0;

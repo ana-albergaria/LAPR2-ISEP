@@ -52,7 +52,7 @@ class TestParameterResult {
 
 }
 
-package Stores {
+package Store {
 
 class TestStore {
     -list<Test> testList
@@ -98,7 +98,7 @@ class TestParametersDTO {
 
 }
 
-package Controllers {
+package Controller {
 
 class WriteReportController {
     -Company company

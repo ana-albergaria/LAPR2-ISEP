@@ -72,8 +72,11 @@ public class TestParametersDTO {
      *
      * @return the reference value of the test parameter result.
      */
-    public MyReferenceValue getResultReferenceValue(){
-        return testResult.getResultReferenceValue();
+    public Double getResultReferenceValueMin(){
+        return testResult.getResultReferenceValue().getMinValue();
     }
 
+    public Double getResultReferenceValueMax(){
+        return testResult.getResultReferenceValue().getMaxValue();
+    }
 }

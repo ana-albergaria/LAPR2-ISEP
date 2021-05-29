@@ -34,4 +34,9 @@ public class ParameterDTO {
     public ParameterCategory getPc() {
         return pc;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Parameter: %s%nDescription: %s%nCode: %s%nCategory: %s%n", shortName, description, parameterCode, pc);
+    }
 }
