@@ -1,8 +1,6 @@
 package app.ui.console;
 
-import app.controller.RecordSamplesController;
 import app.controller.SelectCalController;
-import app.domain.model.ClinicalAnalysisLaboratory;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.ui.console.utils.Utils;
 
