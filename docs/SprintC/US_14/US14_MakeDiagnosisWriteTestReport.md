@@ -222,31 +222,6 @@ The only changes are the testName and the attributes of the Report.
 
 **Test 4:** Check that it is possible to create an instance of the Report class with report text with 400 words.
 
-# 4.2 Company
-
-Before starting the parameter tests, it's useful to create something like this,
-since the company needs to be created:
-
-    private Company company;
-
-    @Before
-    public void setUp() {
-        company = new Company("Many Labs");
-    }
-
-**Test 5:** Check that the report is created correctly when the reportText isn't null or empty.
-
-    @Test
-    public void createReport(){
-        String reportText = "Everything is good.";
-
-        Report reportExpected = new Report(reportText);
-
-        Report reportActual = company.createReport(reportText);
-
-        Assert.assertEquals(reportExpected, reportActual);
-    }
-
 # 5. Construction (Implementation)
 
 ## Class WriteReportController
