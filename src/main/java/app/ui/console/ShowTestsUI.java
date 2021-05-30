@@ -19,7 +19,7 @@ public class ShowTestsUI implements Runnable{
     }
     public void run()
     {
-        OurUtils.showTestsListWithAllData(ctrl.getAllTests(), "All registered tests");
+        OurUtils.showTestsListWithAllData(ctrl.getAllTests(), "ALL REGISTERED TESTS\n");
         //Utils.showList(ctrl.getAllTests(), "All registered tests");
     }
 }

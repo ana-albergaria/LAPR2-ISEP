@@ -68,8 +68,7 @@ public class Report {
      */
     @Override
     public String toString(){
-        return ">> REPORT <<" +
-                "%n> Report text: " + reportText;
+        return reportText;
     }
 
     /**
