@@ -159,6 +159,13 @@ public class TestType {
             throw new IllegalArgumentException("Collecting method cannot have more than 20 alphanumeric characters.");
     }
 
+    /**
+     * Compares the Test Type with the received object.
+     *
+     * @param testTypeObject the object to be compared with the Test Type
+     * @return true if the received object represents other Test Type
+     * equivalent to the Test Type. Otherwise, returns false.
+     */
     @Override
     public boolean equals(Object testTypeObject) {
         if (this == testTypeObject) return true;
@@ -167,8 +174,15 @@ public class TestType {
         return testTypeToCompare.getCode().equals(this.getCode());
     }
 
-
-
+    /**
+     * Method to get the External Module, using Java Reflection.
+     *
+     * @return a instance of the External Module to be used.
+     *
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     */
     public ExternalModule getExternalModule() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Class<?> oClass = Class.forName(classNameOfApi);
         return (ExternalModule) oClass.newInstance();

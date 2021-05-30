@@ -99,16 +99,31 @@ public class TestDTO {
         this.dateOfDiagnosis = dateOfDiagnosis;
     }
 
+    /**
+     * Returns the code of the Test Dto.
+     *
+     * @return code of the Test Dto
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * It returns the relevant textual description of the Test Dto instance.
+     *
+     * @return relevant characteristics of the Test Dto
+     */
     @Override
     public String toString() {
         return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n",
                 code, nhsCode, client.getName(), testType);
     }
 
+    /**
+     * It returns the complete textual description of the Test Dto instance.
+     *
+     * @return complete characteristics of the Test Dto
+     */
     public String toStringWithAllData() {
         List<TestParameter> copyTP = new ArrayList<>(testParameters);
 
@@ -117,7 +132,6 @@ public class TestDTO {
             s.append(testParameter);
             s.append("\n");
         }
-
 
         return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n" +
                         " > Parameters: %n%n%s > Number of Samples Collected: %d%n > Diagnosis Report: %s%n" +

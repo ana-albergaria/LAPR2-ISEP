@@ -61,6 +61,11 @@ public class TestParameterResult {
         return myReferenceValue;
     }
 
+    /**
+     * It returns the textual description of the Test Parameter Result instance.
+     *
+     * @return characteristics of the Test Parameter Result
+     */
     @Override
     public String toString() {
         return String.format("> Value: %s, > Metric: %s, > Ref.Value Min: %s, > Ref.Value Max: %s%n", value, metric, myReferenceValue.getMinValue(), myReferenceValue.getMaxValue());

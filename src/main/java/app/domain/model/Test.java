@@ -104,50 +104,112 @@ public class Test {
         this.dateOfDiagnosis = "n/a";
     }
 
+    /**
+     * Returns the code of the test.
+     *
+     * @return code of the test
+     */
     public String getCode(){
         return code;
     }
 
+    /**
+     * Returns the list of samples of the test
+     *
+     * @return list of samples of the test
+     */
     public List<Sample> getSamples() {
         return new ArrayList<>(samples);
     }
 
+    /**
+     * Returns the Diagnosis Report of the test.
+     *
+     * @return the Diagnosis Report of the test
+     */
     public Report getDiagnosisReport(){
         return diagnosisReport;
     }
 
+    /**
+     * Returns the NHS Code of the test.
+     *
+     * @return the NHS code of the test.
+     */
     public String getNhsCode() {
         return nhsCode;
     }
 
+    /**
+     * Returns the client who will do the test.
+     *
+     * @return the client who will do the test
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * Returns the test type of the test
+     *
+     * @return test type of the test
+     */
     public TestType getTestType() {
         return testType;
     }
 
+    /**
+     * Returns the list of Test Parameters of the test.
+     *
+     * @return list of Test Parameters of the test
+     */
     public List<TestParameter> getParameters() {
         return new ArrayList<>(testParameters);
     }
 
+    /**
+     * Returns the date of test registration.
+     *
+     * @return date of test registration
+     */
     public String getDateOfTestRegistration() {
         return dateOfTestRegistration;
     }
 
+    /**
+     * Returns the date of the samples collection.
+     *
+     * @return date of the samples collection
+     */
     public String getDateOfSamplesCollection() {
         return dateOfSamplesCollection;
     }
 
+    /**
+     * Returns the date of the chemical analysis.
+     *
+     * @return date of the chemical analysis
+     */
     public String getDateOfChemicalAnalysis() {
         return dateOfChemicalAnalysis;
     }
 
+    /**
+     * Returns the date of the diagnosis.
+     *
+     * @return the date of the diagnosis
+     */
     public String getDateOfDiagnosis() {
         return dateOfDiagnosis;
     }
 
+    /**
+     * Method that returns the Test Parameter of the Parameter whose code is received by parameter.
+     *
+     * @param parameterCode
+     *
+     * @return Test Parameter of the Parameter whose code is received by parameter
+     */
     private TestParameter getTestParameterFor(String parameterCode) {
         for (TestParameter testParameter : this.testParameters) {
             if(parameterCode.equals(testParameter.getParameter().getPrmCode())) {
@@ -280,7 +342,11 @@ public class Test {
         testParameter.addResult(result, metric, refValue);
     }
 
-
+    /**
+     * It returns the textual description of the Test instance.
+     *
+     * @return characteristics of the Test
+     */
     @Override
     public String toString() {
         return String.format("TEST CODE %s%n* NHS Code: %s%n* Client name: %s%n* Test Type: %s%n* Collection Method: %s%n* " +
@@ -289,7 +355,13 @@ public class Test {
                 dateOfTestRegistration, dateOfSamplesCollection, dateOfChemicalAnalysis, dateOfDiagnosis);
     }
 
-
+    /**
+     * Compares the Test with the received object.
+     *
+     * @param o the object to be compared with the Test
+     * @return true if the received object represents other Test
+     * equivalent to the Test. Otherwise, returns false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

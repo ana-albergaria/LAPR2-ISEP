@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Container of one of the test parameters and its test result
  *
- * @author João Wolff
+ * @author SRC-Code-23
  */
 public class TestParameter {
 
@@ -47,6 +47,11 @@ public class TestParameter {
         this.testResult = new TestParameterResult(result, metric, refValue);
     }
 
+    /**
+     * It returns the textual description of the Test Parameter instance.
+     *
+     * @return characteristics of the Test Parameter
+     */
     @Override
     public String toString() {
         return String.format("Test Parameter:%s%nTest result: %s%n", parameter, testResult);
