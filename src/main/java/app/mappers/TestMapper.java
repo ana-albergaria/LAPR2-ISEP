@@ -11,7 +11,10 @@ import java.util.List;
 public class TestMapper {
     public TestDTO toDTO(Test test) {
         return new TestDTO(test.getCode(), test.getNhsCode(), test.getClient(),
-                test.getTestType(), test.getParameters(), test.getSamples());
+                test.getTestType(), test.getParameters(), test.getSamples(),
+                test.getDiagnosisReport(), test.getDateOfTestRegistration(),
+                test.getDateOfSamplesCollection(), test.getDateOfChemicalAnalysis(),
+                test.getDateOfDiagnosis());
     }
 
     public List<TestDTO> toDTO(List<Test> tests) {

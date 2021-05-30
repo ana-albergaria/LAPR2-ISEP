@@ -2,6 +2,7 @@ package app.mappers.dto;
 
 import app.domain.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestDTO {
@@ -37,6 +38,31 @@ public class TestDTO {
     private List<TestParameter> testParameters;
 
     /**
+     * Report of test results
+     */
+    private Report diagnosisReport;
+
+    /**
+     * Date of test registration
+     */
+    private final String dateOfTestRegistration;
+
+    /**
+     * Date of samples collection
+     */
+    private String dateOfSamplesCollection;
+
+    /**
+     * Date of chemical analysis
+     */
+    private String dateOfChemicalAnalysis;
+
+    /**
+     * Date of diagnosis
+     */
+    private String dateOfDiagnosis;
+
+    /**
      * Number of existing tests.
      */
     private static int totalTests = 0;
@@ -48,7 +74,17 @@ public class TestDTO {
      * @param testType Type of test to be conduted
      * @param parameters List of parameters to be measured of a given test
      */
-    public TestDTO(String code, String nhsCode, Client client, TestType testType, List<TestParameter> parameters, List<Sample> samples) {
+    public TestDTO(String code,
+                   String nhsCode,
+                   Client client,
+                   TestType testType,
+                   List<TestParameter> parameters,
+                   List<Sample> samples,
+                   Report diagnosisReport,
+                   String dateOfTestRegistration,
+                   String dateOfSamplesCollection,
+                   String dateOfChemicalAnalysis,
+                   String dateOfDiagnosis) {
         totalTests++;
         this.code = code;
         this.nhsCode = nhsCode;
@@ -56,6 +92,11 @@ public class TestDTO {
         this.testType = testType;
         this.testParameters = parameters;
         this.samples = samples;
+        this.diagnosisReport = diagnosisReport;
+        this.dateOfTestRegistration = dateOfTestRegistration;
+        this.dateOfSamplesCollection = dateOfSamplesCollection;
+        this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
+        this.dateOfDiagnosis = dateOfDiagnosis;
     }
 
     public String getCode() {
@@ -66,5 +107,23 @@ public class TestDTO {
     public String toString() {
         return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n",
                 code, nhsCode, client.getName(), testType);
+    }
+
+    public String toStringWithAllData() {
+        List<TestParameter> copyTP = new ArrayList<>(testParameters);
+
+        StringBuilder s = new StringBuilder();
+        for (TestParameter testParameter : copyTP) {
+            s.append(testParameter);
+            s.append("\n");
+        }
+
+
+        return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n" +
+                        " > Parameters: %n%n%s > Number of Samples Collected: %d%n > Diagnosis Report: %s%n" +
+                        " > Date Of Test Registration: %s%n > Date Of Samples Collection: %s%n" +
+                        " > Date of Chemical Analysis: %s%n > Date Of Diagnosis: %s%n",
+                code, nhsCode, client.getName(), testType, s, samples.size(), diagnosisReport,
+                dateOfTestRegistration, dateOfSamplesCollection, dateOfChemicalAnalysis, dateOfDiagnosis);
     }
 }

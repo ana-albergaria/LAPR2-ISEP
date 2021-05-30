@@ -132,6 +132,22 @@ public class Test {
         return new ArrayList<>(testParameters);
     }
 
+    public String getDateOfTestRegistration() {
+        return dateOfTestRegistration;
+    }
+
+    public String getDateOfSamplesCollection() {
+        return dateOfSamplesCollection;
+    }
+
+    public String getDateOfChemicalAnalysis() {
+        return dateOfChemicalAnalysis;
+    }
+
+    public String getDateOfDiagnosis() {
+        return dateOfDiagnosis;
+    }
+
     private TestParameter getTestParameterFor(String parameterCode) {
         for (TestParameter testParameter : this.testParameters) {
             if(parameterCode.equals(testParameter.getParameter().getPrmCode())) {

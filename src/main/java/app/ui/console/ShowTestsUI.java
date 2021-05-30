@@ -1,6 +1,7 @@
 package app.ui.console;
 
 import app.controller.ShowAllTestsController;
+import app.ui.console.utils.OurUtils;
 import app.ui.console.utils.Utils;
 
 
@@ -8,16 +9,17 @@ import app.ui.console.utils.Utils;
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-public class showTestsUI implements Runnable{
+public class ShowTestsUI implements Runnable{
 
     ShowAllTestsController ctrl;
 
-    public showTestsUI()
+    public ShowTestsUI()
     {
         this.ctrl = new ShowAllTestsController();
     }
     public void run()
     {
-        Utils.showList(ctrl.getAllTests(), "All registered tests");
+        OurUtils.showTestsListWithAllData(ctrl.getAllTests(), "All registered tests");
+        //Utils.showList(ctrl.getAllTests(), "All registered tests");
     }
 }
