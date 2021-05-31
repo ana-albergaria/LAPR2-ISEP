@@ -74,4 +74,7 @@ TestParameter "1" -- "0..1" TestParameterResult : contains >
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
 ClinicalAnalysisLaboratory "1" -- "1..*" Test : performs >
 Company "1" --- "*" Test : conducts >
+Receptionist "1..*" -- "1" ClinicalAnalysisLaboratory : works for >
+Company "1" -- "2..*" ClinicalAnalysisLaboratory : owns >
+
 @enduml

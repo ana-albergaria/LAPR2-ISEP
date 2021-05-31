@@ -1,0 +1,21 @@
+@startuml
+
+autonumber
+actor "Lab Coordinator" as MLT
+
+activate MLT
+MLT -> ":System" :  wants to import clinical tests from a CSV file.
+activate ":System"
+":System" --> MLT : Shows the file chooser and asks to select the file.
+deactivate ":System"
+
+MLT -> ":System" : selects requested data
+activate ":System"
+":System" --> MLT : shows the number of clinical tests to be imported\n and requests confirmation
+deactivate ":System"
+MLT -> ":System" : confirms the data
+activate ":System"
+":System" --> MLT : informs operation success
+deactivate ":System"
+
+@enduml
