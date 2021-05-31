@@ -2,32 +2,35 @@
 
 left to right direction
 skinparam packageStyle rectangle
-actor Receptionist
+actor "Client" as CL
+actor "Receptionist" as REC
 actor "Medical Lab Technician" as MLT
 actor Administrator
 actor "Clinical Chemistry Technologist" as CCT
-actor "Laboratory Coordinator" as LC
 actor "Specialist Doctor" as SD
-actor Client
-actor BOT
-
-
+actor "Laboratory Coordinator" as LC
+actor "Many Labs" as ML
 
 rectangle System {
-Receptionist --> (UC 2 - Register a test to be performed)
-(UC 2 - Register a test to be performed) --> (UC 1 - Register a new client) #brown;line.dashed;text:black : <<Include>>
-MLT --> (UC 3 - Register the clinical test performed)
-MLT --> (UC 4 - Record the sample collected in the scope of a given test)
-CCT --> (UC 8 - Record the chemical analysis result)
-Administrator --> (UC 5 - Specify a new type of test and its collecting methods)
+CL --> (UC 1 - View the results of the performed tests)
+CL --> (UC 2 - Update personal data)
+REC --> (UC 4 - Register a test to be performed)
+(UC 4 - Register a test to be performed) --> (UC 3 - Register a new client) #brown;line.dashed;text:black : <<Include>>
+MLT --> (UC 5 - Record the samples collected in the scope of a given test)
 Administrator --> (UC 6 - Specify a new test parameter and categorize it)
-Administrator --> (UC 7 - Specify a new parameter category)
-SD --> (UC 12 - Register a report)
-LC --> (UC 10 - Post the chemical test/result)
-(UC 10 - Post the chemical test/result) --> (UC 9 - Validate the chemical test/result) #brown;line.dashed;text:black : <<Include>>
-BOT --> (UC 13 - Generate Covid-19 reports)
-BOT --> (UC 14 - Send notification)
-(UC 12 - Register a report) --> (UC 11 - Make a diagnosis) #brown;line.dashed;text:black : <<Include>>
+Administrator --> (UC 7 - Register a new employee)
+Administrator --> (UC 8 - Register a new clinical analysis laboratory stating which kind of tests it operates)
+Administrator --> (UC 9 - Specify a new type of test and its collecting methods)
+Administrator --> (UC 10 - Specify a new parameter and categorize it)
+Administrator --> (UC 11 - Specify a new parameter category)
+CCT --> (UC 12 - Record the results of a given test)
+CCT --> (UC 13 - Consult the historical tests performed by a client)
+SD --> (UC 14 - Make a diagnosis and write a report for a given test)
+LC --> (UC 15 - Validate the work done by the clinical chemistry technologist)
+LC --> (UC 16 - Have an overview of all the tests and analyse the company performance)
+LC --> (UC 17 - Import clinical tests from a CSV file)
+Administrator --> (UC 18 - Send the Covid-19 report to the NHS at any time)
+ML --> (UC 19 - Send daily Covid-19 data reports to NHS)
 }
 
 

@@ -11,8 +11,12 @@ performed.
 
 **From the specifications document:**
 
-> "After the specialist doctor has completed the diagnosis, the results of the clinical analyses and the
-report become available in the system and must be validated by the laboratory coordinator."
+> "After the specialist doctor has completed the diagnosis, the results of the clinical analyses 
+> and the report become available in the system and must be validated by the laboratory coordinator."
+
+> "Once the laboratory coordinator confirms that everything was done correctly the client receives 
+a notification alerting that the results are already available in the central application and 
+informing that he/she must access the application to view those results."
 
 
 **From the client clarifications:**
@@ -28,7 +32,8 @@ report become available in the system and must be validated by the laboratory co
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** 
+* **AC1:** The client tests must be shown ordered from the most recent to the oldest one.
+* **AC2:** The test results are shown only after the client has selected a test.
 
 
 ### 1.4. Found out Dependencies
