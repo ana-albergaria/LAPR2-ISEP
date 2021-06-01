@@ -57,7 +57,10 @@ manual (in the annexes) that must be delivered with the application."
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency to "USX: XXX" since xxxxx.
+* There is a dependency to "US4: As a receptionist of the laboratory, I intend to 
+  register a test to be performed to a registered client." since the app needs to have 
+  tests in it, so that the company can have a performance and the Laboratory Coordinator 
+  can have an overview of the company tests.
 
 
 ### 1.5 Input and Output Data
@@ -65,16 +68,16 @@ manual (in the annexes) that must be delivered with the application."
 **Input Data:**
 
 * Typed data:
-    * 
+    * interval of time to be analysed
 
 * Selected data:
-    * 
+    * n/a
 
 
 **Output Data:**
 
-* 
-* (In)Sucess of the operation
+* overview of all the tests performed
+* overall performance of the company
 
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -84,7 +87,11 @@ manual (in the annexes) that must be delivered with the application."
 
 ### 1.7 Other Relevant Remarks
 
-The present US is held many times during the business. As the Company works in the analysis/testing field, it's crucial xxxxxx.
+The present US is held many times during the business. As the Company wants to decrease 
+the number of tests waiting for its result, it's crucial for the Laboratory Coordinator 
+to frequently have an overview of all the tests performed and analyse the overall 
+performance of the company. In this way, he can find the days when the company 
+performance was less effective and figure out the cause of it.
 
 
 ## 2. OO Analysis
@@ -108,8 +115,12 @@ n/a
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1: aaa |	... aaa? | AaA | aaa. |
-| | ... aaa? | AaA | aaa. |
+| Step 1: asks to see an overview of all the tests performed and analyse the overall performance of the company |	... interacting with the actor? | | |
+| | ... coordinating the US? | | |
+| Step 2: shows an overview of all the tests performed and asks the interval of time to be analysed | ... knowing the test info to show? | | |
+| | ... asking the user for this data? | | |
+| Step 3: types requested data | ... saving the inputted data? | | |
+| Step 4: shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs) | ... knowing the data to show? | | |
 
 
 ### Systematization ##
