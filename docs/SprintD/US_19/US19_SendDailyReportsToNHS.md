@@ -38,12 +38,19 @@ file.
 **AC2:** Simple linear and multilinear regression models can be used to compute the estimates and corresponding confidence intervals.  
 **AC3:** When the system is configured to use the simple linear regression model, **the performance of each model should be used to select the best model** (the one that uses the number of tests realized OR the one that uses the mean age as independent variable). **The best model will be used to make the estimated/expected values that will be send to NHS.**  
 **AC4:** The **interval of dates to fit the regression model** and the **number of historical points** (number of days and number of weeks) must be defined through a configuration file.  
-**AC5:** **The system should send the report using the NHS API (available in moodle).**
+**AC5:** **The system should send the report using the NHS API (available in moodle).**  
+
+**From the client clarifications:**
    
 
 ### 1.4. Found out Dependencies
 
-*Identify here any found out dependency to other US and/or requirements.*
+There is a dependency to:
+
+* **"US004 Register a test to be performed to a registered client"** 
+* **"US017 Import clinical tests from a CSV file"**  
+
+Since all the performed tests by Many Labs must be recorded in the system in order to send accurate data and forecasts to NHS.
 
 ### 1.5 Input and Output Data
 
