@@ -24,7 +24,9 @@ evaluated to select the best model.
 documented in the application user manual (in the annexes) that must be delivered with the
 application.  
 > The algorithm to be used by the application must be defined through a configuration
-file.
+file.  
+
+**From the client clarifications:**
 
 
 ### 1.3. Acceptance Criteria
@@ -35,12 +37,16 @@ file.
  * R(SLR), R2 and R2 adjusted for SLR and MLR;  
  * hypothesis tests for regression coefficients significance model with Anova.  
 
-**AC2:** Simple linear and multilinear regression models can be used to compute the estimates and corresponding confidence intervals.  
-**AC3:** When the system is configured to use the simple linear regression model, **the performance of each model should be used to select the best model** (the one that uses the number of tests realized OR the one that uses the mean age as independent variable). **The best model will be used to make the estimated/expected values that will be send to NHS.**  
-**AC4:** The **interval of dates to fit the regression model** and the **number of historical points** (number of days and number of weeks) must be defined through a configuration file.  
+**AC2:** Simple linear and multilinear regression models can be used to compute the estimates and corresponding confidence intervals. 
+
+**AC3:** When the system is configured to use the simple linear regression model, **the performance of each model should be used to select the best model** (the one that uses the number of tests realized OR the one that uses the mean age as independent variable). **The best model will be used to make the estimated/expected values that will be send to NHS.** 
+
+**AC4:** The **interval of dates to fit the regression model** and the **number of historical points** (number of days and number of weeks) must be defined through a configuration file. 
+
 **AC5:** **The system should send the report using the NHS API (available in moodle).**  
 
-**From the client clarifications:**
+**AC6:** To **find the critical values for the t-student and Fisher–Snedecor distributions** you should use the Apache Commons Math Library, version 3.5.  
+
    
 
 ### 1.4. Found out Dependencies
