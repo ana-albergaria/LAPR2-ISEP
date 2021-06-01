@@ -5,6 +5,12 @@ actor "Laboratory Coordinator" as LC
 activate LC
 LC-> ":System" : asks to see an overview of all the tests performed and analyse the overall performance of the company
 activate ":System"
-":System" --> LC : asks the interval of time to be analysed
+":System" --> LC : shows an overview of all the tests performed and asks the interval of time to be analysed
+deactivate ":System"
+
+LC-> ":System" : types requested data
+activate ":System"
+":System" --> LC : shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs)
+deactivate ":System"
 
 @enduml
