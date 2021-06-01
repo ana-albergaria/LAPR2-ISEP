@@ -1,0 +1,10 @@
+@startuml
+
+actor "Laboratory Coordinator" as LC
+
+activate LC
+LC-> ":System" : asks to see an overview of all the tests performed and analyse the overall performance of the company
+activate ":System"
+":System" --> LC : asks the interval of time to be analysed
+
+@enduml
