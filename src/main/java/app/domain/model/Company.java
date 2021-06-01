@@ -19,44 +19,44 @@ public class Company {
     /**
      * The company designation.
      */
-    private String designation;
+    private final String designation;
 
-    private AuthFacade authFacade;
+    private final AuthFacade authFacade;
 
     /**
      * The parameter category store.
      */
-    private ParameterCategoryStore parameterCategoryStore;
+    private final ParameterCategoryStore parameterCategoryStore;
 
     /**
      * The parameter store.
      */
-    private ParameterStore parameterStore;
+    private final ParameterStore parameterStore;
 
     /**
      * The test store.
      */
-    private TestStore testStore;
+    private final TestStore testStore;
 
     /**
      * The client store.
      */
-    private ClientStore clientStore;
+    private final ClientStore clientStore;
 
     /**
      * The test type store.
      */
-    private TestTypeStore testTypeStore;
+    private final TestTypeStore testTypeStore;
 
     /**
      * The sample store.
      */
-    private SampleStore sampleStore;
+    private final SampleStore sampleStore;
 
     /**
      * The clinical analysis laboratory store.
      */
-    private ClinicalAnalysisLaboratoryStore calStore;
+    private final ClinicalAnalysisLaboratoryStore calStore;
 
     private List<Employee> empList;
     private List<OrgRole> roles;
