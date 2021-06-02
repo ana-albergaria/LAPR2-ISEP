@@ -1,0 +1,33 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide empty methods
+hide empty attributes
+left to right direction
+
+class Company{
+- designation
+}
+
+class Test{
+- NhsCode
+- code
+- dateOfTestRegistration
+}
+
+class LaboratoryCoordinator{
+}
+
+class CompanyPerformanceAnalysis{
+- lastDaysToAnalyse
+- worstSubInt
+- statistics
+- graphs
+}
+
+Company "1" -- "*" Test : conducts >
+LaboratoryCoordinator "1..*" -- "*" CompanyPerformanceAnalysis : analyses >
+Company "1" -- "*" CompanyPerformanceAnalysis : has >
+CompanyPerformanceAnalysis "1" -- "*" Test : analyses >
+
+@enduml

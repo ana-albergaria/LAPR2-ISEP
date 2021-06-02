@@ -57,7 +57,7 @@ Test "*" -- "1" SpecialistDoctor : analysed by >
 SpecialistDoctor "1" -- "*" Report : writes >
 'Diagnosis "1" -- "1" FinalResult : receives <
 'Report "1" -- "1" FinalResult : receives <
-Report "1" -- "1" Test : is of >
+Report "1" -- "1" Test : has <
 'Test "*" -- "1" TestType : is of >
 Test "1" -- "1..*" TestParameter : requests analysis of >
 TestParameter "*" -- "1" Parameter : refers to >

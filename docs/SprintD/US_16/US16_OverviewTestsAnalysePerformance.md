@@ -128,12 +128,13 @@ n/a
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* 
-* 
+* CompanyPerformanceAnalysis
+* Company
 
 Other software classes (i.e. Pure Fabrication) identified:
-* 
-* 
+* CompanyPerformanceAnalysisController
+* CompanyPerformanceAnalysisUI
+* TestStore
 
 ## 3.2. Sequence Diagram (SD)
 

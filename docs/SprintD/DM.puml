@@ -246,7 +246,7 @@ SpecialistDoctor "1" -- "*" Report : writes >
 /'Report -- Client : delivered to >'/
 /'Report -- Application : known by >'/
 Report "*" -- "1" LaboratoryCoordinator : validated by >
-Report "1" -- "1" Test : is of >
+Report "1" -- "1" Test : has <
 /'ClinicalResult -- Application : known by >'/
 /'ClinicalResult -- LaboratoryCoordinator : validated by >'/
 LaboratoryCoordinator "1" -- "*" FinalResult : confirms >
