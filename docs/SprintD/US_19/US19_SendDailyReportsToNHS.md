@@ -26,7 +26,12 @@ application.
 > The algorithm to be used by the application must be defined through a configuration
 file.  
 
-**From the client clarifications:**
+**From the client clarifications:**  
+> **Q:** I would like to know if will be given a Multiple Linear Regression Class to work, or should it be developed by the groups?  
+> **A:** **The Multiple Linear Regression Class should be developed by each team**. In moodle I made available a Java file with Simple Linear Regression.
+The teams should not use libraries or other external modules to implement linear regression.  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8836).
 
 
 ### 1.3. Acceptance Criteria
@@ -45,7 +50,7 @@ file.
 
 **AC5:** **The system should send the report using the NHS API (available in moodle).**  
 
-**AC6:** To **find the critical values for the t-student and Fisher–Snedecor distributions** you should use the Apache Commons Math Library, version 3.5.  
+**AC6:** To **find the critical values for the t-student and Fisher–Snedecor distributions** it should be used the Apache Commons Math Library, version 3.5.  
 
    
 
