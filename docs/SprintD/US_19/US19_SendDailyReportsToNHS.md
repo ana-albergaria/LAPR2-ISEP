@@ -58,21 +58,28 @@ You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/dis
 
 There is a dependency to:
 
-* **"US004 Register a test to be performed to a registered client"** 
-* **"US017 Import clinical tests from a CSV file"**  
+* **"US004 Register a test to be performed to a registered client"**  
+* **"US012 Record the results of a given test**  
+* **"US017 Import clinical tests from a CSV file"**
 
-Since all the performed tests by Many Labs must be recorded in the system in order to send accurate data and forecasts to NHS.
+Since all the performed tests **with results** by Many Labs must be recorded in the system in order to send accurate data and forecasts to NHS.
 
 ### 1.5 Input and Output Data
 
-*Identity here the data to be inputted by the system actor as well as the output data that the system have/needs to present in order to properly support the actor actions. Regarding the inputted data, it is suggested to distinguish between typed data and selected data (e.g. from a list)*
+**Input Data:**
+
+* Report data
+
+**Output Data:**
+
+* File "NHSReport.txt"
 
 
 ### 1.6. System Sequence Diagram (SSD)
 
 *Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
 
-![USXX-SSD](USXX-SSD.svg)
+![US19_SSD](US19_SSD.svg)
 
 
 ### 1.7 Other Relevant Remarks
@@ -85,7 +92,7 @@ Since all the performed tests by Many Labs must be recorded in the system in ord
 ### 2.1. Relevant Domain Model Excerpt 
 *In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
 
-![USXX-MD](USXX-MD.svg)
+![US19_DM](US19_DM.svg)
 
 ### 2.2. Other Remarks
 

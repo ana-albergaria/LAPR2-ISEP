@@ -33,14 +33,16 @@ class SignificanceModelAnova {}
 Timer "1" -- "1..*" NHSDailyReport : reports >
 Company "1" -- "1" Timer : knows >
 Company "*" - "1" NhsAPI : makes use of >
-NHSDailyReport "*" -- "1" NhsAPI : send by
+NHSDailyReport "*" -- "1" NhsAPI : send by >
 NHSDailyReport "*" -- "1" RegressionModel : makes us of >
-RegressionModel "1" -- "1" ConfigFile : defined by >
-
-IntervalOfDates "1" -- "1" ConfigFile : defined by >
-NumberOfHistoricalPoints "1" -- "1" ConfigFile : defined by >
 NHSDailyReport "1" -- "*" HypothesisTest : contains >
 NHSDailyReport "1" -- "1" SignificanceModelAnova : contains >
+
+'Apagar posteriormente
+RegressionModel "1" -- "1" ConfigFile : defined by >
+IntervalOfDates "1" -- "1" ConfigFile : defined by >
+NumberOfHistoricalPoints "1" -- "1" ConfigFile : defined by >
+
 
 
 @enduml

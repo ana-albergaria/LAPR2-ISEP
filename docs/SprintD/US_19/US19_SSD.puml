@@ -4,12 +4,13 @@ actor "Timer/Clock\n<<automatic>>" as T
 
 activate T
 T -> ":System" : asks to send automatic daily report to NHS
-activate ":System"
+
+/'activate ":System"
 ":System" --> T : requests report to be sent
 deactivate ":System"
 
 T -> ":System" : create daily report and send it
-activate ":System"
+activate ":System"'/
 
 ":System" --> T : informs operation success
 deactivate ":System"
