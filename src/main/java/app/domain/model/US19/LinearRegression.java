@@ -5,6 +5,8 @@ package app.domain.model.US19;
  *  Simple linear regression.
  ******************************************************************************/
 
+import java.text.DecimalFormat;
+
 /**
  *  The code LinearRegression class performs a simple linear regression
  *  on an set of n data points (y_i, x_i).
@@ -138,8 +140,10 @@ public class LinearRegression {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(String.format("%.2f n + %.2f", slope(), intercept()));
-        s.append("  (R^2 = " + String.format("%.3f", R2()) + ")");
+        //RETIREI AS 2 CASAS DECIMAIS SÓ PARA TESTAR
+        s.append(String.format("%f n + %f", slope(), intercept()));
+        //RETIREI AS 3 CASAS DECIMAIS SÓ PARA TESTAR
+        s.append("  (R^2 = " + String.format("%f", R2()) + ")");
         return s.toString();
     }
 

@@ -1,0 +1,46 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Timer {}
+class NhsAPI{}
+class NHSDailyReport {
+- dayObservedValues
+- dayEstimatedValues
+- weekObservedValues
+- weekEstimatedValues
+- r
+- r2
+- r2Adjusted
+}
+
+class RegressionModel {}
+
+class ConfigFile {}
+
+'The interval of dates to fit the regression model
+class IntervalOfDates {}
+
+'Number of days and number of weeks
+class NumberOfHistoricalPoints {}
+
+'hypothesis tests for regression coefficients
+class HypothesisTest {}
+
+'significance model with Anova.
+class SignificanceModelAnova {}
+
+Timer "1" -- "1..*" NHSDailyReport : reports >
+Company "1" -- "1" Timer : knows >
+Company "*" - "1" NhsAPI : makes use of >
+NHSDailyReport "*" -- "1" NhsAPI : send by
+NHSDailyReport "*" -- "1" RegressionModel : makes us of >
+RegressionModel "1" -- "1" ConfigFile : defined by >
+
+IntervalOfDates "1" -- "1" ConfigFile : defined by >
+NumberOfHistoricalPoints "1" -- "1" ConfigFile : defined by >
+NHSDailyReport "1" -- "*" HypothesisTest : contains >
+NHSDailyReport "1" -- "1" SignificanceModelAnova : contains >
+
+
+@enduml
