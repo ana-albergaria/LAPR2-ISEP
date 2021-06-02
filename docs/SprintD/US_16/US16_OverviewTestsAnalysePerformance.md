@@ -115,12 +115,13 @@ n/a
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1: asks to see an overview of all the tests performed and analyse the overall performance of the company |	... interacting with the actor? | | |
-| | ... coordinating the US? | | |
-| Step 2: shows an overview of all the tests performed and asks the interval of time to be analysed | ... knowing the test info to show? | | |
-| | ... asking the user for this data? | | |
-| Step 3: types requested data | ... saving the inputted data? | | |
-| Step 4: shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs) | ... knowing the data to show? | | |
+| Step 1: asks to see an overview of all the tests performed and analyse the overall performance of the company |	... interacting with the actor? | CompanyPerformanceAnalysisUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| | ... coordinating the US? | CompanyPerformanceAnalysisController | Controller |
+| Step 2: shows an overview of all the tests performed and asks the interval of time to be analysed | ... knowing the test info to show? | TestStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
+| | ... knowing the TestStore? | Company | Pure Fabrication: Company knows the TestStore |
+| | ... asking the user for this data? | CompanyPerformanceAnalysisUI | IE: is responsible for user interactions. |
+| Step 3: types requested data | ... saving the inputted data? | CompanyPerformanceAnalysis | IE: Company Performance Analysis had its own data. |
+| Step 4: shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs) | ... knowing the data to show? | CompanyPerformanceAnalysis | IE: Company Performance Analysis had its own data. |
 
 
 ### Systematization ##
@@ -164,9 +165,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US016_PD](US016_PD.svg)
 
-# 4. Tests
-
-# 4.1 Report
+# 4. Tests«
 
 
 # 5. Construction (Implementation)
