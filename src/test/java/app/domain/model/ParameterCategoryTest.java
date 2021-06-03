@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.domain.shared.Constants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +10,7 @@ public class ParameterCategoryTest {
 
     @Before
     public void setUp(){
-        company = new Company("many labs");
+        company = new Company("many labs", Constants.CLASS_BARCODE_API);
     }
 
     @Test(expected = IllegalArgumentException.class)

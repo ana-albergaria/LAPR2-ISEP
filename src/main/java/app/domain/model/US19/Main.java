@@ -1,6 +1,7 @@
 package app.domain.model.US19;
 
 
+import com.nhs.report.Report2NHS;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,6 +11,9 @@ public class Main {
         LinearRegression simpleLR = new LinearRegression(x, y);
 
         System.out.println(simpleLR);
+
+
+        //Report2NHS.writeUsingFileWriter(simpleLR.toString());
     }
 
 

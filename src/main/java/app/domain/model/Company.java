@@ -60,11 +60,14 @@ public class Company {
 
     private List<Employee> empList;
     private List<OrgRole> roles;
+    private String classNameForBarcodeApi;
 
-    public Company(String designation)
+    public Company(String designation, String classNameForBarcodeApi)
     {
         if (StringUtils.isBlank(designation))
             throw new IllegalArgumentException("Designation cannot be blank.");
+        if (StringUtils.isBlank(classNameForBarcodeApi))
+            throw new IllegalArgumentException("The Class Name for the Barcode API cannot be blank.");
 
         this.designation = designation;
         this.authFacade = new AuthFacade();
@@ -89,6 +92,7 @@ public class Company {
         this.roles.add(r6);
         this.sampleStore = new SampleStore();
         this.calStore = new ClinicalAnalysisLaboratoryStore();
+        this.classNameForBarcodeApi = classNameForBarcodeApi;
     }
 
     public String getDesignation() {
@@ -304,8 +308,7 @@ public class Company {
      * @throws InstantiationException if the class object of the external API cannot be instantiated
      */
     public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        String className = App.getInstance().getBarcodeClassNameConfig();
-        Class<?> oClass = Class.forName(className);
+        Class<?> oClass = Class.forName(classNameForBarcodeApi);
         return (ExternalAPI) oClass.newInstance();
     }
 
