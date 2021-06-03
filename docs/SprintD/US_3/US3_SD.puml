@@ -49,37 +49,34 @@ activate CTRL
 
 CTRL -> CS : saveClient(cl)
 activate CS
+
 CS -> CS : validateClient(cl)
 activate CS
 deactivate CS
+
+CS -> CS : generatedPassword = generatedPassword()
+activate CS
+deactivate CS
+
+
 CS -> CS : addClient(cl)
 activate CS
 deactivate CS
-|||
-deactivate CS
-deactivate CTRL
-UI -> CTRL : makeClientAnUserAndSendPassword()
-activate CTRL
 
-CTRL -> SESSAO : addUser(String name, String email, String generatedPassword)
+
+CS -> SESSAO : addUser(String name, String email, String generatedPassword)
+
 activate SESSAO
+
 SESSAO -> SESSAO : existsUser(String email)
 activate SESSAO
 deactivate SESSAO
 deactivate SESSAO
 
-CTRL -> CTRL : writePassword(generatedPassword)
-activate CTRL
+CS -> CS : writePassword(generatedPassword)
+activate CS
+deactivate CS
 deactivate CTRL
-deactivate CTRL
-
-
-
-
-
-
-
-
 
 
 UI --> RC: informs operation success

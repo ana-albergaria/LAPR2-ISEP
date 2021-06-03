@@ -66,7 +66,7 @@ manual (in the annexes) that must be delivered with the application."
 * **AC2:** While evaluating the performance the laboratory 
   coordinator should have the ability to dynamically select the algorithm to be
   applied from the ones available on the system (the benchmark algorithm provided
-  in moodle and the brute-force algorithm to be developed).
+  in moodle, and the brute-force algorithm to be developed).
 * **AC3:** Support for easily adding other similar algorithms is required.
 
 
@@ -86,7 +86,7 @@ manual (in the annexes) that must be delivered with the application."
     * interval of time to be analysed
 
 * Selected data:
-    * n/a
+    * algorithm to use
 
 
 **Output Data:**
@@ -133,6 +133,7 @@ n/a
 | Step 1: asks to see an overview of all the tests performed and analyse the overall performance of the company |	... interacting with the actor? | CompanyPerformanceAnalysisUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 | | ... coordinating the US? | CompanyPerformanceAnalysisController | Controller |
 | Step 2: shows an overview of all the tests performed and asks the interval of time to be analysed | ... knowing the test info to show? | TestStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
+| | ... knowing client info to show? | ClientStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
 | | ... knowing the TestStore? | Company | Pure Fabrication: Company knows the TestStore |
 | | ... asking the user for this data? | CompanyPerformanceAnalysisUI | IE: is responsible for user interactions. |
 | Step 3: types requested data | ... saving the inputted data? | CompanyPerformanceAnalysis | IE: Company Performance Analysis had its own data. |
