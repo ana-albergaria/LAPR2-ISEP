@@ -9,10 +9,11 @@ T -> ":System" : asks to send automatic daily report to NHS
 ":System" --> T : requests report to be sent
 deactivate ":System"
 
-T -> ":System" : create daily report and send it
-activate ":System"'/
+T -> ":System" : create daily report and send it'/
+activate ":System"
 
 ":System" --> T : informs operation success
+
 deactivate ":System"
 
 /'
