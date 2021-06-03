@@ -1,0 +1,29 @@
+@startuml
+autonumber
+actor "Laboratory Coordinator" as LC
+
+participant ":CompanyPerformanceAnalysisUI" as UI
+participant ":CompanyPerformanceAnalysisController" as CTRL
+participant ":Company" as CMP
+participant ":CompanyPerformanceAnalysis" as CPA
+participant ":Test" as TST
+
+activate LC
+LC -> UI : asks to see an overview of all the tests performed and analyse the overall performance of the company
+activate UI
+
+UI -> CTRL : 
+
+UI --> LC : shows an overview of all the tests performed and asks the interval of time to be analysed
+deactivate UI
+
+
+
+LC -> UI : types requested data
+activate UI
+
+UI --> LC : shows the overall performance of the company for the chosen interval of time
+deactivate UI
+
+
+@enduml

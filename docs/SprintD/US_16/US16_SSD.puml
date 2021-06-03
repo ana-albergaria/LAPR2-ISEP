@@ -1,5 +1,5 @@
 @startuml
-
+autonumber
 actor "Laboratory Coordinator" as LC
 
 activate LC
@@ -10,7 +10,7 @@ deactivate ":System"
 
 LC-> ":System" : types requested data
 activate ":System"
-":System" --> LC : shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs)
+":System" --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate ":System"
 
 @enduml
