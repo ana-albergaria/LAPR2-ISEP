@@ -1,10 +1,9 @@
 package app.domain.model.US19;
-/*
+
 import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
 
 public class CriticalValues {
-    public class Main {
 
 
         public static void main(String[] args) {
@@ -28,8 +27,7 @@ public class CriticalValues {
             double alphaFD= 0.01;
             double critFD= fd.inverseCumulativeProbability(1- alphaFD);
             System.out.println("Fisher–Snedecor critical value:" + critFD);
-
         }
-    }
+
 }
- */
+
