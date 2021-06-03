@@ -54,9 +54,12 @@ loop for each String [] of the list
 note right of CTRL: all data refered in the following steps is extracted \nfrom the .CSV file and stored at each index of each String [] of the list.
 
 alt client not existent with given tin
-CTRL -> CLIENT_STORE : client = createClient(clients citizen card number, NHS number,  birth \n date, TIN number, e-mail, name, phone number)
+CTRL -> CLIENT_STORE : client = createClient(clientDto)
 activate CLIENT_STORE
+deactivate CLIENT_STORE
 CTRL -> CLIENT_STORE : saveClient(client)
+activate CLIENT_STORE
+deactivate CLIENT_STORE
 end
 
 CTRL -> CLIENT_STORE : associatedClient = getClientByTinNumber(tinNumber)
@@ -67,9 +70,19 @@ CTRL -> CAL_STORE : currentCal = getCalById(labId)
 activate CAL_STORE
 deactivate CAL_STORE
 
-CTRL -> CAL_STORE : currentCal = getCalById(labId)
-activate CAL_STORE
-deactivate CAL_STORE
+CTRL -> TEST_TYPE_STORE : selectedTestType = getTestTypeByCode(selectedTestTypeCode)
+activate TEST_TYPE_STORE
+deactivate TEST_TYPE_STORE
+
+CTRL -> TST : List<String> parameterCodes = getParameterCodes(String[] processedData)
+activate TST
+deactivate TST
+
+
+CTRL -> PARAM_STORE : List<Parameters> parameters = getParametersByCodes(String[] parameterCodes)
+activate PARAM_STORE
+deactivate PARAM_STORE
+
 
 
 end
