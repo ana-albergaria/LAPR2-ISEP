@@ -8,9 +8,11 @@ activate ":System"
 ":System" --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
 deactivate ":System"
 
+loop while Laboratory Coordinator changes the data to make the analysis
 LC-> ":System" : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
 activate ":System"
 ":System" --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate ":System"
+end
 
 @enduml
