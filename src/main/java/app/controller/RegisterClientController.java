@@ -99,29 +99,6 @@ public class RegisterClientController {
         return store.saveClient(cl);
     }
 
-    /**
-     * Makes an client and user of the system and writes its generated password to a file.
-     *
-     * @return true if success and false if fails.
-     * @throws IOException if cannot write into the file.
-     */
-    public boolean makeClientAnUserAndSendPassword() throws IOException {
-        if (makeClientAnUser())
-            return PasswordUtils.writePassword(generatedPassword, cl.getEmail());
-        return false;
-    }
-
-    /**
-     * Makes the client an user of the system
-     *
-     * @return true if success and false if fails.
-     */
-    private boolean makeClientAnUser() {
-        this.generatedPassword = PasswordUtils.generateRandomPassword();
-        AuthFacade authFacade = this.company.getAuthFacade();
-        return authFacade.addUser(cl.getName(), cl.getEmail(), generatedPassword);
-    }
-
     public Client getClient() {
         return cl;
     }

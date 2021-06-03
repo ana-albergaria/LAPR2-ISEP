@@ -69,7 +69,7 @@ public class Company {
         this.designation = designation;
         this.authFacade = new AuthFacade();
         this.testTypeStore = new TestTypeStore();
-        this.clientStore = new ClientStore();
+        this.clientStore = new ClientStore(this.authFacade);
         this.parameterCategoryStore = new ParameterCategoryStore();
         this.testStore = new TestStore();
         this.empList = new ArrayList<>();

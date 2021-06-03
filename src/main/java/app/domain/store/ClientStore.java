@@ -1,6 +1,10 @@
 package app.domain.store;
 
 import app.domain.model.Client;
+import app.domain.shared.utils.PasswordUtils;
+import auth.AuthFacade;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -11,6 +15,16 @@ import java.util.Date;
  * @author João Wolff and Alexandre Dias
  */
 public class ClientStore {
+
+    private AuthFacade auth;
+
+    public ClientStore(AuthFacade auth){
+        this.auth = auth;
+    }
+
+    public ClientStore(){
+        this.auth = new AuthFacade();
+    }
 
     /**
      * List of clients
@@ -72,8 +86,39 @@ public class ClientStore {
     public boolean saveClient(Client cl) {
         if (!validateClient(cl))
             return false;
-        return this.clientList.add(cl);
+        String generatedPassword = PasswordUtils.generateRandomPassword();
+        if(this.clientList.add(cl)) {
+            return makeClientAnUserAndSendPassword(cl.getName(),cl.getEmail(), generatedPassword);
+        }
+        return false;
     }
+
+    /**
+     * Makes an client and user of the system and writes its generated password to a file.
+     *
+     * @return true if success and false if fails.
+     * @throws IOException if cannot write into the file.
+     */
+    public boolean makeClientAnUserAndSendPassword(String name, String email, String pwd) {
+        if (makeClientAnUser(name, email, pwd))
+            try {
+                return PasswordUtils.writePassword(pwd, email);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        return false;
+    }
+
+
+    /**
+     * Makes the client an user of the system
+     *
+     * @return true if success and false if fails.
+     */
+    private boolean makeClientAnUser(String name,String email, String pwd) {
+        return auth.addUser(name, email, pwd);
+    }
+
 
     public Client getClientByTinNumber(String tinNumber){
         for (Client client : clientList){
