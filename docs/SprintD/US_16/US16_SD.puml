@@ -7,6 +7,8 @@ participant ":CompanyPerformanceAnalysisController" as CTRL
 participant ":Company" as CMP
 participant ":CompanyPerformanceAnalysis" as CPA
 participant ":Test" as TST
+participant "tstStore\n:TestStore" as TSTSTORE
+participant "cltStore\n:ClientStore" as CLTSTORE
 
 activate LC
 LC -> UI : asks to see an overview of all the tests performed and analyse the overall performance of the company
@@ -15,9 +17,28 @@ activate UI
 UI -> CTRL : testOverview = getTestOverview()
 activate CTRL
 
-CTRL -> CMP : get
+CTRL -> CMP : cltStore = getClientStore()
+activate CMP
+|||
+deactivate CMP
+CTRL -> CLTSTORE : clientsInfo = getClientInfo()
+activate CLTSTORE
+CLTSTORE --> CTRL : clientsInfo
+deactivate CLTSTORE
 
-'array of int with:
+CTRL -> CMP : tstStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+CTRL -> TSTSTORE : testsInfo = getTestsInfo()
+activate TSTSTORE
+TSTSTORE --> CTRL : testsInfo
+deactivate TSTSTORE
+
+CTRL --> UI : testOverview
+deactivate CTRL
+
+'testOverview -> array of int with:
 'number of clients
 'number of tests waiting for results
 'number of tests waiting for diagnosis
@@ -29,10 +50,10 @@ CTRL -> CMP : get
 UI --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
 deactivate UI
 
-
-
 LC -> UI : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
 activate UI
+
+
 
 UI --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate UI
