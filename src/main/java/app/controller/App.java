@@ -77,14 +77,6 @@ public class App {
         return props;
     }
 
-    //ACRESCENTEI
-    public String getBarcodeClassNameConfig() {
-        Properties props = getProperties();
-        String className = props.getProperty("Company.ExternalAPI.Class");
-        return className;
-    }
-
-
     private void bootstrap() {
         this.authFacade.addUserRole(Constants.ROLE_ADMIN,Constants.ROLE_ADMIN);
         this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);

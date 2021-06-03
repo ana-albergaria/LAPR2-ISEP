@@ -1,0 +1,7 @@
+The regression model fitted using data from the interval
+^y=0,003585x + 0,118129
+//
+Other statistics
+R2 = 0,900492
+R = 0,948943
+//
