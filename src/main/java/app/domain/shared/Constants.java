@@ -20,6 +20,9 @@ public class Constants {
     public static final String PARAMS_FILENAME = "config.properties";
     public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
 
+    //created because it's handy for the tests
+    public static final String CLASS_BARCODE_API = "app.domain.adapters.BarbecueAdapter";
+
     public static final String BLOOD_MODULE_1_NAME = "BloodModule1 (for blood tests, requires a key access)";
     public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";
     public static final String COVID_MODULE_NAME = "CovidModule (for Covid 19 Tests)";
