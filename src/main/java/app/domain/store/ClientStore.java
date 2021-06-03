@@ -116,7 +116,7 @@ public class ClientStore {
      * @return true if success and false if fails.
      */
     private boolean makeClientAnUser(String name,String email, String pwd) {
-        return auth.addUser(name, email, pwd);
+        return auth.addUserWithRole(name, email, pwd, "CLIENT");
     }
 
 

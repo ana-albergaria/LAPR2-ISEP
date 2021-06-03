@@ -77,20 +77,12 @@ public class App {
         return props;
     }
 
-    //ACRESCENTEI
-    public String getBarcodeClassNameConfig() {
-        Properties props = getProperties();
-        String className = props.getProperty("Company.ExternalAPI.Class");
-        return className;
-    }
-
-
     private void bootstrap() {
-        this.authFacade.addUserRole(Constants.ROLE_ADMIN,Constants.ROLE_ADMIN);
         this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
         this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserRole(Constants.ROLE_SPECIALIST_DOCTOR, Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserRole(Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST, Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
+        this.authFacade.addUserRole("CLIENT", "CLIENT");
 
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
         this.authFacade.addUserWithRole("Med Lab Technician","medlabtech@gmail.com","1",Constants.ROLE_MED_LAB_TECHNICIAN);

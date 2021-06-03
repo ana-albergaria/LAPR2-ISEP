@@ -60,6 +60,10 @@ public class Company {
 
     private List<Employee> empList;
     private List<OrgRole> roles;
+
+    /**
+     * The Class of the Barcode External API to be used.
+     */
     private String classNameForBarcodeApi;
 
     public Company(String designation, String classNameForBarcodeApi)
