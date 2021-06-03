@@ -5,10 +5,10 @@ actor "Laboratory Coordinator" as LC
 activate LC
 LC-> ":System" : asks to see an overview of all the tests performed and analyse the overall performance of the company
 activate ":System"
-":System" --> LC : shows an overview of all the tests performed and asks the interval of time to be analysed
+":System" --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
 deactivate ":System"
 
-LC-> ":System" : types requested data
+LC-> ":System" : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
 activate ":System"
 ":System" --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate ":System"

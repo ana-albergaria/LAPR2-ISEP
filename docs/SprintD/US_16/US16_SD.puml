@@ -12,14 +12,26 @@ activate LC
 LC -> UI : asks to see an overview of all the tests performed and analyse the overall performance of the company
 activate UI
 
-UI -> CTRL : 
+UI -> CTRL : testOverview = getTestOverview()
+activate CTRL
 
-UI --> LC : shows an overview of all the tests performed and asks the interval of time to be analysed
+CTRL -> CMP : get
+
+'array of int with:
+'number of clients
+'number of tests waiting for results
+'number of tests waiting for diagnosis
+'total number of tests processed in the laboratory in each day
+'...week
+'...month
+'...year
+
+UI --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
 deactivate UI
 
 
 
-LC -> UI : types requested data
+LC -> UI : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
 activate UI
 
 UI --> LC : shows the overall performance of the company for the chosen interval of time
