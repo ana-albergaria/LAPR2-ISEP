@@ -19,9 +19,9 @@ class LaboratoryCoordinator{
 }
 
 class CompanyPerformanceAnalysis{
-- firstDayToAnalyse
-- lastDayToAnalyse
-- chosenAlgorithm
+'- firstDayToAnalyse
+'- lastDayToAnalyse
+'- chosenAlgorithm
 - worstSubInt
 - statistics
 - graphs
