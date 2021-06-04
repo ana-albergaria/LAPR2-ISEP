@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import app.controller.App;
 import app.domain.interfaces.ExternalAPI;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;

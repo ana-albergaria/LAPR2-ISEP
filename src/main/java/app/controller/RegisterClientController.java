@@ -2,11 +2,8 @@ package app.controller;
 
 import app.domain.model.Client;
 import app.domain.model.Company;
-import app.domain.shared.utils.PasswordUtils;
 import app.domain.store.ClientStore;
-import auth.AuthFacade;
 
-import java.io.IOException;
 import java.util.Date;
 
 /**
