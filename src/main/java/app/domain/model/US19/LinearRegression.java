@@ -140,12 +140,14 @@ public class LinearRegression {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        //RETIREI AS 2 CASAS DECIMAIS SÓ PARA TESTAR
+        //tirei arredondamentos para testar
         s.append(String.format("%f n + %f", slope(), intercept()));
-        //RETIREI AS 3 CASAS DECIMAIS SÓ PARA TESTAR
+        //tirei arredondamentos para testar
         s.append("  (R^2 = " + String.format("%f", R2()) + ")");
         return s.toString();
     }
+
+
 
 }
 
