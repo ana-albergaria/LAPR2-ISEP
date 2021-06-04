@@ -50,13 +50,27 @@ deactivate CTRL
 UI --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
 deactivate UI
 
+loop while Laboratory Coordinator changes the data to make the analysis
 LC -> UI : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
 activate UI
+
+UI -> CTRL : worstSubInt = findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
+activate CTRL
+CTRL -> CPA : addWorstSubInt(worstSubInt)
+activate CPA
+|||
+deactivate CPA
+CTRL --> UI : worstSubInt
+deactivate CTRL
+
+'UI -> CTRL : genGraphs()
+'activate CTRL
+'CTRL -> CPA : worstSubInt = getWorstSubInt()
 
 
 
 UI --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate UI
-
+end
 
 @enduml

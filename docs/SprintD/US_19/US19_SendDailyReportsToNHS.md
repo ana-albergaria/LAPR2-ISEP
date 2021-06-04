@@ -108,12 +108,16 @@ Since all the performed tests **with results** by Many Labs must be recorded in 
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1  		 |							 |             |                              |
-| Step 2  		 |							 |             |                              |
-| Step 3  		 |							 |             |                              |
-| Step 4  		 |							 |             |                              |
-| Step 5  		 |							 |             |                              |
-| Step 6  		 |							 |             |                              |              
+| Step 1: asks to send automatic daily report to NHS  | ...interacting with the actor? |             |                              |
+|                                       	          |	...coordinating the US?		                                                   | SendDailyReportsNHSController                 | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                                       	          |	...knowing which Regression Model (Simple or Multiple) is to be used?		   | Company                                       | IE: in the DM, Company makes use of a Regression Model. |
+|                                       	          |	...coordinating the US?		                                                   | SendDailyReportsNHSController                 | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 2: informs operation success  		          |     |     |    |
+
+
+The interval of dates to fit the regression model and the
+number of historical points (number of days and number of weeks) must be
+defined through a configuration file.
 
 ### Systematization ##
 

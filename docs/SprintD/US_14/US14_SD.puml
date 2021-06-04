@@ -119,10 +119,10 @@ activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL -> TSTSTORE : addReportToTest(selectedTest)
-activate TSTSTORE
+CTRL -> TST : addReport(report)
+activate TST
 |||
-deactivate TSTSTORE
+deactivate TST
 
 CTRL --> UI : result
 deactivate CMP
