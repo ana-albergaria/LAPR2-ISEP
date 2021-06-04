@@ -1,3 +1,4 @@
+/*
 package app.domain.model.US19;
 
 import org.apache.commons.math3.distribution.FDistribution;
@@ -30,4 +31,5 @@ public class CriticalValues {
         }
 
 }
+ */
 

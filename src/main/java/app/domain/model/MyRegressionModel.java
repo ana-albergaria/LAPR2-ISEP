@@ -1,5 +1,5 @@
 package app.domain.model;
-
+/*
 public class MyRegressionModel {
     private double intercept;
     private double slope;
@@ -42,9 +42,11 @@ public class MyRegressionModel {
         return text.toString();
     }
 
+ */
+
     /*
     return String.format("The regression model fitted using data from the interval%n" +
                 "^y=%fx + %f%n//%nOther statistics%nR2 = %f%nR2 adjusted = %f%nR = %f%n//",
                 slope, intercept, r2, r2Adjusted, r);
      */
-}
+//}

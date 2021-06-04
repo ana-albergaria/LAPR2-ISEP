@@ -1,3 +1,4 @@
+/*
 package app.domain.adapters;
 
 import app.domain.interfaces.MathCalculus;
@@ -19,3 +20,4 @@ public class SimpleLinearRegressionAdapter implements MathCalculus {
                 Math.sqrt(bestModel.R2()), bestModel.R2(), -1, bestModel);
     }
 }
+ */
