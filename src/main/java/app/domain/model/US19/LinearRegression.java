@@ -18,9 +18,14 @@ package app.domain.model.US19;
  *
  */
 public class LinearRegression {
-    private final double intercept, slope;
+    private final double intercept, slope; //intercept - y, a | slope - x, b
     private final double r2;
     private final double svar0, svar1;
+
+    private int n;
+    private double xxbar;
+    private double yybar;
+    private double xbar; //média
 
     /**
      * Performs a linear regression on the data points (y[i], x[i]).
@@ -33,7 +38,7 @@ public class LinearRegression {
         if (x.length != y.length) {
             throw new IllegalArgumentException("array lengths are not equal");
         }
-        int n = x.length;
+        n = x.length;
 
         // first pass
         double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
@@ -42,11 +47,11 @@ public class LinearRegression {
             sumx2 += x[i]*x[i];
             sumy  += y[i];
         }
-        double xbar = sumx / n;
+        xbar = sumx / n;
         double ybar = sumy / n;
 
         // second pass: compute summary statistics
-        double xxbar = 0.0, yybar = 0.0, xybar = 0.0;
+        double xybar = 0.0;
         for (int i = 0; i < n; i++) {
             xxbar += (x[i] - xbar) * (x[i] - xbar);
             yybar += (y[i] - ybar) * (y[i] - ybar);
@@ -117,6 +122,22 @@ public class LinearRegression {
         return Math.sqrt(svar1);
     }
 
+    public int getN() {
+        return n;
+    }
+
+    public double getXXbar() {
+        return xxbar;
+    }
+
+    public double getYYbar() {
+        return yybar;
+    }
+
+    public double getXbar() {
+        return xbar;
+    }
+
     /**
      * Returns the expected response y given the value of the predictor
      * variable x.
@@ -138,8 +159,10 @@ public class LinearRegression {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(String.format("%.2f n + %.2f", slope(), intercept()));
-        s.append("  (R^2 = " + String.format("%.3f", R2()) + ")");
+        //tirei 2 casas decimais para testar
+        s.append(String.format("%f n + %f", slope(), intercept()));
+        //tirei 3 casas decimais para testar
+        s.append("  (R^2 = " + String.format("%f", R2()) + ")");
         return s.toString();
     }
 

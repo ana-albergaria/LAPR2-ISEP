@@ -6,3 +6,17 @@ R2 = 0,900492
 R2 adjusted = -1,000000
 R = 0,948943
 //
+Hypothesis tests for regression coefficients
+
+--> Level of Significance: 0,01
+
+H0:a=0 H1:a<>0
+t_obs=0,332620
+Decision: 
+No Reject H0
+//
+H0:b=0 H1:b<>0
+t_obs=8,508575
+Decision: 
+Reject H0
+//

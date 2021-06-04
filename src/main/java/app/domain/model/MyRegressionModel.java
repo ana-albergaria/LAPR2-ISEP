@@ -1,12 +1,13 @@
 package app.domain.model;
 
 public class MyRegressionModel {
-    private double intercept;
-    private double slope;
+    private double intercept; //intercept - y, a
+    private double slope; //slope - x, b
     private Double secondIndVariable;
     private double r;
     private double r2;
     private double r2Adjusted;
+    private int numberOfObservations;
     private Object regressionModel;
 
     public MyRegressionModel(double intercept,
@@ -15,6 +16,7 @@ public class MyRegressionModel {
                              double r,
                              double r2,
                              double r2Adjusted,
+                             int numberOfObservations,
                              Object regressionModel) {
         this.intercept = intercept;
         this.slope = slope;
@@ -22,9 +24,25 @@ public class MyRegressionModel {
         this.r = r;
         this.r2 = r2;
         this.r2Adjusted = r2Adjusted;
+        this.numberOfObservations = numberOfObservations;
         this.regressionModel = regressionModel;
     }
 
+    public double getSlope() {
+        return slope;
+    }
+
+    public double getIntercept() {
+        return intercept;
+    }
+
+    public int getNumberOfObservations() {
+        return numberOfObservations;
+    }
+
+    public Object getRegressionModel() {
+        return regressionModel;
+    }
 
     @Override
     public String toString() {
@@ -37,7 +55,7 @@ public class MyRegressionModel {
         text.append(String.format("Other statistics%nR2 = %f%nR2 adjusted = %f%n", r2, r2Adjusted));
         if(secondIndVariable == null)
             text.append(String.format("R = %f%n", r));
-        text.append("//");
+        text.append("//\n");
 
         return text.toString();
     }
