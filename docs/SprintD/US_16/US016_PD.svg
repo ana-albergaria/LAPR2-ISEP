@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="397.5px" preserveAspectRatio="none" style="width:1927px;height:397px;background:#FFFFFF;" version="1.1" viewBox="0 0 1927 397" width="1927.5px" zoomAndPan="magnify"><defs><filter height="300%" id="f1s7m90t1a0y0o" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[2c2e2644034c00788261e03c85b06837]
+cluster Core--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="20,7.5,70,7.5,78.75,37.0117,1508.75,37.0117,1508.75,388.75,20,388.75,20,7.5" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="20" x2="78.75" y1="37.0117" y2="37.0117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="42.5" x="25" y="28.1665">Core</text><!--MD5=[121a8bf1197281ab89ed693fab589f94]
+cluster Domain--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="592.5,62.5,665,62.5,673.75,92.0117,1478.75,92.0117,1478.75,358.75,592.5,358.75,592.5,62.5" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="592.5" x2="673.75" y1="92.0117" y2="92.0117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="65" x="597.5" y="83.1665">Domain</text><!--MD5=[15636c1ca4a123c16a2a1a8e90aca7a9]
+cluster Model--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="960,117.5,1022.5,117.5,1031.25,147.0117,1448.75,147.0117,1448.75,328.75,960,328.75,960,117.5" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="960" x2="1031.25" y1="147.0117" y2="147.0117"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="55" x="965" y="138.1665">Model</text><!--MD5=[7ce1723ddb6e6233854253973eae5a71]
+cluster Store--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="622.5,156.875,677.5,156.875,686.25,186.3867,930,186.3867,930,289.375,622.5,289.375,622.5,156.875" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="622.5" x2="686.25" y1="186.3867" y2="186.3867"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="47.5" x="627.5" y="177.5415">Store</text><!--MD5=[1f2cfc53d9d308f53762fd0fcbaa4873]
+cluster Controller--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="50,148.125,146.25,148.125,155,177.6367,562.5,177.6367,562.5,298.125,50,298.125,50,148.125" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="50" x2="155" y1="177.6367" y2="177.6367"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="88.75" x="55" y="168.7915">Controller</text><!--MD5=[9681dc6e01e10c6b4fe06895ae94f592]
+cluster UI--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="1538.75,115.625,1563.75,115.625,1572.5,145.1367,1906.25,145.1367,1906.25,305.625,1538.75,305.625,1538.75,115.625" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="1538.75" x2="1572.5" y1="145.1367" y2="145.1367"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="17.5" x="1543.75" y="136.2915">UI</text><!--MD5=[b27c5c9af3cea12247b1c4c8d3c78770]
+cluster GUI--><polygon fill="#FFFFFF" filter="url(#f1s7m90t1a0y0o)" points="1568.75,170.625,1607.5,170.625,1616.25,200.1367,1876.25,200.1367,1876.25,275.625,1568.75,275.625,1568.75,170.625" style="stroke:#000000;stroke-width:1.875;"/><line style="stroke:#000000;stroke-width:1.875;" x1="1568.75" x2="1616.25" y1="200.1367" y2="200.1367"/><text fill="#000000" font-family="sans-serif" font-size="17.5" font-weight="bold" lengthAdjust="spacing" textLength="31.25" x="1573.75" y="191.2915">GUI</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="12" fill="#FEFECE" filter="url(#f1s7m90t1a0y0o)" height="146.4746" id="Company" style="stroke:#A80036;stroke-width:1.875;" width="152.5" x="1276.25" y="162.5"/><ellipse cx="1315.8125" cy="182.5" fill="#ADD1B2" rx="13.75" ry="13.75" style="stroke:#A80036;stroke-width:1.25;"/><path d="M1318.3125,178.125 Q1318.5664,177.5 1318.8594,177.1875 Q1319.1523,176.875 1319.4844,176.875 Q1320.0703,176.875 1320.4414,177.2266 Q1320.8125,177.5781 1320.8125,178.3984 L1320.8125,180.3516 Q1320.8125,181.1719 1320.4609,181.5234 Q1320.1094,181.875 1319.5625,181.875 Q1319.0742,181.875 1318.7617,181.6602 Q1318.4492,181.4453 1318.3125,180.8789 Q1318.2539,180.4883 1318.0391,180.2734 Q1317.6484,179.8633 1316.9453,179.6289 Q1316.2422,179.375 1315.5391,179.375 Q1314.6602,179.375 1313.918,179.7266 Q1313.1953,180.0781 1312.6289,180.8594 Q1312.0625,181.6406 1312.0625,182.7148 L1312.0625,183.8672 Q1312.0625,185.1563 1313.1172,186.0156 Q1314.1719,186.875 1316.0469,186.875 Q1317.1602,186.875 1317.9414,186.6211 Q1318.3906,186.4844 1318.8984,186.0352 Q1319.2305,185.7813 1319.4063,185.7031 Q1319.582,185.625 1319.7969,185.625 Q1320.207,185.625 1320.5,185.957 Q1320.8125,186.2695 1320.8125,186.7188 Q1320.8125,187.1484 1320.3828,187.6563 Q1319.7578,188.3984 1318.7617,188.8086 Q1317.4531,189.375 1315.8516,189.375 Q1313.9766,189.375 1312.4727,188.6328 Q1311.2617,188.0469 1310.4023,186.7773 Q1309.5625,185.5078 1309.5625,184.0039 L1309.5625,182.6367 Q1309.5625,181.0742 1310.3047,179.707 Q1311.0664,178.3398 1312.375,177.6172 Q1313.7031,176.875 1315.1875,176.875 Q1316.0859,176.875 1316.8672,177.1875 Q1317.6484,177.5 1318.3125,178.125 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="66.25" x="1337.9375" y="188.6377">Company</text><line style="stroke:#A80036;stroke-width:1.875;" x1="1277.5" x2="1427.5" y1="202.5" y2="202.5"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="112.5" x="1283.75" y="221.7737">-String designation</text><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="122.5" x="1283.75" y="239.0686">-TestStore testStore</text><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="137.5" x="1283.75" y="256.3635">-ClientStore clientStore</text><line style="stroke:#A80036;stroke-width:1.875;" x1="1277.5" x2="1427.5" y1="264.3848" y2="264.3848"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="95" x="1283.75" y="283.6584">+getTestStore()</text><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="101.25" x="1283.75" y="300.9534">+getClientStore()</text><!--MD5=[ac303f9d3ae5a280bcee843295a9d18a]
+class CompanyPerformanceAnalysis--><rect codeLine="20" fill="#FEFECE" filter="url(#f1s7m90t1a0y0o)" height="94.5898" id="CompanyPerformanceAnalysis" style="stroke:#A80036;stroke-width:1.875;" width="252.5" x="980" y="188.125"/><ellipse cx="998.75" cy="208.125" fill="#ADD1B2" rx="13.75" ry="13.75" style="stroke:#A80036;stroke-width:1.25;"/><path d="M1001.25,203.75 Q1001.5039,203.125 1001.7969,202.8125 Q1002.0898,202.5 1002.4219,202.5 Q1003.0078,202.5 1003.3789,202.8516 Q1003.75,203.2031 1003.75,204.0234 L1003.75,205.9766 Q1003.75,206.7969 1003.3984,207.1484 Q1003.0469,207.5 1002.5,207.5 Q1002.0117,207.5 1001.6992,207.2852 Q1001.3867,207.0703 1001.25,206.5039 Q1001.1914,206.1133 1000.9766,205.8984 Q1000.5859,205.4883 999.8828,205.2539 Q999.1797,205 998.4766,205 Q997.5977,205 996.8555,205.3516 Q996.1328,205.7031 995.5664,206.4844 Q995,207.2656 995,208.3398 L995,209.4922 Q995,210.7813 996.0547,211.6406 Q997.1094,212.5 998.9844,212.5 Q1000.0977,212.5 1000.8789,212.2461 Q1001.3281,212.1094 1001.8359,211.6602 Q1002.168,211.4063 1002.3438,211.3281 Q1002.5195,211.25 1002.7344,211.25 Q1003.1445,211.25 1003.4375,211.582 Q1003.75,211.8945 1003.75,212.3438 Q1003.75,212.7734 1003.3203,213.2813 Q1002.6953,214.0234 1001.6992,214.4336 Q1000.3906,215 998.7891,215 Q996.9141,215 995.4102,214.2578 Q994.1992,213.6719 993.3398,212.4023 Q992.5,211.1328 992.5,209.6289 L992.5,208.2617 Q992.5,206.6992 993.2422,205.332 Q994.0039,203.9648 995.3125,203.2422 Q996.6406,202.5 998.125,202.5 Q999.0234,202.5 999.8047,202.8125 Q1000.5859,203.125 1001.25,203.75 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="212.5" x="1016.25" y="214.2627">CompanyPerformanceAnalysis</text><line style="stroke:#A80036;stroke-width:1.875;" x1="981.25" x2="1231.25" y1="228.125" y2="228.125"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="195" x="987.5" y="247.3987">-ArrayList&lt;Integer&gt; worstSubInt</text><line style="stroke:#A80036;stroke-width:1.875;" x1="981.25" x2="1231.25" y1="255.4199" y2="255.4199"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="187.5" x="987.5" y="274.6936">+addWorstSubInt(worstSubInt)</text><!--MD5=[0f6f7964b844a64b0496af0dda7914bd]
+class TestStore--><rect codeLine="29" fill="#FEFECE" filter="url(#f1s7m90t1a0y0o)" height="67.2949" id="TestStore" style="stroke:#A80036;stroke-width:1.875;" width="106.25" x="803.125" y="201.875"/><ellipse cx="821.875" cy="221.875" fill="#ADD1B2" rx="13.75" ry="13.75" style="stroke:#A80036;stroke-width:1.25;"/><path d="M824.375,217.5 Q824.6289,216.875 824.9219,216.5625 Q825.2148,216.25 825.5469,216.25 Q826.1328,216.25 826.5039,216.6016 Q826.875,216.9531 826.875,217.7734 L826.875,219.7266 Q826.875,220.5469 826.5234,220.8984 Q826.1719,221.25 825.625,221.25 Q825.1367,221.25 824.8242,221.0352 Q824.5117,220.8203 824.375,220.2539 Q824.3164,219.8633 824.1016,219.6484 Q823.7109,219.2383 823.0078,219.0039 Q822.3047,218.75 821.6016,218.75 Q820.7227,218.75 819.9805,219.1016 Q819.2578,219.4531 818.6914,220.2344 Q818.125,221.0156 818.125,222.0898 L818.125,223.2422 Q818.125,224.5313 819.1797,225.3906 Q820.2344,226.25 822.1094,226.25 Q823.2227,226.25 824.0039,225.9961 Q824.4531,225.8594 824.9609,225.4102 Q825.293,225.1563 825.4688,225.0781 Q825.6445,225 825.8594,225 Q826.2695,225 826.5625,225.332 Q826.875,225.6445 826.875,226.0938 Q826.875,226.5234 826.4453,227.0313 Q825.8203,227.7734 824.8242,228.1836 Q823.5156,228.75 821.9141,228.75 Q820.0391,228.75 818.5352,228.0078 Q817.3242,227.4219 816.4648,226.1523 Q815.625,224.8828 815.625,223.3789 L815.625,222.0117 Q815.625,220.4492 816.3672,219.082 Q817.1289,217.7148 818.4375,216.9922 Q819.7656,216.25 821.25,216.25 Q822.1484,216.25 822.9297,216.5625 Q823.7109,216.875 824.375,217.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="66.25" x="839.375" y="228.0127">TestStore</text><line style="stroke:#A80036;stroke-width:1.875;" x1="804.375" x2="908.125" y1="241.875" y2="241.875"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="82.5" x="810.625" y="261.1487">+getTestsInfo</text><!--MD5=[55cb992be19579b505cea3c5691093cb]
+class ClientStore--><rect codeLine="33" fill="#FEFECE" filter="url(#f1s7m90t1a0y0o)" height="67.2949" id="ClientStore" style="stroke:#A80036;stroke-width:1.875;" width="116.25" x="643.125" y="201.875"/><ellipse cx="661.875" cy="221.875" fill="#ADD1B2" rx="13.75" ry="13.75" style="stroke:#A80036;stroke-width:1.25;"/><path d="M664.375,217.5 Q664.6289,216.875 664.9219,216.5625 Q665.2148,216.25 665.5469,216.25 Q666.1328,216.25 666.5039,216.6016 Q666.875,216.9531 666.875,217.7734 L666.875,219.7266 Q666.875,220.5469 666.5234,220.8984 Q666.1719,221.25 665.625,221.25 Q665.1367,221.25 664.8242,221.0352 Q664.5117,220.8203 664.375,220.2539 Q664.3164,219.8633 664.1016,219.6484 Q663.7109,219.2383 663.0078,219.0039 Q662.3047,218.75 661.6016,218.75 Q660.7227,218.75 659.9805,219.1016 Q659.2578,219.4531 658.6914,220.2344 Q658.125,221.0156 658.125,222.0898 L658.125,223.2422 Q658.125,224.5313 659.1797,225.3906 Q660.2344,226.25 662.1094,226.25 Q663.2227,226.25 664.0039,225.9961 Q664.4531,225.8594 664.9609,225.4102 Q665.293,225.1563 665.4688,225.0781 Q665.6445,225 665.8594,225 Q666.2695,225 666.5625,225.332 Q666.875,225.6445 666.875,226.0938 Q666.875,226.5234 666.4453,227.0313 Q665.8203,227.7734 664.8242,228.1836 Q663.5156,228.75 661.9141,228.75 Q660.0391,228.75 658.5352,228.0078 Q657.3242,227.4219 656.4648,226.1523 Q655.625,224.8828 655.625,223.3789 L655.625,222.0117 Q655.625,220.4492 656.3672,219.082 Q657.1289,217.7148 658.4375,216.9922 Q659.7656,216.25 661.25,216.25 Q662.1484,216.25 662.9297,216.5625 Q663.7109,216.875 664.375,217.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="76.25" x="679.375" y="228.0127">ClientStore</text><line style="stroke:#A80036;stroke-width:1.875;" x1="644.375" x2="758.125" y1="241.875" y2="241.875"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="91.25" x="650.625" y="261.1487">+getClientInfo()</text><!--MD5=[670275f839cd0f6ae295f6f439fd6034]
+class CompanyPerformanceAnalysisController--><rect codeLine="43" fill="#FEFECE" filter="url(#f1s7m90t1a0y0o)" height="84.5898" id="CompanyPerformanceAnalysisController" style="stroke:#A80036;stroke-width:1.875;" width="471.25" x="70.625" y="193.125"/><ellipse cx="160.9375" cy="213.125" fill="#ADD1B2" rx="13.75" ry="13.75" style="stroke:#A80036;stroke-width:1.25;"/><path d="M163.4375,208.75 Q163.6914,208.125 163.9844,207.8125 Q164.2773,207.5 164.6094,207.5 Q165.1953,207.5 165.5664,207.8516 Q165.9375,208.2031 165.9375,209.0234 L165.9375,210.9766 Q165.9375,211.7969 165.5859,212.1484 Q165.2344,212.5 164.6875,212.5 Q164.1992,212.5 163.8867,212.2852 Q163.5742,212.0703 163.4375,211.5039 Q163.3789,211.1133 163.1641,210.8984 Q162.7734,210.4883 162.0703,210.2539 Q161.3672,210 160.6641,210 Q159.7852,210 159.043,210.3516 Q158.3203,210.7031 157.7539,211.4844 Q157.1875,212.2656 157.1875,213.3398 L157.1875,214.4922 Q157.1875,215.7813 158.2422,216.6406 Q159.2969,217.5 161.1719,217.5 Q162.2852,217.5 163.0664,217.2461 Q163.5156,217.1094 164.0234,216.6602 Q164.3555,216.4063 164.5313,216.3281 Q164.707,216.25 164.9219,216.25 Q165.332,216.25 165.625,216.582 Q165.9375,216.8945 165.9375,217.3438 Q165.9375,217.7734 165.5078,218.2813 Q164.8828,219.0234 163.8867,219.4336 Q162.5781,220 160.9766,220 Q159.1016,220 157.5977,219.2578 Q156.3867,218.6719 155.5273,217.4023 Q154.6875,216.1328 154.6875,214.6289 L154.6875,213.2617 Q154.6875,211.6992 155.4297,210.332 Q156.1914,208.9648 157.5,208.2422 Q158.8281,207.5 160.3125,207.5 Q161.2109,207.5 161.9922,207.8125 Q162.7734,208.125 163.4375,208.75 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="280" x="186.5625" y="219.2627">CompanyPerformanceAnalysisController</text><line style="stroke:#A80036;stroke-width:1.875;" x1="71.875" x2="540.625" y1="233.125" y2="233.125"/><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="122.5" x="78.125" y="252.3987">+getTestOverview()</text><text fill="#000000" font-family="sans-serif" font-size="13.75" lengthAdjust="spacing" textLength="456.25" x="78.125" y="269.6936">+findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)</text><!--MD5=[3404723274ca4ec774b8d2f7e379376f]
+class CompanyPerformanceAnalysisUI--><rect codeLine="56" fill="#FEFECE" filter="url(#f1s7m90t1a0y0o)" height="40" id="CompanyPerformanceAnalysisUI" style="stroke:#A80036;stroke-width:1.875;" width="267.5" x="1588.75" y="215.625"/><ellipse cx="1607.5" cy="235.625" fill="#ADD1B2" rx="13.75" ry="13.75" style="stroke:#A80036;stroke-width:1.25;"/><path d="M1610,231.25 Q1610.2539,230.625 1610.5469,230.3125 Q1610.8398,230 1611.1719,230 Q1611.7578,230 1612.1289,230.3516 Q1612.5,230.7031 1612.5,231.5234 L1612.5,233.4766 Q1612.5,234.2969 1612.1484,234.6484 Q1611.7969,235 1611.25,235 Q1610.7617,235 1610.4492,234.7852 Q1610.1367,234.5703 1610,234.0039 Q1609.9414,233.6133 1609.7266,233.3984 Q1609.3359,232.9883 1608.6328,232.7539 Q1607.9297,232.5 1607.2266,232.5 Q1606.3477,232.5 1605.6055,232.8516 Q1604.8828,233.2031 1604.3164,233.9844 Q1603.75,234.7656 1603.75,235.8398 L1603.75,236.9922 Q1603.75,238.2813 1604.8047,239.1406 Q1605.8594,240 1607.7344,240 Q1608.8477,240 1609.6289,239.7461 Q1610.0781,239.6094 1610.5859,239.1602 Q1610.918,238.9063 1611.0938,238.8281 Q1611.2695,238.75 1611.4844,238.75 Q1611.8945,238.75 1612.1875,239.082 Q1612.5,239.3945 1612.5,239.8438 Q1612.5,240.2734 1612.0703,240.7813 Q1611.4453,241.5234 1610.4492,241.9336 Q1609.1406,242.5 1607.5391,242.5 Q1605.6641,242.5 1604.1602,241.7578 Q1602.9492,241.1719 1602.0898,239.9023 Q1601.25,238.6328 1601.25,237.1289 L1601.25,235.7617 Q1601.25,234.1992 1601.9922,232.832 Q1602.7539,231.4648 1604.0625,230.7422 Q1605.3906,230 1606.875,230 Q1607.7734,230 1608.5547,230.3125 Q1609.3359,230.625 1610,231.25 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="15" lengthAdjust="spacing" textLength="227.5" x="1625" y="241.7627">CompanyPerformanceAnalysisUI</text><!--MD5=[c9a77569df989e7275da4588eec0f57b]
+@startuml
+hide empty methods
+hide empty attributes
+'left to right direction
+skinparam classAttributeIconSize 0
+
+package Core {
+
+package Domain {
+
+package Model{
+
+class Company {
+    -String designation
+    -TestStore testStore
+    -ClientStore clientStore
+    +getTestStore()
+    +getClientStore()
+}
+
+class CompanyPerformanceAnalysis{
+-ArrayList<Integer> worstSubInt
++addWorstSubInt(worstSubInt)
+}
+
+}
+
+package Store {
+
+class TestStore {
++getTestsInfo
+}
+
+class ClientStore {
++getClientInfo()
+}
+
+}
+
+}
+
+package Controller {
+
+class CompanyPerformanceAnalysisController{
++getTestOverview()
++findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)
+}
+
+}
+
+}
+
+package UI {
+
+package GUI {
+
+class CompanyPerformanceAnalysisUI{
+}
+
+}
+
+}
+
+@enduml
+
+@startuml
+hide empty methods
+hide empty attributes
+skinparam classAttributeIconSize 0
+
+package Core {
+
+package Domain {
+
+package Model{
+
+class Company {
+    -String designation
+    -TestStore testStore
+    -ClientStore clientStore
+    +getTestStore()
+    +getClientStore()
+}
+
+class CompanyPerformanceAnalysis{
+-ArrayList<Integer> worstSubInt
++addWorstSubInt(worstSubInt)
+}
+
+}
+
+package Store {
+
+class TestStore {
++getTestsInfo
+}
+
+class ClientStore {
++getClientInfo()
+}
+
+}
+
+}
+
+package Controller {
+
+class CompanyPerformanceAnalysisController{
++getTestOverview()
++findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)
+}
+
+}
+
+}
+
+package UI {
+
+package GUI {
+
+class CompanyPerformanceAnalysisUI{
+}
+
+}
+
+}
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 13:40:07 BST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: Dynamic Code Evolution 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

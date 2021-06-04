@@ -1,0 +1,62 @@
+@startuml
+hide empty methods
+hide empty attributes
+left to right direction
+skinparam classAttributeIconSize 0
+
+package Domain {
+
+package Model{
+
+class Company {
+    -String designation
+    -TestStore testStore
+    -ClientStore clientStore
+    +getTestStore()
+    +getClientStore()
+}
+
+class CompanyPerformanceAnalysis{
+-ArrayList<Integer> worstSubInt
++addWorstSubInt(worstSubInt)
+}
+
+}
+
+package Store {
+
+class TestStore {
++getTestsInfo
+}
+
+class ClientStore {
++getClientInfo()
+}
+
+}
+
+}
+
+package Controller {
+
+class CompanyPerformanceAnalysisController{
++getTestOverview()
++findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)
+}
+
+}
+
+package UI {
+
+class CompanyPerformanceAnalysisUI{
+}
+
+}
+
+CompanyPerformanceAnalysisUI ..> CompanyPerformanceAnalysisController
+CompanyPerformanceAnalysisController ..> Company
+CompanyPerformanceAnalysisController ..> ClientStore
+CompanyPerformanceAnalysisController ..> TestStore
+Company "1" --> "*" CompanyPerformanceAnalysis : has >
+
+@enduml
