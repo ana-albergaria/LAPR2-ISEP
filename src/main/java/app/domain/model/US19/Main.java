@@ -28,6 +28,7 @@ public class Main {
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
         MathCalculus calculus = (MathCalculus) oClass.newInstance();
         MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y);
+        System.out.println(myRegressionModel);
 
         //System.out.println(simpleLR);
 
@@ -37,11 +38,13 @@ public class Main {
         System.out.println(ma.doubleValue());
          */
 
+        /*
         File path = new File("./NHSReport/");
         if(!path.exists())
             path.mkdir();
 
         Report2NHS.writeUsingFileWriter(myRegressionModel.toString());
+         */
 
 
     }

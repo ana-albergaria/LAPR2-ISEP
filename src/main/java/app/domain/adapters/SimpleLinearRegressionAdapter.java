@@ -13,17 +13,9 @@ public class SimpleLinearRegressionAdapter implements MathCalculus {
 
         LinearRegression bestModel = (simpleLRx1.R2() >= simpleLRx2.R2()) ? new LinearRegression(x1, y) : new LinearRegression(x2, y);
 
+        //FALTA OBTER O R2 AJUSTADO
+
         return new MyRegressionModel(bestModel.intercept(), bestModel.slope(), null,
-                Math.sqrt(bestModel.R2()), bestModel.R2(), null, bestModel);
+                Math.sqrt(bestModel.R2()), bestModel.R2(), -1, bestModel);
     }
-
-    /*
-    if(simpleLRx1.R2() >= simpleLRx2.R2())
-            bestModel = new LinearRegression(x1, y);
-        else
-            bestModel = new LinearRegression(x2, y);
-     */
-
-
-
 }

@@ -3,5 +3,6 @@ The regression model fitted using data from the interval
 //
 Other statistics
 R2 = 0,900492
+R2 adjusted = -1,000000
 R = 0,948943
 //

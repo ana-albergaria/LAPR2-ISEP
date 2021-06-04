@@ -6,7 +6,7 @@ public class MyRegressionModel {
     private Double secondIndVariable;
     private double r;
     private double r2;
-    private Double r2Adjusted;
+    private double r2Adjusted;
     private Object regressionModel;
 
     public MyRegressionModel(double intercept,
@@ -14,7 +14,7 @@ public class MyRegressionModel {
                              Double secondIndVariable,
                              double r,
                              double r2,
-                             Double r2Adjusted,
+                             double r2Adjusted,
                              Object regressionModel) {
         this.intercept = intercept;
         this.slope = slope;
@@ -34,11 +34,9 @@ public class MyRegressionModel {
             text.append(String.format("^y=%fx + %f%n//%n", slope, intercept));
         else
             text.append(String.format("^y=%fx + %f%n//%n")); //corrigir - RLMúltipla
-        text.append(String.format("Other statistics%nR2 = %f%n", r2));
+        text.append(String.format("Other statistics%nR2 = %f%nR2 adjusted = %f%n", r2, r2Adjusted));
         if(secondIndVariable == null)
             text.append(String.format("R = %f%n", r));
-        else
-            text.append(String.format("R2 adjusted = %f%n", r2Adjusted));
         text.append("//");
 
         return text.toString();
