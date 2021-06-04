@@ -150,6 +150,14 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.nhs.report</groupId>
+			<artifactId>Report2NHS</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/Report2NHS-1.0.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
 			<version>3.5</version>
