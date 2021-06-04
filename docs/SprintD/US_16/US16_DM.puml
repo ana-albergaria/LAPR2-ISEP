@@ -23,8 +23,8 @@ class CompanyPerformanceAnalysis{
 '- lastDayToAnalyse
 '- chosenAlgorithm
 - worstSubInt
-- statistics
-- graphs
+'- statistics
+'- graphs
 }
 
 Company "1" -- "*" Test : conducts >

@@ -151,6 +151,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 * CompanyPerformanceAnalysisController
 * CompanyPerformanceAnalysisUI
 * TestStore
+* ClientStore
+
 
 ## 3.2. Sequence Diagram (SD)
 
