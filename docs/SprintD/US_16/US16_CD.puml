@@ -1,0 +1,42 @@
+@startuml
+hide empty methods
+hide empty attributes
+left to right direction
+skinparam classAttributeIconSize 0
+
+class Company {
+    -String designation
+    -TestStore testStore
+    -ClientStore clientStore
+    +getTestStore()
+    +getClientStore()
+}
+
+class CompanyPerformanceAnalysis{
+-ArrayList<Integer> worstSubInt
++addWorstSubInt(worstSubInt)
+}
+
+class TestStore {
++getTestsInfo
+}
+
+class ClientStore {
++getClientInfo()
+}
+
+class CompanyPerformanceAnalysisController{
++getTestOverview()
++findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)
+}
+
+class CompanyPerformanceAnalysisUI{
+}
+
+CompanyPerformanceAnalysisUI ..> CompanyPerformanceAnalysisController
+CompanyPerformanceAnalysisController ..> Company
+CompanyPerformanceAnalysisController ..> ClientStore
+CompanyPerformanceAnalysisController ..> TestStore
+Company "1" --> "*" CompanyPerformanceAnalysis : has >
+
+@enduml

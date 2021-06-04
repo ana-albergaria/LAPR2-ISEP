@@ -27,6 +27,6 @@ Controller ..> DTO
 Controller ..> Domain
 Mappers ..> DTO
 Mappers ..> Domain
-Model ..> Store : uses >
+Model --> Store : uses >
 
 @enduml

@@ -151,16 +151,12 @@ Other software classes (i.e. Pure Fabrication) identified:
 * CompanyPerformanceAnalysisController
 * CompanyPerformanceAnalysisUI
 * TestStore
+* ClientStore
+
 
 ## 3.2. Sequence Diagram (SD)
 
-### 3.2.1 Sequence Diagram
-
 ![US016_SD](US016_SD.svg)
-
-### 3.2.2 Partial Sequence Diagram I
-
-...
 
 ## 3.3. Class Diagram (CD)
 
@@ -182,7 +178,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US016_PD](US016_PD.svg)
 
-# 4. Tests«
+# 4. Tests
 
 
 # 5. Construction (Implementation)
@@ -193,3 +189,4 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 7. Observations
 
+n/a
