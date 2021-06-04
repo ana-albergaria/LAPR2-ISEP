@@ -92,31 +92,42 @@ public class App {
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
-        TestType t1 = new TestType("CODE1","descr","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER);
+        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));
+        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE3","covid"));
+
+        List<ParameterCategory> pcsCovid = new ArrayList<>();
+        pcsCovid.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));
+
+        TestType t1 = new TestType("covid","descr","swab",pcsCovid, Constants.COVID_EXTERNAL_ADAPTER);
         this.company.getTestTypeStore().saveTestType(t1);
         List<TestType> selectedTT = new ArrayList<>();
         selectedTT.add(t1);
-        TestType t2 = new TestType("COD22","blabla","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER);
+
+        List<ParameterCategory> pcsBlood = new ArrayList<>();
+        pcsCovid.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
+        pcsCovid.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(1));
+
+        TestType t2 = new TestType("blood","blabla","blood",pcsBlood, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         this.company.getTestTypeStore().saveTestType(t2);
         selectedTT.add(t2);
-        ParameterCategory p1 = new ParameterCategory("code1","descrip");
+
+        ParameterCategory p1 = new ParameterCategory("covid","descrip");
         this.company.getParameterCategoryStore().saveParameterCategory(p1);
-        this.company.getTestTypeStore().saveTestType(new TestType("CODE3","Description","swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER));
+        this.company.getTestTypeStore().saveTestType(new TestType("Covid","Description",
+                "swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER));
         Date d1 = new Date();
         Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","carlos@gmail.com","Carlos","12345678901");
         this.company.getClientStore().saveClient(c1);
 
-        this.company.getParameterStore().saveParameter(new Parameter("code1", "name", "descrip",p1));
+        Parameter parameter = new Parameter("IgGAN", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));
+        this.company.getParameterStore().saveParameter(parameter);
 
-        ParameterCategory pc1 = this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0);
-
-        Parameter param1 = new Parameter("IgGAN","dsg","descr",pc1);
-        Parameter param2 = new Parameter("WBC00","dag","descr",pc1);
         List<Parameter> listParameter = new ArrayList<>();
-        listParameter.add(param1);
-        listParameter.add(param2);
+        listParameter.add(parameter);
 
+/*
         this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
+*/
 
         Test test1 = new Test("123456789012",c1,t1,listParameter);
         this.company.getTestStore().saveTest(test1);
@@ -136,8 +147,11 @@ public class App {
 
          */
 
+        List<Parameter> listParameter2 = new ArrayList<>();
+        listParameter2.add(new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
+        listParameter2.add(new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
 
-        Test test2 = new Test("123456789000",c1,t1,listParameter);
+        Test test2 = new Test("123456789000",c1,t2,listParameter2);
         this.company.getTestStore().saveTest(test2);
 
 

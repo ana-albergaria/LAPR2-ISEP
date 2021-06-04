@@ -1,3 +1,4 @@
+/*
 package app.domain.model.US19;
 
 
@@ -33,18 +34,22 @@ public class Main {
         //System.out.println(simpleLR);
 
 
-        /*
+        */
+/*
         Double ma = 3.0;
         System.out.println(ma.doubleValue());
-         */
+         *//*
 
-        /*
+
+        */
+/*
         File path = new File("./NHSReport/");
         if(!path.exists())
             path.mkdir();
 
         Report2NHS.writeUsingFileWriter(myRegressionModel.toString());
-         */
+         *//*
+
 
 
     }
@@ -55,3 +60,4 @@ public class Main {
 
 
 }
+*/
