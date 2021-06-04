@@ -2,13 +2,13 @@ package app.domain.model.US19;
 
 
 import app.domain.interfaces.ExternalAPI;
-import app.domain.interfaces.MathCalculus;
+//import app.domain.interfaces.MathCalculus;
 import app.domain.model.MyRegressionModel;
 import com.nhs.report.Report2NHS;
 
 import java.io.File;
 
-
+/*
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
@@ -30,6 +30,8 @@ public class Main {
         MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y);
         System.out.println(myRegressionModel);
 
+ */
+
         //System.out.println(simpleLR);
 
 
@@ -47,11 +49,11 @@ public class Main {
          */
 
 
-    }
+    //}
 
 
 
 
 
 
-}
+//}

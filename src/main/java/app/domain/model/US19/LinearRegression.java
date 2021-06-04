@@ -19,10 +19,14 @@ import java.text.DecimalFormat;
  *  estimates for the slope and y-intercept.
  *
  */
+
+/*
 public class LinearRegression {
     private final double intercept, slope;
     private final double r2;
     private final double svar0, svar1;
+
+ */
 
     /**
      * Performs a linear regression on the data points (y[i], x[i]).
@@ -31,6 +35,7 @@ public class LinearRegression {
      * @param  y the corresponding values of the response variable
      * @throws IllegalArgumentException if the lengths of the two arrays are not equal
      */
+    /*
     public LinearRegression(double[] x, double[] y) {
         if (x.length != y.length) {
             throw new IllegalArgumentException("array lengths are not equal");
@@ -73,23 +78,33 @@ public class LinearRegression {
         svar0 = svar/n + xbar*xbar*svar1;
     }
 
+     */
+
     /**
      * Returns the y-intercept alpha of the best of the best-fit line y = alpha + beta * x.
      *
      * @return the y-intercept alpha of the best-fit line y = alpha + beta * x
      */
+
+    /*
     public double intercept() {
         return intercept;
     }
+
+     */
 
     /**
      * Returns the slope beta of the best of the best-fit line y = alpha + beta * x.
      *
      * @return the slope beta of the best-fit line y = alpha + beta * x
      */
+
+    /*
     public double slope() {
         return slope;
     }
+
+     */
 
     /**
      * Returns the coefficient of determination R^2.
@@ -97,27 +112,39 @@ public class LinearRegression {
      * @return the coefficient of determination R^2,
      *         which is a real number between 0 and 1
      */
+
+    /*
     public double R2() {
         return r2;
     }
+
+     */
 
     /**
      * Returns the standard error of the estimate for the intercept.
      *
      * @return the standard error of the estimate for the intercept
      */
+
+    /*
     public double interceptStdErr() {
         return Math.sqrt(svar0);
     }
+
+     */
 
     /**
      * Returns the standard error of the estimate for the slope.
      *
      * @return the standard error of the estimate for the slope
      */
+
+    /*
     public double slopeStdErr() {
         return Math.sqrt(svar1);
     }
+
+     */
 
     /**
      * Returns the expected response y given the value of the predictor
@@ -127,9 +154,12 @@ public class LinearRegression {
      * @return the expected response y given the value of the predictor
      *         variable x
      */
+
+    /*
     public double predict(double x) {
         return slope*x + intercept;
     }
+     */
 
     /**
      * Returns a string representation of the simple linear regression model.
@@ -138,6 +168,8 @@ public class LinearRegression {
      *         including the best-fit line and the coefficient of determination
      *         R^2
      */
+
+    /*
     public String toString() {
         StringBuilder s = new StringBuilder();
         //tirei arredondamentos para testar
@@ -150,4 +182,6 @@ public class LinearRegression {
 
 
 }
+
+     */
 
