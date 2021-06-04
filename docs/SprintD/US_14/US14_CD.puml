@@ -99,9 +99,9 @@ WriteReportController ..> TestDTO
 WriteReportController ..> TestParametersDTO
 TestStore "1" -> "*" Test : adopts >
 Company "1" --> "*" Report : knows >
-Report "1" --> "1" Test : is of >
-TestParameter "1..*" --> "1" Test : is of >
-TestParameterResult "1" --> "1" TestParameter : is of >
+Report "1" --> "1" Test : has <
+TestParameter "1..*" --> "1" Test : has <
+TestParameterResult "1" --> "1" TestParameter : has <
 TestMapper ..> Test
 TestParameterMapper ..> TestParameter
 TestMapper ..> TestDTO
