@@ -3,8 +3,8 @@ package app.domain.model.US19;
 
 import app.domain.interfaces.ExternalAPI;
 //import app.domain.interfaces.MathCalculus;
-import app.domain.model.MyRegressionModel;
-import com.nhs.report.Report2NHS;
+//import app.domain.model.MyRegressionModel;
+//import com.nhs.report.Report2NHS;
 
 import java.io.File;
 
