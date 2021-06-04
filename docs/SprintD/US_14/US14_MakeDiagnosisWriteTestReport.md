@@ -219,7 +219,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4.1 Report
 
-Tests 1 to 3 follow this model:
+Tests 1 to 4 follow this model:
 
     @Test(expected = IllegalArgumentException.class)
     public void testName(){
