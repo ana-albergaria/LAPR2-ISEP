@@ -316,6 +316,26 @@ public class Test {
     }
 
     /**
+     * Method to verify if the test is waiting for results.
+     *
+     * @return true if the test is waiting for results,
+     * otherwise return false.
+     */
+    public boolean isWaitingForResults(){
+        int f = 0;
+        List<TestParameter> testParameters = this.getParameters();
+        for (TestParameter testParameter : testParameters){
+            if (testParameter.getTestParameterResult() != null){
+                f++;
+            }
+        }
+        if (!this.hasSamples()){
+            f++;
+        }
+        return f == 0;
+    }
+
+    /**
      * Method to store the test report object into the test.
      *
      * @param report the test report.

@@ -76,6 +76,20 @@ public class TestStore {
     }
 
     /**
+     * gets the tests which are ready for the results to be added
+     * @return list of ready for the results to be added
+     */
+    public List<Test> getTestsReadyForResults() {
+        List<Test> listTestsReadyForResults = new ArrayList<>();
+
+        for (Test test : testList) {
+            if (test.isWaitingForResults())
+                listTestsReadyForResults.add(test);
+        }
+        return listTestsReadyForResults;
+    }
+
+    /**
      * Gets the tests by its code
      * @param code code of the test to be found
      * @return Found test
@@ -153,16 +167,24 @@ public class TestStore {
 
     /**
      * Saves the Tests info to be considered when analysing the company performance on an ArrayList
-     * @return an ArrayList with all the info to be considered when analysing the company performance
+     * @return an ArrayList with all the Tests info to be considered when analysing the company performance
      */
     public ArrayList<Integer> getTestsInfo(){
         ArrayList<Integer> testsInfo = new ArrayList<Integer>();
-        /*number of tests waiting for results
-        number of tests waiting for diagnosis
-        total number of tests processed in the laboratory in each day...
-        week...
-        month...
-        year*/
+        int waitingForResults = getTestsReadyForResults().size();
+        testsInfo.add(waitingForResults);
+        int waitingForDiagnosis = getTestsReadyToDiagnose().size();
+        testsInfo.add(waitingForDiagnosis);
+        //falta fazer daqui:
+        int processedEachDay = 0;
+        testsInfo.add(processedEachDay);
+        int processedEachWeek = 0;
+        testsInfo.add(processedEachWeek);
+        int processedEachMonth = 0;
+        testsInfo.add(processedEachMonth);
+        int processedEachYear = 0;
+        testsInfo.add(processedEachYear);
+        //até aqui
         return testsInfo;
     }
 
