@@ -42,3 +42,8 @@ H0: b=0  H1:b<>0
 Regression          1                   16,681621           16,681621           72,395851           
 Residual            8                   1,843379            0,230422            
 Total               9                   18,525000           
+
+Decision: f
+72,395851 > f0,05,(1,8)=5,317655
+Reject H0
+The regression model is significant.
