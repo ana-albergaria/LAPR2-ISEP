@@ -151,6 +151,15 @@ public class TestStore {
         return false;
     }
 
-    //+getTestsInfo()
+    public ArrayList<Integer> getTestsInfo(){
+        ArrayList<Integer> testsInfo = new ArrayList<Integer>();
+        /*number of tests waiting for results
+        number of tests waiting for diagnosis
+        total number of tests processed in the laboratory in each day...
+        week...
+        month...
+        year*/
+        return testsInfo;
+    }
 
 }

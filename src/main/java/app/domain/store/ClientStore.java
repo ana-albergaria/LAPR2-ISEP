@@ -133,6 +133,13 @@ public class ClientStore {
         return new ArrayList<>(clientList);
     }
 
-    //+getClientInfo()
+    public int getClientInfo(){
+        //number of clients
+        int num = 0;
+        for (Client client : clientList){
+            num++;
+        }
+        return num;
+    }
 
 }

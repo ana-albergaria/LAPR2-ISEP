@@ -33,18 +33,19 @@ public class CompanyPerformanceAnalysisController {
         this.analysis = null;
     }
 
-    /*public ArrayList<Integer> getTestOverview(){
+    public ArrayList<Integer> getTestOverview(){
+        ArrayList<Integer> testOverview = new ArrayList<Integer>();
         ClientStore clientStore = this.company.getClientStore();
-        ArrayList<Integer> testOverview = clientStore.getClientInfo();
+        int clientInfo = clientStore.getClientInfo();
+        testOverview.add(clientInfo);
         TestStore testStore = this.company.getTestStore();
         testOverview.addAll(testStore.getTestsInfo());
         return  testOverview;
-    }*/
+    }
 
     /*
     testOverview -> arraylist of integers with:
     number of clients
-    ---
     number of tests waiting for results
     number of tests waiting for diagnosis
     total number of tests processed in the laboratory in each day...
