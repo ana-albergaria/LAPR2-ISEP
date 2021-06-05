@@ -27,6 +27,13 @@ public class Main {
         double[] x2 = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0, 12.0, 11.0, 13.0, 11.0};
         //double[] y = {2256.0, 2340.0, 2426.0, 2293.0, 2330.0, 2368.0, 2250.0, 2409.0, 2364.0, 2379.0, 2440.0, 2364.0};
 
+        //Ex 3 f) TP PL7
+        //double[] xa = {20.0, 16.0, 34.0, 23.0, 27.0, 32.0, 18.0, 22.0};
+        //teste
+        //double[] xb = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0};
+
+        //double[] y1 = {128.0, 122.0, 168.0, 140.0, 176.0, 184.0, 144.0, 154.0};
+
         LinearRegression simpleLR = new LinearRegression(x, y);
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
@@ -39,11 +46,24 @@ public class Main {
         NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest);
         System.out.println(report);
 
-        /*
+
         System.out.println(simpleLR);
 
-        TDistribution td= new TDistribution(2);
-        double alphaTD =0.25;
+        /*
+        TDistribution td= new TDistribution(7); //n-2
+        double alphaTD =0.975;
+        if(alphaTD> 0.5) {
+            double critTD = td.inverseCumulativeProbability(alphaTD);
+            System.out.println("t-student critical value: " + critTD);
+        }
+        else {
+            double critTD = td.inverseCumulativeProbability(1 - alphaTD);
+            System.out.println("t-student critical value: " + critTD);
+        }
+         */
+
+        TDistribution td= new TDistribution(8); //n-2
+        double alphaTD =0.95;
         if(alphaTD> 0.5) {
             double critTD = td.inverseCumulativeProbability(alphaTD);
             System.out.println("t-student critical value: " + critTD);
@@ -53,7 +73,7 @@ public class Main {
             System.out.println("t-student critical value: " + critTD);
         }
 
-         */
+
 
 
         /*

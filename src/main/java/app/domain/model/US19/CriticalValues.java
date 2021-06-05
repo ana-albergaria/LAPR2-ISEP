@@ -11,8 +11,8 @@ public class CriticalValues {
 
 
             // Table number 7 from MATCP - t-Student
-            TDistribution td= new TDistribution(2);
-            double alphaTD =0.25;
+            TDistribution td= new TDistribution(7);
+            double alphaTD =0.975;
             if(alphaTD> 0.5) {
                 double critTD = td.inverseCumulativeProbability(alphaTD);
                 System.out.println("t-student critical value: " + critTD);
