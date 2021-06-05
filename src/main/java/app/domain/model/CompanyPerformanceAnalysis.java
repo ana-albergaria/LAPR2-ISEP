@@ -2,6 +2,9 @@ package app.domain.model;
 
 import java.util.ArrayList;
 
+/**
+ * Marta Ribeiro (1201592)
+ */
 public class CompanyPerformanceAnalysis {
 
     private ArrayList<Integer> worstSubInt;

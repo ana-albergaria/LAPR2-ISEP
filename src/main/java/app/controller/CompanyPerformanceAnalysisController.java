@@ -7,6 +7,9 @@ import app.domain.store.TestStore;
 
 import java.util.ArrayList;
 
+/**
+ * @author Marta Ribeiro (1201592)
+ */
 public class CompanyPerformanceAnalysisController {
 
     /**
@@ -24,7 +27,7 @@ public class CompanyPerformanceAnalysisController {
     }
 
     /**
-     * Builds a Report Controller's instance receiving the company.
+     * Builds a Company Performance Analysis Controller's instance receiving the company.
      *
      * @param company company associated to the Controller.
      */
@@ -33,6 +36,10 @@ public class CompanyPerformanceAnalysisController {
         this.analysis = null;
     }
 
+    /**
+     * Creates and returns an ArrayList with all the info to be considered when analysing the company performance
+     * @return an ArrayList with all the info to be considered when analysing the company performance
+     */
     public ArrayList<Integer> getTestOverview(){
         ArrayList<Integer> testOverview = new ArrayList<Integer>();
         ClientStore clientStore = this.company.getClientStore();

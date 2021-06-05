@@ -133,13 +133,13 @@ public class ClientStore {
         return new ArrayList<>(clientList);
     }
 
+    /**
+     * Gets the number of clients in the system.
+     * @return the number of clients in the system.
+     */
     public int getClientInfo(){
         //number of clients
-        int num = 0;
-        for (Client client : clientList){
-            num++;
-        }
-        return num;
+        return clientList.size();
     }
 
 }

@@ -151,6 +151,10 @@ public class TestStore {
         return false;
     }
 
+    /**
+     * Saves the Tests info to be considered when analysing the company performance on an ArrayList
+     * @return an ArrayList with all the info to be considered when analysing the company performance
+     */
     public ArrayList<Integer> getTestsInfo(){
         ArrayList<Integer> testsInfo = new ArrayList<Integer>();
         /*number of tests waiting for results
