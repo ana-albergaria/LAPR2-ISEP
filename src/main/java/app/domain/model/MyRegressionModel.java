@@ -40,6 +40,10 @@ public class MyRegressionModel {
         return numberOfObservations;
     }
 
+    public Double getSecondIndVariable() {
+        return secondIndVariable;
+    }
+
     public Object getRegressionModel() {
         return regressionModel;
     }
@@ -55,7 +59,7 @@ public class MyRegressionModel {
         text.append(String.format("Other statistics%nR2 = %f%nR2 adjusted = %f%n", r2, r2Adjusted));
         if(secondIndVariable == null)
             text.append(String.format("R = %f%n", r));
-        text.append("//\n\n");
+        text.append("//\n");
 
         return text.toString();
     }

@@ -3,7 +3,7 @@ The regression model fitted using data from the interval
 //
 Other statistics
 R2 = 0,900492
-R2 adjusted = -1,000000
+R2 adjusted = 0,888054
 R = 0,948943
 //
 
@@ -35,3 +35,10 @@ Decision:
 Reject H0
 //
 
+
+Significance model with Anova
+H0: b=0  H1:b<>0
+                    df                  SS                  MS                  F                   
+Regression          1                   16,681621           16,681621           72,395851           
+Residual            8                   1,843379            0,230422            
+Total               9                   18,525000           

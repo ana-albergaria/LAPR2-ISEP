@@ -31,6 +31,10 @@ public class Constants {
     public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.adapters.ExternalModule3APIAdapter";
     public static final String COVID_EXTERNAL_ADAPTER = "app.domain.adapters.CovidReferenceValues1APIAdapter";
 
+    //Mathematics
+    //-> Simple Linear Regression
+    public static final double A0 = 0;
+    public static final double B0 = 0;
 
 
 }

@@ -5,6 +5,9 @@ package app.domain.model.US19;
  *  Simple linear regression.
  ******************************************************************************/
 
+import app.domain.interfaces.MathCalculus;
+import app.domain.shared.Constants;
+
 /**
  *  The code LinearRegression class performs a simple linear regression
  *  on an set of n data points (y_i, x_i).
@@ -22,10 +25,18 @@ public class LinearRegression {
     private final double r2;
     private final double svar0, svar1;
 
+    //svar - variância
     private int n;
     private double xxbar;
-    private double yybar;
     private double xbar; //média
+    private double rss; // residual sum of squares
+    private double ssr; // regression sum of squares
+    private double s; //standard deviation (desvio padrão amostral)
+    private double r2Adjusted;
+
+    private static final double A0 = Constants.A0;
+    private static final double B0 = Constants.B0;
+    private static final int NUM_REG_COEFFICIENTS = 1; //temos 2 coeficientes de regressão, mas para a fórmula não conta o da var independente
 
     /**
      * Performs a linear regression on the data points (y[i], x[i]).
@@ -51,7 +62,7 @@ public class LinearRegression {
         double ybar = sumy / n;
 
         // second pass: compute summary statistics
-        double xybar = 0.0;
+        double yybar = 0.0, xybar = 0.0;
         for (int i = 0; i < n; i++) {
             xxbar += (x[i] - xbar) * (x[i] - xbar);
             yybar += (y[i] - ybar) * (y[i] - ybar);
@@ -61,17 +72,17 @@ public class LinearRegression {
         intercept = ybar - slope * xbar;
 
         // more statistical analysis
-        double rss = 0.0;      // residual sum of squares
-        double ssr = 0.0;      // regression sum of squares
         for (int i = 0; i < n; i++) {
             double fit = slope*x[i] + intercept;
-            rss += (fit - y[i]) * (fit - y[i]);
-            ssr += (fit - ybar) * (fit - ybar);
+            rss += (fit - y[i]) * (fit - y[i]); //se (Anova) residual sum of squares
+            ssr += (fit - ybar) * (fit - ybar); //sr (Anova) regression sum of squares
         }
 
         int degreesOfFreedom = n-2;
         r2    = ssr / yybar;
+        r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
         double svar  = rss / degreesOfFreedom;
+        s = Math.sqrt(svar); //acrescentei -> desvio padrão amostral
         svar1 = svar / xxbar;
         svar0 = svar/n + xbar*xbar*svar1;
     }
@@ -122,21 +133,22 @@ public class LinearRegression {
         return Math.sqrt(svar1);
     }
 
+    public double getR2Adjusted() {
+        return r2Adjusted;
+    }
+
     public int getN() {
         return n;
     }
 
-    public double getXXbar() {
-        return xxbar;
+    public double getRSS() {
+        return rss;
     }
 
-    public double getYYbar() {
-        return yybar;
+    public double getSSR() {
+        return ssr;
     }
 
-    public double getXbar() {
-        return xbar;
-    }
 
     /**
      * Returns the expected response y given the value of the predictor
@@ -149,6 +161,15 @@ public class LinearRegression {
     public double predict(double x) {
         return slope*x + intercept;
     }
+
+    public double calculatetObsA() {
+        return (intercept-A0) / (s * Math.sqrt((1.0/n) + (Math.pow(xbar,2) / xxbar)));
+    }
+
+    public double calculateTObsB() {
+        return (slope-B0) / (s * Math.sqrt(1/xxbar));
+    }
+
 
     /**
      * Returns a string representation of the simple linear regression model.
