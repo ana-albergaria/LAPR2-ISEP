@@ -38,15 +38,6 @@ deactivate TSTSTORE
 CTRL --> UI : testOverview
 deactivate CTRL
 
-'testOverview -> array of int with:
-'number of clients
-'number of tests waiting for results
-'number of tests waiting for diagnosis
-'total number of tests processed in the laboratory in each day
-'...week
-'...month
-'...year
-
 UI --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
 deactivate UI
 
@@ -62,12 +53,6 @@ activate CPA
 deactivate CPA
 CTRL --> UI : worstSubInt
 deactivate CTRL
-
-'UI -> CTRL : genGraphs()
-'activate CTRL
-'CTRL -> CPA : worstSubInt = getWorstSubInt()
-
-
 
 UI --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate UI
