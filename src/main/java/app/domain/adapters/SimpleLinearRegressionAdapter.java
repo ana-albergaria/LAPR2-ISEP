@@ -3,6 +3,7 @@ package app.domain.adapters;
 import app.domain.interfaces.MathCalculus;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
+import app.domain.model.SignificanceModelAnova;
 import app.domain.model.US19.LinearRegression;
 import app.domain.shared.Constants;
 
@@ -18,27 +19,22 @@ public class SimpleLinearRegressionAdapter implements MathCalculus {
         //FALTA OBTER O R2 AJUSTADO
 
         return new MyRegressionModel(bestModel.intercept(), bestModel.slope(), null,
-                Math.sqrt(bestModel.R2()), bestModel.R2(), -1, bestModel.getN(), bestModel);
+                Math.sqrt(bestModel.R2()), bestModel.R2(), bestModel.getR2Adjusted(), bestModel.getN(), bestModel);
     }
 
     @Override
     public HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel) {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
-        double a = myRegressionModel.getIntercept(), b = myRegressionModel.getSlope();
-        double xxbar = simpleLR.getXXbar(), yybar = simpleLR.getYYbar();
-        int n = myRegressionModel.getNumberOfObservations();
-        double se = yybar - (Math.pow(b,2) * xxbar), s = Math.sqrt(se / (n-2));
-        double xbar = simpleLR.getXbar();
-
-        //for a
-        final double a0 = MathCalculus.A0;
-        double tObsA = (a-a0) / (s * Math.sqrt((1.0/n) + (Math.pow(xbar,2) / xxbar)));
-
-        //for b
-        final double b0 = MathCalculus.B0;
-        double tObsB = (b-b0) / (s * Math.sqrt(1/xxbar));
-
+        //for a, for b
+        double tObsA = simpleLR.calculatetObsA(), tObsB = simpleLR.calculateTObsB();
         return new HypothesisTest(myRegressionModel, tObsA, tObsB);
+    }
+
+    @Override
+    public SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel) {
+        LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
+        double sr = simpleLR.getSSR(), se = simpleLR.getRSS();
+        return new SignificanceModelAnova(myRegressionModel, sr, se);
     }
 }
 

@@ -25,7 +25,7 @@ public class HypothesisTest {
         this.significanceLevels.add(SIGNIFICANCE_LEVEL_1);
         this.significanceLevels.add(SIGNIFICANCE_LEVEL_5);
     }
-    
+
     public double calculateCriticalValTStudent(double levelOfSignificance) {
         int n = myRegressionModel.getNumberOfObservations();
         double critTD;

@@ -6,6 +6,7 @@ import app.domain.interfaces.MathCalculus;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.NHSDailyReport;
+import app.domain.model.SignificanceModelAnova;
 import com.nhs.report.Report2NHS;
 import org.apache.commons.math3.distribution.TDistribution;
 
@@ -42,8 +43,9 @@ public class Main {
         System.out.println(myRegressionModel);
         HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel);
         System.out.println(hypothesisTest);
+        SignificanceModelAnova modelAnova = calculus.getSignificanceModelAnova(myRegressionModel);
 
-        NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest);
+        NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova);
         System.out.println(report);
 
 
