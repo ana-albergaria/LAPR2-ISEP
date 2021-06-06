@@ -1,14 +1,10 @@
 package app.domain.store;
 
 import app.domain.model.*;
-import app.domain.shared.Constants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Store of tests
@@ -212,40 +208,45 @@ public class TestStore {
                                                                          Date currentDate) throws ParseException {
         List< List<String> > tableOfValues = new ArrayList<>();
         List<String> dates = new ArrayList<>();
-        List<Integer> observedPositives = new ArrayList<>();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        List<String> observedPositives = new ArrayList<>();
 
         addDatesColumnToTableOfValues(numberOfObservations, currentDate, dates);
+        addObservedPositivesToTableOfValues(numberOfObservations, dates, observedPositives);
 
+        tableOfValues.add(dates);
+        tableOfValues.add(observedPositives);
+
+        return tableOfValues;
+    }
+
+    public void addObservedPositivesToTableOfValues(int numberOfObservations,
+                                                    List<String> dates,
+                                                    List<String> observedPositives) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        int[] observedPositivesInt = new int[numberOfObservations];
         int numberOfPositivesPerDay = 0, indexDate = 0;
 
         for (Test test : testList) {
             if(test.hasPositiveResultForCovid()) {
                 for (int i = 0; i < dates.size(); i++) {
-                    Date dateToBeCompared = sdf.parse(dates.get(indexDate));
+                    Date dateToBeCompared = sdf.parse(dates.get(i));
                     if(checkIfDatesAreEqual(test.getDateOfChemicalAnalysis(), dateToBeCompared)) {
                         numberOfPositivesPerDay++;
+                        indexDate = i;
                     }
                 }
             }
-            observedPositives.add(indexDate, numberOfPositivesPerDay);
+            observedPositivesInt[indexDate] = numberOfPositivesPerDay;
             numberOfPositivesPerDay = 0;
-            if(indexDate < dates.size())
-                indexDate++;
         }
-
-
-
-
-
-        return tableOfValues;
-
+        convertIntegerListToString(observedPositives, observedPositivesInt);
     }
 
-    public void addObservedPositivesToTableOfValues(int numberOfObservations,
-                                                    Date currentDate,
-                                                    List<String> observedPositives) {
+    public void convertIntegerListToString(List<String> observedPositives, int[] observedPositivesInt) {
+        for (int i = 0; i < observedPositivesInt.length; i++) {
+            observedPositives.add(String.valueOf(observedPositivesInt[i]));
+        }
+
 
     }
 
