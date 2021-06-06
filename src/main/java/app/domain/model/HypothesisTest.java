@@ -59,9 +59,10 @@ public class HypothesisTest {
         return (Math.abs(tObs) > critTD) ? "Reject H0" : "No Reject H0";
     }
 
-    //CORRIGIR
+
     public String getDecisionForAnova(double critFD) {
-        return (f > critFD) ? "Reject H0\nThe regression model is significant." : "No Reject H0The regression model is not significant.";
+        return (f > critFD) ? String.format("%f > f%.2f,(%d,%d)=%f%nReject H0\nThe regression model is significant.", f, SIGNIFICANCE_LEVEL_5, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD) :
+                String.format("%f <= f%.2f,(%d,%d)=%f%nNo Reject H0\nThe regression model is not significant.", f, SIGNIFICANCE_LEVEL_5, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD);
     }
 
     @Override
@@ -88,9 +89,6 @@ public class HypothesisTest {
         text.append(String.format("Decision: f%n"));
         double critFD = myRegressionModel.calculateCriticalValFSnedecor(numeratorDegreesOfFreedom,
                 denominatorDegreesOfFreedom, SIGNIFICANCE_LEVEL_5);
-        //ELIMINAR LINHA DE BAIXO E COLOCAR NO getDecisionForAnova
-        text.append(String.format("%f > f%.2f,(%d,%d)=%f%n",
-                f, SIGNIFICANCE_LEVEL_5, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD));
         text.append(String.format("%s%n", getDecisionForAnova(critFD)));
         return text.toString();
     }
