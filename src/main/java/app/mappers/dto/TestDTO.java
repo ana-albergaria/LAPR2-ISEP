@@ -2,7 +2,9 @@ package app.mappers.dto;
 
 import app.domain.model.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TestDTO {
@@ -45,22 +47,22 @@ public class TestDTO {
     /**
      * Date of test registration
      */
-    private final String dateOfTestRegistration;
+    private final Date dateOfTestRegistration;
 
     /**
      * Date of samples collection
      */
-    private String dateOfSamplesCollection;
+    private Date dateOfSamplesCollection;
 
     /**
      * Date of chemical analysis
      */
-    private String dateOfChemicalAnalysis;
+    private Date dateOfChemicalAnalysis;
 
     /**
      * Date of diagnosis
      */
-    private String dateOfDiagnosis;
+    private Date dateOfDiagnosis;
 
     /**
      * Number of existing tests.
@@ -81,10 +83,10 @@ public class TestDTO {
                    List<TestParameter> parameters,
                    List<Sample> samples,
                    Report diagnosisReport,
-                   String dateOfTestRegistration,
-                   String dateOfSamplesCollection,
-                   String dateOfChemicalAnalysis,
-                   String dateOfDiagnosis) {
+                   Date dateOfTestRegistration,
+                   Date dateOfSamplesCollection,
+                   Date dateOfChemicalAnalysis,
+                   Date dateOfDiagnosis) {
         totalTests++;
         this.code = code;
         this.nhsCode = nhsCode;
@@ -133,11 +135,17 @@ public class TestDTO {
             s.append("\n");
         }
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        String printDateOfSamplesCollection = (dateOfSamplesCollection == null) ? "n/a" : sdf.format(dateOfSamplesCollection);
+        String printDateOfChemicalAnalysis = (dateOfChemicalAnalysis == null) ? "n/a" : sdf.format(dateOfChemicalAnalysis);
+        String printDateOfDiagnosis = (dateOfDiagnosis == null) ? "n/a" : sdf.format(dateOfDiagnosis);
+
         return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n" +
                         " > Parameters: %n%n%s > Number of Samples Collected: %d%n > Diagnosis Report: %s%n" +
                         " > Date Of Test Registration: %s%n > Date Of Samples Collection: %s%n" +
                         " > Date of Chemical Analysis: %s%n > Date Of Diagnosis: %s%n",
                 code, nhsCode, client.getName(), testType, s, samples.size(), diagnosisReport,
-                dateOfTestRegistration, dateOfSamplesCollection, dateOfChemicalAnalysis, dateOfDiagnosis);
+                sdf.format(dateOfTestRegistration), printDateOfSamplesCollection, printDateOfChemicalAnalysis, printDateOfDiagnosis);
     }
 }

@@ -1,10 +1,12 @@
 package app.domain.model;
 
 import app.domain.interfaces.ExternalModule;
+import app.domain.shared.Constants;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -58,22 +60,22 @@ public class Test {
     /**
      * Date of test registration
      */
-    private final String dateOfTestRegistration;
+    private final Date dateOfTestRegistration;
 
     /**
      * Date of samples collection
      */
-    private String dateOfSamplesCollection;
+    private Date dateOfSamplesCollection;
 
     /**
      * Date of chemical analysis
      */
-    private String dateOfChemicalAnalysis;
+    private Date dateOfChemicalAnalysis;
 
     /**
      * Date of diagnosis
      */
-    private String dateOfDiagnosis;
+    private Date dateOfDiagnosis;
 
     /**
      * Number of existing tests.
@@ -96,12 +98,12 @@ public class Test {
         this.client = client;
         this.testType = testType;
         this.testParameters = addTestParameters(parameters);
-        this.dateOfTestRegistration = generateNowDateAndTime();
+        this.dateOfTestRegistration = Calendar.getInstance().getTime();
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
-        this.dateOfSamplesCollection = "n/a";
-        this.dateOfChemicalAnalysis = "n/a";
-        this.dateOfDiagnosis = "n/a";
+        this.dateOfSamplesCollection = null;
+        this.dateOfChemicalAnalysis = null;
+        this.dateOfDiagnosis = null;
     }
 
     /**
@@ -172,7 +174,7 @@ public class Test {
      *
      * @return date of test registration
      */
-    public String getDateOfTestRegistration() {
+    public Date getDateOfTestRegistration() {
         return dateOfTestRegistration;
     }
 
@@ -181,7 +183,7 @@ public class Test {
      *
      * @return date of the samples collection
      */
-    public String getDateOfSamplesCollection() {
+    public Date getDateOfSamplesCollection() {
         return dateOfSamplesCollection;
     }
 
@@ -190,7 +192,7 @@ public class Test {
      *
      * @return date of the chemical analysis
      */
-    public String getDateOfChemicalAnalysis() {
+    public Date getDateOfChemicalAnalysis() {
         return dateOfChemicalAnalysis;
     }
 
@@ -199,7 +201,7 @@ public class Test {
      *
      * @return the date of the diagnosis
      */
-    public String getDateOfDiagnosis() {
+    public Date getDateOfDiagnosis() {
         return dateOfDiagnosis;
     }
 
@@ -234,14 +236,14 @@ public class Test {
      * Adds the Sample Collecting Date to the Test for which the samples where collected.
      */
     public void addSampleCollectionDate(){
-        this.dateOfSamplesCollection = generateNowDateAndTime();
+        this.dateOfSamplesCollection = Calendar.getInstance().getTime();
     }
 
     /**
      * Adds the current date to the dateOfChemicalAnalysis attribute
      */
     public void addChemicalAnalysisDate(){
-        this.dateOfChemicalAnalysis = generateNowDateAndTime();
+        this.dateOfChemicalAnalysis = Calendar.getInstance().getTime();
     }
 
     /**
@@ -332,6 +334,18 @@ public class Test {
         return f == 0;
     }
 
+    /*
+    to be used in US19
+    WARNING - confirm if the test should only have results OR must be VALIDATED and correct it
+     */
+    public boolean hasPositiveResultForCovid() {
+        if(this.hasResults() && this.getTestType().getClassNameOfApi().equals(Constants.COVID_EXTERNAL_ADAPTER)) {
+            List<TestParameter> testParameters = this.getParameters();
+            return testParameters.get(0).getTestParameterResult().getResultValue() > 1.4;
+        }
+        throw new UnsupportedOperationException("Test not found!");
+    }
+
     /**
      * Method to store the test report object into the test.
      *
@@ -339,7 +353,7 @@ public class Test {
      */
     public void addReport(Report report) {
         this.diagnosisReport = report;
-        this.dateOfDiagnosis = generateNowDateAndTime();
+        this.dateOfDiagnosis = Calendar.getInstance().getTime();
     }
 
     /**

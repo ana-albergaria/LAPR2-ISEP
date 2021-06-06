@@ -1,8 +1,13 @@
 package app.domain.store;
 
 import app.domain.model.*;
+import app.domain.shared.Constants;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -197,5 +202,81 @@ public class TestStore {
         //até aqui
         return testsInfo;
     }
+
+    /*
+    to be used in US19
+    WARNING: - Confirm if it's tests with results OR validated tests;
+            - Confirm if the client wishes the date of test registration or date of results
+     */
+    public List < List<String> > getTestsWithResultsDataForTableOfValues(int numberOfObservations,
+                                                                         Date currentDate) throws ParseException {
+        List< List<String> > tableOfValues = new ArrayList<>();
+        List<String> dates = new ArrayList<>();
+        List<Integer> observedPositives = new ArrayList<>();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        addDatesColumnToTableOfValues(numberOfObservations, currentDate, dates);
+
+        int numberOfPositivesPerDay = 0, indexDate = 0;
+
+        for (Test test : testList) {
+            if(test.hasPositiveResultForCovid()) {
+                for (int i = 0; i < dates.size(); i++) {
+                    Date dateToBeCompared = sdf.parse(dates.get(indexDate));
+                    if(checkIfDatesAreEqual(test.getDateOfChemicalAnalysis(), dateToBeCompared)) {
+                        numberOfPositivesPerDay++;
+                    }
+                }
+            }
+            observedPositives.add(indexDate, numberOfPositivesPerDay);
+            numberOfPositivesPerDay = 0;
+            if(indexDate < dates.size())
+                indexDate++;
+        }
+
+
+
+
+
+        return tableOfValues;
+
+    }
+
+    public void addObservedPositivesToTableOfValues(int numberOfObservations,
+                                                    Date currentDate,
+                                                    List<String> observedPositives) {
+
+    }
+
+    /*
+    WARNING - ter em atenção que ao converter a String selecionada pelo administrador
+    ou a que está definida na configuration file,
+     */
+    public void addDatesColumnToTableOfValues(int numberOfObservations,
+                                                      Date currentDate,
+                                                      List<String> dates) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+
+        for (int i = 0; i < numberOfObservations; i++) {
+            dates.add(sdf.format(currentDate));
+            cal.add(Calendar.DAY_OF_MONTH,-1);
+            currentDate = cal.getTime();
+        }
+    }
+
+    public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
+        Calendar cal = Calendar.getInstance();
+        Calendar otherCal = Calendar.getInstance();
+        cal.setTime(date);
+        otherCal.setTime(otherDate);
+        return cal.get(Calendar.DAY_OF_MONTH) == otherCal.get(Calendar.DAY_OF_MONTH) &&
+                cal.get(Calendar.MONTH) == otherCal.get(Calendar.MONTH) &&
+                cal.get(Calendar.YEAR) == otherCal.get(Calendar.YEAR);
+    }
+
+
 
 }

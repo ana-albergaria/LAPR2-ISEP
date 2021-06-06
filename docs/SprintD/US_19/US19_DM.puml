@@ -30,6 +30,8 @@ class HypothesisTest {}
 'significance model with Anova.
 class SignificanceModelAnova {}
 
+class TableOfValues {}
+
 Timer "1" -- "1..*" NHSDailyReport : reports >
 Company "1" -- "1" Timer : knows >
 Company "*" - "1" NhsAPI : makes use of >
@@ -41,6 +43,7 @@ Company "*" -- "1" RegressionModel : makes use of >
 HypothesisTest "*" -- "1" RegressionModel : of >
 SignificanceModelAnova "1" -- "1" RegressionModel : of >
 SignificanceModelAnova "1" -- "*" HypothesisTest : contains >
+NHSDailyReport "1" -- "1" TableOfValues : contains >
 
 'Apagar posteriormente
 RegressionModel "1" -- "1" ConfigFile : defined by >

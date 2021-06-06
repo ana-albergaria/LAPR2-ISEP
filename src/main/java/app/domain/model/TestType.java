@@ -98,6 +98,10 @@ public class TestType {
         return selectedCategories;
     }
 
+    public String getClassNameOfApi() {
+        return classNameOfApi;
+    }
+
     /**
      * It returns the textual description of the Test Type.
      *

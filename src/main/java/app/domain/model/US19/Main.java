@@ -3,18 +3,22 @@ package app.domain.model.US19;
 
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.MathCalculus;
-import app.domain.model.HypothesisTest;
-import app.domain.model.MyRegressionModel;
-import app.domain.model.NHSDailyReport;
-import app.domain.model.SignificanceModelAnova;
+import app.domain.model.*;
+import app.domain.store.TestStore;
 import com.nhs.report.Report2NHS;
 import org.apache.commons.math3.distribution.TDistribution;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 public class Main {
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, ParseException {
 
         //Ex. 1 TP PL7 MATCP
         double[] x = {825.0, 215.0, 1070.0, 550.0, 480.0, 920.0, 1350.0, 325.0, 670.0, 1215.0};
@@ -48,6 +52,28 @@ public class Main {
 
         NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova);
         System.out.println(report);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR,2002);
+        cal.set(Calendar.MONTH,1);
+        cal.set(Calendar.DAY_OF_MONTH,2);
+        Date currentDate = cal.getTime();
+        TestStore testStore = new TestStore();
+        List<String> dates = new ArrayList<>();
+        testStore.addDatesColumnToTableOfValues(3,currentDate,dates);
+        //testStore.getTestsWithResultsDataForTableOfValues(3, currentDate);
+        System.out.println(dates);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateToBeCompared = sdf.parse(dates.get(0));
+        System.out.println("Date to be compared: " + dateToBeCompared);
+        if(testStore.checkIfDatesAreEqual(currentDate, dateToBeCompared))
+            System.out.println("True");
+        else
+            System.out.println("False");
+
+
+
+
 
 
         //System.out.println(simpleLR);
