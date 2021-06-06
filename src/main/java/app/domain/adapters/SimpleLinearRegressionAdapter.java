@@ -5,7 +5,6 @@ import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
 import app.domain.model.US19.LinearRegression;
-import app.domain.shared.Constants;
 
 public class SimpleLinearRegressionAdapter implements MathCalculus {
 
@@ -15,8 +14,6 @@ public class SimpleLinearRegressionAdapter implements MathCalculus {
         LinearRegression simpleLRx2 = new LinearRegression(x2, y);
 
         LinearRegression bestModel = (simpleLRx1.R2() >= simpleLRx2.R2()) ? new LinearRegression(x1, y) : new LinearRegression(x2, y);
-
-        //FALTA OBTER O R2 AJUSTADO
 
         return new MyRegressionModel(bestModel.intercept(), bestModel.slope(), null,
                 Math.sqrt(bestModel.R2()), bestModel.R2(), bestModel.getR2Adjusted(), bestModel.getN(), bestModel);

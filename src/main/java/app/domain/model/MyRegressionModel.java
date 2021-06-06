@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import org.apache.commons.math3.distribution.FDistribution;
+
 public class MyRegressionModel {
     private double intercept; //intercept - y, a
     private double slope; //slope - x, b
@@ -46,6 +48,15 @@ public class MyRegressionModel {
 
     public Object getRegressionModel() {
         return regressionModel;
+    }
+
+    public double calculateCriticalValFSnedecor(int numeratorDegreesOfFreedom,
+                                                int denominatorDegreesOfFreedom,
+                                                double levelOfSignificance) {
+        FDistribution fd = new FDistribution(numeratorDegreesOfFreedom,denominatorDegreesOfFreedom);
+        double alphaFD = levelOfSignificance;
+        double critFD = fd.inverseCumulativeProbability(1- alphaFD);
+        return critFD;
     }
 
     @Override

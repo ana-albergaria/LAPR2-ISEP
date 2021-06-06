@@ -23,10 +23,18 @@ public class CriticalValues {
             }
 
             // Table number 8 from MATCP - Fisher–Snedecor distribution
-            FDistribution fd= new FDistribution(3,4);
-            double alphaFD= 0.01;
+            FDistribution fd= new FDistribution(2,9);
+            double alphaFD= 0.05;
             double critFD= fd.inverseCumulativeProbability(1- alphaFD);
             System.out.println("Fisher–Snedecor critical value:" + critFD);
+
+
+            /*
+            FDistribution fd= new FDistribution(2,15);
+            double alphaFD= 0.05;
+            double critFD= fd.inverseCumulativeProbability(1- alphaFD);
+            System.out.println("Fisher–Snedecor critical value:" + critFD);
+             */
         }
 
 }

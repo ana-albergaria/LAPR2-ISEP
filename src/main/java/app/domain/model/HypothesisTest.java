@@ -11,6 +11,10 @@ public class HypothesisTest {
     private double tObsB;
     private List<Double> significanceLevels;
 
+    private double f;
+    private int numeratorDegreesOfFreedom;
+    private int denominatorDegreesOfFreedom;
+
     private static final int DEGREES_OF_FREEDOM_TSTUDENT = 2;
     private static final double SIGNIFICANCE_LEVEL_1 = 0.01;
     private static final double SIGNIFICANCE_LEVEL_5 = 0.05;
@@ -24,6 +28,17 @@ public class HypothesisTest {
         this.significanceLevels = new ArrayList<>();
         this.significanceLevels.add(SIGNIFICANCE_LEVEL_1);
         this.significanceLevels.add(SIGNIFICANCE_LEVEL_5);
+    }
+
+    //for Anova Significance Model
+    public HypothesisTest(MyRegressionModel myRegressionModel,
+                          double f,
+                          int numeratorDegreesOfFreedom,
+                          int denominatorDegreesOfFreedom) {
+        this.myRegressionModel = myRegressionModel;
+        this.f = f;
+        this.numeratorDegreesOfFreedom = numeratorDegreesOfFreedom;
+        this.denominatorDegreesOfFreedom = denominatorDegreesOfFreedom;
     }
 
     public double calculateCriticalValTStudent(double levelOfSignificance) {
@@ -44,6 +59,11 @@ public class HypothesisTest {
         return (Math.abs(tObs) > critTD) ? "Reject H0" : "No Reject H0";
     }
 
+    //CORRIGIR
+    public String getDecisionForAnova(double critFD) {
+        return (f > critFD) ? "Reject H0\nThe regression model is significant." : "No Reject H0The regression model is not significant.";
+    }
+
     @Override
     public String toString() {
         StringBuilder text = new StringBuilder();
@@ -60,6 +80,18 @@ public class HypothesisTest {
             text.append(String.format("Decision: %n%s%n", getDecision(tObsB, critTD1)));
             text.append("//\n\n");
         }
+        return text.toString();
+    }
+
+    public String toStringForAnova() {
+        StringBuilder text = new StringBuilder();
+        text.append(String.format("Decision: f%n"));
+        double critFD = myRegressionModel.calculateCriticalValFSnedecor(numeratorDegreesOfFreedom,
+                denominatorDegreesOfFreedom, SIGNIFICANCE_LEVEL_5);
+        //ELIMINAR LINHA DE BAIXO E COLOCAR NO getDecisionForAnova
+        text.append(String.format("%f > f%.2f,(%d,%d)=%f%n",
+                f, SIGNIFICANCE_LEVEL_5, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD));
+        text.append(String.format("%s%n", getDecisionForAnova(critFD)));
         return text.toString();
     }
 }
