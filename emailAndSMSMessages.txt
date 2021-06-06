@@ -47,6 +47,7 @@ Employee email: carlos@gmail.com
 Emplooye Password: JnVaec5G9Q
 
 Employee email: carlos@gmail.com
+<<<<<<< HEAD
 Emplooye Password: wxkaKldn9K
 
 Employee email: carlos@gmail.com
@@ -102,3 +103,6 @@ Emplooye Password: iXo3D3uHHm
 
 Employee email: carlos@gmail.com
 Emplooye Password: rEkFBhGupL
+
+Emplooye Password: o3CBoKkAGV
+
