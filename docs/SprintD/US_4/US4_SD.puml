@@ -20,6 +20,8 @@ activate ADM
 ADM -> UI : asks to register a test to be performed to a registered client
 activate UI
 
+UI -> CTRL**: create(currentCalCode)
+
 
 UI --> ADM : requests data (tinNumber, NHScode)
 deactivate UI

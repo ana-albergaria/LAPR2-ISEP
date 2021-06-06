@@ -11,10 +11,7 @@ deactivate ":System"
 
 MLT -> ":System" : selects requested data
 activate ":System"
-":System" --> MLT : shows the number of clinical tests to be imported\n and requests confirmation
-deactivate ":System"
-MLT -> ":System" : confirms the data
-activate ":System"
+
 ":System" --> MLT : informs operation success
 deactivate ":System"
 

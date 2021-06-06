@@ -60,6 +60,7 @@ public class RegisterClientController {
      */
     public boolean registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate, String sex,
                                   String tinNumber, String email, String name, String phoneNumber) {
+
         ClientStore store = this.company.getClientStore();
         this.cl = store.registerClient(clientsCitizenCardNumber, nhsNumber, birthDate, sex,
                 tinNumber, email, name, phoneNumber);

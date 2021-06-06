@@ -6,16 +6,13 @@ actor "Laboratory coordinator" as ADM
 participant ":ImportTestUI  " as UI
 participant ":ImportTestController" as CTRL
 participant "testFile:TestFileUtils" as TST
+participant "List<Test>:" as TST
 participant ":Company" as PLAT
-participant "store:Client" as CLIENT_STORE
-participant "currentCal\n:ClinicalAnalisysLaboratory" as CAL
-participant "store:TestType" as TEST_TYPE_STORE
-participant "store:Parameter" as PARAM_STORE
-participant "store:ClinicalAnalaysisLaborayory" as CAL_STORE
-/'participant ":Platform" as PLAT'/
-participant "store:TestStore" as ORG
-participant "tt\n:Test" as TAREFA
-participant ": TestParameter" as tp
+participant ":RegisterClientController" as CLIENT_CTRL
+participant ":CreateTestController" as ORG
+participant "store:TestStore" as TEST_STORE
+participant "createdTest: Test" as CREATED_TEST
+
 
 activate ADM
 ADM -> UI : asks to import clinical tests from a CSV file.
@@ -35,201 +32,82 @@ CTRL -> TST : List<String[]>processedListData = getTestDataByFile(pathOfFile)
 activate TST
 deactivate TST
 
+/'
+CTRL -> TEST_LIST** : create()
+'/
+
+
 CTRL -> PLAT : clientStore = getClientStore()
 activate PLAT
 deactivate PLAT
 
-CTRL -> PLAT : testStore = getTestStore()
-activate PLAT
-deactivate PLAT
+CTRL -> CLIENT_CTRL** : createClientCtrl = create()
 
-CTRL -> PLAT : parameterStore = getParameterStore()
-activate PLAT
-deactivate PLAT
 
-CTRL -> PLAT : calStore = getCalStore()
-activate PLAT
-deactivate PLAT
+CTRL -> ORG** : createTestCtrl = create(currentCalCode)
+
+
 loop for each String [] of the list
 note right of CTRL: all data refered in the following steps is extracted \nfrom the .CSV file and stored at each index of each String [] of the list.
 
 alt client not existent with given tin
-CTRL -> CLIENT_STORE : client = createClient(clientDto)
-activate CLIENT_STORE
-deactivate CLIENT_STORE
-CTRL -> CLIENT_STORE : saveClient(client)
-activate CLIENT_STORE
-deactivate CLIENT_STORE
+CTRL -> CLIENT_CTRL : createClient(clientDto)
+activate CLIENT_CTRL
+deactivate CLIENT_CTRL
+CTRL -> CLIENT_CTRL : saveClient()
+activate CLIENT_CTRL
+deactivate CLIENT_CTRL
 end
-
-CTRL -> CLIENT_STORE : associatedClient = getClientByTinNumber(tinNumber)
-activate CLIENT_STORE
-deactivate CLIENT_STORE
-
-CTRL -> CAL_STORE : currentCal = getCalById(labId)
-activate CAL_STORE
-deactivate CAL_STORE
-
-CTRL -> TEST_TYPE_STORE : selectedTestType = getTestTypeByCode(selectedTestTypeCode)
-activate TEST_TYPE_STORE
-deactivate TEST_TYPE_STORE
 
 CTRL -> TST : List<String> parameterCodes = getParameterCodes(String[] processedData)
 activate TST
 deactivate TST
 
-
-CTRL -> PARAM_STORE : List<Parameters> parameters = getParametersByCodes(String[] parameterCodes)
-activate PARAM_STORE
-deactivate PARAM_STORE
-
-
-
-end
-CTRL --> UI : result
-deactivate CTRL
-UI -> ADM : shows test types and request to select one
-deactivate UI
-
-ADM -> UI : selects requested data
-activate UI
-
-UI -> CTRL : categories = getCategoriesListOfTestType(selectedTestTypeCode)
-activate CTRL
-ref over CTRL
-SD_getCategoriesOfTestType(selectedTestTypeCode)
-end
-
-CTRL --> UI : ttCategoriesListDto
-deactivate CTRL
-
-loop while user adds categories
-UI --> ADM : shows available categories and request to select one
-deactivate PLAT
-deactivate UI
-
-
-ADM -> UI : selects requested data
-activate UI
-UI -> UI : selectedCategoriesCodes.add(selectedCategoryCode)
-end
-
-UI -> CTRL : parameters = getParametersOfCategories(selectedCategoriesCodes)
-activate CTRL
-ref over CTRL
-SD_getParameterOfCategories(selectedCategoriesCodes)
-end
-
-CTRL --> UI : filteredParamsList
-deactivate CTRL
-
-loop while user adds parameters
-UI --> ADM : shows available parameters and request to select one
-deactivate PLAT
-deactivate UI
-
-
-ADM -> UI : selects requested data
-activate UI
-UI -> UI : selectedParamCodes.add(selectedParamCode)
-end
-
-UI -> CTRL : createTest(NHScode, tinNumber,\n selectedTestTypeCode, selectedParamCodes)
-activate CTRL
-CTRL -> PLAT : clientStore = getClientStore()
-activate PLAT
-|||
-deactivate PLAT
-
-
-CTRL -> CLIENT_STORE : associatedClient = getClientByTinNumber(tinNumber)
-activate CLIENT_STORE
-deactivate CLIENT_STORE
-
-
-
-CTRL -> PLAT : testTypeStore = getTestTypeStore()
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> TEST_TYPE_STORE : selectedTestType = getTestTypeByCode(selectedTestTypeCode)
-activate TEST_TYPE_STORE
-deactivate TEST_TYPE_STORE
-
-CTRL -> PLAT : parameterStore = getParameterStore()
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> PARAM_STORE : selectedParamsList = getParamsByCodes(selectedParamCodes)
-activate PARAM_STORE
-deactivate PARAM_STORE
-
-
-CTRL -> PLAT : testStore = getTestStore()
-activate PLAT
-PLAT -> ORG** : create()
-deactivate PLAT
-
-CTRL -> ORG : test = createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
-activate ORG
-ORG -> TAREFA** : createTest(NHScode, associatedClient,\n selectedTestType, selectedParamsList)
-deactivate ORG
-
-activate TAREFA
-TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
-
-
-
-loop for each parameter of the list
-TAREFA -> tp**: testParameter =  create(parameter)
-TAREFA -> TAREFA: testParameters.add(testParameter)
-end
-
-TAREFA -> TAREFA : code = generateSequentialCode()
-
-
-
-
-TAREFA -> TAREFA : dateOfTestRegistration = generateNowDateAndTime ()
-deactivate TAREFA
-
-CTRL -> ORG : result = validateTest(test)
+CTRL -> ORG : createTest(NHScode, tinNumber, testTypeCode, paramCodes)
 activate ORG
 deactivate ORG
 
-
-
-CTRL --> UI : result
-deactivate CTRL
-UI --> ADM : shows Test data and requests confirmation
-deactivate PLAT
-deactivate UI
-
-
-ADM -> UI : confirms the data
-activate UI
-UI -> CTRL : saveTest()
-activate CTRL
-CTRL -> PLAT : testStore = getTestStore()
-activate PLAT
-|||
-deactivate PLAT
-
-CTRL -> ORG : saveTest(test)
+CTRL -> ORG : saveTest()
 activate ORG
-
-ORG -> ORG: validateTest(test)
-ORG -> ORG: addTest(test)
 deactivate ORG
 
-CTRL -> CAL : currentCal.addTest(test)
-activate CAL
+CTRL -> TEST_STORE : createdTest = getTestByNhsNumber(nhsNumber)
+activate TEST_STORE
+deactivate TEST_STORE
 
-CAL -> CAL : validateTest(test)
+CTRL -> TST : List<Double> parameterResults = getParameterResults(String[] processedData)
+activate TST
+deactivate TST
 
-deactivate CAL
+loop for each test parameter code
+CTRL -> CREATED_TEST : createdTest.addTestResult(parameterCode, parameterResult)
+activate CREATED_TEST
+deactivate CREATED_TEST
+end
+
+CTRL -> CREATED_TEST : setRegDate(regDate)
+activate CREATED_TEST
+deactivate CREATED_TEST
+
+CTRL -> CREATED_TEST : setChemicalDate(chemicalDate)
+activate CREATED_TEST
+deactivate CREATED_TEST
+
+CTRL -> CREATED_TEST : setReportData(reportDate)
+activate CREATED_TEST
+deactivate CREATED_TEST
+
+/'CTRL -> TEST_LIST : createdTestsList.add(createdTest)
+activate TEST_LIST
+deactivate TEST_LIST'/
+end
+
+/'CTRL -> TEST_LIST : resultSize = createdTestsList.size()
+activate TEST_LIST
+deactivate TEST_LIST'/
+
+
+deactivate CTRL
 
 CTRL --> UI: result
 
