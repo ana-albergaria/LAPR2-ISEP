@@ -83,7 +83,7 @@ public class TestStore {
         List<Test> listTestsReadyForResults = new ArrayList<>();
 
         for (Test test : testList) {
-            if (test.isWaitingForResults())
+            if (test.hasSamples() && !test.hasResults())
                 listTestsReadyForResults.add(test);
         }
         return listTestsReadyForResults;
@@ -101,6 +101,16 @@ public class TestStore {
             }
         }
         throw new UnsupportedOperationException("Test not found in ready to diagnose list!");
+    }
+
+    public ArrayList<Test> getTestsByClient(Client client){
+        ArrayList<Test> clientTests = new ArrayList<Test>();
+        for (Test tst : testList){
+            if (tst.getClient().equals(client)){
+                clientTests.add(tst);
+            }
+        }
+        return clientTests;
     }
 
     /**

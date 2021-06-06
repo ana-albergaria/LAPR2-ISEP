@@ -316,21 +316,18 @@ public class Test {
     }
 
     /**
-     * Method to verify if the test is waiting for results.
+     * Method to check if the test has results.
      *
-     * @return true if the test is waiting for results,
+     * @return true if the test has results,
      * otherwise return false.
      */
-    public boolean isWaitingForResults(){
+    public boolean hasResults(){
         int f = 0;
         List<TestParameter> testParameters = this.getParameters();
         for (TestParameter testParameter : testParameters){
-            if (testParameter.getTestParameterResult() != null){
+            if (testParameter.getTestParameterResult() == null){
                 f++;
             }
-        }
-        if (!this.hasSamples()){
-            f++;
         }
         return f == 0;
     }

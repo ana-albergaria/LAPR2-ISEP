@@ -41,7 +41,7 @@ public class CompanyPerformanceAnalysisController {
      * @return an ArrayList with all the info to be considered when analysing the company performance
      */
     public ArrayList<Integer> getTestOverview(){
-        ArrayList<Integer> testOverview = new ArrayList<Integer>();
+        ArrayList<Integer> testOverview = new ArrayList<>();
         ClientStore clientStore = this.company.getClientStore();
         int clientInfo = clientStore.getClientInfo();
         testOverview.add(clientInfo);
