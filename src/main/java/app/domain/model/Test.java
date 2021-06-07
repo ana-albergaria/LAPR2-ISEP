@@ -369,6 +369,10 @@ public class Test {
         throw new UnsupportedOperationException("Test not found!");
     }
 
+    public void setDateOfChemicalAnalysis(Date dateOfChemicalAnalysis) {
+        this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
+    }
+
     /**
      * Method to store the test report object into the test.
      *
@@ -404,7 +408,7 @@ public class Test {
     @Override
     public String toString() {
         return String.format("TEST CODE %s%n* NHS Code: %s%n* Client name: %s%n* Test Type: %s%n* Collection Method: %s%n* " +
-                        "Parameters: %s%nDate of test registration:%s%n Date of sample collection:%s%nDate of chemical analysis: %s%nDate of diagnosis: %s%n",
+                        "Parameters: %s%nDate of test registration:%s%nDate of sample collection:%s%nDate of chemical analysis: %s%nDate of diagnosis: %s%n",
                 code, nhsCode, client.getName(), testType, testType.getCollectingMethod(), testParameters,
                 dateOfTestRegistration, dateOfSamplesCollection, dateOfChemicalAnalysis, dateOfDiagnosis);
     }
