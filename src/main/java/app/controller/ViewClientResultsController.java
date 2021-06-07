@@ -37,7 +37,8 @@ public class ViewClientResultsController {
      * Retrieves list of client tests with or list of client tests without results
      * @param client the client
      * @param withResults whether the list to be returned is the list of client tests with or without results
-     * @return list of client tests with or list of client tests without results
+     * @return list of client tests with results if withResults is true
+     * otherwise return list of client tests without results
      */
     public List<TestDTO> getClientTestsWithOrWithoutResults(Client client, boolean withResults){
         TestStore tstStore = this.company.getTestStore();

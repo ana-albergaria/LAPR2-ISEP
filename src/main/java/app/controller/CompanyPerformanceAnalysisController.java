@@ -47,7 +47,7 @@ public class CompanyPerformanceAnalysisController {
         return  testOverview;
     }
 
-        /*
+    /*
     testOverview -> arraylist of integers with:
     number of clients
     number of tests waiting for results
@@ -61,13 +61,33 @@ public class CompanyPerformanceAnalysisController {
     year
     */
 
-    public ArrayList<Integer> findWorstSubIntWithBenchmarkAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
-        //falta fazer
+    //12 WORKING HOURS PER DAY
+    //WORKING DAY IS FROM 8:00 TO 20:00
+    //SUNDAY IS NOT A WORKING DAY
+
+    public int findNumberOfTestsProcessedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
+        //TO DO
+        return 0;
+    }
+
+    public int findNumberOfTestsWithResultsObtainedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
+        //TO DO
+        return 0;
+    }
+
+    public int[] makeIntervalArray(Date firstDayToAnalyse, Date lastDayToAnalyse){
+        //TO DO
         return null;
     }
 
-    public ArrayList<Integer> findWorstSubIntWithBruteforceAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
-        //falta fazer
+    public int[] findWorstSubIntWithBenchmarkAlgorithm(int[] interval){
+        //int[] worstSubInt = Sum.Max(interval);
+        //return worstSubInt
+        return null;
+    }
+
+    public int[] findWorstSubIntWithBruteforceAlgorithm(int[] interval){
+        //TO DO
         return null;
     }
 
