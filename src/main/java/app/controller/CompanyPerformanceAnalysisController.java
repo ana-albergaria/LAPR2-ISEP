@@ -67,11 +67,13 @@ public class CompanyPerformanceAnalysisController {
 
     public int findNumberOfTestsProcessedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
         //TO DO
+        //Use getNumberOfTestsByIntervalDateOfTestRegistration(beginningDate, endDate)
         return 0;
     }
 
     public int findNumberOfTestsWithResultsObtainedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
         //TO DO
+        //Use getNumberOfTestsByIntervalDateOfDiagnosis(beginningDate, endDate)
         return 0;
     }
 

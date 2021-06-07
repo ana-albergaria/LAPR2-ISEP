@@ -127,6 +127,16 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found!");
     }
 
+    public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDate, Date endDate){
+        //TO DO
+        return 0;
+    }
+
+    public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDate, Date endDate){ //because it only becomes available to the client after the diagnosis
+        //TO DO
+        return 0;
+    }
+
     /**
      * Gets a list of test parameters of a test
      * @param tst test to retrieve list
