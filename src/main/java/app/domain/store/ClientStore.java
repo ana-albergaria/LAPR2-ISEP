@@ -120,6 +120,15 @@ public class ClientStore {
     }
 
 
+    public boolean existsClientByTin(String tinNumber){
+        for (Client client : clientList){
+            if(client.getTinNumber().equals(tinNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Client getClientByTinNumber(String tinNumber){
         for (Client client : clientList){
             if(client.getTinNumber().equals(tinNumber)){

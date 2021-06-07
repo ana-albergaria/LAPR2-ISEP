@@ -120,11 +120,19 @@ public class App {
         List<Parameter> listParameter = new ArrayList<>();
         listParameter.add(parameter);
 
-/*
-        this.company.getTestStore().saveTest(new Test("alphanumeric",c1,t1,listParameter));
-*/
 
-        Test test1 = new Test("123456789012",c1,t1,listParameter);
+        ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
+
+
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
+
+        ClinicalAnalysisLaboratory cal2 = new ClinicalAnalysisLaboratory("llll1",
+                "CAL","fff","91841373811","1234537890", selectedTT);
+
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal2);
+
+        Test test1 = new Test("123456789012",c1,t1,listParameter, cal2);
         this.company.getTestStore().saveTest(test1);
         //RETIRAR BARCODE EXCEPTION DO CONSTRUTOR, BOOTSTRAP E SINGLETON EM BAIXO
 
@@ -146,20 +154,8 @@ public class App {
         listParameter2.add(new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
         listParameter2.add(new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
 
-        Test test2 = new Test("123456789000",c1,t2,listParameter2);
+        Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
         this.company.getTestStore().saveTest(test2);
-
-
-        ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
-                "CAL","Lisboa","91841378811","1234567890", selectedTT);
-        cal1.getCalTestList().add(test2);
-
-        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
-
-        ClinicalAnalysisLaboratory cal2 = new ClinicalAnalysisLaboratory("llll1",
-                "CAL","fff","91841373811","1234537890", selectedTT);
-        cal2.getCalTestList().add(test1);
-        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal2);
 
 
 

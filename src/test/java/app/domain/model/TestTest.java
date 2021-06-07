@@ -27,10 +27,10 @@ public class TestTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
     private ParameterCategory p2;
-    private List<TestType> selectedTT;
     private TestType t1;
     private TestType t2;
     private Date d1;
+    private ClinicalAnalysisLaboratory cal;
 
     @Before
     public void setUp() throws ParseException {
@@ -57,15 +57,18 @@ public class TestTest {
         t1 = new TestType("CODE3","blood test","blood",pcListBlood, Constants.BLOOD_EXTERNAL_ADAPTER_3);
         t2 = new TestType("CODE4","covid","swab",pcList, Constants.COVID_EXTERNAL_ADAPTER);
 
-        selectedTT = new ArrayList<>();
+        List<TestType> selectedTT = new ArrayList<>();
         selectedTT.add(t1);
         selectedTT.add(t2);
+
+        cal =  new ClinicalAnalysisLaboratory("001DO",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNullParameters(){
-        app.domain.model.Test test = new app.domain.model.Test(null, null, null, null);
+        app.domain.model.Test test = new app.domain.model.Test(null, null, null, null, null);
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -77,25 +80,25 @@ public class TestTest {
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithUnder12CharsNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test("12345678901", client, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("12345678901", client, t1, parametersBlood, cal);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithMore12CharsNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood,cal);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNotAlphanumericNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test("!@#456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("!@#456789012", client, t1, parametersBlood,cal);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithemptyNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test("", client, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("", client, t1, parametersBlood,cal);
     }
 
     @Test //this test checks if the generated number is truly sequential, making the boolean conditions for this purpouse.
@@ -103,9 +106,9 @@ public class TestTest {
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
         Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
         Client client3 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex3@gmail.com", "Alex", "12345688901");
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
-        app.domain.model.Test test2 = new app.domain.model.Test("123456789012", client2, t2, parametersCovid);
-        app.domain.model.Test test3 = new app.domain.model.Test("123456789012", client3, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood,cal);
+        app.domain.model.Test test2 = new app.domain.model.Test("123456789012", client2, t2, parametersCovid,cal);
+        app.domain.model.Test test3 = new app.domain.model.Test("123456789012", client3, t1, parametersBlood,cal);
 
         boolean firstAndSecondCondition = Long.parseLong(test.getCode()) == Long.parseLong(test2.getCode())-1;
         boolean secondAndThirdCondition = Long.parseLong(test2.getCode()) == Long.parseLong(test3.getCode())-1;
@@ -115,7 +118,7 @@ public class TestTest {
     @Test //this test checks if the generated number is 12 digits long
     public void ensureCodeis12digits(){
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood,cal);
 
         Assert.assertTrue(test.getCode().length() == 12);
     }
@@ -124,7 +127,7 @@ public class TestTest {
     public void ensureNotPossibleToAddNullSample() {
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood,cal);
 
         Assert.assertFalse(test.addSample(null));
     }
@@ -133,7 +136,7 @@ public class TestTest {
     public void ensureTestWithNoSampleIsFound() {
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood,cal);
 
         Assert.assertFalse(test.hasSamples());
     }
@@ -142,7 +145,7 @@ public class TestTest {
     public void ensureTestWithSampleIsFound() throws BarcodeException {
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood,cal);
 
         Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
 

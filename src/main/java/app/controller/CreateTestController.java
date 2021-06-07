@@ -33,11 +33,19 @@ public class CreateTestController {
      */
     private ClinicalAnalysisLaboratory currentCal;
 
+    public CreateTestController() {
+        this(App.getInstance().getCompany(), null);
+    }
+
     /**
      * Empty constructor for having the actual instance of the company when instantiated.
      */
     public CreateTestController(String currentCalCode) {
         this(App.getInstance().getCompany(), currentCalCode);
+    }
+
+    public void setCurrentCal(String calId) {
+        this.currentCal = getCalByCode(calId);
     }
 
     /**
@@ -68,7 +76,7 @@ public class CreateTestController {
         TestType testType = testTypeStore.getSingleTestTypeByCode(selectedTestTypeCode);
         List<Parameter> parameters = parameterStore.getParamsByCodes(selectedParamsCodes);
 
-        this.test = testStore.createTest(nhsCode, associatedClient, testType, parameters);
+        this.test = testStore.createTest(nhsCode, associatedClient, testType, parameters, currentCal);
 
         return testStore.validateTest(test);
     }
@@ -80,7 +88,7 @@ public class CreateTestController {
      */
     public boolean saveTest() {
         TestStore testStore = this.company.getTestStore();
-        return testStore.saveTest(test) && currentCal.addTest(test);
+        return testStore.saveTest(test);
     }
 
     /**
@@ -128,6 +136,7 @@ public class CreateTestController {
      * @return the found CAL
      */
     public ClinicalAnalysisLaboratory getCalByCode(String currentCalCode){
+        if(currentCalCode == null) return null;
         ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
         return calStore.getCalByCode(currentCalCode);
     }

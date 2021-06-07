@@ -30,8 +30,8 @@ public class TestStore {
      * @param testType         Type of test to be conduted
      * @param parameters       List of parameters to be measured of a given test
      */
-    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters) {
-        return new Test(nhsCode, associatedClient, testType, parameters);
+    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters, ClinicalAnalysisLaboratory cal) {
+        return new Test(nhsCode, associatedClient, testType, parameters, cal);
     }
 
     /**
@@ -153,6 +153,15 @@ public class TestStore {
 
         return listTotalTestParameters;
     }
+
+    public Test getTestByNhsNumber(String nhsNumber){
+        for (Test test : testList) {
+            if (test.getNhsCode().equalsIgnoreCase(nhsNumber))
+                return test;
+        }
+        throw new UnsupportedOperationException("Test not found with given nhs number!");
+    }
+
     /**
      * Gets a test object by its sample barcode number
      * @param barcodeNumber barcode number to find in the tests

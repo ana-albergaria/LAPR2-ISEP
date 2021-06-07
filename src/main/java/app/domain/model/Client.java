@@ -140,7 +140,7 @@ public class Client {
         if ((!clientsCitizenCardNumber.matches("[0-9]+")))
             throw new IllegalArgumentException("Clients Citizen Card Number must be only digits");
         if ((clientsCitizenCardNumber).length() != CITIZEN_CARD_LENGTH)
-            throw new IllegalArgumentException("Clients Citizen Card Number must be 16 digits");
+            throw new IllegalArgumentException("Clients Citizen Card Number must be 16 digits " + clientsCitizenCardNumber);
     }
 
     /**
@@ -215,17 +215,14 @@ public class Client {
      * @param email clients email
      */
     private void checkEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
+        String emailRegex = "^[\\w-']+(\\.[\\w-']+)*@([a-z0-9-]+(\\.[a-z0-9-]+)*?\\.[a-z]{2,6}|(\\d{1,3}\\.){3}\\d{1,3})(:\\d{4})?$";
 
         Pattern pat = Pattern.compile(emailRegex);
 
         if (StringUtils.isBlank(email))
             throw new IllegalArgumentException("Email cannot be blank");
         if (!pat.matcher(email).matches())
-            throw new IllegalArgumentException("Invalid Email format");
+            throw new IllegalArgumentException("Invalid Email format " + email);
 
     }
 

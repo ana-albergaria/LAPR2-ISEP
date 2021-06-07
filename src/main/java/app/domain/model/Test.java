@@ -60,7 +60,7 @@ public class Test {
     /**
      * Date of test registration
      */
-    private final Date dateOfTestRegistration;
+    private Date dateOfTestRegistration;
 
     /**
      * Date of samples collection
@@ -83,6 +83,12 @@ public class Test {
     private static int totalTests = 0;
 
     /**
+     * Laboratory in which a test was created
+     */
+
+    private ClinicalAnalysisLaboratory cal;
+
+    /**
      * Constructor only without samples, since in the business process they are added later on,
      * also generates the attribute code, test registration time and makes the list of parameter into test parameters
      * @param nhsCode National health system code of a given test
@@ -90,7 +96,7 @@ public class Test {
      * @param testType Type of test to be conduted
      * @param parameters List of parameters to be measured of a given test
      */
-    public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters) {
+    public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters, ClinicalAnalysisLaboratory cal) {
         checkNhsCode(nhsCode);
         totalTests++;
         this.code = generateCode();
@@ -98,6 +104,7 @@ public class Test {
         this.client = client;
         this.testType = testType;
         this.testParameters = addTestParameters(parameters);
+        this.cal = cal;
         this.dateOfTestRegistration = Calendar.getInstance().getTime();
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
@@ -203,6 +210,22 @@ public class Test {
      */
     public Date getDateOfDiagnosis() {
         return dateOfDiagnosis;
+    }
+
+    public void setDateOfSamplesCollection(Date dateOfSamplesCollection) {
+        this.dateOfSamplesCollection = dateOfSamplesCollection;
+    }
+
+    public void setDateOfChemicalAnalysis(Date dateOfChemicalAnalysis) {
+        this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
+    }
+
+    public void setDateOfDiagnosis(Date dateOfDiagnosis) {
+        this.dateOfDiagnosis = dateOfDiagnosis;
+    }
+
+    public void setDateOfTestRegistration(Date dateOfTestRegistration) {
+        this.dateOfTestRegistration = dateOfTestRegistration;
     }
 
     /**

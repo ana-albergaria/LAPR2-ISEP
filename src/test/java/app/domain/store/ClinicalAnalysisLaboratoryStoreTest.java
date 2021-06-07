@@ -231,19 +231,20 @@ public class ClinicalAnalysisLaboratoryStoreTest {
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
         Client client2 = new Client("1234567890123458", "1234567890", d1, "Male", "1234567890", "alex1@gmail.com", "Alex", "12345675901");
         Client client3 = new Client("1234567890123457", "1234567890", d1, "Male", "1234567890", "alex3@gmail.com", "Alex", "12345688901");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
-        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t2, parametersCovid);
-        app.domain.model.Test test3 = testStore.createTest("123456789012", client3, t1, parametersBlood);
+        ClinicalAnalysisLaboratory cal = new ClinicalAnalysisLaboratory("MEL23",
+                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t2, parametersCovid, cal);
+        app.domain.model.Test test3 = testStore.createTest("123456789012", client3, t1, parametersBlood, cal);
         testStore.saveTest(test);
         testStore.saveTest(test2);
         testStore.saveTest(test3);
-        ClinicalAnalysisLaboratory cal = new ClinicalAnalysisLaboratory("MEL23",
-                "BMAC","Bragança","97777378811","1234567890", selectedTT);
+
         cal.getCalTestList().add(test);
         cal.getCalTestList().add(test2);
         cal.getCalTestList().add(test3);
-        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal);
 
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(cal);
 
         List<app.domain.model.Test> calTestList = calStore.getTestsWithNoSamples(cal.getLaboratoryID());
         List<app.domain.model.Test> expectedCalTestList = new ArrayList<>();

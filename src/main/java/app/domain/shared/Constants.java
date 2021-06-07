@@ -1,5 +1,7 @@
 package app.domain.shared;
 
+import app.domain.model.TestType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class Constants {
     public static final String BLOOD_EXTERNAL_ADAPTER_2 = "app.domain.adapters.ExternalModule2APIAdapter";
     public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.adapters.ExternalModule3APIAdapter";
     public static final String COVID_EXTERNAL_ADAPTER = "app.domain.adapters.CovidReferenceValues1APIAdapter";
+
+    public static final String [] BASE_CSV_DATA = {"Test_Code","NHS_Code","Lab_ID","CitizenCard_Number","NHS_Number","TIN","BirthDay","PhoneNumber","Name","E-mail","Address","TestType","Category","HB000","WBC00","PLT00" ,"RBC00" ,"Category","HDL00" ,"Category","IgGAN","Test_Reg_DateHour","Test_Chemical_DateHour" ,"Test_Doctor_DateHour" ,"Test_Validation_DateHour"};
 
     //Mathematics
     //-> Simple Linear Regression
