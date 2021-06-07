@@ -1,12 +1,12 @@
 package app.domain.adapters;
 
-import app.domain.interfaces.MathCalculus;
+import app.domain.interfaces.RegressionModel;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
 import app.domain.model.US19.LinearRegression;
 
-public class SimpleLinearRegressionAdapter implements MathCalculus {
+public class SimpleLinearRegressionAdapter implements RegressionModel {
 
     @Override
     public MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y) {

@@ -1,12 +1,10 @@
 package app.domain.model.US19;
 
 
-import app.domain.interfaces.ExternalAPI;
-import app.domain.interfaces.MathCalculus;
+import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.domain.store.TestStore;
 import com.nhs.report.Report2NHS;
-import org.apache.commons.math3.distribution.TDistribution;
 
 import java.io.File;
 import java.text.ParseException;
@@ -42,7 +40,7 @@ public class Main {
         LinearRegression simpleLR = new LinearRegression(x, y);
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
-        MathCalculus calculus = (MathCalculus) oClass.newInstance();
+        RegressionModel calculus = (RegressionModel) oClass.newInstance();
         MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y);
         //MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, y1);
         System.out.println(myRegressionModel);

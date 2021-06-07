@@ -5,7 +5,6 @@ package app.domain.model.US19;
  *  Simple linear regression.
  ******************************************************************************/
 
-import app.domain.interfaces.MathCalculus;
 import app.domain.shared.Constants;
 
 /**

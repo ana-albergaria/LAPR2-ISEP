@@ -1,12 +1,18 @@
 package app.domain.model;
 
 import app.domain.interfaces.ExternalAPI;
+import app.domain.interfaces.RegressionModel;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,7 +71,17 @@ public class Company {
      */
     private String classNameForBarcodeApi;
 
-    public Company(String designation, String classNameForBarcodeApi)
+    private String regressionModelCLass;
+
+    private String dateInterval;
+
+    private String historicalPoints;
+
+    public Company(String designation,
+                   String classNameForBarcodeApi,
+                   String regressionModelCLass,
+                   String dateInterval,
+                   String historicalPoints)
     {
         if (StringUtils.isBlank(designation))
             throw new IllegalArgumentException("Designation cannot be blank.");
@@ -96,6 +112,9 @@ public class Company {
         this.sampleStore = new SampleStore();
         this.calStore = new ClinicalAnalysisLaboratoryStore();
         this.classNameForBarcodeApi = classNameForBarcodeApi;
+        this.regressionModelCLass = regressionModelCLass;
+        this.dateInterval = dateInterval;
+        this.historicalPoints = historicalPoints;
     }
 
     public String getDesignation() {
@@ -313,6 +332,24 @@ public class Company {
     public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Class<?> oClass = Class.forName(classNameForBarcodeApi);
         return (ExternalAPI) oClass.newInstance();
+    }
+
+    public RegressionModel getRegressionModel() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        Class<?> oClass = Class.forName(regressionModelCLass);
+        return (RegressionModel) oClass.newInstance();
+    }
+
+    public List<Date> getDateInterval() throws ParseException {
+        String[] intervalDatesInString = dateInterval.split("-");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        List<Date> intervalDates = new ArrayList<>();
+        intervalDates.add(sdf.parse(intervalDatesInString[0]));
+        intervalDates.add(sdf.parse(intervalDatesInString[1]));
+        return intervalDates;
+    }
+
+    public int getHistoricalPoints() {
+        return Integer.parseInt(historicalPoints);
     }
 
 

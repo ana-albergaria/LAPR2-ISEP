@@ -1,4 +1,4 @@
-
+/*
 package app.domain.model.US19;
 
 import app.domain.model.*;
@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/*
+
 public class Main2 {
     public static void main(String[] args) throws IllegalAccessException, ClassNotFoundException, InstantiationException, ParseException {
         List<Test> testList = new ArrayList<>();
@@ -25,8 +25,8 @@ public class Main2 {
         test1.addTestResult("IgGAN",1.5,"mg");
         Calendar hoje = Calendar.getInstance();
         hoje.set(Calendar.YEAR, 2021);
-        hoje.set(Calendar.MONTH, 5);    // janeiro é representado por 0
-        hoje.set(Calendar.DAY_OF_MONTH, 1);
+        hoje.set(Calendar.MONTH, 4);    // janeiro é representado por 0
+        hoje.set(Calendar.DAY_OF_MONTH, 30);
         Date d2 = hoje.getTime();
         test1.setDateOfChemicalAnalysis(d2);
         testList.add(test1);
@@ -79,25 +79,20 @@ public class Main2 {
                                                            List<Test> testList) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         int[] observedPositivesInt = new int[numberOfObservations];
-        int numberOfPositivesPerDay = 0, indexDate = 0;
+        int indexDate = 0;
 
         for (Test test : testList) {
             if(test.hasPositiveResultForCovid()) {
                 for (int i = 0; i < dates.size(); i++) {
                     Date dateToBeCompared = sdf.parse(dates.get(i));
                     if(checkIfDatesAreEqual(test.getDateOfChemicalAnalysis(), dateToBeCompared)) {
-                        numberOfPositivesPerDay++;
                         indexDate = i;
+                        observedPositivesInt[indexDate]++;
                     }
                 }
             }
-            observedPositivesInt[indexDate] = numberOfPositivesPerDay;
-            numberOfPositivesPerDay = 0;
         }
         convertIntegerListToString(observedPositives, observedPositivesInt);
-
-
-
     }
 
     public static void convertIntegerListToString(List<String> observedPositives, int[] observedPositivesInt) {
@@ -134,5 +129,6 @@ public class Main2 {
     }
 
 }
-
  */
+
+
