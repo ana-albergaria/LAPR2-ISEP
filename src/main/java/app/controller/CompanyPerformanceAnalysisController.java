@@ -5,7 +5,8 @@ import app.domain.model.Test;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 
-import com.isep.mdis.Sum;
+//import com.isep.mdis.Sum;
+import org.apache.commons.math3.stat.descriptive.summary.Sum;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,11 +84,13 @@ public class CompanyPerformanceAnalysisController {
 
         return null;
     }
-
+/*
     public int[] findWorstSubIntWithBenchmarkAlgorithm(int[] interval){
         int[] worstSubInt = Sum.Max(interval);
         return worstSubInt;
     }
+
+ */
 
     public int[] findWorstSubIntWithBruteforceAlgorithm(int[] interval){
         //TO DO

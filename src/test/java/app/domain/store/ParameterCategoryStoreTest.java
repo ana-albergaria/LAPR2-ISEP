@@ -19,7 +19,7 @@ public class ParameterCategoryStoreTest {
 
     @Before
     public void setUp() {
-        company = new Company("Many Labs", Constants.CLASS_BARCODE_API);
+        company = new Company("Many Labs", Constants.CLASS_BARCODE_API, Constants.CLASS_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS);
         parameterCategoryStore = company.getParameterCategoryStore();
     }
 

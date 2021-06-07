@@ -102,7 +102,8 @@ public class Main {
         }
          */
 
-
+        Date date = new Date();
+        System.out.println(date);
 
 
         /*

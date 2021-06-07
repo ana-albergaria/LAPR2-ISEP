@@ -17,7 +17,7 @@ public class TestTypeStoreTest {
     private List<ParameterCategory> pcList;
     private ParameterCategory p1;
     private ParameterCategory p2;
-    private Company company = new Company("many labs", Constants.CLASS_BARCODE_API);
+    private Company company = new Company("many labs", Constants.CLASS_BARCODE_API, Constants.CLASS_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS);
 
     @Before
     public void setUp() {
