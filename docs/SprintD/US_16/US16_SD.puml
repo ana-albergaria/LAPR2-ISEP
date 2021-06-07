@@ -19,7 +19,7 @@ activate CTRL
 
 CTRL -> CMP : cltStore = getClientStore()
 activate CMP
-|||
+CMP --> CLTSTORE** : create()
 deactivate CMP
 CTRL -> CLTSTORE : clientsInfo = getClientInfo()
 activate CLTSTORE
@@ -28,7 +28,7 @@ deactivate CLTSTORE
 
 CTRL -> CMP : tstStore = getTestStore()
 activate CMP
-|||
+CMP --> TSTSTORE** : create()
 deactivate CMP
 CTRL -> TSTSTORE : testsInfo = getTestsInfo()
 activate TSTSTORE
