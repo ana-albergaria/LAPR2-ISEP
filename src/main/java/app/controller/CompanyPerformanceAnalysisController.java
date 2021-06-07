@@ -4,6 +4,8 @@ import app.domain.model.Company;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 
+import com.isep.mdis.Sum;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -83,9 +85,8 @@ public class CompanyPerformanceAnalysisController {
     }
 
     public int[] findWorstSubIntWithBenchmarkAlgorithm(int[] interval){
-        //int[] worstSubInt = Sum.Max(interval);
-        //return worstSubInt
-        return null;
+        int[] worstSubInt = Sum.Max(interval);
+        return worstSubInt;
     }
 
     public int[] findWorstSubIntWithBruteforceAlgorithm(int[] interval){

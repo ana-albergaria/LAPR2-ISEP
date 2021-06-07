@@ -127,14 +127,37 @@ public class TestStore {
         throw new UnsupportedOperationException("Test not found!");
     }
 
+    /**
+     * Gets the number of tests that were registered between the desired interval of time
+     *
+     * @param beginningDate the beginning date of the desired interval of time
+     * @param endDate the end date of the desired interval of time
+     * @return the number of tests that were registered between the desired interval of time
+     */
     public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDate, Date endDate){
-        //TO DO
-        return 0;
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfTestRegistration().after(beginningDate) && test.getDateOfTestRegistration().before(endDate))
+                num++;
+        }
+        return num;
     }
 
-    public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDate, Date endDate){ //because it only becomes available to the client after the diagnosis
-        //TO DO
-        return 0;
+    /**
+     * Gets the number of tests that were validated between the desired interval of time
+     *
+     * @param beginningDate the beginning date of the desired interval of time
+     * @param endDate the end date of the desired interval of time
+     * @return the number of tests that were validated between the desired interval of time
+     */
+    public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDate, Date endDate){
+        //because it only becomes available to the client after the diagnosis
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfDiagnosis().after(beginningDate) && test.getDateOfDiagnosis().before(endDate))
+                num++;
+        }
+        return num;
     }
 
     /**
