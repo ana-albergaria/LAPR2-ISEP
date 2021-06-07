@@ -369,10 +369,6 @@ public class Test {
         throw new UnsupportedOperationException("Test not found!");
     }
 
-    public void setDateOfChemicalAnalysis(Date dateOfChemicalAnalysis) {
-        this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
-    }
-
     /**
      * Method to store the test report object into the test.
      *
