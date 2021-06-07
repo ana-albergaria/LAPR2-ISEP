@@ -22,6 +22,9 @@ public class Constants {
 
     //created because it's handy for the tests
     public static final String CLASS_BARCODE_API = "app.domain.adapters.BarbecueAdapter";
+    public static final String CLASS_REGRESSION_MODEL = "app.domain.adapters.SimpleLinearRegressionAdapter";
+    public static final String DATE_INTERVAL = "28/05/2021-7/06/2021";
+    public static final String HISTORICAL_POINTS = "15";
 
     public static final String BLOOD_MODULE_1_NAME = "BloodModule1 (for blood tests, requires a key access)";
     public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";

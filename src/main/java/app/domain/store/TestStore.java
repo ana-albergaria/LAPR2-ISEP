@@ -201,7 +201,7 @@ public class TestStore {
 
     /*
     to be used in US19
-    WARNING: - Confirm if it's tests with results OR validated tests;
+    WARNING: - Confirm if it's tests with results OR validated tests -> A: Validated.
             - Confirm if the client wishes the date of test registration or date of results
      */
     public List < List<String> > getTestsWithResultsDataForTableOfValues(int numberOfObservations,
@@ -224,20 +224,18 @@ public class TestStore {
                                                     List<String> observedPositives) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         int[] observedPositivesInt = new int[numberOfObservations];
-        int numberOfPositivesPerDay = 0, indexDate = 0;
+        int indexDate = 0;
 
         for (Test test : testList) {
             if(test.hasPositiveResultForCovid()) {
                 for (int i = 0; i < dates.size(); i++) {
                     Date dateToBeCompared = sdf.parse(dates.get(i));
-                    if(checkIfDatesAreEqual(test.getDateOfChemicalAnalysis(), dateToBeCompared)) {
-                        numberOfPositivesPerDay++;
+                    if(checkIfDatesAreEqual(test.getDateOfDiagnosis(), dateToBeCompared)) {
                         indexDate = i;
+                        observedPositivesInt[indexDate]++;
                     }
                 }
             }
-            observedPositivesInt[indexDate] = numberOfPositivesPerDay;
-            numberOfPositivesPerDay = 0;
         }
         convertIntegerListToString(observedPositives, observedPositivesInt);
     }
@@ -246,8 +244,6 @@ public class TestStore {
         for (int i = 0; i < observedPositivesInt.length; i++) {
             observedPositives.add(String.valueOf(observedPositivesInt[i]));
         }
-
-
     }
 
     /*
@@ -268,9 +264,52 @@ public class TestStore {
         }
     }
 
+    public double getNumberOfCovidTestsRealizedInADay(Date date) {
+        double testsInADay = 0;
+        for (Test test : testList) {
+            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
+                testsInADay++;
+        }
+        return testsInADay;
+    }
+
+    public double[] getCovidTestListDataFromDateInterval(Date beginDate, Date endDate) {
+        Calendar auxEndDate = Calendar.getInstance();
+        auxEndDate.setTime(endDate);
+
+        List<Double> covidTestList = new ArrayList<>();
+
+        while(!checkIfDatesAreEqual(beginDate, endDate)) {
+            double testsInADay = getNumberOfCovidTestsRealizedInADay(endDate);
+            covidTestList.add(testsInADay);
+            auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
+            endDate = auxEndDate.getTime();
+        }
+
+        double[] covidTestArray = convertListOfDoubleToArray(covidTestList);
+        return covidTestArray;
+    }
+
+    /*
+    public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
+        double sumAges = 0;
+        for (Test test : testList) {
+            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
+                sumAges += test.getClient().
+        }
+    }
+     */
+
+    public double[] convertListOfDoubleToArray(List<Double> list) {
+        double[] array = new double[list.size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = list.get(i);
+        }
+        return array;
+    }
+
     public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
-        Calendar cal = Calendar.getInstance();
-        Calendar otherCal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(), otherCal = Calendar.getInstance();
         cal.setTime(date);
         otherCal.setTime(otherDate);
         return cal.get(Calendar.DAY_OF_MONTH) == otherCal.get(Calendar.DAY_OF_MONTH) &&

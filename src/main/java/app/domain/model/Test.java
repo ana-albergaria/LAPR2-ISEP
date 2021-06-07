@@ -334,12 +334,20 @@ public class Test {
         return f == 0;
     }
 
+    public boolean isValidated() {
+        return this.diagnosisReport != null;
+    }
+
+    public boolean isCovidTest() {
+        return this.getTestType().getClassNameOfApi().equals(Constants.COVID_EXTERNAL_ADAPTER);
+    }
+
     /*
     to be used in US19
     WARNING - confirm if the test should only have results OR must be VALIDATED and correct it
      */
     public boolean hasPositiveResultForCovid() {
-        if(this.hasResults() && this.getTestType().getClassNameOfApi().equals(Constants.COVID_EXTERNAL_ADAPTER)) {
+        if(this.isCovidTest() && this.isValidated()) {
             List<TestParameter> testParameters = this.getParameters();
             return testParameters.get(0).getTestParameterResult().getResultValue() > 1.4;
         }
