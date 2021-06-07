@@ -240,13 +240,9 @@ public class ClinicalAnalysisLaboratoryStoreTest {
         testStore.saveTest(test2);
         testStore.saveTest(test3);
 
-        cal.getCalTestList().add(test);
-        cal.getCalTestList().add(test2);
-        cal.getCalTestList().add(test3);
-
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal);
 
-        List<app.domain.model.Test> calTestList = calStore.getTestsWithNoSamples(cal.getLaboratoryID());
+        List<app.domain.model.Test> calTestList = testStore.getTestsWithNoSamples(cal.getLaboratoryID());
         List<app.domain.model.Test> expectedCalTestList = new ArrayList<>();
         expectedCalTestList.add(test);
         expectedCalTestList.add(test2);

@@ -137,6 +137,22 @@ public class TestStore {
     }
 
     /**
+     * Method for getting list of tests in the store list with no samples collected.
+     *
+     *
+     * @return list of tests with no samples
+     */
+    public List<Test> getTestsWithNoSamples(String laboratoryID) {
+        List<Test> listTestsNoSamples = new ArrayList<>();
+
+        for (Test test : testList) {
+            if (!test.hasSamples() && test.getCalId().equals(laboratoryID))
+                listTestsNoSamples.add(test);
+        }
+        return listTestsNoSamples;
+    }
+
+    /**
      * Gets a list of the parameters of the test parameters of an specified test object
      * @param test test object to find parameters
      * @return list of parameters

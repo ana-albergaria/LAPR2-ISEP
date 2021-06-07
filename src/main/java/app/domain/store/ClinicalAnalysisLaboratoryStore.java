@@ -79,22 +79,6 @@ public class ClinicalAnalysisLaboratoryStore {
         return new ArrayList<>(calList);
     }
 
-    /**
-     * Method for getting list of tests in the store list with no samples collected.
-     *
-     *
-     * @return list of tests with no samples
-     */
-    public List<Test> getTestsWithNoSamples(String laboratoryID) {
-        ClinicalAnalysisLaboratory selectedCal = getCalByCode(laboratoryID);
-        List<Test> listTestsNoSamples = new ArrayList<>();
-
-        for (Test test : selectedCal.getCalTestList()) {
-            if (!test.hasSamples())
-                listTestsNoSamples.add(test);
-        }
-        return listTestsNoSamples;
-    }
 
     /**
      * Method for getting the Clinical Analysis Laboratory by its laboratory ID.
