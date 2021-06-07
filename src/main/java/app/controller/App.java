@@ -24,7 +24,11 @@ public class App {
 
     private App() {
         Properties props = getProperties();
-        this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION), props.getProperty("Company.ExternalAPI.Class"));
+        this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
+                props.getProperty("Company.ExternalAPI.Class"),
+                props.getProperty("Company.RegressionModel.Class"),
+                props.getProperty("Company.DateInterval"),
+                props.getProperty("Company.NumberOfHistoricalPoints"));
         this.authFacade = this.company.getAuthFacade();
         bootstrap();
     }
