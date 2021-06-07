@@ -57,6 +57,45 @@ manual (in the annexes) that must be delivered with the application."
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8831#p11592).
 
+-
+
+> **Question:** When referring to "the application should also display statistics and graphs" is it up to the team to decide which API or resource should be used to generate graphs and statistics, or do you prefer something specific?
+>
+> **Answer:** With JavaFX you can draw high quality graphs and there is no need to use other tools.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8869#p11682).
+
+-
+
+> **Question:** After the Laboratory Coordinator types the requested data and views the analysis of the company performance, should he be able to re-type different data and view the results for a different interval of time and/or algorithm? To make the re-type of the data easier, should there be a "clear" button, that is responsible for clearing the text fields for data entry?
+>
+> **Answer:**  The laboratory coordinator should be able to explore different parameter values (settings) and check the results. Each team should prepare a simple and intuitive interface that requires a minimum number of interactions with the user.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8901#p11695).
+
+-
+
+> **Question:** Can we assume that every day in the interval defined by the coordinator is a working day with 12 working hours each?
+>
+> **Answer:** Yes.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8906#p11696).
+
+-
+
+> **Question:** If Saturday or Sunday are in the interval should we skip them or count them also as working days?
+>
+> **Answer:** Sunday is not a working day. All the other days of the week are working days.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8906#p11696).
+
+-
+
+> **Question:** Is there any specific hour to start filling the 144 integers list?
+>
+> **Answer:** A working day is from 8h00 to 20h00.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8906#p11696).
 
 
 ### 1.3. Acceptance Criteria
