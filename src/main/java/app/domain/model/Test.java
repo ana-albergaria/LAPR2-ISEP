@@ -149,6 +149,10 @@ public class Test {
         return nhsCode;
     }
 
+    public String getCalId() {
+        return cal.getLaboratoryID();
+    }
+
     /**
      * Returns the client who will do the test.
      *
