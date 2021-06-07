@@ -27,7 +27,7 @@ activate CTRL
 
 CTRL -> CMP : tstStore = getTestStore()
 activate CMP
-|||
+CMP --> TSTSTORE** : create()
 deactivate CMP
 
 CTRL -> TSTSTORE : listTestsToDiagnose = getTestsReadyToDiagnose()

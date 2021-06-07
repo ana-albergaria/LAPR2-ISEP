@@ -1,11 +1,13 @@
 package app.controller;
 
 import app.domain.model.Company;
-import app.domain.model.CompanyPerformanceAnalysis;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 
+import com.isep.mdis.Sum;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author Marta Ribeiro (1201592)
@@ -16,8 +18,6 @@ public class CompanyPerformanceAnalysisController {
      * The company associated with the Controller.
      */
     private Company company;
-
-    private CompanyPerformanceAnalysis analysis;
 
     /**
      * Builds an empty constructor for having the actual instance of the company when instantiated.
@@ -33,7 +33,6 @@ public class CompanyPerformanceAnalysisController {
      */
     public CompanyPerformanceAnalysisController(Company company){
         this.company = company;
-        this.analysis = null;
     }
 
     /**
@@ -55,12 +54,44 @@ public class CompanyPerformanceAnalysisController {
     number of clients
     number of tests waiting for results
     number of tests waiting for diagnosis
+    -------------
+    faltam:
+    -------------
     total number of tests processed in the laboratory in each day...
     week...
     month...
     year
     */
 
-    //+findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)
+    //12 WORKING HOURS PER DAY
+    //WORKING DAY IS FROM 8:00 TO 20:00
+    //SUNDAY IS NOT A WORKING DAY
+
+    public int findNumberOfTestsProcessedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
+        //TO DO
+        //Use getNumberOfTestsByIntervalDateOfTestRegistration(beginningDate, endDate)
+        return 0;
+    }
+
+    public int findNumberOfTestsWithResultsObtainedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
+        //TO DO
+        //Use getNumberOfTestsByIntervalDateOfDiagnosis(beginningDate, endDate)
+        return 0;
+    }
+
+    public int[] makeIntervalArray(Date firstDayToAnalyse, Date lastDayToAnalyse){
+        //TO DO
+        return null;
+    }
+
+    public int[] findWorstSubIntWithBenchmarkAlgorithm(int[] interval){
+        int[] worstSubInt = Sum.Max(interval);
+        return worstSubInt;
+    }
+
+    public int[] findWorstSubIntWithBruteforceAlgorithm(int[] interval){
+        //TO DO
+        return null;
+    }
 
 }

@@ -26,8 +26,8 @@ public class TestStore {
      * @param testType         Type of test to be conduted
      * @param parameters       List of parameters to be measured of a given test
      */
-    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters) {
-        return new Test(nhsCode, associatedClient, testType, parameters);
+    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters, ClinicalAnalysisLaboratory cal) {
+        return new Test(nhsCode, associatedClient, testType, parameters, cal);
     }
 
     /**
@@ -128,12 +128,61 @@ public class TestStore {
     }
 
     /**
+     * Gets the number of tests that were registered between the desired interval of time
+     *
+     * @param beginningDate the beginning date of the desired interval of time
+     * @param endDate the end date of the desired interval of time
+     * @return the number of tests that were registered between the desired interval of time
+     */
+    public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDate, Date endDate){
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfTestRegistration().after(beginningDate) && test.getDateOfTestRegistration().before(endDate))
+                num++;
+        }
+        return num;
+    }
+
+    /**
+     * Gets the number of tests that were validated between the desired interval of time
+     *
+     * @param beginningDate the beginning date of the desired interval of time
+     * @param endDate the end date of the desired interval of time
+     * @return the number of tests that were validated between the desired interval of time
+     */
+    public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDate, Date endDate){
+        //because it only becomes available to the client after the diagnosis
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfDiagnosis().after(beginningDate) && test.getDateOfDiagnosis().before(endDate))
+                num++;
+        }
+        return num;
+    }
+
+    /**
      * Gets a list of test parameters of a test
      * @param tst test to retrieve list
      * @return list of test parameters
      */
     public List<TestParameter> getTestParameters(Test tst) {
         return new ArrayList<>(tst.getParameters());
+    }
+
+    /**
+     * Method for getting list of tests in the store list with no samples collected.
+     *
+     *
+     * @return list of tests with no samples
+     */
+    public List<Test> getTestsWithNoSamples(String laboratoryID) {
+        List<Test> listTestsNoSamples = new ArrayList<>();
+
+        for (Test test : testList) {
+            if (!test.hasSamples() && test.getCalId().equals(laboratoryID))
+                listTestsNoSamples.add(test);
+        }
+        return listTestsNoSamples;
     }
 
     /**
@@ -149,6 +198,15 @@ public class TestStore {
 
         return listTotalTestParameters;
     }
+
+    public Test getTestByNhsNumber(String nhsNumber){
+        for (Test test : testList) {
+            if (test.getNhsCode().equalsIgnoreCase(nhsNumber))
+                return test;
+        }
+        throw new UnsupportedOperationException("Test not found with given nhs number!");
+    }
+
     /**
      * Gets a test object by its sample barcode number
      * @param barcodeNumber barcode number to find in the tests

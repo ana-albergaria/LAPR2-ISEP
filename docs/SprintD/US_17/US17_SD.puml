@@ -75,7 +75,7 @@ CTRL -> TEST_STORE : createdTest = getTestByNhsNumber(nhsNumber)
 activate TEST_STORE
 deactivate TEST_STORE
 
-CTRL -> TST : List<Double> parameterResults = getParameterResults(String[] processedData)
+CTRL -> TST : List<Double> parameterResults = getParameterResults(String[] parameterCodes)
 activate TST
 deactivate TST
 

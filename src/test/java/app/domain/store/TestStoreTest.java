@@ -29,6 +29,7 @@ public class TestStoreTest {
     private TestType t1;
     private TestType t2;
     private Date d1;
+    private ClinicalAnalysisLaboratory cal;
 
     @Before
     public void setUp() throws ParseException {
@@ -59,6 +60,8 @@ public class TestStoreTest {
         selectedTT.add(t1);
         selectedTT.add(t2);
 
+        cal =  new ClinicalAnalysisLaboratory("001DO",
+                "CAL","Lisboa","91841378811","1234567890", selectedTT);
     }
 
     @Test
@@ -71,7 +74,7 @@ public class TestStoreTest {
     public void ensureEqualTestsAreNotSaved(){
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
         Assert.assertFalse(testStore.saveTest(test));
     }
@@ -80,10 +83,10 @@ public class TestStoreTest {
     public void ensureDifferentTestsPassValidation(){
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
         Client client2 = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test2 = testStore.createTest("123456789011", client, t1, parametersBlood);
+        app.domain.model.Test test2 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
         Assert.assertTrue(testStore.saveTest(test2));
     }
 
@@ -94,7 +97,7 @@ public class TestStoreTest {
         RecordSamplesController recordSamplesController = new RecordSamplesController();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         MyBarcode myBarcode = recordSamplesController.getBarcode();
@@ -112,7 +115,7 @@ public class TestStoreTest {
         RecordSamplesController recordSamplesController = new RecordSamplesController();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         MyBarcode myBarcode = recordSamplesController.getBarcode();
@@ -130,7 +133,7 @@ public class TestStoreTest {
         RecordSamplesController recordSamplesController = new RecordSamplesController();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
 
@@ -142,7 +145,7 @@ public class TestStoreTest {
         TestStore testStore = new TestStore();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         testStore.getTestByCodeInTestList("000000000002");
@@ -153,7 +156,7 @@ public class TestStoreTest {
         TestStore testStore = new TestStore();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
@@ -167,7 +170,7 @@ public class TestStoreTest {
         TestStore testStore = new TestStore();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
@@ -185,7 +188,7 @@ public class TestStoreTest {
         TestStore testStore = new TestStore();
 
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
@@ -199,7 +202,7 @@ public class TestStoreTest {
     public void ensureGetTestParametersByTestReturnsCorrectly() {
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         Assert.assertEquals(parametersBlood, testStore.getTotalTestParameters(test));
@@ -210,7 +213,7 @@ public class TestStoreTest {
     public void ensureGetTestParametersReturnsCorrectly() {
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood);
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test);
 
         Assert.assertEquals(test.getParameters(), testStore.getTestParameters(test));

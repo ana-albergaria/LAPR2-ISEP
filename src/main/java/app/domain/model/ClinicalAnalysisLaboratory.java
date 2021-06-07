@@ -24,12 +24,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
     private List<TestType> selectedTT;
 
     /**
-     * The tests the Clinical Analysis Laboratory performs.
-     */
-    private List<Test> calTestList;
-
-
-    /**
      * The length of the laboratory ID.
      */
     private static final int LABORATORY_ID_LENGTH = 5;
@@ -57,7 +51,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
         checkSelectedTestTypesRules(selectedTT);
         this.laboratoryID = laboratoryID;
         this.selectedTT = new ArrayList<>(selectedTT);
-        this.calTestList = new ArrayList<>();
     }
 
     /**
@@ -71,10 +64,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
 
     public List<TestType> getSelectedTT() {
         return selectedTT;
-    }
-
-    public List<Test> getCalTestList() {
-        return calTestList;
     }
 
         /**
@@ -100,27 +89,6 @@ public class ClinicalAnalysisLaboratory extends Laboratory {
                 throw new IllegalArgumentException("Laboratory ID must only have alphanumeric characters.");
         }
 
-        /**
-        * Method for adding tests to the current clinical analysis laboratory object
-        * @param test test to be added to the list
-        * @return true if successfully added false otherwise
-        */
-        public boolean addTest(Test test){
-            if (!validateTest(test))
-                return false;
-            return this.calTestList.add(test);
-        }
-
-        /**
-         * Validates the test to be added into the clinical analysis laboratory
-         * @param test test to be validated
-         * @return true if not null nor contained in the list, false otherwise
-         */
-        public boolean validateTest(Test test){
-            if(test == null)
-                return false;
-            return !this.calTestList.contains(test);
-        }
         /**
          * Returns true if the list of the Test Types received in the parameter respects
          * all the rules.

@@ -5,13 +5,12 @@ actor "Laboratory Coordinator" as LC
 participant ":CompanyPerformanceAnalysisUI" as UI
 participant ":CompanyPerformanceAnalysisController" as CTRL
 participant ":Company" as CMP
-participant ":CompanyPerformanceAnalysis" as CPA
 participant ":Test" as TST
 participant "tstStore\n:TestStore" as TSTSTORE
 participant "cltStore\n:ClientStore" as CLTSTORE
 
 activate LC
-LC -> UI : asks to see an overview of all the tests performed and analyse the overall performance of the company
+LC -> UI : asks to see an overview of all the tests performed and \n analyse the overall performance of the company
 activate UI
 
 UI -> CTRL : testOverview = getTestOverview()
@@ -19,7 +18,7 @@ activate CTRL
 
 CTRL -> CMP : cltStore = getClientStore()
 activate CMP
-|||
+CMP --> CLTSTORE** : create()
 deactivate CMP
 CTRL -> CLTSTORE : clientsInfo = getClientInfo()
 activate CLTSTORE
@@ -28,7 +27,7 @@ deactivate CLTSTORE
 
 CTRL -> CMP : tstStore = getTestStore()
 activate CMP
-|||
+CMP --> TSTSTORE** : create()
 deactivate CMP
 CTRL -> TSTSTORE : testsInfo = getTestsInfo()
 activate TSTSTORE
@@ -38,19 +37,20 @@ deactivate TSTSTORE
 CTRL --> UI : testOverview
 deactivate CTRL
 
-UI --> LC : shows an overview of all the tests performed, asks the interval of time to be analysed and asks the algorithm to use
+UI --> LC : shows an overview of all the tests performed, asks the interval \n of time to be analysed and asks the algorithm to use
 deactivate UI
 
 loop while Laboratory Coordinator changes the data to make the analysis
-LC -> UI : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
+LC -> UI : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse) \n and selects requested data (e.g chosenAlgorithm)
 activate UI
 
-UI -> CTRL : worstSubInt = findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
+UI -> CTRL : worstSubInt = findWorstSubIntWithBenchmarkAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
 activate CTRL
-CTRL -> CPA : addWorstSubInt(worstSubInt)
-activate CPA
-|||
-deactivate CPA
+CTRL --> UI : worstSubInt
+deactivate CTRL
+
+UI -> CTRL : worstSubInt = findWorstSubIntWithBruteforceAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
+activate CTRL
 CTRL --> UI : worstSubInt
 deactivate CTRL
 

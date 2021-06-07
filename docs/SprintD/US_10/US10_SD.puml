@@ -30,7 +30,7 @@ activate CTRL
 
 CTRL -> CMP : pcStore = getParameterCategoryStore()
 activate CMP
-|||
+CMP --> PCSTORE** : create()
 deactivate CMP
 
 CTRL -> PCSTORE : lc = getParameterCategoriesStore()
@@ -74,7 +74,7 @@ deactivate PCSTORE
 
 CTRL -> CMP: prmStore = getParameterStore()
 activate CMP
-|||
+CMP --> PRMSTORE** : create()
 deactivate CMP
 CTRL -> PRMSTORE: prm = createParameter(parameterCode, shortName, description, pc)
 activate PRMSTORE

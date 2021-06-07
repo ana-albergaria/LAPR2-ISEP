@@ -98,8 +98,8 @@ public class RecordSamplesController {
      * @return a List<TestDTO> if the list was successfully received.
      */
     public List<TestDTO> getTestsNoSamples(String laboratoryID) {
-        ClinicalAnalysisLaboratoryStore calStore = this.company.getCalStore();
-        List<Test> listTestsNoSamples = calStore.getTestsWithNoSamples(laboratoryID);
+        TestStore testStore = this.company.getTestStore();
+        List<Test> listTestsNoSamples = testStore.getTestsWithNoSamples(laboratoryID);
 
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(listTestsNoSamples);
