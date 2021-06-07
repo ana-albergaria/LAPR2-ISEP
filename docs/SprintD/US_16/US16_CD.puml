@@ -12,22 +12,19 @@ class Company {
     +getClientStore()
 }
 
-class CompanyPerformanceAnalysis{
--ArrayList<Integer> worstSubInt
-+addWorstSubInt(worstSubInt)
-}
-
 class TestStore {
-+getTestsInfo
+    +getTestsInfo
 }
 
 class ClientStore {
-+getClientInfo()
+    +getClientInfo()
 }
 
 class CompanyPerformanceAnalysisController{
-+getTestOverview()
-+findWorstSubInt(firstDayToAnalyse, lastDayToAnalyse, chosen Algorithm)
+    -Company company
+    +getTestOverview()
+    +findWorstSubIntWithBenchmarkAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
+    +findWorstSubIntWithBruteforceAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
 }
 
 class CompanyPerformanceAnalysisUI{
@@ -37,6 +34,5 @@ CompanyPerformanceAnalysisUI ..> CompanyPerformanceAnalysisController
 CompanyPerformanceAnalysisController ..> Company
 CompanyPerformanceAnalysisController ..> ClientStore
 CompanyPerformanceAnalysisController ..> TestStore
-Company "1" --> "*" CompanyPerformanceAnalysis : has >
 
 @enduml

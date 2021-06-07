@@ -9,7 +9,7 @@ activate ":System"
 deactivate ":System"
 
 loop while Laboratory Coordinator changes the data to make the analysis
-LC-> ":System" : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse, chosenAlgorithm)
+LC-> ":System" : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse) and selects requested data (e.g chosenAlgorithm)
 activate ":System"
 ":System" --> LC : shows the overall performance of the company for the chosen interval of time
 deactivate ":System"

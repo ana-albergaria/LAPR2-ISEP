@@ -175,15 +175,15 @@ n/a
 | | ... knowing client info to show? | ClientStore | Pure Fabrication: for coupling reasons. There is no reason to assign this responsibility to any existing class in the Domain Model. |
 | | ... knowing the TestStore? | Company | Pure Fabrication: Company knows the TestStore |
 | | ... asking the user for this data? | CompanyPerformanceAnalysisUI | IE: is responsible for user interactions. |
-| Step 3: types requested data | ... saving the inputted data? | CompanyPerformanceAnalysis | IE: Company Performance Analysis had its own data. |
-| Step 4: shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs) | ... knowing the data to show? | CompanyPerformanceAnalysis | IE: Company Performance Analysis had its own data. |
+| Step 3: types requested data | ... using the inputted data? | CompanyPerformanceAnalysisController | Controller |
+| Step 4: shows the overall performance of the company for the chosen interval of time (e.g worstSubInt, statistics, graphs) | ... knowing the data to show? | CompanyPerformanceAnalysisController | Controller |
+| | ... showing the data? | CompanyPerformanceAnalysisUI | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* CompanyPerformanceAnalysis
 * Company
 
 Other software classes (i.e. Pure Fabrication) identified:

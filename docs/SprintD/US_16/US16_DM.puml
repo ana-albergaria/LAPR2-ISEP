@@ -15,21 +15,22 @@ class Test{
 - dateOfTestRegistration
 }
 
+class Client{
+- clientsCitizenCardNumber
+- nhsNumber
+- birthDate
+- sex
+- tinNumber
+- email
+- name
+- phoneNumber
+}
+
 class LaboratoryCoordinator{
 }
 
-class CompanyPerformanceAnalysis{
-'- firstDayToAnalyse
-'- lastDayToAnalyse
-'- chosenAlgorithm
-- worstSubInt
-'- statistics
-'- graphs
-}
-
 Company "1" -- "*" Test : conducts >
-LaboratoryCoordinator "1..*" -- "*" CompanyPerformanceAnalysis : analyses >
-Company "1" -- "*" CompanyPerformanceAnalysis : has >
-CompanyPerformanceAnalysis "1" -- "*" Test : analyses >
+LaboratoryCoordinator "1..*" -- "*" Test : analyses >
+LaboratoryCoordinator "1..*" -- "*" Client : analyses >
 
 @enduml

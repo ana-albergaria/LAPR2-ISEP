@@ -18,11 +18,6 @@ public class ViewClientResultsController {
     private Company company;
 
     /**
-     * The report associated to the controller.
-     */
-    private ArrayList<Test> clientTests;
-
-    /**
      * Builds an empty constructor for having the actual instance of the company when instantiated.
      */
     public ViewClientResultsController(){
@@ -30,13 +25,12 @@ public class ViewClientResultsController {
     }
 
     /**
-     * Builds a Client Results Controller's instance receiving the company.
+     * Builds a View Client Results Controller's instance receiving the company.
      *
      * @param company company associated to the Controller.
      */
     public ViewClientResultsController(Company company){
         this.company = company;
-        this.clientTests = null;
     }
 
     /**
