@@ -129,6 +129,8 @@ public class Client {
         return name;
     }
 
+
+
     /**
      * Checks if the Clients citizan card number is correct, and if not throws an error message
      *
