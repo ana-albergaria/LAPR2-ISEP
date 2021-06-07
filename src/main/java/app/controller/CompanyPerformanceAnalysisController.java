@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.domain.model.Company;
+import app.domain.model.Test;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 
@@ -68,19 +69,18 @@ public class CompanyPerformanceAnalysisController {
     //SUNDAY IS NOT A WORKING DAY
 
     public int findNumberOfTestsProcessedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
-        //TO DO
-        //Use getNumberOfTestsByIntervalDateOfTestRegistration(beginningDate, endDate)
+        //getNumberOfTestsByIntervalDateOfTestRegistration(beginningDate, endDate)
         return 0;
     }
 
     public int findNumberOfTestsWithResultsObtainedBetweenTwoDates(Date beginningOfHalfHour, Date endOfHalfHour){
-        //TO DO
-        //Use getNumberOfTestsByIntervalDateOfDiagnosis(beginningDate, endDate)
+        //getNumberOfTestsByIntervalDateOfDiagnosis(beginningDate, endDate)
         return 0;
     }
 
     public int[] makeIntervalArray(Date firstDayToAnalyse, Date lastDayToAnalyse){
         //TO DO
+
         return null;
     }
 

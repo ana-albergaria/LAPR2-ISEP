@@ -137,7 +137,7 @@ public class TestStore {
     public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDate, Date endDate){
         int num = 0;
         for (Test test : testList) {
-            if (test.getDateOfTestRegistration().after(beginningDate) && test.getDateOfTestRegistration().before(endDate))
+            if ((test.getDateOfTestRegistration().after(beginningDate) && test.getDateOfTestRegistration().before(endDate)) || test.getDateOfTestRegistration().equals(beginningDate))
                 num++;
         }
         return num;
@@ -154,7 +154,7 @@ public class TestStore {
         //because it only becomes available to the client after the diagnosis
         int num = 0;
         for (Test test : testList) {
-            if (test.getDateOfDiagnosis().after(beginningDate) && test.getDateOfDiagnosis().before(endDate))
+            if ((test.getDateOfDiagnosis().after(beginningDate) && test.getDateOfDiagnosis().before(endDate)) || test.getDateOfDiagnosis().equals(beginningDate))
                 num++;
         }
         return num;
