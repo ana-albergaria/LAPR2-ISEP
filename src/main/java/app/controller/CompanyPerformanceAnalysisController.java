@@ -3,6 +3,7 @@ package app.controller;
 import app.domain.model.BenchmarkAlgorithm;
 import app.domain.model.BruteForceAlgorithm;
 import app.domain.model.Company;
+import app.domain.model.Test;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
@@ -65,20 +66,23 @@ public class CompanyPerformanceAnalysisController {
     }
 
     public int getNumTestsWaitingForResultsDay(Date day){
-        //TO DO
-        return 0;
+        TestStore testStore = new TestStore();
+        int numTestsWaitingForResultsDay = testStore.getNumTestsWaitingForResultsDay(day);
+        return numTestsWaitingForResultsDay;
     }
 
     //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
     //SHOW ERROR MESSAGES!!!
     public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){
-        //TO DO
-        return 0;
+        TestStore testStore = new TestStore();
+        int numTestsWaitingForResultsInterval = testStore.getNumTestsWaitingForResultsInterval(beginningDay, endingDay);
+        return numTestsWaitingForResultsInterval;
     }
 
     public int getNumTestsWaitingForDiagnosisDay(Date day){
-        //TO DO
-        return 0;
+        TestStore testStore = new TestStore();
+        int numTestsWaitingForDiagnosisDay = testStore.getNumTestsWaitingForDiagnosisDay(day);
+        return numTestsWaitingForDiagnosisDay;
     }
 
     //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI

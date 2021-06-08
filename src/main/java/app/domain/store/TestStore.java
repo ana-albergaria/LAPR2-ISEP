@@ -63,6 +63,41 @@ public class TestStore {
     }
 
     /**
+     * Gets the number of tests that were waiting for results on a specific day
+     * @return number of tests that were waiting for results on a specific day
+     */
+    public int getNumTestsWaitingForResultsDay(Date day){
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfSamplesCollection().before(day) && test.getDateOfChemicalAnalysis().after(day))
+                num++;
+        }
+        return num;
+    }
+
+    /**
+     * Gets the number of tests that were waiting for results between two specific days
+     * @return number of tests that were waiting for results between two specific days
+     */
+    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfChemicalAnalysis().after(beginningDay) && test.getDateOfChemicalAnalysis().before(endingDay))
+                num++;
+        }
+        return num;
+    }
+
+    public int getNumTestsWaitingForDiagnosisDay(Date day){
+        int num = 0;
+        for (Test test : testList) {
+            if (test.getDateOfChemicalAnalysis().before(day) && test.getDateOfDiagnosis().after(day))
+                num++;
+        }
+        return num;
+    }
+
+    /**
      * gets the tests which are ready to be diagnosed
      * @return list of ready to diagnosis tests
      */
@@ -74,47 +109,6 @@ public class TestStore {
                 listTestsReadyToDiagnose.add(test);
         }
         return listTestsReadyToDiagnose;
-    }
-
-    /**
-     * gets the tests which are ready for the results to be added
-     * @return list of ready for the results to be added
-     */
-    public List<Test> getTestsReadyForResults() {
-        List<Test> listTestsReadyForResults = new ArrayList<>();
-
-        for (Test test : testList) {
-            if (test.hasSamples() && !test.hasResults())
-                listTestsReadyForResults.add(test);
-        }
-        return listTestsReadyForResults;
-    }
-
-    /*public int getNumTestsWaitingForResultsDay(Date day){
-
-    }*/
-
-    /**
-     * Saves the Tests info to be considered when analysing the company performance on an ArrayList
-     * @return an ArrayList with all the Tests info to be considered when analysing the company performance
-     */
-    public ArrayList<Integer> getTestsInfo(){
-        ArrayList<Integer> testsInfo = new ArrayList<Integer>();
-        int waitingForResults = getTestsReadyForResults().size();
-        testsInfo.add(waitingForResults);
-        int waitingForDiagnosis = getTestsReadyToDiagnose().size();
-        testsInfo.add(waitingForDiagnosis);
-        //falta fazer daqui:
-        int processedEachDay = 0;
-        testsInfo.add(processedEachDay);
-        int processedEachWeek = 0;
-        testsInfo.add(processedEachWeek);
-        int processedEachMonth = 0;
-        testsInfo.add(processedEachMonth);
-        int processedEachYear = 0;
-        testsInfo.add(processedEachYear);
-        //até aqui
-        return testsInfo;
     }
 
     /**
