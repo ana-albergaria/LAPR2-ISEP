@@ -171,21 +171,11 @@ public class Client {
 
         if (birthDate == null)
             throw new IllegalArgumentException("Birth Date cannot be blank!");
-        if (getYearsDiff(birthDate) > MAX_AGE) {
+        if (getAge() > MAX_AGE) {
             throw new IllegalArgumentException("Invalid birth date, the max age is 150 years!");
         }
     }
 
-    public int getYearsDiff(Date birthDate) {
-        Date today = new Date();
-        long diffInTime = today.getTime() - birthDate.getTime();
-        long difference_In_Years
-                = (diffInTime
-                / (1000L * 60 * 60 * 24 * 365));
-        return (int) difference_In_Years;
-    }
-
-    //o getYearsDiff não faz exatamente o mesmo que o getAge()?
     public int getAge() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(birthDate);

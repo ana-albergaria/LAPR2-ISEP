@@ -1,10 +1,7 @@
 package app.domain.store;
 
 import app.domain.interfaces.RegressionModel;
-import app.domain.model.HypothesisTest;
-import app.domain.model.MyRegressionModel;
-import app.domain.model.NHSDailyReport;
-import app.domain.model.SignificanceModelAnova;
+import app.domain.model.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +13,15 @@ import java.util.List;
 public class NHSReportStore {
 
     private List<NHSDailyReport> nhsDailyReportList = new ArrayList<>();
+
+    public NHSDailyReport createNHSDailyReport(MyRegressionModel myRegressionModel, HypothesisTest hypothesisTest, SignificanceModelAnova modelAnova, TableOfValues tableOfValues) {
+        return new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
+    }
+
+    public boolean validateNHSDailyReport(NHSDailyReport nhsDailyReport) {
+        return nhsDailyReport != null && nhsDailyReport.getMyRegressionModel() != null &&
+                nhsDailyReport.getHypothesisTest() != null && nhsDailyReport.getModelAnova() != null && nhsDailyReport.getTableOfValues() != null;
+    }
 
     public MyRegressionModel createMyRegressionModel(RegressionModel regressionModel,
                                                   int historicalPoints,
@@ -37,6 +43,10 @@ public class NHSReportStore {
 
     public SignificanceModelAnova createSignificanceModelAnova(RegressionModel regressionModel, MyRegressionModel myRegressionModel) {
         return regressionModel.getSignificanceModelAnova(myRegressionModel);
+    }
+
+    public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives) {
+        return new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives);
     }
 
     public double[] getDoubleArrayWithData(List<List<Double>> covidTestAndMeanAgeList, int index) {
@@ -65,5 +75,10 @@ public class NHSReportStore {
             currentDate = cal.getTime();
         }
         return dates;
+    }
+
+    //CORRIGIR! TER ATENÇÃO ONDE COMEÇA A SEMANA PASSADA!
+    public Date getStartDate() {
+        return new Date();
     }
 }

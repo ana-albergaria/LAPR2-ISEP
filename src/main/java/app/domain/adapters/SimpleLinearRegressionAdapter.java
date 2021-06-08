@@ -6,6 +6,10 @@ import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
 import app.domain.model.US19.LinearRegression;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class SimpleLinearRegressionAdapter implements RegressionModel {
 
     @Override
@@ -13,9 +17,10 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         LinearRegression simpleLRx1 = new LinearRegression(x1, y);
         LinearRegression simpleLRx2 = new LinearRegression(x2, y);
 
-        LinearRegression bestModel = (simpleLRx1.R2() >= simpleLRx2.R2()) ? new LinearRegression(x1, y) : new LinearRegression(x2, y);
+        double[] bestX = (simpleLRx1.R2() >= simpleLRx2.R2()) ? x1 : x2;
+        LinearRegression bestModel = new LinearRegression(bestX, y);
 
-        return new MyRegressionModel(bestModel.intercept(), bestModel.slope(), null,
+        return new MyRegressionModel(bestX, y, bestModel.intercept(), bestModel.slope(),
                 Math.sqrt(bestModel.R2()), bestModel.R2(), bestModel.getR2Adjusted(), historicalPoints, bestModel);
     }
 
@@ -32,6 +37,19 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
         double sr = simpleLR.getSSR(), se = simpleLR.getRSS();
         return new SignificanceModelAnova(myRegressionModel, sr, se);
+    }
+
+    @Override
+    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel) {
+        LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
+        double[] x = myRegressionModel.getX1();
+        List<Double> estimatedPositives = new ArrayList<>();
+
+        for (int i = 0; i < x.length; i++) {
+            double estimatedValue = simpleLR.predict(x[i]);
+            estimatedPositives.add(estimatedValue);
+        }
+        return estimatedPositives;
     }
 }
 

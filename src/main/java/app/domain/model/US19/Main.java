@@ -48,6 +48,7 @@ public class Main {
         System.out.println(hypothesisTest);
         SignificanceModelAnova modelAnova = calculus.getSignificanceModelAnova(myRegressionModel);
 
+        /*
         NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova);
         System.out.println(report);
 
@@ -56,6 +57,7 @@ public class Main {
             path.mkdir();
 
         Report2NHS.writeUsingFileWriter(report.toString());
+         */
 
 
 

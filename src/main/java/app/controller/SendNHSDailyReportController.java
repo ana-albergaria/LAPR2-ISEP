@@ -23,7 +23,7 @@ public class SendNHSDailyReportController {
         this.nhsDailyReport = null;
     }
 
-/*
+
     public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         RegressionModel regressionModel = this.company.getRegressionModel();
         int historicalPoints = this.company.getHistoricalPoints();
@@ -33,10 +33,15 @@ public class SendNHSDailyReportController {
         MyRegressionModel myRegressionModel = nhsReportStore.createMyRegressionModel(regressionModel, historicalPoints, dataList);
         HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel);
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel);
+        //CORRIGIR MÉTODO getStartDate() para obter a data de início a começar do fim
+        Date startDate = nhsReportStore.getStartDate();
+        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, historicalPoints, startDate);
 
+        this.nhsDailyReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
+        return nhsReportStore.validateNHSDailyReport(nhsDailyReport);
     }
 
- */
+
 
 
     public List<List<Double>> getDataListToFitTheModel() throws ParseException {
@@ -48,15 +53,22 @@ public class SendNHSDailyReportController {
     }
 
 
-    /*
-    public TableOfValues getTableOfValues(int historicalPoints, Date currentDate) throws ParseException {
+
+    public TableOfValues getTableOfValues(MyRegressionModel myRegressionModel,
+                                          int historicalPoints,
+                                          Date startDate) throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
-        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, currentDate);
+        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
         TestStore testStore = new TestStore();
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
+        RegressionModel regressionModel = this.company.getRegressionModel();
+        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel);
+
+        TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives);
+        return tableOfValues;
     }
 
-     */
+
 
 
 
