@@ -55,12 +55,8 @@ public class ImportTestController {
                     String.format("Failed creating test with %s NHS number", testData[1]));
 
             Test createdTest = testStore.getTestByNhsNumber(testData[1]);
-
             if(createdTest == null) return false;
-            List<Double> parameterResults = TestFileUtils.getParameterResults(testData);
-            for(int i=0;i<parameterCodes.size();i++){
-                createdTest.addTestResult(parameterCodes.get(i), parameterResults.get(i), "");
-            }
+
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             createdTest.setDateOfTestRegistration(sdf.parse(testData[21]));
             createdTest.setDateOfChemicalAnalysis(sdf.parse(testData[22]));
@@ -81,6 +77,13 @@ public class ImportTestController {
         String email = data[9];
         clientController.registerClient(citizenCardNum, nhsNum, date, tin, email, name, phoneNum);
         clientController.saveClient();
+    }
+
+    private void addTestResults(String[] testData, List<String> parameterCodes, Test createdTest) throws IllegalAccessException, ClassNotFoundException, InstantiationException, ParseException {
+        List<Double> parameterResults = TestFileUtils.getParameterResults(testData);
+        for(int i=0;i<parameterCodes.size();i++){
+            createdTest.addTestResult(parameterCodes.get(i), parameterResults.get(i), "");
+        }
     }
 
 }
