@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class TestFileUtilsTest {
 
-    @Test
+    /*@Test
     public void testCsvProcess(){
        List<String[]> procedData = TestFileUtils.getTestDataByFile("C:/Users/jluca/Downloads/tests_BloodCovidMATCPMDISCCSV.csv");
         int totalLines=0;
@@ -54,6 +54,6 @@ public class TestFileUtilsTest {
             System.out.println();
         }
 
-    }
+    }*/
 
 }

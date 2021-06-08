@@ -1,16 +1,13 @@
 package app.controller;
 
-import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.model.Test;
-import app.domain.shared.Constants;
 import app.domain.shared.utils.TestFileUtils;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -40,41 +37,49 @@ public class ImportTestController {
 
     public boolean importTestsFromFile(String filePath) throws ParseException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         List<String[]>  processedListData = TestFileUtils.getTestDataByFile(filePath);
+        List<String>  dataLabels = TestFileUtils.getDataLabels();
         ClientStore clientStore = this.company.getClientStore();
         TestStore testStore = this.company.getTestStore();
         CreateTestController testController = new CreateTestController();
 
         for (String[] testData : processedListData){
             /*testController.setCurrentCal(testData[2]);*/
-            if(!clientStore.existsClientByTin(testData[5])){
-                createAndSaveClient(testData);
+            if(!clientStore.existsClientByTin(testData[dataLabels.indexOf("TIN")])){
+                createAndSaveClient(testData, dataLabels);
             }
             List<String> parameterCodes = TestFileUtils.getParameterCodes(testData);
-            testController.createTest(testData[1], testData[5], testData[11], parameterCodes);
+            testController.createTest(testData[dataLabels.indexOf("NHS_Code")],
+                    testData[dataLabels.indexOf("TIN")],
+                    testData[dataLabels.indexOf("TestType")],
+                    parameterCodes);
             if(!testController.saveTest()) throw new UnsupportedOperationException(
                     String.format("Failed creating test with %s NHS number", testData[1]));
 
             Test createdTest = testStore.getTestByNhsNumber(testData[1]);
             if(createdTest == null) return false;
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            createdTest.setDateOfTestRegistration(sdf.parse(testData[21]));
-            createdTest.setDateOfChemicalAnalysis(sdf.parse(testData[22]));
-            createdTest.setDateOfDiagnosis(sdf.parse(testData[23]));
+            addTestResults(testData,parameterCodes,createdTest);
+            addTestDates(testData, createdTest, dataLabels);
         }
         return true;
     }
 
-    private void createAndSaveClient(String [] data) throws ParseException {
+    private void addTestDates(String[] testData, Test createdTest, List<String> dataLabels) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        createdTest.setDateOfTestRegistration(sdf.parse(testData[dataLabels.indexOf("Test_Reg_DateHour")]));
+        createdTest.setDateOfChemicalAnalysis(sdf.parse(testData[dataLabels.indexOf("Test_Chemical_DateHour")]));
+        createdTest.setDateOfDiagnosis(sdf.parse(testData[dataLabels.indexOf("Test_Doctor_DateHour")]));
+    }
+
+    private void createAndSaveClient(String [] data, List<String> dataLabels) throws ParseException {
         RegisterClientController clientController = new RegisterClientController();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String citizenCardNum = String.format("%016d", Integer.parseInt(data[3]));
-        String nhsNum = data[4];
-        String tin = data[5];
-        Date date = df.parse(data[6]);
-        String phoneNum = data[7];
-        String name = data[8];
-        String email = data[9];
+        String citizenCardNum = String.format("%016d", Integer.parseInt(data[dataLabels.indexOf("CitizenCard_Number")]));
+        String nhsNum = data[dataLabels.indexOf("NHS_Number")];
+        String tin = data[dataLabels.indexOf("TIN")];
+        Date date = df.parse(data[dataLabels.indexOf("BirthDay")]);
+        String phoneNum = data[dataLabels.indexOf("PhoneNumber")];
+        String name = data[dataLabels.indexOf("Name")];
+        String email = data[dataLabels.indexOf("E-mail ")];
         clientController.registerClient(citizenCardNum, nhsNum, date, tin, email, name, phoneNum);
         clientController.saveClient();
     }
