@@ -1,8 +1,12 @@
 package app.domain.model;
 
 import org.apache.commons.math3.distribution.FDistribution;
+import org.apache.commons.math3.distribution.TDistribution;
 
 public class MyRegressionModel {
+    private double[] x1;
+    private double[] x2;
+    private double[] y;
     private double intercept; //intercept - y, a
     private double slope; //slope - x, b
     private Double secondIndVariable;
@@ -12,7 +16,12 @@ public class MyRegressionModel {
     private int numberOfObservations;
     private Object regressionModel;
 
-    public MyRegressionModel(double intercept,
+    private static final int DEGREES_OF_FREEDOM_TSTUDENT = 2;
+
+    public MyRegressionModel(double[] x1,
+                             double[] x2,
+                             double[] y,
+                             double intercept,
                              double slope,
                              Double secondIndVariable,
                              double r,
@@ -20,6 +29,9 @@ public class MyRegressionModel {
                              double r2Adjusted,
                              int numberOfObservations,
                              Object regressionModel) {
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y = y;
         this.intercept = intercept;
         this.slope = slope;
         this.secondIndVariable = secondIndVariable;
@@ -29,6 +41,28 @@ public class MyRegressionModel {
         this.numberOfObservations = numberOfObservations;
         this.regressionModel = regressionModel;
     }
+
+    public MyRegressionModel(double[] x1,
+                             double[] y,
+                             double intercept,
+                             double slope,
+                             double r,
+                             double r2,
+                             double r2Adjusted,
+                             int numberOfObservations,
+                             Object regressionModel) {
+        this.x1 = x1;
+        this.y = y;
+        this.intercept = intercept;
+        this.slope = slope;
+        this.r = r;
+        this.r2 = r2;
+        this.r2Adjusted = r2Adjusted;
+        this.numberOfObservations = numberOfObservations;
+        this.regressionModel = regressionModel;
+    }
+
+
 
     public double getSlope() {
         return slope;
@@ -50,6 +84,10 @@ public class MyRegressionModel {
         return regressionModel;
     }
 
+    public double[] getX1() {
+        return x1;
+    }
+
     public double calculateCriticalValFSnedecor(int numeratorDegreesOfFreedom,
                                                 int denominatorDegreesOfFreedom,
                                                 double levelOfSignificance) {
@@ -57,6 +95,20 @@ public class MyRegressionModel {
         double alphaFD = levelOfSignificance;
         double critFD = fd.inverseCumulativeProbability(1- alphaFD);
         return critFD;
+    }
+
+    public double calculateCriticalValTStudent(double levelOfSignificance) {
+        int n = numberOfObservations;
+        double critTD;
+        TDistribution td = new TDistribution(n - DEGREES_OF_FREEDOM_TSTUDENT);
+        double alphaTD = 1 - (levelOfSignificance / 2);
+        if(alphaTD > 0.5) {
+            critTD = td.inverseCumulativeProbability(alphaTD);
+        }
+        else {
+            critTD = td.inverseCumulativeProbability(1 - alphaTD);
+        }
+        return critTD;
     }
 
     @Override

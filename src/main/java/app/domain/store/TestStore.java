@@ -268,8 +268,8 @@ public class TestStore {
         List<String> dates = new ArrayList<>();
         List<String> observedPositives = new ArrayList<>();
 
-        addDatesColumnToTableOfValues(numberOfObservations, currentDate, dates);
-        addObservedPositivesToTableOfValues(numberOfObservations, dates, observedPositives);
+        //addDatesColumnToTableOfValues(numberOfObservations, currentDate, dates);
+        //getObservedPositivesToTableOfValues(numberOfObservations, dates, observedPositives);
 
         tableOfValues.add(dates);
         tableOfValues.add(observedPositives);
@@ -277,11 +277,10 @@ public class TestStore {
         return tableOfValues;
     }
 
-    public void addObservedPositivesToTableOfValues(int numberOfObservations,
-                                                    List<String> dates,
-                                                    List<String> observedPositives) throws ParseException {
+    public int[] getObservedPositivesToTableOfValues(int numberOfObservations,
+                                                    List<String> dates) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        int[] observedPositivesInt = new int[numberOfObservations];
+        int[] observedPositives = new int[numberOfObservations];
         int indexDate = 0;
 
         for (Test test : testList) {
@@ -290,37 +289,14 @@ public class TestStore {
                     Date dateToBeCompared = sdf.parse(dates.get(i));
                     if(checkIfDatesAreEqual(test.getDateOfDiagnosis(), dateToBeCompared)) {
                         indexDate = i;
-                        observedPositivesInt[indexDate]++;
+                        observedPositives[indexDate]++;
                     }
                 }
             }
         }
-        convertIntegerListToString(observedPositives, observedPositivesInt);
+        return observedPositives;
     }
 
-    public void convertIntegerListToString(List<String> observedPositives, int[] observedPositivesInt) {
-        for (int i = 0; i < observedPositivesInt.length; i++) {
-            observedPositives.add(String.valueOf(observedPositivesInt[i]));
-        }
-    }
-
-    /*
-    WARNING - ter em atenção que ao converter a String selecionada pelo administrador
-    ou a que está definida na configuration file,
-     */
-    public void addDatesColumnToTableOfValues(int numberOfObservations,
-                                                      Date currentDate,
-                                                      List<String> dates) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate);
-
-        for (int i = 0; i < numberOfObservations; i++) {
-            dates.add(sdf.format(currentDate));
-            cal.add(Calendar.DAY_OF_MONTH,-1);
-            currentDate = cal.getTime();
-        }
-    }
 
     public double getNumberOfCovidTestsRealizedInADay(Date date) {
         double testsInADay = 0;
@@ -351,7 +327,7 @@ public class TestStore {
         return positives;
     }
 
-    public List< List<Double> > getCovidTestAndMeanAgeListDataFromDateInterval(Date beginDate, Date endDate) {
+    public List< List<Double> > getAllDataToFitTheModel(Date beginDate, Date endDate) {
         Calendar auxEndDate = Calendar.getInstance();
         auxEndDate.setTime(endDate);
 
@@ -359,17 +335,17 @@ public class TestStore {
         List<Double> meanAgeList = new ArrayList<>();
         List<Double> observedPositives = new ArrayList<>();
 
-        getAllDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
+        addAllDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
 
-        List< List<Double> > covidTestAndMeanAgeList = new ArrayList<>();
-        covidTestAndMeanAgeList.add(covidTestList);
-        covidTestAndMeanAgeList.add(meanAgeList);
-        covidTestAndMeanAgeList.add(observedPositives);
+        List< List<Double> > dataList = new ArrayList<>();
+        dataList.add(covidTestList);
+        dataList.add(meanAgeList);
+        dataList.add(observedPositives);
 
-        return covidTestAndMeanAgeList;
+        return dataList;
     }
 
-    public void getAllDataFromDateInterval(Date beginDate,
+    public void addAllDataFromDateInterval(Date beginDate,
                                            Date endDate,
                                            List<Double> covidTestList,
                                            List<Double> meanAgeList,

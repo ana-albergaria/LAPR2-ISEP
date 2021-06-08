@@ -41,19 +41,6 @@ public class HypothesisTest {
         this.denominatorDegreesOfFreedom = denominatorDegreesOfFreedom;
     }
 
-    public double calculateCriticalValTStudent(double levelOfSignificance) {
-        int n = myRegressionModel.getNumberOfObservations();
-        double critTD;
-        TDistribution td = new TDistribution(n - DEGREES_OF_FREEDOM_TSTUDENT);
-        double alphaTD = 1 - (levelOfSignificance / 2);
-        if(alphaTD > 0.5) {
-            critTD = td.inverseCumulativeProbability(alphaTD);
-        }
-        else {
-            critTD = td.inverseCumulativeProbability(1 - alphaTD);
-        }
-        return critTD;
-    }
 
     public String getDecision(double tObs, double critTD) {
         return (Math.abs(tObs) > critTD) ? "Reject H0" : "No Reject H0";
@@ -73,7 +60,7 @@ public class HypothesisTest {
             text.append(String.format("--> Significance Level: %.2f%n%n", significanceLevel));
             text.append("H0:a=0 H1:a<>0\n");
             text.append(String.format("t_obs=%f%n", tObsA));
-            double critTD1 = calculateCriticalValTStudent(significanceLevel);
+            double critTD1 = myRegressionModel.calculateCriticalValTStudent(significanceLevel);
             text.append(String.format("Decision: %n%s%n", getDecision(tObsA, critTD1)));
             text.append("//\n");
             text.append("H0:b=0 H1:b<>0\n");

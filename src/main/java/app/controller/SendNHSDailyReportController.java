@@ -1,9 +1,8 @@
 package app.controller;
 
 import app.domain.interfaces.RegressionModel;
-import app.domain.model.Company;
-import app.domain.model.MyRegressionModel;
-import app.domain.model.NHSDailyReport;
+import app.domain.model.*;
+import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 
 import java.text.ParseException;
@@ -23,45 +22,63 @@ public class SendNHSDailyReportController {
         this.company = company;
         this.nhsDailyReport = null;
     }
-    /*
-    public boolean createNHSDailyReport() {
 
+
+    public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+        RegressionModel regressionModel = this.company.getRegressionModel();
+        int historicalPoints = this.company.getHistoricalPoints();
+        List<List<Double>> dataList = getDataListToFitTheModel();
+
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        MyRegressionModel myRegressionModel = nhsReportStore.createMyRegressionModel(regressionModel, historicalPoints, dataList);
+        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel);
+        SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel);
+        //CORRIGIR MÉTODO getStartDate() para obter a data de início a começar do fim
+        Date startDate = nhsReportStore.getStartDate();
+        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, historicalPoints, startDate);
+
+        this.nhsDailyReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
+        return nhsReportStore.validateNHSDailyReport(nhsDailyReport);
     }
-     */
 
 
 
 
-    public MyRegressionModel getMyRegressionModel() throws IllegalAccessException, InstantiationException, ClassNotFoundException, ParseException {
+    public List<List<Double>> getDataListToFitTheModel() throws ParseException {
         List<Date> intervalDates = this.company.getDateInterval();
         Date beginDate = intervalDates.get(0), endDate = intervalDates.get(1);
         TestStore testStore = this.company.getTestStore();
-        List< List<Double> > covidTestAndMeanAgeList = testStore.getCovidTestAndMeanAgeListDataFromDateInterval(beginDate, endDate);
+        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate);
+        return dataList;
+    }
 
-        double[] covidTestsArray = getDoubleArrayWithData(covidTestAndMeanAgeList, 0);
-        double[] meanAgeArray = getDoubleArrayWithData(covidTestAndMeanAgeList, 1);
-        double[] observedPositives = getDoubleArrayWithData(covidTestAndMeanAgeList, 2);
 
+
+    public TableOfValues getTableOfValues(MyRegressionModel myRegressionModel,
+                                          int historicalPoints,
+                                          Date startDate) throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
+        TestStore testStore = new TestStore();
+        int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
-        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives);
+        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel);
 
-        return myRegressionModel;
+        TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives);
+        return tableOfValues;
     }
-
-    public double[] getDoubleArrayWithData(List< List<Double> > covidTestAndMeanAgeList, int index) {
-        Double[] extractedArray = new Double[covidTestAndMeanAgeList.get(index).size()];
-        double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
-        for (int i = 0; i < wishedArray.length; i++) {
-            wishedArray[i] = extractedArray[i];
-        }
-        return wishedArray;
-    }
-
-
-
 
 
 
 
 
 }
+
+
+
+
+
+
+
+
+

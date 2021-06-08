@@ -63,6 +63,8 @@ public class Company {
      */
     private final ClinicalAnalysisLaboratoryStore calStore;
 
+    private final NHSReportStore nhsReportStore;
+
     private List<Employee> empList;
     private List<OrgRole> roles;
 
@@ -115,6 +117,7 @@ public class Company {
         this.regressionModelCLass = regressionModelCLass;
         this.dateInterval = dateInterval;
         this.historicalPoints = historicalPoints;
+        this.nhsReportStore = new NHSReportStore();
     }
 
     public String getDesignation() {
@@ -186,6 +189,10 @@ public class Company {
      */
     public ClinicalAnalysisLaboratoryStore getCalStore() {
         return calStore;
+    }
+
+    public NHSReportStore getNhsReportStore() {
+        return nhsReportStore;
     }
 
     /**
