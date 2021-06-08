@@ -12,19 +12,7 @@ left to right direction
         - laboratoryID
         }
 
-        class TestParameter{
-            +TestParameter(parameter: Parameter)
-        }
-        class TestParameterResult{
-        - createdAt
-        - value
-        - metric
-        }
-        class TestType {
-        - code : String
-        - description : String
-        - collectingMethod : String
-        }
+
 
         class Test{
             - code
@@ -35,11 +23,6 @@ left to right direction
             - dateOfDiagnosis
         }
 
-        class Parameter {
-          -code
-          -shortName
-          -description
-        }
 
         class Company {
             -designation : String
@@ -49,10 +32,6 @@ left to right direction
             +getCalStore()
         }
 
-        class ParameterCategory{
-            -code
-            -name
-        }
         class Client{
         - name
         - citizenCardNum
@@ -64,18 +43,6 @@ left to right direction
         - email
         }
 
-/'    }'/
-/'    package Stores <<Folder>> {'/
-        class ParameterStore {
-            +getParamsByCategories(List<String> selectedCategoriesCodes)
-            +getParamsByCategory(String category)
-        }
-
-        class TestTypeStore {
-               +getTestTypes()
-               +getTestTypeByCode(String code)
-               +getCategoriesByTestTypeCode(String selectedTestTypeCode)
-            }
 
         class ClientStore {
            +getClientByTinNumber(tinNumber)
@@ -127,33 +94,18 @@ ImportTestController ..> RegisterClientController
 ImportTestController ..> TestStore
 ImportTestController ..> TestFileUtils
 CreateTestControler ..> Company
-CreateTestControler ..> ParameterStore
-CreateTestControler ..> TestTypeStore
 CreateTestControler ..> ClinicalAnalysisLaboratory
 CreateTestControler ..> TestStore
 RegisterClientController ..> Company
 RegisterClientController ..> ClientStore
-TestTypeStore "1" -- "*" TestType : stores >
 ClientStore "1" -- "*" Client : stores >
 TestStore "1" -- "*" Test : stores >
-ParameterStore "1" -- "*" Parameter : stores >
 ClinicalAnalysisLaboratoryStore "1" -- "*" ClinicalAnalysisLaboratory : stores >
-Company "1" -- "1" ParameterStore : uses >
-Company "1" -- "1" TestTypeStore : uses >
 Company "1" -- "1" TestStore : uses >
 Company "1" -- "1" ClientStore : uses >
 Company "1" -- "1" ClinicalAnalysisLaboratoryStore : uses >
-TestType "1" -- "1..*" Parameter : characterized by >
-Company "1" -- "*" TestType : conducts >
 Company "1" --- "*" Test : conducts >
-Company "1" - "*" Parameter : capable of analysing >
-Test "*" -- "1" TestType : classified as >
-Test "1" -- "1..*" TestParameter : requests analysis of >
-TestParameter "*" -- "1" Parameter : refers to >
-TestParameter "1" -- "0..1" TestParameterResult : contains >
 Client "1" -- "1" Test : requested by <
-Parameter "*" -- "1" ParameterCategory: presented under >
-TestType "1" -- "1..*" ParameterCategory : characterized by >
 ClinicalAnalysisLaboratory "1" - "1..*" Test : performs >
 
 @enduml

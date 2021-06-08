@@ -61,10 +61,10 @@ public class ImportTestController {
             for(int i=0;i<parameterCodes.size();i++){
                 createdTest.addTestResult(parameterCodes.get(i), parameterResults.get(i), "");
             }
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             createdTest.setDateOfTestRegistration(sdf.parse(testData[21]));
             createdTest.setDateOfChemicalAnalysis(sdf.parse(testData[22]));
-            createdTest.setDateOfTestRegistration(sdf.parse(testData[23]));
+            createdTest.setDateOfDiagnosis(sdf.parse(testData[23]));
         }
         return true;
     }
