@@ -47,12 +47,17 @@ public class SendNHSDailyReportController {
         return dataList;
     }
 
+
     /*
-    public TableOfValues getTableOfValues(int historicalPoints, Date currentDate) {
+    public TableOfValues getTableOfValues(int historicalPoints, Date currentDate) throws ParseException {
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
-        List<String> dates = nhsReportStore.addDatesColumnToTableOfValues(historicalPoints, currentDate);
+        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, currentDate);
+        TestStore testStore = new TestStore();
+        int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
     }
+
      */
+
 
 
 }

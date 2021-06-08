@@ -52,7 +52,7 @@ public class NHSReportStore {
     WARNING - ter em atenção que ao converter a String selecionada pelo administrador
     ou a que está definida na configuration file,
      */
-    public List<String> addDatesColumnToTableOfValues(int numberOfObservations,
+    public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
                                               Date currentDate) {
         List<String> dates = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
