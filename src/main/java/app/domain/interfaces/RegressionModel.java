@@ -5,7 +5,7 @@ import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
 
 public interface RegressionModel {
-    public abstract MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y);
+    public abstract MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y, int historicalPoints);
     public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel);
     public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel);
 }

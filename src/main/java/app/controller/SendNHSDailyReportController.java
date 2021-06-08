@@ -1,9 +1,8 @@
 package app.controller;
 
 import app.domain.interfaces.RegressionModel;
-import app.domain.model.Company;
-import app.domain.model.MyRegressionModel;
-import app.domain.model.NHSDailyReport;
+import app.domain.model.*;
+import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 
 import java.text.ParseException;
@@ -23,45 +22,46 @@ public class SendNHSDailyReportController {
         this.company = company;
         this.nhsDailyReport = null;
     }
-    /*
-    public boolean createNHSDailyReport() {
 
+/*
+    public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+        RegressionModel regressionModel = this.company.getRegressionModel();
+        int historicalPoints = this.company.getHistoricalPoints();
+        List<List<Double>> dataList = getDataListToFitTheModel();
+
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        MyRegressionModel myRegressionModel = nhsReportStore.createMyRegressionModel(regressionModel, historicalPoints, dataList);
+        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel);
+        SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel);
+
+    }
+
+ */
+
+
+    public List<List<Double>> getDataListToFitTheModel() throws ParseException {
+        List<Date> intervalDates = this.company.getDateInterval();
+        Date beginDate = intervalDates.get(0), endDate = intervalDates.get(1);
+        TestStore testStore = this.company.getTestStore();
+        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate);
+        return dataList;
+    }
+
+    /*
+    public TableOfValues getTableOfValues(int historicalPoints, Date currentDate) {
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        List<String> dates = nhsReportStore.addDatesColumnToTableOfValues(historicalPoints, currentDate);
     }
      */
 
 
-
-
-    public MyRegressionModel getMyRegressionModel() throws IllegalAccessException, InstantiationException, ClassNotFoundException, ParseException {
-        List<Date> intervalDates = this.company.getDateInterval();
-        Date beginDate = intervalDates.get(0), endDate = intervalDates.get(1);
-        TestStore testStore = this.company.getTestStore();
-        List< List<Double> > covidTestAndMeanAgeList = testStore.getCovidTestAndMeanAgeListDataFromDateInterval(beginDate, endDate);
-
-        double[] covidTestsArray = getDoubleArrayWithData(covidTestAndMeanAgeList, 0);
-        double[] meanAgeArray = getDoubleArrayWithData(covidTestAndMeanAgeList, 1);
-        double[] observedPositives = getDoubleArrayWithData(covidTestAndMeanAgeList, 2);
-
-        RegressionModel regressionModel = this.company.getRegressionModel();
-        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives);
-
-        return myRegressionModel;
-    }
-
-    public double[] getDoubleArrayWithData(List< List<Double> > covidTestAndMeanAgeList, int index) {
-        Double[] extractedArray = new Double[covidTestAndMeanAgeList.get(index).size()];
-        double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
-        for (int i = 0; i < wishedArray.length; i++) {
-            wishedArray[i] = extractedArray[i];
-        }
-        return wishedArray;
-    }
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+

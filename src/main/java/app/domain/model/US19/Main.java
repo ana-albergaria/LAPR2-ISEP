@@ -41,7 +41,7 @@ public class Main {
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
         RegressionModel calculus = (RegressionModel) oClass.newInstance();
-        MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y);
+        MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y, x.length);
         //MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, y1);
         System.out.println(myRegressionModel);
         HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel);
