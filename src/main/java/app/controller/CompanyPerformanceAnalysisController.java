@@ -3,7 +3,7 @@ package app.controller;
 import app.domain.model.Company;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
-import com.isep.mdis.Sum;
+//import com.isep.mdis.Sum;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
@@ -97,12 +97,14 @@ public class CompanyPerformanceAnalysisController {
         }
         return intervalArray;
     }
-
+/*
     public int[] findWorstSubIntWithBenchmarkAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
         int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
         int[] worstSubInt = Sum.Max(interval);
         return worstSubInt;
     }
+
+ */
 
     public int[] findWorstSubIntWithBruteforceAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
         int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
