@@ -374,11 +374,12 @@ public class Test {
     WARNING - confirm if the test should only have results OR must be VALIDATED and correct it
      */
     public boolean hasPositiveResultForCovid() {
-        if(this.isCovidTest() && this.isValidated()) {
+        //if(this.isCovidTest() && this.isValidated())
+        if(this.isCovidTest()) {
             List<TestParameter> testParameters = this.getParameters();
             return testParameters.get(0).getTestParameterResult().getResultValue() > 1.4;
         }
-        throw new UnsupportedOperationException("Test not found!");
+        throw new UnsupportedOperationException("Test not found!" + this.getTestType().getClassNameOfApi() + this + this.getParameters());
     }
 
     /**

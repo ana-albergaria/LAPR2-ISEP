@@ -51,6 +51,7 @@ public class Main {
         NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova);
         System.out.println(report);
 
+        /*
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR,2002);
         cal.set(Calendar.MONTH,1);
@@ -59,7 +60,9 @@ public class Main {
         TestStore testStore = new TestStore();
         List<String> dates = new ArrayList<>();
         testStore.addDatesColumnToTableOfValues(3,currentDate,dates);
+         */
         //testStore.getTestsWithResultsDataForTableOfValues(3, currentDate);
+        /*
         System.out.println(dates);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date dateToBeCompared = sdf.parse(dates.get(0));
@@ -68,8 +71,17 @@ public class Main {
             System.out.println("True");
         else
             System.out.println("False");
+         */
 
-
+        /*
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR,1998);
+        cal.set(Calendar.MONTH,7);
+        cal.set(Calendar.DAY_OF_MONTH,6);
+        Date d1 = cal.getTime();
+        Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","carlos@gmail.com","Carlos","12345678901");
+        System.out.println(c1.getAge());
+         */
 
 
 
@@ -101,9 +113,6 @@ public class Main {
             System.out.println("t-student critical value: " + critTD);
         }
          */
-
-        Date date = new Date();
-        System.out.println(date);
 
 
         /*

@@ -1,6 +1,10 @@
-/*
+
 package app.domain.model.US19;
 
+import app.controller.App;
+import app.controller.CreateTestController;
+import app.controller.ImportTestController;
+import app.controller.ShowAllTestsController;
 import app.domain.model.*;
 import app.domain.shared.Constants;
 
@@ -11,7 +15,7 @@ import java.util.*;
 
 public class Main2 {
     public static void main(String[] args) throws IllegalAccessException, ClassNotFoundException, InstantiationException, ParseException {
-        List<Test> testList = new ArrayList<>();
+        /*List<Test> testList = new ArrayList<>();
         List<ParameterCategory> pcsCovid = new ArrayList<>();
         ParameterCategory pc1 = new ParameterCategory("CODE3","covid");
         pcsCovid.add(pc1);
@@ -36,6 +40,8 @@ public class Main2 {
         List <List<String>>  tableOfValues = getTestsWithResultsDataForTableOfValues(15,d1, testList);
         System.out.println(tableOfValues);
 
+         */
+/*
         StringBuilder text = new StringBuilder();
         text.append(String.format("%-20s%-20s%n", "Date", "Number of OBSERVED positive cases"));
         for (int i = 0; i < tableOfValues.get(0).size(); i++) {
@@ -44,6 +50,30 @@ public class Main2 {
 
         System.out.println(text.toString());
 
+ */
+
+
+        ImportTestController ctrl = new ImportTestController();
+        ctrl.importTestsFromFile("C:/Users/Ana Albergaria/Desktop/tests_CovidMATCPCSV.csv");
+
+        Calendar hoje = Calendar.getInstance();
+        hoje.set(Calendar.YEAR, 2021);
+        hoje.set(Calendar.MONTH, 4);    // janeiro é representado por 0
+        hoje.set(Calendar.DAY_OF_MONTH, 29);
+
+        Date d1 = hoje.getTime();
+        List<Test> testList = App.getInstance().getCompany().getTestStore().getTests();
+
+        List <List<String>>  tableOfValues = getTestsWithResultsDataForTableOfValues(15,d1, testList);
+        System.out.println(tableOfValues);
+
+        StringBuilder text = new StringBuilder();
+        text.append(String.format("%-20s%-20s%n", "Date", "Number of OBSERVED positive cases"));
+        for (int i = 0; i < tableOfValues.get(0).size(); i++) {
+            text.append(String.format("%-35s%-35s%n", tableOfValues.get(0).get(i), tableOfValues.get(1).get(i)));
+        }
+
+        System.out.println(text.toString());
 
 
 
@@ -77,7 +107,7 @@ public class Main2 {
                                                            List<String> dates,
                                                            List<String> observedPositives,
                                                            List<Test> testList) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         int[] observedPositivesInt = new int[numberOfObservations];
         int indexDate = 0;
 
@@ -129,6 +159,6 @@ public class Main2 {
     }
 
 }
- */
+
 
 

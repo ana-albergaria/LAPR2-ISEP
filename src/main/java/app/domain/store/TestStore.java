@@ -331,32 +331,44 @@ public class TestStore {
         return testsInADay;
     }
 
-    public double[] getCovidTestListDataFromDateInterval(Date beginDate, Date endDate) {
+    public double[][] getCovidTestAndMeanAgeListDataFromDateInterval(Date beginDate, Date endDate) {
         Calendar auxEndDate = Calendar.getInstance();
         auxEndDate.setTime(endDate);
 
         List<Double> covidTestList = new ArrayList<>();
+        List<Double> meanAgeList = new ArrayList<>();
 
         while(!checkIfDatesAreEqual(beginDate, endDate)) {
             double testsInADay = getNumberOfCovidTestsRealizedInADay(endDate);
             covidTestList.add(testsInADay);
+            double meanAgeInADay = getMeanAgeOfClientsOfCovidTestsInADay(endDate);
+            meanAgeList.add(meanAgeInADay);
             auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
             endDate = auxEndDate.getTime();
         }
 
+        //FALTA COLOCAR A INFORMAÇÃO DOS ARRAYS NA MATRIZ!!!!!!
         double[] covidTestArray = convertListOfDoubleToArray(covidTestList);
-        return covidTestArray;
+        double[] meanAgeArray = convertListOfDoubleToArray(meanAgeList);
+
+        double[][] covidTestAndMeanAgeList = new double[2][covidTestArray.length];
+
+
+        return covidTestAndMeanAgeList;
     }
 
-    /*
+
     public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
-        double sumAges = 0;
+        double sumAges = 0, numClients = 0;
         for (Test test : testList) {
-            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
-                sumAges += test.getClient().
+            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date)) {
+                sumAges += test.getClient().getAge();
+                numClients++;
+            }
         }
+        return sumAges / numClients;
     }
-     */
+
 
     public double[] convertListOfDoubleToArray(List<Double> list) {
         double[] array = new double[list.size()];

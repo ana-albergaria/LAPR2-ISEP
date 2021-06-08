@@ -136,14 +136,14 @@ public class App {
 
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal2);
 
-        Test test1 = new Test("123456789012",c1,t1,listParameter, cal2);
-        this.company.getTestStore().saveTest(test1);
+        //Test test1 = new Test("123456789012",c1,t1,listParameter, cal2);
+        //this.company.getTestStore().saveTest(test1);
         //RETIRAR BARCODE EXCEPTION DO CONSTRUTOR, BOOTSTRAP E SINGLETON EM BAIXO
 
         MyBarcode mb1 = new MyBarcode(c1, "12345678901");
 
         Sample s1 = new Sample(mb1);
-        test1.addSample(s1);
+        //test1.addSample(s1);
         /*
         try{
             test1.addTestResult("code1", 23.45, "ug");
@@ -158,8 +158,8 @@ public class App {
         listParameter2.add(new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
         listParameter2.add(new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
 
-        Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
-        this.company.getTestStore().saveTest(test2);
+        //Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
+        //this.company.getTestStore().saveTest(test2);
 
 
 

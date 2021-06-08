@@ -80,7 +80,7 @@ public class ImportTestController {
         String name = data[8];
         String email = data[9];
         clientController.registerClient(citizenCardNum, nhsNum, date, tin, email, name, phoneNum);
-        System.out.println(clientController.saveClient());
+        clientController.saveClient();
     }
 
 }

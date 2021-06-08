@@ -31,20 +31,22 @@ public class SendNHSDailyReportController {
 
 
     /*
+
     public MyRegressionModel getMyRegressionModel() throws IllegalAccessException, InstantiationException, ClassNotFoundException, ParseException {
         List<Date> intervalDates = this.company.getDateInterval();
-        TestStore testStore = this.company.getTestStore();
         Date beginDate = intervalDates.get(0), endDate = intervalDates.get(1);
-        double[] covidTestArray = testStore.getCovidTestListDataFromDateInterval(beginDate, endDate);
+        TestStore testStore = this.company.getTestStore();
+        double[][] covidTestAndMeanAgeList = testStore.getCovidTestAndMeanAgeListDataFromDateInterval(beginDate, endDate);
         RegressionModel regressionModel = this.company.getRegressionModel();
         MyRegressionModel myRegressionModel = regressionModel.getRegressionModel()
-
-
-
 
     }
 
      */
+
+
+
+
 
 
 }

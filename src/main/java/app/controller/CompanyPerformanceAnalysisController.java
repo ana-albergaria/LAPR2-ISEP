@@ -35,61 +35,80 @@ public class CompanyPerformanceAnalysisController {
         this.company = company;
     }
 
-    /**
+    /*
      * Creates and returns an ArrayList with all the info to be considered when analysing the company performance
      * @return an ArrayList with all the info to be considered when analysing the company performance
      */
+    /*
     public ArrayList<Integer> getTestOverview(){
         ArrayList<Integer> testOverview = new ArrayList<>();
         ClientStore clientStore = this.company.getClientStore();
-        int clientInfo = clientStore.getClientInfo();
+        int clientInfo = clientStore.getNumClients();
         testOverview.add(clientInfo);
         TestStore testStore = this.company.getTestStore();
         testOverview.addAll(testStore.getTestsInfo());
         return  testOverview;
     }
-
-    /*
-    testOverview -> arraylist of integers with:
-    number of clients
-    number of tests waiting for results
-    number of tests waiting for diagnosis
-    -------------
-    faltam:
-    -------------
-    total number of tests processed in the laboratory in each day...
-    week...
-    month...
-    year
     */
+
+    //ALL TIME
+    //GET NUM CLIENTS -> clientStore.getNumClients()
+    //GET NUM TESTS WAITING FOR RESULTS ->
+    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
+    //GET NUM TESTS PROCESSES IN THE LAB ->
+
+    //EACH YEAR
+    //GET NUM CLIENTS ->
+    //GET NUM TESTS WAITING FOR RESULTS ->
+    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
+    //GET NUM TESTS PROCESSES IN THE LAB ->
+
+    //EACH MONTH
+    //GET NUM CLIENTS ->
+    //GET NUM TESTS WAITING FOR RESULTS ->
+    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
+    //GET NUM TESTS PROCESSES IN THE LAB ->
+
+    //EACH WEEK
+    //GET NUM CLIENTS ->
+    //GET NUM TESTS WAITING FOR RESULTS ->
+    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
+    //GET NUM TESTS PROCESSES IN THE LAB ->
+
+    //EACH DAY
+    //GET NUM CLIENTS ->
+    //GET NUM TESTS WAITING FOR RESULTS ->
+    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
+    //GET NUM TESTS PROCESSES IN THE LAB ->
 
     //12 WORKING HOURS PER DAY
     //WORKING DAY IS FROM 8:00 TO 20:00
     //SUNDAY IS NOT A WORKING DAY
 
-    //test store:
-    //getNumberOfTestsByIntervalDateOfTestRegistration(beginningDate, endDate)
-    //getNumberOfTestsByIntervalDateOfDiagnosis(beginningDate, endDate)
-
-    //eg.:
-    //firstDayToAnalise d1d1/m1m1/y1y1 às 08:00:00:00
-    //lastDay d2d2/m2m2/y2y2 às 19:59:59:59
-    public int[] makeIntervalArray(Date firstDayToAnalyse, Date lastDayToAnalyse){ //começa às 8:00 e acaba às 20:00
+    /**
+     * Creates an array with the difference between the number of new tests and the number of results available to the client during each half an hour period
+     *
+     * @param firstDayToAnalyse beginning date of the interval
+     * @param lastDayToAnalyse end date of the interval
+     * @return an array with the difference between the number of new tests and the number of results available to the client during each half an hour period
+     */
+    public int[] makeIntervalArray(Date firstDayToAnalyse, Date lastDayToAnalyse){
         TestStore testStore = company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
-        int numRegistered;
-        int numValidated;
-        int intToKeep;
+        int numRegistered = 0;
+        int numValidated = 0;
+        int intToKeep = 0;
         int minToAdd = 30;
         Date date1 = firstDayToAnalyse;
         Date date2 = DateUtils.addMinutes(date1, minToAdd);
         do{
-            numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
-            numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
-            date1 = DateUtils.addMinutes(date1, minToAdd);
-            date2 = DateUtils.addMinutes(date2, minToAdd);
-            intToKeep = numRegistered-numValidated;
-            intervalArrayList.add(intToKeep);
+            if ((date1.getDay()!=0 && date2.getDay()!=0) && (date1.getHours()>=8 && date2.getHours()<20))
+                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
+                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
+                date1 = DateUtils.addMinutes(date1, minToAdd);
+                date2 = DateUtils.addMinutes(date2, minToAdd);
+                intToKeep = numRegistered-numValidated;
+                intervalArrayList.add(intToKeep);
         } while (date2.before(lastDayToAnalyse));
         int[] intervalArray = new int[intervalArrayList.size()];
         for (int i = 0; i < intervalArray.length; i++) {
@@ -97,15 +116,31 @@ public class CompanyPerformanceAnalysisController {
         }
         return intervalArray;
     }
-/*
+
+
+    /**
+     * Finds the contiguous subsequence with maximum sum of an interval, through a benchmark algorithm
+     *
+     * @param firstDayToAnalyse beginning date of the interval
+     * @param lastDayToAnalyse end date of the interval
+     * @return the contiguous subsequence with maximum sum of an interval
+     */
+
+    /*
     public int[] findWorstSubIntWithBenchmarkAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
         int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
         int[] worstSubInt = Sum.Max(interval);
         return worstSubInt;
     }
+     */
 
- */
-
+    /**
+     * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm
+     *
+     * @param firstDayToAnalyse beginning date of the interval
+     * @param lastDayToAnalyse end date of the interval
+     * @return the contiguous subsequence with maximum sum of an interval
+     */
     public int[] findWorstSubIntWithBruteforceAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
         int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
         //TO DO

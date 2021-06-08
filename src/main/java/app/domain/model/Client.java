@@ -2,6 +2,9 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -180,6 +183,16 @@ public class Client {
                 = (diffInTime
                 / (1000L * 60 * 60 * 24 * 365));
         return (int) difference_In_Years;
+    }
+
+    //o getYearsDiff não faz exatamente o mesmo que o getAge()?
+    public int getAge() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(birthDate);
+        int year = cal.get(Calendar.YEAR), month = cal.get(Calendar.MONTH), day = cal.get(Calendar.DAY_OF_MONTH);
+        LocalDate date = LocalDate.of(year, month, day), now = LocalDate.now();
+        Period diff = Period.between(date, now);
+        return diff.getYears();
     }
 
     /**

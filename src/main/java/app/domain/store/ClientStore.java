@@ -146,7 +146,7 @@ public class ClientStore {
      * Gets the number of clients in the system.
      * @return the number of clients in the system.
      */
-    public int getClientInfo(){
+    public int getNumClients(){
         //number of clients
         return clientList.size();
     }
