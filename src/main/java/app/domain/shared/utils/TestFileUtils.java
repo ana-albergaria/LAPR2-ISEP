@@ -1,10 +1,6 @@
 package app.domain.shared.utils;
 
-import app.domain.shared.Constants;
-
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -14,13 +10,19 @@ import java.util.Locale;
 
 public class TestFileUtils {
 
+    public static List<String> dataLabels = new ArrayList<>();
+
+    public static List<String> getDataLabels() {
+        return dataLabels;
+    }
+
     public static List<String[]> getTestDataByFile(String filePath){
         File csvFile = new File(filePath);
         List<String[]> processedListData = new ArrayList<>();
-
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
-            bufferedReader.readLine();
             String line = bufferedReader.readLine();
+            dataLabels = Arrays.asList(line.split(";"));
+            line = bufferedReader.readLine();
             while(line != null){
                 String [] attributes = line.split(";");
                 processedListData.add(attributes);
@@ -36,16 +38,12 @@ public class TestFileUtils {
 
     public static List<String> getParameterCodes(String [] arrayData){
         List<String> parameterCodes = new ArrayList<>();
-        if(!arrayData[12].equals("NA")){
-            for(int i = 13; i<17; i++) {
-                parameterCodes.add(Constants.BASE_CSV_DATA[i]);
+        int indexOfTestType = dataLabels.indexOf("TestType") + 1;
+        int indexOfFirstDate = dataLabels.indexOf("Test_Reg_DateHour");
+        for (int i=indexOfTestType; i < indexOfFirstDate; i++){
+            if(!arrayData[i].equals("NA") && !dataLabels.get(i).equals("Category")){
+                parameterCodes.add(dataLabels.get(i));
             }
-        }
-        if(!arrayData[17].equals("NA")){
-            parameterCodes.add(Constants.BASE_CSV_DATA[18]);
-        }
-        if(!arrayData[19].equals("NA")){
-            parameterCodes.add(Constants.BASE_CSV_DATA[20]);
         }
         return parameterCodes;
     }
@@ -56,7 +54,7 @@ public class TestFileUtils {
         List<Double> parameterResults = new ArrayList<>();
         int indexOfCode;
         for(String code : parameterCodes){
-            indexOfCode = Arrays.asList(Constants.BASE_CSV_DATA).indexOf(code);
+            indexOfCode = dataLabels.indexOf(code);
             parameterResults.add(format.parse(arrayData[indexOfCode]).doubleValue());
         }
         return parameterResults;
