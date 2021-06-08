@@ -76,8 +76,7 @@ public class ImportTestControllerTest {
     public void createCovidTestsFromFile() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         ImportTestController ctrl = new ImportTestController();
         ctrl.importTestsFromFile("C:/Users/jluca/Downloads/tests_CovidMATCPCSV.csv");
-        ShowAllTestsController showAllTestsController = new ShowAllTestsController();
-        System.out.println(showAllTestsController.getAllTests());
+        System.out.println(App.getInstance().getCompany().getTestStore().getTests().get(2));
     }
 
     @Test
