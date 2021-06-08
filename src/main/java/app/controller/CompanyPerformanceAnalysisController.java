@@ -118,6 +118,7 @@ public class CompanyPerformanceAnalysisController {
         return intervalArray;
     }
 
+
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through a benchmark algorithm
      *
@@ -130,6 +131,8 @@ public class CompanyPerformanceAnalysisController {
         int[] worstSubInt = Sum.Max(interval);
         return worstSubInt;
     }*/
+
+
 
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm

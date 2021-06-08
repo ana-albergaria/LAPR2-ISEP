@@ -51,67 +51,6 @@ public class Main {
         NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova);
         System.out.println(report);
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR,2002);
-        cal.set(Calendar.MONTH,1);
-        cal.set(Calendar.DAY_OF_MONTH,2);
-        Date currentDate = cal.getTime();
-        TestStore testStore = new TestStore();
-        List<String> dates = new ArrayList<>();
-        testStore.addDatesColumnToTableOfValues(3,currentDate,dates);
-        //testStore.getTestsWithResultsDataForTableOfValues(3, currentDate);
-        System.out.println(dates);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateToBeCompared = sdf.parse(dates.get(0));
-        System.out.println("Date to be compared: " + dateToBeCompared);
-        if(testStore.checkIfDatesAreEqual(currentDate, dateToBeCompared))
-            System.out.println("True");
-        else
-            System.out.println("False");
-
-
-
-
-
-
-        //System.out.println(simpleLR);
-
-        /*
-        TDistribution td= new TDistribution(7); //n-2
-        double alphaTD =0.975;
-        if(alphaTD> 0.5) {
-            double critTD = td.inverseCumulativeProbability(alphaTD);
-            System.out.println("t-student critical value: " + critTD);
-        }
-        else {
-            double critTD = td.inverseCumulativeProbability(1 - alphaTD);
-            System.out.println("t-student critical value: " + critTD);
-        }
-         */
-
-        /*
-        TDistribution td= new TDistribution(8); //n-2
-        double alphaTD =0.95;
-        if(alphaTD> 0.5) {
-            double critTD = td.inverseCumulativeProbability(alphaTD);
-            System.out.println("t-student critical value: " + critTD);
-        }
-        else {
-            double critTD = td.inverseCumulativeProbability(1 - alphaTD);
-            System.out.println("t-student critical value: " + critTD);
-        }
-         */
-
-        Date date = new Date();
-        System.out.println(date);
-
-
-        /*
-        Double ma = 3.0;
-        System.out.println(ma.doubleValue());
-         */
-
-
         File path = new File("./NHSReport/");
         if(!path.exists())
             path.mkdir();

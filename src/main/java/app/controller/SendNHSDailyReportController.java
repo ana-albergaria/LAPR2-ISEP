@@ -30,21 +30,38 @@ public class SendNHSDailyReportController {
      */
 
 
-    /*
+
+
     public MyRegressionModel getMyRegressionModel() throws IllegalAccessException, InstantiationException, ClassNotFoundException, ParseException {
         List<Date> intervalDates = this.company.getDateInterval();
-        TestStore testStore = this.company.getTestStore();
         Date beginDate = intervalDates.get(0), endDate = intervalDates.get(1);
-        double[] covidTestArray = testStore.getCovidTestListDataFromDateInterval(beginDate, endDate);
+        TestStore testStore = this.company.getTestStore();
+        List< List<Double> > covidTestAndMeanAgeList = testStore.getCovidTestAndMeanAgeListDataFromDateInterval(beginDate, endDate);
+
+        double[] covidTestsArray = getDoubleArrayWithData(covidTestAndMeanAgeList, 0);
+        double[] meanAgeArray = getDoubleArrayWithData(covidTestAndMeanAgeList, 1);
+        double[] observedPositives = getDoubleArrayWithData(covidTestAndMeanAgeList, 2);
+
         RegressionModel regressionModel = this.company.getRegressionModel();
-        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel()
+        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives);
 
-
-
-
+        return myRegressionModel;
     }
 
-     */
+    public double[] getDoubleArrayWithData(List< List<Double> > covidTestAndMeanAgeList, int index) {
+        Double[] extractedArray = new Double[covidTestAndMeanAgeList.get(index).size()];
+        double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
+        for (int i = 0; i < wishedArray.length; i++) {
+            wishedArray[i] = extractedArray[i];
+        }
+        return wishedArray;
+    }
+
+
+
+
+
+
 
 
 }

@@ -331,39 +331,62 @@ public class TestStore {
         return testsInADay;
     }
 
-    public double[] getCovidTestListDataFromDateInterval(Date beginDate, Date endDate) {
+    public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
+        double sumAges = 0, numClients = 0;
+        for (Test test : testList) {
+            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date)) {
+                sumAges += test.getClient().getAge();
+                numClients++;
+            }
+        }
+        return sumAges / numClients;
+    }
+
+    public double getObservedPositivesCovidInADay(Date date) {
+        double positives = 0;
+        for (Test test : testList) {
+            if(test.hasPositiveResultForCovid() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
+                positives++;
+        }
+        return positives;
+    }
+
+    public List< List<Double> > getCovidTestAndMeanAgeListDataFromDateInterval(Date beginDate, Date endDate) {
         Calendar auxEndDate = Calendar.getInstance();
         auxEndDate.setTime(endDate);
 
         List<Double> covidTestList = new ArrayList<>();
+        List<Double> meanAgeList = new ArrayList<>();
+        List<Double> observedPositives = new ArrayList<>();
+
+        getAllDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
+
+        List< List<Double> > covidTestAndMeanAgeList = new ArrayList<>();
+        covidTestAndMeanAgeList.add(covidTestList);
+        covidTestAndMeanAgeList.add(meanAgeList);
+        covidTestAndMeanAgeList.add(observedPositives);
+
+        return covidTestAndMeanAgeList;
+    }
+
+    public void getAllDataFromDateInterval(Date beginDate,
+                                           Date endDate,
+                                           List<Double> covidTestList,
+                                           List<Double> meanAgeList,
+                                           List<Double> observedPositives) {
+        Calendar auxEndDate = Calendar.getInstance();
+        auxEndDate.setTime(endDate);
 
         while(!checkIfDatesAreEqual(beginDate, endDate)) {
             double testsInADay = getNumberOfCovidTestsRealizedInADay(endDate);
             covidTestList.add(testsInADay);
+            double meanAgeInADay = getMeanAgeOfClientsOfCovidTestsInADay(endDate);
+            meanAgeList.add(meanAgeInADay);
+            double observedPositivesInADay = getObservedPositivesCovidInADay(endDate);
+            observedPositives.add(observedPositivesInADay);
             auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
             endDate = auxEndDate.getTime();
         }
-
-        double[] covidTestArray = convertListOfDoubleToArray(covidTestList);
-        return covidTestArray;
-    }
-
-    /*
-    public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
-        double sumAges = 0;
-        for (Test test : testList) {
-            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
-                sumAges += test.getClient().
-        }
-    }
-     */
-
-    public double[] convertListOfDoubleToArray(List<Double> list) {
-        double[] array = new double[list.size()];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = list.get(i);
-        }
-        return array;
     }
 
     public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
