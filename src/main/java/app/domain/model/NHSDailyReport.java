@@ -32,6 +32,7 @@ public class NHSDailyReport {
         return tableOfValues;
     }
 
+    @Override
     public String toString() {
         return String.format("%s%n%s%n%s%n%s",
                 myRegressionModel, hypothesisTest, modelAnova, tableOfValues);

@@ -1,5 +1,6 @@
 package app.domain.interfaces;
 
+import app.domain.model.ConfidenceInterval;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
@@ -12,5 +13,6 @@ public interface RegressionModel {
     public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel);
     public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel);
     public abstract List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel);
+    public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0);
 }
 

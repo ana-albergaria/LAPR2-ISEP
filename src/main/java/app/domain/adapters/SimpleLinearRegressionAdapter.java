@@ -1,6 +1,7 @@
 package app.domain.adapters;
 
 import app.domain.interfaces.RegressionModel;
+import app.domain.model.ConfidenceInterval;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
@@ -50,6 +51,17 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
             estimatedPositives.add(estimatedValue);
         }
         return estimatedPositives;
+    }
+
+    @Override
+    public ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0) {
+        int n = myRegressionModel.getNumberOfObservations();
+        LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
+        double y0 = simpleLR.predict(x0), s = simpleLR.getS();
+        double xbar = simpleLR.getXbar(), xxbar = simpleLR.getXXbar();
+        double auxDelta = s * Math.sqrt((1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar)));
+
+        return new ConfidenceInterval(y0, auxDelta);
     }
 }
 

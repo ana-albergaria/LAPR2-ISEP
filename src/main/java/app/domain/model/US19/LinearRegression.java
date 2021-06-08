@@ -148,6 +148,17 @@ public class LinearRegression {
         return ssr;
     }
 
+    public double getS() {
+        return s;
+    }
+
+    public double getXbar() {
+        return xbar;
+    }
+
+    public double getXXbar() {
+        return xxbar;
+    }
 
     /**
      * Returns the expected response y given the value of the predictor
