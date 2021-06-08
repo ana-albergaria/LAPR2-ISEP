@@ -1,16 +1,19 @@
 package app.controller;
 
+import app.domain.model.BenchmarkAlgorithm;
+import app.domain.model.BruteForceAlgorithm;
 import app.domain.model.Company;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
-//import com.isep.mdis.Sum;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * @author Marta Ribeiro (1201592)
+ * Controller class for analysing the company performance
+ *
+ * @author Marta Ribeiro 1201592
  */
 public class CompanyPerformanceAnalysisController {
 
@@ -117,32 +120,26 @@ public class CompanyPerformanceAnalysisController {
         return intervalArray;
     }
 
-    /*
-     * Finds the contiguous subsequence with maximum sum of an interval, through a benchmark algorithm
+    BenchmarkAlgorithm bma = new BenchmarkAlgorithm();
+    BruteForceAlgorithm bfa = new BruteForceAlgorithm();
+
+    /**
+     * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
      * @param firstDayToAnalyse beginning date of the interval
      * @param lastDayToAnalyse end date of the interval
+     * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */
-    /*public int[] findWorstSubIntWithBenchmarkAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
+    public int[] findWorstSubIntWithChosenAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse, boolean chosenAlgorithm){
         int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
-        int[] worstSubInt = Sum.Max(interval);
+        int[] worstSubInt;
+        if (chosenAlgorithm){
+            worstSubInt = bma.findSubMaxSum(interval);
+        } else {
+            worstSubInt = bfa.findSubMaxSum(interval);
+        }
         return worstSubInt;
-    }*/
-
-    /*
-     * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm
-     *
-     * @param firstDayToAnalyse beginning date of the interval
-     * @param lastDayToAnalyse end date of the interval
-     * @return the contiguous subsequence with maximum sum of an interval
-     */
-    /*public int[] findWorstSubIntWithBruteforceAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse){
-        int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
-        int[] worstSubInt = SubMaxSum.findSubMaxSum(interval);
-        return null;
-    }*/
-
-
+    }
 
 }
