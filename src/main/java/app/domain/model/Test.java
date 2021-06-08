@@ -379,7 +379,7 @@ public class Test {
             List<TestParameter> testParameters = this.getParameters();
             return testParameters.get(0).getTestParameterResult().getResultValue() > 1.4;
         }
-        throw new UnsupportedOperationException("Test not found!" + this.getTestType().getClassNameOfApi() + this + this.getParameters());
+        return false;
     }
 
     /**
