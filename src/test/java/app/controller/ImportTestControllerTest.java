@@ -72,10 +72,12 @@ public class ImportTestControllerTest {
 
     }
 
-    /*@Test
+    @Test
     public void createCovidTestsFromFile() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         ImportTestController ctrl = new ImportTestController();
         ctrl.importTestsFromFile("C:/Users/jluca/Downloads/tests_CovidMATCPCSV.csv");
+        ShowAllTestsController showAllTestsController = new ShowAllTestsController();
+        System.out.println(showAllTestsController.getAllTests());
     }
 
     @Test
@@ -83,6 +85,6 @@ public class ImportTestControllerTest {
         ImportTestController ctrl = new ImportTestController();
         ctrl.importTestsFromFile("C:/Users/jluca/Desktop/dadosteste.csv");
 
-    }*/
+    }
 
 }
