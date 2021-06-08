@@ -54,31 +54,53 @@ public class CompanyPerformanceAnalysisController {
     }
     */
 
-    //ALL TIME
-    //GET NUM CLIENTS -> clientStore.getNumClients()
-    //GET NUM TESTS WAITING FOR RESULTS ->
-    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
-    //GET NUM TESTS PROCESSES IN THE LAB ->
+    /**
+     * Gets the number of clients in the system.
+     * @return the number of clients in the system.
+     */
+    public int getNumClients() {
+        ClientStore clientStore = new ClientStore();
+        int numClients = clientStore.getClients().size();
+        return numClients;
+    }
 
-    //EACH YEAR
-    //GET NUM CLIENTS ->
-    //GET NUM TESTS WAITING FOR RESULTS ->
-    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
-    //GET NUM TESTS PROCESSES IN THE LAB ->
+    public int getNumTestsWaitingForResultsDay(Date day){
+        //TO DO
+        return 0;
+    }
 
-    //EACH MONTH
-    //GET NUM CLIENTS ->
-    //GET NUM TESTS WAITING FOR RESULTS ->
-    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
-    //GET NUM TESTS PROCESSES IN THE LAB ->
+    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
+    //SHOW ERROR MESSAGES!!!
+    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){
+        //TO DO
+        return 0;
+    }
 
-    //EACH WEEK
-    //GET NUM CLIENTS ->
-    //GET NUM TESTS WAITING FOR RESULTS ->
-    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
-    //GET NUM TESTS PROCESSES IN THE LAB ->
+    public int getNumTestsWaitingForDiagnosisDay(Date day){
+        //TO DO
+        return 0;
+    }
 
-    //EACH DAY
+    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
+    //SHOW ERROR MESSAGES!!!
+    public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay){
+        //TO DO
+        return 0;
+    }
+
+    public int getNumTestsProcessedInLabDay(Date day){
+        //TO DO
+        return 0;
+    }
+
+    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
+    //SHOW ERROR MESSAGES!!!
+    public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay){
+        //TO DO
+        return 0;
+    }
+
+    //EACH YEAR, MONTH, WEEK, DAY
     //GET NUM CLIENTS ->
     //GET NUM TESTS WAITING FOR RESULTS ->
     //GET NUM TESTS WAITING FOR DIAGNOSIS ->

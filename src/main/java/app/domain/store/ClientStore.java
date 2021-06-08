@@ -142,13 +142,4 @@ public class ClientStore {
         return new ArrayList<>(clientList);
     }
 
-    /**
-     * Gets the number of clients in the system.
-     * @return the number of clients in the system.
-     */
-    public int getNumClients(){
-        //number of clients
-        return clientList.size();
-    }
-
 }

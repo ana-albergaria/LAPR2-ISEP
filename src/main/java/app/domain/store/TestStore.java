@@ -90,6 +90,33 @@ public class TestStore {
         return listTestsReadyForResults;
     }
 
+    /*public int getNumTestsWaitingForResultsDay(Date day){
+
+    }*/
+
+    /**
+     * Saves the Tests info to be considered when analysing the company performance on an ArrayList
+     * @return an ArrayList with all the Tests info to be considered when analysing the company performance
+     */
+    public ArrayList<Integer> getTestsInfo(){
+        ArrayList<Integer> testsInfo = new ArrayList<Integer>();
+        int waitingForResults = getTestsReadyForResults().size();
+        testsInfo.add(waitingForResults);
+        int waitingForDiagnosis = getTestsReadyToDiagnose().size();
+        testsInfo.add(waitingForDiagnosis);
+        //falta fazer daqui:
+        int processedEachDay = 0;
+        testsInfo.add(processedEachDay);
+        int processedEachWeek = 0;
+        testsInfo.add(processedEachWeek);
+        int processedEachMonth = 0;
+        testsInfo.add(processedEachMonth);
+        int processedEachYear = 0;
+        testsInfo.add(processedEachYear);
+        //até aqui
+        return testsInfo;
+    }
+
     /**
      * Gets the tests by its code
      * @param code code of the test to be found
@@ -232,29 +259,6 @@ public class TestStore {
                 return true;
         }
         return false;
-    }
-
-    /**
-     * Saves the Tests info to be considered when analysing the company performance on an ArrayList
-     * @return an ArrayList with all the Tests info to be considered when analysing the company performance
-     */
-    public ArrayList<Integer> getTestsInfo(){
-        ArrayList<Integer> testsInfo = new ArrayList<Integer>();
-        int waitingForResults = getTestsReadyForResults().size();
-        testsInfo.add(waitingForResults);
-        int waitingForDiagnosis = getTestsReadyToDiagnose().size();
-        testsInfo.add(waitingForDiagnosis);
-        //falta fazer daqui:
-        int processedEachDay = 0;
-        testsInfo.add(processedEachDay);
-        int processedEachWeek = 0;
-        testsInfo.add(processedEachWeek);
-        int processedEachMonth = 0;
-        testsInfo.add(processedEachMonth);
-        int processedEachYear = 0;
-        testsInfo.add(processedEachYear);
-        //até aqui
-        return testsInfo;
     }
 
     /*
