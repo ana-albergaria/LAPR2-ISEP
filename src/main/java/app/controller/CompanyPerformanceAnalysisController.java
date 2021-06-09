@@ -122,8 +122,8 @@ public class CompanyPerformanceAnalysisController {
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
-     * @param firstDayToAnalyse beginning date of the interval
-     * @param lastDayToAnalyse end date of the interval
+     * @param beginningDay beginning date of the interval
+     * @param endingDay end date of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */

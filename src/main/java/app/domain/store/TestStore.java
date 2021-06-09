@@ -75,8 +75,8 @@ public class TestStore {
             if (date1!=null)
                 if (date2==null)
                     date2=new Date(10000,Calendar.JANUARY,1);
-            if (date1.before(day) && date2.after(day))
-                num++;
+                if (date1.before(day) && date2.after(day))
+                    num++;
         }
         return num;
     }
@@ -132,8 +132,8 @@ public class TestStore {
             if (date2!=null)
                 if (date1==null)
                     date1=new Date(10000,Calendar.JANUARY,1);
-            if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
-                num++;
+                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
+                    num++;
         }
         return num;
     }
