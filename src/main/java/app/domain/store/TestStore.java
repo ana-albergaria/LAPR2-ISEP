@@ -333,21 +333,6 @@ public class TestStore {
     WARNING: - Confirm if it's tests with results OR validated tests -> A: Validated.
             - Confirm if the client wishes the date of test registration or date of results
      */
-    public List < List<String> > getTestsWithResultsDataForTableOfValues(int numberOfObservations,
-                                                                         Date currentDate) throws ParseException {
-        List< List<String> > tableOfValues = new ArrayList<>();
-        List<String> dates = new ArrayList<>();
-        List<String> observedPositives = new ArrayList<>();
-
-        //addDatesColumnToTableOfValues(numberOfObservations, currentDate, dates);
-        //getObservedPositivesToTableOfValues(numberOfObservations, dates, observedPositives);
-
-        tableOfValues.add(dates);
-        tableOfValues.add(observedPositives);
-
-        return tableOfValues;
-    }
-
     public int[] getObservedPositivesToTableOfValues(int numberOfObservations,
                                                     List<String> dates) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

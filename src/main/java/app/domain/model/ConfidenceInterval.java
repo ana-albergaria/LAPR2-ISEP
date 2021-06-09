@@ -32,14 +32,6 @@ public class ConfidenceInterval {
         return confidenceLevel;
     }
 
-    public double getLimInf() {
-        return limInf;
-    }
-
-    public double getLimSup() {
-        return limSup;
-    }
-
     @Override
     public String toString() {
         return String.format("%f,%f", limInf, limSup);
@@ -55,7 +47,7 @@ public class ConfidenceInterval {
 
         ConfidenceInterval otherConfidenceInterval = (ConfidenceInterval) otherObject;
 
-        DecimalFormat df = new DecimalFormat("#.####");
+        DecimalFormat df = new DecimalFormat("#.######");
 
         return df.format(this.limInf).equals(df.format(otherConfidenceInterval.limInf)) &&
                 df.format(this.limSup).equals(df.format(otherConfidenceInterval.limSup));
