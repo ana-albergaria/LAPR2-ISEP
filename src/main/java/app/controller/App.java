@@ -28,7 +28,8 @@ public class App {
                 props.getProperty("Company.ExternalAPI.Class"),
                 props.getProperty("Company.RegressionModel.Class"),
                 props.getProperty("Company.DateInterval"),
-                props.getProperty("Company.NumberOfHistoricalPoints"));
+                props.getProperty("Company.NumberOfHistoricalPoints"),
+                props.getProperty("Company.ConfidenceLevel"));
         this.authFacade = this.company.getAuthFacade();
         bootstrap();
     }
@@ -160,6 +161,8 @@ public class App {
 
         //Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
         //this.company.getTestStore().saveTest(test2);
+
+
 
 
 

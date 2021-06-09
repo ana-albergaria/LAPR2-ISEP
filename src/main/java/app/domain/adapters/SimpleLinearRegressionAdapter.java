@@ -1,10 +1,7 @@
 package app.domain.adapters;
 
 import app.domain.interfaces.RegressionModel;
-import app.domain.model.ConfidenceInterval;
-import app.domain.model.HypothesisTest;
-import app.domain.model.MyRegressionModel;
-import app.domain.model.SignificanceModelAnova;
+import app.domain.model.*;
 import app.domain.model.US19.LinearRegression;
 
 import java.util.ArrayList;
@@ -54,14 +51,28 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0) {
+    public ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0, double confidenceLevel) {
         int n = myRegressionModel.getNumberOfObservations();
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
         double y0 = simpleLR.predict(x0), s = simpleLR.getS();
         double xbar = simpleLR.getXbar(), xxbar = simpleLR.getXXbar();
-        double auxDelta = s * Math.sqrt((1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar)));
 
-        return new ConfidenceInterval(y0, auxDelta);
+        double auxDelta = s * Math.sqrt(1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar));
+
+        return new ConfidenceInterval(myRegressionModel, y0, auxDelta, confidenceLevel);
+    }
+
+    @Override
+    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double confidenceLevel) {
+        int numberOfObservations = myRegressionModel.getNumberOfObservations();
+        double[] x = myRegressionModel.getX1();
+        List<ConfidenceInterval> confidenceIntervals = new ArrayList<>();
+
+        for (int i = 0; i < numberOfObservations; i++) {
+            ConfidenceInterval confidenceInterval = getConfidenceInterval(myRegressionModel, x[i], confidenceLevel);
+            confidenceIntervals.add(confidenceInterval);
+        }
+        return confidenceIntervals;
     }
 }
 

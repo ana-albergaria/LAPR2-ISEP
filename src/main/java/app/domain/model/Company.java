@@ -79,16 +79,25 @@ public class Company {
 
     private String historicalPoints;
 
+    private String confidenceLevel;
+
     public Company(String designation,
                    String classNameForBarcodeApi,
                    String regressionModelCLass,
                    String dateInterval,
-                   String historicalPoints)
+                   String historicalPoints,
+                   String confidenceLevel)
     {
         if (StringUtils.isBlank(designation))
             throw new IllegalArgumentException("Designation cannot be blank.");
         if (StringUtils.isBlank(classNameForBarcodeApi))
             throw new IllegalArgumentException("The Class Name for the Barcode API cannot be blank.");
+        if (StringUtils.isBlank(regressionModelCLass))
+            throw new IllegalArgumentException("The Class Name for Regression Model cannot be blank.");
+        if (StringUtils.isBlank(dateInterval))
+            throw new IllegalArgumentException("The Class Name for the Date Interval cannot be blank.");
+        if (StringUtils.isBlank(historicalPoints))
+            throw new IllegalArgumentException("The Class Name for the Historical Points cannot be blank.");
 
         this.designation = designation;
         this.authFacade = new AuthFacade();
@@ -118,6 +127,7 @@ public class Company {
         this.dateInterval = dateInterval;
         this.historicalPoints = historicalPoints;
         this.nhsReportStore = new NHSReportStore();
+        this.confidenceLevel = confidenceLevel;
     }
 
     public String getDesignation() {
@@ -359,6 +369,7 @@ public class Company {
         return Integer.parseInt(historicalPoints);
     }
 
-
-
+    public double getConfidenceLevel() {
+        return Double.parseDouble(confidenceLevel);
+    }
 }

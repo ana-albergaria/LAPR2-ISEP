@@ -28,6 +28,8 @@ public class Constants {
     public static final String DATE_INTERVAL = "28/05/2021-7/06/2021";
     public static final String HISTORICAL_POINTS = "15";
 
+    public static final String CONFIDENCE_LEVEL = "0.95";
+
     public static final String BLOOD_MODULE_1_NAME = "BloodModule1 (for blood tests, requires a key access)";
     public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";
     public static final String COVID_MODULE_NAME = "CovidModule (for Covid 19 Tests)";

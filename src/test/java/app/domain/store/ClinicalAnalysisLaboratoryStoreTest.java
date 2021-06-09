@@ -41,7 +41,7 @@ public class ClinicalAnalysisLaboratoryStoreTest {
         p2 = new ParameterCategory("CODE2","Name");
         pcList.add(p1);
         pcList.add(p2);
-        company = new Company("Many Labs", Constants.CLASS_BARCODE_API, Constants.CLASS_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS);
+        company = new Company("Many Labs", Constants.CLASS_BARCODE_API, Constants.CLASS_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS, Constants.CONFIDENCE_LEVEL);
         t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList,"");
         t2 = company.getTestTypeStore().createTestType("CODE4","Description","swab", pcList,"");
         t1 = company.getTestTypeStore().createTestType("CODE3","Description","swab", pcList, Constants.BLOOD_EXTERNAL_ADAPTER_2);

@@ -3,6 +3,8 @@ package app.domain.model;
 import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
 
+import java.util.Arrays;
+
 public class MyRegressionModel {
     private double[] x1;
     private double[] x2;
@@ -90,9 +92,9 @@ public class MyRegressionModel {
 
     public double calculateCriticalValFSnedecor(int numeratorDegreesOfFreedom,
                                                 int denominatorDegreesOfFreedom,
-                                                double levelOfSignificance) {
+                                                double significanceLevel) {
         FDistribution fd = new FDistribution(numeratorDegreesOfFreedom,denominatorDegreesOfFreedom);
-        double alphaFD = levelOfSignificance;
+        double alphaFD = significanceLevel;
         double critFD = fd.inverseCumulativeProbability(1- alphaFD);
         return critFD;
     }
@@ -134,4 +136,23 @@ public class MyRegressionModel {
                 "^y=%fx + %f%n//%nOther statistics%nR2 = %f%nR2 adjusted = %f%nR = %f%n//",
                 slope, intercept, r2, r2Adjusted, r);
      */
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        MyRegressionModel otherMyRegressionModel = (MyRegressionModel) otherObject;
+
+        return this.intercept == otherMyRegressionModel.intercept &&
+                this.slope == otherMyRegressionModel.slope &&
+                this.secondIndVariable == otherMyRegressionModel.secondIndVariable &&
+                this.r == otherMyRegressionModel.r &&
+                this.r2 == otherMyRegressionModel.r2 &&
+                this.r2Adjusted == otherMyRegressionModel.r2Adjusted &&
+                this.numberOfObservations == otherMyRegressionModel.numberOfObservations;
+    }
 }

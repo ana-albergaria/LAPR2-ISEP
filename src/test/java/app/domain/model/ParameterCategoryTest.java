@@ -10,7 +10,7 @@ public class ParameterCategoryTest {
 
     @Before
     public void setUp(){
-        company = new Company("many labs", Constants.CLASS_BARCODE_API, Constants.CLASS_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS);
+        company = new Company("many labs", Constants.CLASS_BARCODE_API, Constants.CLASS_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS, Constants.CONFIDENCE_LEVEL);
     }
 
     @Test(expected = IllegalArgumentException.class)

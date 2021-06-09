@@ -179,7 +179,7 @@ public class Client {
     private int calculateAge(Date birthDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(birthDate);
-        int year = cal.get(Calendar.YEAR), month = cal.get(Calendar.MONTH), day = cal.get(Calendar.DAY_OF_MONTH);
+        int year = cal.get(Calendar.YEAR), month = cal.get(Calendar.MONTH) + 1, day = cal.get(Calendar.DAY_OF_MONTH);
         LocalDate date = LocalDate.of(year, month, day), now = LocalDate.now();
         Period diff = Period.between(date, now);
         return diff.getYears();

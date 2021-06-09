@@ -6,55 +6,92 @@ participant ":CompanyPerformanceAnalysisUI" as UI
 participant ":CompanyPerformanceAnalysisController" as CTRL
 participant ":Company" as CMP
 participant ":Test" as TST
-participant "tstStore\n:TestStore" as TSTSTORE
-participant "cltStore\n:ClientStore" as CLTSTORE
+participant "testStore\n:TestStore" as TSTSTORE
+participant "clientStore\n:ClientStore" as CLTSTORE
 
 activate LC
 LC -> UI : asks to see an overview of all the tests performed and \n analyse the overall performance of the company
 activate UI
+UI --> LC : asks the day or interval of time to analyse \n and asks the algorithm to be used
+deactivate UI
 
-UI -> CTRL : testOverview = getTestOverview()
+loop while the Laboratory Coordinator inserts and selects different data
+LC -> UI : inserts and selects the requested data
+activate UI
+
+UI -> CTRL : clientInfo = getNumClients()
 activate CTRL
 
-CTRL -> CMP : cltStore = getClientStore()
+CTRL -> CMP : clientStore = getClientStore()
 activate CMP
 CMP --> CLTSTORE** : create()
 deactivate CMP
-CTRL -> CLTSTORE : clientsInfo = getClientInfo()
+CTRL -> CLTSTORE : clients = getClients()
 activate CLTSTORE
-CLTSTORE --> CTRL : clientsInfo
+|||
+deactivate CLTSTORE
+CTRL -> CLTSTORE : clientsNum = size()
+activate CLTSTORE
+|||
 deactivate CLTSTORE
 
-CTRL -> CMP : tstStore = getTestStore()
+CTRL --> UI : clientInfo
+deactivate CTRL
+
+alt Laboratory Coordinator requests analysis for a day
+
+UI -> CTRL : testInfoDay = getTestInfoDay
+activate CTRL
+
+CTRL -> CMP : testStore = getTestStore()
 activate CMP
 CMP --> TSTSTORE** : create()
 deactivate CMP
-CTRL -> TSTSTORE : testsInfo = getTestsInfo()
+CTRL -> TSTSTORE : numTestsWaitingForResultsDay = getNumTestsWaitingForResultsDay(day)
 activate TSTSTORE
-TSTSTORE --> CTRL : testsInfo
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDay = getNumTestsWaitingForDiagnosisDay(day)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsProcessedInLabDay = getNumTestsProcessedInLabDay(day)
+activate TSTSTORE
+|||
 deactivate TSTSTORE
 
-CTRL --> UI : testOverview
+CTRL --> UI : testInfoDay
 deactivate CTRL
 
-UI --> LC : shows an overview of all the tests performed, asks the interval \n of time to be analysed and asks the algorithm to use
-deactivate UI
+else Laboratory Coordinator requests analysis for an interval of days
 
-loop while Laboratory Coordinator changes the data to make the analysis
-LC -> UI : types requested data (e.g firstDayToAnalyse, lastDayToAnalyse) \n and selects requested data (e.g chosenAlgorithm)
-activate UI
+UI -> CTRL : testInfoInterval = getTestInfoInterval
+activate CTRL
 
-UI -> CTRL : worstSubInt = findWorstSubIntWithBenchmarkAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
+CTRL -> TSTSTORE : numTestsWaitingForResultsInterval = getNumTestsWaitingForResultsInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisInterval = getNumTestsWaitingForDiagnosisInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsProcessedInLabInterval = getNumTestsProcessedInLabInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL --> UI : testInfoInterval
+deactivate CTRL
+
+UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay chosenAlgorithm)
 activate CTRL
 CTRL --> UI : worstSubInt
 deactivate CTRL
 
-UI -> CTRL : worstSubInt = findWorstSubIntWithBruteforceAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
-activate CTRL
-CTRL --> UI : worstSubInt
-deactivate CTRL
+end
 
-UI --> LC : shows the overall performance of the company for the chosen interval of time
+UI --> LC : shows an overview of the clients and tests performed, and \n shows the overall performance of the company
 deactivate UI
 end
 

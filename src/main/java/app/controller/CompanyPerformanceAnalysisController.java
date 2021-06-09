@@ -3,7 +3,6 @@ package app.controller;
 import app.domain.model.BenchmarkAlgorithm;
 import app.domain.model.BruteForceAlgorithm;
 import app.domain.model.Company;
-import app.domain.model.Test;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
@@ -54,63 +53,29 @@ public class CompanyPerformanceAnalysisController {
     //SHOW ERROR MESSAGES!!!
 
     /**
-     * Gets the number of tests that were waiting for results on a specific day
-     * @return number of tests that were waiting for results on a specific day
+     * Gets an array with the tests info on a specific day
+     * @return array with the tests info on a specific day
      */
-    public int getNumTestsWaitingForResultsDay(Date day){
+    public int[] getTestInfoDay(Date day){
+        int[] testInfo = new int[3];
         TestStore testStore = new TestStore();
-        int numTestsWaitingForResultsDay = testStore.getNumTestsWaitingForResultsDay(day);
-        return numTestsWaitingForResultsDay;
+        testInfo[0]=testStore.getNumTestsWaitingForResultsDay(day);
+        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDay(day);
+        testInfo[2]=testStore.getNumTestsProcessedInLabDay(day);
+        return testInfo;
     }
 
     /**
-     * Gets the number of tests that were waiting for results between two specific days
-     * @return number of tests that were waiting for results between two specific days
+     * Gets an array with the tests info between two specific days
+     * @return array with the tests info between two specific days
      */
-    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){
+    public int[] getTestInfoInterval(Date beginningDay, Date endingDay){
+        int[] testInfo = new int[3];
         TestStore testStore = new TestStore();
-        int numTestsWaitingForResultsInterval = testStore.getNumTestsWaitingForResultsInterval(beginningDay, endingDay);
-        return numTestsWaitingForResultsInterval;
-    }
-
-    /**
-     * Gets the number of tests that were waiting for diagnosis on a specific day
-     * @return number of tests that were waiting for diagnosis on a specific day
-     */
-    public int getNumTestsWaitingForDiagnosisDay(Date day){
-        TestStore testStore = new TestStore();
-        int numTestsWaitingForDiagnosisDay = testStore.getNumTestsWaitingForDiagnosisDay(day);
-        return numTestsWaitingForDiagnosisDay;
-    }
-
-    /**
-     * Gets the number of tests that were waiting for diagnosis between two specific days
-     * @return number of tests that were waiting for diagnosis between two specific days
-     */
-    public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay){
-        TestStore testStore = new TestStore();
-        int numTestsWaitingForDiagnosisInterval = testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay, endingDay);
-        return numTestsWaitingForDiagnosisInterval;
-    }
-
-    //WHICH ONES ARE THE PROCESSED?
-
-    /**
-     * Gets the number of tests processed in the lab on a specific day
-     * @return number of tests processed in the lab on a specific day
-     */
-    public int getNumTestsProcessedInLabDay(Date day){
-        //TO DO
-        return 0;
-    }
-
-    /**
-     * Gets the number of tests processed in the lab between two specific days
-     * @return number of tests processed in the lab between two specific days
-     */
-    public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay){
-        //TO DO
-        return 0;
+        testInfo[0]=testStore.getNumTestsWaitingForResultsInterval(beginningDay,endingDay);
+        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay,endingDay);
+        testInfo[2]=testStore.getNumTestsProcessedInLabInterval(beginningDay,endingDay);
+        return testInfo;
     }
 
     //12 WORKING HOURS PER DAY
@@ -157,13 +122,13 @@ public class CompanyPerformanceAnalysisController {
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
-     * @param firstDayToAnalyse beginning date of the interval
-     * @param lastDayToAnalyse end date of the interval
+     * @param beginningDay beginning date of the interval
+     * @param endingDay end date of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse, boolean chosenAlgorithm){
-        int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
+    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, boolean chosenAlgorithm){
+        int[] interval = makeIntervalArray(beginningDay, endingDay);
         int[] worstSubInt;
         if (chosenAlgorithm){
             worstSubInt = bma.findSubMaxSum(interval);

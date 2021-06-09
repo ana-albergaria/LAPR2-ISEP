@@ -68,9 +68,15 @@ public class TestStore {
      */
     public int getNumTestsWaitingForResultsDay(Date day){
         int num = 0;
+        Date date1, date2;
         for (Test test : testList) {
-            if (test.getDateOfSamplesCollection().before(day) && test.getDateOfChemicalAnalysis().after(day))
-                num++;
+            date1=test.getDateOfSamplesCollection();
+            date2=test.getDateOfChemicalAnalysis();
+            if (date1!=null)
+                if (date2==null)
+                    date2=new Date(10000,Calendar.JANUARY,1);
+                if (date1.before(day) && date2.after(day))
+                    num++;
         }
         return num;
     }
@@ -100,9 +106,15 @@ public class TestStore {
      */
     public int getNumTestsWaitingForDiagnosisDay(Date day){
         int num = 0;
+        Date date1, date2;
         for (Test test : testList) {
-            if (test.getDateOfChemicalAnalysis().before(day) && test.getDateOfDiagnosis().after(day))
-                num++;
+            date1=test.getDateOfChemicalAnalysis();
+            date2=test.getDateOfDiagnosis();
+            if (date1!=null)
+                if (date2==null)
+                    date2=new Date(10000,Calendar.JANUARY,1);
+                if (date1.before(day) && date2.after(day))
+                    num++;
         }
         return num;
     }
@@ -120,8 +132,40 @@ public class TestStore {
             if (date2!=null)
                 if (date1==null)
                     date1=new Date(10000,Calendar.JANUARY,1);
-            if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
-                num++;
+                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
+                    num++;
+        }
+        return num;
+    }
+
+    /**
+     * Gets the number of tests processed in lab on a specific day
+     * @return number of tests processed in lab on a specific day
+     */
+    public int getNumTestsProcessedInLabDay(Date day){
+        int num = 0;
+        Date date1;
+        for (Test test : testList) {
+            date1 = test.getDateOfTestRegistration();
+            if (date1!=null)
+                if (date1.before(day) || date1.equals(day))
+                    num++;
+        }
+        return num;
+    }
+
+    /**
+     * Gets the number of tests processed in lab between two specific days
+     * @return number of tests processed in lab between two specific days
+     */
+    public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay){
+        int num = 0;
+        Date date1;
+        for (Test test : testList) {
+            date1 = test.getDateOfTestRegistration();
+            if (date1!=null)
+                if ((date1.after(beginningDay) && date1.before(endingDay)) || date1.before(beginningDay))
+                    num++;
         }
         return num;
     }
@@ -289,21 +333,6 @@ public class TestStore {
     WARNING: - Confirm if it's tests with results OR validated tests -> A: Validated.
             - Confirm if the client wishes the date of test registration or date of results
      */
-    public List < List<String> > getTestsWithResultsDataForTableOfValues(int numberOfObservations,
-                                                                         Date currentDate) throws ParseException {
-        List< List<String> > tableOfValues = new ArrayList<>();
-        List<String> dates = new ArrayList<>();
-        List<String> observedPositives = new ArrayList<>();
-
-        //addDatesColumnToTableOfValues(numberOfObservations, currentDate, dates);
-        //getObservedPositivesToTableOfValues(numberOfObservations, dates, observedPositives);
-
-        tableOfValues.add(dates);
-        tableOfValues.add(observedPositives);
-
-        return tableOfValues;
-    }
-
     public int[] getObservedPositivesToTableOfValues(int numberOfObservations,
                                                     List<String> dates) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

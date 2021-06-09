@@ -45,8 +45,8 @@ public class NHSReportStore {
         return regressionModel.getSignificanceModelAnova(myRegressionModel);
     }
 
-    public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives) {
-        return new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives);
+    public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives, List<ConfidenceInterval> confidenceIntervals) {
+        return new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
     }
 
     public double[] getDoubleArrayWithData(List<List<Double>> covidTestAndMeanAgeList, int index) {
@@ -79,6 +79,10 @@ public class NHSReportStore {
 
     //CORRIGIR! TER ATENÇÃO ONDE COMEÇA A SEMANA PASSADA!
     public Date getStartDate() {
-        return new Date();
+        Date currentDate = new Date();
+        Calendar oneDayBefore = Calendar.getInstance();
+        oneDayBefore.setTime(currentDate);
+        oneDayBefore.add(Calendar.DAY_OF_MONTH,-1);
+        return oneDayBefore.getTime();
     }
 }

@@ -35,6 +35,7 @@ public class ImportTestController {
         this.company = company;
     }
 
+
     public boolean importTestsFromFile(String filePath) throws ParseException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         List<String[]>  processedListData = TestFileUtils.getTestDataByFile(filePath);
         List<String>  dataLabels = TestFileUtils.getDataLabels();
@@ -62,6 +63,7 @@ public class ImportTestController {
         }
         return true;
     }
+
 
     private void addTestDates(String[] testData, Test createdTest, List<String> dataLabels) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

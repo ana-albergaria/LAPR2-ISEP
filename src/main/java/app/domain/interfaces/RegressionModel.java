@@ -13,6 +13,7 @@ public interface RegressionModel {
     public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel);
     public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel);
     public abstract List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel);
-    public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0);
+    public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0, double confidenceLevel);
+    public abstract List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double confidenceLevel);
 }
 
