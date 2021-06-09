@@ -171,18 +171,22 @@ public class Client {
 
         if (birthDate == null)
             throw new IllegalArgumentException("Birth Date cannot be blank!");
-        if (getAge() > MAX_AGE) {
+        if (calculateAge(birthDate) > MAX_AGE) {
             throw new IllegalArgumentException("Invalid birth date, the max age is 150 years!");
         }
     }
 
-    public int getAge() {
+    private int calculateAge(Date birthDate) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(birthDate);
         int year = cal.get(Calendar.YEAR), month = cal.get(Calendar.MONTH), day = cal.get(Calendar.DAY_OF_MONTH);
         LocalDate date = LocalDate.of(year, month, day), now = LocalDate.now();
         Period diff = Period.between(date, now);
         return diff.getYears();
+    }
+
+    public int getAge() {
+        return calculateAge(this.birthDate);
     }
 
     /**
