@@ -150,6 +150,14 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.isep.mdis</groupId>
+			<artifactId>Sum</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/Sum-1.0.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
 			<groupId>com.nhs.report</groupId>
 			<artifactId>Report2NHS</artifactId>
 			<version>1.0.0</version>
