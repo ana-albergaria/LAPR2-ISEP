@@ -88,8 +88,9 @@ public class CompanyPerformanceAnalysisController {
     //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
     //SHOW ERROR MESSAGES!!!
     public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay){
-        //TO DO
-        return 0;
+        TestStore testStore = new TestStore();
+        int numTestsWaitingForDiagnosisInterval = testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay, endingDay);
+        return numTestsWaitingForDiagnosisInterval;
     }
 
     public int getNumTestsProcessedInLabDay(Date day){

@@ -79,11 +79,17 @@ public class TestStore {
      * Gets the number of tests that were waiting for results between two specific days
      * @return number of tests that were waiting for results between two specific days
      */
-    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){
+    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){ //endingDay vai ser as ...:59 do domingo PARA PERTENCER
         int num = 0;
+        Date date1, date2;
         for (Test test : testList) {
-            if (test.getDateOfChemicalAnalysis().after(beginningDay) && test.getDateOfChemicalAnalysis().before(endingDay))
-                num++;
+            date1 = test.getDateOfChemicalAnalysis();
+            date2 = test.getDateOfSamplesCollection();
+            if (date2!=null)
+                if (date1==null)
+                    date1=new Date(10000,Calendar.JANUARY,1);
+                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
+                    num++;
         }
         return num;
     }
@@ -92,6 +98,21 @@ public class TestStore {
         int num = 0;
         for (Test test : testList) {
             if (test.getDateOfChemicalAnalysis().before(day) && test.getDateOfDiagnosis().after(day))
+                num++;
+        }
+        return num;
+    }
+
+    public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay){
+        int num = 0;
+        Date date1, date2;
+        for (Test test : testList) {
+            date1 = test.getDateOfDiagnosis();
+            date2 = test.getDateOfChemicalAnalysis();
+            if (date2!=null)
+                if (date1==null)
+                    date1=new Date(10000,Calendar.JANUARY,1);
+            if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
                 num++;
         }
         return num;
