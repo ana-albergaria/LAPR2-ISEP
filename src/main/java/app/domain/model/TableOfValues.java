@@ -33,7 +33,6 @@ public class TableOfValues {
     }
 
 
-
     @Override
     public String toString() {
         StringBuilder text = new StringBuilder();

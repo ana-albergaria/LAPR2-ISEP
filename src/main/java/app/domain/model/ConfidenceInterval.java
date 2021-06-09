@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +32,36 @@ public class ConfidenceInterval {
         return confidenceLevel;
     }
 
+    public double getLimInf() {
+        return limInf;
+    }
+
+    public double getLimSup() {
+        return limSup;
+    }
+
     @Override
     public String toString() {
         return String.format("%f,%f", limInf, limSup);
     }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        ConfidenceInterval otherConfidenceInterval = (ConfidenceInterval) otherObject;
+
+        DecimalFormat df = new DecimalFormat("#.####");
+
+        return df.format(this.limInf).equals(df.format(otherConfidenceInterval.limInf)) &&
+                df.format(this.limSup).equals(df.format(otherConfidenceInterval.limSup));
+    }
 }
+
+
 
 

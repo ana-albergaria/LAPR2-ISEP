@@ -56,7 +56,8 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
         double y0 = simpleLR.predict(x0), s = simpleLR.getS();
         double xbar = simpleLR.getXbar(), xxbar = simpleLR.getXXbar();
-        double auxDelta = s * Math.sqrt((1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar)));
+
+        double auxDelta = s * Math.sqrt(1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar));
 
         return new ConfidenceInterval(myRegressionModel, y0, auxDelta, confidenceLevel);
     }

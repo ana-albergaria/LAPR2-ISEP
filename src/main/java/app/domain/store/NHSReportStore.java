@@ -79,6 +79,10 @@ public class NHSReportStore {
 
     //CORRIGIR! TER ATENÇÃO ONDE COMEÇA A SEMANA PASSADA!
     public Date getStartDate() {
-        return new Date();
+        Date currentDate = new Date();
+        Calendar oneDayBefore = Calendar.getInstance();
+        oneDayBefore.setTime(currentDate);
+        oneDayBefore.add(Calendar.DAY_OF_MONTH,-1);
+        return oneDayBefore.getTime();
     }
 }

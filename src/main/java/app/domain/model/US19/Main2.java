@@ -1,4 +1,4 @@
-
+/*
 package app.domain.model.US19;
 
 import app.controller.App;
@@ -17,7 +17,7 @@ public class Main2 {
     public static void main(String[] args) throws IllegalAccessException, ClassNotFoundException, InstantiationException, ParseException {
 
         ImportTestController ctrl = new ImportTestController();
-        ctrl.importTestsFromFile("C:/Users/Ana Albergaria/Desktop/tests_CovidMATCPCSV.csv");
+        ctrl.importTestsFromFile("./tests_CovidMATCPCSV.csv");
 
         Calendar hoje = Calendar.getInstance();
         hoje.set(Calendar.YEAR, 2021);
@@ -124,6 +124,10 @@ public class Main2 {
     }
 
 }
+
+ */
+
+
 
 
 
