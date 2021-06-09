@@ -1,6 +1,9 @@
 package app.domain.store;
 
+import app.controller.App;
+import app.controller.ImportTestController;
 import app.controller.RecordSamplesController;
+import app.controller.ShowAllTestsController;
 import app.domain.model.*;
 import app.domain.shared.Constants;
 import net.sourceforge.barbecue.BarcodeException;
@@ -12,6 +15,7 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,9 +34,12 @@ public class TestStoreTest {
     private TestType t2;
     private Date d1;
     private ClinicalAnalysisLaboratory cal;
+    private ImportTestController importTestCtrl;
+    private TestStore testStore;
+    private Date startDate;
 
     @Before
-    public void setUp() throws ParseException {
+    public void setUp() throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         parametersBlood = new ArrayList<>();
         parametersCovid = new ArrayList<>();
 
@@ -62,6 +69,16 @@ public class TestStoreTest {
 
         cal =  new ClinicalAnalysisLaboratory("001DO",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
+
+        //for US18 and US19
+        importTestCtrl = new ImportTestController();
+        importTestCtrl.importTestsFromFile("./tests_CovidMATCPCSV.csv");
+        testStore = App.getInstance().getCompany().getTestStore();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2021);
+        cal.set(Calendar.MONTH, 4);    // janeiro é representado por 0
+        cal.set(Calendar.DAY_OF_MONTH, 29);
+        startDate = cal.getTime();
     }
 
     @Test
@@ -217,5 +234,55 @@ public class TestStoreTest {
         testStore.saveTest(test);
 
         Assert.assertEquals(test.getParameters(), testStore.getTestParameters(test));
+    }
+
+    //for US18 and US19
+    @Test
+    public void getObservedPositivesToTableOfValues() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+        int numberOfObservations = 8;
+        NHSReportStore nhsReportStore = new NHSReportStore();
+        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(numberOfObservations, startDate);
+        int[] expObservedPositives = {1, 3, 2, 5, 8, 8, 0, 12};
+
+        int[] observedPositives = testStore.getObservedPositivesToTableOfValues(numberOfObservations, dates);
+
+        Assert.assertArrayEquals(expObservedPositives, observedPositives);
+    }
+
+    @Test
+    public void getNumberOfCovidTestsRealizedInADay() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2021);
+        cal.set(Calendar.MONTH, 4);    // january is represented by 0
+        cal.set(Calendar.DAY_OF_MONTH, 20);
+        Date date = cal.getTime();
+        double expNumber = 15;
+
+        double number = testStore.getNumberOfCovidTestsRealizedInADay(date);
+
+        Assert.assertEquals(expNumber, number, 0.0);
+    }
+
+    @Test
+    public void getMeanAgeOfClientsOfCovidTestsInADay() throws ParseException {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2021);
+        cal.set(Calendar.MONTH, 4);    // january is represented by 0
+        cal.set(Calendar.DAY_OF_MONTH, 28);
+        Date date = cal.getTime();
+
+        double expNumber = 24.83333;
+        double number = testStore.getMeanAgeOfClientsOfCovidTestsInADay(date);
+
+        Assert.assertEquals(expNumber, number, 0.0001);
+    }
+
+    @Test
+    public void getObservedPositivesCovidInADay() {
+        double expNumber = 1;
+        double number = testStore.getObservedPositivesCovidInADay(startDate);
+
+        Assert.assertEquals(expNumber, number, 0.0);
+
     }
 }

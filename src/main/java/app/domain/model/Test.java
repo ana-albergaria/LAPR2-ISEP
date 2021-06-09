@@ -362,7 +362,7 @@ public class Test {
     }
 
     public boolean isValidated() {
-        return this.diagnosisReport != null;
+        return this.dateOfDiagnosis != null;
     }
 
     public boolean isCovidTest() {
@@ -374,8 +374,7 @@ public class Test {
     WARNING - confirm if the test should only have results OR must be VALIDATED and correct it
      */
     public boolean hasPositiveResultForCovid() {
-        //if(this.isCovidTest() && this.isValidated())
-        if(this.isCovidTest()) {
+        if(this.isCovidTest() && this.isValidated()) {
             List<TestParameter> testParameters = this.getParameters();
             return testParameters.get(0).getTestParameterResult().getResultValue() > 1.4;
         }

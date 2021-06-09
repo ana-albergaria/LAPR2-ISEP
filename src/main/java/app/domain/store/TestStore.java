@@ -342,8 +342,8 @@ public class TestStore {
         for (Test test : testList) {
             if(test.hasPositiveResultForCovid()) {
                 for (int i = 0; i < dates.size(); i++) {
-                    Date dateToBeCompared = sdf.parse(dates.get(i));
-                    if(checkIfDatesAreEqual(test.getDateOfDiagnosis(), dateToBeCompared)) {
+                    String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
+                    if(testDateOfDiagnosis.equals(dates.get(i))) {
                         indexDate = i;
                         observedPositives[indexDate]++;
                     }

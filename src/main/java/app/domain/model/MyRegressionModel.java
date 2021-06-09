@@ -6,17 +6,17 @@ import org.apache.commons.math3.distribution.TDistribution;
 import java.util.Arrays;
 
 public class MyRegressionModel {
-    private double[] x1;
+    private final double[] x1;
     private double[] x2;
     private double[] y;
-    private double intercept; //intercept - y, a
-    private double slope; //slope - x, b
+    private final double intercept; //intercept - y, a
+    private final double slope; //slope - x, b
     private Double secondIndVariable;
-    private double r;
-    private double r2;
-    private double r2Adjusted;
-    private int numberOfObservations;
-    private Object regressionModel;
+    private final double r;
+    private final double r2;
+    private final double r2Adjusted;
+    private final int numberOfObservations;
+    private final Object regressionModel;
 
     private static final int DEGREES_OF_FREEDOM_TSTUDENT = 2;
 

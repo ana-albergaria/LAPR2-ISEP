@@ -128,6 +128,8 @@ public class Company {
         this.historicalPoints = historicalPoints;
         this.nhsReportStore = new NHSReportStore();
         this.confidenceLevel = confidenceLevel;
+
+        //COLOCAR CONSTRUTOR DO REPORTTASK AQUI
     }
 
     public String getDesignation() {
