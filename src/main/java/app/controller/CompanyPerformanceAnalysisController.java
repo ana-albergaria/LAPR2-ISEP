@@ -3,12 +3,10 @@ package app.controller;
 import app.domain.model.BenchmarkAlgorithm;
 import app.domain.model.BruteForceAlgorithm;
 import app.domain.model.Company;
-import app.domain.model.Test;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -71,7 +69,7 @@ public class CompanyPerformanceAnalysisController {
      * Gets an array with the tests info between two specific days
      * @return array with the tests info between two specific days
      */
-    public int[] getTestInfoDay(Date beginningDay, Date endingDay){
+    public int[] getTestInfoInterval(Date beginningDay, Date endingDay){
         int[] testInfo = new int[3];
         TestStore testStore = new TestStore();
         testInfo[0]=testStore.getNumTestsWaitingForResultsInterval(beginningDay,endingDay);
@@ -129,8 +127,8 @@ public class CompanyPerformanceAnalysisController {
      * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(Date firstDayToAnalyse, Date lastDayToAnalyse, boolean chosenAlgorithm){
-        int[] interval = makeIntervalArray(firstDayToAnalyse, lastDayToAnalyse);
+    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, boolean chosenAlgorithm){
+        int[] interval = makeIntervalArray(beginningDay, endingDay);
         int[] worstSubInt;
         if (chosenAlgorithm){
             worstSubInt = bma.findSubMaxSum(interval);
