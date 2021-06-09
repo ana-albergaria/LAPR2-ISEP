@@ -100,8 +100,9 @@ public class CompanyPerformanceAnalysisController {
      * @return number of tests processed in the lab on a specific day
      */
     public int getNumTestsProcessedInLabDay(Date day){
-        //TO DO
-        return 0;
+        TestStore testStore = new TestStore();
+        int numTestsProcessedInLabDay = testStore.getNumTestsProcessedInLabDay(day);
+        return numTestsProcessedInLabDay;
     }
 
     /**
@@ -109,8 +110,9 @@ public class CompanyPerformanceAnalysisController {
      * @return number of tests processed in the lab between two specific days
      */
     public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay){
-        //TO DO
-        return 0;
+        TestStore testStore = new TestStore();
+        int numTestsProcessedInLabInterval = testStore.getNumTestsProcessedInLabInterval(beginningDay, endingDay);
+        return numTestsProcessedInLabInterval;
     }
 
     //12 WORKING HOURS PER DAY

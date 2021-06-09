@@ -68,8 +68,14 @@ public class TestStore {
      */
     public int getNumTestsWaitingForResultsDay(Date day){
         int num = 0;
+        Date date1, date2;
         for (Test test : testList) {
-            if (test.getDateOfSamplesCollection().before(day) && test.getDateOfChemicalAnalysis().after(day))
+            date1=test.getDateOfSamplesCollection();
+            date2=test.getDateOfChemicalAnalysis();
+            if (date1!=null)
+                if (date2==null)
+                    date2=new Date(10000,Calendar.JANUARY,1);
+            if (date1.before(day) && date2.after(day))
                 num++;
         }
         return num;
@@ -100,9 +106,15 @@ public class TestStore {
      */
     public int getNumTestsWaitingForDiagnosisDay(Date day){
         int num = 0;
+        Date date1, date2;
         for (Test test : testList) {
-            if (test.getDateOfChemicalAnalysis().before(day) && test.getDateOfDiagnosis().after(day))
-                num++;
+            date1=test.getDateOfChemicalAnalysis();
+            date2=test.getDateOfDiagnosis();
+            if (date1!=null)
+                if (date2==null)
+                    date2=new Date(10000,Calendar.JANUARY,1);
+                if (date1.before(day) && date2.after(day))
+                    num++;
         }
         return num;
     }
@@ -122,6 +134,38 @@ public class TestStore {
                     date1=new Date(10000,Calendar.JANUARY,1);
             if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
                 num++;
+        }
+        return num;
+    }
+
+    /**
+     * Gets the number of tests processed in lab on a specific day
+     * @return number of tests processed in lab on a specific day
+     */
+    public int getNumTestsProcessedInLabDay(Date day){
+        int num = 0;
+        Date date1;
+        for (Test test : testList) {
+            date1 = test.getDateOfTestRegistration();
+            if (date1!=null)
+                if (date1.before(day) || date1.equals(day))
+                    num++;
+        }
+        return num;
+    }
+
+    /**
+     * Gets the number of tests processed in lab between two specific days
+     * @return number of tests processed in lab between two specific days
+     */
+    public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay){
+        int num = 0;
+        Date date1;
+        for (Test test : testList) {
+            date1 = test.getDateOfTestRegistration();
+            if (date1!=null)
+                if ((date1.after(beginningDay) && date1.before(endingDay)) || date1.before(beginningDay))
+                    num++;
         }
         return num;
     }
