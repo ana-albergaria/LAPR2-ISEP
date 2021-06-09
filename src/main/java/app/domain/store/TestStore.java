@@ -94,6 +94,10 @@ public class TestStore {
         return num;
     }
 
+    /**
+     * Gets the number of tests that were waiting for diagnosis on a specific day
+     * @return number of tests that were waiting for diagnosis on a specific day
+     */
     public int getNumTestsWaitingForDiagnosisDay(Date day){
         int num = 0;
         for (Test test : testList) {
@@ -103,6 +107,10 @@ public class TestStore {
         return num;
     }
 
+    /**
+     * Gets the number of tests that were waiting for diagnosis between two specific days
+     * @return number of tests that were waiting for diagnosis between two specific days
+     */
     public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay){
         int num = 0;
         Date date1, date2;

@@ -39,22 +39,6 @@ public class CompanyPerformanceAnalysisController {
         this.company = company;
     }
 
-    /*
-     * Creates and returns an ArrayList with all the info to be considered when analysing the company performance
-     * @return an ArrayList with all the info to be considered when analysing the company performance
-     */
-    /*
-    public ArrayList<Integer> getTestOverview(){
-        ArrayList<Integer> testOverview = new ArrayList<>();
-        ClientStore clientStore = this.company.getClientStore();
-        int clientInfo = clientStore.getNumClients();
-        testOverview.add(clientInfo);
-        TestStore testStore = this.company.getTestStore();
-        testOverview.addAll(testStore.getTestsInfo());
-        return  testOverview;
-    }
-    */
-
     /**
      * Gets the number of clients in the system.
      * @return the number of clients in the system.
@@ -65,51 +49,69 @@ public class CompanyPerformanceAnalysisController {
         return numClients;
     }
 
+    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
+    //FIRST THE LB SELECTS DAY, WEEK, MONTH OR YEAR
+    //SHOW ERROR MESSAGES!!!
+
+    /**
+     * Gets the number of tests that were waiting for results on a specific day
+     * @return number of tests that were waiting for results on a specific day
+     */
     public int getNumTestsWaitingForResultsDay(Date day){
         TestStore testStore = new TestStore();
         int numTestsWaitingForResultsDay = testStore.getNumTestsWaitingForResultsDay(day);
         return numTestsWaitingForResultsDay;
     }
 
-    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
-    //SHOW ERROR MESSAGES!!!
+    /**
+     * Gets the number of tests that were waiting for results between two specific days
+     * @return number of tests that were waiting for results between two specific days
+     */
     public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){
         TestStore testStore = new TestStore();
         int numTestsWaitingForResultsInterval = testStore.getNumTestsWaitingForResultsInterval(beginningDay, endingDay);
         return numTestsWaitingForResultsInterval;
     }
 
+    /**
+     * Gets the number of tests that were waiting for diagnosis on a specific day
+     * @return number of tests that were waiting for diagnosis on a specific day
+     */
     public int getNumTestsWaitingForDiagnosisDay(Date day){
         TestStore testStore = new TestStore();
         int numTestsWaitingForDiagnosisDay = testStore.getNumTestsWaitingForDiagnosisDay(day);
         return numTestsWaitingForDiagnosisDay;
     }
 
-    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
-    //SHOW ERROR MESSAGES!!!
+    /**
+     * Gets the number of tests that were waiting for diagnosis between two specific days
+     * @return number of tests that were waiting for diagnosis between two specific days
+     */
     public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay){
         TestStore testStore = new TestStore();
         int numTestsWaitingForDiagnosisInterval = testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay, endingDay);
         return numTestsWaitingForDiagnosisInterval;
     }
 
+    //WHICH ONES ARE THE PROCESSED?
+
+    /**
+     * Gets the number of tests processed in the lab on a specific day
+     * @return number of tests processed in the lab on a specific day
+     */
     public int getNumTestsProcessedInLabDay(Date day){
         //TO DO
         return 0;
     }
 
-    //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
-    //SHOW ERROR MESSAGES!!!
+    /**
+     * Gets the number of tests processed in the lab between two specific days
+     * @return number of tests processed in the lab between two specific days
+     */
     public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay){
         //TO DO
         return 0;
     }
-
-    //EACH YEAR, MONTH, WEEK, DAY
-    //GET NUM CLIENTS ->
-    //GET NUM TESTS WAITING FOR RESULTS ->
-    //GET NUM TESTS WAITING FOR DIAGNOSIS ->
-    //GET NUM TESTS PROCESSES IN THE LAB ->
 
     //12 WORKING HOURS PER DAY
     //WORKING DAY IS FROM 8:00 TO 20:00
@@ -146,6 +148,8 @@ public class CompanyPerformanceAnalysisController {
         }
         return intervalArray;
     }
+
+    //IS THIS THE RIGHT WAY TO DO IT??? (SEE BELOW)
 
     BenchmarkAlgorithm bma = new BenchmarkAlgorithm();
     BruteForceAlgorithm bfa = new BruteForceAlgorithm();
