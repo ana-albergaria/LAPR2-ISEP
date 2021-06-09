@@ -6,7 +6,6 @@ import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -63,9 +62,17 @@ public class SendNHSDailyReportController {
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
         List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel);
+        List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel);
 
-        TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives);
+        TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
         return tableOfValues;
+    }
+
+    public List<ConfidenceInterval> getConfidenceIntervalListForTableOfValues(MyRegressionModel myRegressionModel,
+                                                                              RegressionModel regressionModel) {
+        double confidenceLevel = this.company.getConfidenceLevel();
+        List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, confidenceLevel);
+        return confidenceIntervalList;
     }
 
 

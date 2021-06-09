@@ -90,9 +90,9 @@ public class MyRegressionModel {
 
     public double calculateCriticalValFSnedecor(int numeratorDegreesOfFreedom,
                                                 int denominatorDegreesOfFreedom,
-                                                double levelOfSignificance) {
+                                                double significanceLevel) {
         FDistribution fd = new FDistribution(numeratorDegreesOfFreedom,denominatorDegreesOfFreedom);
-        double alphaFD = levelOfSignificance;
+        double alphaFD = significanceLevel;
         double critFD = fd.inverseCumulativeProbability(1- alphaFD);
         return critFD;
     }

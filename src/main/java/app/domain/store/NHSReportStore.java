@@ -45,8 +45,8 @@ public class NHSReportStore {
         return regressionModel.getSignificanceModelAnova(myRegressionModel);
     }
 
-    public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives) {
-        return new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives);
+    public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives, List<ConfidenceInterval> confidenceIntervals) {
+        return new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
     }
 
     public double[] getDoubleArrayWithData(List<List<Double>> covidTestAndMeanAgeList, int index) {
