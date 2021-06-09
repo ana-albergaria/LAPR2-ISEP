@@ -1,24 +1,18 @@
-package app.domain.adapters;
+package app.domain.model;
 
 import app.domain.interfaces.RegressionModel;
-import app.domain.model.Company;
-import app.domain.model.ConfidenceInterval;
-import app.domain.model.MyRegressionModel;
 import app.domain.model.US19.LinearRegression;
 import app.domain.shared.Constants;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SimpleLinearRegressionAdapterTest {
+public class TableOfValuesTest {
     private Company company;
     private RegressionModel regressionModel;
     private MyRegressionModel myRegressionModel;
     private LinearRegression simpleLR;
     private int historicalPoints;
-
 
     @Before
     public void setUp() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -34,28 +28,5 @@ public class SimpleLinearRegressionAdapterTest {
         myRegressionModel = regressionModel.getRegressionModel(x, x0, y, historicalPoints);
         simpleLR = new LinearRegression(x, y);
     }
-
-    @Test
-    public void getEstimatedPositives() {
-        //Ex. 1 TP PL7 MATCP
-        double[] x = {825.0, 215.0, 1070.0, 550.0, 480.0, 920.0, 1350.0, 325.0, 670.0, 1215.0};
-
-
-    }
-
-    @Test
-    public void getConfidenceInterval() {
-        //Arrange
-        double x0 = 1000.0;
-        double y0 = simpleLR.predict(x0);
-        double auxDelta = 0.51334312;
-        double confidenceLevel = 0.95;
-        ConfidenceInterval expectedConfInt = new ConfidenceInterval(myRegressionModel,y0,auxDelta,confidenceLevel);
-        //Act
-        ConfidenceInterval confidenceInterval = regressionModel.getConfidenceInterval(myRegressionModel, x0, confidenceLevel);
-        //Assert
-        Assert.assertEquals(expectedConfInt, confidenceInterval);
-    }
-
 
 }

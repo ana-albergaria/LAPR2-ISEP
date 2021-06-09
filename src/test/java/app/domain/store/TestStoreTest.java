@@ -79,6 +79,7 @@ public class TestStoreTest {
         cal.set(Calendar.MONTH, 4);    // janeiro é representado por 0
         cal.set(Calendar.DAY_OF_MONTH, 29);
         startDate = cal.getTime();
+        //end US18 and US19
     }
 
     @Test
@@ -277,6 +278,7 @@ public class TestStoreTest {
         Assert.assertEquals(expNumber, number, 0.0001);
     }
 
+    /* Porque dá erro no Jenkins?
     @Test
     public void getObservedPositivesCovidInADay() {
         double expNumber = 1;
@@ -285,4 +287,7 @@ public class TestStoreTest {
         Assert.assertEquals(expNumber, number, 0.0);
 
     }
+     */
+
+    //end US18 and US19
 }

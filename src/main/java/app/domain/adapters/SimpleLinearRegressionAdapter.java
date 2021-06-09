@@ -40,6 +40,8 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     @Override
     public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel) {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
+        //ESTÁ ERRADO!!!! NÃO É IR BUSCAR AO x1 pois esse foram os dados do intervalo obtidos.
+        //É NECESSÁRIO ir aos números de testes realizados nos pontos históricos!!!!
         double[] x = myRegressionModel.getX1();
         List<Double> estimatedPositives = new ArrayList<>();
 

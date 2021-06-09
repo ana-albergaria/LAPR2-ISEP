@@ -23,8 +23,6 @@ public class TableOfValues {
         this.observedPositives = observedPositives;
         this.estimatedPositives = estimatedPositives;
         this.confidenceIntervals = confidenceIntervals;
-
-
     }
 
     public String getConfidenceLevelInPercentage() {
