@@ -26,13 +26,12 @@ public class SendNHSDailyReportController {
     public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         RegressionModel regressionModel = this.company.getRegressionModel();
         int historicalPoints = this.company.getHistoricalPoints();
-        List<List<Double>> dataList = getDataListToFitTheModel();
-
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
-        MyRegressionModel myRegressionModel = nhsReportStore.createMyRegressionModel(regressionModel, historicalPoints, dataList);
+
+        MyRegressionModel myRegressionModel = getMyRegressionModel(regressionModel, historicalPoints);
         HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel);
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel);
-        //CORRIGIR MÉTODO getStartDate() para obter a data de início a começar do fim
+        
         Date startDate = nhsReportStore.getStartDate();
         TableOfValues tableOfValues = getTableOfValues(myRegressionModel, historicalPoints, startDate);
 
@@ -49,6 +48,19 @@ public class SendNHSDailyReportController {
         TestStore testStore = this.company.getTestStore();
         List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate);
         return dataList;
+    }
+
+    public MyRegressionModel getMyRegressionModel(RegressionModel regressionModel,
+                                                  int historicalPoints) throws ParseException {
+        List<List<Double>> dataList = getDataListToFitTheModel();
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
+        double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
+        double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
+        double[] bestX = nhsReportStore.getBestX(regressionModel, covidTestsArray, meanAgeArray, observedPositives);
+        MyRegressionModel myRegressionModel = (bestX != null) ? nhsReportStore.createMyBestRegressionModel(regressionModel, bestX, observedPositives, historicalPoints) :
+                nhsReportStore.createMyRegressionModel(regressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
+        return myRegressionModel;
     }
 
 
