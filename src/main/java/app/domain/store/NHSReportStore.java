@@ -23,12 +23,12 @@ public class NHSReportStore {
                 nhsDailyReport.getHypothesisTest() != null && nhsDailyReport.getModelAnova() != null && nhsDailyReport.getTableOfValues() != null;
     }
 
-    public double[] getBestX(RegressionModel regressionModel,
+    public int getBestXIndex(RegressionModel regressionModel,
                              double[] x1,
                              double[] x2,
                              double[] y) {
 
-        return regressionModel.getBestX(x1, x2, y);
+        return regressionModel.getBestXIndex(x1, x2, y);
     }
 
     public MyRegressionModel createMyBestRegressionModel(RegressionModel regressionModel,
