@@ -1,4 +1,4 @@
-package app.domain.model.US19;
+/*package app.domain.model.US19;
 
 import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
@@ -8,10 +8,12 @@ public class CriticalValues {
 
         public static void main(String[] args) {
 
+ */
+
 
 
             // Table number 7 from MATCP - t-Student
-            TDistribution td= new TDistribution(7);
+            /*TDistribution td= new TDistribution(7);
             double alphaTD =0.975;
             if(alphaTD> 0.5) {
                 double critTD = td.inverseCumulativeProbability(alphaTD);
@@ -22,11 +24,15 @@ public class CriticalValues {
                 System.out.println("t-student critical value: " + critTD);
             }
 
+             */
+
             // Table number 8 from MATCP - Fisher–Snedecor distribution
-            FDistribution fd= new FDistribution(2,9);
+            /*FDistribution fd= new FDistribution(2,9);
             double alphaFD= 0.05;
             double critFD= fd.inverseCumulativeProbability(1- alphaFD);
             System.out.println("Fisher–Snedecor critical value:" + critFD);
+
+             */
 
 
             /*
@@ -35,8 +41,9 @@ public class CriticalValues {
             double critFD= fd.inverseCumulativeProbability(1- alphaFD);
             System.out.println("Fisher–Snedecor critical value:" + critFD);
              */
-        }
+        //}
 
-}
+//}
+
 
 

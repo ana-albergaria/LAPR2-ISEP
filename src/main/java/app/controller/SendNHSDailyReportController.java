@@ -78,7 +78,7 @@ public class SendNHSDailyReportController {
         TestStore testStore = new TestStore();
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
-        
+
         double[] bestXInHistoricalPoints = new double[historicalPoints];
         if(bestXIndex != null) {
             if(bestXIndex == 1)
