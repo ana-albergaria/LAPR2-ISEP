@@ -208,6 +208,16 @@ public class TestStore {
         return clientTests;
     }
 
+    public List<Test> getTestsByClientTin(String tinNumber){
+        List<Test> clientTests = new ArrayList<>();
+        for (Test tst : testList){
+            if (tst.isOfClient(tinNumber)){
+                clientTests.add(tst);
+            }
+        }
+        return clientTests;
+    }
+
     /**
      * Method for getting a test by it's code in the tests list stored in the testStore
      * @param code code of the test to be found

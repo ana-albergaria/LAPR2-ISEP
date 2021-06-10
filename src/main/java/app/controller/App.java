@@ -26,6 +26,7 @@ public class App {
         Properties props = getProperties();
         this.company = new Company(props.getProperty(Constants.PARAMS_COMPANY_DESIGNATION),
                 props.getProperty("Company.ExternalAPI.Class"),
+                props.getProperty("Company.SortAlgorithm.Class"),
                 props.getProperty("Company.RegressionModel.Class"),
                 props.getProperty("Company.DateInterval"),
                 props.getProperty("Company.NumberOfHistoricalPoints"),
@@ -91,7 +92,7 @@ public class App {
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
 
-        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE1","hemogram"));
+        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE3","covid"));
 
@@ -155,9 +156,9 @@ public class App {
 
          */
 
-        List<Parameter> listParameter2 = new ArrayList<>();
-        listParameter2.add(new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
-        listParameter2.add(new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
+        this.company.getParameterStore().saveParameter(new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
+        this.company.getParameterStore().saveParameter(new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
+
 
         //Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
         //this.company.getTestStore().saveTest(test2);

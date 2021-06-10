@@ -273,6 +273,10 @@ public class Test {
         this.dateOfChemicalAnalysis = Calendar.getInstance().getTime();
     }
 
+    public boolean isOfClient(String tinNumber){
+        return this.client.getTinNumber().equals(tinNumber);
+    }
+
     /**
      * Generates a sequencial code based on the number of existing tests
      * @return 12 digits sequencial number of current test.
