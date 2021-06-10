@@ -31,7 +31,68 @@ file.
 > **A:** **The Multiple Linear Regression Class should be developed by each team**. In moodle I made available a Java file with Simple Linear Regression.
 The teams should not use libraries or other external modules to implement linear regression.  
 
-You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8836).
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8836).  
+
+> **Q**: As the report is generated automatically, should the system generate a notication that the report was sent?  
+> **A**: **The application should write the event into a log file**.  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8894#p11691).  
+
+> **Q**: Regarding US18 and US19, it is only one report containing all the tests performed by Many Labs to be sent each time, correct? Or is it one report per laboratory, for example? Or other option?
+> **A**: **The report should contain all the tests made by Many Labs.**
+>
+> **Q**: In US19, in Sprint D Requirements, it says "The report should include day and week (observed and estimated) values..." and also "Reports...must be sent every day at 6:00 am".
+> As the Report is to be automatically sent very early in the morning, do you wish the report to have the data concerning the day before and the last week starting at the day before?  
+> **A**: The format of the report should follow the report example that is available in moodle.
+>
+> **Q**: Should the report contain the data of all the tests with results (with or without report, with or without validation) or contain only the validated tests?  
+> **A**: The NHS Covid report should include statistics computed only from **validated tests**.
+>
+> **Q**: General doubt: Are we going to be able to use more math libraries in order to facilitate the calculus (for example, for confidence intervals) or is the rest of the calculus to be developed by each team?
+> **A**: **Each team should implement the classes and methods needed.**  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8892#p11693).  
+
+> **Q**: From the project description it is known "send the forecasts for these same time horizons (the number of Covid-19 cases for the following day, next week and next month)." In the example report we have in moodle, there is a line that says "// Prediction values". Does this mean that after this line we should put our predictions or it refers to the following table?  
+> **A**: Yes, the prediction values are the ones available in the table that we include in the example.  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8910#p11745).  
+
+> **Q:** The acceptance criteria have "When the system is configured to use the simple linear regression model, the performance of each model should be used to select the best model (the one that uses the number of tests realized or the one that uses the mean age as the independent variable)."  
+> And a doubt came to my mind...How it is supposed to evaluate the performance of the Simple Linear Regression for the different independent variables?  
+> **A:** **You should apply anova and from the best r2 you can conclude which fits better.**  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9112#p11872).  
+
+
+
+
+
+
+
+### For US18
+>**Q**: which significance level should we use for the hypothesis tests?  
+>**A**: The application should allow the user to choose the significance level.  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8890).  
+
+> **Q**: From Sprint D requirements we get "I want to define... the number of historical points (number of days or number of weeks) that must be sent to the NHS".  
+> Is the Administrator who must choose between days or weeks? If so, how should he make this choice?  
+> **A**: Yes. The Administrator should select between days and weeks using the user interface.  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8937#p11751).  
+
+> **Q:** In US18 you said " ..the number of historical points (number of days or number of weeks) that must be sent to the NHS .." what exactly is this? Is this a interval of dates?  
+> **A:** Yes, you must allow the client to choose days of weeks.  
+
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9109#p11873).  
+
+
+
+
+
+
+
 
 
 ### 1.3. Acceptance Criteria
