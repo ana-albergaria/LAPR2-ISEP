@@ -1,9 +1,9 @@
 package app.domain.model.US19;
 
 public class MultipleLinearRegression {
-    private double[] xTx;
-    private double[] xTxInverse;
-    private double[] xTy;
+    private double b0;
+    private double b1;
+    private double b2;
     private double[] regressionCoefficients;
     private int n;
 
@@ -39,27 +39,36 @@ public class MultipleLinearRegression {
         System.out.println();
 
         //determine xTx
-
         double[][] xTx = matrixMultiplication(xT, x);
 
         System.out.println("xTx:");
         imprimir(xTx);
         System.out.println();
 
+        //determine inverse of xTx
         double[][] xTxInverse = invert(xTx);
 
         System.out.println("xTxInverse: ");
         imprimir(xTxInverse);
         System.out.println();
 
-        //double[][] xTy = matrixMultiplication(xT, y);
+        //determine xTy
+        double[] xTy = matrixWithVectorMultiplication(xT, y);
 
+        System.out.println("xTy: ");
+        imprimir(xTy);
+        System.out.println();
 
+        //determine the vector containing the regression coefficients
+        regressionCoefficients = matrixWithVectorMultiplication(xTxInverse, xTy);
 
+        System.out.println("Regression Coefficients Vector: ");
+        imprimir(regressionCoefficients);
+        System.out.println();
 
-
-
-
+        b0 = regressionCoefficients[0];
+        b1 = regressionCoefficients[1];
+        b2 = regressionCoefficients[2];
     }
 
     private double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
@@ -75,6 +84,22 @@ public class MultipleLinearRegression {
                     result[row][column] += matrix[row][k] * otherMatrix[k][column];
                 }
             }
+        }
+        return result;
+    }
+
+    private double[] matrixWithVectorMultiplication(double[][] matrix, double[] vector) {
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
+        double[] result = new double[rows];
+
+        for (int row = 0; row < rows; row++) {
+            double sum = 0;
+            for (int column = 0; column < columns; column++) {
+                sum += matrix[row][column] * vector[column];
+            }
+            result[row] = sum;
         }
         return result;
     }
@@ -132,9 +157,9 @@ public class MultipleLinearRegression {
 
         // Search the pivoting element from each column
         int k = 0;
-        for (int j=0; j<n-1; ++j) {
+        for (int j = 0; j < n-1; ++j) {
             double pi1 = 0;
-            for (int i=j; i<n; ++i) {
+            for (int i = j; i < n; ++i) {
                 double pi0 = Math.abs(a[index[i]][j]);
                 pi0 /= c[index[i]];
                 if (pi0 > pi1) {
@@ -147,23 +172,34 @@ public class MultipleLinearRegression {
             int itmp = index[j];
             index[j] = index[k];
             index[k] = itmp;
-            for (int i=j+1; i<n; ++i) {
+            for (int i = j+1; i < n; ++i) {
                 double pj = a[index[i]][j] / a[index[j]][j];
                 // Record pivoting ratios below the diagonal
                 a[index[i]][j] = pj;
                 // Modify other elements accordingly
-                for (int l=j+1; l<n; ++l)
+                for (int l = j+1; l < n; ++l)
                     a[index[i]][l] -= pj * a[index[j]][l];
             }
         }
     }
+    @Override
+    public String toString() {
+        return String.format("^y=%f + %fx1 + %fx2", b0, b1, b2);
+    }
 
+    //APAGAR POSTERIORMENTE!!!!!!!
     public static void imprimir(double[][] array) {
         for (int linha = 0; linha < array.length; linha++) {
             for (int coluna = 0; coluna < array[linha].length; coluna++) {
                 System.out.print(array[linha][coluna] + " ");
             }
             System.out.println();
+        }
+    }
+
+    public static void imprimir(double[] vector) {
+        for (int i = 0; i < vector.length; i++) {
+            System.out.println(vector[i]);
         }
     }
 }
