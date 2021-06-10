@@ -440,6 +440,26 @@ public class TestStore {
         return covidTestsInHistoricalPoints;
     }
 
+    public double[] getMeanAgeInHistoricalPoints(List<String> dates) {
+        double[] meanAgeInHistoricalPoints = new double[dates.size()];
+        double sumAges = 0, numClients = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (int i = 0; i < dates.size(); i++) {
+            for (Test test : testList) {
+                if(test.isCovidTest() && test.isValidated()) {
+                    String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
+                    if(testDateOfDiagnosis.equals(dates.get(i))) {
+                        sumAges += test.getClient().getAge();
+                        numClients++;
+                    }
+                }
+            }
+            meanAgeInHistoricalPoints[i] = sumAges / numClients;
+        }
+        return meanAgeInHistoricalPoints;
+    }
+
     public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
         Calendar cal = Calendar.getInstance(), otherCal = Calendar.getInstance();
         cal.setTime(date);

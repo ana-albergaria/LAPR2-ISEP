@@ -26,14 +26,19 @@ public class SendNHSDailyReportController {
     public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         RegressionModel regressionModel = this.company.getRegressionModel();
         int historicalPoints = this.company.getHistoricalPoints();
+        List<List<Double>> dataList = getDataListToFitTheModel();
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
+        double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
+        double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
+        int bestXIndex = nhsReportStore.getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives);
 
-        MyRegressionModel myRegressionModel = getMyRegressionModel(regressionModel, historicalPoints);
+        MyRegressionModel myRegressionModel = getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
         HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel);
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel);
-        
+
         Date startDate = nhsReportStore.getStartDate();
-        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, historicalPoints, startDate);
+        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate);
 
         this.nhsDailyReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
         return nhsReportStore.validateNHSDailyReport(nhsDailyReport);
@@ -51,21 +56,21 @@ public class SendNHSDailyReportController {
     }
 
     public MyRegressionModel getMyRegressionModel(RegressionModel regressionModel,
-                                                  int historicalPoints) throws ParseException {
-        List<List<Double>> dataList = getDataListToFitTheModel();
-        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
-        double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
-        double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
-        double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
-        double[] bestX = nhsReportStore.getBestX(regressionModel, covidTestsArray, meanAgeArray, observedPositives);
-        MyRegressionModel myRegressionModel = (bestX != null) ? nhsReportStore.createMyBestRegressionModel(regressionModel, bestX, observedPositives, historicalPoints) :
-                nhsReportStore.createMyRegressionModel(regressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
+                                                  Integer bestXIndex,
+                                                  double[] covidTestsArray,
+                                                  double[] meanAgeArray,
+                                                  double[] observedPositives,
+                                                  int historicalPoints) {
+        NHSReportStore nhsReportStore = new NHSReportStore();
+        MyRegressionModel myRegressionModel = (bestXIndex == null) ? nhsReportStore.createMyRegressionModel(regressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
+                ((bestXIndex == 1) ? nhsReportStore.createMyBestRegressionModel(regressionModel, covidTestsArray, observedPositives, historicalPoints) : nhsReportStore.createMyBestRegressionModel(regressionModel, meanAgeArray, observedPositives, historicalPoints));
         return myRegressionModel;
     }
 
 
 
     public TableOfValues getTableOfValues(MyRegressionModel myRegressionModel,
+                                          Integer bestXIndex,
                                           int historicalPoints,
                                           Date startDate) throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
@@ -73,10 +78,18 @@ public class SendNHSDailyReportController {
         TestStore testStore = new TestStore();
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
-        //FALTA ARRANJAR FORMA DE IR BUSCAR A MELHOR VARIÁVEL
-        double[] covidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
-        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, covidTestsInHistoricalPoints);
-        List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, covidTestsInHistoricalPoints);
+        
+        double[] bestXInHistoricalPoints = new double[historicalPoints];
+        if(bestXIndex != null) {
+            if(bestXIndex == 1)
+                bestXInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+            else
+                bestXInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
+        }
+        //FALTA ACRESCENTAR ELSE PARA A REGRESSÃO MÚLTIPLA!!!
+
+        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, bestXInHistoricalPoints);
+        List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints);
 
         TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
         return tableOfValues;

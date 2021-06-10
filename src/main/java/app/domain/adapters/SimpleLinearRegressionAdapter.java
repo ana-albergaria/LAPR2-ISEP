@@ -10,11 +10,13 @@ import java.util.List;
 public class SimpleLinearRegressionAdapter implements RegressionModel {
 
     @Override
-    public double[] getBestX(double[] x1, double[] x2, double[] y) {
+    public Integer getBestXIndex(double[] x1, double[] x2, double[] y) {
         LinearRegression simpleLRx1 = new LinearRegression(x1, y);
         LinearRegression simpleLRx2 = new LinearRegression(x2, y);
         //FALTA FAZER O SIGNIFICANCE MODEL ANOVA
-        return (simpleLRx1.R2() >= simpleLRx2.R2()) ? x1 : x2;
+        int x1Index = 1, x2Index = 2;
+
+        return (simpleLRx1.R2() >= simpleLRx2.R2()) ? x1Index : x2Index;
     }
 
     @Override
