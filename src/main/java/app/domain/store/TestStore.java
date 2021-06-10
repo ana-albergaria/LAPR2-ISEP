@@ -421,6 +421,25 @@ public class TestStore {
         }
     }
 
+    public double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
+        double[] covidTestsInHistoricalPoints = new double[dates.size()];
+        int indexDate = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Test test : testList) {
+            if(test.isCovidTest() && test.isValidated()) {
+                for (int i = 0; i < dates.size(); i++) {
+                    String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
+                    if(testDateOfDiagnosis.equals(dates.get(i))) {
+                        indexDate = i;
+                        covidTestsInHistoricalPoints[indexDate]++;
+                    }
+                }
+            }
+        }
+        return covidTestsInHistoricalPoints;
+    }
+
     public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
         Calendar cal = Calendar.getInstance(), otherCal = Calendar.getInstance();
         cal.setTime(date);

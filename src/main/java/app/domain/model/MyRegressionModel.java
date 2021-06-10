@@ -6,9 +6,6 @@ import org.apache.commons.math3.distribution.TDistribution;
 import java.util.Arrays;
 
 public class MyRegressionModel {
-    private final double[] x1;
-    private double[] x2;
-    private double[] y;
     private final double intercept; //intercept - y, a
     private final double slope; //slope - x, b
     private Double secondIndVariable;
@@ -20,10 +17,7 @@ public class MyRegressionModel {
 
     private static final int DEGREES_OF_FREEDOM_TSTUDENT = 2;
 
-    public MyRegressionModel(double[] x1,
-                             double[] x2,
-                             double[] y,
-                             double intercept,
+    public MyRegressionModel(double intercept,
                              double slope,
                              Double secondIndVariable,
                              double r,
@@ -31,9 +25,6 @@ public class MyRegressionModel {
                              double r2Adjusted,
                              int numberOfObservations,
                              Object regressionModel) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y = y;
         this.intercept = intercept;
         this.slope = slope;
         this.secondIndVariable = secondIndVariable;
@@ -44,17 +35,13 @@ public class MyRegressionModel {
         this.regressionModel = regressionModel;
     }
 
-    public MyRegressionModel(double[] x1,
-                             double[] y,
-                             double intercept,
+    public MyRegressionModel(double intercept,
                              double slope,
                              double r,
                              double r2,
                              double r2Adjusted,
                              int numberOfObservations,
                              Object regressionModel) {
-        this.x1 = x1;
-        this.y = y;
         this.intercept = intercept;
         this.slope = slope;
         this.r = r;
@@ -84,10 +71,6 @@ public class MyRegressionModel {
 
     public Object getRegressionModel() {
         return regressionModel;
-    }
-
-    public double[] getX1() {
-        return x1;
     }
 
     public double calculateCriticalValFSnedecor(int numeratorDegreesOfFreedom,

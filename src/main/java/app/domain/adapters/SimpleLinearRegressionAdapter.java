@@ -5,7 +5,6 @@ import app.domain.model.*;
 import app.domain.model.US19.LinearRegression;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SimpleLinearRegressionAdapter implements RegressionModel {
@@ -18,7 +17,7 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         double[] bestX = (simpleLRx1.R2() >= simpleLRx2.R2()) ? x1 : x2;
         LinearRegression bestModel = new LinearRegression(bestX, y);
 
-        return new MyRegressionModel(bestX, y, bestModel.intercept(), bestModel.slope(),
+        return new MyRegressionModel(bestModel.intercept(), bestModel.slope(),
                 Math.sqrt(bestModel.R2()), bestModel.R2(), bestModel.getR2Adjusted(), historicalPoints, bestModel);
     }
 
@@ -38,15 +37,13 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel) {
+    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints) {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
-        //ESTÁ ERRADO!!!! NÃO É IR BUSCAR AO x1 pois esse foram os dados do intervalo obtidos.
-        //É NECESSÁRIO ir aos números de testes realizados nos pontos históricos!!!!
-        double[] x = myRegressionModel.getX1();
+
         List<Double> estimatedPositives = new ArrayList<>();
 
-        for (int i = 0; i < x.length; i++) {
-            double estimatedValue = simpleLR.predict(x[i]);
+        for (int i = 0; i < xInHistoricalPoints.length; i++) {
+            double estimatedValue = simpleLR.predict(xInHistoricalPoints[i]);
             estimatedPositives.add(estimatedValue);
         }
         return estimatedPositives;
@@ -65,13 +62,12 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double confidenceLevel) {
+    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints, double confidenceLevel) {
         int numberOfObservations = myRegressionModel.getNumberOfObservations();
-        double[] x = myRegressionModel.getX1();
         List<ConfidenceInterval> confidenceIntervals = new ArrayList<>();
 
         for (int i = 0; i < numberOfObservations; i++) {
-            ConfidenceInterval confidenceInterval = getConfidenceInterval(myRegressionModel, x[i], confidenceLevel);
+            ConfidenceInterval confidenceInterval = getConfidenceInterval(myRegressionModel, xInHistoricalPoints[i], confidenceLevel);
             confidenceIntervals.add(confidenceInterval);
         }
         return confidenceIntervals;

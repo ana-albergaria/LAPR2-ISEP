@@ -61,17 +61,20 @@ public class SendNHSDailyReportController {
         TestStore testStore = new TestStore();
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
-        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel);
-        List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel);
+        //FALTA ARRANJAR FORMA DE IR BUSCAR A MELHOR VARIÁVEL
+        double[] covidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, covidTestsInHistoricalPoints);
+        List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, covidTestsInHistoricalPoints);
 
         TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
         return tableOfValues;
     }
 
     public List<ConfidenceInterval> getConfidenceIntervalListForTableOfValues(MyRegressionModel myRegressionModel,
-                                                                              RegressionModel regressionModel) {
+                                                                              RegressionModel regressionModel,
+                                                                              double[] xInHistoricalPoints) {
         double confidenceLevel = this.company.getConfidenceLevel();
-        List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, confidenceLevel);
+        List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, xInHistoricalPoints, confidenceLevel);
         return confidenceIntervalList;
     }
 
