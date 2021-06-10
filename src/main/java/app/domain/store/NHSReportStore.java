@@ -23,17 +23,30 @@ public class NHSReportStore {
                 nhsDailyReport.getHypothesisTest() != null && nhsDailyReport.getModelAnova() != null && nhsDailyReport.getTableOfValues() != null;
     }
 
+    public double[] getBestX(RegressionModel regressionModel,
+                             double[] x1,
+                             double[] x2,
+                             double[] y) {
+
+        return regressionModel.getBestX(x1, x2, y);
+    }
+
+    public MyRegressionModel createMyBestRegressionModel(RegressionModel regressionModel,
+                                                         double[] bestX,
+                                                         double[] y,
+                                                         int historicalPoints) {
+        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(bestX, null, y, historicalPoints);
+        return myRegressionModel;
+    }
+
     public MyRegressionModel createMyRegressionModel(RegressionModel regressionModel,
-                                                  int historicalPoints,
-                                                  List< List<Double> > dataList) throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+                                                     double[] x1,
+                                                     double[] x2,
+                                                     double[] y,
+                                                     int historicalPoints) {
 
-        double[] covidTestsArray = getDoubleArrayWithData(dataList, 0);
-        double[] meanAgeArray = getDoubleArrayWithData(dataList, 1);
-        double[] observedPositives = getDoubleArrayWithData(dataList, 2);
-
-        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(covidTestsArray,
-                meanAgeArray, observedPositives, historicalPoints);
-
+        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(x1,
+                x2, y, historicalPoints);
         return myRegressionModel;
     }
 
@@ -77,12 +90,15 @@ public class NHSReportStore {
         return dates;
     }
 
-    //CORRIGIR! TER ATENÇÃO ONDE COMEÇA A SEMANA PASSADA!
     public Date getStartDate() {
         Date currentDate = new Date();
         Calendar oneDayBefore = Calendar.getInstance();
         oneDayBefore.setTime(currentDate);
-        oneDayBefore.add(Calendar.DAY_OF_MONTH,-1);
+        if ((oneDayBefore.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+            oneDayBefore.add(Calendar.DAY_OF_MONTH, -2);
+        else
+            oneDayBefore.add(Calendar.DAY_OF_MONTH, -1);
+
         return oneDayBefore.getTime();
     }
 }

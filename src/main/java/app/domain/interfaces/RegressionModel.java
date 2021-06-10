@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface RegressionModel {
+    public abstract double[] getBestX(double[] x1, double[] x2, double[] y);
     public abstract MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y, int historicalPoints);
     public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel);
     public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel);

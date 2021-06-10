@@ -31,7 +31,7 @@ public class SimpleLinearRegressionAdapterTest {
         double[] x0 = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0, 12.0, 11.0};
         historicalPoints = 10;
         //
-        myRegressionModel = regressionModel.getRegressionModel(x, x0, y, historicalPoints);
+        myRegressionModel = regressionModel.getRegressionModel(x, null, y, historicalPoints);
         simpleLR = new LinearRegression(x, y);
     }
 
