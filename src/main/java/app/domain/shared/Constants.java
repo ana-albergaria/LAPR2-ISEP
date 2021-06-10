@@ -18,6 +18,7 @@ public class Constants {
     public static final String ROLE_LAB_COORDINATOR = "LAB COORDINATOR";
     public static final String ROLE_CLIENT = "CLIENT";
 
+    public static final String TIN_COMPARATOR_ID = "TIN";
 
     public static final String PARAMS_FILENAME = "config.properties";
     public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";

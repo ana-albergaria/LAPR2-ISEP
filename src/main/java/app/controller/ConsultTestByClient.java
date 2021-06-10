@@ -5,6 +5,7 @@ import app.domain.interfaces.SortAlgorithm;
 import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.model.Test;
+import app.domain.shared.Constants;
 import app.domain.sort.comparators.alphabeticalNameClient;
 import app.domain.sort.comparators.ascendTinClient;
 import app.domain.store.ClientStore;
@@ -37,11 +38,10 @@ public class ConsultTestByClient {
     }
 
 
-
     public List<ClientDTO> getClientsDtoInOrder(String compareBy) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         List<Client> clients = getClients();
         SortAlgorithm sortAlgorithm = this.company.getSortAlgorithm();
-        if(compareBy.equals("tin")){
+        if(compareBy.equalsIgnoreCase(Constants.TIN_COMPARATOR_ID)){
             sortAlgorithm.sortClientsList(clients, new ascendTinClient());
         }else{
             sortAlgorithm.sortClientsList(clients, new alphabeticalNameClient());
