@@ -1,5 +1,6 @@
 package app.domain.sort.algorithms;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -7,7 +8,6 @@ public class BubbleSort {
     public <T> void bubbleSortArrayList(List<T> list, Comparator<? super T> comparator) {
         T temp;
         boolean sorted = false;
-
         while (!sorted) {
             sorted = true;
             for (int i = 0; i < list.size()-1; i++) {

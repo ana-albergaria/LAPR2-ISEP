@@ -8,6 +8,7 @@ import app.domain.store.TestStore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ImportTestController {
         ClientStore clientStore = this.company.getClientStore();
         TestStore testStore = this.company.getTestStore();
         CreateTestController testController = new CreateTestController();
-
+        
         for (String[] testData : processedListData){
             /*testController.setCurrentCal(testData[2]);*/
             if(!clientStore.existsClientByTin(testData[dataLabels.indexOf("TIN")])){

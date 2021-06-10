@@ -32,7 +32,7 @@ public class ConsultTestByClientTest {
     public void getClientsDtoInOrder() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         ConsultTestByClient consultTestByClient = new ConsultTestByClient();
 
-        List<ClientDTO> clientDTOList = consultTestByClient.getClientsDtoInOrder("laslalndo");
+        List<ClientDTO> clientDTOList = consultTestByClient.getClientsDtoInOrder("tin");
 
         for(ClientDTO client : clientDTOList){
             System.out.println(client);
