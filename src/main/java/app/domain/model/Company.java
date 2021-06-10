@@ -2,6 +2,7 @@ package app.domain.model;
 
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.RegressionModel;
+import app.domain.interfaces.SortAlgorithm;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
@@ -73,6 +74,8 @@ public class Company {
      */
     private String classNameForBarcodeApi;
 
+    private String classNameForSortAlgorithm;
+
     private String regressionModelCLass;
 
     private String dateInterval;
@@ -83,6 +86,7 @@ public class Company {
 
     public Company(String designation,
                    String classNameForBarcodeApi,
+                   String classNameForSortAlgorithm,
                    String regressionModelCLass,
                    String dateInterval,
                    String historicalPoints,
@@ -123,6 +127,7 @@ public class Company {
         this.sampleStore = new SampleStore();
         this.calStore = new ClinicalAnalysisLaboratoryStore();
         this.classNameForBarcodeApi = classNameForBarcodeApi;
+        this.classNameForSortAlgorithm = classNameForSortAlgorithm;
         this.regressionModelCLass = regressionModelCLass;
         this.dateInterval = dateInterval;
         this.historicalPoints = historicalPoints;
@@ -351,6 +356,11 @@ public class Company {
     public ExternalAPI getExternalAPI() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Class<?> oClass = Class.forName(classNameForBarcodeApi);
         return (ExternalAPI) oClass.newInstance();
+    }
+
+    public SortAlgorithm getSortAlgorithm() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        Class<?> oClass = Class.forName(classNameForSortAlgorithm);
+        return (SortAlgorithm) oClass.newInstance();
     }
 
     public RegressionModel getRegressionModel() throws ClassNotFoundException, IllegalAccessException, InstantiationException {

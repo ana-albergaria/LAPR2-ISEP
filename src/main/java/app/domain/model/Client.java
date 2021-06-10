@@ -132,7 +132,25 @@ public class Client {
         return name;
     }
 
+    public String getClientsCitizenCardNumber() {
+        return clientsCitizenCardNumber;
+    }
 
+    public String getNhsNumber() {
+        return nhsNumber;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     /**
      * Checks if the Clients citizan card number is correct, and if not throws an error message

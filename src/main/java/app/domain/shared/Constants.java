@@ -22,6 +22,7 @@ public class Constants {
     public static final String PARAMS_FILENAME = "config.properties";
     public static final String PARAMS_COMPANY_DESIGNATION = "Company.Designation";
 
+    public static final String CLASS_SORT_ALGORITHM = "app.domain.adapters.BubbleSortAdapter";
     //created because it's handy for the tests
     public static final String CLASS_BARCODE_API = "app.domain.adapters.BarbecueAdapter";
     public static final String CLASS_REGRESSION_MODEL = "app.domain.adapters.SimpleLinearRegressionAdapter";
