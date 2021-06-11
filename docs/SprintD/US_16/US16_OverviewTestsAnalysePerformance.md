@@ -276,7 +276,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-Tests from 4.1 and 4.2 follow this mode:
+Tests from 4.1 and 4.2 follow this model:
 
     @Test
     public void checkIfSubMaxSumIsFound(){
@@ -287,12 +287,12 @@ Tests from 4.1 and 4.2 follow this mode:
 
 ## 4.1 BenchmarkAlgorithm
 
-**Test 1:** Check if the contiguous subsequence with maximum sum is successfully found, using the BenchmarkAlgorithm.
+**Test 1-2:** Check if the contiguous subsequence with maximum sum is successfully found, using the BenchmarkAlgorithm.
 
 
 ## 4.2 BruteForceAlgorithm
 
-**Test 2:** Check if the contiguous subsequence with maximum sum is successfully found, using the BruteForceAlgorithm.
+**Test 3-4:** Check if the contiguous subsequence with maximum sum is successfully found, using the BruteForceAlgorithm.
 
 
 # 5. Construction (Implementation)
