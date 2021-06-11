@@ -24,7 +24,7 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         LinearRegression simpleLRx1 = new LinearRegression(x1, y);
 
         return new MyRegressionModel(simpleLRx1.intercept(), simpleLRx1.slope(),
-                Math.sqrt(simpleLRx1.R2()), simpleLRx1.R2(), simpleLRx1.getR2Adjusted(), historicalPoints, simpleLRx1);
+                simpleLRx1.R2(), simpleLRx1.getR2Adjusted(), historicalPoints, simpleLRx1);
     }
 
     @Override
