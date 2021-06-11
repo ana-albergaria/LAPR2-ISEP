@@ -18,7 +18,7 @@ overall analysis, the application should also display statistics and graphs.
 
 > "...the company wants to decrease the number of tests waiting for its result. To evaluate this, it proceeds as following: for
 any interval of time, for example one week (6 working days with 12 working hours per day), the difference between the number 
-of new tests and the number of results available to the client during each half an hour period is computed . In that case, 
+of new tests and the number of results available to the client during each half an hour period is computed. In that case, 
 a list with 144 integers is obtained, where a positive integer means that in such half an hour more tests were processed 
 than results were obtained, and a negative integer means the opposite. Now, the problem consists in determining what
 the contiguous subsequence of the initial sequence is, whose sum of their entries is maximum. 
@@ -27,7 +27,7 @@ This will show the time interval, in such week, when the company was less effect
 > "So, the application should implement a brute force algorithm (an algorithm which examines each
 subsequence) to determine the contiguous subsequence with maximum sum, for any interval of time
 registered. The implemented algorithm should be analysed in terms of its worst complexity, and it 
-should be compared to a provided benchmark algorithm . The algorithm to be used by the application must be 
+should be compared to a provided benchmark algorithm. The algorithm to be used by the application must be 
 defined through a configuration file."
 
 > "The complexity analysis must be accompanied by the observation of the execution time of the
@@ -159,6 +159,10 @@ Please consider the requirements introduced at the beginning of Sprint D. The la
   register a test to be performed to a registered client." since the app needs to have 
   tests in it, so that the company can have a performance and the Laboratory Coordinator 
   can have an overview of the company tests.
+
+* There is a dependency to "US7: Register a new employee" since the Laboratory Coordinator must 
+  be registered in the application and login in order to have an overview of all the tests 
+  and analyse the company performance.
 
 
 ### 1.5 Input and Output Data
