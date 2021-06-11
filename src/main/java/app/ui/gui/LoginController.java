@@ -1,13 +1,13 @@
 package app.ui.gui;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-import java.awt.event.ActionEvent;
 
-public class FXMLController {
+public class LoginController extends MainUI {
 
     @FXML
     private ImageView imgTeam;
@@ -17,15 +17,8 @@ public class FXMLController {
 
 
     @FXML
-    void insertUserEmail(ActionEvent event) {
-
-    }
-
-
-    @FXML
     void exitAction(ActionEvent event) {
         System.exit(0);
-
     }
 
 

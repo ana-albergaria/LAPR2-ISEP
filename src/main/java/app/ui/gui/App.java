@@ -1,19 +1,17 @@
 package app.ui.gui;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.awt.event.ActionEvent;
+
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;

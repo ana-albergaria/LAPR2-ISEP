@@ -71,14 +71,17 @@ public class MultipleLinearRegression {
         b2 = regressionCoefficients[2];
 
         double ybar = mean(y);
+        
 
         //regressionCoefficientsT = regressionCoefficients (in Code!)
-        //determine ^BxTy
+        //determine ^BTxTy
         double regressionsCoefficientsTxTy = vectorWithVectorMultiplication(regressionCoefficients, xTy);
+        System.out.println("^BTxTy = " + regressionsCoefficientsTxTy);
 
         //y = yT in Code!
         //determine yTy
         double yTy = vectorWithVectorMultiplication(y, y);
+        System.out.println("yTy = " + yTy);
 
         //determine SQr
         sr = regressionsCoefficientsTxTy - (n * Math.pow(ybar, 2));
