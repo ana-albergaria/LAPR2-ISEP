@@ -103,7 +103,7 @@ public class MyRegressionModel {
         if(secondIndVariable == null)
             text.append(String.format("^y=%fx + %f%n//%n", slope, intercept));
         else
-            text.append(String.format("^y=%fx + %f%n//%n")); //corrigir - RLMúltipla
+            text.append(String.format("^y=%f + %fx1 + %fx2", slope, intercept, secondIndVariable)); //corrigir - RLMúltipla
         text.append(String.format("Other statistics%nR2 = %f%nR2 adjusted = %f%n", r2, r2Adjusted));
         if(secondIndVariable == null)
             text.append(String.format("R = %f%n", r));

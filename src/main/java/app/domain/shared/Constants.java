@@ -39,6 +39,10 @@ public class Constants {
     public static final String BLOOD_EXTERNAL_ADAPTER_2 = "app.domain.adapters.ExternalModule2APIAdapter";
     public static final String BLOOD_EXTERNAL_ADAPTER_3 = "app.domain.adapters.ExternalModule3APIAdapter";
     public static final String COVID_EXTERNAL_ADAPTER = "app.domain.adapters.CovidReferenceValues1APIAdapter";
+
+    public static final String BENCHMARK_ALGORITHM_ADAPTER = "app.domain.adapters.BenchmarkAlgorithmAdapter";
+    public static final String BRUTEFORCE_ALGORITHM_ADAPTER = "app.domain.adapters.BruteForceAlgorithmAdapter";
+
     //Mathematics
     //-> Simple Linear Regression
     public static final double A0 = 0;

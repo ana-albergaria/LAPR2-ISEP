@@ -73,7 +73,7 @@ public class MultipleLinearRegression {
 
     private double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
         if(matrix[0].length != otherMatrix.length)
-            throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "column from the" +
+            throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "columns from the" +
                     "first matrix and" + otherMatrix.length + "lines from the second matrix!");
 
         double[][] result = new double[matrix.length][otherMatrix[0].length];
@@ -89,6 +89,10 @@ public class MultipleLinearRegression {
     }
 
     private double[] matrixWithVectorMultiplication(double[][] matrix, double[] vector) {
+        if(matrix[0].length != vector.length)
+            throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "columns from the" +
+                    "matrix and" + vector.length + "lines from the vector!");
+
         int rows = matrix.length;
         int columns = matrix[0].length;
 
@@ -197,6 +201,7 @@ public class MultipleLinearRegression {
         }
     }
 
+    //APAGAR!!!!!!
     public static void imprimir(double[] vector) {
         for (int i = 0; i < vector.length; i++) {
             System.out.println(vector[i]);

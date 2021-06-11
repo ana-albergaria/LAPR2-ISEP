@@ -8,7 +8,13 @@ public class TestMultipla {
         double[] x2 = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0, 12.0, 11.0, 13.0, 11.0};
         double[] y = {2256.0, 2340.0, 2426.0, 2293.0, 2330.0, 2368.0, 2250.0, 2409.0, 2364.0, 2379.0, 2440.0, 2364.0};
 
-        MultipleLinearRegression mlr = new MultipleLinearRegression(x1, x2, y);
+        //MATCP - TP PL8 ex 1
+        double[] xa = {4.0, 5.0, 5.5, 7.0, 6.0, 5.0, 7.0, 8.0, 8.5, 9.0};
+        double[] xb = {36.0, 33.0, 37.0, 37.0, 34.0, 32.0, 36.0, 35.0, 38.0, 39.0};
+        double[] ya = {4.0, 4.5, 5.0, 6.5, 7.0, 7.8, 7.5, 8.0, 8.0, 8.5};
+
+
+        MultipleLinearRegression mlr = new MultipleLinearRegression(xa, xb, ya);
         System.out.println(mlr);
 
 

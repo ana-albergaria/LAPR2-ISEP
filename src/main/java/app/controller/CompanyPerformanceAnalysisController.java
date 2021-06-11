@@ -2,7 +2,10 @@ package app.controller;
 
 import app.domain.adapters.BenchmarkAlgorithmAdapter;
 import app.domain.adapters.BruteForceAlgorithmAdapter;
+import app.domain.interfaces.ExternalAPI;
+import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;
+import app.domain.shared.Constants;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
@@ -110,10 +113,6 @@ public class CompanyPerformanceAnalysisController {
         return intervalArray;
     }
 
-    //IS THIS THE RIGHT WAY TO DO IT??? (SEE BELOW)
-
-    BenchmarkAlgorithmAdapter bma = new BenchmarkAlgorithmAdapter();
-    BruteForceAlgorithmAdapter bfa = new BruteForceAlgorithmAdapter();
 
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
@@ -123,17 +122,26 @@ public class CompanyPerformanceAnalysisController {
      * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm){
+    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(beginningDay, endingDay);
-        int[] worstSubInt;
-        if (chosenAlgorithm==1){
-            worstSubInt = bma.findSubMaxSum(interval);
-        } else if (chosenAlgorithm==2){
-            worstSubInt = bfa.findSubMaxSum(interval);
-        } else {
-            return null;
-        }
+
+        String algorithmClass = getAlgorithmClass(chosenAlgorithm);
+        Class<?> oClass = Class.forName(algorithmClass);
+        SubMaxSumAlgorithms subMaxSum = (SubMaxSumAlgorithms) oClass.newInstance();
+
+        int[] worstSubInt = subMaxSum.findSubMaxSum(interval);
+
         return worstSubInt;
+    }
+
+    public String getAlgorithmClass(int chosenAlgorithm) {
+        String algorithmClass;
+        if(chosenAlgorithm == 1)
+            algorithmClass = Constants.BENCHMARK_ALGORITHM_ADAPTER;
+        else
+            algorithmClass = Constants.BRUTEFORCE_ALGORITHM_ADAPTER;
+
+        return algorithmClass;
     }
 
 }
