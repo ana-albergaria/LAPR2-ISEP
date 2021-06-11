@@ -77,6 +77,8 @@ public class TestStoreTest {
         cal.set(Calendar.DAY_OF_MONTH, 29);
         startDate = cal.getTime();
         //end US18 and US19
+
+
     }
 
     @Test
@@ -233,6 +235,52 @@ public class TestStoreTest {
 
         Assert.assertEquals(test.getParameters(), testStore.getTestParameters(test));
     }
+
+//========== US16 ================
+
+    @Test
+    public void testGetNumTestsWaitingForResultsDay() throws BarcodeException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+
+        app.domain.model.Test test1 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test1);
+        Sample sample1 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        test1.addSample(sample1);
+        Date date1s = new Date(2020, Calendar.JANUARY, 14, 11, 0, 0);
+        test1.setDateOfSamplesCollection(date1s);
+        test1.addTestResult("RBC12", 23.45, "ug");
+        test1.addTestResult("WBC12", 23.45, "ug");
+        Date date1 = new Date(2020, Calendar.JANUARY, 15, 9, 0, 0);
+        test1.setDateOfChemicalAnalysis(date1);
+
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
+        testStore.saveTest(test2);
+
+        app.domain.model.Test test3 = testStore.createTest("123456789013", client, t1, parametersBlood, cal);
+        testStore.saveTest(test3);
+
+        app.domain.model.Test test4 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test4);
+        Sample sample4 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        test1.addSample(sample4);
+        Date date4s = new Date(2020, Calendar.JANUARY, 15, 19, 50, 0);
+        test1.setDateOfSamplesCollection(date4s);
+        test1.addTestResult("RBC12", 23.45, "ug");
+        test1.addTestResult("WBC12", 23.45, "ug");
+        test1.addChemicalAnalysisDate();
+        Date date4 = new Date(2020, Calendar.JANUARY, 25, 18, 0, 0);
+        test1.setDateOfChemicalAnalysis(date4);
+
+        Date day = new Date(2020, Calendar.JANUARY, 16, 0, 0, 0);
+
+        int expectedResult = 1;
+        int obtainedResult = testStore.getNumTestsWaitingForResultsDay(day);
+
+        Assert.assertEquals(expectedResult, obtainedResult);
+    }
+
+//========== END US16 ============
 
     //for US18 and US19
     /* Porque dá erro no Jenkins??
