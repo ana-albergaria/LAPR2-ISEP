@@ -11,8 +11,9 @@ import com.isep.mdis.Sum;
 public class BenchmarkAlgorithm implements SubMaxSumAlgorithms {
     public BenchmarkAlgorithm(){
     }
+
+    @Override
     public int[] findSubMaxSum(int[] interval){
-        int[] worstSubInt = Sum.Max(interval);
-        return worstSubInt;
+        return Sum.Max(interval);
     }
 }

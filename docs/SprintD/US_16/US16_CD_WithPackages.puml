@@ -1,4 +1,5 @@
 @startuml
+'skinparam linetype ortho
 hide empty methods
 hide empty attributes
 left to right direction
@@ -16,16 +17,37 @@ class Company {
     +getClientStore()
 }
 
+class BenchmarkAlgorithm{
+    +findSubMaxSum(interval)
+}
+
+class BruteForceAlgorithm{
+    +findSubMaxSum(interval)
+}
+
+}
+
+package Interfaces {
+
+interface SubMaxSumAlgorithms <<interface>> {
+    +findSubMaxSum(interval)
+}
+
 }
 
 package Store {
 
 class TestStore {
-+getTestsInfo
+    +getNumTestsWaitingForResultsDay(day)
+    +getNumTestsWaitingForResultsInterval(beginningDay, endingDay)
+    +getNumTestsWaitingForDiagnosisDay(day)
+    +getNumTestsWaitingForDiagnosisInterval(beginningDay, endingDay)
+    +getNumTestsProcessedInLabDay(day)
+    +getNumTestsProcessedInLabInterval(beginningDay, endingDay)
 }
 
 class ClientStore {
-+getClientInfo()
+    +getClients()
 }
 
 }
@@ -36,9 +58,11 @@ package Controller {
 
 class CompanyPerformanceAnalysisController{
     -Company company
-    +getTestOverview()
-    +findWorstSubIntWithBenchmarkAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
-    +findWorstSubIntWithBruteforceAlgorithm(firstDayToAnalyse, lastDayToAnalyse)
+    +getNumClients()
+    +getTestInfoDay(day)
+    +getTestInfoInterval(beginningDay, endingDay)
+    +makeIntervalArray(beginningDay, endingDay)
+    +findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
 }
 
 }
@@ -54,5 +78,9 @@ CompanyPerformanceAnalysisUI ..> CompanyPerformanceAnalysisController
 CompanyPerformanceAnalysisController ..> Company
 CompanyPerformanceAnalysisController ..> ClientStore
 CompanyPerformanceAnalysisController ..> TestStore
+CompanyPerformanceAnalysisController "1" --> "1" SubMaxSumAlgorithms : makes use of
+
+class BenchmarkAlgorithm implements SubMaxSumAlgorithms
+class BruteForceAlgorithm implements SubMaxSumAlgorithms
 
 @enduml

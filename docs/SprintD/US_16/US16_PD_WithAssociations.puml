@@ -9,6 +9,7 @@ package Core {
 package Domain {
 package Model {}
 package Store {}
+package Interfaces{}
 }
 
 package Controller {}
@@ -20,6 +21,6 @@ package UI {}
 
 UI ..> Controller
 Controller ..> Domain
-Model --> Store : uses >
+Model --> Store : uses
 
 @enduml

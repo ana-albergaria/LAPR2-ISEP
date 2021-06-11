@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class BruteForceAlgorithm implements SubMaxSumAlgorithms {
     public BruteForceAlgorithm(){
     }
+
+    @Override
     public int[] findSubMaxSum(int[] interval){
         ArrayList<Integer> subMaxSum = new ArrayList<>();
         int sumValue = 0;
