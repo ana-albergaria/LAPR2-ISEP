@@ -283,8 +283,8 @@ public class TestStoreTest {
 //========== END US16 ============
 
     //for US18 and US19
-    /* Porque dá erro no Jenkins??
-    @Test
+    // Porque dá erro no Jenkins??
+    /*@Test
     public void getObservedPositivesToTableOfValues() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         int numberOfObservations = 8;
         NHSReportStore nhsReportStore = new NHSReportStore();
@@ -296,6 +296,7 @@ public class TestStoreTest {
         Assert.assertArrayEquals(expObservedPositives, observedPositives);
     }
      */
+
 
     @Test
     public void getNumberOfCovidTestsRealizedInADay() {
@@ -325,8 +326,8 @@ public class TestStoreTest {
         Assert.assertEquals(expNumber, number, 0.0001);
     }
 
-    /* Porque dá erro no Jenkins?
-    @Test
+    //Porque dá erro no Jenkins?
+    /*@Test
     public void getObservedPositivesCovidInADay() {
         double expNumber = 1;
         double number = testStore.getObservedPositivesCovidInADay(startDate);
@@ -335,6 +336,7 @@ public class TestStoreTest {
 
     }
      */
+
 
     //end US18 and US19
 }
