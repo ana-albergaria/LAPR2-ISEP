@@ -1,11 +1,11 @@
-package app.domain.model;
+package app.domain.adapters;
 
 import app.domain.adapters.BenchmarkAlgorithmAdapter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BenchmarkAlgorithmTest {
+public class BenchmarkAlgorithmAdapterTest {
 
     private BenchmarkAlgorithmAdapter bma;
     private int[] example1;

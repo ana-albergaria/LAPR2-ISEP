@@ -1,10 +1,10 @@
-package app.domain.model;
+package app.domain.adapters;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BruteForceAlgorithmTest {
+public class BruteForceAlgorithmAdapterTest {
 
     private app.domain.adapters.BenchmarkAlgorithmAdapter bfa;
     private int[] example1;

@@ -8,6 +8,11 @@ participant ":Company" as CMP
 participant ":Test" as TST
 participant "testStore\n:TestStore" as TSTSTORE
 participant "clientStore\n:ClientStore" as CLTSTORE
+participant ":Constants" as CST
+participant ":Class" as CL
+participant ":SubMaxSumAlgorithms" as SMSA
+participant ":Sum" as SUM
+participant ":BruteForceAlgorithm" as BFA
 
 activate LC
 LC -> UI : asks to see an overview of all the tests performed and \n analyse the overall performance of the company
@@ -86,6 +91,43 @@ deactivate CTRL
 
 UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay chosenAlgorithm)
 activate CTRL
+
+CTRL -> CTRL : interval = makeIntervalArray(beginningDay, endingDay)
+activate CTRL
+|||
+deactivate CTRL
+
+CTRL -> CTRL : algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm)
+activate CTRL
+|||
+deactivate CTRL
+
+CTRL -> CL : oClass = forName(algorithmClass)
+activate CL
+|||
+deactivate CL
+
+CTRL -> SMSA : subMaxSumAlgorithm = newInstance()
+activate SMSA
+|||
+deactivate SMSA
+
+alt The chosen algorithm is the Benchmark algorithm
+
+CTRL -> SUM : worstSubInt = findSubMaxSum(interval)
+activate SUM
+|||
+deactivate SUM
+
+else The chosen algorithm is the Brute-force algorithm
+
+CTRL -> BFA : worstSubInt = findSubMaxSum(interval)
+activate BFA
+|||
+deactivate BFA
+
+end
+
 CTRL --> UI : worstSubInt
 deactivate CTRL
 

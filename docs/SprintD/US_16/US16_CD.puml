@@ -33,7 +33,7 @@ class CompanyPerformanceAnalysisController{
     +getTestInfoInterval(beginningDay, endingDay)
     +makeIntervalArray(beginningDay, endingDay)
     +findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
-    +getAlgorithmClass(chosenAlgorithm)
+    +getChosenAlgorithmAdapter(chosenAlgorithm)
 }
 
 class CompanyPerformanceAnalysisUI{
