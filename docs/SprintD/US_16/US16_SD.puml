@@ -97,7 +97,7 @@ activate CTRL
 |||
 deactivate CTRL
 
-CTRL -> CTRL : algorithmClass = getAlgorithmClass(chosenAlgorithm)
+CTRL -> CTRL : algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm)
 activate CTRL
 |||
 deactivate CTRL
@@ -114,14 +114,14 @@ deactivate SMSA
 
 alt The chosen algorithm is the Benchmark algorithm
 
-CTRL -> SUM : findSubMaxSum(interval)
+CTRL -> SUM : worstSubInt = findSubMaxSum(interval)
 activate SUM
 |||
 deactivate SUM
 
 else The chosen algorithm is the Brute-force algorithm
 
-CTRL -> BFA : findSubMaxSum(interval)
+CTRL -> BFA : worstSubInt = findSubMaxSum(interval)
 activate BFA
 |||
 deactivate BFA

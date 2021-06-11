@@ -122,7 +122,7 @@ public class CompanyPerformanceAnalysisController {
     public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(beginningDay, endingDay);
 
-        String algorithmClass = getAlgorithmClass(chosenAlgorithm);
+        String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
         SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
 
@@ -131,14 +131,20 @@ public class CompanyPerformanceAnalysisController {
         return worstSubInt;
     }
 
-    public String getAlgorithmClass(int chosenAlgorithm) {
-        String algorithmClass;
+    /**
+     *
+     *
+     * @param chosenAlgorithm the chosen algorithm
+     * @return the chosen algorithm adapter
+     */
+    public String getChosenAlgorithmAdapter(int chosenAlgorithm) {
+        String chosenAlgorithmAdapter;
         if(chosenAlgorithm == 1)
-            algorithmClass = Constants.BENCHMARK_ALGORITHM_ADAPTER;
+            chosenAlgorithmAdapter = Constants.BENCHMARK_ALGORITHM_ADAPTER;
         else
-            algorithmClass = Constants.BRUTEFORCE_ALGORITHM_ADAPTER;
+            chosenAlgorithmAdapter = Constants.BRUTEFORCE_ALGORITHM_ADAPTER;
 
-        return algorithmClass;
+        return chosenAlgorithmAdapter;
     }
 
 }
