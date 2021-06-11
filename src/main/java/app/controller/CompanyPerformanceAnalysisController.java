@@ -124,9 +124,9 @@ public class CompanyPerformanceAnalysisController {
 
         String algorithmClass = getAlgorithmClass(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
-        SubMaxSumAlgorithms subMaxSum = (SubMaxSumAlgorithms) oClass.newInstance();
+        SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
 
-        int[] worstSubInt = subMaxSum.findSubMaxSum(interval);
+        int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
 
         return worstSubInt;
     }
