@@ -17,7 +17,7 @@ public class BruteForceAlgorithmTest {
         exampleResult = new int[]{51, -9, 44, 74, 4};
     }
 
-    //Test 1
+    //Test 2
     @Test
     public void checkIfSubMaxSumIsFound(){
         int[] obtainedResult = bfa.findSubMaxSum(example);

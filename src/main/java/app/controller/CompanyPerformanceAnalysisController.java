@@ -92,12 +92,8 @@ public class CompanyPerformanceAnalysisController {
     public int[] makeIntervalArray(Date beginningDay, Date endingDay){
         TestStore testStore = company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
-        int numRegistered = 0;
-        int numValidated = 0;
-        int intToKeep = 0;
-        int minToAdd = 30;
-        Date date1 = beginningDay;
-        Date date2 = DateUtils.addMinutes(date1, minToAdd);
+        int numRegistered = 0, numValidated = 0, intToKeep = 0, minToAdd = 30;
+        Date date1 = beginningDay, date2 = DateUtils.addMinutes(date1, minToAdd);
         do{
             if ((date1.getDay()!=0 && date2.getDay()!=0) && (date1.getHours()>=8 && date2.getHours()<20))
                 numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);

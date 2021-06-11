@@ -1,6 +1,8 @@
 # US 16 - have an overview of all the tests and analyse the company performance
 
+
 ## 1. Requirements Engineering
+
 
 ### 1.1. User Story Description
 
@@ -8,6 +10,7 @@ As a laboratory coordinator, I want to have an overview of all the tests perform
 by Many Labs and analyse the overall performance of the company (for instance, check
 the sub-intervals in which there were more samples waiting for the result). To facilitate
 overall analysis, the application should also display statistics and graphs.
+
 
 ### 1.2. Customer Specifications and Clarifications
 
@@ -139,7 +142,6 @@ Please consider the requirements introduced at the beginning of Sprint D. The la
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8931#p11901).
 
 
-
 ### 1.3. Acceptance Criteria
 
 * **AC1:** To facilitate overall analysis, the application should display 
@@ -192,6 +194,7 @@ performance was less effective and figure out the cause of it.
 
 ## 2. OO Analysis
 
+
 ### 2.1. Relevant Domain Model Excerpt
 
 
@@ -204,6 +207,7 @@ n/a
 
 
 ## 3. Design - User Story Realization
+
 
 ### 3.1. Rationale
 
@@ -239,30 +243,209 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US016_SD](US016_SD.svg)
 
+
 ## 3.3. Class Diagram (CD)
+
 
 ### 3.3.1 Class Diagram
 
 ![US016_CD](US016_CD.svg)
 
+
 ### 3.3.2 Class Diagran With Packages
 
 ![US016_CD_WithPackages](US016_CD_WithPackages.svg)
 
+
 ## 3.4. Package Diagram (PD)
+
 
 ### 3.4.1 Package Diagram With Associations
 
 ![US016_PD_WithAssociations](US016_PD_WithAssociations.svg)
 
+
 ### 3.4.2 Package Diagram
 
 ![US016_PD](US016_PD.svg)
 
+
 # 4. Tests
+
+Tests from 4.1 and 4.2 follow this mode:
+
+    @Test
+    public void checkIfSubMaxSumIsFound(){
+        int[] obtainedSubMaxSum = chosenAlgorithm.findSubMaxSum(example);
+        Assert.assertArrayEquals(expectedSubMaxSum, obtainedSubMaxSum);
+    }
+
+
+## 4.1 BenchmarkAlgorithm
+
+**Test 1:** Check if the contiguous subsequence with maximum sum is successfully found, using the BenchmarkAlgorithm.
+
+
+## 4.2 BruteForceAlgorithm
+
+**Test 2:** Check if the contiguous subsequence with maximum sum is successfully found, using the BruteForceAlgorithm.
 
 
 # 5. Construction (Implementation)
+
+
+## 5.1 CompanyPerformanceAnalysisController
+
+    //...Omitted
+
+    public int getNumClients() {
+        ClientStore clientStore = new ClientStore();
+        int numClients = clientStore.getClients().size();
+        return numClients;
+    }
+
+    //...Omitted
+
+    public int[] getTestInfoDay(Date day){
+        int[] testInfo = new int[3];
+        TestStore testStore = new TestStore();
+        testInfo[0]=testStore.getNumTestsWaitingForResultsDay(day);
+        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDay(day);
+        testInfo[2]=testStore.getNumTestsProcessedInLabDay(day);
+        return testInfo;
+    }
+
+    //...Omitted
+
+    public int[] getTestInfoInterval(Date beginningDay, Date endingDay){
+        int[] testInfo = new int[3];
+        TestStore testStore = new TestStore();
+        testInfo[0]=testStore.getNumTestsWaitingForResultsInterval(beginningDay,endingDay);
+        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay,endingDay);
+        testInfo[2]=testStore.getNumTestsProcessedInLabInterval(beginningDay,endingDay);
+        return testInfo;
+    }
+
+    //...Omitted
+
+    BenchmarkAlgorithm bma = new BenchmarkAlgorithm();
+    BruteForceAlgorithm bfa = new BruteForceAlgorithm();
+
+    //...Omitted
+
+    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, boolean chosenAlgorithm){
+        int[] interval = makeIntervalArray(beginningDay, endingDay);
+        int[] worstSubInt;
+        if (chosenAlgorithm){
+            worstSubInt = bma.findSubMaxSum(interval);
+        } else {
+            worstSubInt = bfa.findSubMaxSum(interval);
+        }
+        return worstSubInt;
+    }
+
+    //...Omitted
+
+
+## 5.2 SubMaxSumAlgorithms
+
+    //...Omitted
+
+    int[] findSubMaxSum(int[] interval);
+
+    //...Omitted
+
+
+## 5.3 BenchmarkAlgorithm
+
+    //...Omitted
+
+    @Override
+    public int[] findSubMaxSum(int[] interval){
+        return Sum.Max(interval);
+    }
+
+    //...Omitted
+
+## 5.4 BruteForceAlgorithm
+
+    //...Omitted
+
+    @Override
+    public int[] findSubMaxSum(int[] interval){
+        ArrayList<Integer> subMaxSum = new ArrayList<>();
+        int sumValue = 0;
+        int num = 0;
+        for (int i = 0; i < interval.length; i++) {
+            for (int j = 0; j < interval.length; j++) {
+                if (i<j) {
+                    for (int k = i; k <= j; k++) {
+                        num=num+interval[k];
+                    }
+                    if (num > sumValue) {
+                        subMaxSum.clear();
+                        for (int l = i; l <= j; l++) {
+                            subMaxSum.add(interval[l]);
+                        }
+                        sumValue=num;
+                    }
+                    num=0;
+                }
+            }
+        }
+        int[] finalSubMaxSum = new int[subMaxSum.size()];
+        for (int i = 0; i < finalSubMaxSum.length; i++) {
+            finalSubMaxSum[i] = subMaxSum.get(i).intValue();
+        }
+        return finalSubMaxSum;
+    }
+
+    //...Omitted
+
+## 5.5 TestStore
+
+    //...Omitted
+
+    public int getNumTestsWaitingForResultsDay(Date day){
+        int num = 0;
+        Date date1, date2;
+        for (Test test : testList) {
+            date1=test.getDateOfSamplesCollection();
+            date2=test.getDateOfChemicalAnalysis();
+            if (date1!=null)
+                if (date2==null)
+                    date2=new Date(10000,Calendar.JANUARY,1);
+                if (date1.before(day) && date2.after(day))
+                    num++;
+        }
+        return num;
+    }
+
+    //...Omitted
+
+    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){ //endingDay vai ser as ...:59 do domingo PARA PERTENCER
+        int num = 0;
+        Date date1, date2;
+        for (Test test : testList) {
+            date1 = test.getDateOfChemicalAnalysis();
+            date2 = test.getDateOfSamplesCollection();
+            if (date2!=null)
+                if (date1==null)
+                    date1=new Date(10000,Calendar.JANUARY,1);
+                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
+                    num++;
+        }
+        return num;
+    }
+
+    //...Omitted
+
+
+The logic used in the methods above, is also used in the following methods:
+- public int getNumTestsWaitingForDiagnosisDay(Date day) ;
+- public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay) ;
+- public int getNumTestsProcessedInLabDay(Date day) ;
+- public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay) .
 
 
 # 6. Integration and Demo
