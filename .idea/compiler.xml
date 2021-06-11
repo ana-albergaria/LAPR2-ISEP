@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Sem2App" target="8" />
+      <module name="Sem2App" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
