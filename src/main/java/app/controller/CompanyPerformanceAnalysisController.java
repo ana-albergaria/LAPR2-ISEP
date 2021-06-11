@@ -1,7 +1,7 @@
 package app.controller;
 
-import app.domain.model.BenchmarkAlgorithm;
-import app.domain.model.BruteForceAlgorithm;
+import app.domain.adapters.BenchmarkAlgorithmAdapter;
+import app.domain.adapters.BruteForceAlgorithmAdapter;
 import app.domain.model.Company;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
@@ -112,8 +112,8 @@ public class CompanyPerformanceAnalysisController {
 
     //IS THIS THE RIGHT WAY TO DO IT??? (SEE BELOW)
 
-    BenchmarkAlgorithm bma = new BenchmarkAlgorithm();
-    BruteForceAlgorithm bfa = new BruteForceAlgorithm();
+    BenchmarkAlgorithmAdapter bma = new BenchmarkAlgorithmAdapter();
+    BruteForceAlgorithmAdapter bfa = new BruteForceAlgorithmAdapter();
 
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
@@ -123,13 +123,15 @@ public class CompanyPerformanceAnalysisController {
      * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, boolean chosenAlgorithm){
+    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm){
         int[] interval = makeIntervalArray(beginningDay, endingDay);
         int[] worstSubInt;
-        if (chosenAlgorithm){
+        if (chosenAlgorithm==1){
             worstSubInt = bma.findSubMaxSum(interval);
-        } else {
+        } else if (chosenAlgorithm==2){
             worstSubInt = bfa.findSubMaxSum(interval);
+        } else {
+            return null;
         }
         return worstSubInt;
     }

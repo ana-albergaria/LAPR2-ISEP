@@ -1,7 +1,5 @@
 package app.domain.model;
 
-import app.domain.interfaces.SubMaxSumAlgorithms;
-
 import java.util.ArrayList;
 
 /**
@@ -9,25 +7,24 @@ import java.util.ArrayList;
  *
  * @author Marta Ribeiro 1201592
  */
-public class BruteForceAlgorithm implements SubMaxSumAlgorithms {
+public class BruteForceAlgorithm {
     public BruteForceAlgorithm(){
     }
 
-    @Override
-    public int[] findSubMaxSum(int[] interval){
+    public static int[] Max(int[] seq){
         ArrayList<Integer> subMaxSum = new ArrayList<>();
         int sumValue = 0;
         int num = 0;
-        for (int i = 0; i < interval.length; i++) {
-            for (int j = 0; j < interval.length; j++) {
+        for (int i = 0; i < seq.length; i++) {
+            for (int j = 0; j < seq.length; j++) {
                 if (i<j) {
                     for (int k = i; k <= j; k++) {
-                        num=num+interval[k];
+                        num=num+seq[k];
                     }
                     if (num > sumValue) {
                         subMaxSum.clear();
                         for (int l = i; l <= j; l++) {
-                            subMaxSum.add(interval[l]);
+                            subMaxSum.add(seq[l]);
                         }
                         sumValue=num;
                     }
