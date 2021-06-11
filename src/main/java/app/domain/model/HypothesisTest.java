@@ -22,17 +22,20 @@ public class HypothesisTest {
         this.myRegressionModel = myRegressionModel;
         this.tObsA = tObsA;
         this.tObsB = tObsB;
+        this.significanceLevel = significanceLevel;
     }
 
     //for Anova Significance Model
     public HypothesisTest(MyRegressionModel myRegressionModel,
                           double f,
                           int numeratorDegreesOfFreedom,
-                          int denominatorDegreesOfFreedom) {
+                          int denominatorDegreesOfFreedom,
+                          double significanceLevel) {
         this.myRegressionModel = myRegressionModel;
         this.f = f;
         this.numeratorDegreesOfFreedom = numeratorDegreesOfFreedom;
         this.denominatorDegreesOfFreedom = denominatorDegreesOfFreedom;
+        this.significanceLevel = significanceLevel;
     }
 
 

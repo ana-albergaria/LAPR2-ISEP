@@ -29,7 +29,7 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel) {
+    public SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel, double significanceLevel) {
         return null;
     }
 

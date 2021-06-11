@@ -19,6 +19,7 @@ public class TableOfValues {
                          int[] observedPositives,
                          List<Double> estimatedPositives,
                          List<ConfidenceInterval> confidenceIntervals) {
+        this.myRegressionModel = myRegressionModel;
         this.dates = dates;
         this.observedPositives = observedPositives;
         this.estimatedPositives = estimatedPositives;
@@ -34,9 +35,9 @@ public class TableOfValues {
     @Override
     public String toString() {
         StringBuilder text = new StringBuilder();
-        text.append(String.format("%-20s%-20s%-20s%-20s%n", "Date", "Number of OBSERVED positive cases", "Number of ESTIMATED/EXPECTED positive cases", getConfidenceLevelInPercentage() + "intervals"));
+        text.append(String.format("%-20s%-50s%-60s%-50s%n", "Date", "Number of OBSERVED positive cases", "Number of ESTIMATED/EXPECTED positive cases", getConfidenceLevelInPercentage() + "% intervals"));
         for (int i = 0; i < myRegressionModel.getNumberOfObservations(); i++) {
-            text.append(String.format("%-35s%-35d%-35f%-35s%n", dates.get(i), observedPositives[i], estimatedPositives.get(i), confidenceIntervals.get(i).toString()));
+            text.append(String.format("%-35s%-50d%-47f%-35s%n", dates.get(i), observedPositives[i], estimatedPositives.get(i), confidenceIntervals.get(i).toString()));
         }
         return text.toString();
     }
