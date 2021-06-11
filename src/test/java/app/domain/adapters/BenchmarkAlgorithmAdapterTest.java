@@ -1,6 +1,5 @@
 package app.domain.adapters;
 
-import app.domain.adapters.BenchmarkAlgorithmAdapter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
