@@ -8,6 +8,7 @@ public class MultipleLinearRegression {
     private int n;
     private double r2;
     private double r2Adjusted;
+    private double sr;
 
     private static final int NUM_REG_COEFFICIENTS = 2;
 
@@ -30,13 +31,7 @@ public class MultipleLinearRegression {
         System.out.println();
 
         //determine xT (transpose of the matrix X)
-        int rowX = x.length, columnX = x[0].length;
-        double[][] xT = new double[columnX][rowX];
-        for (int i = 0; i < rowX; i++) {
-            for (int j = 0; j < columnX; j++) {
-                xT[j][i] = x[i][j];
-            }
-        }
+        double[][] xT = transposeMatrix(x);
 
         System.out.println("xT:");
         imprimir(xT);
@@ -74,25 +69,35 @@ public class MultipleLinearRegression {
         b1 = regressionCoefficients[1];
         b2 = regressionCoefficients[2];
 
-        //double[] regressionCoefficientsT =
+        double ybar = mean(y);
+
+        //regressionCoefficientsT = regressionCoefficients (in Code!)
+        //determine ^BxTy
+        double regressionsCoefficientsTxTy = vectorWithVectorMultiplication(regressionCoefficients, xTy);
+
+        //determine SQr
+        sr = regressionsCoefficientsTxTy - (n * Math.pow(ybar, 2));
+
+        System.out.println("regressionsCoefficientsT * xTy = " + regressionsCoefficientsTxTy);
+        System.out.println("SQr = " + sr);
+
         //r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
 
         //System.out.println(r2Adjusted);
     }
 
-    /*
-    private double[][] transpose(double[][] matrix) {
-        int row = matrix.length, column
+
+    private double[][] transposeMatrix(double[][] x) {
+        int rowX = x.length, columnX = x[0].length;
         double[][] xT = new double[columnX][rowX];
+
         for (int i = 0; i < rowX; i++) {
             for (int j = 0; j < columnX; j++) {
                 xT[j][i] = x[i][j];
             }
         }
+        return xT;
     }
-
-     */
-
 
 
     private double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
@@ -131,6 +136,21 @@ public class MultipleLinearRegression {
         }
         return result;
     }
+
+    private double vectorWithVectorMultiplication(double[] vector, double[] otherVector) {
+        if(vector.length != otherVector.length)
+            throw new IllegalArgumentException("The multiplication is not possible with" + vector.length + "columns from the" +
+                    "vector and" + otherVector.length + "lines from the matrix!");
+
+        double result = 0;
+        for (int i = 0; i < vector.length; i++) {
+            result += vector[i] * otherVector[i];
+        }
+
+        return result;
+    }
+
+
 
     private double[][] invert(double a[][]) {
         int n = a.length;
@@ -210,6 +230,15 @@ public class MultipleLinearRegression {
             }
         }
     }
+
+    public double mean(double[] x) {
+        double sum = 0;
+        for (int i = 0; i < x.length; i++) {
+            sum += x[i];
+        }
+        return sum / x.length;
+    }
+
     @Override
     public String toString() {
         return String.format("^y=%f + %fx1 + %fx2", b0, b1, b2);
