@@ -71,6 +71,7 @@ public class MultipleLinearRegression {
         b2 = regressionCoefficients[2];
 
         double ybar = mean(y);
+        System.out.println("Ybar: " + ybar);
         
 
         //regressionCoefficientsT = regressionCoefficients (in Code!)
