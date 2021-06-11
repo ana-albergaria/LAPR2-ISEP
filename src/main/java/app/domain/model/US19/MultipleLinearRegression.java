@@ -100,7 +100,45 @@ public class MultipleLinearRegression {
 
         System.out.println("R2 = " + r2);
         System.out.println("R2 adjusted = " + r2Adjusted);
+        System.out.println();
 
+    }
+
+    public double getB0() {
+        return b0;
+    }
+
+    public double getB1() {
+        return b1;
+    }
+
+    public double getB2() {
+        return b2;
+    }
+
+    public double getR2() {
+        return r2;
+    }
+
+    public double getR2Adjusted() {
+        return r2Adjusted;
+    }
+
+    public double getSr() {
+        return sr;
+    }
+
+    public double getSe() {
+        return se;
+    }
+
+    public int getN() {
+        return n;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
     }
 
 
@@ -254,10 +292,6 @@ public class MultipleLinearRegression {
         return sum / x.length;
     }
 
-    @Override
-    public String toString() {
-        return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
-    }
 
     //APAGAR POSTERIORMENTE!!!!!!!
     public static void imprimir(double[][] array) {

@@ -1,7 +1,10 @@
 package app.domain.model.US19;
 
+import app.domain.interfaces.RegressionModel;
+import app.domain.model.MyRegressionModel;
+
 public class TestMultipla {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         //MATCP - Teórica Regressão Linear Múltipla
         double[] x1 = {80.0, 93.0, 100.0, 82.0, 90.0, 99.0, 81.0, 96.0, 94.0, 93.0, 97.0, 95.0};
@@ -16,6 +19,12 @@ public class TestMultipla {
 
         MultipleLinearRegression mlr = new MultipleLinearRegression(xa, xb, ya);
         System.out.println(mlr);
+
+        Class<?> oClass = Class.forName("app.domain.adapters.MultipleLinearRegressionAdapter");
+        RegressionModel calculus = (RegressionModel) oClass.newInstance();
+        MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, ya, mlr.getN());
+
+        System.out.println(myRegressionModel);
 
 
     }
