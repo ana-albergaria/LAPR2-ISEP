@@ -10,6 +10,14 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.5</version>
+				<configuration>
+					<mainClass>app.ui.gui.App</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -22,6 +30,16 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.0</version>
 				<dependencies>
+					<dependency>
+						<groupId>org.openjfx</groupId>
+						<artifactId>javafx-controls</artifactId>
+						<version>11.0.2</version>
+					</dependency>
+					<dependency>
+						<groupId>org.openjfx</groupId>
+						<artifactId>javafx-fxml</artifactId>
+						<version>11.0.2</version>
+					</dependency>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit4</artifactId>
