@@ -1,15 +1,19 @@
 package app.ui.gui;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.io.IOException;
+import java.awt.event.ActionEvent;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,11 +30,15 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setTitle("Demo Maven and JavaFX Application");
-        stage.setMinWidth(MINIMUM_WINDOW_WIDTH);
-        stage.setMinHeight(MINIMUM_WINDOW_HEIGHT);
+        //stage.setMinWidth(MINIMUM_WINDOW_WIDTH); Prof
+        //stage.setMinHeight(MINIMUM_WINDOW_HEIGHT); Prof
+        stage.setMinHeight(495);
+        stage.setMinWidth(693);
+
         toMainScene();
         this.stage.show();
     }
+
 
     public Stage getStage() {
         return this.stage;
@@ -38,7 +46,7 @@ public class App extends Application {
 
     public void toMainScene() {
         try {
-            MainUI mainUI = (MainUI) replaceSceneContent("/fxml/Main.fxml");
+            MainUI mainUI = (MainUI) replaceSceneContent("/fxml/Login.fxml");
             mainUI.setMainApp(this);
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,8 +68,13 @@ public class App extends Application {
         scene.getStylesheets().add("/styles/Styles.css");
         this.stage.setScene(scene);
         this.stage.sizeToScene();
+        if(fxml.equals("/fxml/Login.fxml"))
+            stage.initStyle(StageStyle.UNDECORATED);
         return (Initializable) loader.getController();
     }
+
+
+
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.

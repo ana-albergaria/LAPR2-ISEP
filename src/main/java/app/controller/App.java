@@ -30,7 +30,8 @@ public class App {
                 props.getProperty("Company.RegressionModel.Class"),
                 props.getProperty("Company.DateInterval"),
                 props.getProperty("Company.NumberOfHistoricalPoints"),
-                props.getProperty("Company.ConfidenceLevel"));
+                props.getProperty("Company.ConfidenceLevel"),
+                props.getProperty("Company.SignificanceLevel"));
         this.authFacade = this.company.getAuthFacade();
         bootstrap();
     }

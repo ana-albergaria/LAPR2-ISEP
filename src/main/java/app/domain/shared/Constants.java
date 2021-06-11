@@ -31,6 +31,7 @@ public class Constants {
     public static final String HISTORICAL_POINTS = "15";
 
     public static final String CONFIDENCE_LEVEL = "0.95";
+    public static final String SIGNIFICANCE_LEVEL = "0.05";
 
     public static final String BLOOD_MODULE_1_NAME = "BloodModule1 (for blood tests, requires a key access)";
     public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";

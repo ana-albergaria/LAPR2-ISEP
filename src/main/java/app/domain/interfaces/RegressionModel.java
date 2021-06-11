@@ -11,7 +11,7 @@ import java.util.List;
 public interface RegressionModel {
     public abstract Integer getBestXIndex(double[] x1, double[] x2, double[] y);
     public abstract MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y, int historicalPoints);
-    public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel);
+    public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel);
     public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel);
     public abstract List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints);
     public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0, double confidenceLevel);

@@ -9,6 +9,7 @@ public class MultipleLinearRegression {
     private double r2;
     private double r2Adjusted;
     private double sr;
+    private double se;
 
     private static final int NUM_REG_COEFFICIENTS = 2;
 
@@ -75,15 +76,27 @@ public class MultipleLinearRegression {
         //determine ^BxTy
         double regressionsCoefficientsTxTy = vectorWithVectorMultiplication(regressionCoefficients, xTy);
 
+        //y = yT in Code!
+        //determine yTy
+        double yTy = vectorWithVectorMultiplication(y, y);
+
         //determine SQr
         sr = regressionsCoefficientsTxTy - (n * Math.pow(ybar, 2));
+        //determine SQe
+        se = yTy - regressionsCoefficientsTxTy;
+        //determine SQt
+        double st = sr + se;
 
-        System.out.println("regressionsCoefficientsT * xTy = " + regressionsCoefficientsTxTy);
         System.out.println("SQr = " + sr);
+        System.out.println("SQe = " + se);
 
-        //r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
+        //determine r2 and r2Adjusted
+        r2 = sr / st;
+        r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
 
-        //System.out.println(r2Adjusted);
+        System.out.println("R2 = " + r2);
+        System.out.println("R2 adjusted = " + r2Adjusted);
+
     }
 
 
@@ -149,8 +162,6 @@ public class MultipleLinearRegression {
 
         return result;
     }
-
-
 
     private double[][] invert(double a[][]) {
         int n = a.length;
@@ -241,7 +252,7 @@ public class MultipleLinearRegression {
 
     @Override
     public String toString() {
-        return String.format("^y=%f + %fx1 + %fx2", b0, b1, b2);
+        return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
     }
 
     //APAGAR POSTERIORMENTE!!!!!!!

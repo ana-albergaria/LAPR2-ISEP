@@ -15,7 +15,7 @@ public class MyRegressionModel {
     private final int numberOfObservations;
     private final Object regressionModel;
 
-    private static final int DEGREES_OF_FREEDOM_TSTUDENT = 2;
+    private static final int MLR_NUM_REG_COEFFICIENTS = 2;
 
     public MyRegressionModel(double intercept,
                              double slope,
@@ -52,7 +52,6 @@ public class MyRegressionModel {
     }
 
 
-
     public double getSlope() {
         return slope;
     }
@@ -82,11 +81,13 @@ public class MyRegressionModel {
         return critFD;
     }
 
-    public double calculateCriticalValTStudent(double levelOfSignificance) {
+    public double calculateCriticalValTStudent(double significanceLevel) {
         int n = numberOfObservations;
+        int degreesOfFreedom = (secondIndVariable == null) ? n-2 : n-(MLR_NUM_REG_COEFFICIENTS + 1);
+
         double critTD;
-        TDistribution td = new TDistribution(n - DEGREES_OF_FREEDOM_TSTUDENT);
-        double alphaTD = 1 - (levelOfSignificance / 2);
+        TDistribution td = new TDistribution(degreesOfFreedom);
+        double alphaTD = 1 - (significanceLevel / 2);
         if(alphaTD > 0.5) {
             critTD = td.inverseCumulativeProbability(alphaTD);
         }

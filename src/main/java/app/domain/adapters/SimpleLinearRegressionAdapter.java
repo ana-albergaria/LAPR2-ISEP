@@ -28,11 +28,11 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel) {
+    public HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel) {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
         //for a, for b
         double tObsA = simpleLR.calculatetObsA(), tObsB = simpleLR.calculateTObsB();
-        return new HypothesisTest(myRegressionModel, tObsA, tObsB);
+        return new HypothesisTest(myRegressionModel, tObsA, tObsB, significanceLevel);
     }
 
     @Override

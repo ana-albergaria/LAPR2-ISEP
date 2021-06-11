@@ -50,8 +50,8 @@ public class NHSReportStore {
         return myRegressionModel;
     }
 
-    public HypothesisTest createHypothesisTest(RegressionModel regressionModel, MyRegressionModel myRegressionModel) {
-        return regressionModel.getHypothesisTest(myRegressionModel);
+    public HypothesisTest createHypothesisTest(RegressionModel regressionModel, MyRegressionModel myRegressionModel, double significanceLevel) {
+        return regressionModel.getHypothesisTest(myRegressionModel, significanceLevel);
     }
 
     public SignificanceModelAnova createSignificanceModelAnova(RegressionModel regressionModel, MyRegressionModel myRegressionModel) {

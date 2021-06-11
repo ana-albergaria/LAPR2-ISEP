@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.MainUI">
+    <children>
+      <BorderPane>
+         <left>
+            <AnchorPane prefHeight="403.0" prefWidth="338.0" style="-fx-background-color: #4068B8; -fx-border-color: #FFFFFF; -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" layoutX="84.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Many Labs">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="imgTeam" fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgTeam.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="455.0" prefWidth="338.0" style="-fx-background-color: #26292F;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField layoutX="91.0" layoutY="203.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #4068B8; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField layoutX="91.0" layoutY="251.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #4068B8; -fx-border-width: 0px 0px 2px 0px;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+                  <Text fill="WHITE" layoutX="121.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login" AnchorPane.bottomAnchor="278.9765625" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="120.97265625" AnchorPane.topAnchor="144.1015625">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="153.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@whiteUser.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="143.0" layoutY="320.0" mnemonicParsing="false" style="-fx-background-color: #4068B8;" text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </center>
+         <top>
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                <Button fx:id="sairBtn" mnemonicParsing="false" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE" />
+              </items>
+            </ToolBar>
+         </top>
+      </BorderPane>
+    </children>
+</AnchorPane>

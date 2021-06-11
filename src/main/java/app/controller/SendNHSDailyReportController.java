@@ -26,6 +26,8 @@ public class SendNHSDailyReportController {
     public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         RegressionModel regressionModel = this.company.getRegressionModel();
         int historicalPoints = this.company.getHistoricalPoints();
+        double significanceLevel = this.company.getSignificanceLevel();
+
         List<List<Double>> dataList = getDataListToFitTheModel();
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
         double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
@@ -34,7 +36,7 @@ public class SendNHSDailyReportController {
         int bestXIndex = nhsReportStore.getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives);
 
         MyRegressionModel myRegressionModel = getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
-        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel);
+        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel, significanceLevel);
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel);
 
         Date startDate = nhsReportStore.getStartDate();

@@ -44,7 +44,7 @@ public class Main {
         MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y, x.length);
         //MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, y1);
         System.out.println(myRegressionModel);
-        HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel);
+        HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel, 0.05);
         System.out.println(hypothesisTest);
         SignificanceModelAnova modelAnova = calculus.getSignificanceModelAnova(myRegressionModel);
 

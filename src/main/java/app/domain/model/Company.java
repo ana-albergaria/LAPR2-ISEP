@@ -84,13 +84,16 @@ public class Company {
 
     private String confidenceLevel;
 
+    private String significanceLevel;
+
     public Company(String designation,
                    String classNameForBarcodeApi,
                    String classNameForSortAlgorithm,
                    String regressionModelCLass,
                    String dateInterval,
                    String historicalPoints,
-                   String confidenceLevel)
+                   String confidenceLevel,
+                   String significanceLevel)
     {
         if (StringUtils.isBlank(designation))
             throw new IllegalArgumentException("Designation cannot be blank.");
@@ -133,6 +136,7 @@ public class Company {
         this.historicalPoints = historicalPoints;
         this.nhsReportStore = new NHSReportStore();
         this.confidenceLevel = confidenceLevel;
+        this.significanceLevel = significanceLevel;
 
         //COLOCAR CONSTRUTOR DO REPORTTASK AQUI
     }
@@ -383,5 +387,9 @@ public class Company {
 
     public double getConfidenceLevel() {
         return Double.parseDouble(confidenceLevel);
+    }
+
+    public double getSignificanceLevel() {
+        return Double.parseDouble(significanceLevel);
     }
 }
