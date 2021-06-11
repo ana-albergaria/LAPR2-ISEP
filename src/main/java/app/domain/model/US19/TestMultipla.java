@@ -14,7 +14,7 @@ public class TestMultipla {
         double[] ya = {4.0, 4.5, 5.0, 6.5, 7.0, 7.8, 7.5, 8.0, 8.0, 8.5};
 
 
-        MultipleLinearRegression mlr = new MultipleLinearRegression(xa, xb, ya);
+        MultipleLinearRegression mlr = new MultipleLinearRegression(x1, x2, y);
         System.out.println(mlr);
 
 

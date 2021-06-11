@@ -6,6 +6,10 @@ public class MultipleLinearRegression {
     private double b2;
     private double[] regressionCoefficients;
     private int n;
+    private double r2;
+    private double r2Adjusted;
+
+    private static final int NUM_REG_COEFFICIENTS = 2;
 
     public MultipleLinearRegression(double[] x1, double[] x2, double[] y) {
         if (x1.length != x2.length || x1.length != y.length) {
@@ -69,7 +73,27 @@ public class MultipleLinearRegression {
         b0 = regressionCoefficients[0];
         b1 = regressionCoefficients[1];
         b2 = regressionCoefficients[2];
+
+        //double[] regressionCoefficientsT =
+        //r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
+
+        //System.out.println(r2Adjusted);
     }
+
+    /*
+    private double[][] transpose(double[][] matrix) {
+        int row = matrix.length, column
+        double[][] xT = new double[columnX][rowX];
+        for (int i = 0; i < rowX; i++) {
+            for (int j = 0; j < columnX; j++) {
+                xT[j][i] = x[i][j];
+            }
+        }
+    }
+
+     */
+
+
 
     private double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
         if(matrix[0].length != otherMatrix.length)
