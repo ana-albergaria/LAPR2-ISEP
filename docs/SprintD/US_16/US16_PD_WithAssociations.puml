@@ -10,17 +10,26 @@ package Domain {
 package Model {}
 package Store {}
 package Interfaces{}
+package Adapters{}
 }
 
 package Controller {}
 
+package ThirdParty{
+package APIs{}
+}
+
 }
 
 
-package UI {}
+package UI {
+package GUI{}
+}
 
-UI ..> Controller
+GUI ..> Controller
 Controller ..> Domain
 Model --> Store : uses
+Interfaces <|.. Adapters
+Adapters --> APIs
 
 @enduml

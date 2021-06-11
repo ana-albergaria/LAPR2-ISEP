@@ -33,6 +33,7 @@ class CompanyPerformanceAnalysisController{
     +getTestInfoInterval(beginningDay, endingDay)
     +makeIntervalArray(beginningDay, endingDay)
     +findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
+    +getAlgorithmClass(chosenAlgorithm)
 }
 
 class CompanyPerformanceAnalysisUI{
@@ -42,12 +43,20 @@ interface SubMaxSumAlgorithms <<interface>> {
     +findSubMaxSum(interval)
 }
 
-class BenchmarkAlgorithm{
+class BenchmarkAlgorithmAdapter{
     +findSubMaxSum(interval)
 }
 
-class BruteForceAlgorithm{
+class BruteForceAlgorithmAdapter{
     +findSubMaxSum(interval)
+}
+
+class Sum{
+    +Max(seq)
+}
+
+class BruteForceAlgorithm{
+    +Max(seq)
 }
 
 CompanyPerformanceAnalysisUI ..> CompanyPerformanceAnalysisController
@@ -55,8 +64,10 @@ CompanyPerformanceAnalysisController ..> Company
 CompanyPerformanceAnalysisController ..> ClientStore
 CompanyPerformanceAnalysisController ..> TestStore
 CompanyPerformanceAnalysisController "1" --> "1" SubMaxSumAlgorithms : makes use of
+BenchmarkAlgorithmAdapter --> Sum
+BruteForceAlgorithmAdapter --> BruteForceAlgorithm
 
-class BenchmarkAlgorithm implements SubMaxSumAlgorithms
-class BruteForceAlgorithm implements SubMaxSumAlgorithms
+class BenchmarkAlgorithmAdapter implements SubMaxSumAlgorithms
+class BruteForceAlgorithmAdapter implements SubMaxSumAlgorithms
 
 @enduml

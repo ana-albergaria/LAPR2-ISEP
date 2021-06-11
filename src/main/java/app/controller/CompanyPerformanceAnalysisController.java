@@ -1,8 +1,5 @@
 package app.controller;
 
-import app.domain.adapters.BenchmarkAlgorithmAdapter;
-import app.domain.adapters.BruteForceAlgorithmAdapter;
-import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;
 import app.domain.shared.Constants;

@@ -5,6 +5,8 @@ hide empty attributes
 left to right direction
 skinparam classAttributeIconSize 0
 
+package Core{
+
 package Domain {
 
 package Model{
@@ -17,12 +19,8 @@ class Company {
     +getClientStore()
 }
 
-class BenchmarkAlgorithm{
-    +findSubMaxSum(interval)
-}
-
 class BruteForceAlgorithm{
-    +findSubMaxSum(interval)
+    +Max(seq)
 }
 
 }
@@ -52,6 +50,18 @@ class ClientStore {
 
 }
 
+package Adapters{
+
+class BenchmarkAlgorithmAdapter{
+    +findSubMaxSum(interval)
+}
+
+class BruteForceAlgorithmAdapter{
+    +findSubMaxSum(interval)
+}
+
+}
+
 }
 
 package Controller {
@@ -67,9 +77,27 @@ class CompanyPerformanceAnalysisController{
 
 }
 
+package ThirdParty{
+
+package APIs {
+
+class Sum{
+    +Max(seq)
+}
+
+}
+
+}
+
+}
+
 package UI {
 
+package GUI{
+
 class CompanyPerformanceAnalysisUI{
+}
+
 }
 
 }
@@ -79,8 +107,10 @@ CompanyPerformanceAnalysisController ..> Company
 CompanyPerformanceAnalysisController ..> ClientStore
 CompanyPerformanceAnalysisController ..> TestStore
 CompanyPerformanceAnalysisController "1" --> "1" SubMaxSumAlgorithms : makes use of
+BenchmarkAlgorithmAdapter --> Sum
+BruteForceAlgorithmAdapter --> BruteForceAlgorithm
 
-class BenchmarkAlgorithm implements SubMaxSumAlgorithms
-class BruteForceAlgorithm implements SubMaxSumAlgorithms
+class BenchmarkAlgorithmAdapter implements SubMaxSumAlgorithms
+class BruteForceAlgorithmAdapter implements SubMaxSumAlgorithms
 
 @enduml
