@@ -440,6 +440,133 @@ public class TestStoreTest {
         Assert.assertEquals(expectedResult, obtainedResult);
     }
 
+    //Test 9
+    @Test
+    public void testGetNumTestsProcessedInLabDay() throws BarcodeException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+
+        app.domain.model.Test test1 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test1);
+        Date date1reg = new Date(2020,Calendar.JANUARY, 14,9,0,0);
+        test1.setDateOfTestRegistration(date1reg);
+        Sample sample1 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        test1.addSample(sample1);
+        Date date1s = new Date(2020, Calendar.JANUARY, 14, 11, 0, 0);
+        test1.setDateOfSamplesCollection(date1s);
+        test1.addTestResult("RBC12", 23.45, "ug");
+        test1.addTestResult("WBC12", 23.45, "ug");
+        Date date1 = new Date(2020, Calendar.JANUARY, 15, 9, 0, 0);
+        test1.setDateOfChemicalAnalysis(date1);
+        Report report1 = new Report("Everything is well.");
+        test1.addReport(report1);
+        Date date1r = new Date(2020,Calendar.JANUARY,15,10,0,0);
+        test1.setDateOfDiagnosis(date1r);
+
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
+        testStore.saveTest(test2);
+        Date date2reg = new Date(2020,Calendar.JANUARY, 29,19,0,0);
+        test2.setDateOfTestRegistration(date2reg);
+        Sample sample2 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678902"), "12345678902"));
+        test2.addSample(sample2);
+        Date date2s = new Date(2020, Calendar.JANUARY, 30, 16, 0, 45);
+        test2.setDateOfSamplesCollection(date2s);
+
+        app.domain.model.Test test3 = testStore.createTest("123456789013", client, t1, parametersBlood, cal);
+        testStore.saveTest(test3);
+        Date date3reg = new Date(2020,Calendar.JANUARY, 5,15,1,26);
+        test3.setDateOfTestRegistration(date3reg);
+
+        app.domain.model.Test test4 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test4);
+        Date date4reg = new Date(2020,Calendar.JANUARY, 13,17,0,23);
+        test4.setDateOfTestRegistration(date4reg);
+        Sample sample4 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        test1.addSample(sample4);
+        Date date4s = new Date(2020, Calendar.JANUARY, 15, 19, 50, 0);
+        test1.setDateOfSamplesCollection(date4s);
+        test1.addTestResult("RBC12", 23.45, "ug");
+        test1.addTestResult("WBC12", 23.45, "ug");
+        test1.addChemicalAnalysisDate();
+        Date date4 = new Date(2020, Calendar.JANUARY, 15, 19, 55, 0);
+        test1.setDateOfChemicalAnalysis(date4);
+        Report report4 = new Report("Everything is well.");
+        test1.addReport(report1);
+        Date date4r = new Date(2020,Calendar.JANUARY,16,8,30,0);
+        test1.setDateOfDiagnosis(date4r);
+
+        Date day = new Date(2020, Calendar.JANUARY, 14, 0, 0, 0);
+
+        int expectedResult = 2;
+        int obtainedResult = testStore.getNumTestsProcessedInLabDay(day);
+
+        Assert.assertEquals(expectedResult, obtainedResult);
+    }
+
+    //Test 10
+    @Test
+    public void testGetNumTestsProcessedInLabInterval() throws BarcodeException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+
+        app.domain.model.Test test1 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test1);
+        Date date1reg = new Date(2020,Calendar.JANUARY, 14,9,0,0);
+        test1.setDateOfTestRegistration(date1reg);
+        Sample sample1 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        test1.addSample(sample1);
+        Date date1s = new Date(2020, Calendar.JANUARY, 14, 11, 0, 0);
+        test1.setDateOfSamplesCollection(date1s);
+        test1.addTestResult("RBC12", 23.45, "ug");
+        test1.addTestResult("WBC12", 23.45, "ug");
+        Date date1 = new Date(2020, Calendar.JANUARY, 15, 9, 0, 0);
+        test1.setDateOfChemicalAnalysis(date1);
+        Report report1 = new Report("Everything is well.");
+        test1.addReport(report1);
+        Date date1r = new Date(2020,Calendar.JANUARY,15,10,0,0);
+        test1.setDateOfDiagnosis(date1r);
+
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
+        testStore.saveTest(test2);
+        Date date2reg = new Date(2020,Calendar.JANUARY, 29,19,0,0);
+        test2.setDateOfTestRegistration(date2reg);
+        Sample sample2 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678902"), "12345678902"));
+        test2.addSample(sample2);
+        Date date2s = new Date(2020, Calendar.JANUARY, 30, 16, 0, 45);
+        test2.setDateOfSamplesCollection(date2s);
+
+        app.domain.model.Test test3 = testStore.createTest("123456789013", client, t1, parametersBlood, cal);
+        testStore.saveTest(test3);
+        Date date3reg = new Date(2020,Calendar.JANUARY, 5,15,1,26);
+        test3.setDateOfTestRegistration(date3reg);
+
+        app.domain.model.Test test4 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test4);
+        Date date4reg = new Date(2020,Calendar.JANUARY, 13,17,0,23);
+        test4.setDateOfTestRegistration(date4reg);
+        Sample sample4 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        test1.addSample(sample4);
+        Date date4s = new Date(2020, Calendar.JANUARY, 15, 19, 50, 0);
+        test1.setDateOfSamplesCollection(date4s);
+        test1.addTestResult("RBC12", 23.45, "ug");
+        test1.addTestResult("WBC12", 23.45, "ug");
+        test1.addChemicalAnalysisDate();
+        Date date4 = new Date(2020, Calendar.JANUARY, 15, 19, 55, 0);
+        test1.setDateOfChemicalAnalysis(date4);
+        Report report4 = new Report("Everything is well.");
+        test1.addReport(report1);
+        Date date4r = new Date(2020,Calendar.JANUARY,16,8,30,0);
+        test1.setDateOfDiagnosis(date4r);
+
+        Date beginningDay = new Date(2020, Calendar.JANUARY, 15, 0, 0, 0);
+        Date endingDay = new Date(2020, Calendar.JANUARY, 30, 23, 59, 59);
+
+        int expectedResult = 4;
+        int obtainedResult = testStore.getNumTestsProcessedInLabInterval(beginningDay, endingDay);
+
+        Assert.assertEquals(expectedResult, obtainedResult);
+    }
+
 //========== END US16 ============
 
     //for US18 and US19
