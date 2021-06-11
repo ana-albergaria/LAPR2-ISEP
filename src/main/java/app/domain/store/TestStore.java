@@ -72,11 +72,10 @@ public class TestStore {
         for (Test test : testList) {
             date1=test.getDateOfSamplesCollection();
             date2=test.getDateOfChemicalAnalysis();
-            if (date1!=null)
-                if (date2==null)
-                    date2=new Date(10000,Calendar.JANUARY,1);
-                if (date1.before(day) && date2.after(day))
-                    num++;
+            if (date1!=null && date2==null)
+                date2=new Date(10000,Calendar.JANUARY,1);
+            if (date1!=null && date1.before(day) && date2.after(day))
+                num++;
         }
         return num;
     }
@@ -91,11 +90,10 @@ public class TestStore {
         for (Test test : testList) {
             date1 = test.getDateOfChemicalAnalysis();
             date2 = test.getDateOfSamplesCollection();
-            if (date2!=null)
-                if (date1==null)
-                    date1=new Date(10000,Calendar.JANUARY,1);
-                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
-                    num++;
+            if (date2!=null && date1==null)
+                date1=new Date(10000,Calendar.JANUARY,1);
+            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) || (date2!=null && date2.before(endingDay) && date1.after(endingDay)))
+                num++;
         }
         return num;
     }
@@ -110,11 +108,10 @@ public class TestStore {
         for (Test test : testList) {
             date1=test.getDateOfChemicalAnalysis();
             date2=test.getDateOfDiagnosis();
-            if (date1!=null)
-                if (date2==null)
-                    date2=new Date(10000,Calendar.JANUARY,1);
-                if (date1.before(day) && date2.after(day))
-                    num++;
+            if (date1!=null && date2==null)
+                date2=new Date(10000,Calendar.JANUARY,1);
+            if (date1!=null && date1.before(day) && date2.after(day))
+                num++;
         }
         return num;
     }
@@ -129,11 +126,10 @@ public class TestStore {
         for (Test test : testList) {
             date1 = test.getDateOfDiagnosis();
             date2 = test.getDateOfChemicalAnalysis();
-            if (date2!=null)
-                if (date1==null)
-                    date1=new Date(10000,Calendar.JANUARY,1);
-                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
-                    num++;
+            if (date2!=null && date1==null)
+                date1=new Date(10000,Calendar.JANUARY,1);
+            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) || (date2!=null && date2.before(endingDay) && date1.after(endingDay)))
+                num++;
         }
         return num;
     }
@@ -147,9 +143,8 @@ public class TestStore {
         Date date1;
         for (Test test : testList) {
             date1 = test.getDateOfTestRegistration();
-            if (date1!=null)
-                if (date1.before(day) || date1.equals(day))
-                    num++;
+            if ((date1!=null && date1.before(day)) || (date1!=null && date1.equals(day)))
+                num++;
         }
         return num;
     }
@@ -163,9 +158,8 @@ public class TestStore {
         Date date1;
         for (Test test : testList) {
             date1 = test.getDateOfTestRegistration();
-            if (date1!=null)
-                if ((date1.after(beginningDay) && date1.before(endingDay)) || date1.before(beginningDay))
-                    num++;
+            if ((date1!=null && date1.after(beginningDay) && date1.before(endingDay)) || (date1!=null && date1.before(beginningDay)))
+                num++;
         }
         return num;
     }
