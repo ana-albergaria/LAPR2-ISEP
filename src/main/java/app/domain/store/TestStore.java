@@ -112,13 +112,14 @@ public class TestStore {
         //number of tests that became completed in the specific day/interval
         //in case of a day, the difference between the beginningDay and the endingDay is in the hours
         int num = 0;
-        Date date1, date2, date3, date4;
+        Date date1, date2, date3, date4, date5;
         for (Test test : testList) {
             date1 = test.getDateOfTestRegistration();
             date2 = test.getDateOfSamplesCollection();
             date3 = test.getDateOfChemicalAnalysis();
             date4 = test.getDateOfDiagnosis();
-            if (date1!=null && date2!=null && date3!=null && date4!=null &&
+            date5 = test.getDateOfValidation();
+            if (date1!=null && date2!=null && date3!=null && date4!=null && date5!=null &&
                     ((date4.after(beginningDay) && date4.before(endingDay)) || date4.equals(endingDay)))
                 num++;
         }
@@ -401,8 +402,8 @@ public class TestStore {
         }
     }
 
-    public double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
-        double[] covidTestsInHistoricalPoints = new double[dates.size()];
+    public Double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
+        Double[] covidTestsInHistoricalPoints = new Double[dates.size()];
         int indexDate = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -420,8 +421,8 @@ public class TestStore {
         return covidTestsInHistoricalPoints;
     }
 
-    public double[] getMeanAgeInHistoricalPoints(List<String> dates) {
-        double[] meanAgeInHistoricalPoints = new double[dates.size()];
+    public Double[] getMeanAgeInHistoricalPoints(List<String> dates) {
+        Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
         double sumAges = 0, numClients = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 

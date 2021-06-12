@@ -388,6 +388,7 @@ public class TestStoreTest {
         test1.addReport(report1);
         Date date1r = new Date(2020,Calendar.JANUARY,18,8,0,0);
         test1.setDateOfDiagnosis(date1r);
+        test1.setDateOfValidation(date1r);
 
         app.domain.model.Test test2 = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
         testStore.saveTest(test2);
@@ -420,6 +421,7 @@ public class TestStoreTest {
         test4.addReport(report4);
         Date date4r = new Date(2020,Calendar.JANUARY,16,19,59,59);
         test4.setDateOfDiagnosis(date4r);
+        test4.setDateOfValidation(date4r);
 
         Date beginningDay = new Date(2020, Calendar.JANUARY, 15, 8, 0, 0);
         Date endingDay = new Date(2020, Calendar.JANUARY, 16, 19, 59, 59);

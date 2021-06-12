@@ -71,6 +71,14 @@ public class NHSReportStore {
         return wishedArray;
     }
 
+    public Double[] copyArray(Double[] array) {
+        Double[] wishedArray = new Double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            wishedArray[i] = array[i];
+        }
+        return wishedArray;
+    }
+
     /*
     WARNING - ter em atenção que ao converter a String selecionada pelo administrador
     ou a que está definida na configuration file,

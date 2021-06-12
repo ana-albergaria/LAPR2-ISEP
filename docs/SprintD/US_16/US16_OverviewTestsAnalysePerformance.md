@@ -297,7 +297,7 @@ Tests from 4.1 and 4.2 follow this model:
 
 ## 4.3 TestStoreTest
 
-Tests 5-6 are made following this process:
+Tests 5-7 are made following this process:
 * create different tests in different "parts" of the testing process
 * manually count the number of the tests in the desired condition
 * compare the manually counted number with the number returned by the method to be tested
