@@ -56,6 +56,4 @@ public class SimpleLinearRegressionAdapterTest {
         //Assert
         Assert.assertEquals(expectedConfInt, confidenceInterval);
     }
-
-
 }

@@ -182,6 +182,10 @@ public class LinearRegression {
         return (slope-B0) / (s * Math.sqrt(1/xxbar));
     }
 
+    public double calculateAuxDelta(Double x0) {
+        return s * Math.sqrt(1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar));
+    }
+
 
     /**
      * Returns a string representation of the simple linear regression model.

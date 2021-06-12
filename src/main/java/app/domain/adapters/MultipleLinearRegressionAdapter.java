@@ -67,7 +67,14 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] xInHistoricalPoints, double confidenceLevel) {
-        return null;
+    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] x1InHistoricalPoints, Double[] x2InHistoricalPoints, double confidenceLevel) {
+        int numberOfObservations = myRegressionModel.getNumberOfObservations();
+        List<ConfidenceInterval> confidenceIntervals = new ArrayList<>();
+
+        for (int i = 0; i < numberOfObservations; i++) {
+            ConfidenceInterval confidenceInterval = getConfidenceInterval(myRegressionModel, x1InHistoricalPoints[i], x2InHistoricalPoints[i], confidenceLevel);
+            confidenceIntervals.add(confidenceInterval);
+        }
+        return confidenceIntervals;
     }
 }

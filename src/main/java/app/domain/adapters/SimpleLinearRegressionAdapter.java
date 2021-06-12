@@ -60,21 +60,19 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         //x1 is x0
         int n = myRegressionModel.getNumberOfObservations();
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
-        double y0 = simpleLR.predict(x1), s = simpleLR.getS();
-        double xbar = simpleLR.getXbar(), xxbar = simpleLR.getXXbar();
-
-        double auxDelta = s * Math.sqrt(1 + (1.0/n) + (Math.pow((x1-xbar),2) / xxbar));
+        double y0 = simpleLR.predict(x1);
+        double auxDelta = simpleLR.calculateAuxDelta(x1);
 
         return new ConfidenceInterval(myRegressionModel, y0, auxDelta, confidenceLevel);
     }
 
     @Override
-    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] xInHistoricalPoints, double confidenceLevel) {
+    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] x1InHistoricalPoints, Double[] x2InHistoricalPoints, double confidenceLevel) {
         int numberOfObservations = myRegressionModel.getNumberOfObservations();
         List<ConfidenceInterval> confidenceIntervals = new ArrayList<>();
 
         for (int i = 0; i < numberOfObservations; i++) {
-            ConfidenceInterval confidenceInterval = getConfidenceInterval(myRegressionModel, xInHistoricalPoints[i], null, confidenceLevel);
+            ConfidenceInterval confidenceInterval = getConfidenceInterval(myRegressionModel, x1InHistoricalPoints[i], null, confidenceLevel);
             confidenceIntervals.add(confidenceInterval);
         }
         return confidenceIntervals;

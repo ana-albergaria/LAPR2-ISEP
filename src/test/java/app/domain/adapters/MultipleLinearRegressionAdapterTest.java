@@ -17,6 +17,7 @@ public class MultipleLinearRegressionAdapterTest {
     private Company company;
     private RegressionModel regressionModel;
     private MyRegressionModel myRegressionModel;
+    private MyRegressionModel myRegressionModel2;
     private MultipleLinearRegression multipleLR;
     private int historicalPoints;
 
@@ -32,6 +33,12 @@ public class MultipleLinearRegressionAdapterTest {
         //
         myRegressionModel = regressionModel.getRegressionModel(x1, x2, y, 12);
         multipleLR = new MultipleLinearRegression(x1, x2, y);
+
+        //MATCP - TP PL8 ex 1
+        double[] xa = {4.0, 5.0, 5.5, 7.0, 6.0, 5.0, 7.0, 8.0, 8.5, 9.0};
+        double[] xb = {36.0, 33.0, 37.0, 37.0, 34.0, 32.0, 36.0, 35.0, 38.0, 39.0};
+        double[] ya = {4.0, 4.5, 5.0, 6.5, 7.0, 7.8, 7.5, 8.0, 8.0, 8.5};
+        myRegressionModel2 = regressionModel.getRegressionModel(xa, xb, ya, 10);
     }
 
     @Test
@@ -43,6 +50,20 @@ public class MultipleLinearRegressionAdapterTest {
         ConfidenceInterval expectedConfInt = new ConfidenceInterval(myRegressionModel,y0,auxDelta,confidenceLevel);
         //Act
         ConfidenceInterval confidenceInterval = regressionModel.getConfidenceInterval(myRegressionModel, 80.0, 8.0, confidenceLevel);
+        //Assert
+        Assert.assertEquals(expectedConfInt, confidenceInterval);
+    }
+
+    @Test
+    public void getConfidenceInterval2() {
+        //Arrange
+        double y0 = 5.48267573696152;
+        double auxDelta = 0.92467027062118;
+        double confidenceLevel = 0.95;
+        ConfidenceInterval expectedConfInt = new ConfidenceInterval(myRegressionModel2,y0,auxDelta,confidenceLevel);
+        //Act
+        ConfidenceInterval confidenceInterval = regressionModel.getConfidenceInterval(myRegressionModel2, 5.5, 36.0, confidenceLevel);
+
         //Assert
         Assert.assertEquals(expectedConfInt, confidenceInterval);
     }
