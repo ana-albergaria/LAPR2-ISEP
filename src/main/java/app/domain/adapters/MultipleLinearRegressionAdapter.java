@@ -5,8 +5,10 @@ import app.domain.model.ConfidenceInterval;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
+import app.domain.model.US19.LinearRegression;
 import app.domain.model.US19.MultipleLinearRegression;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleLinearRegressionAdapter implements RegressionModel {
@@ -42,8 +44,16 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints) {
-        return null;
+    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, Double[] x1InHistoricalPoints, Double[] x2InHistoricalPoints) {
+        MultipleLinearRegression multipleLR = (MultipleLinearRegression) myRegressionModel.getRegressionModel();
+
+        List<Double> estimatedPositives = new ArrayList<>();
+
+        for (int i = 0; i < x1InHistoricalPoints.length; i++) {
+            double estimatedValue = multipleLR.predict(x1InHistoricalPoints[i], x2InHistoricalPoints[i]);
+            estimatedPositives.add(estimatedValue);
+        }
+        return estimatedPositives;
     }
 
     @Override
@@ -52,7 +62,7 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints, double confidenceLevel) {
+    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] xInHistoricalPoints, double confidenceLevel) {
         return null;
     }
 }

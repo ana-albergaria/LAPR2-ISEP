@@ -43,13 +43,13 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints) {
+    public List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, Double[] x1InHistoricalPoints, Double[] x2InHistoricalPoints) {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
 
         List<Double> estimatedPositives = new ArrayList<>();
 
-        for (int i = 0; i < xInHistoricalPoints.length; i++) {
-            double estimatedValue = simpleLR.predict(xInHistoricalPoints[i]);
+        for (int i = 0; i < x1InHistoricalPoints.length; i++) {
+            double estimatedValue = simpleLR.predict(x1InHistoricalPoints[i]);
             estimatedPositives.add(estimatedValue);
         }
         return estimatedPositives;
@@ -68,7 +68,7 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints, double confidenceLevel) {
+    public List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] xInHistoricalPoints, double confidenceLevel) {
         int numberOfObservations = myRegressionModel.getNumberOfObservations();
         List<ConfidenceInterval> confidenceIntervals = new ArrayList<>();
 

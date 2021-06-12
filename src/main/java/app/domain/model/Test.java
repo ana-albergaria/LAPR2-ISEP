@@ -381,7 +381,7 @@ public class Test {
     }
 
     public boolean isValidated() {
-        return this.dateOfDiagnosis != null;
+        return this.dateOfValidation != null;
     }
 
     public boolean isCovidTest() {

@@ -27,11 +27,11 @@ activate UI
 UI -> CTRL : clientsListInOrder(sortOption)
 activate CTRL
 
-CTRL -> COMPANY : clientStore = getClientStore()
+CTRL -> COMPANY : testStore = getTestStore()
 activate COMPANY
 deactivate COMPANY
 
-CTRL -> CLIENT_STORE : clientsList  = getClients()
+CTRL -> CLIENT_STORE : clientsList  = getClientsWithValidatedTests()
 activate CLIENT_STORE
 deactivate CLIENT_STORE
 
