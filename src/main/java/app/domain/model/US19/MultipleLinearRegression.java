@@ -1,5 +1,7 @@
 package app.domain.model.US19;
 
+import java.util.Arrays;
+
 public class MultipleLinearRegression {
     private double b0;
     private double b1;
@@ -133,6 +135,10 @@ public class MultipleLinearRegression {
         return r2Adjusted;
     }
 
+    public double getSvar() {
+        return svar;
+    }
+
     public double getSR() {
         return sr;
     }
@@ -149,13 +155,22 @@ public class MultipleLinearRegression {
         return regressionCoefficients;
     }
 
+    public double predict(double x1, double x2) {
+        return b0 + (b1*x1) + (b2*x2);
+    }
+
     public double calculateTObsBj(int indexB) {
         double cjj = xTxInverse[indexB][indexB];
         return regressionCoefficients[indexB] / Math.sqrt(svar * cjj);
     }
 
-    public double predict(double x1, double x2) {
-        return b0 + (b1*x1) + (b2*x2);
+    public double calculateAuxDelta(double[] x0T) {
+        //determine x0T * C
+        double[] x0TC = vectorWithMatrixMultiplication(x0T, xTxInverse);
+        //determine x0T * C * x0
+        double x0TCx0 = vectorWithVectorMultiplication(x0TC, x0T);
+
+        return Math.sqrt(svar * (1.0 + x0TCx0));
     }
 
 
@@ -219,6 +234,27 @@ public class MultipleLinearRegression {
         double result = 0;
         for (int i = 0; i < vector.length; i++) {
             result += vector[i] * otherVector[i];
+        }
+
+        return result;
+    }
+
+    //VERIFICAR DEPOIS!!!!
+    private double[] vectorWithMatrixMultiplication(double[] vector, double[][] matrix) {
+        if(vector.length != matrix.length)
+            throw new IllegalArgumentException("The multiplication is not possible with" + vector.length + "columns from the" +
+                    "vector and" + matrix.length + "lines from the matrix!");
+
+        int columns = matrix[0].length;
+
+        double[] result = new double[columns];
+
+        for (int column = 0; column < columns; column++) {
+            double sum = 0;
+            for (int i = 0; i < columns; i++) {
+                sum += vector[i] * matrix[i][column];
+            }
+            result[column] = sum;
         }
 
         return result;

@@ -21,6 +21,9 @@ public class TestMultipla {
 
         MultipleLinearRegression mlr = new MultipleLinearRegression(x1, x2, y);
         //System.out.println(mlr);
+        double[] xT0 = {1.0, 80.0, 8.0};
+        System.out.println("AQUI!!!!!!!");
+        mlr.calculateAuxDelta(xT0);
 
 
         Class<?> oClass = Class.forName("app.domain.adapters.MultipleLinearRegressionAdapter");
@@ -34,6 +37,9 @@ public class TestMultipla {
 
         SignificanceModelAnova modelAnova = new SignificanceModelAnova(myRegressionModel, mlr.getSR(),mlr.getSE(), 0.05);
         System.out.println(modelAnova);
+
+
+
 
 
 

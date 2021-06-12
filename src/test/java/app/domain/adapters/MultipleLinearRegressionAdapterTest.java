@@ -1,0 +1,49 @@
+package app.domain.adapters;
+
+import app.domain.interfaces.RegressionModel;
+import app.domain.model.Company;
+import app.domain.model.ConfidenceInterval;
+import app.domain.model.MyRegressionModel;
+import app.domain.model.US19.LinearRegression;
+import app.domain.model.US19.MultipleLinearRegression;
+import app.domain.shared.Constants;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class MultipleLinearRegressionAdapterTest {
+    private Company company;
+    private RegressionModel regressionModel;
+    private MyRegressionModel myRegressionModel;
+    private MultipleLinearRegression multipleLR;
+    private int historicalPoints;
+
+    @Before
+    public void setUp() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        company = new Company("Many Labs", Constants.CLASS_BARCODE_API, Constants.CLASS_SORT_ALGORITHM, Constants.CLASS_MULTIPLE_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS, Constants.CONFIDENCE_LEVEL, Constants.SIGNIFICANCE_LEVEL);
+        regressionModel = this.company.getRegressionModel();
+        //MATCP - Teórica Regressão Linear Múltipla
+        double[] x1 = {80.0, 93.0, 100.0, 82.0, 90.0, 99.0, 81.0, 96.0, 94.0, 93.0, 97.0, 95.0};
+        double[] x2 = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0, 12.0, 11.0, 13.0, 11.0};
+        double[] y = {2256.0, 2340.0, 2426.0, 2293.0, 2330.0, 2368.0, 2250.0, 2409.0, 2364.0, 2379.0, 2440.0, 2364.0};
+        historicalPoints = 10;
+        //
+        myRegressionModel = regressionModel.getRegressionModel(x1, x2, y, 12);
+        multipleLR = new MultipleLinearRegression(x1, x2, y);
+    }
+
+    @Test
+    public void getConfidenceInterval() {
+        //Arrange
+        double y0 = 2241.90597157;
+        double auxDelta = 22.5859909;
+        double confidenceLevel = 0.95;
+        ConfidenceInterval expectedConfInt = new ConfidenceInterval(myRegressionModel,y0,auxDelta,confidenceLevel);
+        //Act
+        ConfidenceInterval confidenceInterval = regressionModel.getConfidenceInterval(myRegressionModel, 80.0, 8.0, confidenceLevel);
+        //Assert
+        Assert.assertEquals(expectedConfInt, confidenceInterval);
+    }
+}

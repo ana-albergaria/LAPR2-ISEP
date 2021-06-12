@@ -14,7 +14,7 @@ public interface RegressionModel {
     public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel);
     public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel, double significanceLevel);
     public abstract List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, Double[] x1InHistoricalPoints, Double[] x2InHistoricalPoints);
-    public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0, double confidenceLevel);
+    public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, Double x1, Double x2, double confidenceLevel);
     public abstract List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] xInHistoricalPoints, double confidenceLevel);
 }
 
