@@ -57,8 +57,13 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0, double confidenceLevel) {
-        return null;
+    public ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, Double x1, Double x2, double confidenceLevel) {
+        MultipleLinearRegression multipleLR = (MultipleLinearRegression) myRegressionModel.getRegressionModel();
+        double y0 = multipleLR.predict(x1, x2);
+        double[] x0T = {1.0, x1, x2};
+        double auxDelta = multipleLR.calculateAuxDelta(x0T);
+
+        return new ConfidenceInterval(myRegressionModel, y0, auxDelta, confidenceLevel);
     }
 
     @Override
