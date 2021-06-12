@@ -61,7 +61,10 @@
          <top>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
-                <Button fx:id="sairBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE" />
+                <Button fx:id="sairBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
               </items>
             </ToolBar>
          </top>
