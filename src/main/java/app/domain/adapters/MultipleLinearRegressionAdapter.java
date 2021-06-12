@@ -25,6 +25,8 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
 
     @Override
     public HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel) {
+        //double tObsB0
+
         return null;
     }
 

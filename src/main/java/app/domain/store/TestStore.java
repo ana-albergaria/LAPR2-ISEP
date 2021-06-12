@@ -375,6 +375,7 @@ public class TestStore {
                 numClients++;
             }
         }
+        //COLOCAR EXCEÇÃO!!!!!!! OU ENTÃO QUE COLOCAR?
         return sumAges / numClients;
     }
 
@@ -459,6 +460,7 @@ public class TestStore {
                     }
                 }
             }
+            //SE O NUM CLIENTES == 0, O QUE FAZER????
             meanAgeInHistoricalPoints[i] = sumAges / numClients;
         }
         return meanAgeInHistoricalPoints;
