@@ -12,16 +12,16 @@
     <children>
       <BorderPane>
          <left>
-            <AnchorPane prefHeight="403.0" prefWidth="338.0" style="-fx-background-color: #4068B8; -fx-border-color: #FFFFFF; -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="403.0" prefWidth="338.0" style="-fx-background-color: #3d5a80; -fx-border-color: #FFFFFF; -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="84.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Many Labs">
+                  <Text fill="WHITE" layoutX="66.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANY LABS">
                      <font>
-                        <Font size="36.0" />
+                        <Font name="System Bold" size="36.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="imgTeam" fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgTeam" fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imgTeam.png" />
+                        <Image url="@../../java/app/ui/gui/Images/Logo.png" />
                      </image>
                   </ImageView>
                </children>
@@ -30,12 +30,12 @@
          <center>
             <AnchorPane prefHeight="455.0" prefWidth="338.0" style="-fx-background-color: #26292F;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField layoutX="91.0" layoutY="203.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #4068B8; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
+                  <TextField layoutX="91.0" layoutY="203.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <PasswordField layoutX="91.0" layoutY="251.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #4068B8; -fx-border-width: 0px 0px 2px 0px;">
+                  <PasswordField layoutX="91.0" layoutY="251.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -50,7 +50,7 @@
                         <Image url="@whiteUser.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="143.0" layoutY="320.0" mnemonicParsing="false" style="-fx-background-color: #4068B8;" text="Login" textFill="WHITE">
+                  <Button layoutX="143.0" layoutY="320.0" mnemonicParsing="false" style="-fx-background-color: #3d5a80;" text="Login" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
