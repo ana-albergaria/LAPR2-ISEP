@@ -260,13 +260,12 @@ public class CompanyPerformanceAnalysisController {
     /**
      * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
-     * @param beginningDay beginning date of the interval
-     * @param endingDay end date of the interval
+     * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the contiguous subsequence with maximum sum of an interval
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        int[] interval = makeIntervalArray(getDays(beginningDay, endingDay)); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+    public int[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
 
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
