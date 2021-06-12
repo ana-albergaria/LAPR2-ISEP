@@ -51,36 +51,22 @@ public class CompanyPerformanceAnalysisController {
     //THE VERIFICATION OF THE NUMBER OF DAYS BETWEEN THE TWO DATES IS MADE IN THE UI
     //FIRST THE LB SELECTS DAY, WEEK, MONTH OR YEAR
     //SHOW ERROR MESSAGES!!!
-
-    /**
-     * Gets an array with the tests info on a specific day
-     * @return array with the tests info on a specific day
-     */
-    public int[] getTestInfoDay(Date day){
-        int[] testInfo = new int[3];
-        TestStore testStore = new TestStore();
-        testInfo[0]=testStore.getNumTestsWaitingForResultsDay(day);
-        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDay(day);
-        testInfo[2]=testStore.getNumTestsProcessedInLabDay(day);
-        return testInfo;
-    }
-
-    /**
-     * Gets an array with the tests info between two specific days
-     * @return array with the tests info between two specific days
-     */
-    public int[] getTestInfoInterval(Date beginningDay, Date endingDay){
-        int[] testInfo = new int[3];
-        TestStore testStore = new TestStore();
-        testInfo[0]=testStore.getNumTestsWaitingForResultsInterval(beginningDay,endingDay);
-        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay,endingDay);
-        testInfo[2]=testStore.getNumTestsProcessedInLabInterval(beginningDay,endingDay);
-        return testInfo;
-    }
-
     //12 WORKING HOURS PER DAY
-    //WORKING DAY IS FROM 8:00 TO 20:00
+    //WORKING DAY IS FROM 8:00 TO 20:00 (endingDay will end at 19:59:59)
     //SUNDAY IS NOT A WORKING DAY
+
+    /**
+     * Gets an array with the tests info on a specific day/interval
+     * @return array with the tests info on a specific day/interval
+     */
+    public int[] getTestInfoDayOrInterval(Date beginningDay, Date endingDay){
+        int[] testInfo = new int[3];
+        TestStore testStore = new TestStore();
+        testInfo[0]=testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+        testInfo[2]=testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
+        return testInfo;
+    }
 
     /**
      * Creates an array with the difference between the number of new tests and the number of results available to the client during each half an hour period
