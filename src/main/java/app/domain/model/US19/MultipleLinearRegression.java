@@ -10,6 +10,8 @@ public class MultipleLinearRegression {
     private double r2Adjusted;
     private double sr;
     private double se;
+    private double svar;
+    private double[][] xTxInverse;
 
     private static final int NUM_REG_COEFFICIENTS = 2;
 
@@ -46,7 +48,7 @@ public class MultipleLinearRegression {
         System.out.println();
 
         //determine inverse of xTx
-        double[][] xTxInverse = invert(xTx);
+        xTxInverse = invert(xTx);
 
         System.out.println("xTxInverse: ");
         imprimir(xTxInverse);
@@ -102,6 +104,13 @@ public class MultipleLinearRegression {
         System.out.println("R2 adjusted = " + r2Adjusted);
         System.out.println();
 
+        //determine svar == MQe!
+        svar = se / (n - (NUM_REG_COEFFICIENTS + 1));
+
+        System.out.println("Variância: " + svar);
+
+
+
     }
 
     public double getB0() {
@@ -124,11 +133,11 @@ public class MultipleLinearRegression {
         return r2Adjusted;
     }
 
-    public double getSr() {
+    public double getSR() {
         return sr;
     }
 
-    public double getSe() {
+    public double getSE() {
         return se;
     }
 
@@ -136,10 +145,20 @@ public class MultipleLinearRegression {
         return n;
     }
 
-    @Override
-    public String toString() {
-        return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
+    public double[] getRegressionCoefficients() {
+        return regressionCoefficients;
     }
+
+    public double calculateTObsBj(int indexB) {
+        double cjj = xTxInverse[indexB][indexB];
+        return regressionCoefficients[indexB] / Math.sqrt(svar * cjj);
+    }
+
+    public double predict(double x1, double x2) {
+        return b0 + (b1*x1) + (b2*x2);
+    }
+
+
 
 
     private double[][] transposeMatrix(double[][] x) {
@@ -284,12 +303,17 @@ public class MultipleLinearRegression {
         }
     }
 
-    public double mean(double[] x) {
+    private double mean(double[] x) {
         double sum = 0;
         for (int i = 0; i < x.length; i++) {
             sum += x[i];
         }
         return sum / x.length;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
     }
 
 

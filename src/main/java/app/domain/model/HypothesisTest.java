@@ -9,7 +9,9 @@ public class HypothesisTest {
     private MyRegressionModel myRegressionModel;
     private double tObsA;
     private double tObsB;
+    private double tObsC;
     private double significanceLevel;
+    private double critTD;
 
     private double f;
     private int numeratorDegreesOfFreedom;
@@ -23,6 +25,20 @@ public class HypothesisTest {
         this.tObsA = tObsA;
         this.tObsB = tObsB;
         this.significanceLevel = significanceLevel;
+        this.critTD = myRegressionModel.calculateCriticalValTStudent(significanceLevel);
+    }
+
+    public HypothesisTest(MyRegressionModel myRegressionModel,
+                          double tObsA,
+                          double tObsB,
+                          double tObsC,
+                          double significanceLevel) {
+        this.myRegressionModel = myRegressionModel;
+        this.tObsA = tObsA;
+        this.tObsB = tObsB;
+        this.tObsC = tObsC;
+        this.significanceLevel = significanceLevel;
+        this.critTD = myRegressionModel.calculateCriticalValTStudent(significanceLevel);
     }
 
     //for Anova Significance Model
@@ -56,13 +72,19 @@ public class HypothesisTest {
         text.append(String.format("--> Significance Level: %.2f%n%n", significanceLevel));
         text.append("H0:a=0 H1:a<>0\n");
         text.append(String.format("t_obs=%f%n", tObsA));
-        double critTD1 = myRegressionModel.calculateCriticalValTStudent(significanceLevel);
-        text.append(String.format("Decision: %n%s%n", getDecision(tObsA, critTD1)));
+        text.append(String.format("Decision: %n%s%n", getDecision(tObsA, critTD)));
         text.append("//\n");
         text.append("H0:b=0 H1:b<>0\n");
         text.append(String.format("t_obs=%f%n", tObsB));
-        text.append(String.format("Decision: %n%s%n", getDecision(tObsB, critTD1)));
-        text.append("//\n\n");
+        text.append(String.format("Decision: %n%s%n", getDecision(tObsB, critTD)));
+        text.append("//\n");
+        if(myRegressionModel.getSecondIndVariable() != null) {
+            text.append("H0:c=0 H1:c<>0\n");
+            text.append(String.format("t_obs=%f%n", tObsC));
+            text.append(String.format("Decision: %n%s%n", getDecision(tObsC, critTD)));
+            text.append("//\n");
+        }
+        text.append("\n");
 
         return text.toString();
     }

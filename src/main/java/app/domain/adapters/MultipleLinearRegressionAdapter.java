@@ -25,14 +25,20 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
 
     @Override
     public HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel) {
-        //double tObsB0
+        MultipleLinearRegression multipleLR = (MultipleLinearRegression) myRegressionModel.getRegressionModel();
+        double tObsB0 = multipleLR.calculateTObsBj(0);
+        double tObsB1 = multipleLR.calculateTObsBj(1);
+        double tObsB2 = multipleLR.calculateTObsBj(2);
 
-        return null;
+        return new HypothesisTest(myRegressionModel, tObsB0, tObsB1, tObsB2, significanceLevel);
     }
 
     @Override
     public SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel, double significanceLevel) {
-        return null;
+        MultipleLinearRegression multipleLR = (MultipleLinearRegression) myRegressionModel.getRegressionModel();
+        double sr = multipleLR.getSR(), se = multipleLR.getSE();
+
+        return new SignificanceModelAnova(myRegressionModel, sr, se, significanceLevel);
     }
 
     @Override
