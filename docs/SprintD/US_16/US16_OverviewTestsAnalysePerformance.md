@@ -256,7 +256,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 ![US016_CD](US016_CD.svg)
 
 
-### 3.3.2 Class Diagran With Packages
+### 3.3.2 Class Diagram With Packages
 
 ![US016_CD_WithPackages](US016_CD_WithPackages.svg)
 
@@ -280,19 +280,33 @@ Tests from 4.1 and 4.2 follow this model:
 
     @Test
     public void checkIfSubMaxSumIsFound(){
-        int[] obtainedSubMaxSum = chosenAlgorithm.findSubMaxSum(example);
+        int[] obtainedSubMaxSum = chosenAlgorithmAdapter.findSubMaxSum(example);
         Assert.assertArrayEquals(expectedSubMaxSum, obtainedSubMaxSum);
     }
 
 
-## 4.1 BenchmarkAlgorithm
+## 4.1 BenchmarkAlgorithmAdapterTest
 
-**Test 1-2:** Check if the contiguous subsequence with maximum sum is successfully found, using the BenchmarkAlgorithm.
+**Test 1-2:** Check if the contiguous subsequence with maximum sum is being successfully found, using the BenchmarkAlgorithm.
 
 
-## 4.2 BruteForceAlgorithm
+## 4.2 BruteForceAlgorithmAdapterTest
 
-**Test 3-4:** Check if the contiguous subsequence with maximum sum is successfully found, using the BruteForceAlgorithm.
+**Test 3-4:** Check if the contiguous subsequence with maximum sum is being successfully found, using the BruteForceAlgorithm.
+
+
+## 4.3 TestStoreTest
+
+Tests 5-6 are made following this process:
+* create different tests in different "parts" of the testing process
+* manually count the number of the tests in the desired condition
+* compare the manually counted number with the number returned by the method to be tested
+
+**Test 5:** Check if the number of tests waiting for results on a specific day or interval is being correctly counted.
+
+**Test 6:** Check if the number of tests waiting for diagnosis on a specific day or interval is being correctly counted.
+
+**Test 7:** Check if the number of tests processed in the lab on a specific day or interval is being correctly counted.
 
 
 # 5. Construction (Implementation)
@@ -310,42 +324,39 @@ Tests from 4.1 and 4.2 follow this model:
 
     //...Omitted
 
-    public int[] getTestInfoDay(Date day){
+    public int[] getTestInfoDayOrInterval(Date beginningDay, Date endingDay){
         int[] testInfo = new int[3];
         TestStore testStore = new TestStore();
-        testInfo[0]=testStore.getNumTestsWaitingForResultsDay(day);
-        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDay(day);
-        testInfo[2]=testStore.getNumTestsProcessedInLabDay(day);
+        testInfo[0]=testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+        testInfo[2]=testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
         return testInfo;
     }
 
     //...Omitted
 
-    public int[] getTestInfoInterval(Date beginningDay, Date endingDay){
-        int[] testInfo = new int[3];
-        TestStore testStore = new TestStore();
-        testInfo[0]=testStore.getNumTestsWaitingForResultsInterval(beginningDay,endingDay);
-        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisInterval(beginningDay,endingDay);
-        testInfo[2]=testStore.getNumTestsProcessedInLabInterval(beginningDay,endingDay);
-        return testInfo;
-    }
-
-    //...Omitted
-
-    BenchmarkAlgorithm bma = new BenchmarkAlgorithm();
-    BruteForceAlgorithm bfa = new BruteForceAlgorithm();
-
-    //...Omitted
-
-    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, boolean chosenAlgorithm){
+    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(beginningDay, endingDay);
-        int[] worstSubInt;
-        if (chosenAlgorithm){
-            worstSubInt = bma.findSubMaxSum(interval);
-        } else {
-            worstSubInt = bfa.findSubMaxSum(interval);
-        }
+
+        String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
+        Class<?> oClass = Class.forName(algorithmClass);
+        SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
+
+        int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
+
         return worstSubInt;
+    }
+
+    //...Omitted
+
+    public String getChosenAlgorithmAdapter(int chosenAlgorithm) {
+        String chosenAlgorithmAdapter;
+        if(chosenAlgorithm == 1)
+            chosenAlgorithmAdapter = Constants.BENCHMARK_ALGORITHM_ADAPTER;
+        else
+            chosenAlgorithmAdapter = Constants.BRUTEFORCE_ALGORITHM_ADAPTER;
+
+        return chosenAlgorithmAdapter;
     }
 
     //...Omitted
@@ -360,7 +371,7 @@ Tests from 4.1 and 4.2 follow this model:
     //...Omitted
 
 
-## 5.3 BenchmarkAlgorithm
+## 5.3 BenchmarkAlgorithmAdapter
 
     //...Omitted
 
@@ -371,25 +382,35 @@ Tests from 4.1 and 4.2 follow this model:
 
     //...Omitted
 
-## 5.4 BruteForceAlgorithm
+
+## 5.4 BruteForceAlgorithmAdapter
 
     //...Omitted
 
     @Override
     public int[] findSubMaxSum(int[] interval){
+        return BruteForceAlgorithm.Max(interval);
+    }
+
+    //...Omitted
+
+
+## 5.5 BruteForceAlgorithm
+
+    public static int[] Max(int[] seq){
         ArrayList<Integer> subMaxSum = new ArrayList<>();
         int sumValue = 0;
         int num = 0;
-        for (int i = 0; i < interval.length; i++) {
-            for (int j = 0; j < interval.length; j++) {
+        for (int i = 0; i < seq.length; i++) {
+            for (int j = 0; j < seq.length; j++) {
                 if (i<j) {
                     for (int k = i; k <= j; k++) {
-                        num=num+interval[k];
+                        num=num+seq[k];
                     }
                     if (num > sumValue) {
                         subMaxSum.clear();
                         for (int l = i; l <= j; l++) {
-                            subMaxSum.add(interval[l]);
+                            subMaxSum.add(seq[l]);
                         }
                         sumValue=num;
                     }
@@ -404,40 +425,22 @@ Tests from 4.1 and 4.2 follow this model:
         return finalSubMaxSum;
     }
 
-    //...Omitted
-
-## 5.5 TestStore
+## 5.6 TestStore
 
     //...Omitted
 
-    public int getNumTestsWaitingForResultsDay(Date day){
+    public int getNumTestsWaitingForResultsDayOrInterval(Date beginningDay, Date endingDay){ //endingDay vai ser as 19:59:59 do (domingo) sábado PARA NÃO PERTENCER
         int num = 0;
         Date date1, date2;
         for (Test test : testList) {
-            date1=test.getDateOfSamplesCollection();
-            date2=test.getDateOfChemicalAnalysis();
-            if (date1!=null)
-                if (date2==null)
-                    date2=new Date(10000,Calendar.JANUARY,1);
-                if (date1.before(day) && date2.after(day))
-                    num++;
-        }
-        return num;
-    }
-
-    //...Omitted
-
-    public int getNumTestsWaitingForResultsInterval(Date beginningDay, Date endingDay){ //endingDay vai ser as ...:59 do domingo PARA PERTENCER
-        int num = 0;
-        Date date1, date2;
-        for (Test test : testList) {
-            date1 = test.getDateOfChemicalAnalysis();
             date2 = test.getDateOfSamplesCollection();
-            if (date2!=null)
-                if (date1==null)
-                    date1=new Date(10000,Calendar.JANUARY,1);
-                if ((date1.after(beginningDay) && date1.before(endingDay)) || (date2.before(endingDay) && date1.after(endingDay)))
-                    num++;
+            date1 = test.getDateOfChemicalAnalysis();
+            if (date2!=null && date1==null)
+                date1=new Date(10000,Calendar.JANUARY,1);
+            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) //waiting in moment beginningDay
+                    || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
+                    || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
+                num++;
         }
         return num;
     }
@@ -445,11 +448,9 @@ Tests from 4.1 and 4.2 follow this model:
     //...Omitted
 
 
-The logic used in the methods above, is also used in the following methods:
-- public int getNumTestsWaitingForDiagnosisDay(Date day) ;
-- public int getNumTestsWaitingForDiagnosisInterval(Date beginningDay, Date endingDay) ;
-- public int getNumTestsProcessedInLabDay(Date day) ;
-- public int getNumTestsProcessedInLabInterval(Date beginningDay, Date endingDay) .
+The logic used in the method above, is also used in the following methods:
+* public int getNumTestsWaitingForDiagnosisDayOrInterval(Date beginningDay, Date endingDay) ;
+* public int getNumTestsProcessedInLabDayOrInterval(Date beginningDay, Date endingDay) .
 
 
 # 6. Integration and Demo
