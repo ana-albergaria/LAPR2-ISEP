@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,6 +27,7 @@ public class ConsultTestByClientTest {
         params.add("RBC00");
         createTestController.createTest("123456789012", "2100000004", "Blood", params);
         createTestController.saveTest();
+        App.getInstance().getCompany().getTestStore().getTestsByClient(App.getInstance().getCompany().getClientStore().getClientByTinNumber("2100000004")).get(1).setDateOfValidation(new Date());
     }
     
     @Test
@@ -44,7 +46,7 @@ public class ConsultTestByClientTest {
     @Test
     public void getTestsOfClientDto(){
         ConsultTestByClient consultTestByClient = new ConsultTestByClient();
-        List<TestDTO> testDTOS = consultTestByClient.getTestsOfClientDto("2100000004");
+        List<TestDTO> testDTOS = consultTestByClient.getValidatedTestsOfClient("2100000004");
         for (TestDTO testDTO : testDTOS){
             System.out.println(testDTO.toStringWithAllData());
         }

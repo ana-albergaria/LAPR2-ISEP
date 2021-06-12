@@ -163,10 +163,10 @@ public class TestStore {
         return clientTests;
     }
 
-    public List<Test> getTestsByClientTin(String tinNumber){
+    public List<Test> getValidatedTestsByClientTin(String tinNumber){
         List<Test> clientTests = new ArrayList<>();
         for (Test tst : testList){
-            if (tst.isOfClient(tinNumber)){
+            if (tst.isOfClient(tinNumber) && tst.isValidated()){
                 clientTests.add(tst);
             }
         }
@@ -246,6 +246,16 @@ public class TestStore {
         return listTestsNoSamples;
     }
 
+    public List<Client> getClientsWithValidatedTests (){
+        List<Client> clientsWithValidatedTests  = new ArrayList<>();
+        for(Test test : testList){
+            if(test.isValidated()){
+                clientsWithValidatedTests.add(test.getClient());
+            }
+        }
+        return clientsWithValidatedTests;
+    }
+
     /**
      * Gets a list of the parameters of the test parameters of an specified test object
      * @param test test object to find parameters
@@ -267,6 +277,8 @@ public class TestStore {
         }
         throw new UnsupportedOperationException("Test not found with given nhs number!");
     }
+
+
 
     /**
      * Gets a test object by its sample barcode number

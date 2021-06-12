@@ -39,7 +39,7 @@ public class ConsultTestByClient {
 
 
     public List<ClientDTO> getClientsDtoInOrder(String compareBy) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        List<Client> clients = getClients();
+        List<Client> clients = getClientsWithValidatedTests();
         SortAlgorithm sortAlgorithm = this.company.getSortAlgorithm();
         if(compareBy.equalsIgnoreCase(Constants.TIN_COMPARATOR_ID)){
             sortAlgorithm.sortClientsList(clients, new ascendTinClient());
@@ -49,14 +49,14 @@ public class ConsultTestByClient {
         return getClientsDto(clients);
     }
 
-    public List<TestDTO> getTestsOfClientDto(String clientTin){
+    public List<TestDTO> getValidatedTestsOfClient(String clientTin){
         TestMapper testMapper = new TestMapper();
         return testMapper.toDTO(getTestsOfClient(clientTin));
     }
 
     private List<Test> getTestsOfClient(String clientTin){
         TestStore testStore =  this.company.getTestStore();
-        return testStore.getTestsByClientTin(clientTin);
+        return testStore.getValidatedTestsByClientTin(clientTin);
     }
 
     public List<ClientDTO> getClientsDto(List<Client> clients){
@@ -64,9 +64,9 @@ public class ConsultTestByClient {
         return clientsMapper.toDTO(clients);
     }
 
-    private List<Client> getClients(){
-        ClientStore clientStore = this.company.getClientStore();
-        return clientStore.getClients();
+    private List<Client> getClientsWithValidatedTests(){
+        TestStore testStore =  this.company.getTestStore();
+        return testStore.getClientsWithValidatedTests();
     }
 
 
