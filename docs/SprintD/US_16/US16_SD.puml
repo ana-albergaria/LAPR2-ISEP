@@ -43,53 +43,32 @@ deactivate CLTSTORE
 CTRL --> UI : clientInfo
 deactivate CTRL
 
-alt Laboratory Coordinator requests analysis for a day
-
-UI -> CTRL : testInfoDay = getTestInfoDay
+UI -> CTRL : testInfoDayOrInterval = getTestInfoDayOrInterval
 activate CTRL
 
 CTRL -> CMP : testStore = getTestStore()
 activate CMP
 CMP --> TSTSTORE** : create()
 deactivate CMP
-CTRL -> TSTSTORE : numTestsWaitingForResultsDay = getNumTestsWaitingForResultsDay(day)
+CTRL -> TSTSTORE : numTestsWaitingForResultsDayOrInterval = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDay = getNumTestsWaitingForDiagnosisDay(day)
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDayOrInterval = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabDay = getNumTestsProcessedInLabDay(day)
+CTRL -> TSTSTORE : numTestsProcessedInLabDayOrInterval = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL --> UI : testInfoDay
+CTRL --> UI : testInfoDayOrInterval
 deactivate CTRL
 
-else Laboratory Coordinator requests analysis for an interval of days
+alt The Laboratory Coordinator chose an interval
 
-UI -> CTRL : testInfoInterval = getTestInfoInterval
-activate CTRL
-
-CTRL -> TSTSTORE : numTestsWaitingForResultsInterval = getNumTestsWaitingForResultsInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisInterval = getNumTestsWaitingForDiagnosisInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabInterval = getNumTestsProcessedInLabInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-
-CTRL --> UI : testInfoInterval
-deactivate CTRL
-
-UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay chosenAlgorithm)
+UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
 activate CTRL
 
 CTRL -> CTRL : interval = makeIntervalArray(beginningDay, endingDay)

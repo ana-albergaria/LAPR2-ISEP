@@ -14,12 +14,11 @@ class Company {
 }
 
 class TestStore {
-    +getNumTestsWaitingForResultsDay(day)
-    +getNumTestsWaitingForResultsInterval(beginningDay, endingDay)
-    +getNumTestsWaitingForDiagnosisDay(day)
-    +getNumTestsWaitingForDiagnosisInterval(beginningDay, endingDay)
-    +getNumTestsProcessedInLabDay(day)
-    +getNumTestsProcessedInLabInterval(beginningDay, endingDay)
+    +getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay)
+    +getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay)
+    +getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay)
+    +getNumberOfTestsByIntervalDateOfTestRegistration(beginningDay, endingDay)
+    +getNumberOfTestsByIntervalDateOfDiagnosis(beginningDay, endingDay)
 }
 
 class ClientStore {
@@ -29,8 +28,7 @@ class ClientStore {
 class CompanyPerformanceAnalysisController{
     -Company company
     +getNumClients()
-    +getTestInfoDay(day)
-    +getTestInfoInterval(beginningDay, endingDay)
+    +getTestInfoDayOrInterval(beginningDay, endingDay)
     +makeIntervalArray(beginningDay, endingDay)
     +findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
     +getChosenAlgorithmAdapter(chosenAlgorithm)

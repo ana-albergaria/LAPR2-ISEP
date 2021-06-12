@@ -189,14 +189,15 @@ public class TestStore {
     /**
      * Gets the number of tests that were registered between the desired interval of time
      *
-     * @param beginningDate the beginning date of the desired interval of time
-     * @param endDate the end date of the desired interval of time
+     * @param beginningDay the beginning date of the desired interval of time
+     * @param endingDay the end date of the desired interval of time
      * @return the number of tests that were registered between the desired interval of time
      */
-    public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDate, Date endDate){
+    public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDay, Date endingDay){
         int num = 0;
         for (Test test : testList) {
-            if (test.getDateOfTestRegistration().after(beginningDate) && test.getDateOfTestRegistration().before(endDate))
+            if ((test.getDateOfTestRegistration().after(beginningDay) && test.getDateOfTestRegistration().before(endingDay))
+            || (test.getDateOfTestRegistration().equals(beginningDay)))
                 num++;
         }
         return num;
@@ -205,15 +206,16 @@ public class TestStore {
     /**
      * Gets the number of tests that were validated between the desired interval of time
      *
-     * @param beginningDate the beginning date of the desired interval of time
-     * @param endDate the end date of the desired interval of time
+     * @param beginningDay the beginning date of the desired interval of time
+     * @param endingDay the end date of the desired interval of time
      * @return the number of tests that were validated between the desired interval of time
      */
-    public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDate, Date endDate){
+    public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDay, Date endingDay){
         //because it only becomes available to the client after the diagnosis
         int num = 0;
         for (Test test : testList) {
-            if (test.getDateOfDiagnosis().after(beginningDate) && test.getDateOfDiagnosis().before(endDate))
+            if ((test.getDateOfDiagnosis().after(beginningDay) && test.getDateOfDiagnosis().before(endingDay))
+            || (test.getDateOfDiagnosis().equals(beginningDay)))
                 num++;
         }
         return num;

@@ -366,7 +366,7 @@ public class TestStoreTest {
         Assert.assertEquals(expectedResult, obtainedResult);
     }
 
-    //Test 6
+    //Test 7
     @Test
     public void testGetNumTestsProcessedInLabDayOrInterval() throws BarcodeException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         TestStore testStore = new TestStore();
