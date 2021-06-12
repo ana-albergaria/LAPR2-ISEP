@@ -432,6 +432,45 @@ public class TestStoreTest {
 
 //========== END US16 ============
 
+//=========== US1 ================
+
+    @Test
+    public void testGetTestsByClient() throws BarcodeException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        Client client2 = new Client("1234567890123333", "1234567777", d1, "Female", "1234567777", "alexandra@gmail.com", "Alexandra", "12345677777");
+
+        app.domain.model.Test test1 = testStore.createTest("123456789011", client, t1, parametersBlood, cal);
+        testStore.saveTest(test1);
+        Date date1reg = new Date(2020,Calendar.JANUARY, 14,8,0,0);
+        test1.setDateOfTestRegistration(date1reg);
+
+        app.domain.model.Test test4 = testStore.createTest("123456789011", client2, t1, parametersBlood, cal);
+        testStore.saveTest(test4);
+        Date date4reg = new Date(2020,Calendar.JANUARY, 14,8,1,0);
+        test4.setDateOfTestRegistration(date4reg);
+
+        app.domain.model.Test test3 = testStore.createTest("123456789013", client, t1, parametersBlood, cal);
+        testStore.saveTest(test3);
+        Date date3reg = new Date(2020,Calendar.JANUARY, 14,15,1,26);
+        test3.setDateOfTestRegistration(date3reg);
+
+        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t1, parametersBlood, cal);
+        testStore.saveTest(test2);
+        Date date2reg = new Date(2020,Calendar.JANUARY, 14,19,59,59);
+        test2.setDateOfTestRegistration(date2reg);
+
+        ArrayList<app.domain.model.Test> expectedResult = new ArrayList<>();
+        expectedResult.add(test4);
+        expectedResult.add(test2);
+
+        ArrayList<app.domain.model.Test> obtainedResult = testStore.getTestsByClient(client2);
+
+        Assert.assertEquals(expectedResult, obtainedResult);
+    }
+
+//=========== END US1 ============
+
     //for US18 and US19
     // Porque dá erro no Jenkins??
     /*@Test
