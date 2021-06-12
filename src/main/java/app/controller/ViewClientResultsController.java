@@ -10,6 +10,9 @@ import app.mappers.dto.TestDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Marta Ribeiro 1201592
+ */
 public class ViewClientResultsController {
 
     /**

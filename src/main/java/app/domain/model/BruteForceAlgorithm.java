@@ -3,14 +3,17 @@ package app.domain.model;
 import java.util.ArrayList;
 
 /**
- * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm.
+ * Brute-force algorithm implementation, used to find the contiguous subsequence with maximum sum of an interval.
  *
  * @author Marta Ribeiro 1201592
  */
 public class BruteForceAlgorithm {
-    public BruteForceAlgorithm(){
-    }
 
+    /**
+     * Searches for the contiguous subsequence with maximum sum of a sequence
+     * @param seq the sequence to be analysed
+     * @return the contiguous subsequence with maximum sum
+     */
     public static int[] Max(int[] seq){
         ArrayList<Integer> subMaxSum = new ArrayList<>();
         int sumValue = 0;

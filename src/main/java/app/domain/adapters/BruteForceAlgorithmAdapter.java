@@ -9,11 +9,15 @@ import app.domain.model.BruteForceAlgorithm;
  * @author Marta Ribeiro 1201592
  */
 public class BruteForceAlgorithmAdapter implements SubMaxSumAlgorithms {
-    public BruteForceAlgorithmAdapter(){
-    }
 
+    /**
+     * Method for getting the contiguous subsequence with maximum sum of an interval, through the brute-force algorithm
+     * @param interval the interval to be analysed
+     * @return the contiguous subsequence with maximum sum
+     */
     @Override
     public int[] findSubMaxSum(int[] interval){
         return BruteForceAlgorithm.Max(interval);
     }
+
 }

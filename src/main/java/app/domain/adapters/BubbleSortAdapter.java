@@ -7,6 +7,11 @@ import app.domain.sort.algorithms.BubbleSort;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm.
+ *
+ * @author Marta Ribeiro 1201592
+ */
 public class BubbleSortAdapter implements SortAlgorithm {
     @Override
     public void sortClientsList(List<Client> clients, Comparator<Client> comparator) {
