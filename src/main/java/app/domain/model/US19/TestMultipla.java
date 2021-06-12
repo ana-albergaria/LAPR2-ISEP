@@ -1,7 +1,9 @@
 package app.domain.model.US19;
 
 import app.domain.interfaces.RegressionModel;
+import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
+import app.domain.model.SignificanceModelAnova;
 
 public class TestMultipla {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
@@ -17,14 +19,25 @@ public class TestMultipla {
         double[] ya = {4.0, 4.5, 5.0, 6.5, 7.0, 7.8, 7.5, 8.0, 8.0, 8.5};
 
 
-        MultipleLinearRegression mlr = new MultipleLinearRegression(xa, xb, ya);
-        System.out.println(mlr);
+        MultipleLinearRegression mlr = new MultipleLinearRegression(x1, x2, y);
+        //System.out.println(mlr);
+
 
         Class<?> oClass = Class.forName("app.domain.adapters.MultipleLinearRegressionAdapter");
         RegressionModel calculus = (RegressionModel) oClass.newInstance();
-        MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, ya, mlr.getN());
+        MyRegressionModel myRegressionModel = calculus.getRegressionModel(x1, x2, y, 12);
 
         System.out.println(myRegressionModel);
+
+        HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel, 0.05);
+        System.out.println(hypothesisTest);
+
+        SignificanceModelAnova modelAnova = new SignificanceModelAnova(myRegressionModel, mlr.getSR(),mlr.getSE(), 0.05);
+        System.out.println(modelAnova);
+
+
+
+
 
 
     }

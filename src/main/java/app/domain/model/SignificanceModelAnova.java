@@ -11,8 +11,8 @@ public class SignificanceModelAnova {
     private final double sr;
     private final double se;
     private final double st;
-    private final double msr;
-    private final double mse;
+    private final double mr;
+    private final double me;
     private final double f;
     private final int deg_freedom_sr;
     private final int deg_freedom_se;
@@ -34,9 +34,9 @@ public class SignificanceModelAnova {
         this.sr = sr;
         this.se = se;
         this.st = sr + se;
-        this.msr = sr / deg_freedom_sr;
-        this.mse = se / deg_freedom_se;
-        this.f = msr / mse;
+        this.mr = sr / deg_freedom_sr;
+        this.me = se / deg_freedom_se;
+        this.f = mr / me;
         this.significanceLevel = significanceLevel;
         this.testRegSignificance = new HypothesisTest(myRegressionModel, f, deg_freedom_sr, deg_freedom_se, significanceLevel);
     }
@@ -47,8 +47,8 @@ public class SignificanceModelAnova {
         text.append("Significance model with Anova\n");
         text.append("H0: b=0  H1:b<>0\n");
         text.append(String.format("%-20s%-20s%-20s%-20s%-20s%n", "", "df", "SS", "MS","F"));
-        text.append(String.format("%-20s%-20d%-20f%-20f%-20f%n", "Regression", deg_freedom_sr, sr, msr,f));
-        text.append(String.format("%-20s%-20d%-20f%-20f%n", "Residual", deg_freedom_se, se, mse));
+        text.append(String.format("%-20s%-20d%-20f%-20f%-20f%n", "Regression", deg_freedom_sr, sr, mr,f));
+        text.append(String.format("%-20s%-20d%-20f%-20f%n", "Residual", deg_freedom_se, se, me));
         text.append(String.format("%-20s%-20d%-20f%n%n", "Total", deg_freedom_st, st));
         text.append(testRegSignificance.toStringForAnova());
         return text.toString();
