@@ -8,7 +8,6 @@ import app.domain.store.TestStore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +70,7 @@ public class ImportTestController {
         createdTest.setDateOfTestRegistration(sdf.parse(testData[dataLabels.indexOf("Test_Reg_DateHour")]));
         createdTest.setDateOfChemicalAnalysis(sdf.parse(testData[dataLabels.indexOf("Test_Chemical_DateHour")]));
         createdTest.setDateOfDiagnosis(sdf.parse(testData[dataLabels.indexOf("Test_Doctor_DateHour")]));
+        createdTest.setDateOfValidation(sdf.parse(testData[dataLabels.indexOf("Test_Validation_DateHour")]));
     }
 
     private void createAndSaveClient(String [] data, List<String> dataLabels) throws ParseException {

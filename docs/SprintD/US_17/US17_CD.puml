@@ -13,7 +13,6 @@ left to right direction
         }
 
 
-
         class Test{
             - code
             - NhsCode
@@ -23,6 +22,17 @@ left to right direction
             - dateOfDiagnosis
         }
 
+        class TestFileDTO{
+           -ClientDTO
+           -NhsCode
+           -TestParameterCodes
+           -TestParameterResult
+           - dateOfTestRegistration
+           - dateOfSamplesCollection
+           - dateOfChemicalAnalysis
+           - dateOfDiagnosis
+        }
+
 
         class Company {
             -designation : String
@@ -30,6 +40,25 @@ left to right direction
             +getParameterStore()
             +getTestStore()
             +getCalStore()
+        }
+        class TestType {
+            - code : String
+            - description : String
+            - collectingMethod : String
+            }
+
+        class Parameter {
+          -code
+          -shortName
+          -description
+        }
+        class TestParameter{
+            +TestParameter(parameter: Parameter)
+        }
+        class TestParameterResult{
+        - createdAt
+        - value
+        - metric
         }
 
         class Client{
@@ -48,6 +77,11 @@ left to right direction
            +getClientByTinNumber(tinNumber)
         }
 
+        class ParameterStore {
+                    +getParamsByCategories(List<String> selectedCategoriesCodes)
+                    +getParamsByCategory(String category)
+                }
+
 
         class TestStore {
             +getTestByNhsCode(nhsCode)
@@ -64,38 +98,43 @@ left to right direction
 }'/
 
 /'package Controller <<Folder>>{'/
-    class CreateTestControler{
-    +createTest(NHScode, citizenCardNumber,selectedTestTypeCode, selectedParamCodes)
-    +saveTest(test)
+    class CreateTestOfFileControler{
+    +createTest(TestFileDto)
+    +saveTest()
     }
 
     class ImportTestController{
-            +createTestsFromFile(filePath)
+            +createTestsFromFile(TestFileDto)
         }
 
     class RegisterClientController {
-      +registerClient(clientsCitizenCardNumber, nhsNumber, birthDate \n, sex, tinNumber, email, name, phoneNumber)
+      +registerClient(ClientDto)
       +saveClient()
     }
 
 /'}'/
 
     class TestFileUtils {
-        +getTestDataByFile(filepath)
-        +getParameterCodes(String [])
-        +getParameterResults(String[])
+        +getTestDataToDto(filepath)
+
     }
 
 
 
 ImportTestUI ..> ImportTestController
-ImportTestController ..> CreateTestControler
+ImportTestUI ..> TestFileUtils
+ImportTestUI ..> TestFileDTO
+TestFileUtils ..> TestFileDTO
+ImportTestController ..> TestFileDTO
+ImportTestController ..> CreateTestOfFileControler
 ImportTestController ..> RegisterClientController
-ImportTestController ..> TestStore
-ImportTestController ..> TestFileUtils
-CreateTestControler ..> Company
-CreateTestControler ..> ClinicalAnalysisLaboratory
-CreateTestControler ..> TestStore
+CreateTestOfFileControler ..> Company
+CreateTestOfFileControler ..> ClinicalAnalysisLaboratoryStore
+CreateTestOfFileControler ..> ParameterStore
+CreateTestOfFileControler ..> TestTypeStore
+CreateTestOfFileControler ..> TestStore
+Company "1" -- "1" ParameterStore : uses >
+ParameterStore "1" -- "*" Parameter : stores >
 RegisterClientController ..> Company
 RegisterClientController ..> ClientStore
 ClientStore "1" -- "*" Client : stores >
@@ -107,5 +146,13 @@ Company "1" -- "1" ClinicalAnalysisLaboratoryStore : uses >
 Company "1" --- "*" Test : conducts >
 Client "1" -- "1" Test : requested by <
 ClinicalAnalysisLaboratory "1" - "1..*" Test : performs >
-
+TestType "1" -- "1..*" Parameter : characterized by >
+Company "1" -- "*" TestType : conducts >
+Company "1" -- "*" Test : conducts >
+TestTypeStore "1" -- "*" TestType : stores >
+Company "1" -- "*" Parameter : capable of analysing >
+Test "*" -- "1" TestType : classified as >
+Test "1" -- "1..*" TestParameter : requests analysis of >
+TestParameter "*" -- "1" Parameter : refers to >
+TestParameter "1" -- "0..1" TestParameterResult : contains >
 @enduml

@@ -22,7 +22,7 @@ public class TestMapper {
                 test.getTestType(), test.getParameters(), test.getSamples(),
                 test.getDiagnosisReport(), test.getDateOfTestRegistration(),
                 test.getDateOfSamplesCollection(), test.getDateOfChemicalAnalysis(),
-                test.getDateOfDiagnosis());
+                test.getDateOfDiagnosis(), test.getDateOfValidation());
     }
 
     /**

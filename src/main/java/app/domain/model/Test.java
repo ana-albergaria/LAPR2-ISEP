@@ -78,6 +78,12 @@ public class Test {
     private Date dateOfDiagnosis;
 
     /**
+     * Date of validation
+     */
+    private Date dateOfValidation;
+
+
+    /**
      * Number of existing tests.
      */
     private static int totalTests = 0;
@@ -111,6 +117,7 @@ public class Test {
         this.dateOfSamplesCollection = null;
         this.dateOfChemicalAnalysis = null;
         this.dateOfDiagnosis = null;
+        this.dateOfValidation = null;
     }
 
     /**
@@ -138,6 +145,10 @@ public class Test {
      */
     public Report getDiagnosisReport(){
         return diagnosisReport;
+    }
+
+    public Date getDateOfValidation() {
+        return dateOfValidation;
     }
 
     /**
@@ -230,6 +241,10 @@ public class Test {
 
     public void setDateOfTestRegistration(Date dateOfTestRegistration) {
         this.dateOfTestRegistration = dateOfTestRegistration;
+    }
+
+    public void setDateOfValidation(Date dateOfValidation) {
+        this.dateOfValidation = dateOfValidation;
     }
 
     /**
@@ -393,6 +408,7 @@ public class Test {
     public void addReport(Report report) {
         this.diagnosisReport = report;
         this.dateOfDiagnosis = Calendar.getInstance().getTime();
+        this.dateOfValidation = Calendar.getInstance().getTime();
     }
 
     /**

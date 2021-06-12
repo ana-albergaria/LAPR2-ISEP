@@ -1,5 +1,6 @@
 package app.domain.shared.utils;
 
+import app.mappers.dto.TestFileDTO;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -10,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class TestFileUtilsTest {
 
-    /*@Test
+    @Test
     public void testCsvProcess(){
        List<String[]> procedData = TestFileUtils.getTestDataByFile("C:/Users/jluca/Downloads/tests_BloodCovidMATCPMDISCCSV.csv");
         int totalLines=0;
@@ -54,6 +55,19 @@ public class TestFileUtilsTest {
             System.out.println();
         }
 
-    }*/
+    }
+
+    @Test
+    public void testGetListOfTestFileDto(){
+        List<TestFileDTO> procedData = TestFileUtils.getTestsDataToDto("C:/Users/jluca/Desktop/dadosteste.csv");
+
+        List<String> codes = new ArrayList<>();
+
+        for (TestFileDTO s : procedData){
+                System.out.printf("%s ", procedData);
+            System.out.println();
+        }
+
+    }
 
 }
