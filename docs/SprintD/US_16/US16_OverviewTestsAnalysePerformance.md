@@ -324,19 +324,52 @@ Tests 5-6 are made following this process:
 
     //...Omitted
 
-    public int[] getTestInfoDayOrInterval(Date beginningDay, Date endingDay){
+    public ArrayList<int[]> getTestInfoPerYear(ArrayList<Date> days){ //YEAR: FROM JAN 1 TO DEC 31
+        ArrayList<int[]> testInfoPerYear = new ArrayList<>();
         int[] testInfo = new int[3];
         TestStore testStore = new TestStore();
-        testInfo[0]=testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-        testInfo[1]=testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-        testInfo[2]=testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
-        return testInfo;
+        ArrayList<ArrayList<Date>> years = new ArrayList<>();
+        ArrayList<Date> year = new ArrayList<>();
+        for (Date date : days) {
+            if (!(date.getMonth()==Calendar.DECEMBER && date.getDate()==31)) {
+                year.add(date);
+            } else {
+                year.add(date);
+                years.add(year);
+                year.clear();
+                }
+        }
+        Date beginningDay;
+        Date endingDay;
+        for(ArrayList<Date> singleYear : years) {
+            beginningDay = new Date(singleYear.get(0).getYear(), singleYear.get(0).getMonth(), singleYear.get(0).getDate(), 8, 0, 0);
+            endingDay = new Date(singleYear.get(singleYear.size()-1).getYear(), singleYear.get(singleYear.size()-1).getMonth(), singleYear.get(singleYear.size()-1).getDate(), 19, 59, 59);
+            testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+            testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+            testInfo[2] = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
+            testInfoPerYear.add(testInfo);
+        }
+        return testInfoPerYear;
     }
 
     //...Omitted
 
-    public int[] findWorstSubIntWithChosenAlgorithm(Date beginningDay, Date endingDay, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        int[] interval = makeIntervalArray(beginningDay, endingDay);
+        public ArrayList<Date> getDays(Date beginningDay, Date endingDay){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+        ArrayList<Date> days = new ArrayList<>();
+        Date day = beginningDay;
+        Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
+        do {
+            if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                days.add(day);
+            day = DateUtils.addDays(day, 1);
+        } while (day.before(end));
+        return days;
+    }
+
+    //...Omitted
+
+    public int[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
 
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
@@ -360,6 +393,14 @@ Tests 5-6 are made following this process:
     }
 
     //...Omitted
+
+The logic used in the "getTestsInfoPerYear" method above, is similar to the one used in the following methods:
+* public ArrayList<int[]> getTestInfoPerMonth(ArrayList<Date> days) ;
+* public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days) ;
+* public ArrayList<int[]> getTestInfoPerDay(ArrayList<Date> days) .
+
+The "makeIntervalArray" method creates an array with the difference between the number of new tests 
+and the number of results available to the client during each half an hour period.
 
 
 ## 5.2 SubMaxSumAlgorithms
@@ -452,6 +493,11 @@ The logic used in the method above, is also used in the following methods:
 * public int getNumTestsWaitingForDiagnosisDayOrInterval(Date beginningDay, Date endingDay) ;
 * public int getNumTestsProcessedInLabDayOrInterval(Date beginningDay, Date endingDay) .
 
+The "getNumberOfTestsByIntervalDateOfTestRegistration" method gets the number of tests 
+that were registered between the desired interval of time.
+
+The "getNumberOfTestsByIntervalDateOfDiagnosis" method gets the number of tests that 
+were validated between the desired interval of time.
 
 # 6. Integration and Demo
 

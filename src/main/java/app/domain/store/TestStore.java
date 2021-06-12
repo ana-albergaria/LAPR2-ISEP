@@ -197,7 +197,7 @@ public class TestStore {
         int num = 0;
         for (Test test : testList) {
             if ((test.getDateOfTestRegistration().after(beginningDay) && test.getDateOfTestRegistration().before(endingDay))
-            || (test.getDateOfTestRegistration().equals(beginningDay)))
+            || (test.getDateOfTestRegistration().equals(beginningDay)) || (test.getDateOfTestRegistration().equals(endingDay)))
                 num++;
         }
         return num;
@@ -215,7 +215,7 @@ public class TestStore {
         int num = 0;
         for (Test test : testList) {
             if ((test.getDateOfDiagnosis().after(beginningDay) && test.getDateOfDiagnosis().before(endingDay))
-            || (test.getDateOfDiagnosis().equals(beginningDay)))
+            || (test.getDateOfTestRegistration().equals(beginningDay)) || (test.getDateOfTestRegistration().equals(endingDay)))
                 num++;
         }
         return num;

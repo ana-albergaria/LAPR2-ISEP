@@ -43,33 +43,107 @@ deactivate CLTSTORE
 CTRL --> UI : clientInfo
 deactivate CTRL
 
-UI -> CTRL : testInfoDayOrInterval = getTestInfoDayOrInterval
+UI -> CTRL : days = getDays(beginningDay, endingDay)
+activate CTRL
+CTRL --> UI : days
+deactivate CTRL
+
+UI -> CTRL : testInfoDays = getTestInfoPerDay(days)
 activate CTRL
 
 CTRL -> CMP : testStore = getTestStore()
 activate CMP
 CMP --> TSTSTORE** : create()
 deactivate CMP
-CTRL -> TSTSTORE : numTestsWaitingForResultsDayOrInterval = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
+CTRL -> TSTSTORE : numTestsWaitingForResultsDay = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDayOrInterval = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDay = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabDayOrInterval = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
+CTRL -> TSTSTORE : numTestsProcessedInLabDay = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
 
-CTRL --> UI : testInfoDayOrInterval
+CTRL --> UI : testInfoDays
 deactivate CTRL
 
-UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
+UI -> CTRL : testInfoWeeks = getTestInfoPerWeek(days)
 activate CTRL
 
-CTRL -> CTRL : interval = makeIntervalArray(beginningDay, endingDay)
+CTRL -> CMP : testStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+CTRL -> TSTSTORE : numTestsWaitingForResultsWeek = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisWeek = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsProcessedInLabWeek = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL --> UI : testInfoWeeks
+deactivate CTRL
+
+UI -> CTRL : testInfoMonths = getTestInfoPerMonth(days)
+activate CTRL
+
+CTRL -> CMP : testStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+CTRL -> TSTSTORE : numTestsWaitingForResultsMonth = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisMonth = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsProcessedInLabMonth = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL --> UI : testInfoYears
+deactivate CTRL
+
+UI -> CTRL : testInfoYears = getTestInfoPerYear(days)
+activate CTRL
+
+CTRL -> CMP : testStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+CTRL -> TSTSTORE : numTestsWaitingForResultsYear = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsWaitingForDiagnosisYear = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+CTRL -> TSTSTORE : numTestsProcessedInLabYear = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+CTRL --> UI : testInfoYears
+deactivate CTRL
+
+UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(days, chosenAlgorithm)
+activate CTRL
+
+CTRL -> CTRL : interval = makeIntervalArray(days)
 activate CTRL
 |||
 deactivate CTRL

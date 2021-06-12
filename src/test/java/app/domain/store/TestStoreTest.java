@@ -418,7 +418,7 @@ public class TestStoreTest {
         test4.setDateOfChemicalAnalysis(date4);
         Report report4 = new Report("Everything is well.");
         test4.addReport(report4);
-        Date date4r = new Date(2020,Calendar.JANUARY,16,8,30,0);
+        Date date4r = new Date(2020,Calendar.JANUARY,16,19,59,59);
         test4.setDateOfDiagnosis(date4r);
 
         Date beginningDay = new Date(2020, Calendar.JANUARY, 15, 8, 0, 0);

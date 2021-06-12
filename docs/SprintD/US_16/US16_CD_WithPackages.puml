@@ -68,9 +68,13 @@ package Controller {
 class CompanyPerformanceAnalysisController{
     -Company company
     +getNumClients()
-    +getTestInfoDayOrInterval(beginningDay, endingDay)
-    +makeIntervalArray(beginningDay, endingDay)
-    +findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
+    +getTestInfoPerDay(days)
+    +getTestInfoPerWeek(days)
+    +getTestInfoPerMonth(days)
+    +getTestInfoPerYear(days)
+    +getDays(beginningDay, endingDay)
+    +makeIntervalArray(days)
+    +findWorstSubIntWithChosenAlgorithm(days, chosenAlgorithm)
     +getChosenAlgorithmAdapter(chosenAlgorithm)
 }
 
