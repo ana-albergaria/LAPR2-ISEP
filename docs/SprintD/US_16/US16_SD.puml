@@ -66,8 +66,6 @@ deactivate TSTSTORE
 CTRL --> UI : testInfoDayOrInterval
 deactivate CTRL
 
-alt The Laboratory Coordinator chose an interval
-
 UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(beginningDay, endingDay, chosenAlgorithm)
 activate CTRL
 
@@ -109,8 +107,6 @@ end
 
 CTRL --> UI : worstSubInt
 deactivate CTRL
-
-end
 
 UI --> LC : shows an overview of the clients and tests performed, and \n shows the overall performance of the company
 deactivate UI
