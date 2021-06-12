@@ -78,6 +78,8 @@ public class LinearRegression {
         }
 
         int degreesOfFreedom = n-2;
+        if(yybar == 0)
+            throw new IllegalArgumentException("yybar cannot be 0!");
         r2    = ssr / yybar;
         r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
         double svar  = rss / degreesOfFreedom;
