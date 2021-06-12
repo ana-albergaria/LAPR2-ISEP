@@ -389,8 +389,8 @@ public class TestStore {
         }
     }
 
-    public double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
-        double[] covidTestsInHistoricalPoints = new double[dates.size()];
+    public Double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
+        Double[] covidTestsInHistoricalPoints = new Double[dates.size()];
         int indexDate = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -408,8 +408,8 @@ public class TestStore {
         return covidTestsInHistoricalPoints;
     }
 
-    public double[] getMeanAgeInHistoricalPoints(List<String> dates) {
-        double[] meanAgeInHistoricalPoints = new double[dates.size()];
+    public Double[] getMeanAgeInHistoricalPoints(List<String> dates) {
+        Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
         double sumAges = 0, numClients = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 

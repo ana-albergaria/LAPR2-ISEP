@@ -6,6 +6,7 @@ import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,16 +82,23 @@ public class SendNHSDailyReportController {
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
 
-        double[] bestXInHistoricalPoints = new double[historicalPoints];
-        if(bestXIndex != null) {
-            if(bestXIndex == 1)
-                bestXInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
-            else
-                bestXInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
-        }
-        //FALTA ACRESCENTAR ELSE PARA A REGRESSÃO MÚLTIPLA!!!
+        Double[] bestXInHistoricalPoints = new Double[historicalPoints];
+        List<Double> estimatedPositives;
+        Double[] numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+        Double[] meanAgeInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
 
-        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, bestXInHistoricalPoints);
+        if(bestXIndex != null) {
+            //for Simple Linear Regression
+            if(bestXIndex == 1)
+                bestXInHistoricalPoints = nhsReportStore.copyArray(numCovidTestsInHistoricalPoints);
+            else
+                bestXInHistoricalPoints = nhsReportStore.copyArray(meanAgeInHistoricalPoints);
+            estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, bestXInHistoricalPoints, null);
+        } else {
+            //for Multiple Linear Regression
+            estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints);
+        }
+
         List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints);
 
         TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
@@ -99,7 +107,7 @@ public class SendNHSDailyReportController {
 
     public List<ConfidenceInterval> getConfidenceIntervalListForTableOfValues(MyRegressionModel myRegressionModel,
                                                                               RegressionModel regressionModel,
-                                                                              double[] xInHistoricalPoints) {
+                                                                              Double[] xInHistoricalPoints) {
         double confidenceLevel = this.company.getConfidenceLevel();
         List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, xInHistoricalPoints, confidenceLevel);
         return confidenceIntervalList;

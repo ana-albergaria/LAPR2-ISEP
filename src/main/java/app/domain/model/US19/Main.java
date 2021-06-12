@@ -55,8 +55,9 @@ public class Main {
         Date date = new Date();
         List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(10, date);
         //observedPositives = y
-        List<Double> estimatedPositives = calculus.getEstimatedPositives(myRegressionModel, x);
-        List<ConfidenceInterval> confidenceIntervalList = calculus.getConfidenceIntervalList(myRegressionModel, x, 0.95);
+        Double[] xDouble = turnPrimitiveIntoDouble(x);
+        List<Double> estimatedPositives = calculus.getEstimatedPositives(myRegressionModel, xDouble, null);
+        List<ConfidenceInterval> confidenceIntervalList = calculus.getConfidenceIntervalList(myRegressionModel, xDouble, 0.95);
 
         TableOfValues tableOfValues = new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervalList);
 
@@ -74,6 +75,13 @@ public class Main {
 
 
 
+    }
+    public static Double[] turnPrimitiveIntoDouble(double[] array) {
+        Double[] wishedArray = new Double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            wishedArray[i] = array[i];
+        }
+        return wishedArray;
     }
 }
 
