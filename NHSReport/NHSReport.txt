@@ -9,19 +9,6 @@ R = 0,948943
 
 Hypothesis tests for regression coefficients
 
---> Significance Level: 0,01
-
-H0:a=0 H1:a<>0
-t_obs=0,332620
-Decision: 
-No Reject H0
-//
-H0:b=0 H1:b<>0
-t_obs=8,508575
-Decision: 
-Reject H0
-//
-
 --> Significance Level: 0,05
 
 H0:a=0 H1:a<>0
@@ -47,3 +34,15 @@ Decision: f
 72,395851 > f0,05,(1,8)=5,317655
 Reject H0
 The regression model is significant.
+
+Date                Number of OBSERVED positive cases                 Number of ESTIMATED/EXPECTED positive cases                 95.0% intervals                                   
+11/06/2021                         3                                                 3,075863                                       1,91-4,24                          
+10/06/2021                         1                                                 0,888933                                       -0,39-2,17                         
+09/06/2021                         4                                                 3,954221                                       2,76-5,15                          
+08/06/2021                         2                                                 2,089952                                       0,91-3,27                          
+07/06/2021                         1                                                 1,838993                                       0,65-3,03                          
+05/06/2021                         3                                                 3,416451                                       2,25-4,59                          
+04/06/2021                         4                                                 4,958058                                       3,66-6,25                          
+03/06/2021                         1                                                 1,283297                                       0,05-2,52                          
+02/06/2021                         3                                                 2,520168                                       1,36-3,68                          
+01/06/2021                         5                                                 4,474065                                       3,23-5,72                          

@@ -36,10 +36,10 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
     }
 
     @Override
-    public SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel) {
+    public SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel, double significanceLevel) {
         LinearRegression simpleLR = (LinearRegression) myRegressionModel.getRegressionModel();
         double sr = simpleLR.getSSR(), se = simpleLR.getRSS();
-        return new SignificanceModelAnova(myRegressionModel, sr, se);
+        return new SignificanceModelAnova(myRegressionModel, sr, se, significanceLevel);
     }
 
     @Override

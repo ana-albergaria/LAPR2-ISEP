@@ -12,7 +12,7 @@ public interface RegressionModel {
     public abstract Integer getBestXIndex(double[] x1, double[] x2, double[] y);
     public abstract MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y, int historicalPoints);
     public abstract HypothesisTest getHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel);
-    public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel);
+    public abstract SignificanceModelAnova getSignificanceModelAnova(MyRegressionModel myRegressionModel, double significanceLevel);
     public abstract List<Double> getEstimatedPositives(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints);
     public abstract ConfidenceInterval getConfidenceInterval(MyRegressionModel myRegressionModel, double x0, double confidenceLevel);
     public abstract List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, double[] xInHistoricalPoints, double confidenceLevel);

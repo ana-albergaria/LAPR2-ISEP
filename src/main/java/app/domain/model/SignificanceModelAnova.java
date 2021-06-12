@@ -6,6 +6,7 @@ import java.util.List;
 public class SignificanceModelAnova {
     private MyRegressionModel myRegressionModel;
     private HypothesisTest testRegSignificance;
+    private double significanceLevel;
 
     private final double sr;
     private final double se;
@@ -22,12 +23,13 @@ public class SignificanceModelAnova {
 
     public SignificanceModelAnova(MyRegressionModel myRegressionModel,
                                   double sr,
-                                  double se) {
+                                  double se,
+                                  double significanceLevel) {
         this.myRegressionModel = myRegressionModel;
         //k - coefficients of regression but without the first one - B0
         int k = (myRegressionModel.getSecondIndVariable() == null) ? NUM_REG_COEFFICIENTS_SLR : NUM_REG_COEFFICIENTS_MLR;
         this.deg_freedom_sr = k;
-        this.deg_freedom_se = myRegressionModel.getNumberOfObservations() - (k +1);
+        this.deg_freedom_se = myRegressionModel.getNumberOfObservations() - (k + 1);
         this.deg_freedom_st = myRegressionModel.getNumberOfObservations() - 1;
         this.sr = sr;
         this.se = se;
@@ -35,7 +37,8 @@ public class SignificanceModelAnova {
         this.msr = sr / deg_freedom_sr;
         this.mse = se / deg_freedom_se;
         this.f = msr / mse;
-        this.testRegSignificance = new HypothesisTest(myRegressionModel, f, deg_freedom_sr, deg_freedom_se);
+        this.significanceLevel = significanceLevel;
+        this.testRegSignificance = new HypothesisTest(myRegressionModel, f, deg_freedom_sr, deg_freedom_se, significanceLevel);
     }
 
     @Override

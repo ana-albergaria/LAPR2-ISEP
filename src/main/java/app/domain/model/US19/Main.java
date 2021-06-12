@@ -3,6 +3,7 @@ package app.domain.model.US19;
 
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
+import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 import com.nhs.report.Report2NHS;
 
@@ -22,8 +23,9 @@ public class Main {
         double[] x = {825.0, 215.0, 1070.0, 550.0, 480.0, 920.0, 1350.0, 325.0, 670.0, 1215.0};
         double[] y = {3.5, 1.0, 4.0, 2.0, 1.0, 3.0, 4.5, 1.5, 3.0, 5.0};
 
-        //somente para teste
+        //somente para teste os dois arrays seguintes
         double[] x0 = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0, 12.0, 11.0};
+        int[] observedPositives = {3, 1, 4, 2, 1, 3, 4, 1, 3, 5};
 
         //Teórica 8 MATCP - Ex Regressão Múltipla
         double[] x1 = {80.0, 93.0, 100.0, 82.0, 90.0, 99.0, 81.0, 96.0, 94.0, 93.0, 97.0, 95.0};
@@ -46,10 +48,20 @@ public class Main {
         System.out.println(myRegressionModel);
         HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel, 0.05);
         System.out.println(hypothesisTest);
-        SignificanceModelAnova modelAnova = calculus.getSignificanceModelAnova(myRegressionModel);
+        SignificanceModelAnova modelAnova = calculus.getSignificanceModelAnova(myRegressionModel, 0.05);
 
-        /*
-        NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova);
+        NHSReportStore nhsReportStore = new NHSReportStore();
+        Date date = new Date();
+        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(10, date);
+        //observedPositives = y
+        List<Double> estimatedPositives = calculus.getEstimatedPositives(myRegressionModel, x);
+        List<ConfidenceInterval> confidenceIntervalList = calculus.getConfidenceIntervalList(myRegressionModel, x, 0.95);
+
+        TableOfValues tableOfValues = new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervalList);
+
+
+
+        NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
         System.out.println(report);
 
         File path = new File("./NHSReport/");
@@ -57,7 +69,7 @@ public class Main {
             path.mkdir();
 
         Report2NHS.writeUsingFileWriter(report.toString());
-         */
+
 
 
 

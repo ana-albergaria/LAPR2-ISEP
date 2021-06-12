@@ -54,8 +54,8 @@ public class NHSReportStore {
         return regressionModel.getHypothesisTest(myRegressionModel, significanceLevel);
     }
 
-    public SignificanceModelAnova createSignificanceModelAnova(RegressionModel regressionModel, MyRegressionModel myRegressionModel) {
-        return regressionModel.getSignificanceModelAnova(myRegressionModel);
+    public SignificanceModelAnova createSignificanceModelAnova(RegressionModel regressionModel, MyRegressionModel myRegressionModel, double significanceLevel) {
+        return regressionModel.getSignificanceModelAnova(myRegressionModel, significanceLevel);
     }
 
     public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives, List<ConfidenceInterval> confidenceIntervals) {
@@ -77,6 +77,7 @@ public class NHSReportStore {
      */
     public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
                                               Date currentDate) {
+        //VERIFICAR SE O MÉTODO RETIRA BEM AS DATAS POR CAUSA DO DOMINGO!!!
         List<String> dates = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
@@ -85,6 +86,8 @@ public class NHSReportStore {
         for (int i = 0; i < numberOfObservations; i++) {
             dates.add(sdf.format(currentDate));
             cal.add(Calendar.DAY_OF_MONTH,-1);
+            if ((cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+                cal.add(Calendar.DAY_OF_MONTH,-1);
             currentDate = cal.getTime();
         }
         return dates;
