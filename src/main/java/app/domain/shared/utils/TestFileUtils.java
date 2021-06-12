@@ -1,21 +1,59 @@
 package app.domain.shared.utils;
 
+import app.domain.model.Test;
+import app.mappers.dto.ClientDTO;
+import app.mappers.dto.TestFileDTO;
+
 import java.io.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class TestFileUtils {
 
-    public static List<String> dataLabels = new ArrayList<>();
+    private static List<String> dataLabels = new ArrayList<>();
 
     public static List<String> getDataLabels() {
         return dataLabels;
     }
 
+    public static List<TestFileDTO> getTestsDataToDto(String filePath){
+        File csvFile = new File(filePath);
+        List<TestFileDTO> processedListData = new ArrayList<>();
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
+            String line = bufferedReader.readLine();
+            dataLabels = Arrays.asList(line.split(";"));
+            line = bufferedReader.readLine();
+            while(line != null){
+                String [] attributes = line.split(";");
+                processedListData.add(attributesToDto(attributes));
+                line = bufferedReader.readLine();
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return processedListData;
+    }
+
+    private static TestFileDTO attributesToDto(String[] testData) throws ParseException {
+        return new TestFileDTO(clientToDto(testData), testData[dataLabels.indexOf("NHS_Code")],
+                testData[dataLabels.indexOf("TestType")], getParameterCodes(testData), getParameterResults(testData),
+                testData[dataLabels.indexOf("Test_Reg_DateHour")], testData[dataLabels.indexOf("Test_Chemical_DateHour")],
+                testData[dataLabels.indexOf("Test_Doctor_DateHour")], testData[dataLabels.indexOf("Lab_ID")]);
+    }
+
+    private static ClientDTO clientToDto(String[] data) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String citizenCardNum = String.format("%016d", Integer.parseInt(data[dataLabels.indexOf("CitizenCard_Number")]));
+        String nhsNum = data[dataLabels.indexOf("NHS_Number")];
+        String tin = data[dataLabels.indexOf("TIN")];
+        Date date = df.parse(data[dataLabels.indexOf("BirthDay")]);
+        String phoneNum = data[dataLabels.indexOf("PhoneNumber")];
+        String name = data[dataLabels.indexOf("Name")];
+        String email = data[dataLabels.indexOf("E-mail ")];
+        return new ClientDTO(citizenCardNum, nhsNum, date, tin, email,name, phoneNum);
+    }
     public static List<String[]> getTestDataByFile(String filePath){
         File csvFile = new File(filePath);
         List<String[]> processedListData = new ArrayList<>();

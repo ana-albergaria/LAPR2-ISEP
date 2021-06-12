@@ -2,68 +2,56 @@
 autonumber
 'hide footbox
 actor "Laboratory coordinator" as ADM
-
 participant ":ImportTestUI  " as UI
-participant ":ImportTestController" as CTRL
 participant "testFile:TestFileUtils" as TST
-participant "List<Test>:" as TST
+participant ":ImportTestController" as CTRL
 participant ":Company" as PLAT
 participant ":RegisterClientController" as CLIENT_CTRL
-participant ":CreateTestController" as ORG
-participant "store:TestStore" as TEST_STORE
-participant "createdTest: Test" as CREATED_TEST
-
+participant ":CreateFileTestController" as ORG
 
 activate ADM
 ADM -> UI : asks to import clinical tests from a CSV file.
 activate UI
 
+UI -> CTRL : create()
+activate CTRL
+CTRL -> CLIENT_CTRL** : createClientCtrl = create()
+CTRL -> ORG** : createClientCtrl = create()
+deactivate CTRL
+
+
+
 
 UI --> ADM : shows the file chooser and asks to select the file.
 deactivate UI
 
-
 ADM -> UI : selects requested data
 activate UI
-UI -> CTRL : createTestsFromFile(pathOfFile)
-activate CTRL
 
-CTRL -> TST : List<String[]>processedListData = getTestDataByFile(pathOfFile)
+UI -> TST** : Create()
+UI -> TST : List<TestFileDTO>testFileDTO = getTestDataToDto(pathOfFile)
 activate TST
 deactivate TST
+loop for each TestFileDTO of the list
+
+UI -> CTRL : createTestsFromFile(TestFileDTO)
+activate CTRL
 
 /'
 CTRL -> TEST_LIST** : create()
 '/
 
 
-CTRL -> PLAT : clientStore = getClientStore()
-activate PLAT
-deactivate PLAT
-
-CTRL -> CLIENT_CTRL** : createClientCtrl = create()
-
-
-CTRL -> ORG** : createTestCtrl = create(currentCalCode)
-
-
-loop for each String [] of the list
-note right of CTRL: all data refered in the following steps is extracted \nfrom the .CSV file and stored at each index of each String [] of the list.
-
-alt client not existent with given tin
-CTRL -> CLIENT_CTRL : createClient(clientDto)
+CTRL -> CLIENT_CTRL : existsClient = createClient(testFileDTO.getClientDTO())
 activate CLIENT_CTRL
 deactivate CLIENT_CTRL
-CTRL -> CLIENT_CTRL : saveClient()
+
+alt client doesn't exist in Client Store
+CTRL -> CLIENT_CTRL : clientCreation = saveClient()
 activate CLIENT_CTRL
 deactivate CLIENT_CTRL
 end
-
-CTRL -> TST : List<String> parameterCodes = getParameterCodes(String[] processedData)
-activate TST
-deactivate TST
-
-CTRL -> ORG : createTest(NHScode, tinNumber, testTypeCode, paramCodes)
+CTRL -> ORG : createTest(TestFileDTO)
 activate ORG
 deactivate ORG
 
@@ -71,47 +59,11 @@ CTRL -> ORG : saveTest()
 activate ORG
 deactivate ORG
 
-CTRL -> TEST_STORE : createdTest = getTestByNhsNumber(nhsNumber)
-activate TEST_STORE
-deactivate TEST_STORE
-
-CTRL -> TST : List<Double> parameterResults = getParameterResults(String[] parameterCodes)
-activate TST
-deactivate TST
-
-loop for each test parameter code
-CTRL -> CREATED_TEST : createdTest.addTestResult(parameterCode, parameterResult)
-activate CREATED_TEST
-deactivate CREATED_TEST
-end
-
-CTRL -> CREATED_TEST : setRegDate(regDate)
-activate CREATED_TEST
-deactivate CREATED_TEST
-
-CTRL -> CREATED_TEST : setChemicalDate(chemicalDate)
-activate CREATED_TEST
-deactivate CREATED_TEST
-
-CTRL -> CREATED_TEST : setReportData(reportDate)
-activate CREATED_TEST
-deactivate CREATED_TEST
-
-/'CTRL -> TEST_LIST : createdTestsList.add(createdTest)
-activate TEST_LIST
-deactivate TEST_LIST'/
-end
-
-/'CTRL -> TEST_LIST : resultSize = createdTestsList.size()
-activate TEST_LIST
-deactivate TEST_LIST'/
-
-
-deactivate CTRL
-
 CTRL --> UI: result
+deactivate CTRL
+end
 
-UI --> ADM : informs operation success
+UI --> ADM : informs operation success\n and shows all created tests
 deactivate ORG
 deactivate CTRL
 deactivate UI
