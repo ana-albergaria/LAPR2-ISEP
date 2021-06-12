@@ -82,10 +82,11 @@ public class SendNHSDailyReportController {
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         RegressionModel regressionModel = this.company.getRegressionModel();
 
-        Double[] bestXInHistoricalPoints = new Double[historicalPoints];
+        Double[] bestXInHistoricalPoints;
         List<Double> estimatedPositives;
         Double[] numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
         Double[] meanAgeInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+        List<ConfidenceInterval> confidenceIntervals;
 
         if(bestXIndex != null) {
             //for Simple Linear Regression
@@ -94,12 +95,12 @@ public class SendNHSDailyReportController {
             else
                 bestXInHistoricalPoints = nhsReportStore.copyArray(meanAgeInHistoricalPoints);
             estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, bestXInHistoricalPoints, null);
+            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints, null);
         } else {
             //for Multiple Linear Regression
             estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints);
+            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints);
         }
-
-        List<ConfidenceInterval> confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints);
 
         TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
         return tableOfValues;
@@ -107,9 +108,10 @@ public class SendNHSDailyReportController {
 
     public List<ConfidenceInterval> getConfidenceIntervalListForTableOfValues(MyRegressionModel myRegressionModel,
                                                                               RegressionModel regressionModel,
-                                                                              Double[] xInHistoricalPoints) {
+                                                                              Double[] x1InHistoricalPoints,
+                                                                              Double[] x2InHistoricalPoints) {
         double confidenceLevel = this.company.getConfidenceLevel();
-        List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, xInHistoricalPoints, confidenceLevel);
+        List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
         return confidenceIntervalList;
     }
 

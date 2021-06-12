@@ -57,7 +57,7 @@ public class Main {
         //observedPositives = y
         Double[] xDouble = turnPrimitiveIntoDouble(x);
         List<Double> estimatedPositives = calculus.getEstimatedPositives(myRegressionModel, xDouble, null);
-        List<ConfidenceInterval> confidenceIntervalList = calculus.getConfidenceIntervalList(myRegressionModel, xDouble, 0.95);
+        List<ConfidenceInterval> confidenceIntervalList = calculus.getConfidenceIntervalList(myRegressionModel, xDouble, null, 0.95);
 
         TableOfValues tableOfValues = new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervalList);
 
