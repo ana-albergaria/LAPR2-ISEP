@@ -39,6 +39,10 @@ public class ClientDTO {
         this(clientsCitizenCardNumber, nhsNumber, birthDate, OMITTED_SEX, tinNumber, email, name, phoneNumber);
     }
 
+    public String getTinNumber() {
+        return tinNumber;
+    }
+
     @Override
     public String toString() {
         return String.format("Client: %s%nTin: %s%nEmail: %s%n", name, tinNumber, email);

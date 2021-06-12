@@ -44,10 +44,6 @@ public class CreateTestController {
         this(App.getInstance().getCompany(), currentCalCode);
     }
 
-    public void setCurrentCal(String calId) {
-        this.currentCal = getCalByCode(calId);
-    }
-
     /**
      * Construtor recieving the company as an argument
      *

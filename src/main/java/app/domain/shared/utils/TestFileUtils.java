@@ -39,9 +39,19 @@ public class TestFileUtils {
     private static TestFileDTO attributesToDto(String[] testData) throws ParseException {
         return new TestFileDTO(clientToDto(testData), testData[dataLabels.indexOf("NHS_Code")],
                 testData[dataLabels.indexOf("TestType")], getParameterCodes(testData), getParameterResults(testData),
-                testData[dataLabels.indexOf("Test_Reg_DateHour")], testData[dataLabels.indexOf("Test_Chemical_DateHour")],
-                testData[dataLabels.indexOf("Test_Doctor_DateHour")], testData[dataLabels.indexOf("Lab_ID")]);
+                getDateOfString(testData[dataLabels.indexOf("Test_Reg_DateHour")]), getDateOfString(testData[dataLabels.indexOf("Test_Chemical_DateHour")]),
+                getDateOfString(testData[dataLabels.indexOf("Test_Doctor_DateHour")]), testData[dataLabels.indexOf("Lab_ID")]);
     }
+
+    private static Date getDateOfString(String stringFormatDate){
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            return sdf.parse(stringFormatDate);
+        } catch(ParseException p){
+            return null;
+        }
+    }
+
 
     private static ClientDTO clientToDto(String[] data) throws ParseException {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");

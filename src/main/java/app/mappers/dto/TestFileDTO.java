@@ -17,16 +17,16 @@ public class TestFileDTO {
 
     private List<Double> testParameterResults;
 
-    private String dateOfTestRegistration;
+    private Date dateOfTestRegistration;
 
-    private String dateOfChemicalAnalysis;
+    private Date dateOfChemicalAnalysis;
 
-    private String dateOfDiagnosis;
+    private Date dateOfDiagnosis;
 
     private String labId;
 
     public TestFileDTO(ClientDTO clientDTO, String nhsCode, String testTypeCode, List<String> testParameterCodes, List<Double> testParameterResults,
-                       String dateOfTestRegistration, String dateOfChemicalAnalysis, String dateOfDiagnosis, String labId) {
+                       Date dateOfTestRegistration, Date dateOfChemicalAnalysis, Date dateOfDiagnosis, String labId) {
         this.clientDTO = clientDTO;
         this.nhsCode = nhsCode;
         this.testTypeCode = testTypeCode;
@@ -36,6 +36,42 @@ public class TestFileDTO {
         this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
         this.dateOfDiagnosis = dateOfDiagnosis;
         this.labId = labId;
+    }
+
+    public ClientDTO getClientDTO() {
+        return clientDTO;
+    }
+
+    public String getNhsCode() {
+        return nhsCode;
+    }
+
+    public String getTestTypeCode() {
+        return testTypeCode;
+    }
+
+    public List<String> getTestParameterCodes() {
+        return testParameterCodes;
+    }
+
+    public List<Double> getTestParameterResults() {
+        return testParameterResults;
+    }
+
+    public Date getDateOfTestRegistration() {
+        return dateOfTestRegistration;
+    }
+
+    public Date getDateOfChemicalAnalysis() {
+        return dateOfChemicalAnalysis;
+    }
+
+    public Date getDateOfDiagnosis() {
+        return dateOfDiagnosis;
+    }
+
+    public String getLabId() {
+        return labId;
     }
 
     @Override
