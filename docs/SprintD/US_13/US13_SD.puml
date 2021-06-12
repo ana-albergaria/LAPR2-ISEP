@@ -8,12 +8,11 @@ participant ":SelectClientUI  " as UI
 participant ":ConsultTestsByClient" as CTRL
 participant ":Company" as COMPANY
 participant "clientStore\n:ClientStore" as CLIENT_STORE
+participant "sortAlgorithm\n:SortAlgorithm" as SORTA
 participant "testStore\n:TestStore" as TEST_STORE
-participant "selectedTest\n:Test" as SELECTED_TEST
 participant ":clientMapper" as CLIENT_MAPPER
-participant "sample\n:Sample" as SAMPLE
-participant "api\n:ExternalAPI" as API
-participant "barcode\n:Barcode" as BARCODE
+participant ":TestMapper" as TEST_MAPPER
+
 
 activate MLT
 MLT -> UI : asks to consult the historical tests performed by a particular client
@@ -36,181 +35,53 @@ CTRL -> CLIENT_STORE : clientsList  = getClients()
 activate CLIENT_STORE
 deactivate CLIENT_STORE
 
+CTRL -> COMPANY : sortAlgorithm = getSortAlgorithm()
+activate COMPANY
+deactivate COMPANY
+
+alt sortOption is tin
+CTRL -> SORTA : sortAlgorithm.sort(clientsList, tinComparator)
+activate SORTA
+deactivate SORTA
+
+
 CTRL -> CLIENT_MAPPER : clientListDto = clientMapper.toDto(clientList)
 activate CLIENT_MAPPER
 deactivate CLIENT_MAPPER
 
-
+CTRL -> UI : clientsListDto
 
 deactivate CTRL
 
 
-UI --> MLT : asks the number of samples to collect
+UI --> MLT : shows list of clients and asks to select one
 deactivate UI
 
-MLT -> UI : types number
+MLT -> UI : selects requested data
 activate UI
 
-UI --> MLT : requests confirmation
-deactivate UI
 
-MLT -> UI : confirms the data
-activate UI
-
-loop for each Sample to be recorded
-UI -> CTRL : createSample()
+UI -> CTRL : getValidatedTestsByClient(tin)
 activate CTRL
 
-CTRL -> CTRL : getBarcode()
-activate CTRL
-ref over CTRL
-SD_getBarcode()
-end
-CTRL --> CTRL : myBarcode
-deactivate CTRL
-
-CTRL -> COMPANY : sampleStore = getSampleStore()
-activate COMPANY
-COMPANY --> SAMPLE_STORE** : create()
-deactivate COMPANY
-
-
-CTRL -> SAMPLE_STORE : sample = createSample(myBarcode)
-activate SAMPLE_STORE
-
-SAMPLE_STORE --> SAMPLE** : create(myBarcode)
-
-
-deactivate SAMPLE_STORE
-
-/'
-SAMPLE -> SAMPLE : api = getExternalAPI()
-activate SAMPLE
-deactivate SAMPLE
-'/
-
-
-/'
-SAMPLE -> API : barcode = getBarcode(barcodeNumber)
-activate API
-'/
-/'
-API --> BARCODE** : create(barcodeNumber)
-
-API --> SAMPLE : barcode'/
-/'deactivate SAMPLE'/
-deactivate COMPANY
-deactivate API
-
-CTRL --> UI : result
-deactivate CTRL
-
-
-
-/'UI --> MLT : shows data and requests confirmation
-
-MLT -> UI : confirms the data'/
-
-/' SAVESAMPLE()
-UI -> CTRL : saveSample()
-activate CTRL
-
-CTRL -> COMPANY : sampleStore = getSampleStore()
+CTRL -> COMPANY : getTestStore()
 activate COMPANY
 deactivate COMPANY
 
-CTRL -> SAMPLE_STORE : saveSample(sample)
-activate SAMPLE_STORE
-
-
-SAMPLE_STORE -> SAMPLE_STORE : validateSample(sample)
-activate SAMPLE_STORE
-deactivate SAMPLE_STORE
-
-SAMPLE_STORE -> SAMPLE_STORE : addSample(sample)
-activate SAMPLE_STORE
-deactivate SAMPLE_STORE
-
-CTRL --> UI : result
-
-deactivate SAMPLE_STORE
-'/
-
-
-note over UI, CTRL
-The **code** refers to the code of the TestDto
-selected by the Medical Lab Technician in step 12.
-end note
-UI -> CTRL : addSample(code)
-activate CTRL
-
-
-
-
-CTRL -> COMPANY : testStore = getTestStore()
-activate COMPANY
-
-COMPANY --> TEST_STORE** : create()
-
-deactivate COMPANY
-
-CTRL -> TEST_STORE : getTestByCodeInTestList(code)
+CTRL -> TEST_STORE : getValidatedTestsByClient(tin)
 activate TEST_STORE
-ref over TEST_STORE
-SD_getTestByCodeInTestList()
-end
-TEST_STORE --> CTRL : selectedTest
 deactivate TEST_STORE
-|||
-CTRL -> SELECTED_TEST : addSample(sample)
-activate SELECTED_TEST
 
-SELECTED_TEST -> SELECTED_TEST : add(sample)
-activate SELECTED_TEST
-deactivate SELECTED_TEST
+CTRL -> TEST_MAPPER : toDTO(validatedTestsOfClient)
+activate TEST_MAPPER
+deactivate TEST_MAPPER
 
-deactivate SELECTED_TEST
-
-
-
-/'dentro do método addSample, vai-se verificar se a sample já está lá?'/
-
+CTRL -> UI : validatedTestsOfClientDTO
 deactivate CTRL
 
 
-UI -> CTRL : saveImageBarcode(code)
-activate CTRL
-
-CTRL -> COMPANY : api = getExternalApi()
-activate COMPANY
-deactivate COMPANY
-
-CTRL -> SAMPLE : myBarcode = getMyBarcode()
-activate SAMPLE
-deactivate SAMPLE
-
-CTRL -> API : saveImageBarcode(myBarcode, code)
-activate API
-deactivate API
-
-CTRL --> UI : result
-
-deactivate CTRL
-
-end
-deactivate CTRL
-|||
-UI -> CTRL : addSampleCollectingDateToTest()
-activate CTRL
-
-CTRL -> SELECTED_TEST : addSampleCollectingDate()
-activate SELECTED_TEST
-deactivate SELECTED_TEST
-deactivate CTRL
-
-
-
-UI --> MLT : informs operation success
+UI --> MLT : shows historical tests performed by the client in details
+deactivate UI
 
 
 /'colocar requests confirmation

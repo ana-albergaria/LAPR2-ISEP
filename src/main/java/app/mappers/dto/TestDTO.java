@@ -64,6 +64,11 @@ public class TestDTO {
      */
     private Date dateOfDiagnosis;
 
+
+    /**
+     * Date of validation
+     */
+    private Date dateOfValidation;
     /**
      * Number of existing tests.
      */
@@ -86,7 +91,8 @@ public class TestDTO {
                    Date dateOfTestRegistration,
                    Date dateOfSamplesCollection,
                    Date dateOfChemicalAnalysis,
-                   Date dateOfDiagnosis) {
+                   Date dateOfDiagnosis,
+                   Date dateOfValidation) {
         totalTests++;
         this.code = code;
         this.nhsCode = nhsCode;
@@ -99,6 +105,7 @@ public class TestDTO {
         this.dateOfSamplesCollection = dateOfSamplesCollection;
         this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
         this.dateOfDiagnosis = dateOfDiagnosis;
+        this.dateOfValidation = dateOfValidation;
     }
 
     /**
@@ -140,12 +147,13 @@ public class TestDTO {
         String printDateOfSamplesCollection = (dateOfSamplesCollection == null) ? "n/a" : sdf.format(dateOfSamplesCollection);
         String printDateOfChemicalAnalysis = (dateOfChemicalAnalysis == null) ? "n/a" : sdf.format(dateOfChemicalAnalysis);
         String printDateOfDiagnosis = (dateOfDiagnosis == null) ? "n/a" : sdf.format(dateOfDiagnosis);
+        String printDateOfValidation = (dateOfValidation == null) ? "n/a" : sdf.format(dateOfValidation);
 
         return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n" +
                         " > Parameters: %n%n%s > Number of Samples Collected: %d%n > Diagnosis Report: %s%n" +
                         " > Date Of Test Registration: %s%n > Date Of Samples Collection: %s%n" +
-                        " > Date of Chemical Analysis: %s%n > Date Of Diagnosis: %s%n",
+                        " > Date of Chemical Analysis: %s%n > Date Of Diagnosis: %s%n > Date Of Validation: %s%n",
                 code, nhsCode, client.getName(), testType, s, samples.size(), diagnosisReport,
-                sdf.format(dateOfTestRegistration), printDateOfSamplesCollection, printDateOfChemicalAnalysis, printDateOfDiagnosis);
+                sdf.format(dateOfTestRegistration), printDateOfSamplesCollection, printDateOfChemicalAnalysis, printDateOfDiagnosis, printDateOfValidation);
     }
 }
