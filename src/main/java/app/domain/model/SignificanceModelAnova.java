@@ -130,4 +130,27 @@ public class SignificanceModelAnova {
         text.append(testRegSignificance.toStringForAnova());
         return text.toString();
     }
+
+    /**
+     * Compares the Significance Model Anova with the received object.
+     *
+     * @param otherObject the object to be compared with the Significance Model Anova
+     * @return true if the received object represents other Significance Model Anova
+     * equivalent to the Significance Model Anova. Otherwise, returns false.
+     */
+    @Override
+    public boolean equals (Object otherObject){
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        SignificanceModelAnova otherSignificanceModelAnova = (SignificanceModelAnova) otherObject;
+
+        return this.sr == otherSignificanceModelAnova.sr &&
+                this.se == otherSignificanceModelAnova.se &&
+                this.significanceLevel == otherSignificanceModelAnova.significanceLevel &&
+                this.myRegressionModel == otherSignificanceModelAnova.myRegressionModel;
+    }
 }

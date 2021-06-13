@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 public class HypothesisTestTest {
     private MyRegressionModel myRegressionModelWithSLR;
     private SimpleLinearRegression simpleLR;
-    private HypothesisTest hypothesisTest;
 
     @Before
     public void setUp() {
