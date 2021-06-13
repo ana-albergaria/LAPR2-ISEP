@@ -36,7 +36,7 @@ public class ViewClientResultsController {
     }
 
     /**
-     * Retrieves list of client tests with or list of client tests without results
+     * Retrieves list of client tests with or list of client tests without results, ordered by date
      * @param client the client
      * @param withResults whether the list to be returned is the list of client tests with or without results
      * @return list of client tests with results if withResults is true
@@ -53,34 +53,16 @@ public class ViewClientResultsController {
                 desiredList.add(test);
             }
         }
-        List<Test> orderedTests = orderTests(desiredList);
-        TestMapper mapper = new TestMapper();
-        return mapper.toDTO(orderedTests);
-    }
 
-    public List<Test> orderTests(List<Test> clientWantedTests){
-        List<Test> orderedTests = new ArrayList<>();
-        orderedTests.add(clientWantedTests.get(0));
-        int previousIndex = -1;
-        int followingIndex = -1;
-        for (Test test : clientWantedTests){
-            for (int i = 0; i < orderedTests.size(); i++) {
-                if (test.getDateOfTestRegistration().after(orderedTests.get(i).getDateOfTestRegistration())){
-                    previousIndex=i;
-                }
-                if (test.getDateOfTestRegistration().before(orderedTests.get(i).getDateOfTestRegistration())){
-                    followingIndex=i;
-                }
+        desiredList.sort(new Comparator<Test>() {
+            @Override
+            public int compare(Test o1, Test o2) {
+                return Long.compare(o1.getDateOfTestRegistration().getTime(), o2.getDateOfTestRegistration().getTime());
             }
-            if (previousIndex!=-1){
-                orderedTests.add(previousIndex+1,test);
-            } else if (previousIndex==-1 && followingIndex!=-1){
-                orderedTests.add(followingIndex-1,test);
-            }
-            previousIndex=-1;
-            followingIndex=-1;
-        }
-        return orderedTests;
+        });
+
+        TestMapper mapper = new TestMapper();
+        return mapper.toDTO(desiredList);
     }
 
 }
