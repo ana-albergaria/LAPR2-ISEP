@@ -260,7 +260,6 @@ public class MyRegressionModel {
             return this.intercept == otherMyRegressionModel.intercept &&
                     this.slope == otherMyRegressionModel.slope &&
                     this.secondIndVariable.equals(otherMyRegressionModel.secondIndVariable) &&
-                    this.r == otherMyRegressionModel.r &&
                     this.r2 == otherMyRegressionModel.r2 &&
                     this.r2Adjusted == otherMyRegressionModel.r2Adjusted &&
                     this.numberOfObservations == otherMyRegressionModel.numberOfObservations;
