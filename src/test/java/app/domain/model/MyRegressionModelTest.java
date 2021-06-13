@@ -82,15 +82,66 @@ public class MyRegressionModelTest {
 
     //Equals Method for Multiple Linear Regression
     @Test
-    public void ensureNotEqualsWithDifferentSecondVariable() {
-        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
-        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.0,0,900,10, simpleLR);
+    public void ensureNotEqualsWithDifferentInterceptForMLR() {
+        MyRegressionModel object = new MyRegressionModel(1.235,0.0045, 2.33,0,900,10, multipleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, multipleLR);
 
         boolean result = object.equals(differentObject);
 
         Assert.assertFalse(result);
     }
 
+    @Test
+    public void ensureNotEqualsWithDifferentSlopeForMLR() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.045, 2.33,0,900,10, multipleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, multipleLR);
+
+        boolean result = object.equals(differentObject);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void ensureNotEqualsWithDifferentR2ForMLR() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0.2,900,10, multipleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, multipleLR);
+
+        boolean result = object.equals(differentObject);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void ensureNotEqualsWithDifferentR2AdjustedForMLR() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0.2,9003,10, multipleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.33,0.2,900,10, multipleLR);
+
+        boolean result = object.equals(differentObject);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void ensureNotEqualsWithDifferentNForMLR() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0.2,900,1, multipleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.33,0.2,900,10, multipleLR);
+
+        boolean result = object.equals(differentObject);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void ensureNotEqualsWithDifferentSecondVariable() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, multipleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.2345,0.0045, 2.0,0,900,10, multipleLR);
+
+        boolean result = object.equals(differentObject);
+
+        Assert.assertFalse(result);
+    }
+
+    //Other tests for Equals Method
     @Test
     public void ensureEqualsMethodObjectsFromDifferentClasses() {
         MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
