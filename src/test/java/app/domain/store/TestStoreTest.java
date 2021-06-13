@@ -6,12 +6,16 @@ import app.controller.RecordSamplesController;
 import app.controller.ShowAllTestsController;
 import app.domain.model.*;
 import app.domain.shared.Constants;
+import app.domain.shared.utils.TestFileUtils;
+import app.mappers.dto.TestFileDTO;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
+import net.sourceforge.barbecue.output.OutputException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -36,7 +40,7 @@ public class TestStoreTest {
     private Date startDate;
 
     @Before
-    public void setUp() throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public void setUp() throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException, BarcodeException, OutputException, IOException {
         parametersBlood = new ArrayList<>();
         parametersCovid = new ArrayList<>();
 
@@ -68,8 +72,12 @@ public class TestStoreTest {
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
         //for US18 and US19
+        TestFileUtils testFileUtils = new TestFileUtils();
         importTestCtrl = new ImportTestController();
-        importTestCtrl.importTestsFromFile("./tests_CovidMATCPCSV.csv");
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
+        for (TestFileDTO testData : procedData) {
+            importTestCtrl.importTestFromFile(testData);
+        }
         testStore = App.getInstance().getCompany().getTestStore();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2021);
@@ -237,6 +245,20 @@ public class TestStoreTest {
     }
 
 //========== US16 ================
+
+    /*@Test
+    public void getNumberOfCovidTestsRealizedInADay() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2021);
+        cal.set(Calendar.MONTH, 4);    // january is represented by 0
+        cal.set(Calendar.DAY_OF_MONTH, 20);
+        Date date = cal.getTime();
+        double expNumber = 15;
+
+        double number = testStore.getNumberOfCovidTestsRealizedInADay(date);
+
+        Assert.assertEquals(expNumber, number, 0.0);
+    }*/
 
     //Test 5
     @Test
@@ -488,20 +510,6 @@ public class TestStoreTest {
     }
      */
 
-
-    @Test
-    public void getNumberOfCovidTestsRealizedInADay() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 2021);
-        cal.set(Calendar.MONTH, 4);    // january is represented by 0
-        cal.set(Calendar.DAY_OF_MONTH, 20);
-        Date date = cal.getTime();
-        double expNumber = 15;
-
-        double number = testStore.getNumberOfCovidTestsRealizedInADay(date);
-
-        Assert.assertEquals(expNumber, number, 0.0);
-    }
 
     @Test
     public void getMeanAgeOfClientsOfCovidTestsInADay() throws ParseException {

@@ -12,7 +12,7 @@ deactivate ":System"
 MLT -> ":System" : selects requested data
 activate ":System"
 
-":System" --> MLT : shows all imported data
+":System" --> MLT : shows all imported data \nand informs operation successfull
 deactivate ":System"
 
 @enduml

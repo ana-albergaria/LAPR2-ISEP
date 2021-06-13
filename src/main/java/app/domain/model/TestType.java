@@ -187,7 +187,7 @@ public class TestType {
      * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      * @throws InstantiationException if the class object of the external API cannot be instantiated
      */
-    public ExternalModule getExternalModule() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public ExternalModule   getExternalModule() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Class<?> oClass = Class.forName(classNameOfApi);
         return (ExternalModule) oClass.newInstance();
     }

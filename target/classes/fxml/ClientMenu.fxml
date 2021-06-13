@@ -9,6 +9,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/clientMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.ClientMenuUI" />
+=======
+>>>>>>> 3440126549732f7ddf602cbdc3ada915150d7c69
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
@@ -25,3 +31,7 @@
       </BorderPane>
    </children>
 </AnchorPane>
+<<<<<<< HEAD
+=======
+>>>>>>> dc5cace59fec5086a1024bf0abcb7cd515edcd38
+>>>>>>> 3440126549732f7ddf602cbdc3ada915150d7c69

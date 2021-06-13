@@ -31,6 +31,19 @@ public class TestStore {
     }
 
     /**
+     * Method for creating an instance of Test
+     *
+     * @param nhsCode          National health system code of a given test
+     * @param associatedClient client object which has solicited a test
+     * @param testType         Type of test to be conduted
+     * @param parameters       List of parameters to be measured of a given test
+     */
+    public Test createTest(String nhsCode, Client associatedClient, TestType testType, List<Parameter> parameters,List<Double> paramsResults,
+                           ClinicalAnalysisLaboratory cal, Date testRegDate, Date testChemDate, Date testDiagnosisDate, Date testValidationDate) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        return new Test(nhsCode, associatedClient, testType, parameters, paramsResults, cal, testRegDate, testChemDate, testDiagnosisDate, testValidationDate);
+    }
+
+    /**
      * Validation of test instance relative to list of tests. checking for null and duplicity
      *
      * @param test test to be validated
@@ -337,7 +350,7 @@ public class TestStore {
     public double getNumberOfCovidTestsRealizedInADay(Date date) {
         double testsInADay = 0;
         for (Test test : testList) {
-            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
+            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date))
                 testsInADay++;
         }
         return testsInADay;
