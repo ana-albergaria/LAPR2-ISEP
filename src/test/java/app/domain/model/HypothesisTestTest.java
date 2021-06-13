@@ -47,7 +47,7 @@ public class HypothesisTestTest {
     @Test
     public void getDecisionEqual() {
         double tObsA = 2.399, tObsB = 2.306, critTD = 2.306;
-        HypothesisTest hypothesisTest = new HypothesisTest(myRegressionModelWithSLR, tObsA, tObsB, 0.05);
+        HypothesisTest hypothesisTest = new HypothesisTest(myRegressionModelWithSLR, tObsA, tObsB, 2.36,0.05);
         String expected = "No Reject H0";
         String actual = hypothesisTest.getDecision(tObsB,critTD);
 
