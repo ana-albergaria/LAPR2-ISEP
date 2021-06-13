@@ -237,7 +237,7 @@ public class MyRegressionModel {
      *
      * @param otherObject the object to be compared with the MyRegressionModel
      * @return true if the received object represents other MyRegressionModel
-     * equivalent to the MyBarcode. Otherwise, returns false.
+     * equivalent to the MyRegressionModel. Otherwise, returns false.
      */
     @Override
     public boolean equals(Object otherObject) {

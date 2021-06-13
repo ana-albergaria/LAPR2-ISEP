@@ -4,15 +4,10 @@ package app.domain.model.US19;
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.domain.store.NHSReportStore;
-import app.domain.store.TestStore;
 import com.nhs.report.Report2NHS;
-import org.apache.commons.math3.distribution.FDistribution;
 
 import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +58,7 @@ public class Main {
 
 
 
-        NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
+        NHSReport report = new NHSReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
         System.out.println(report);
 
         File path = new File("./NHSReport/");

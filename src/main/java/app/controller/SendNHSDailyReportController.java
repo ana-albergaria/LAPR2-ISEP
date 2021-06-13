@@ -6,13 +6,12 @@ import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class SendNHSDailyReportController {
     private Company company;
-    private NHSDailyReport nhsDailyReport;
+    private NHSReport nhsReport;
 
     public SendNHSDailyReportController() {
         this(App.getInstance().getCompany());
@@ -20,7 +19,7 @@ public class SendNHSDailyReportController {
 
     public SendNHSDailyReportController(Company company) {
         this.company = company;
-        this.nhsDailyReport = null;
+        this.nhsReport = null;
     }
 
 
@@ -43,8 +42,8 @@ public class SendNHSDailyReportController {
         Date startDate = nhsReportStore.getStartDate();
         TableOfValues tableOfValues = getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate);
 
-        this.nhsDailyReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
-        return nhsReportStore.validateNHSDailyReport(nhsDailyReport);
+        this.nhsReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
+        return nhsReportStore.validateNHSDailyReport(nhsReport);
     }
 
 

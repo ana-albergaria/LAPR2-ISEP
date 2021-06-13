@@ -14,7 +14,7 @@ package app.domain.model;
 
 public class HypothesisTest {
     /**
-     * The MyRegressionModel of the HypothesisTest.
+     * The myRegressionModel of the HypothesisTest.
      */
     private MyRegressionModel myRegressionModel;
     /**
