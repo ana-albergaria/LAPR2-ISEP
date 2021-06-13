@@ -1,15 +1,50 @@
-package app.domain.model.US19;
+package app.thirdparty;
 
-import java.util.Arrays;
-
+/**
+ *  The code MultipleLinearRegression class performs a multiple linear regression
+ *  on an set of n data points (x1_i, x2_i, y_i).
+ *  That is, it fits a straight line y = b0 + b1 * x1 + b2 * x2,
+ *  (where y is the response variable, x1 and x2 are the predictor variables,
+ *  b0 is the y-intercept, and b1 and b2 the coefficients of the
+ *  indepedent variables x1 and x2).
+ *
+ *  It  computes associated statistics, including the coefficient of
+ *  determination R^2 and the R^2 adjusted.
+ *
+ * @author Ana Albergaria
+ */
 public class MultipleLinearRegression {
+    /**
+     * The first regression coefficient.
+     */
     private double b0;
+    /**
+     * The second regression coefficient.
+     */
     private double b1;
+    /**
+     * The third regression coefficient.
+     */
     private double b2;
+    /**
+     * The vector containing the regression coefficients.
+     */
     private double[] regressionCoefficients;
+    /**
+     * The number of observations.
+     */
     private int n;
+    /**
+     * The coefficient of determination.
+     */
     private double r2;
+    /**
+     * The r2 adjusted.
+     */
     private double r2Adjusted;
+    /**
+     * 
+     */
     private double sr;
     private double se;
     private double svar;

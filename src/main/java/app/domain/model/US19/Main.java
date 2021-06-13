@@ -4,6 +4,7 @@ package app.domain.model.US19;
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.domain.store.NHSReportStore;
+import app.thirdparty.SimpleLinearRegression;
 import com.nhs.report.Report2NHS;
 
 import java.io.File;

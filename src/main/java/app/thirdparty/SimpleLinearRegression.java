@@ -1,4 +1,4 @@
-package app.domain.model.US19;
+package app.thirdparty;
 
 /******************************************************************************
  *  Compute least squares solution to y = beta * x + alpha.
@@ -20,22 +20,62 @@ import app.domain.shared.Constants;
  *
  */
 public class SimpleLinearRegression {
-    private final double intercept, slope; //intercept - y, a | slope - x, b
+    /**
+     * The intercept of the SimpleLinearRegression.
+     */
+    private final double intercept; //intercept - y, a | slope - x, b
+    /**
+     * The slope of the SimpleLinearRegression.
+     */
+    private final double slope;
+    /**
+     * The determination coefficient of the SimpleLinearRegression.
+     */
     private final double r2;
     private final double svar0, svar1;
-
-    //svar - variância
+    /**
+     * The number of observations of the SimpleLinearRegression.
+     */
     private int n;
+    /**
+     * The Sxx of the SimpleLinearRegression.
+     */
     private double xxbar;
+    /**
+     * The mean of the x variable of the SimpleLinearRegression.
+     */
     private double xbar; //média
+    /**
+     * The residual sum of squares of the SimpleLinearRegression.
+     */
     private double rss; // residual sum of squares
+    /**
+     * The regression sum of squares of the SimpleLinearRegression.
+     */
     private double ssr; // regression sum of squares
+    /**
+     * The standard deviation of the SimpleLinearRegression.
+     */
     private double s; //standard deviation (desvio padrão amostral)
+    /**
+     * The r2 adjusted of the SimpleLinearRegression.
+     */
     private double r2Adjusted;
-
+    /**
+     * The a0 to calculate the observed value for the hypothesis test
+     * regarding the first regression coefficient.
+     */
     private static final double A0 = Constants.A0;
+    /**
+     * The b0 to calculate the observed value for the hypothesis test
+     * regarding the second regression coefficient.
+     */
     private static final double B0 = Constants.B0;
-    private static final int NUM_REG_COEFFICIENTS = 1; //temos 2 coeficientes de regressão, mas para a fórmula não conta o da var independente
+    /**
+     * The number of the Regression Coefficients of the Simple Linear Regression.
+     * (it doesn't include the first regression coefficient)
+     */
+    private static final int NUM_REG_COEFFICIENTS = 1;
 
     /**
      * Performs a linear regression on the data points (y[i], x[i]).
@@ -82,6 +122,7 @@ public class SimpleLinearRegression {
             throw new IllegalArgumentException("yybar cannot be 0!");
         r2    = ssr / yybar;
         r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
+        //svar - variance
         double svar  = rss / degreesOfFreedom;
         s = Math.sqrt(svar); //acrescentei -> desvio padrão amostral
         svar1 = svar / xxbar;
@@ -134,33 +175,51 @@ public class SimpleLinearRegression {
         return Math.sqrt(svar1);
     }
 
+    /**
+     * Returns the r2 adjusted.
+     *
+     * @return the r2 adjusted
+     */
     public double getR2Adjusted() {
         return r2Adjusted;
     }
 
+    /**
+     * Returns the number of the observations.
+     *
+     * @return number of the observations
+     */
     public int getN() {
         return n;
     }
 
+    /**
+     * Returns the residual sum of squares.
+     *
+     * @return the residual sum of squares
+     */
     public double getRSS() {
         return rss;
     }
 
+    /**
+     * Returns the regression sum of squares.
+     *
+     * @return the regression sum of squares
+     */
     public double getSSR() {
         return ssr;
     }
 
+    /**
+     * Returns the standard deviation.
+     *
+     * @return the standard deviation
+     */
     public double getS() {
         return s;
     }
 
-    public double getXbar() {
-        return xbar;
-    }
-
-    public double getXXbar() {
-        return xxbar;
-    }
 
     /**
      * Returns the expected response y given the value of the predictor
@@ -174,14 +233,32 @@ public class SimpleLinearRegression {
         return slope*x + intercept;
     }
 
+    /**
+     * Returns the observed value regarding the first regression coefficient.
+     *
+     * @return the observed value regarding the first regression coefficient
+     */
     public double calculatetObsA() {
         return (intercept-A0) / (s * Math.sqrt((1.0/n) + (Math.pow(xbar,2) / xxbar)));
     }
 
+    /**
+     * Returns the observed value regarding the second regression coefficient.
+     *
+     * @return the observed value regarding the second regression coefficient
+     */
     public double calculateTObsB() {
         return (slope-B0) / (s * Math.sqrt(1/xxbar));
     }
 
+    /**
+     * Returns the partial value of the error (without the critical value)
+     * of a Confidence Interval.
+     *
+     * @param x0 the x0 to obtain the predicted value y0
+     *
+     * @return the partial value of the error (without the critical value) of a Confidence Interval.
+     */
     public double calculateAuxDelta(Double x0) {
         return s * Math.sqrt(1 + (1.0/n) + (Math.pow((x0-xbar),2) / xxbar));
     }

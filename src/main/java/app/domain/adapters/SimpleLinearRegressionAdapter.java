@@ -2,7 +2,7 @@ package app.domain.adapters;
 
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
-import app.domain.model.US19.SimpleLinearRegression;
+import app.thirdparty.SimpleLinearRegression;
 
 import java.util.ArrayList;
 import java.util.List;
