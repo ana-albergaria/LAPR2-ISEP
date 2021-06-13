@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.MainUI">
-    <children>
+   <children>
       <AnchorPane layoutX="338.0" prefHeight="500.0" prefWidth="355.0" style="-fx-background-color: #26292F;">
          <children>
             <TextField layoutX="95.0" layoutY="250.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
@@ -56,15 +56,15 @@
       <AnchorPane prefHeight="45.0" prefWidth="693.0">
          <children>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="693.0" style="-fx-background-color: transparent;">
-              <items>
-                <Button fx:id="sairBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+               <items>
+                  <Button fx:id="sairBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-              </items>
+               </items>
             </ToolBar>
          </children>
       </AnchorPane>
-    </children>
+   </children>
 </AnchorPane>
