@@ -249,12 +249,22 @@ public class MyRegressionModel {
 
         MyRegressionModel otherMyRegressionModel = (MyRegressionModel) otherObject;
 
-        return this.intercept == otherMyRegressionModel.intercept &&
-                this.slope == otherMyRegressionModel.slope &&
-                this.secondIndVariable == otherMyRegressionModel.secondIndVariable &&
-                this.r == otherMyRegressionModel.r &&
-                this.r2 == otherMyRegressionModel.r2 &&
-                this.r2Adjusted == otherMyRegressionModel.r2Adjusted &&
-                this.numberOfObservations == otherMyRegressionModel.numberOfObservations;
+        if(secondIndVariable == null) {
+            return this.intercept == otherMyRegressionModel.intercept &&
+                    this.slope == otherMyRegressionModel.slope &&
+                    this.r == otherMyRegressionModel.r &&
+                    this.r2 == otherMyRegressionModel.r2 &&
+                    this.r2Adjusted == otherMyRegressionModel.r2Adjusted &&
+                    this.numberOfObservations == otherMyRegressionModel.numberOfObservations;
+        } else {
+            return this.intercept == otherMyRegressionModel.intercept &&
+                    this.slope == otherMyRegressionModel.slope &&
+                    this.secondIndVariable.equals(otherMyRegressionModel.secondIndVariable) &&
+                    this.r == otherMyRegressionModel.r &&
+                    this.r2 == otherMyRegressionModel.r2 &&
+                    this.r2Adjusted == otherMyRegressionModel.r2Adjusted &&
+                    this.numberOfObservations == otherMyRegressionModel.numberOfObservations;
+        }
+
     }
 }
