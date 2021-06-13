@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SimpleLinearRegressionAdapterTest {
     private Company company;
@@ -39,6 +40,7 @@ public class SimpleLinearRegressionAdapterTest {
 
     @Test
     public void getEstimatedPositives() {
+        Locale.setDefault(Locale.ENGLISH); //necessary because Jenkins was configured to numbers in English format.
         //Ex. 1 TP PL7 MATCP
         double[] x = {825.0, 215.0, 1070.0, 550.0, 480.0, 920.0, 1350.0, 325.0, 670.0, 1215.0};
         double[] y = {3.5, 1.0, 4.0, 2.0, 1.0, 3.0, 4.5, 1.5, 3.0, 5.0};
@@ -46,16 +48,16 @@ public class SimpleLinearRegressionAdapterTest {
         Double[] yInDouble = {3.5, 1.0, 4.0, 2.0, 1.0, 3.0, 4.5, 1.5, 3.0, 5.0};
 
         List<String> expectedEstimatedPositives = new ArrayList<>();
-        expectedEstimatedPositives.add("3,075863");
-        expectedEstimatedPositives.add("0,888933");
-        expectedEstimatedPositives.add("3,954221");
-        expectedEstimatedPositives.add("2,089952");
-        expectedEstimatedPositives.add("1,838993");
-        expectedEstimatedPositives.add("3,416451");
-        expectedEstimatedPositives.add("4,958058");
-        expectedEstimatedPositives.add("1,283297");
-        expectedEstimatedPositives.add("2,520168");
-        expectedEstimatedPositives.add("4,474065");
+        expectedEstimatedPositives.add("3.075863");
+        expectedEstimatedPositives.add("0.888933");
+        expectedEstimatedPositives.add("3.954221");
+        expectedEstimatedPositives.add("2.089952");
+        expectedEstimatedPositives.add("1.838993");
+        expectedEstimatedPositives.add("3.416451");
+        expectedEstimatedPositives.add("4.958058");
+        expectedEstimatedPositives.add("1.283297");
+        expectedEstimatedPositives.add("2.520168");
+        expectedEstimatedPositives.add("4.474065");
 
 
         MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(x, null, y, 10);
