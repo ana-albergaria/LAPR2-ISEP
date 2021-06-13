@@ -212,4 +212,5 @@ public class HypothesisTest {
         text.append(String.format("%s%n", getDecisionForAnova(critFD)));
         return text.toString();
     }
+
 }

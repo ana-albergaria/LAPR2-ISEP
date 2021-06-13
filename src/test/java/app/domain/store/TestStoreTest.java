@@ -497,18 +497,21 @@ public class TestStoreTest {
 
     //for US18 and US19
     // Porque dá erro no Jenkins??
-    /*@Test
-    public void getObservedPositivesToTableOfValues() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+    /*
+    @Test
+    public void getObservedPositivesToTableOfValues() throws ParseException {
         int numberOfObservations = 8;
         NHSReportStore nhsReportStore = new NHSReportStore();
         List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(numberOfObservations, startDate);
-        int[] expObservedPositives = {1, 3, 2, 5, 8, 8, 0, 12};
+        int[] expObservedPositives = {1, 3, 2, 5, 8, 8, 12, 10};
 
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(numberOfObservations, dates);
 
         Assert.assertArrayEquals(expObservedPositives, observedPositives);
     }
      */
+
+
 
 
     @Test
@@ -526,7 +529,8 @@ public class TestStoreTest {
     }
 
     //Porque dá erro no Jenkins?
-    /*@Test
+    /*
+    @Test
     public void getObservedPositivesCovidInADay() {
         double expNumber = 1;
         double number = testStore.getObservedPositivesCovidInADay(startDate);
@@ -535,6 +539,8 @@ public class TestStoreTest {
 
     }
      */
+
+
 
 
     //end US18 and US19
