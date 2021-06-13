@@ -37,7 +37,7 @@ Company "1" -- "1" Timer : knows >
 Company "*" - "1" NhsAPI : makes use of >
 NHSDailyReport "*" -- "1" NhsAPI : send by >
 NHSDailyReport "*" -- "1" RegressionModel : has >
-NHSDailyReport "1" -- "*" HypothesisTest : contains >
+NHSDailyReport "1" -- "1" HypothesisTest : contains >
 NHSDailyReport "1" -- "1" SignificanceModelAnova : contains >
 Company "*" -- "1" RegressionModel : makes use of >
 HypothesisTest "*" -- "1" RegressionModel : of >

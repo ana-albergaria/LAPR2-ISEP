@@ -1,19 +1,55 @@
 package app.domain.model;
 
-import app.domain.interfaces.RegressionModel;
-
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a Table of Values through:
+ * a My Regression Model,
+ * the dates (in days or weeks) corresponding to the historical points,
+ * the observed Covid-19 tests positives
+ * the estimated Covid-19 tests positives
+ * the prediction confidence intervals
+ *
+ * @author Ana Albergaria
+ */
+
 public class TableOfValues {
+    /**
+     * The MyRegressionModel of the TableOfValues.
+     */
     private MyRegressionModel myRegressionModel;
+    /**
+     * The dates (in days or weeks) corresponding to the historical points.
+     */
     private List<String> dates;
+    /**
+     * The observed Covid-19 tests positives.
+     */
     private int[] observedPositives;
+    /**
+     * The estimated Covid-19 tests positives.
+     */
     List<Double> estimatedPositives;
+    /**
+     * The prediction confidence intervals
+     */
     private List<ConfidenceInterval> confidenceIntervals;
 
-
-
+    /**
+     * Builds a Table Of Value's instance receiving:
+     * the myRegressionModel
+     * the dates
+     * the observed positives
+     * the estimated positives
+     * the confidence intervals
+     *
+     * @param myRegressionModel the myRegressionModel of the TableOfValues
+     * @param dates the dates (in days or weeks) corresponding to the historical points
+     *              of the TableOfValues
+     * @param observedPositives the observed Covid-19 tests positives of the TableOfValues
+     * @param estimatedPositives the estimated Covid-19 tests positives of the TableOfValues
+     * @param confidenceIntervals the prediction confidence intervals
+     */
     public TableOfValues(MyRegressionModel myRegressionModel,
                          List<String> dates,
                          int[] observedPositives,
@@ -26,12 +62,21 @@ public class TableOfValues {
         this.confidenceIntervals = confidenceIntervals;
     }
 
+    /**
+     * Returns the confidence level in percentage.
+     *
+     * @return the confidence level in percentage
+     */
     public String getConfidenceLevelInPercentage() {
         double confidenceLevel = confidenceIntervals.get(0).getConfidenceLevel() * 100;
         return String.valueOf(confidenceLevel);
     }
 
-
+    /**
+     * Returns the textual description of the TableOfValues' instance.
+     *
+     * @return characteristics of the TableOfValues
+     */
     @Override
     public String toString() {
         StringBuilder text = new StringBuilder();

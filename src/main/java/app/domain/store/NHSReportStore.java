@@ -3,7 +3,6 @@ package app.domain.store;
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,15 +11,15 @@ import java.util.List;
 
 public class NHSReportStore {
 
-    private List<NHSDailyReport> nhsDailyReportList = new ArrayList<>();
+    private List<NHSReport> nhsReportList = new ArrayList<>();
 
-    public NHSDailyReport createNHSDailyReport(MyRegressionModel myRegressionModel, HypothesisTest hypothesisTest, SignificanceModelAnova modelAnova, TableOfValues tableOfValues) {
-        return new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
+    public NHSReport createNHSDailyReport(MyRegressionModel myRegressionModel, HypothesisTest hypothesisTest, SignificanceModelAnova modelAnova, TableOfValues tableOfValues) {
+        return new NHSReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
     }
 
-    public boolean validateNHSDailyReport(NHSDailyReport nhsDailyReport) {
-        return nhsDailyReport != null && nhsDailyReport.getMyRegressionModel() != null &&
-                nhsDailyReport.getHypothesisTest() != null && nhsDailyReport.getModelAnova() != null && nhsDailyReport.getTableOfValues() != null;
+    public boolean validateNHSDailyReport(NHSReport nhsReport) {
+        return nhsReport != null && nhsReport.getMyRegressionModel() != null &&
+                nhsReport.getHypothesisTest() != null && nhsReport.getModelAnova() != null && nhsReport.getTableOfValues() != null;
     }
 
     public int getBestXIndex(RegressionModel regressionModel,

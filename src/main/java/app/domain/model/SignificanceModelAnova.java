@@ -4,7 +4,16 @@ package app.domain.model;
  * Represents a Significance Model Anova through:
  * a My Regression Model,
  * the Hypothesis Test for the Test for Significance of Regression (testRegSignificance),
- * the significance level
+ * the significance level,
+ * the regression sum of squares (sr),
+ * the residual sum of squares (se),
+ * the total sum of squares (st),
+ * the regression mean square (mr),
+ * the mean squared error (me),
+ * the observed value f for the Test for Significance of Regression,
+ * the degrees of freedom regarding the regression mean square,
+ * the degrees of freedom regarding the mean squared error,
+ * the degrees of freedom regarding the total sum of squares.
  *
  * @author Ana Albergaria
  */

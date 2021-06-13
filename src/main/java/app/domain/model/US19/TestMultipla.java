@@ -4,6 +4,7 @@ import app.domain.interfaces.RegressionModel;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
+import app.thirdparty.MultipleLinearRegression;
 
 public class TestMultipla {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
