@@ -7,8 +7,7 @@ import app.domain.store.TestStore;
 import app.mappers.TestMapper;
 import app.mappers.dto.TestDTO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Marta Ribeiro 1201592
@@ -54,9 +53,34 @@ public class ViewClientResultsController {
                 desiredList.add(test);
             }
         }
+        List<Test> orderedTests = orderTests(desiredList);
         TestMapper mapper = new TestMapper();
-        return mapper.toDTO(desiredList);
+        return mapper.toDTO(orderedTests);
     }
 
+    public List<Test> orderTests(List<Test> clientWantedTests){
+        List<Test> orderedTests = new ArrayList<>();
+        orderedTests.add(clientWantedTests.get(0));
+        int previousIndex = -1;
+        int followingIndex = -1;
+        for (Test test : clientWantedTests){
+            for (int i = 0; i < orderedTests.size(); i++) {
+                if (test.getDateOfTestRegistration().after(orderedTests.get(i).getDateOfTestRegistration())){
+                    previousIndex=i;
+                }
+                if (test.getDateOfTestRegistration().before(orderedTests.get(i).getDateOfTestRegistration())){
+                    followingIndex=i;
+                }
+            }
+            if (previousIndex!=-1){
+                orderedTests.add(previousIndex+1,test);
+            } else if (previousIndex==-1 && followingIndex!=-1){
+                orderedTests.add(followingIndex-1,test);
+            }
+            previousIndex=-1;
+            followingIndex=-1;
+        }
+        return orderedTests;
+    }
 
 }
