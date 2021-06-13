@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -35,22 +36,22 @@ public class ClientMenuUI implements Initializable {
     }
 
     @FXML
-    void logoutAction(javafx.event.ActionEvent event) {
+    void logoutAction(ActionEvent event) {
         this.mainUI.getMainApp().toMainScene();
     }
 
     @FXML
-    void viewTestResultAction(javafx.event.ActionEvent event) {
+    void viewTestResultAction(ActionEvent event) {
 
     }
 
     @FXML
-    void updateClientDataAction(javafx.event.ActionEvent event) {
+    void updateClientDataAction(ActionEvent event) {
 
     }
 
     @FXML
-    void exitAction(javafx.event.ActionEvent event) {
+    void exitAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
         alert.setTitle("Aplication");

@@ -30,26 +30,25 @@
                <children>
                   <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1">
                     <items>
-                      <Button mnemonicParsing="false" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+                      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
                     </items>
                   </ToolBar>
-                  <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnAction" style="-fx-background-color: transparent;">
                      <font>
                         <Font name="Tahoma" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="31.0">
+                           <image>
+                              <Image url="@../../java/app/ui/gui/Images/Icon3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <ImageView fitHeight="31.0" fitWidth="31.0">
-                     <image>
-                        <Image url="@../../java/app/ui/gui/Images/Icon3.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </ImageView>
                </children>
             </GridPane>
          </top>
