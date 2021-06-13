@@ -43,15 +43,36 @@ public class MultipleLinearRegression {
      */
     private double r2Adjusted;
     /**
-     * 
+     * The regression sum of squares.
      */
     private double sr;
+    /**
+     * The residual sum of squares.
+     */
     private double se;
+    /**
+     * The variance.
+     */
     private double svar;
+    /**
+     * The inverse of the xTx matrix.
+     */
     private double[][] xTxInverse;
-
+    /**
+     * The number of the Regression Coefficients of the Multiple Linear Regression.
+     * (it doesn't include B0)
+     *
+     */
     private static final int NUM_REG_COEFFICIENTS = 2;
 
+    /**
+     * Performs a linear regression on the data points (x1_i, x2_i, y_i).
+     *
+     * @param x1 the values of the first independent variable
+     * @param x2 the values of the second independent variable
+     * @param y the values of the dependent variable
+     * @throws IllegalArgumentException if the array lengths aren't equal
+     */
     public MultipleLinearRegression(double[] x1, double[] x2, double[] y) {
         if (x1.length != x2.length || x1.length != y.length) {
             throw new IllegalArgumentException("Array lengths are not equal!");
@@ -145,60 +166,114 @@ public class MultipleLinearRegression {
         svar = se / (n - (NUM_REG_COEFFICIENTS + 1));
 
         System.out.println("Variância: " + svar);
-
-
-
     }
 
+    /**
+     * Returns the first regression coefficient.
+     *
+     * @return the first regression coefficient
+     */
     public double getB0() {
         return b0;
     }
 
+    /**
+     * Returns the second regression coefficient.
+     *
+     * @return the second regression coefficient
+     */
     public double getB1() {
         return b1;
     }
 
+    /**
+     * Returns the third regression coefficient.
+     *
+     * @return the third regression coefficient
+     */
     public double getB2() {
         return b2;
     }
 
+    /**
+     * Returns the coefficient of determination.
+     *
+     * @return the coefficient of determination
+     */
     public double getR2() {
         return r2;
     }
 
+    /**
+     * Returns the R2 adjusted.
+     *
+     * @return the R2 adjusted
+     */
     public double getR2Adjusted() {
         return r2Adjusted;
     }
 
-    public double getSvar() {
-        return svar;
-    }
-
+    /**
+     * Returns the regression sum of squares.
+     *
+     * @return the regression sum of squares
+     */
     public double getSR() {
         return sr;
     }
 
+    /**
+     * Returns the residual sum of squares.
+     *
+     * @return the residual sum of squares
+     */
     public double getSE() {
         return se;
     }
 
+    /**
+     * Returns the number of observations.
+     *
+     * @return the number of observations
+     */
     public int getN() {
         return n;
     }
 
-    public double[] getRegressionCoefficients() {
-        return regressionCoefficients;
-    }
-
+    /**
+     * Returns the expected response y given the value of the predictors
+     * variables x1 and x2.
+     *
+     * @param x1 first independent variable
+     * @param x2 second independent variable
+     *
+     * @return the expected response y given the value of the predictors variables x1 and x2
+     */
     public double predict(double x1, double x2) {
         return b0 + (b1*x1) + (b2*x2);
     }
 
+    /**
+     * Returns the observed value regarding a certain regression coefficient,
+     * defined by its index (indexB)
+     *
+     * @param indexB the index to determine which is the regression coefficient
+     *
+     * @return the observed value regarding a certain regression coefficient
+     */
     public double calculateTObsBj(int indexB) {
         double cjj = xTxInverse[indexB][indexB];
         return regressionCoefficients[indexB] / Math.sqrt(svar * cjj);
     }
 
+    /**
+     * Returns the partial value of the error (without the critical value)
+     * of a Confidence Interval.
+     *
+     * @param x0T the x0T vector to obtain the predicted value y0
+     *
+     * @return the partial value of the error (without the critical value) of a Confidence Interval.
+     */
     public double calculateAuxDelta(double[] x0T) {
         //determine x0T * C
         double[] x0TC = vectorWithMatrixMultiplication(x0T, xTxInverse);
@@ -208,9 +283,13 @@ public class MultipleLinearRegression {
         return Math.sqrt(svar * (1.0 + x0TCx0));
     }
 
-
-
-
+    /**
+     * Returns the tranpose of a matrix received by parameter.
+     *
+     * @param x the matrix to be transposed
+     *
+     * @return the transpose of the matrix x
+     */
     private double[][] transposeMatrix(double[][] x) {
         int rowX = x.length, columnX = x[0].length;
         double[][] xT = new double[columnX][rowX];
@@ -223,7 +302,14 @@ public class MultipleLinearRegression {
         return xT;
     }
 
-
+    /**
+     * Returns the result of a multiplication between two matrices - a matrix.
+     *
+     * @param matrix first matrix
+     * @param otherMatrix second matrix
+     *
+     * @return result of a multiplication between two matrices - a matrix
+     */
     private double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
         if(matrix[0].length != otherMatrix.length)
             throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "columns from the" +
@@ -241,6 +327,14 @@ public class MultipleLinearRegression {
         return result;
     }
 
+    /**
+     * Returns the result of a multiplication between matrix and a vector - a vector.
+     *
+     * @param matrix the matrix
+     * @param vector the vector
+     *
+     * @return result of a multiplication between matrix and a vector - a vector
+     */
     private double[] matrixWithVectorMultiplication(double[][] matrix, double[] vector) {
         if(matrix[0].length != vector.length)
             throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "columns from the" +
@@ -261,6 +355,14 @@ public class MultipleLinearRegression {
         return result;
     }
 
+    /**
+     * Returns the result of a multiplication between two vectors - a value.
+     *
+     * @param vector first vector
+     * @param otherVector second vector
+     *
+     * @return result of a multiplication between two vectors - a value
+     */
     private double vectorWithVectorMultiplication(double[] vector, double[] otherVector) {
         if(vector.length != otherVector.length)
             throw new IllegalArgumentException("The multiplication is not possible with" + vector.length + "columns from the" +
@@ -274,7 +376,16 @@ public class MultipleLinearRegression {
         return result;
     }
 
-    //VERIFICAR DEPOIS!!!!
+    //VERIFICAR DEPOIS MÉTODO ABAIXO!!!!
+
+    /**
+     * Returns the result of a multiplication between vector and a matrix - a vector.
+     *
+     * @param vector the vector
+     * @param matrix the matrix
+     *
+     * @return the result of a multiplication between vector and a matrix - a vector
+     */
     private double[] vectorWithMatrixMultiplication(double[] vector, double[][] matrix) {
         if(vector.length != matrix.length)
             throw new IllegalArgumentException("The multiplication is not possible with" + vector.length + "columns from the" +
@@ -295,6 +406,13 @@ public class MultipleLinearRegression {
         return result;
     }
 
+    /**
+     * Returns the inverse of a matrix a, received by parameter
+     *
+     * @param a matrix to be inverted
+     *
+     * @return inverse of the matrix a
+     */
     private double[][] invert(double a[][]) {
         int n = a.length;
         double x[][] = new double[n][n];
@@ -326,8 +444,13 @@ public class MultipleLinearRegression {
         return x;
     }
 
-    // Method to carry out the partial-pivoting Gaussian
-    // elimination.  Here index[] stores pivoting order.
+    /**
+     * Method to carry out the partial-pivoting Gaussian
+     * elimination.  Here index[] stores pivoting order.
+     *
+     * @param a matrix
+     * @param index vector to store pivoting order
+     */
     private void gaussian(double[][] a, int[] index) {
         int n = index.length;
         double c[] = new double[n];
@@ -374,6 +497,14 @@ public class MultipleLinearRegression {
         }
     }
 
+    /**
+     * Returns the mean of the values of the vector x,
+     * received by parameter.
+     *
+     * @param x values of the vector
+     *
+     * @return the mean of the values of the vector x
+     */
     private double mean(double[] x) {
         double sum = 0;
         for (int i = 0; i < x.length; i++) {
@@ -382,6 +513,12 @@ public class MultipleLinearRegression {
         return sum / x.length;
     }
 
+    /**
+     * Returns a string representation of the multiple linear regression model.
+     *
+     * @return a string representation of the multiple linear regression model,
+     *         including the regression equation and R^2
+     */
     @Override
     public String toString() {
         return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
