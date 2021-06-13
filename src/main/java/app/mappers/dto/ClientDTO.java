@@ -43,6 +43,34 @@ public class ClientDTO {
         return tinNumber;
     }
 
+    public String getClientsCitizenCardNumber() {
+        return clientsCitizenCardNumber;
+    }
+
+    public String getNhsNumber() {
+        return nhsNumber;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     @Override
     public String toString() {
         return String.format("Client: %s%nTin: %s%nEmail: %s%n", name, tinNumber, email);

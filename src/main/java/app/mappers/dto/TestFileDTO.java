@@ -23,10 +23,12 @@ public class TestFileDTO {
 
     private Date dateOfDiagnosis;
 
+    private Date dateOfValidation;
+
     private String labId;
 
     public TestFileDTO(ClientDTO clientDTO, String nhsCode, String testTypeCode, List<String> testParameterCodes, List<Double> testParameterResults,
-                       Date dateOfTestRegistration, Date dateOfChemicalAnalysis, Date dateOfDiagnosis, String labId) {
+                       Date dateOfTestRegistration, Date dateOfChemicalAnalysis, Date dateOfDiagnosis, Date dateOfValidation, String labId) {
         this.clientDTO = clientDTO;
         this.nhsCode = nhsCode;
         this.testTypeCode = testTypeCode;
@@ -35,6 +37,7 @@ public class TestFileDTO {
         this.dateOfTestRegistration = dateOfTestRegistration;
         this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
         this.dateOfDiagnosis = dateOfDiagnosis;
+        this.dateOfValidation = dateOfValidation;
         this.labId = labId;
     }
 
@@ -74,9 +77,13 @@ public class TestFileDTO {
         return labId;
     }
 
+    public Date getDateOfValidation() {
+        return dateOfValidation;
+    }
+
     @Override
     public String toString() {
-        return String.format("TEST FILE DTO:%n Client:%s%nNhsCode:%s%nTestParameters:%s%nTestParameterResults:%s%nTestType:%s%nDates:%s%n%s%n%s%n",
-                clientDTO, nhsCode, testParameterCodes, testParameterResults, testTypeCode, dateOfTestRegistration, dateOfChemicalAnalysis, dateOfDiagnosis);
+        return String.format("TEST FILE DTO:%n Client:%s%nNhsCode:%s%nTestParameters:%s%nTestParameterResults:%s%nTestType:%s%nDates:%n%s%n%s%n%s%n%s%n",
+                clientDTO, nhsCode, testParameterCodes, testParameterResults, testTypeCode, dateOfTestRegistration, dateOfChemicalAnalysis, dateOfDiagnosis, dateOfValidation);
     }
 }

@@ -1,12 +1,17 @@
 package app.controller;
 
+import app.domain.shared.utils.TestFileUtils;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import app.mappers.dto.ClientDTO;
 import app.mappers.dto.TestDTO;
+import app.mappers.dto.TestFileDTO;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.output.OutputException;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +22,14 @@ import static org.junit.Assert.*;
 public class ConsultTestByClientTest {
 
     @Before
-    public void setUp() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+    public void setUp() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
         ImportTestController importTestController = new ImportTestController();
-        importTestController.importTestsFromFile("tests_Covid_short.csv");
+        TestFileUtils testFileUtils = new TestFileUtils();
+        importTestController = new ImportTestController();
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_CovidMATCPCSV.csv");
+        for (TestFileDTO testData : procedData) {
+            importTestController.importTestFromFile(testData);
+        }
         TestStore testStore = App.getInstance().getCompany().getTestStore();
         CreateTestController createTestController = new CreateTestController();
         List<String> params = new ArrayList<>();

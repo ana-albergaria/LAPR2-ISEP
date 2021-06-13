@@ -2,6 +2,7 @@ package app.domain.store;
 
 import app.domain.model.Client;
 import app.domain.shared.utils.PasswordUtils;
+import app.mappers.dto.ClientDTO;
 import auth.AuthFacade;
 
 import java.io.IOException;
@@ -49,21 +50,10 @@ public class ClientStore {
                 tinNumber, email, name, phoneNumber);
     }
 
-    /**
-     * Creates an client instance with all arguments but sex(optional)
-     * @param clientsCitizenCardNumber clients Citizen Card Number.
-     * @param nhsNumber                clients NHS Number.
-     * @param birthDate                clients Birth Date
-     * @param tinNumber                clients TIN Number.
-     * @param email                    clients E-mail.
-     * @param name                     clients Name.
-     * @param phoneNumber              clients Phone Number.
-     * @return the created client
-     */
-    public Client registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate,
-                                                  String tinNumber, String email, String name, String phoneNumber) {
-        return new Client(clientsCitizenCardNumber, nhsNumber, birthDate,
-                tinNumber, email, name, phoneNumber);
+
+    public Client registerClient(ClientDTO clientDTO) {
+        return new Client(clientDTO.getClientsCitizenCardNumber(),clientDTO.getNhsNumber(), clientDTO.getBirthDate(),
+                clientDTO.getTinNumber(), clientDTO.getEmail(), clientDTO.getName(), clientDTO.getPhoneNumber());
     }
 
     /**
