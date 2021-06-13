@@ -3,6 +3,7 @@ package app.controller;
 import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.store.ClientStore;
+import app.mappers.dto.ClientDTO;
 
 import java.util.Date;
 
@@ -67,23 +68,10 @@ public class RegisterClientController {
         return store.validateClient(cl);
     }
 
-    /**
-     * Creates an client instance with all arguments but sex(optional)
-     *
-     * @param clientsCitizenCardNumber clients Citizen Card Number.
-     * @param nhsNumber                clients NHS Number.
-     * @param birthDate                clients Birth Date
-     * @param tinNumber                clients TIN Number.
-     * @param email                    clients E-mail.
-     * @param name                     clients Name.
-     * @param phoneNumber              clients Phone Number.
-     * @return true if success, false if fails
-     */
-    public boolean registerClient(String clientsCitizenCardNumber, String nhsNumber, Date birthDate,
-                                  String tinNumber, String email, String name, String phoneNumber) {
+
+    public boolean registerClient(ClientDTO clientDTO) {
         ClientStore store = this.company.getClientStore();
-        this.cl = store.registerClient(clientsCitizenCardNumber, nhsNumber, birthDate,
-                tinNumber, email, name, phoneNumber);
+        this.cl = store.registerClient(clientDTO);
         return store.validateClient(cl);
     }
 

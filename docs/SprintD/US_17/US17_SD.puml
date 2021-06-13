@@ -5,9 +5,18 @@ actor "Laboratory coordinator" as ADM
 participant ":ImportTestUI  " as UI
 participant "testFile:TestFileUtils" as TST
 participant ":ImportTestController" as CTRL
-participant ":Company" as PLAT
 participant ":RegisterClientController" as CLIENT_CTRL
-participant ":CreateFileTestController" as ORG
+participant ":CreateFileTestController" as TEST_CTRL
+participant ":Company" as PLAT
+participant "clientStore\n:ClientStore" as CLIENT_STORE
+participant "testTypeStore\n:TestTypeStore" as TEST_TYPE_STORE
+participant "parameterStore\n:ParameterStore" as PARAM_STORE
+participant "calStore\n:CalStore" as CAL_STORE
+participant "testFileDto\n:TestFIleDTO" as DTO
+participant ":RecordSamplesController" as SAM_CTRL
+participant "store:TestStore" as ORG
+participant "tt\n:Test" as TAREFA
+participant ": TestParameter" as tp
 
 activate ADM
 ADM -> UI : asks to import clinical tests from a CSV file.
@@ -16,7 +25,7 @@ activate UI
 UI -> CTRL : create()
 activate CTRL
 CTRL -> CLIENT_CTRL** : createClientCtrl = create()
-CTRL -> ORG** : createClientCtrl = create()
+CTRL -> TEST_CTRL** : createClientCtrl = create()
 deactivate CTRL
 
 
@@ -44,24 +53,148 @@ CTRL -> TEST_LIST** : create()
 
 CTRL -> CLIENT_CTRL : existsClient = createClient(testFileDTO.getClientDTO())
 activate CLIENT_CTRL
+
+ref over CLIENT_CTRL
+SD_createClient(clientDto)
+end
 deactivate CLIENT_CTRL
 
 alt client doesn't exist in Client Store
 CTRL -> CLIENT_CTRL : clientCreation = saveClient()
 activate CLIENT_CTRL
+ref over CLIENT_CTRL
+SD_saveClient()
+end
+
 deactivate CLIENT_CTRL
 end
-CTRL -> ORG : createTest(TestFileDTO)
+CTRL -> TEST_CTRL : createTest(TestFileDTO)
+activate TEST_CTRL
+
+TEST_CTRL -> PLAT : clientStore = getClientStore()
+activate PLAT
+|||
+deactivate PLAT
+
+
+TEST_CTRL -> CLIENT_STORE : associatedClient = getClientByTinNumber(testFileDTO.getClientDTO().getTinNumber)
+activate CLIENT_STORE
+deactivate CLIENT_STORE
+
+
+
+TEST_CTRL -> PLAT : testTypeStore = getTestTypeStore()
+activate PLAT
+|||
+deactivate PLAT
+
+TEST_CTRL -> TEST_TYPE_STORE : selectedTestType = getTestTypeByCode(TestFileDTO.getTestTypeCode)
+activate TEST_TYPE_STORE
+deactivate TEST_TYPE_STORE
+
+TEST_CTRL -> PLAT : parameterStore = getParameterStore()
+activate PLAT
+|||
+deactivate PLAT
+
+TEST_CTRL -> PARAM_STORE : selectedParamsList = getParamsByCodes(TestFileDTO.getParamsCodes)
+activate PARAM_STORE
+deactivate PARAM_STORE
+
+
+TEST_CTRL -> PLAT : calStore = getClinicalAnalysisLaboratoryStore()
+activate PLAT
+|||
+deactivate PLAT
+
+TEST_CTRL -> CAL_STORE : cal = getCalByCode(TestFileDTO.getCalId)
+activate CAL_STORE
+deactivate CAL_STORE
+
+
+TEST_CTRL -> DTO: nhsCode = testFileDto.getNhsCode()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testRegDate = testFileDto.getTestRegDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testChemDate = testFileDto.getTestChemDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testDiagnosisDate = testFileDto.getDiagnosisDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testValidationDate = testFileDto.getValidationDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> PLAT : Test = getTestStore()
+activate PLAT
+PLAT -> ORG** : create()
+deactivate PLAT
+
+TEST_CTRL -> ORG : test = createTest(nhsCode, associatedClient,\n selectedTestType, selectedParamsList, paramsResults, cal,\n testRegDate, testChemDate, testDiagnosisDate, testValidationDate)
 activate ORG
+ORG -> TAREFA** : createTest(nhsCode, associatedClient,\n selectedTestType, selectedParamsList, paramsResults, cal,\n testRegDate, testChemDate, testDiagnosisDate, testValidationDate)
+
+
+activate TAREFA
+TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
+
+
+
+loop for each parameter of the list
+TAREFA -> ExternalAPI** : refValue = getRefValueFor(parameter)
+TAREFA -> tp**: testParameter =  create(parameter, result, refValue)
+TAREFA -> TAREFA: testParameters.add(testParameter)
+end
+
+TAREFA -> TAREFA : code = generateSequentialCode()
+deactivate TAREFA
+
+alt testChemDate different than null
+TEST_CTRL -> SAM_CTRL** : create()
+
+TEST_CTRL -> SAM_CTRL : createSample()
+activate SAM_CTRL
+deactivate SAM_CTRL
+
+TEST_CTRL -> SAM_CTRL : addSample(test.getCode())
+activate SAM_CTRL
+deactivate SAM_CTRL
+end
+
+TEST_CTRL -> ORG : result = validateTest(test)
+TEST_CTRL -> CTRL : result
+deactivate TEST_CTRL
+
+deactivate TEST_CTRL
 deactivate ORG
 
-CTRL -> ORG : saveTest()
+CTRL -> TEST_CTRL : saveTest()
+activate TEST_CTRL
+
+TEST_CTRL -> PLAT : testStore = getTestStore()
+activate PLAT
+|||
+deactivate PLAT
+
+TEST_CTRL -> ORG : saveTest(test)
 activate ORG
+
+ORG -> ORG: validateTest(test)
+ORG -> ORG: addTest(test)
 deactivate ORG
+
 
 CTRL --> UI: result
-deactivate CTRL
+deactivate TEST_CTRL
 end
+
 
 UI --> ADM : informs operation success\n and shows all created tests
 deactivate ORG

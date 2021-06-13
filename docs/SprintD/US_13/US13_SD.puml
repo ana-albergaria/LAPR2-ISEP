@@ -32,8 +32,8 @@ activate COMPANY
 deactivate COMPANY
 
 CTRL -> CLIENT_STORE : clientsList  = getClientsWithValidatedTests()
-activate CLIENT_STORE
-deactivate CLIENT_STORE
+activate TEST_STORE
+deactivate TEST_STORE
 
 CTRL -> COMPANY : sortAlgorithm = getSortAlgorithm()
 activate COMPANY

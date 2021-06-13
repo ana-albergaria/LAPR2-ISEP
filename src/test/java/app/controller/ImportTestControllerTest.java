@@ -5,14 +5,19 @@ import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
 import app.domain.shared.Constants;
+import app.domain.shared.utils.TestFileUtils;
 import app.domain.store.ClientStore;
 import app.domain.store.ParameterStore;
 import app.domain.store.TestStore;
 import app.domain.store.TestTypeStore;
+import app.mappers.dto.TestFileDTO;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.output.OutputException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,19 +77,18 @@ public class ImportTestControllerTest {
 
     }
 
-   /* @Test
-    public void createCovidTestsFromFile() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
-        ImportTestController ctrl = new ImportTestController();
-        ctrl.importTestsFromFile("C:/Users/jluca/Downloads/tests_CovidMATCPCSV.csv");
-        System.out.println(App.getInstance().getCompany().getTestStore().getTests().get(1));
-        System.out.println(App.getInstance().getCompany().getTestStore().getTests().get(1500));
-        System.out.println(App.getInstance().getCompany().getTestStore().getTests().get(2000));
-    }
-
     @Test
-    public void createBloodCovidTests() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+    public void createCovidTestsFromFile() throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException, OutputException, IOException {
         ImportTestController ctrl = new ImportTestController();
-        ctrl.importTestsFromFile("C:/Users/jluca/Desktop/dadosteste.csv");
-    }*/
+        TestFileUtils testFileUtils = new TestFileUtils();
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_CovidMATCPCSV.csv");
+        for (TestFileDTO testData : procedData) {
+            ctrl.importTestFromFile(testData);
+        }
+        for (app.domain.model.Test s : App.getInstance().getCompany().getTestStore().getTests()) {
+            System.out.println(s);
+            System.out.println("++++++++++++++++++++++++++++++");
+        }
+    }
 
 }

@@ -121,6 +121,33 @@ public class Test {
     }
 
     /**
+     * Constructor only without samples, since in the business process they are added later on,
+     * also generates the attribute code, test registration time and makes the list of parameter into test parameters
+     * @param nhsCode National health system code of a given test
+     * @param client Client object which has solicited a test
+     * @param testType Type of test to be conduted
+     * @param parameters List of parameters to be measured of a given test
+     */
+    public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters,List<Double> paramsResults,
+                ClinicalAnalysisLaboratory cal, Date testRegDate, Date testChemDate, Date testDiagnosisDate, Date testValidationDate) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        checkNhsCode(nhsCode);
+        totalTests++;
+        this.code = generateCode();
+        this.nhsCode = nhsCode;
+        this.client = client;
+        this.testType = testType;
+        this.testParameters = addTestParameterWithResults(parameters, paramsResults);
+        this.cal = cal;
+        this.dateOfTestRegistration = testRegDate;
+        this.diagnosisReport = null;
+        this.samples = new ArrayList<>();
+        this.dateOfSamplesCollection = null;
+        this.dateOfChemicalAnalysis = testChemDate;
+        this.dateOfDiagnosis = testDiagnosisDate;
+        this.dateOfValidation = testValidationDate;
+    }
+
+    /**
      * Returns the code of the test.
      *
      * @return code of the test
@@ -309,6 +336,18 @@ public class Test {
         return simpleDateFormat.format(new Date());
     }
 
+    private List<TestParameter> addTestParameterWithResults(List<Parameter> parameters, List<Double> results) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        List<TestParameter> testParameters = new ArrayList<>();
+        for(int i = 0; i<parameters.size();i++){
+            if(parameters.get(i) == null) throw new UnsupportedOperationException("Parameter cannot be null");
+            MyReferenceValue refValue = getRefValueOfParameter(parameters.get(i));
+            TestParameterResult testResult = new TestParameterResult(results.get(i), "", refValue);
+            testParameters.add(new TestParameter(parameters.get(i), testResult));
+        }
+        return testParameters;
+    }
+
+
     /**
      * Method for turning a list of Parameter objects into test parameters object which are stored into the test
      * @param parameters parameters to be tested
@@ -317,6 +356,7 @@ public class Test {
     private List<TestParameter> addTestParameters(List<Parameter> parameters){
         List<TestParameter> testParameters = new ArrayList<>();
         for(Parameter parameter : parameters){
+            if(parameter == null) throw new UnsupportedOperationException("Parameter cannot be null");
             testParameters.add(new TestParameter(parameter));
         }
         return testParameters;
@@ -334,6 +374,11 @@ public class Test {
             throw new IllegalArgumentException("Nhs code must hold 12 alphanumeric characters");
         if (!StringUtils.isAlphanumeric(code))
             throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
+    }
+
+
+    public boolean hasChemDate() {
+        return this.dateOfChemicalAnalysis != null;
     }
 
     /**
@@ -423,9 +468,13 @@ public class Test {
     public void addTestResult(String parameterCode, Double result, String metric) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestParameter testParameter = getTestParameterFor(parameterCode);
         Parameter selectedParameter = testParameter.getParameter();
-        ExternalModule api = this.testType.getExternalModule();
-        MyReferenceValue refValue = api.getReferenceValue(selectedParameter);
+        MyReferenceValue refValue = getRefValueOfParameter(selectedParameter);
         testParameter.addResult(result, metric, refValue);
+    }
+
+    private MyReferenceValue getRefValueOfParameter(Parameter parameter) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        ExternalModule api = this.testType.getExternalModule();
+        return api.getReferenceValue(parameter);
     }
 
     /**
