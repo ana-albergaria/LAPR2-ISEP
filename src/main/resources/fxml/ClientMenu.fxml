@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="693.0">
          <image>
-            <Image url="@../../java/app/ui/gui/Images/Background1.png" />
+            <Image url="@../../java/app/ui/gui/Images/Background3.png" />
          </image>
       </ImageView>
       <BorderPane prefHeight="500.0" prefWidth="693.0">
