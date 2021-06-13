@@ -18,16 +18,17 @@ import java.util.logging.Logger;
 
 public class App extends Application {
     private Stage stage;
+    private final String TITLE =  "Many Labs";
     private final double MINIMUM_WINDOW_WIDTH = 500.0;
     private final double MINIMUM_WINDOW_HEIGHT = 300.0;
-    private final double SCENE_WIDTH = 550.0;
-    private final double SCENE_HEIGHT = 350.0;
+    private final double SCENE_WIDTH = 693;
+    private final double SCENE_HEIGHT = 495;
 
     @Override
 
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        stage.setTitle("Demo Maven and JavaFX Application");
+        stage.setTitle(TITLE);
         //stage.setMinWidth(MINIMUM_WINDOW_WIDTH); Prof
         //stage.setMinHeight(MINIMUM_WINDOW_HEIGHT); Prof
         stage.setMinHeight(495);
@@ -70,8 +71,6 @@ public class App extends Application {
             stage.initStyle(StageStyle.UNDECORATED);
         return (Initializable) loader.getController();
     }
-
-
 
 
     /**
