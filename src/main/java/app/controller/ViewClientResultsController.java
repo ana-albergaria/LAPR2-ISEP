@@ -7,8 +7,7 @@ import app.domain.store.TestStore;
 import app.mappers.TestMapper;
 import app.mappers.dto.TestDTO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Marta Ribeiro 1201592
@@ -37,7 +36,7 @@ public class ViewClientResultsController {
     }
 
     /**
-     * Retrieves list of client tests with or list of client tests without results
+     * Retrieves list of client tests with or list of client tests without results, ordered by date
      * @param client the client
      * @param withResults whether the list to be returned is the list of client tests with or without results
      * @return list of client tests with results if withResults is true
@@ -54,9 +53,16 @@ public class ViewClientResultsController {
                 desiredList.add(test);
             }
         }
+
+        desiredList.sort(new Comparator<Test>() {
+            @Override
+            public int compare(Test o1, Test o2) {
+                return Long.compare(o1.getDateOfTestRegistration().getTime(), o2.getDateOfTestRegistration().getTime());
+            }
+        });
+
         TestMapper mapper = new TestMapper();
         return mapper.toDTO(desiredList);
     }
-
 
 }

@@ -43,6 +43,10 @@ public class MainUI implements Initializable {
         ctrl = new AuthController();
     }
 
+    public App getMainApp(){
+        return this.mainApp;
+    }
+
     public void setMainApp(App mainApp) {
         this.mainApp = mainApp;
     }

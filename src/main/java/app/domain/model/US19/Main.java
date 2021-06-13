@@ -4,15 +4,11 @@ package app.domain.model.US19;
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.domain.store.NHSReportStore;
-import app.domain.store.TestStore;
+import app.thirdparty.SimpleLinearRegression;
 import com.nhs.report.Report2NHS;
-import org.apache.commons.math3.distribution.FDistribution;
 
 import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +36,7 @@ public class Main {
 
         double[] y1 = {128.0, 122.0, 168.0, 140.0, 176.0, 184.0, 144.0, 154.0};
 
-        LinearRegression simpleLR = new LinearRegression(x, y);
+        SimpleLinearRegression simpleLR = new SimpleLinearRegression(x, y);
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
         RegressionModel calculus = (RegressionModel) oClass.newInstance();
@@ -63,7 +59,7 @@ public class Main {
 
 
 
-        NHSDailyReport report = new NHSDailyReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
+        NHSReport report = new NHSReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
         System.out.println(report);
 
         File path = new File("./NHSReport/");
