@@ -91,6 +91,35 @@ public class MyRegressionModelTest {
         Assert.assertFalse(result);
     }
 
+    @Test
+    public void ensureEqualsMethodObjectsFromDifferentClasses() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+
+        boolean result = object.equals(simpleLR);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+        MyRegressionModel nullObject = null;
+
+        boolean result = object.equals(nullObject);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test
+    public void ensureEquals() {
+        MyRegressionModel object1 = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+        MyRegressionModel object2 = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+
+        boolean result = object1.equals(object2);
+
+        Assert.assertTrue(result);
+    }
+
     //For Critical Values
 
     @Test
