@@ -8,7 +8,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Labeled;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,22 +35,22 @@ public class ClientMenuUI implements Initializable {
     }
 
     @FXML
-    void logoutAction(ActionEvent event) {
+    void logoutAction(javafx.event.ActionEvent event) {
         this.mainUI.getMainApp().toMainScene();
     }
 
     @FXML
-    void viewTestResultAction(ActionEvent event) {
+    void viewTestResultAction(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void updateClientDataAction(ActionEvent event) {
+    void updateClientDataAction(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void exitAction(ActionEvent event) {
+    void exitAction(javafx.event.ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
         alert.setTitle("Aplication");
