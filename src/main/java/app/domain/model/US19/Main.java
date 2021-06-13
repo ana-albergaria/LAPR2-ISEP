@@ -35,7 +35,7 @@ public class Main {
 
         double[] y1 = {128.0, 122.0, 168.0, 140.0, 176.0, 184.0, 144.0, 154.0};
 
-        LinearRegression simpleLR = new LinearRegression(x, y);
+        SimpleLinearRegression simpleLR = new SimpleLinearRegression(x, y);
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
         RegressionModel calculus = (RegressionModel) oClass.newInstance();

@@ -8,7 +8,7 @@ package app.domain.model.US19;
 import app.domain.shared.Constants;
 
 /**
- *  The code LinearRegression class performs a simple linear regression
+ *  The code SimpleLinearRegression class performs a simple linear regression
  *  on an set of n data points (y_i, x_i).
  *  That is, it fits a straight line y = alpha + beta * x,
  *  (where y is the response variable, x is the predictor variable,
@@ -19,7 +19,7 @@ import app.domain.shared.Constants;
  *  estimates for the slope and y-intercept.
  *
  */
-public class LinearRegression {
+public class SimpleLinearRegression {
     private final double intercept, slope; //intercept - y, a | slope - x, b
     private final double r2;
     private final double svar0, svar1;
@@ -44,7 +44,7 @@ public class LinearRegression {
      * @param  y the corresponding values of the response variable
      * @throws IllegalArgumentException if the lengths of the two arrays are not equal
      */
-    public LinearRegression(double[] x, double[] y) {
+    public SimpleLinearRegression(double[] x, double[] y) {
         if (x.length != y.length) {
             throw new IllegalArgumentException("array lengths are not equal");
         }

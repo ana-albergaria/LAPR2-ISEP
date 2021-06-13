@@ -1,17 +1,15 @@
 package app.domain.model;
 
 import app.domain.interfaces.RegressionModel;
-import app.domain.model.US19.LinearRegression;
+import app.domain.model.US19.SimpleLinearRegression;
 import app.domain.shared.Constants;
 import org.junit.Before;
-
-import static org.junit.Assert.*;
 
 public class TableOfValuesTest {
     private Company company;
     private RegressionModel regressionModel;
     private MyRegressionModel myRegressionModel;
-    private LinearRegression simpleLR;
+    private SimpleLinearRegression simpleLR;
     private int historicalPoints;
 
     @Before
@@ -26,7 +24,7 @@ public class TableOfValuesTest {
         historicalPoints = 10;
         //
         myRegressionModel = regressionModel.getRegressionModel(x, x0, y, historicalPoints);
-        simpleLR = new LinearRegression(x, y);
+        simpleLR = new SimpleLinearRegression(x, y);
     }
 
 }

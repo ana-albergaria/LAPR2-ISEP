@@ -4,19 +4,17 @@ import app.domain.interfaces.RegressionModel;
 import app.domain.model.Company;
 import app.domain.model.ConfidenceInterval;
 import app.domain.model.MyRegressionModel;
-import app.domain.model.US19.LinearRegression;
+import app.domain.model.US19.SimpleLinearRegression;
 import app.domain.shared.Constants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class SimpleLinearRegressionAdapterTest {
+public class SimpleSimpleLinearRegressionAdapterTest {
     private Company company;
     private RegressionModel regressionModel;
     private MyRegressionModel myRegressionModel;
-    private LinearRegression simpleLR;
+    private SimpleLinearRegression simpleLR;
     private int historicalPoints;
 
 
@@ -32,7 +30,7 @@ public class SimpleLinearRegressionAdapterTest {
         historicalPoints = 10;
         //
         myRegressionModel = regressionModel.getRegressionModel(x, null, y, historicalPoints);
-        simpleLR = new LinearRegression(x, y);
+        simpleLR = new SimpleLinearRegression(x, y);
     }
 
     @Test
