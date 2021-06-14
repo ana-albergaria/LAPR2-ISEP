@@ -92,6 +92,7 @@ public class App {
         this.authFacade.addUserWithRole("rece","rec@gmail.com","1",Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
+        this.authFacade.addUserWithRole("Maria", "maria@gmail.com","maria","CLIENT");
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));
@@ -118,7 +119,7 @@ public class App {
         this.company.getTestTypeStore().saveTestType(new TestType("Covid","Description",
                 "swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER));
         Date d1 = new Date();
-        Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","carlos@gmail.com","Carlos","12345678901");
+        Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","maria@gmail.com","Maria","12345678901");
         this.company.getClientStore().saveClient(c1);
 
         Parameter parameter = new Parameter("IgGAN", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));

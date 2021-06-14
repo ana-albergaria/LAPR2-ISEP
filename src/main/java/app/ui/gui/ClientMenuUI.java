@@ -12,12 +12,24 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ClientMenuUI implements Initializable {
+public class ClientMenuUI implements Initializable, Menu {
+
+    private App mainApp;
+
+    private final String FXML_PATH = "/fxml/ClientMenu.fxml";
+
+    public String getFXML_PATH(){
+        return FXML_PATH;
+    }
 
     private MainUI mainUI;
 
     public MainUI getMainUI(){
         return this.mainUI;
+    }
+
+    public void setMainApp(App mainApp){
+        this.mainApp=mainApp;
     }
 
     @FXML
@@ -46,7 +58,8 @@ public class ClientMenuUI implements Initializable {
 
     @FXML
     void viewTestResultAction(ActionEvent event) {
-
+        ClientTestResultsUI1 clientTestResultsUI1
+                = new ClientTestResultsUI1();
     }
 
     @FXML
