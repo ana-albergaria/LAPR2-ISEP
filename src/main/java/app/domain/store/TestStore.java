@@ -482,15 +482,12 @@ public class TestStore {
                 if(test.isCovidTest() && test.isValidated()) {
                     String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
                     if(testDateOfDiagnosis.equals(dates.get(i))) {
-                        System.out.println("Idade: " + test.getClient().getAge());
                         sumAges += test.getClient().getAge();
                         numClients++;
                     }
                 }
             }
             //SE O NUM CLIENTES == 0, O QUE FAZER????
-            System.out.println("SumAges" + sumAges);
-            System.out.println("Num Clints" + numClients);
             if(numClients == 0)
                 meanAgeInHistoricalPoints[i] = 0.0;
             else

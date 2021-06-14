@@ -19,6 +19,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 public class NHSReportTask extends TimerTask {
@@ -102,7 +105,6 @@ public class NHSReportTask extends TimerTask {
         List<Double> estimatedPositives;
         Double[] numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
         Double[] meanAgeInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
-        System.out.println(Arrays.toString(meanAgeInHistoricalPoints));
         List<ConfidenceInterval> confidenceIntervals;
 
         if(bestXIndex != null) {
@@ -158,6 +160,20 @@ public class NHSReportTask extends TimerTask {
                     path.mkdir();
 
                 Report2NHS.writeUsingFileWriter(this.nhsReport.toString());
+
+                Logger logger = Logger.getLogger(NHSReportTask.class.getSimpleName());
+                FileHandler fh;
+
+                // This block configure the logger with handler and formatter
+                fh = new FileHandler("./NHSReport.log", true);
+                logger.addHandler(fh);
+                SimpleFormatter formatter = new SimpleFormatter();
+                fh.setFormatter(formatter);
+
+                // the following statement is used to log any messages
+                logger.info("NHS Daily Report sent");
+
+                logger.setUseParentHandlers(false);
 
             }
         } catch (ClassNotFoundException e) {
