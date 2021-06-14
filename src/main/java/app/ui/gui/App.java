@@ -24,6 +24,7 @@ public class App extends Application {
     private final double SCENE_WIDTH = 693;
     private final double SCENE_HEIGHT = 495;
 
+
     @Override
 
     public void start(Stage stage) throws Exception {

@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="693.0">
          <image>
-            <Image url="@../../java/app/ui/gui/Images/Background2.png" />
+            <Image url="@Images/Background2.png" />
          </image>
       </ImageView>
       <BorderPane prefHeight="500.0" prefWidth="693.0">
@@ -30,26 +30,25 @@
                <children>
                   <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1">
                     <items>
-                      <Button mnemonicParsing="false" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+                      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
                     </items>
                   </ToolBar>
-                  <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                  <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnAction" style="-fx-background-color: transparent;">
                      <font>
                         <Font name="Tahoma" size="15.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="31.0">
+                           <image>
+                              <Image url="@Images/Icon3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <ImageView fitHeight="31.0" fitWidth="31.0">
-                     <image>
-                        <Image url="@../../java/app/ui/gui/Images/Icon3.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
-                  </ImageView>
                </children>
             </GridPane>
          </top>
@@ -63,11 +62,11 @@
                   <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView prefHeight="385.0" prefWidth="613.0" style="-fx-border-color: ;" GridPane.rowIndex="1">
+                  <TableView fx:id="tableView" prefHeight="385.0" prefWidth="613.0" style="-fx-border-color: ;" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn prefWidth="231.5" sortable="false" text="Test Type" />
-                      <TableColumn prefWidth="231.5" sortable="false" text="Date of Test Registration" />
-                        <TableColumn prefWidth="150.0" sortable="false" text="Test Results" />
+                      <TableColumn fx:id="colTestType" prefWidth="231.5" sortable="false" text="Test Type" />
+                      <TableColumn fx:id="colDateOfTestRegistration" prefWidth="231.5" sortable="false" text="Date of Test Registration" />
+                        <TableColumn fx:id="colTestResults" prefWidth="150.0" sortable="false" text="Test Results" />
                     </columns>
                   </TableView>
                </children>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -10,59 +9,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.MainUI">
-    <children>
-<<<<<<< HEAD
-      <BorderPane>
-         <left>
-            <AnchorPane prefHeight="403.0" prefWidth="338.0" style="-fx-background-color: #3d5a80; -fx-border-color: #FFFFFF; -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
-               <children>
-                  <Text fill="WHITE" layoutX="66.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANY LABS">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Text>
-                  <ImageView fx:id="imgTeam" fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../java/app/ui/gui/Images/Logo.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </left>
-         <center>
-            <AnchorPane prefHeight="455.0" prefWidth="338.0" style="-fx-background-color: #26292F;" BorderPane.alignment="CENTER">
-               <children>
-                  <TextField fx:id="email" layoutX="91.0" layoutY="203.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <PasswordField fx:id="pwd" layoutX="91.0" layoutY="251.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </PasswordField>
-                  <Text fill="WHITE" layoutX="121.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login" AnchorPane.bottomAnchor="278.9765625" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="120.97265625" AnchorPane.topAnchor="144.1015625">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="153.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@whiteUser.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="143.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleLoginButton" style="-fx-background-color: #3d5a80;" text="Login" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
-         </center>
-         <top>
-            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-=======
+   <children>
       <AnchorPane layoutX="338.0" prefHeight="500.0" prefWidth="355.0" style="-fx-background-color: #26292F;">
          <children>
             <TextField layoutX="95.0" layoutY="250.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
@@ -101,7 +48,7 @@
             </Text>
             <ImageView fx:id="imgTeam" fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/app/ui/gui/Images/Logo.png" />
+                  <Image url="@Images/Logo.png" />
                </image>
             </ImageView>
          </children>
@@ -109,16 +56,15 @@
       <AnchorPane prefHeight="45.0" prefWidth="693.0">
          <children>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="693.0" style="-fx-background-color: transparent;">
->>>>>>> 3ee40570734ee46ee8f50509534109c66adcf9a2
-              <items>
-                <Button fx:id="sairBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+               <items>
+                  <Button fx:id="sairBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Button>
-              </items>
+               </items>
             </ToolBar>
          </children>
       </AnchorPane>
-    </children>
+   </children>
 </AnchorPane>
