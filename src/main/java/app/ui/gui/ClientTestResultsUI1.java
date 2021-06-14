@@ -23,8 +23,6 @@ public class ClientTestResultsUI1 implements Initializable {
     private ClientMenuUI clientMenuUI;
     private ViewClientResultsController controller;
 
-    List<TestDTO> testsWithResults = controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
-
     @FXML
     private TableView<TestDTO> tableView;
 
@@ -53,11 +51,19 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-
-
+        List<TestDTO> testsWithResults = controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
+        updateClientTestsInfoForTableview(testsWithResults, clientTestsInfoForTableview);
     }
 
+    private ObservableList<ClientTestsInfoForTableview> clientTestsInfoForTableview = FXCollections.observableArrayList();
 
+    public void updateClientTestsInfoForTableview(List<TestDTO> testsToAdd, List<ClientTestsInfoForTableview> clientTestsInfoForTableview){
+        String description, date;
+        for (int i = 0; i < testsToAdd.size(); i++) {
+            description=testsToAdd.get(i).getTestTypeDescription();
+            date=testsToAdd.get(i).getStringDateOfTestRegistration();
+            //clientTestsInfoForTableview.add(description, date);
+        }
+    }
 
 }
