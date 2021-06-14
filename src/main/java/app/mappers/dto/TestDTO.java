@@ -118,6 +118,24 @@ public class TestDTO {
     }
 
     /**
+     * Returns the description of the test type of the Test Dto.
+     *
+     * @return description of the test type of the Test Dto
+     */
+    public String getTestTypeDescription(){
+        return testType.getDescription();
+    }
+
+    /**
+     * Returns the date of test registration of the Test Dto.
+     *
+     * @return date of test registration of the Test Dto
+     */
+    public Date getDateOfTestRegistration(){
+        return dateOfTestRegistration;
+    }
+
+    /**
      * It returns the relevant textual description of the Test Dto instance.
      *
      * @return relevant characteristics of the Test Dto
