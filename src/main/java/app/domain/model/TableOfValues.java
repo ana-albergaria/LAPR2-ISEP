@@ -86,4 +86,28 @@ public class TableOfValues {
         }
         return text.toString();
     }
+
+    /**
+     * Compares the TableOfValues with the received object.
+     *
+     * @param otherObject the object to be compared with the TableOfValues
+     * @return true if the received object represents other TableOfValues
+     * equivalent to the TableOfValues. Otherwise, returns false.
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        if(this == otherObject)
+            return true;
+
+        if(otherObject == null || this.getClass() != otherObject.getClass())
+            return false;
+
+        TableOfValues otherTableOfValues = (TableOfValues) otherObject;
+
+        return this.myRegressionModel.equals(otherTableOfValues.myRegressionModel) &&
+                this.dates.equals(otherTableOfValues.dates) &&
+                this.observedPositives.equals(otherTableOfValues.observedPositives) &&
+                this.estimatedPositives.equals(otherTableOfValues.estimatedPositives) &&
+                this.confidenceIntervals.equals(otherTableOfValues.confidenceIntervals);
+    }
 }
