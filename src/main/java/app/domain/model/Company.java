@@ -11,10 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -93,8 +90,7 @@ public class Company {
                    String dateInterval,
                    String historicalPoints,
                    String confidenceLevel,
-                   String significanceLevel)
-    {
+                   String significanceLevel) {
         if (StringUtils.isBlank(designation))
             throw new IllegalArgumentException("Designation cannot be blank.");
         if (StringUtils.isBlank(classNameForBarcodeApi))
@@ -138,6 +134,10 @@ public class Company {
         this.confidenceLevel = confidenceLevel;
         this.significanceLevel = significanceLevel;
 
+        NHSReportTask nhsReportTask = new NHSReportTask(regressionModelCLass,
+                historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
+        Timer timer = new Timer();
+        timer.schedule(nhsReportTask,0);
         //COLOCAR CONSTRUTOR DO REPORTTASK AQUI
     }
 

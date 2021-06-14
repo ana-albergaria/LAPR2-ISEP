@@ -365,7 +365,7 @@ public class TestStore {
             }
         }
         //COLOCAR EXCEÇÃO!!!!!!! OU ENTÃO QUE COLOCAR?
-        return sumAges / numClients;
+        return (numClients != 0) ? sumAges / numClients : 0;
     }
 
     public double getObservedPositivesCovidInADay(Date date) {
@@ -394,7 +394,7 @@ public class TestStore {
 
         return dataList;
     }
-
+    //AQUI!!!!! - NÃO DEIXAR DOMINGOS - certo?? Para retirar os dados para o modelo de regressão
     public void addAllDataFromDateInterval(Date beginDate,
                                            Date endDate,
                                            List<Double> covidTestList,
@@ -405,12 +405,16 @@ public class TestStore {
 
         while(!checkIfDatesAreEqual(beginDate, endDate)) {
             double testsInADay = getNumberOfCovidTestsRealizedInADay(endDate);
+            //System.out.println("Tests in a day: " + testsInADay + endDate);
             covidTestList.add(testsInADay);
             double meanAgeInADay = getMeanAgeOfClientsOfCovidTestsInADay(endDate);
+            //System.out.println("Mean Age In a day: " + meanAgeInADay + endDate);
             meanAgeList.add(meanAgeInADay);
             double observedPositivesInADay = getObservedPositivesCovidInADay(endDate);
             observedPositives.add(observedPositivesInADay);
             auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
+            if ((auxEndDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+                auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
             endDate = auxEndDate.getTime();
         }
     }
@@ -431,6 +435,8 @@ public class TestStore {
                 }
             }
         }
+        //important! Otherwise the default value will be null
+        changeNullToZeroInDoubleArray(covidTestsInHistoricalPoints);
         return covidTestsInHistoricalPoints;
     }
 
@@ -450,7 +456,10 @@ public class TestStore {
                 }
             }
             //SE O NUM CLIENTES == 0, O QUE FAZER????
-            meanAgeInHistoricalPoints[i] = sumAges / numClients;
+            if(numClients == 0)
+                meanAgeInHistoricalPoints[i] = 0.0;
+            else
+                meanAgeInHistoricalPoints[i] = sumAges / numClients; //antes só tinha esta linha
         }
         return meanAgeInHistoricalPoints;
     }
@@ -462,6 +471,13 @@ public class TestStore {
         return cal.get(Calendar.DAY_OF_MONTH) == otherCal.get(Calendar.DAY_OF_MONTH) &&
                 cal.get(Calendar.MONTH) == otherCal.get(Calendar.MONTH) &&
                 cal.get(Calendar.YEAR) == otherCal.get(Calendar.YEAR);
+    }
+
+    public void changeNullToZeroInDoubleArray(Double[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == null)
+                array[i] = 0.0;
+        }
     }
 
 
