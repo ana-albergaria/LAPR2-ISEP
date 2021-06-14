@@ -1,33 +1,41 @@
 package app.ui.gui;
 
 import app.controller.ViewClientResultsController;
+import app.domain.model.TestType;
 import app.mappers.dto.TestDTO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import java.util.List;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ClientTestResultsUI1 /*implements Initializable*/ {
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class ClientTestResultsUI1 implements Initializable {
 
     private App mainApp;
     private ClientMenuUI clientMenuUI;
     private ViewClientResultsController controller;
 
-    //List<TestDTO> testsWithResults = controller.getClientTestsWithOrWithoutResults(this.clientMenuUI.getMainUI().getEmail(), true);
+    List<TestDTO> testsWithResults = controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
 
     @FXML
-    private TableView<List<String>> tableView;
+    private TableView<TestDTO> tableView;
 
     @FXML
-    private TableColumn<List<String>, String> colTestType;
+    private TableColumn<TestDTO, String> colTestType;
 
     @FXML
-    private TableColumn<List<String>, String> colDateOfTestRegistration;
+    private TableColumn<TestDTO, String> colDateOfTestRegistration;
 
     @FXML
-    private TableColumn<List<String>, Button> colTestResults;
+    private TableColumn<TestDTO, Button> colTestResults;
 
     @FXML
     private Button exitBtn;
@@ -42,5 +50,14 @@ public class ClientTestResultsUI1 /*implements Initializable*/ {
     @FXML
     void returnAction(ActionEvent event) {
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+
+
+    }
+
+
 
 }

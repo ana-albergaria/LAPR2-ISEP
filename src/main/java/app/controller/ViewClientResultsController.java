@@ -37,22 +37,18 @@ public class ViewClientResultsController {
     }
 
     /**
-     * Retrieves list of client tests with or list of client tests without results, ordered by date
+     * Retrieves list of client tests with results, ordered by date
      * @param email the client email
-     * @param withResults whether the list to be returned is the list of client tests with or without results
-     * @return list of client tests with results if withResults is true
-     * otherwise return list of client tests without results
+     * @return list of client tests with results
      */
-    public List<TestDTO> getClientTestsWithOrWithoutResults(String email, boolean withResults){
+    public List<TestDTO> getClientTestsWithResults(String email){
         ClientStore clientStore = this.company.getClientStore();
         Client client = clientStore.getClientByEmail(email);
         TestStore tstStore = this.company.getTestStore();
         List<Test> clientTests = tstStore.getTestsByClient(client);
         ArrayList<Test> desiredList = new ArrayList<>();
         for (Test test : clientTests){
-            if (test.hasResults() && withResults){
-                desiredList.add(test);
-            } else if (!test.hasResults() && !withResults){
+            if (test.hasResults()){
                 desiredList.add(test);
             }
         }

@@ -64,11 +64,11 @@ public class TestDTO {
      */
     private Date dateOfDiagnosis;
 
-
     /**
      * Date of validation
      */
     private Date dateOfValidation;
+
     /**
      * Number of existing tests.
      */
@@ -133,6 +133,15 @@ public class TestDTO {
      */
     public Date getDateOfTestRegistration(){
         return dateOfTestRegistration;
+    }
+
+    /**
+     * Returns the date of test registration of the Test Dto, in the String format.
+     *
+     * @return the date of test registration of the Test Dto, in the String format
+     */
+    public String getStringDateOfTestRegistration(){
+        return dateOfTestRegistration.toString();
     }
 
     /**
