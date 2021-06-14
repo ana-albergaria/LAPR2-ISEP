@@ -128,6 +128,15 @@ public class ClientStore {
         throw new UnsupportedOperationException("There are no client registered with given TIN number: " + tinNumber);
     }
 
+    public Client getClientByEmail(String email){
+        for (Client client : clientList){
+            if(client.getEmail().equals(email)){
+                return client;
+            }
+        }
+        throw new UnsupportedOperationException("There are no client registered with given email: " + email);
+    }
+
     public List<Client> getClients() {
         return new ArrayList<>(clientList);
     }

@@ -16,6 +16,10 @@ public class ClientMenuUI implements Initializable {
 
     private MainUI mainUI;
 
+    public MainUI getMainUI(){
+        return this.mainUI;
+    }
+
     @FXML
     private Button logoutBtn;
 
