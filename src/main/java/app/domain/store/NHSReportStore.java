@@ -65,7 +65,8 @@ public class NHSReportStore {
         Double[] extractedArray = new Double[covidTestAndMeanAgeList.get(index).size()];
         double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
         for (int i = 0; i < wishedArray.length; i++) {
-            wishedArray[i] = extractedArray[i];
+            wishedArray[i] = covidTestAndMeanAgeList.get(index).get(i);
+            //wishedArray[i] = extractedArray[i];
         }
         return wishedArray;
     }
@@ -104,9 +105,8 @@ public class NHSReportStore {
         Date currentDate = new Date();
         Calendar oneDayBefore = Calendar.getInstance();
         oneDayBefore.setTime(currentDate);
+        oneDayBefore.add(Calendar.DAY_OF_MONTH, -1);
         if ((oneDayBefore.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
-            oneDayBefore.add(Calendar.DAY_OF_MONTH, -2);
-        else
             oneDayBefore.add(Calendar.DAY_OF_MONTH, -1);
 
         return oneDayBefore.getTime();

@@ -128,16 +128,25 @@ public class App {
         listParameter.add(parameter);
 
 
-        ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("mel23",
+        ClinicalAnalysisLaboratory cal1 = new ClinicalAnalysisLaboratory("001DO",
                 "CAL","Lisboa","91841378811","1234567890", selectedTT);
 
 
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal1);
 
-        ClinicalAnalysisLaboratory cal2 = new ClinicalAnalysisLaboratory("llll1",
-                "CAL","fff","91841373811","1234537890", selectedTT);
+        ClinicalAnalysisLaboratory cal2 = new ClinicalAnalysisLaboratory("001LN",
+                "CAL","fff","91841373811","1234537898", selectedTT);
 
         this.company.getCalStore().saveClinicalAnalysisLaboratory(cal2);
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(new ClinicalAnalysisLaboratory("001LR",
+                "CAL3","SSS","91841373551","1231537890", selectedTT));
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(new ClinicalAnalysisLaboratory("001MA",
+                "CAL4","GGG","91841373441","1232537890", selectedTT));
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(new ClinicalAnalysisLaboratory("001SO",
+                "CAL5","GG","91841373331","1234537890", selectedTT));
+        this.company.getCalStore().saveClinicalAnalysisLaboratory(new ClinicalAnalysisLaboratory("001WA",
+                "CAL6","AAA","91841373221","1234437890", selectedTT));
+
 
         //Test test1 = new Test("123456789012",c1,t1,listParameter, cal2);
         //this.company.getTestStore().saveTest(test1);

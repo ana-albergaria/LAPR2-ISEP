@@ -31,7 +31,7 @@ public class ConsultTestByClientTest {
             importTestController.importTestFromFile(testData);
         }
         TestStore testStore = App.getInstance().getCompany().getTestStore();
-        CreateTestController createTestController = new CreateTestController();
+        CreateTestController createTestController = new CreateTestController("001WA");
         List<String> params = new ArrayList<>();
         params.add("WBC00");
         params.add("RBC00");
