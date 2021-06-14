@@ -11101,6 +11101,18 @@ Employee email: SofiaCONNOLLY113@hotmail.com
 Emplooye Password: cV9ntyDObm
 
 Employee email: carlos@gmail.com
+<<<<<<< HEAD
+Emplooye Password: yRzFEXSobT
+
+Employee email: carlos@gmail.com
+Emplooye Password: LZ742DkXuJ
+
+Employee email: carlos@gmail.com
+Emplooye Password: N9TkG648np
+
+Employee email: carlos@gmail.com
+Emplooye Password: 4LWGitscti
+=======
 Emplooye Password: 4daRFaSDgU
 
 Employee email: EmmaNICOLSON2@hotmail.com
@@ -17117,3 +17129,4 @@ Emplooye Password: btSJITw5rG
 
 Employee email: SofiaCONNOLLY113@hotmail.com
 Emplooye Password: RVRNQhhZN7
+>>>>>>> 98e230288a099050fee0cdc23dd2dc277d86ed80

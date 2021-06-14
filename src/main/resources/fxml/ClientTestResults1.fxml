@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="693.0">
          <image>
-            <Image url="@../../java/app/ui/gui/Images/Background2.png" />
+            <Image url="@Images/Background2.png" />
          </image>
       </ImageView>
       <BorderPane prefHeight="500.0" prefWidth="693.0">
@@ -44,7 +44,7 @@
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="31.0">
                            <image>
-                              <Image url="@../../java/app/ui/gui/Images/Icon3.png" />
+                              <Image url="@Images/Icon3.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -62,11 +62,11 @@
                   <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView prefHeight="385.0" prefWidth="613.0" style="-fx-border-color: ;" GridPane.rowIndex="1">
+                  <TableView fx:id="tableView" prefHeight="385.0" prefWidth="613.0" style="-fx-border-color: ;" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn prefWidth="231.5" sortable="false" text="Test Type" />
-                      <TableColumn prefWidth="231.5" sortable="false" text="Date of Test Registration" />
-                        <TableColumn prefWidth="150.0" sortable="false" text="Test Results" />
+                      <TableColumn fx:id="colTestType" prefWidth="231.5" sortable="false" text="Test Type" />
+                      <TableColumn fx:id="colDateOfTestRegistration" prefWidth="231.5" sortable="false" text="Date of Test Registration" />
+                        <TableColumn fx:id="colTestResults" prefWidth="150.0" sortable="false" text="Test Results" />
                     </columns>
                   </TableView>
                </children>

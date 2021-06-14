@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="693.0">
          <image>
-            <Image url="@../../java/app/ui/gui/Images/Background3.png" />
+            <Image url="@Images/Background3.png" />
          </image>
       </ImageView>
       <BorderPane prefHeight="500.0" prefWidth="693.0">
@@ -67,7 +67,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@../../java/app/ui/gui/Images/Icon1.png" />
+                              <Image url="@Images/Icon1.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -79,7 +79,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@../../java/app/ui/gui/Images/Icon2.png" />
+                              <Image url="@Images/Icon2.png" />
                            </image>
                         </ImageView>
                      </graphic>
