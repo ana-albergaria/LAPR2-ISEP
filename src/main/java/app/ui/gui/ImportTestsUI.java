@@ -3,21 +3,15 @@ package app.ui.gui;
 import app.controller.ImportTestController;
 import app.domain.shared.utils.TestFileUtils;
 import app.mappers.dto.TestFileDTO;
-import auth.mappers.dto.UserRoleDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
@@ -47,7 +41,6 @@ public class ImportTestsUI implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.ctrl = new ImportTestController();
         this.testsOfFile = Collections.emptyList();
-
     }
 
     public void setMainApp(App mainApp) {
