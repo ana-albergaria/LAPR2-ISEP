@@ -48,7 +48,7 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
     public MyRegressionModel getRegressionModel(double[] x1, double[] x2, double[] y, int historicalPoints) {
         MultipleLinearRegression multipleLR = new MultipleLinearRegression(x1, x2, y);
 ;
-        return new MyRegressionModel(multipleLR.getB0(), multipleLR.getB1(), multipleLR.getB2(), multipleLR.getR2(), multipleLR.getR2Adjusted(), multipleLR.getN(), multipleLR);
+        return new MyRegressionModel(multipleLR.getB0(), multipleLR.getB1(), multipleLR.getB2(), multipleLR.getR2(), multipleLR.getR2Adjusted(), historicalPoints, multipleLR);
     }
 
     /**

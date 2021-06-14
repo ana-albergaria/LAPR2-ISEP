@@ -1,4 +1,4 @@
-/*
+
 package app.domain.model;
 
 import app.controller.ImportTestController;
@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
@@ -53,7 +54,7 @@ public class NHSReportTask extends TimerTask {
         double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
         double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
         double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
-        int bestXIndex = nhsReportStore.getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives);
+        Integer bestXIndex = nhsReportStore.getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives);
 
         MyRegressionModel myRegressionModel = getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
         HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(regressionModel, myRegressionModel, significanceLevel);
@@ -94,14 +95,14 @@ public class NHSReportTask extends TimerTask {
                                           int historicalPoints,
                                           Date startDate) throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
-        TestStore testStore = new TestStore();
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         this.regressionModel = getRegressionModel(regressionModelClass);
 
         Double[] bestXInHistoricalPoints;
         List<Double> estimatedPositives;
         Double[] numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
-        Double[] meanAgeInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+        Double[] meanAgeInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
+        System.out.println(Arrays.toString(meanAgeInHistoricalPoints));
         List<ConfidenceInterval> confidenceIntervals;
 
         if(bestXIndex != null) {
@@ -111,11 +112,11 @@ public class NHSReportTask extends TimerTask {
             else
                 bestXInHistoricalPoints = nhsReportStore.copyArray(meanAgeInHistoricalPoints);
             estimatedPositives = this.regressionModel.getEstimatedPositives(myRegressionModel, bestXInHistoricalPoints, null);
-            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints, null);
+            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints, null, bestXIndex);
         } else {
             //for Multiple Linear Regression
             estimatedPositives = this.regressionModel.getEstimatedPositives(myRegressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints);
-            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints);
+            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints, bestXIndex);
         }
 
         TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
@@ -125,8 +126,13 @@ public class NHSReportTask extends TimerTask {
     public List<ConfidenceInterval> getConfidenceIntervalListForTableOfValues(MyRegressionModel myRegressionModel,
                                                                               RegressionModel regressionModel,
                                                                               Double[] x1InHistoricalPoints,
-                                                                              Double[] x2InHistoricalPoints) {
-        List<ConfidenceInterval> confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
+                                                                              Double[] x2InHistoricalPoints,
+                                                                              Integer bestXIndex) {
+        List<ConfidenceInterval> confidenceIntervalList;
+        if(bestXIndex != null) //for Simple Linear Regression
+            confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
+        else //For Multiple Linear Regression
+            confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
         return confidenceIntervalList;
     }
 
@@ -173,4 +179,4 @@ public class NHSReportTask extends TimerTask {
     }
 }
 
- */
+

@@ -1,4 +1,4 @@
-package app.domain.model.US19;
+/*package app.domain.model.US19;
 
 
 import app.domain.interfaces.RegressionModel;
@@ -80,6 +80,8 @@ public class Main {
         return wishedArray;
     }
 }
+
+ */
 
 
 
