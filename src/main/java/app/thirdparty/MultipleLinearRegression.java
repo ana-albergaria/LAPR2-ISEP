@@ -290,7 +290,7 @@ public class MultipleLinearRegression {
      *
      * @return the transpose of the matrix x
      */
-    private double[][] transposeMatrix(double[][] x) {
+    public double[][] transposeMatrix(double[][] x) {
         int rowX = x.length, columnX = x[0].length;
         double[][] xT = new double[columnX][rowX];
 
@@ -310,10 +310,10 @@ public class MultipleLinearRegression {
      *
      * @return result of a multiplication between two matrices - a matrix
      */
-    private double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
+    public double[][] matrixMultiplication(double[][] matrix, double[][] otherMatrix) {
         if(matrix[0].length != otherMatrix.length)
-            throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "columns from the" +
-                    "first matrix and" + otherMatrix.length + "lines from the second matrix!");
+            throw new IllegalArgumentException("The multiplication is not possible with " + matrix[0].length + " columns from the" +
+                    " first matrix and " + otherMatrix.length + " lines from the second matrix!");
 
         double[][] result = new double[matrix.length][otherMatrix[0].length];
 
@@ -335,10 +335,10 @@ public class MultipleLinearRegression {
      *
      * @return result of a multiplication between matrix and a vector - a vector
      */
-    private double[] matrixWithVectorMultiplication(double[][] matrix, double[] vector) {
+    public double[] matrixWithVectorMultiplication(double[][] matrix, double[] vector) {
         if(matrix[0].length != vector.length)
-            throw new IllegalArgumentException("The multiplication is not possible with" + matrix[0].length + "columns from the" +
-                    "matrix and" + vector.length + "lines from the vector!");
+            throw new IllegalArgumentException("The multiplication is not possible with " + matrix[0].length + " columns from the " +
+                    "matrix and " + vector.length + " lines from the vector!");
 
         int rows = matrix.length;
         int columns = matrix[0].length;
@@ -363,10 +363,10 @@ public class MultipleLinearRegression {
      *
      * @return result of a multiplication between two vectors - a value
      */
-    private double vectorWithVectorMultiplication(double[] vector, double[] otherVector) {
+    public double vectorWithVectorMultiplication(double[] vector, double[] otherVector) {
         if(vector.length != otherVector.length)
-            throw new IllegalArgumentException("The multiplication is not possible with" + vector.length + "columns from the" +
-                    "vector and" + otherVector.length + "lines from the matrix!");
+            throw new IllegalArgumentException("The multiplication is not possible with " + vector.length + " columns from the " +
+                    "first vector and " + otherVector.length + " lines from the second vector!");
 
         double result = 0;
         for (int i = 0; i < vector.length; i++) {
@@ -376,8 +376,6 @@ public class MultipleLinearRegression {
         return result;
     }
 
-    //VERIFICAR DEPOIS MÉTODO ABAIXO!!!!
-
     /**
      * Returns the result of a multiplication between vector and a matrix - a vector.
      *
@@ -386,10 +384,10 @@ public class MultipleLinearRegression {
      *
      * @return the result of a multiplication between vector and a matrix - a vector
      */
-    private double[] vectorWithMatrixMultiplication(double[] vector, double[][] matrix) {
+    public double[] vectorWithMatrixMultiplication(double[] vector, double[][] matrix) {
         if(vector.length != matrix.length)
-            throw new IllegalArgumentException("The multiplication is not possible with" + vector.length + "columns from the" +
-                    "vector and" + matrix.length + "lines from the matrix!");
+            throw new IllegalArgumentException("The multiplication is not possible with " + vector.length + " columns from the " +
+                    "vector and " + matrix.length + " lines from the matrix!");
 
         int columns = matrix[0].length;
 
@@ -505,7 +503,7 @@ public class MultipleLinearRegression {
      *
      * @return the mean of the values of the vector x
      */
-    private double mean(double[] x) {
+    public double mean(double[] x) {
         double sum = 0;
         for (int i = 0; i < x.length; i++) {
             sum += x[i];
