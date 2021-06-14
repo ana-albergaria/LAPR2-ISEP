@@ -138,13 +138,13 @@ public class Test {
         this.testType = testType;
         this.testParameters = addTestParameterWithResults(parameters, paramsResults);
         this.cal = cal;
-        this.dateOfTestRegistration = testRegDate;
+        this.dateOfTestRegistration = (Date)testRegDate.clone();
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
         this.dateOfSamplesCollection = null;
         this.dateOfChemicalAnalysis = (Date)testChemDate.clone();
-        this.dateOfDiagnosis = testDiagnosisDate;
-        this.dateOfValidation = testValidationDate;
+        this.dateOfDiagnosis = (Date)testDiagnosisDate.clone();
+        this.dateOfValidation = (Date)testValidationDate.clone();
     }
 
     /**
@@ -255,23 +255,23 @@ public class Test {
     }
 
     public void setDateOfSamplesCollection(Date dateOfSamplesCollection) {
-        this.dateOfSamplesCollection = dateOfSamplesCollection;
+        this.dateOfSamplesCollection = (Date)dateOfSamplesCollection.clone();
     }
 
     public void setDateOfChemicalAnalysis(Date dateOfChemicalAnalysis) {
-        this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
+        this.dateOfChemicalAnalysis = (Date)dateOfChemicalAnalysis.clone();
     }
 
     public void setDateOfDiagnosis(Date dateOfDiagnosis) {
-        this.dateOfDiagnosis = dateOfDiagnosis;
+        this.dateOfDiagnosis = (Date)dateOfDiagnosis.clone();
     }
 
     public void setDateOfTestRegistration(Date dateOfTestRegistration) {
-        this.dateOfTestRegistration = dateOfTestRegistration;
+        this.dateOfTestRegistration = (Date)dateOfTestRegistration.clone();
     }
 
     public void setDateOfValidation(Date dateOfValidation) {
-        this.dateOfValidation = dateOfValidation;
+        this.dateOfValidation = (Date)dateOfValidation.clone();
     }
 
     /**
