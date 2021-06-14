@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="693.0" stylesheets="@../styles/clientMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.LabCoordinatorUI">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="693.0">
+         <image>
+            <Image url="@Images/Background3.png" />
+         </image>
+      </ImageView>
+      <BorderPane prefHeight="500.0" prefWidth="693.0">
+         <top>
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+              <items>
+                <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
+              </items>
+            </ToolBar>
+         </top>
+         <bottom>
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logoutAction" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: ee6c4d; -fx-background-radius: 90;" text="Logout" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Tahoma Bold" size="15.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin></Button>
+         </bottom>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="265.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleImportTests" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="140.0" fitWidth="140.0">
+                           <image>
+                              <Image url="@Images/Icon1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Text fill="#e0fbfc" layoutX="287.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Import Tests">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#e0fbfc" layoutX="204.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Laboratory Coordinator Menu">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -81,6 +81,10 @@ public class TestFileDTO {
         return dateOfValidation;
     }
 
+    public String showAddedTest(){
+        return String.format("NHS code: %s; TestType: %s; Client's email: %s; date of registration: %s%n", nhsCode,testTypeCode, clientDTO.getEmail(), dateOfTestRegistration);
+    }
+
     @Override
     public String toString() {
         return String.format("TEST FILE DTO:%n Client:%s%nNhsCode:%s%nTestParameters:%s%nTestParameterResults:%s%nTestType:%s%nDates:%n%s%n%s%n%s%n%s%n",

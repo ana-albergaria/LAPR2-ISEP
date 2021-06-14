@@ -10,7 +10,7 @@ public class MenuItem {
     private String description;
     private Menu ui;
 
-    public MenuItem(String description,  AdminMenu ui)
+    public MenuItem(String description,  Menu ui)
     {
         if (StringUtils.isBlank(description))
             throw new IllegalArgumentException("MenuItem description cannot be null or empty.");

@@ -85,6 +85,7 @@ public class App {
         this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserRole(Constants.ROLE_SPECIALIST_DOCTOR, Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserRole(Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST, Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
+        this.authFacade.addUserRole(Constants.ROLE_LAB_COORDINATOR, Constants.ROLE_LAB_COORDINATOR);
         this.authFacade.addUserRole("CLIENT", "CLIENT");
 
         this.authFacade.addUserWithRole("Main Administrator", "admin@lei.sem2.pt", "123456",Constants.ROLE_ADMIN);
@@ -93,6 +94,7 @@ public class App {
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
         this.authFacade.addUserWithRole("Maria", "maria@gmail.com","maria","CLIENT");
+        this.authFacade.addUserWithRole("labCord", "lc@gmail.com","1",Constants.ROLE_LAB_COORDINATOR);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));

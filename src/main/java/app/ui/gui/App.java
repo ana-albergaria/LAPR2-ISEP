@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class App extends Application {
+
     private Stage stage;
     private final String TITLE =  "Many Labs";
     private final double MINIMUM_WINDOW_WIDTH = 500.0;
