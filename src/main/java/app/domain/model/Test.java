@@ -3,12 +3,7 @@ package app.domain.model;
 import app.domain.interfaces.ExternalModule;
 import app.domain.shared.Constants;
 import org.apache.commons.lang3.StringUtils;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class of the Test to be performed to a client
@@ -104,6 +99,10 @@ public class Test {
      */
     public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters, ClinicalAnalysisLaboratory cal) {
         checkNhsCode(nhsCode);
+        checkTestType(testType);
+        checkParameters(parameters);
+        checkCal(cal);
+        checkClient(client);
         totalTests++;
         this.code = generateCode();
         this.nhsCode = nhsCode;
@@ -131,6 +130,11 @@ public class Test {
     public Test(String nhsCode, Client client, TestType testType, List<Parameter> parameters,List<Double> paramsResults,
                 ClinicalAnalysisLaboratory cal, Date testRegDate, Date testChemDate, Date testDiagnosisDate, Date testValidationDate) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         checkNhsCode(nhsCode);
+        checkTestType(testType);
+        checkParameters(parameters);
+        checkCal(cal);
+        checkClient(client);
+        checkParameterResults(parameters, paramsResults);
         totalTests++;
         this.code = generateCode();
         this.nhsCode = nhsCode;
@@ -138,14 +142,60 @@ public class Test {
         this.testType = testType;
         this.testParameters = addTestParameterWithResults(parameters, paramsResults);
         this.cal = cal;
-        this.dateOfTestRegistration = testRegDate;
+        this.dateOfTestRegistration = (Date)testRegDate.clone();
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
         this.dateOfSamplesCollection = null;
-        this.dateOfChemicalAnalysis = testChemDate;
-        this.dateOfDiagnosis = testDiagnosisDate;
-        this.dateOfValidation = testValidationDate;
+        this.dateOfChemicalAnalysis = testChemDate == null ? null : (Date)testChemDate.clone();
+        this.dateOfDiagnosis = testDiagnosisDate == null ? null : (Date)testDiagnosisDate.clone();
+        this.dateOfValidation = testValidationDate == null ? null :(Date)testValidationDate.clone();
     }
+
+    
+    public void checkTestType(TestType testType){
+        if(Objects.isNull(testType)){
+            throw new IllegalArgumentException("Test type cannot be null");
+        }
+    }
+    
+    public void checkParameters(List<Parameter> parameters){
+        if(parameters.isEmpty()){
+            throw new IllegalArgumentException("Parameter list cannot be empty"); 
+        }
+    }
+    
+    public void checkCal(ClinicalAnalysisLaboratory cal){
+        if(Objects.isNull(cal)){
+            throw new IllegalArgumentException("Clinical analysis laboratory cannot be null");
+        }
+    }
+
+    public void checkClient(Client client){
+        if(Objects.isNull(client)){
+            throw new IllegalArgumentException("Client cannot be null");
+        }
+    }
+
+    public void checkParameterResults(List<Parameter> params, List<Double> results){
+        if(params.size() != results.size()){
+            throw new IllegalArgumentException("Each param must have it respective result, even if it is null");
+        }
+    }
+
+    /**
+     * Nhs code attribute validation for having non alphanumeric characters, more or less then 12 characters or blank
+     *
+     * @param code Test type's code
+     */
+    private void checkNhsCode(String code) {
+        if (StringUtils.isBlank(code))
+            throw new IllegalArgumentException("Nhs code cannot be blank.");
+        if ((code.length() != NHS_CODE_MAX_LENGTH))
+            throw new IllegalArgumentException("Nhs code must hold 12 alphanumeric characters");
+        if (!StringUtils.isAlphanumeric(code))
+            throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
+    }
+
 
     /**
      * Returns the code of the test.
@@ -255,23 +305,23 @@ public class Test {
     }
 
     public void setDateOfSamplesCollection(Date dateOfSamplesCollection) {
-        this.dateOfSamplesCollection = dateOfSamplesCollection;
+        this.dateOfSamplesCollection = (Date)dateOfSamplesCollection.clone();
     }
 
     public void setDateOfChemicalAnalysis(Date dateOfChemicalAnalysis) {
-        this.dateOfChemicalAnalysis = dateOfChemicalAnalysis;
+        this.dateOfChemicalAnalysis = (Date)dateOfChemicalAnalysis.clone();
     }
 
     public void setDateOfDiagnosis(Date dateOfDiagnosis) {
-        this.dateOfDiagnosis = dateOfDiagnosis;
+        this.dateOfDiagnosis = (Date)dateOfDiagnosis.clone();
     }
 
     public void setDateOfTestRegistration(Date dateOfTestRegistration) {
-        this.dateOfTestRegistration = dateOfTestRegistration;
+        this.dateOfTestRegistration = (Date)dateOfTestRegistration.clone();
     }
 
     public void setDateOfValidation(Date dateOfValidation) {
-        this.dateOfValidation = dateOfValidation;
+        this.dateOfValidation = (Date)dateOfValidation.clone();
     }
 
     /**
@@ -327,24 +377,16 @@ public class Test {
         return String.format("%012d", totalTests);
     }
 
-    /**
-     * Method for generating the now date and time, used for the needed date attributes
-     * @return the String format of the generated date
-     */
-    private String generateNowDateAndTime(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        return simpleDateFormat.format(new Date());
-    }
 
     private List<TestParameter> addTestParameterWithResults(List<Parameter> parameters, List<Double> results) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
-        List<TestParameter> testParameters = new ArrayList<>();
+        List<TestParameter> testParametersToBeAdded = new ArrayList<>();
         for(int i = 0; i<parameters.size();i++){
-            if(parameters.get(i) == null) throw new UnsupportedOperationException("Parameter cannot be null");
+            if(parameters.get(i) == null) throw new IllegalArgumentException("Parameter cannot be null");
             MyReferenceValue refValue = getRefValueOfParameter(parameters.get(i));
             TestParameterResult testResult = new TestParameterResult(results.get(i), "", refValue);
-            testParameters.add(new TestParameter(parameters.get(i), testResult));
+            testParametersToBeAdded.add(new TestParameter(parameters.get(i), testResult));
         }
-        return testParameters;
+        return testParametersToBeAdded;
     }
 
 
@@ -354,28 +396,13 @@ public class Test {
      * @return list of test parameters objects
      */
     private List<TestParameter> addTestParameters(List<Parameter> parameters){
-        List<TestParameter> testParameters = new ArrayList<>();
+        List<TestParameter> testParametersToBeAdded = new ArrayList<>();
         for(Parameter parameter : parameters){
-            if(parameter == null) throw new UnsupportedOperationException("Parameter cannot be null");
-            testParameters.add(new TestParameter(parameter));
+            if(parameter == null) throw new IllegalArgumentException("Parameter cannot be null");
+            testParametersToBeAdded.add(new TestParameter(parameter));
         }
-        return testParameters;
+        return testParametersToBeAdded;
     }
-
-    /**
-     * Nhs code attribute validation for having non alphanumeric characters, more or less then 12 characters or blank
-     *
-     * @param code Test type's code
-     */
-    private void checkNhsCode(String code) {
-        if (StringUtils.isBlank(code))
-            throw new IllegalArgumentException("Nhs code cannot be blank.");
-        if ((code.length() != NHS_CODE_MAX_LENGTH))
-            throw new IllegalArgumentException("Nhs code must hold 12 alphanumeric characters");
-        if (!StringUtils.isAlphanumeric(code))
-            throw new IllegalArgumentException("Nhs code must only have alphanumeric characters.");
-    }
-
 
     public boolean hasChemDate() {
         return this.dateOfChemicalAnalysis != null;
@@ -439,8 +466,8 @@ public class Test {
      */
     public boolean hasPositiveResultForCovid() {
         if(this.isCovidTest() && this.isValidated()) {
-            List<TestParameter> testParameters = this.getParameters();
-            return testParameters.get(0).getTestParameterResult().getResultValue() > 1.4;
+            List<TestParameter> testParameterList = this.getParameters();
+            return testParameterList.get(0).getTestParameterResult().getResultValue() > 1.4;
         }
         return false;
     }

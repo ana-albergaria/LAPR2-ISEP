@@ -3,6 +3,7 @@ package app.controller;
 import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.model.Test;
+import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import app.mappers.TestMapper;
 import app.mappers.dto.TestDTO;
@@ -37,12 +38,14 @@ public class ViewClientResultsController {
 
     /**
      * Retrieves list of client tests with or list of client tests without results, ordered by date
-     * @param client the client
+     * @param email the client email
      * @param withResults whether the list to be returned is the list of client tests with or without results
      * @return list of client tests with results if withResults is true
      * otherwise return list of client tests without results
      */
-    public List<TestDTO> getClientTestsWithOrWithoutResults(Client client, boolean withResults){
+    public List<TestDTO> getClientTestsWithOrWithoutResults(String email, boolean withResults){
+        ClientStore clientStore = this.company.getClientStore();
+        Client client = clientStore.getClientByEmail(email);
         TestStore tstStore = this.company.getTestStore();
         List<Test> clientTests = tstStore.getTestsByClient(client);
         ArrayList<Test> desiredList = new ArrayList<>();

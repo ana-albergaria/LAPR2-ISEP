@@ -47,6 +47,10 @@ public class MainUI implements Initializable {
         return this.mainApp;
     }
 
+    public String getEmail(){
+        return email.getText();
+    }
+
     public void setMainApp(App mainApp) {
         this.mainApp = mainApp;
     }

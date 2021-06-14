@@ -1,24 +1,33 @@
 package app.ui.gui;
 
+import app.controller.ViewClientResultsController;
+import app.mappers.dto.TestDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import java.util.List;
 
-public class ClientTestResultsUI1 {
+public class ClientTestResultsUI1 /*implements Initializable*/ {
 
-    @FXML
-    private TableView<?> tableView;
+    private App mainApp;
+    private ClientMenuUI clientMenuUI;
+    private ViewClientResultsController controller;
 
-    @FXML
-    private TableColumn<?, ?> colDateOfTestRegistration;
-
-    @FXML
-    private TableColumn<?, ?> colTestResults;
+    //List<TestDTO> testsWithResults = controller.getClientTestsWithOrWithoutResults(this.clientMenuUI.getMainUI().getEmail(), true);
 
     @FXML
-    private TableColumn<?, ?> colTestType;
+    private TableView<List<String>> tableView;
+
+    @FXML
+    private TableColumn<List<String>, String> colTestType;
+
+    @FXML
+    private TableColumn<List<String>, String> colDateOfTestRegistration;
+
+    @FXML
+    private TableColumn<List<String>, Button> colTestResults;
 
     @FXML
     private Button exitBtn;
@@ -28,12 +37,10 @@ public class ClientTestResultsUI1 {
 
     @FXML
     void exitAction(ActionEvent event) {
-
     }
 
     @FXML
     void returnAction(ActionEvent event) {
-
     }
 
 }

@@ -46,8 +46,7 @@ public class CreateFullTestController {
         TestType testType = testTypeStore.getSingleTestTypeByCode(testFileDTO.getTestTypeCode());
         List<Parameter> parameters = parameterStore.getParamsByCodes(testFileDTO.getTestParameterCodes());
         List<Double> results = testFileDTO.getTestParameterResults();
-        /*ClinicalAnalysisLaboratory cal = calStore.getCalByCode(testFileDTO.getLabId());*/
-        ClinicalAnalysisLaboratory cal = null;
+        ClinicalAnalysisLaboratory cal = calStore.getCalByCode(testFileDTO.getLabId());
 
         Date testRegDate = testFileDTO.getDateOfTestRegistration();
         Date testChemDate = testFileDTO.getDateOfChemicalAnalysis();

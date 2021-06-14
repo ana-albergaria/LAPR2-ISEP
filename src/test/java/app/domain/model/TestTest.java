@@ -15,6 +15,7 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -48,14 +49,14 @@ public class TestTest {
         pcList = new ArrayList<>();
         p2 = new ParameterCategory("CODE1","covid");
         pcList.add(p2);
-        Parameter igg = new Parameter("IGG12", "igg", "covidParam", p2);
+        Parameter igg = new Parameter("igGAN", "igg", "covidParam", p2);
 
         parametersBlood.add(rbc);
         parametersBlood.add(wbc);
         parametersCovid.add(igg);
 
-        t1 = new TestType("CODE3","blood test","blood",pcListBlood, Constants.BLOOD_EXTERNAL_ADAPTER_3);
-        t2 = new TestType("CODE4","covid","swab",pcList, Constants.COVID_EXTERNAL_ADAPTER);
+        t1 = new TestType("CODE3","blood test","blood",pcListBlood, Constants.BLOOD_EXTERNAL_ADAPTER_2);
+        t2 = new TestType("covid","covid","swab",pcList, Constants.COVID_EXTERNAL_ADAPTER);
 
         List<TestType> selectedTT = new ArrayList<>();
         selectedTT.add(t1);
@@ -69,6 +70,29 @@ public class TestTest {
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNullParameters(){
         app.domain.model.Test test = new app.domain.model.Test(null, null, null, null, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithNullNhs(){
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test(null, client, t1, parametersBlood, cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithNullTestType(){
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, null, parametersBlood, cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithNullClient(){
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", null, t1, parametersBlood, cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithEmptyResults() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood, Collections.emptyList(), cal, new Date(), new Date(), new Date(), new Date());
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -99,6 +123,68 @@ public class TestTest {
     public void createTestWithemptyNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("", client, t1, parametersBlood,cal);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void ensureTestParameterNotFoundWithWrongCode() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood,cal);
+        test.addTestResult("notEx", 12.9, "g");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestParameterNotCreatedWithNullParameterFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Parameter> params = new ArrayList<>();
+        params.add(null);
+        List<Double> res = new ArrayList<>();
+        res.add(1.6);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, params, res,cal, new Date(), new Date(),new Date(), new Date());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestParameterNotCreatedWithNullParameter() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Parameter> params = new ArrayList<>();
+        params.add(null);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, params,cal);
+    }
+
+    @Test
+    public void ensureIsTrueForNegativeCovid() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.6);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), new Date());
+        Assert.assertTrue(test.hasPositiveResultForCovid());
+    }
+
+    @Test
+    public void ensureIsFalseForNegativeCovid() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), new Date());
+        Assert.assertFalse(test.hasPositiveResultForCovid());
+    }
+
+    @Test
+    public void ensureIsFalseForNotValidated() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), null);
+        Assert.assertFalse(test.hasPositiveResultForCovid());
+    }
+
+    @Test
+    public void ensureIsFalseForNotCovidTest() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        res.add(2.7);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood, res,cal, new Date(), new Date(),new Date(), new Date());
+        Assert.assertFalse(test.hasPositiveResultForCovid());
     }
 
     @Test //this test checks if the generated number is truly sequential, making the boolean conditions for this purpouse.
@@ -154,6 +240,7 @@ public class TestTest {
 
         Assert.assertTrue(test.hasSamples());
     }
+
 
 
 
