@@ -11,10 +11,20 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientMenuUI implements Initializable, Menu {
 
     private App mainApp;
+
+    public App getMainApp() {
+        return this.mainApp;
+    }
+
+    public void setMainApp(App mainApp){
+        this.mainApp=mainApp;
+    }
 
     private final String FXML_PATH = "/fxml/ClientMenu.fxml";
 
@@ -26,10 +36,6 @@ public class ClientMenuUI implements Initializable, Menu {
 
     public MainUI getMainUI(){
         return this.mainUI;
-    }
-
-    public void setMainApp(App mainApp){
-        this.mainApp=mainApp;
     }
 
     @FXML
@@ -53,13 +59,22 @@ public class ClientMenuUI implements Initializable, Menu {
 
     @FXML
     void logoutAction(ActionEvent event) {
-        this.mainUI.getMainApp().toMainScene();
+        try {
+            MainUI mainUI = (MainUI) this.mainApp.replaceSceneContent("/fxml/Login.fxml");
+            mainUI.setMainApp(mainApp);
+        } catch (Exception ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     void viewTestResultAction(ActionEvent event) {
-        ClientTestResultsUI1 clientTestResultsUI1
-                = new ClientTestResultsUI1();
+        try {
+            ClientTestResultsUI1 clientTestResultsUI1 = (ClientTestResultsUI1) this.mainApp.replaceSceneContent("/fxml/ClientTestResults1.fxml");
+            clientTestResultsUI1.setMainApp(mainApp);
+        } catch (Exception ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -71,7 +86,7 @@ public class ClientMenuUI implements Initializable, Menu {
     void exitAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-        alert.setTitle("Aplication");
+        alert.setTitle("Application");
         alert.setHeaderText("Action confirmation.");
         alert.setContentText("Do you really wish to exit the application?");
 
