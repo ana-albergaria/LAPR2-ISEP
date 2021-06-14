@@ -12,12 +12,12 @@
    <children>
       <AnchorPane layoutX="338.0" prefHeight="500.0" prefWidth="355.0" style="-fx-background-color: #26292F;">
          <children>
-            <TextField layoutX="95.0" layoutY="250.0" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
+            <TextField layoutX="95.0" layoutY="250.0" fx:id="email" promptText="User E-mail" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" styleClass="text-input" AnchorPane.bottomAnchor="220.0">
                <font>
                   <Font name="Tahoma" size="14.0" />
                </font>
             </TextField>
-            <PasswordField layoutX="95.0" layoutY="303.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;">
+            <PasswordField layoutX="95.0" layoutY="303.0" fx:id="pwd" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;">
                <font>
                   <Font name="Tahoma" size="14.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Image url="@whiteUser.png" />
                </image>
             </ImageView>
-            <Button layoutX="130.0" layoutY="405.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #3d5a80; -fx-background-radius: 90;" text="Login" textFill="WHITE">
+            <Button layoutX="130.0" layoutY="405.0" onAction="#handleLoginButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #3d5a80; -fx-background-radius: 90;" text="Login" textFill="WHITE">
                <font>
                   <Font name="Tahoma Bold" size="15.0" />
                </font>
