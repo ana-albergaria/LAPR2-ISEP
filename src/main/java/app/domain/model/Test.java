@@ -142,7 +142,7 @@ public class Test {
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
         this.dateOfSamplesCollection = null;
-        this.dateOfChemicalAnalysis = testChemDate;
+        this.dateOfChemicalAnalysis = (Date)testChemDate.clone();
         this.dateOfDiagnosis = testDiagnosisDate;
         this.dateOfValidation = testValidationDate;
     }
