@@ -3,6 +3,8 @@ package app.ui.gui;
 import app.controller.ViewClientResultsController;
 import app.domain.model.TestType;
 import app.mappers.dto.TestDTO;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,10 +61,12 @@ public class ClientTestResultsUI1 implements Initializable {
 
     public void updateClientTestsInfoForTableview(List<TestDTO> testsToAdd, List<ClientTestsInfoForTableview> clientTestsInfoForTableview){
         String description, date;
+        ClientTestsInfoForTableview toAdd;
         for (int i = 0; i < testsToAdd.size(); i++) {
             description=testsToAdd.get(i).getTestTypeDescription();
             date=testsToAdd.get(i).getStringDateOfTestRegistration();
-            //clientTestsInfoForTableview.add(description, date);
+            toAdd = new ClientTestsInfoForTableview(description,date);
+            clientTestsInfoForTableview.add(toAdd);
         }
     }
 

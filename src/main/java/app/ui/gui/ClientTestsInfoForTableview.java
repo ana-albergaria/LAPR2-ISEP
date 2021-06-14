@@ -16,6 +16,10 @@ public class ClientTestsInfoForTableview {
 
     private Button button;
 
+    public ClientTestsInfoForTableview(){
+        this(null,null);
+    }
+
     public ClientTestsInfoForTableview(String testTypeDescription, String stringDateOfTestRegistration) {
         this.testTypeDescription = testTypeDescription;
         this.stringDateOfTestRegistration = stringDateOfTestRegistration;
