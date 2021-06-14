@@ -172,7 +172,6 @@ public class MyRegressionModelTest {
     }
 
     //For Critical Values
-
     @Test
     public void calculateCriticalValFSnedecor() {
         double expected = 4.2565;

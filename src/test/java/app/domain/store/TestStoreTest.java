@@ -499,7 +499,7 @@ public class TestStoreTest {
     // Porque dá erro no Jenkins??
     /*
     @Test
-    public void getObservedPositivesToTableOfValues() throws ParseException {
+    public void getObservedPositivesToTableOfValues() throws ParseException, IllegalAccessException, InstantiationException, OutputException, IOException, BarcodeException, ClassNotFoundException {
         int numberOfObservations = 8;
         NHSReportStore nhsReportStore = new NHSReportStore();
         List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(numberOfObservations, startDate);
@@ -510,7 +510,6 @@ public class TestStoreTest {
         Assert.assertArrayEquals(expObservedPositives, observedPositives);
     }
      */
-
 
 
 
@@ -531,14 +530,14 @@ public class TestStoreTest {
     //Porque dá erro no Jenkins?
     /*
     @Test
-    public void getObservedPositivesCovidInADay() {
+    public void getObservedPositivesCovidInADay() throws IllegalAccessException, InstantiationException, OutputException, IOException, BarcodeException, ClassNotFoundException {
         double expNumber = 1;
         double number = testStore.getObservedPositivesCovidInADay(startDate);
 
         Assert.assertEquals(expNumber, number, 0.0);
-
     }
      */
+
 
 
 
