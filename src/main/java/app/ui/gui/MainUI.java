@@ -95,7 +95,8 @@ public class MainUI implements Initializable {
     {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(Constants.ROLE_ADMIN, new AdminMenu()));
-        rolesUI.add(new MenuItem(Constants.ROLE_CLIENT, new ClientMenuUI()));
+        rolesUI.add(new MenuItem(Constants.ROLE_LAB_COORDINATOR, new LabCoordinatorUI()));
+        rolesUI.add(new MenuItem(Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST, new ChemTechUI()));
         return rolesUI;
     }
 
@@ -112,7 +113,7 @@ public class MainUI implements Initializable {
                     Menu uiController = (Menu)this.mainApp.replaceSceneContent(item.getUi().getFXML_PATH());
                     uiController.setMainApp(mainApp);
                 } catch (Exception ex) {
-                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
         }
         if (!found)

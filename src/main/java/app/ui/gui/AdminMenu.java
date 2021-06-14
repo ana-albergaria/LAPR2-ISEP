@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -30,5 +31,6 @@ public class AdminMenu implements Initializable, Menu {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 
 }

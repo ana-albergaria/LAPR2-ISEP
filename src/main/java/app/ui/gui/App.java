@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class App extends Application {
+
     private Stage stage;
     private final String TITLE =  "Many Labs";
     private final double MINIMUM_WINDOW_WIDTH = 500.0;
@@ -68,7 +69,7 @@ public class App extends Application {
         scene.getStylesheets().add("/styles/Styles.css");
         this.stage.setScene(scene);
         this.stage.sizeToScene();
-        if(fxml.equals("/fxml/Login.fxml"))
+        if(fxml.equals("/fxml/Login.fxml") && !stage.getStyle().equals(StageStyle.UNDECORATED))
             stage.initStyle(StageStyle.UNDECORATED);
         return (Initializable) loader.getController();
     }

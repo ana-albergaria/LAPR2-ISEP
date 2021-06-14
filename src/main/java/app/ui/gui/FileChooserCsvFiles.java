@@ -10,7 +10,7 @@ public class FileChooserCsvFiles {
         associarFiltro("CSV files", "*.csv");
     }
 
-    public static FileChooser criarFileChooserListaTelefonica() {
+    public static FileChooser createCsvFileChooser() {
         FileChooserCsvFiles fcListaTelefonica = new FileChooserCsvFiles();
         return fcListaTelefonica.fileChooser;
     }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.TestPageUI">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="620.0">
+         <image>
+            <Image url="@Images/Background2.png" />
+         </image>
+      </ImageView>
+      <BorderPane prefHeight="400.0" prefWidth="620.0">
+         <bottom>
+            <Pane prefHeight="40.0" prefWidth="693.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <right>
+            <Pane prefHeight="420.0" prefWidth="40.0" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <HBox prefHeight="420.0" prefWidth="40.0" BorderPane.alignment="CENTER" />
+         </left>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextArea fx:id="clientsTestArea" editable="false" layoutX="18.0" layoutY="93.0" prefHeight="264.0" prefWidth="504.0" style="-fx-text-inner-color: black;" />
+                  <Text fill="WHITE" layoutX="-44.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historic of tests of:" textAlignment="RIGHT" wrappingWidth="291.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="clientsName" fill="WHITE" layoutX="254.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Client]" wrappingWidth="291.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

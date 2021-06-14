@@ -183,4 +183,28 @@ public class TestDTO {
                 code, nhsCode, client.getName(), testType, s, samples.size(), diagnosisReport,
                 sdf.format(dateOfTestRegistration), printDateOfSamplesCollection, printDateOfChemicalAnalysis, printDateOfDiagnosis, printDateOfValidation);
     }
+
+    public String showAllButReport() {
+        List<TestParameter> copyTP = new ArrayList<>(testParameters);
+
+        StringBuilder s = new StringBuilder();
+        for (TestParameter testParameter : copyTP) {
+            s.append(testParameter);
+            s.append("\n");
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        String printDateOfSamplesCollection = (dateOfSamplesCollection == null) ? "n/a" : sdf.format(dateOfSamplesCollection);
+        String printDateOfChemicalAnalysis = (dateOfChemicalAnalysis == null) ? "n/a" : sdf.format(dateOfChemicalAnalysis);
+        String printDateOfDiagnosis = (dateOfDiagnosis == null) ? "n/a" : sdf.format(dateOfDiagnosis);
+        String printDateOfValidation = (dateOfValidation == null) ? "n/a" : sdf.format(dateOfValidation);
+
+        return String.format(">> TEST CODE %s%n > NHS Code: %s%n > Client name: %s%n > Test Type: %s%n" +
+                        " > Parameters: %n%n%s > Number of Samples Collected: %d%n" +
+                        " > Date Of Test Registration: %s%n > Date Of Samples Collection: %s%n" +
+                        " > Date of Chemical Analysis: %s%n > Date Of Diagnosis: %s%n > Date Of Validation: %s%n%n%n",
+                code, nhsCode, client.getName(), testType, s, samples.size(),
+                sdf.format(dateOfTestRegistration), printDateOfSamplesCollection, printDateOfChemicalAnalysis, printDateOfDiagnosis, printDateOfValidation);
+    }
 }
