@@ -44,11 +44,7 @@
                      <graphic>
                         <ImageView fitHeight="31.0" fitWidth="31.0">
                            <image>
-<<<<<<< HEAD
                               <Image url="@Images/Icon3.png" />
-=======
-                              <Image url="@../../java/app/ui/gui/Images/Icon3.png" />
->>>>>>> 98e230288a099050fee0cdc23dd2dc277d86ed80
                            </image>
                         </ImageView>
                      </graphic>
