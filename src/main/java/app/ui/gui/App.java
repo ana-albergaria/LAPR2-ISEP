@@ -69,7 +69,7 @@ public class App extends Application {
         scene.getStylesheets().add("/styles/Styles.css");
         this.stage.setScene(scene);
         this.stage.sizeToScene();
-        if(fxml.equals("/fxml/Login.fxml"))
+        if(fxml.equals("/fxml/Login.fxml") && !stage.getStyle().equals(StageStyle.UNDECORATED))
             stage.initStyle(StageStyle.UNDECORATED);
         return (Initializable) loader.getController();
     }

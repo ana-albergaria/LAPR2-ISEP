@@ -112,7 +112,7 @@ public class MainUI implements Initializable {
                     Menu uiController = (Menu)this.mainApp.replaceSceneContent(item.getUi().getFXML_PATH());
                     uiController.setMainApp(mainApp);
                 } catch (Exception ex) {
-                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
         }
         if (!found)
