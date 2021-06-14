@@ -134,13 +134,13 @@ public class Company {
         this.confidenceLevel = confidenceLevel;
         this.significanceLevel = significanceLevel;
 
-        /*
+
         NHSReportTask nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
         Timer timer = new Timer();
-        timer.schedule(nhsReportTask,0);
-        
-         */
+        timer.schedule(nhsReportTask,5000);
+
+
         //COLOCAR CONSTRUTOR DO REPORTTASK AQUI
     }
 

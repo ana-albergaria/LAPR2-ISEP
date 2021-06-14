@@ -22,7 +22,7 @@ public class NHSReportStore {
                 nhsReport.getHypothesisTest() != null && nhsReport.getModelAnova() != null && nhsReport.getTableOfValues() != null;
     }
 
-    public int getBestXIndex(RegressionModel regressionModel,
+    public Integer getBestXIndex(RegressionModel regressionModel,
                              double[] x1,
                              double[] x2,
                              double[] y) {
@@ -78,6 +78,7 @@ public class NHSReportStore {
         }
         return wishedArray;
     }
+
 
     /*
     WARNING - ter em atenção que ao converter a String selecionada pelo administrador

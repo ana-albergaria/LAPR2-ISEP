@@ -5,6 +5,7 @@ import app.domain.model.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Store of tests
@@ -335,8 +336,8 @@ public class TestStore {
         for (Test test : testList) {
             if(test.hasPositiveResultForCovid()) {
                 for (int i = 0; i < dates.size(); i++) {
-                    String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
-                    if(testDateOfDiagnosis.equals(dates.get(i))) {
+                    String testDateOfValidation = sdf.format(test.getDateOfValidation());
+                    if(testDateOfValidation.equals(dates.get(i))) {
                         indexDate = i;
                         observedPositives[indexDate]++;
                     }
@@ -349,30 +350,56 @@ public class TestStore {
 
     public double getNumberOfCovidTestsRealizedInADay(Date date) {
         double testsInADay = 0;
-        for (Test test : testList) {
+        /*for (Test test : testList) {
             if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date))
                 testsInADay++;
+        }
+         */
+        List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
+        for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
+            Test test = iterator.next();
+            if (test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date)) {
+                testsInADay++;
+            }
         }
         return testsInADay;
     }
 
     public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
         double sumAges = 0, numClients = 0;
-        for (Test test : testList) {
-            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date)) {
+        /*for (Test test : testList) {
+            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date)) {
                 sumAges += test.getClient().getAge();
                 numClients++;
             }
         }
+         */
+        List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
+        for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
+            Test test = iterator.next();
+            if (test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date)) {
+                sumAges += test.getClient().getAge();
+                numClients++;
+            }
+        }
+
         //COLOCAR EXCEÇÃO!!!!!!! OU ENTÃO QUE COLOCAR?
         return (numClients != 0) ? sumAges / numClients : 0;
     }
 
     public double getObservedPositivesCovidInADay(Date date) {
         double positives = 0;
-        for (Test test : testList) {
-            if(test.hasPositiveResultForCovid() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfDiagnosis(), date))
+        /*for (Test test : testList) {
+            if(test.hasPositiveResultForCovid() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date))
                 positives++;
+        }
+         */
+        List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
+        for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
+            Test test = iterator.next();
+            if (test.hasPositiveResultForCovid() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date)) {
+                positives++;
+            }
         }
         return positives;
     }
@@ -400,45 +427,50 @@ public class TestStore {
                                            List<Double> covidTestList,
                                            List<Double> meanAgeList,
                                            List<Double> observedPositives) {
-        Calendar auxEndDate = Calendar.getInstance();
-        auxEndDate.setTime(endDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        Date auxEndDate = cal.getTime();
 
-        while(!checkIfDatesAreEqual(beginDate, endDate)) {
-            double testsInADay = getNumberOfCovidTestsRealizedInADay(endDate);
-            //System.out.println("Tests in a day: " + testsInADay + endDate);
+        //INCLUIR DATA DE INÍCIO
+        while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
+            //System.out.println("Cal: " + cal.getTime());
+            //System.out.println("AuxEndDate: " + auxEndDate);
+            double testsInADay = getNumberOfCovidTestsRealizedInADay(auxEndDate);
+            //System.out.println("Tests in a day: " + testsInADay + " " + auxEndDate);
             covidTestList.add(testsInADay);
-            double meanAgeInADay = getMeanAgeOfClientsOfCovidTestsInADay(endDate);
-            //System.out.println("Mean Age In a day: " + meanAgeInADay + endDate);
+            double meanAgeInADay = getMeanAgeOfClientsOfCovidTestsInADay(auxEndDate);
+            //System.out.println("Mean Age In a day: " + meanAgeInADay + " " + auxEndDate);
             meanAgeList.add(meanAgeInADay);
-            double observedPositivesInADay = getObservedPositivesCovidInADay(endDate);
+            double observedPositivesInADay = getObservedPositivesCovidInADay(auxEndDate);
+            //System.out.println("Observed in a day: " + observedPositivesInADay + " " + auxEndDate);
             observedPositives.add(observedPositivesInADay);
-            auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
-            if ((auxEndDate.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
-                auxEndDate.add(Calendar.DAY_OF_MONTH,-1);
-            endDate = auxEndDate.getTime();
+            cal.add(Calendar.DAY_OF_MONTH,-1);
+            if ((cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+                cal.add(Calendar.DAY_OF_MONTH,-1);
+            auxEndDate = cal.getTime();
         }
     }
 
     public Double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
-        Double[] covidTestsInHistoricalPoints = new Double[dates.size()];
+        double[] covidTestsInHistoricalPointsPrimitive = new double[dates.size()];
         int indexDate = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         for (Test test : testList) {
             if(test.isCovidTest() && test.isValidated()) {
                 for (int i = 0; i < dates.size(); i++) {
-                    String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
-                    if(testDateOfDiagnosis.equals(dates.get(i))) {
+                    String testDateOfValidation = sdf.format(test.getDateOfValidation());
+                    if(testDateOfValidation.equals(dates.get(i))) {
                         indexDate = i;
-                        covidTestsInHistoricalPoints[indexDate]++;
+                        covidTestsInHistoricalPointsPrimitive[indexDate]++;
                     }
                 }
             }
         }
-        //important! Otherwise the default value will be null
-        changeNullToZeroInDoubleArray(covidTestsInHistoricalPoints);
+        Double[] covidTestsInHistoricalPoints = turnPrimitiveIntoDoubleArray(covidTestsInHistoricalPointsPrimitive);
         return covidTestsInHistoricalPoints;
     }
+//TESTAR POR CAUSA DO NULL DO DOUBLE!!!!
 
     public Double[] getMeanAgeInHistoricalPoints(List<String> dates) {
         Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
@@ -450,16 +482,21 @@ public class TestStore {
                 if(test.isCovidTest() && test.isValidated()) {
                     String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
                     if(testDateOfDiagnosis.equals(dates.get(i))) {
+                        System.out.println("Idade: " + test.getClient().getAge());
                         sumAges += test.getClient().getAge();
                         numClients++;
                     }
                 }
             }
             //SE O NUM CLIENTES == 0, O QUE FAZER????
+            System.out.println("SumAges" + sumAges);
+            System.out.println("Num Clints" + numClients);
             if(numClients == 0)
                 meanAgeInHistoricalPoints[i] = 0.0;
             else
                 meanAgeInHistoricalPoints[i] = sumAges / numClients; //antes só tinha esta linha
+            sumAges = 0;
+            numClients = 0;
         }
         return meanAgeInHistoricalPoints;
     }
@@ -478,6 +515,14 @@ public class TestStore {
             if(array[i] == null)
                 array[i] = 0.0;
         }
+    }
+
+    public Double[] turnPrimitiveIntoDoubleArray(double[] array) {
+        Double[] wishedArray = new Double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            wishedArray[i] = array[i];
+        }
+        return wishedArray;
     }
 
 

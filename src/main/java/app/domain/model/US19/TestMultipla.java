@@ -1,4 +1,4 @@
-package app.domain.model.US19;
+/*package app.domain.model.US19;
 
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.HypothesisTest;
@@ -57,3 +57,5 @@ public class TestMultipla {
         }
     }
 }
+
+ */
