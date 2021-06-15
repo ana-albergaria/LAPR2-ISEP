@@ -68,25 +68,30 @@ public class ImportTestsUI implements Initializable {
 
     @FXML
     private void importTests(){
-        TestFileUtils testFileUtils = new TestFileUtils();
-        testsOfFile = testFileUtils.getTestsDataToDto(inputFile.toString());
-        List<TestFileDTO> addedTests = new ArrayList<>();
-        for(int i=0; i < testsOfFile.size();i++){
-            try{
-                if(!ctrl.importTestFromFile(testsOfFile.get(i)))
-                    throw new Exception("Test already existent in the system");
-                addedTests.add(testsOfFile.get(i));
-            }catch (Exception e){
-                System.out.println("Error in line " + (i+2) + " of csv file");
-                System.out.println(e.getMessage());
-                System.out.println();
+        if(inputFile != null) {
+            TestFileUtils testFileUtils = new TestFileUtils();
+            testsOfFile = testFileUtils.getTestsDataToDto(inputFile.toString());
+            List<TestFileDTO> addedTests = new ArrayList<>();
+            for (int i = 0; i < testsOfFile.size(); i++) {
+                try {
+                    if (!ctrl.importTestFromFile(testsOfFile.get(i)))
+                        throw new Exception("Test already existent in the system");
+                    addedTests.add(testsOfFile.get(i));
+                } catch (Exception e) {
+                    System.out.println("Error in line " + (i + 2) + " of csv file");
+                    System.out.println(e.getMessage());
+                    System.out.println();
+                }
             }
-        }
 
-        if(!addedTests.isEmpty()){
-            this.txtImportedTests.setVisible(true);
-            this.importedTests.setVisible(true);
-            showImportedTests(addedTests);
+            if (!addedTests.isEmpty()) {
+                this.txtImportedTests.setVisible(true);
+                this.importedTests.setVisible(true);
+                showImportedTests(addedTests);
+            }
+        }else{
+            AlertUI.createAlert(Alert.AlertType.WARNING, "Import file", "Failed to import file",
+                    "Please select a file to be imported.").show();
         }
 
     }
