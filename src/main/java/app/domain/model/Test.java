@@ -515,9 +515,9 @@ public class Test {
         return nhsCode.equalsIgnoreCase(test.nhsCode) &&
                 client.equals(test.client) &&
                 testType.equals(test.testType) &&
-                dateOfTestRegistration.equals(test.dateOfTestRegistration) &&
-                dateOfChemicalAnalysis.equals(test.dateOfChemicalAnalysis) &&
-                dateOfDiagnosis.equals(test.dateOfDiagnosis) &&
-                dateOfValidation.equals(test.dateOfValidation);
+                Objects.equals(dateOfTestRegistration, test.dateOfTestRegistration) &&
+                Objects.equals(dateOfChemicalAnalysis, test.dateOfChemicalAnalysis) &&
+                Objects.equals(dateOfDiagnosis, test.dateOfDiagnosis) &&
+                Objects.equals(dateOfValidation, test.dateOfValidation);
     }
 }
