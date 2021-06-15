@@ -1,0 +1,146 @@
+package app.controller;
+
+import app.domain.interfaces.RegressionModel;
+import app.domain.model.*;
+import app.domain.store.NHSReportStore;
+import app.domain.store.TestStore;
+
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+
+public class SendNHSReportController {
+    private Company company;
+    private NHSReport nhsReport;
+
+    public SendNHSReportController() {
+        this(App.getInstance().getCompany());
+    }
+
+    public SendNHSReportController(Company company) {
+        this.company = company;
+        this.nhsReport = null;
+    }
+
+    public boolean createNHSDailyReport(Date currentDate,
+                                        String typeOfData,
+                                        int historicalPoints,
+                                        Date beginDate,
+                                        Date endDate,
+                                        String chosenRegressionModelClass,
+                                        String chosenVariable,
+                                        double significanceLevel,
+                                        double confidenceLevel) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+        RegressionModel chosenRegressionModel = this.company.getChosenRegressionModel(chosenRegressionModelClass);
+
+        //ALTERAR MÉTODO getDataListToFitTheModel PARA INCLUIR DADOS SEMANAIS
+        //OPÇÃO: COLOCAR MAIS UM PARÂMETRO COM O TIPO DE DATA E DEPOIS FAZER UM IF NO METODO
+        List<List<Double>> dataList = getDataListToFitTheModel(beginDate, endDate);
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
+        double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
+        double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
+
+        MyRegressionModel myRegressionModel = getMyRegressionModel(chosenRegressionModel, chosenVariable, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
+        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(chosenRegressionModel, myRegressionModel, significanceLevel);
+        SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(chosenRegressionModel, myRegressionModel, significanceLevel);
+
+        Date startDate = nhsReportStore.getStartDate();
+        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, chosenRegressionModel, chosenVariable, typeOfData, historicalPoints, startDate, confidenceLevel);
+
+        this.nhsReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
+        return nhsReportStore.validateNHSDailyReport(nhsReport);
+    }
+
+
+    public List<List<Double>> getDataListToFitTheModel(Date beginDate,
+                                                       Date endDate) {
+        TestStore testStore = this.company.getTestStore();
+        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate);
+        return dataList;
+    }
+
+    public MyRegressionModel getMyRegressionModel(RegressionModel chosenRegressionModel,
+                                                  String chosenVariable,
+                                                  double[] covidTestsArray,
+                                                  double[] meanAgeArray,
+                                                  double[] observedPositives,
+                                                  int historicalPoints) {
+
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        MyRegressionModel myRegressionModel;
+        if(!chosenVariable.isEmpty()) {
+            //for Simple Linear Regression
+            myRegressionModel = (chosenVariable.equals("Covid-19 Tests Realized")) ?
+                    nhsReportStore.createMyRegressionModel(chosenRegressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
+                    nhsReportStore.createMyRegressionModel(chosenRegressionModel, meanAgeArray, covidTestsArray, observedPositives, historicalPoints);
+        } else {
+            //for Multiple Linear Regression
+            myRegressionModel = nhsReportStore.createMyRegressionModel(chosenRegressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
+        }
+        return myRegressionModel;
+    }
+
+
+    public TableOfValues getTableOfValues(MyRegressionModel myRegressionModel,
+                                          RegressionModel chosenRegressionModel,
+                                          String chosenVariable,
+                                          String typeOfData,
+                                          int historicalPoints,
+                                          Date startDate,
+                                          double confidenceLevel) throws ParseException {
+
+        NHSReportStore nhsReportStore = this.company.getNhsReportStore();
+        TestStore testStore = this.company.getTestStore();
+        List<String> dates;
+        int[] observedPositives;
+        Double[] numCovidTestsInHistoricalPoints;
+        Double[] meanAgeInHistoricalPoints;
+
+        if(typeOfData.equals("Day")) {
+            dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
+            observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
+            numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+            meanAgeInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
+        } else {
+            dates = nhsReportStore.getWeeksColumnToTableOfValues(historicalPoints, startDate);
+            observedPositives = testStore.getWeeklyObservedPositivesToTableOfValues(historicalPoints, dates);
+            numCovidTestsInHistoricalPoints = testStore.getWeeklyNumberOfCovidTestsInHistoricalPoints(dates);
+            meanAgeInHistoricalPoints = testStore.getWeeklyMeanAgeInHistoricalPoints(dates);
+        }
+
+        Double[] chosenVariableArray;
+        List<Double> estimatedPositives;
+        List<ConfidenceInterval> confidenceIntervals;
+
+        if(!chosenVariable.isEmpty()) { //for Simple Linear Regression
+            if(chosenVariable.equals("Covid-19 Tests Realized"))
+                chosenVariableArray = nhsReportStore.copyArray(numCovidTestsInHistoricalPoints);
+            else
+                chosenVariableArray = nhsReportStore.copyArray(meanAgeInHistoricalPoints);
+            estimatedPositives = chosenRegressionModel.getEstimatedPositives(myRegressionModel, chosenVariableArray, null);
+            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, chosenRegressionModel, chosenVariableArray, null, chosenVariable, confidenceLevel);
+        } else { //for Multiple Linear Regression
+            estimatedPositives = chosenRegressionModel.getEstimatedPositives(myRegressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints);
+            confidenceIntervals = getConfidenceIntervalListForTableOfValues(myRegressionModel, chosenRegressionModel, numCovidTestsInHistoricalPoints, meanAgeInHistoricalPoints, chosenVariable, confidenceLevel);
+        }
+
+        TableOfValues tableOfValues = nhsReportStore.createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
+        return tableOfValues;
+    }
+
+    public List<ConfidenceInterval> getConfidenceIntervalListForTableOfValues(MyRegressionModel myRegressionModel,
+                                                                              RegressionModel regressionModel,
+                                                                              Double[] x1InHistoricalPoints,
+                                                                              Double[] x2InHistoricalPoints,
+                                                                              String chosenVariable,
+                                                                              double confidenceLevel) {
+        List<ConfidenceInterval> confidenceIntervalList;
+        if(!chosenVariable.isEmpty()) //for Simple Linear Regression
+            confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
+        else //For Multiple Linear Regression
+            confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
+        return confidenceIntervalList;
+    }
+
+}

@@ -328,7 +328,7 @@ public class TestStore {
             - Confirm if the client wishes the date of test registration or date of results
      */
     public int[] getObservedPositivesToTableOfValues(int numberOfObservations,
-                                                    List<String> dates) throws ParseException {
+                                                    List<String> dates) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         int[] observedPositives = new int[numberOfObservations];
         int indexDate = 0;
@@ -345,6 +345,31 @@ public class TestStore {
             }
         }
         return observedPositives;
+    }
+
+    public int[] getWeeklyObservedPositivesToTableOfValues(int numberOfObservations,
+                                                           List<String> dates) throws ParseException {
+        int[] observedPositives = new int[numberOfObservations];
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        for (int i = 0; i < dates.size(); i++) {
+            String[] intervalDatesInString = dates.get(i).split("-");
+            Date beginDate = sdf.parse(intervalDatesInString[0]), endDate = sdf.parse(intervalDatesInString[1]);
+            observedPositives[i] = getObservedPositivesInOneWeek(beginDate, endDate);
+        }
+        return observedPositives;
+    }
+
+    public int getObservedPositivesInOneWeek(Date beginDate, Date endDate) {
+        int weeklyPositives = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        Date auxEndDate = cal.getTime();
+        while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
+            weeklyPositives += getObservedPositivesCovidInADay(auxEndDate);
+            cal.add(Calendar.DAY_OF_MONTH,-1);
+            auxEndDate = cal.getTime();
+        }
+        return weeklyPositives;
     }
 
 
@@ -364,6 +389,7 @@ public class TestStore {
         }
         return testsInADay;
     }
+
 
     public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
         double sumAges = 0, numClients = 0;
@@ -386,6 +412,7 @@ public class TestStore {
         //COLOCAR EXCEÇÃO!!!!!!! OU ENTÃO QUE COLOCAR?
         return (numClients != 0) ? sumAges / numClients : 0;
     }
+
 
     public double getObservedPositivesCovidInADay(Date date) {
         double positives = 0;
@@ -421,7 +448,7 @@ public class TestStore {
 
         return dataList;
     }
-    //AQUI!!!!! - NÃO DEIXAR DOMINGOS - certo?? Para retirar os dados para o modelo de regressão
+
     public void addAllDataFromDateInterval(Date beginDate,
                                            Date endDate,
                                            List<Double> covidTestList,
@@ -431,18 +458,12 @@ public class TestStore {
         cal.setTime(endDate);
         Date auxEndDate = cal.getTime();
 
-        //INCLUIR DATA DE INÍCIO
         while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
-            //System.out.println("Cal: " + cal.getTime());
-            //System.out.println("AuxEndDate: " + auxEndDate);
             double testsInADay = getNumberOfCovidTestsRealizedInADay(auxEndDate);
-            //System.out.println("Tests in a day: " + testsInADay + " " + auxEndDate);
             covidTestList.add(testsInADay);
             double meanAgeInADay = getMeanAgeOfClientsOfCovidTestsInADay(auxEndDate);
-            //System.out.println("Mean Age In a day: " + meanAgeInADay + " " + auxEndDate);
             meanAgeList.add(meanAgeInADay);
             double observedPositivesInADay = getObservedPositivesCovidInADay(auxEndDate);
-            //System.out.println("Observed in a day: " + observedPositivesInADay + " " + auxEndDate);
             observedPositives.add(observedPositivesInADay);
             cal.add(Calendar.DAY_OF_MONTH,-1);
             if ((cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
@@ -470,6 +491,32 @@ public class TestStore {
         Double[] covidTestsInHistoricalPoints = turnPrimitiveIntoDoubleArray(covidTestsInHistoricalPointsPrimitive);
         return covidTestsInHistoricalPoints;
     }
+
+    public Double[] getWeeklyNumberOfCovidTestsInHistoricalPoints(List<String> dates) throws ParseException {
+        double[] covidTestsInHistoricalPointsPrimitive = new double[dates.size()];
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        for (int i = 0; i < dates.size(); i++) {
+            String[] intervalDatesInString = dates.get(i).split("-");
+            Date beginDate = sdf.parse(intervalDatesInString[0]), endDate = sdf.parse(intervalDatesInString[1]);
+            covidTestsInHistoricalPointsPrimitive[i] = getNumberOfCovidTestsInOneWeek(beginDate, endDate);
+        }
+        Double[] covidTestsInHistoricalPoints = turnPrimitiveIntoDoubleArray(covidTestsInHistoricalPointsPrimitive);
+        return covidTestsInHistoricalPoints;
+    }
+
+    public double getNumberOfCovidTestsInOneWeek(Date beginDate, Date endDate) {
+        int weeklyTests = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        Date auxEndDate = cal.getTime();
+        while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
+            weeklyTests += getObservedPositivesCovidInADay(auxEndDate);
+            cal.add(Calendar.DAY_OF_MONTH,-1);
+            auxEndDate = cal.getTime();
+        }
+        return weeklyTests;
+    }
+
 //TESTAR POR CAUSA DO NULL DO DOUBLE!!!!
 
     public Double[] getMeanAgeInHistoricalPoints(List<String> dates) {
@@ -498,6 +545,33 @@ public class TestStore {
         return meanAgeInHistoricalPoints;
     }
 
+    public Double[] getWeeklyMeanAgeInHistoricalPoints(List<String> dates) throws ParseException {
+        Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
+        double sumAges = 0, numClients = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        for (int i = 0; i < dates.size(); i++) {
+            String[] intervalDatesInString = dates.get(i).split("-");
+            Date beginDate = sdf.parse(intervalDatesInString[0]), endDate = sdf.parse(intervalDatesInString[1]);
+            meanAgeInHistoricalPoints[i] = getMeanAgeInOneWeek(beginDate, endDate);
+        }
+        return meanAgeInHistoricalPoints;
+    }
+
+    public double getMeanAgeInOneWeek(Date beginDate, Date endDate) {
+        int weeklyTests = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        Date auxEndDate = cal.getTime();
+        while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
+            weeklyTests += getMeanAgeOfClientsOfCovidTestsInADay(auxEndDate);
+            cal.add(Calendar.DAY_OF_MONTH,-1);
+            auxEndDate = cal.getTime();
+        }
+        return weeklyTests;
+    }
+
+
+
     public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
         Calendar cal = Calendar.getInstance(), otherCal = Calendar.getInstance();
         cal.setTime(date);
@@ -505,13 +579,6 @@ public class TestStore {
         return cal.get(Calendar.DAY_OF_MONTH) == otherCal.get(Calendar.DAY_OF_MONTH) &&
                 cal.get(Calendar.MONTH) == otherCal.get(Calendar.MONTH) &&
                 cal.get(Calendar.YEAR) == otherCal.get(Calendar.YEAR);
-    }
-
-    public void changeNullToZeroInDoubleArray(Double[] array) {
-        for (int i = 0; i < array.length; i++) {
-            if(array[i] == null)
-                array[i] = 0.0;
-        }
     }
 
     public Double[] turnPrimitiveIntoDoubleArray(double[] array) {
