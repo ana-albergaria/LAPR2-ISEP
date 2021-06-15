@@ -73,11 +73,13 @@ public class ImportTestsUI implements Initializable {
         List<TestFileDTO> addedTests = new ArrayList<>();
         for(int i=0; i < testsOfFile.size();i++){
             try{
-                ctrl.importTestFromFile(testsOfFile.get(i));
+                if(!ctrl.importTestFromFile(testsOfFile.get(i)))
+                    throw new Exception("Test already existent in the system");
                 addedTests.add(testsOfFile.get(i));
             }catch (Exception e){
                 System.out.println("Error in line " + (i+2) + " of csv file");
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                System.out.println();
             }
         }
 

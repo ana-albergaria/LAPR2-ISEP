@@ -43,6 +43,11 @@ public class LabCoordinatorUI implements Initializable, Menu {
     }
 
     @FXML
+    public void checkCompPerAction(){
+
+    }
+
+    @FXML
     void exitAction(ActionEvent event) {
         System.exit(    0);
     }
