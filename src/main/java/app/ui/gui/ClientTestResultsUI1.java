@@ -88,7 +88,7 @@ public class ClientTestResultsUI1 implements Initializable {
         ArrayList<String> stringsForListview = new ArrayList<>();
         String toAdd;
         for (int i = 0; i < testsWithResults.size(); i++) {
-            toAdd=testsWithResults.get(i).getTestTypeDescription() + "|" + testsWithResults.get(i).getStringDateOfTestRegistration();
+            toAdd=testsWithResults.get(i).getTestTypeDescription() + "  |  " + testsWithResults.get(i).getStringDateOfTestRegistration();
             stringsForListview.add(toAdd);
         }
         //ObservableList<String> items =FXCollections.observableArrayList(stringsForListview);
@@ -96,8 +96,15 @@ public class ClientTestResultsUI1 implements Initializable {
         for (String string : stringsForListview) {
             mListView.getItems().add(string);
         }
-        mListView.getItems().add("item add test funcionou, falta só testes com resutl!");
-        }
+    }
+
+    public void handleItemClicks(){
+        mListView.setOnMouseClicked(event -> {
+            String selectedItem = mListView.getSelectionModel().getSelectedItem().toString();
+            Dialog d=new Alert(Alert.AlertType.INFORMATION,selectedItem);
+            d.show();
+        });
+    }
 
 
 

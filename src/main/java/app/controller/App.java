@@ -4,6 +4,7 @@ import app.domain.model.*;
 import app.domain.shared.Constants;
 import auth.AuthFacade;
 import auth.UserSession;
+import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
 
 import java.io.FileInputStream;
@@ -92,6 +93,7 @@ public class App {
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
         this.authFacade.addUserWithRole("Maria", "maria@gmail.com","maria","CLIENT");
+        this.authFacade.addUserWithRole("Pedro", "pedro@gmail.com","pedro","CLIENT");
         this.authFacade.addUserWithRole("labCord", "lc@gmail.com","1",Constants.ROLE_LAB_COORDINATOR);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
@@ -120,6 +122,9 @@ public class App {
                 "swab",this.company.getParameterCategoryStore().getParameterCategoriesStore(), Constants.COVID_EXTERNAL_ADAPTER));
         Date d1 = new Date();
         Client c1 = new Client("1234567890123456","1234567890",d1,"1234567890","maria@gmail.com","Maria","12345678901");
+        this.company.getClientStore().saveClient(c1);
+
+        Client c2 = new Client("1234567890123333","1233367890",d1,"1234555890","pedro@gmail.com","Pedro","11115678901");
         this.company.getClientStore().saveClient(c1);
 
         Parameter parameter = new Parameter("IgGAN", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));
@@ -174,16 +179,32 @@ public class App {
         //Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
         //this.company.getTestStore().saveTest(test2);
 
-        /*Test testWithResult = new Test("123456789067",c1,t2,listParameter,cal1);
+        p1 = new ParameterCategory("CODE1","Hemogram");
+        Parameter rbc = new Parameter("RBC12", "rbc", "redbloodcells", p1);
+        Parameter wbc = new Parameter("WBC12", "wbc", "whitebloodcells", p1);
+
+        Test testWithResult = new Test("123456789067",c1,t2,listParameter,cal1);
         this.company.getTestStore().saveTest(testWithResult);
-        Date date1reg = new Date(2020, Calendar.JANUARY, 14,8,0,0);
+        Date date1reg = new Date(2020, Calendar.JANUARY, 14,18,0,0);
         testWithResult.setDateOfTestRegistration(date1reg);
-        Sample sample1 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        Sample sample1 = null;
+        try {
+            sample1 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        } catch (BarcodeException e) {
+            e.printStackTrace();
+        }
         testWithResult.addSample(sample1);
         Date date1s = new Date(2020, Calendar.JANUARY, 15, 8, 0, 0);
         testWithResult.setDateOfSamplesCollection(date1s);
-        testWithResult.addTestResult("RBC12", 23.45, "ug");
-        testWithResult.addTestResult("WBC12", 23.45, "ug");
+        try {
+            testWithResult.addTestResult("IgGAN", 23.45, "ug");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         Date date1 = new Date(2020, Calendar.JANUARY, 16, 8, 0, 0);
         testWithResult.setDateOfChemicalAnalysis(date1);
         Report report1 = new Report("Everything is well.");
@@ -196,12 +217,24 @@ public class App {
         this.company.getTestStore().saveTest(test4);
         Date date4reg = new Date(2020,Calendar.JANUARY, 14,8,0,0);
         test4.setDateOfTestRegistration(date4reg);
-        Sample sample4 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        Sample sample4 = null;
+        try {
+            sample4 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        } catch (BarcodeException e) {
+            e.printStackTrace();
+        }
         test4.addSample(sample4);
         Date date4s = new Date(2020, Calendar.JANUARY, 15, 19, 59, 58);
         test4.setDateOfSamplesCollection(date4s);
-        test4.addTestResult("RBC12", 23.45, "ug");
-        test4.addTestResult("WBC12", 23.45, "ug");
+        try {
+            test4.addTestResult("IgGAN", 23.45, "ug");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         test4.addChemicalAnalysisDate();
         Date date4 = new Date(2020, Calendar.JANUARY, 15, 19, 59, 59);
         test4.setDateOfChemicalAnalysis(date4);
@@ -209,7 +242,38 @@ public class App {
         test4.addReport(report4);
         Date date4r = new Date(2020,Calendar.JANUARY,16,19,59,59);
         test4.setDateOfDiagnosis(date4r);
-        test4.setDateOfValidation(date4r);*/
+        test4.setDateOfValidation(date4r);
+
+        Test test5 = new Test("000099898888",c2,t1,listParameter,cal1);
+        this.company.getTestStore().saveTest(test5);
+        Date date5reg = new Date(2020,Calendar.JANUARY, 14,8,0,0);
+        test5.setDateOfTestRegistration(date5reg);
+        Sample sample5 = null;
+        try {
+            sample5 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        } catch (BarcodeException e) {
+            e.printStackTrace();
+        }
+        test5.addSample(sample5);
+        Date date5s = new Date(2020, Calendar.JANUARY, 15, 19, 59, 58);
+        test5.setDateOfSamplesCollection(date5s);
+        try {
+            test5.addTestResult("IgGAN", 23.45, "ug");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        test4.addChemicalAnalysisDate();
+        Date date5 = new Date(2020, Calendar.JANUARY, 15, 19, 59, 59);
+        test5.setDateOfChemicalAnalysis(date5);
+        Report report5 = new Report("Everything is well.");
+        test5.addReport(report5);
+        Date date5r = new Date(2020,Calendar.JANUARY,16,19,59,59);
+        test5.setDateOfDiagnosis(date5r);
+        test5.setDateOfValidation(date5r);
 
     }
 
