@@ -4,14 +4,12 @@ import app.domain.model.*;
 import app.domain.shared.Constants;
 import auth.AuthFacade;
 import auth.UserSession;
+import net.sourceforge.barbecue.BarcodeFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  *
@@ -176,9 +174,42 @@ public class App {
         //Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
         //this.company.getTestStore().saveTest(test2);
 
+        /*Test testWithResult = new Test("123456789067",c1,t2,listParameter,cal1);
+        this.company.getTestStore().saveTest(testWithResult);
+        Date date1reg = new Date(2020, Calendar.JANUARY, 14,8,0,0);
+        testWithResult.setDateOfTestRegistration(date1reg);
+        Sample sample1 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+        testWithResult.addSample(sample1);
+        Date date1s = new Date(2020, Calendar.JANUARY, 15, 8, 0, 0);
+        testWithResult.setDateOfSamplesCollection(date1s);
+        testWithResult.addTestResult("RBC12", 23.45, "ug");
+        testWithResult.addTestResult("WBC12", 23.45, "ug");
+        Date date1 = new Date(2020, Calendar.JANUARY, 16, 8, 0, 0);
+        testWithResult.setDateOfChemicalAnalysis(date1);
+        Report report1 = new Report("Everything is well.");
+        testWithResult.addReport(report1);
+        Date date1r = new Date(2020,Calendar.JANUARY,18,8,0,0);
+        testWithResult.setDateOfDiagnosis(date1r);
+        testWithResult.setDateOfValidation(date1r);
 
-
-
+        Test test4 = new Test("000099998888",c1,t1,listParameter,cal1);
+        this.company.getTestStore().saveTest(test4);
+        Date date4reg = new Date(2020,Calendar.JANUARY, 14,8,0,0);
+        test4.setDateOfTestRegistration(date4reg);
+        Sample sample4 = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678904"), "12345678904"));
+        test4.addSample(sample4);
+        Date date4s = new Date(2020, Calendar.JANUARY, 15, 19, 59, 58);
+        test4.setDateOfSamplesCollection(date4s);
+        test4.addTestResult("RBC12", 23.45, "ug");
+        test4.addTestResult("WBC12", 23.45, "ug");
+        test4.addChemicalAnalysisDate();
+        Date date4 = new Date(2020, Calendar.JANUARY, 15, 19, 59, 59);
+        test4.setDateOfChemicalAnalysis(date4);
+        Report report4 = new Report("Everything is well.");
+        test4.addReport(report4);
+        Date date4r = new Date(2020,Calendar.JANUARY,16,19,59,59);
+        test4.setDateOfDiagnosis(date4r);
+        test4.setDateOfValidation(date4r);*/
 
     }
 

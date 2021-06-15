@@ -62,7 +62,7 @@
                   <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ListView fx:id="mListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <ListView fx:id="mListView" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TESTS WITH RESULTS" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Tahoma Bold" size="20.0" />
