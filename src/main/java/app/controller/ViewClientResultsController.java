@@ -48,7 +48,7 @@ public class ViewClientResultsController {
         List<Test> clientTests = tstStore.getTestsByClient(client);
         ArrayList<Test> desiredList = new ArrayList<>();
         for (Test test : clientTests){
-            if (test.hasResults()){
+            if (test.hasSamplesAnalysed()){
                 desiredList.add(test);
             }
         }
