@@ -305,11 +305,11 @@ public class Client {
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
 
-        return Objects.equals(email, client.email) ||
-                Objects.equals(phoneNumber, client.phoneNumber) ||
-                Objects.equals(tinNumber, client.tinNumber) ||
-                Objects.equals(clientsCitizenCardNumber, client.clientsCitizenCardNumber) ||
-                Objects.equals(nhsNumber, client.nhsNumber);
+        return email.equals(client.email) ||
+                phoneNumber.equals(client.phoneNumber) ||
+                tinNumber.equals(client.tinNumber) ||
+                clientsCitizenCardNumber.equals(client.clientsCitizenCardNumber) ||
+                nhsNumber.equals(client.nhsNumber);
     }
 
 

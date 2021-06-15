@@ -31,10 +31,10 @@ import java.util.logging.Logger;
 public class ConsultTestsUI implements Initializable {
 
     @FXML
-    private RadioButton orderByTin;
+    private RadioButton tin;
 
     @FXML
-    private RadioButton orderByName;
+    private RadioButton name;
 
     @FXML
     private ListView<ClientDTO> clientsList = new ListView<>();
@@ -85,25 +85,41 @@ public class ConsultTestsUI implements Initializable {
     }
 
     @FXML
-    private void searchForClients() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
-        if(orderByTin.isSelected()){
-            clientsDto = ctrl.getClientsDtoInOrder(Constants.TIN_COMPARATOR_ID);
-        }else{
-            clientsDto = ctrl.getClientsDtoInOrder("name");
-        }
-        ObservableList<ClientDTO> items = FXCollections.observableArrayList();
-        for(ClientDTO client : clientsDto){
-            items.add(client);
-        }
-        clientsList.setItems(items);
+    public void nameSelected(){
+        this.tin.setSelected(false);
     }
 
     @FXML
+    public void selectedTin(){
+        this.name.setSelected(false);
+    }
+
+    @FXML
+    private void searchForClients() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        if(!name.isSelected() && !tin.isSelected()){
+            AlertUI.createAlert(Alert.AlertType.WARNING, "Many labs", "No order selected!", "Please select by which attribute the clients should be ordered.").show();
+        }else {
+            clientsDto = ctrl.getClientsDtoInOrder(getSelectedOrder());
+        }
+        ObservableList<ClientDTO> items = FXCollections.observableArrayList();
+        items.addAll(clientsDto);
+        clientsList.setItems(items);
+    }
+
+    private String getSelectedOrder(){
+        System.out.println(tin.getId());
+        return tin.isSelected() ? tin.getId() : name.getId();
+    }
+    @FXML
     private void getTestsOfClient(){
-        int index = clientsList.getSelectionModel().getSelectedIndex();
-        List<TestDTO> tests = ctrl.getValidatedTestsOfClient(clientsDto.get(index).getTinNumber());
-        testPageUI.setTestIn(tests, clientsDto.get(index).getName());
-        testPageStage.showAndWait();
+        if(clientsList.getSelectionModel().getSelectedIndex() < 0){
+            AlertUI.createAlert(Alert.AlertType.WARNING, "Many labs", "No client selected!", "Please select a client to see tests historic.").show();
+        }else {
+            int index = clientsList.getSelectionModel().getSelectedIndex();
+            List<TestDTO> tests = ctrl.getValidatedTestsOfClient(clientsDto.get(index).getTinNumber());
+            testPageUI.setTestIn(tests, clientsDto.get(index).getName());
+            testPageStage.showAndWait();
+        }
     }
 
     @FXML
