@@ -23,8 +23,6 @@ public class MainUI implements Initializable {
 
     private AuthController ctrl;
 
-    private ClientMenuUI clientMenuUI;
-
     @FXML
     private ImageView imgTeam;
 
@@ -116,6 +114,7 @@ public class MainUI implements Initializable {
                     Menu uiController = (Menu)this.mainApp.replaceSceneContent(item.getUi().getFXML_PATH());
                     uiController.setMainApp(mainApp);
                     if (item.getUi().getFXML_PATH().equals("/fxml/ClientMenu.fxml")){
+                        ClientMenuUI clientMenuUI = (ClientMenuUI) uiController;
                         clientMenuUI.setMainUI(this);
                     }
                 } catch (Exception ex) {

@@ -68,6 +68,7 @@ public class ClientTestResultsUI1 implements Initializable {
         try {
             ClientMenuUI clientMenuUI = (ClientMenuUI) this.mainApp.replaceSceneContent("/fxml/ClientMenu.fxml");
             clientMenuUI.setMainApp(mainApp);
+            clientMenuUI.setMainUI(this.clientMenuUI.getMainUI());
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,8 +76,10 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setClientMenuUI(clientMenuUI);
         this.controller=new ViewClientResultsController();
+    }
+
+    public void getClientTests(){
         clientTests= controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
         populateData(clientTests);
     }
@@ -90,8 +93,12 @@ public class ClientTestResultsUI1 implements Initializable {
         }
         //ObservableList<String> items =FXCollections.observableArrayList(stringsForListview);
         //mListView.setItems(items);
-        for (String string : stringsForListview)
+        for (String string : stringsForListview) {
             mListView.getItems().add(string);
-    }
+        }
+        mListView.getItems().add("item add test funcionou, falta só testes com resutl!");
+        }
+
+
 
 }
