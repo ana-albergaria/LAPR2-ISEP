@@ -1,9 +1,7 @@
 package app.domain.model;
 
-import app.controller.RecordSamplesController;
 import app.domain.shared.Constants;
 import app.domain.store.ClientStore;
-import app.domain.store.SampleStore;
 import app.domain.store.TestStore;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -69,30 +67,74 @@ public class TestTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNullParameters(){
-        app.domain.model.Test test = new app.domain.model.Test(null, null, null, null, null);
+        new app.domain.model.Test(null, null, null, null, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNullNhs(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test(null, client, t1, parametersBlood, cal);
+        new app.domain.model.Test(null, client, t1, parametersBlood, cal);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNullTestType(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, null, parametersBlood, cal);
+        new app.domain.model.Test("123456789012", client, null, parametersBlood, cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureTestTypeCannotBeNullFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, null, parametersBlood, res,cal, new Date(), new Date(),new Date(), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithNullClient(){
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", null, t1, parametersBlood, cal);
+        new app.domain.model.Test("123456789012", null, t1, parametersBlood, cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithNullClientFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        new app.domain.model.Test("123456789012", null, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithEmptyResults() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood, Collections.emptyList(), cal, new Date(), new Date(), new Date(), new Date());
+        new app.domain.model.Test("123456789012", client, t1, parametersBlood, Collections.emptyList(), cal, new Date(), new Date(), new Date(), new Date());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureParameterListCannotBeEmpty() {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, Collections.emptyList(), cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureParameterListCannotBeEmptyFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, Collections.emptyList(), res,cal, new Date(), new Date(),new Date(), null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureCalIsNotNull(){
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood, null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ensureCalIsNotNullFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,null, new Date(), new Date(),new Date(), null);
+
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -108,9 +150,25 @@ public class TestTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void createTestWithUnder12CharsNhsFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("1234567890", client, t2, parametersBlood, res,cal, new Date(), new Date(),new Date(), null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void createTestWithMore12CharsNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood,cal);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithMore12CharsNhsFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t2, parametersBlood, res,cal, new Date(), new Date(),new Date(), null);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -120,10 +178,27 @@ public class TestTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void createTestWithNotAlphanumericNhsFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("!@#456789012", client, t2, parametersBlood, res,cal, new Date(), new Date(),new Date(), null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void createTestWithemptyNHScode(){
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         app.domain.model.Test test = new app.domain.model.Test("", client, t1, parametersBlood,cal);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createTestWithEmptyNhsFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("", client, t2, parametersBlood, res,cal, new Date(), new Date(),new Date(), null);
+    }
+
 
     @Test(expected = UnsupportedOperationException.class)
     public void ensureTestParameterNotFoundWithWrongCode() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
@@ -150,6 +225,32 @@ public class TestTest {
         app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, params,cal);
     }
 
+
+    @Test(expected = NullPointerException.class)
+    public void ensureRegDateCannotBeNull() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, null, new Date(),new Date(), null);
+    }
+
+    @Test
+    public void ensureDateOfChemicalAnalysisCanBeNull() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), null,new Date(), new Date());
+    }
+
+
+    @Test
+    public void ensureDateOfDiagnosisCanBeNull() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),null, null);
+    }
+
     @Test
     public void ensureIsTrueForNegativeCovid() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
@@ -169,15 +270,6 @@ public class TestTest {
     }
 
     @Test
-    public void ensureIsFalseForNotValidated() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
-        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        List<Double> res = new ArrayList<>();
-        res.add(1.3);
-        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), null);
-        Assert.assertFalse(test.hasPositiveResultForCovid());
-    }
-
-    @Test
     public void ensureIsFalseForNotCovidTest() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
         List<Double> res = new ArrayList<>();
@@ -185,6 +277,40 @@ public class TestTest {
         res.add(2.7);
         app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersBlood, res,cal, new Date(), new Date(),new Date(), new Date());
         Assert.assertFalse(test.hasPositiveResultForCovid());
+    }
+
+    @Test
+    public void ensureTestWithResultsIsTrue() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersCovid, res,cal, new Date(), new Date(),new Date(), new Date());
+        Assert.assertTrue(test.hasSamplesAnalysed());
+    }
+
+    @Test
+    public void ensureTestWithNoResultsIsFalse(){
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersCovid,cal);
+        Assert.assertFalse(test.hasSamplesAnalysed());
+    }
+
+    @Test
+    public void ensureTestWithChemDateIsTrue() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersCovid, res,cal, new Date(), new Date(),new Date(), new Date());
+        Assert.assertTrue(test.hasChemDate());
+    }
+
+    @Test
+    public void ensureTestWithNoChemDateIsFalse() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t1, parametersCovid, res,cal, new Date(), null,new Date(), new Date());
+        Assert.assertFalse(test.hasChemDate());
     }
 
     @Test //this test checks if the generated number is truly sequential, making the boolean conditions for this purpouse.
@@ -211,7 +337,7 @@ public class TestTest {
 
     @Test
     public void ensureNotPossibleToAddNullSample() {
-        TestStore testStore = new TestStore();
+        app.domain.store.TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
         app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood,cal);
 
@@ -240,6 +366,7 @@ public class TestTest {
 
         Assert.assertTrue(test.hasSamples());
     }
+
 
 
 
