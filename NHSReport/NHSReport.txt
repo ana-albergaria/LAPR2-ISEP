@@ -36,6 +36,7 @@ Reject H0
 The regression model is significant.
 
 Date                Number of OBSERVED positive cases                 Number of ESTIMATED/EXPECTED positive cases                 95.0% intervals                                   
+14/06/2021                         0                                                 -0,032609                                      -0,754474-0,689256                 
 12/06/2021                         0                                                 -0,032609                                      -0,754474-0,689256                 
 11/06/2021                         0                                                 -0,032609                                      -0,754474-0,689256                 
 10/06/2021                         0                                                 -0,032609                                      -0,754474-0,689256                 
@@ -50,4 +51,3 @@ Date                Number of OBSERVED positive cases                 Number of 
 31/05/2021                         0                                                 -0,032609                                      -0,754474-0,689256                 
 29/05/2021                         1                                                 1,684783                                       0,909868-2,459697                  
 28/05/2021                         3                                                 2,543478                                       1,663598-3,423359                  
-27/05/2021                         2                                                 2,543478                                       1,663598-3,423359                  

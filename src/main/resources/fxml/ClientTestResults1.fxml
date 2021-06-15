@@ -62,13 +62,12 @@
                   <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="tableView" prefHeight="385.0" prefWidth="613.0" style="-fx-border-color: ;" GridPane.rowIndex="1">
-                    <columns>
-                      <TableColumn fx:id="colTestType" prefWidth="231.5" sortable="false" text="Test Type" />
-                      <TableColumn fx:id="colDateOfTestRegistration" prefWidth="231.5" sortable="false" text="Date of Test Registration" />
-                        <TableColumn fx:id="colTestResults" prefWidth="150.0" sortable="false" text="Test Results" />
-                    </columns>
-                  </TableView>
+                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TESTS WITH RESULTS" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Tahoma Bold" size="20.0" />
+                     </font>
+                  </Text>
                </children>
             </GridPane>
          </center>

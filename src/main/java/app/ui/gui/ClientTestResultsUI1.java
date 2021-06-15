@@ -36,19 +36,7 @@ public class ClientTestResultsUI1 implements Initializable {
 
     private ClientMenuUI clientMenuUI;
     private ViewClientResultsController controller;
-
-    @FXML
-    private TableView<ClientTestsInfoForTableview> tableView;
-
-    @FXML
-    private TableColumn<ClientTestsInfoForTableview, String> colTestType;
-
-    @FXML
-    private TableColumn<ClientTestsInfoForTableview, String> colDateOfTestRegistration;
-
-    @FXML
-    private TableColumn<ClientTestsInfoForTableview, Button> colTestResults;
-
+    
     @FXML
     private Button exitBtn;
 
@@ -83,24 +71,7 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*List<TestDTO> testsWithResults = controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
-        updateClientTestsInfoForTableview(testsWithResults, clientTestsInfoForTableview);
-        colTestType.setCellValueFactory(new PropertyValueFactory<ClientTestsInfoForTableview,String>("testType"));
-        colDateOfTestRegistration.setCellValueFactory(new PropertyValueFactory<ClientTestsInfoForTableview,String>("stringDateOfTestRegistration"));
-        tableView.setItems(clientTestsInfoForTableview);*/
+
     }
-
-    /*private ObservableList<ClientTestsInfoForTableview> clientTestsInfoForTableview = FXCollections.observableArrayList();
-
-    public void updateClientTestsInfoForTableview(List<TestDTO> testsToAdd, List<ClientTestsInfoForTableview> clientTestsInfoForTableview){
-        String description, date;
-        ClientTestsInfoForTableview toAdd;
-        for (int i = 0; i < testsToAdd.size(); i++) {
-            description=testsToAdd.get(i).getTestTypeDescription();
-            date=testsToAdd.get(i).getStringDateOfTestRegistration();
-            toAdd = new ClientTestsInfoForTableview(description,date);
-            clientTestsInfoForTableview.add(toAdd);
-        }
-    }*/
 
 }

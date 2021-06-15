@@ -64,17 +64,6 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 4dccfe06d89c7dd799f852e3bf8c2fd20955874a
-                        <Button layoutX="196.0" layoutY="155.0" mnemonicParsing="false" onAction="#openFileChooser" text="Select File" />
-                        <Label fx:id="pathOfFile" layoutX="295.0" layoutY="160.0" text="No File Selected" textFill="WHITE" />
-                        <Text fill="WHITE" layoutX="196.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the CSV file of tests!" />
-                        <Button layoutX="263.0" layoutY="222.0" mnemonicParsing="false" onAction="#importTests" text="Import" />
-<<<<<<< HEAD
-=======
-=======
                         <Button layoutX="209.0" layoutY="71.0" mnemonicParsing="false" onAction="#openFileChooser" text="Select File" />
                         <Text fill="WHITE" layoutX="-40.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the CSV file of tests!" textAlignment="CENTER" wrappingWidth="693.0">
                            <font>
@@ -92,8 +81,6 @@
                               <Font size="18.0" />
                            </font>
                         </Text>
->>>>>>> 43fe8607ec346263c42dd38c642e37814c51cf91
->>>>>>> 4dccfe06d89c7dd799f852e3bf8c2fd20955874a
                      </children>
                   </Pane>
                </children>
