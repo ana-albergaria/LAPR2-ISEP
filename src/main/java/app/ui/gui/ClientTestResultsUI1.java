@@ -1,20 +1,15 @@
 package app.ui.gui;
 
 import app.controller.ViewClientResultsController;
-import app.domain.model.TestType;
 import app.mappers.dto.TestDTO;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -37,17 +32,14 @@ public class ClientTestResultsUI1 implements Initializable {
     private ClientMenuUI clientMenuUI;
     private ViewClientResultsController controller;
 
-    @FXML
-    private TableView<ClientTestsInfoForTableview> tableView;
+    private List<TestDTO> clientTests;
+
+    public void setClientMenuUI(ClientMenuUI clientMenuUI) {
+        this.clientMenuUI = clientMenuUI;
+    }
 
     @FXML
-    private TableColumn<ClientTestsInfoForTableview, String> colTestType;
-
-    @FXML
-    private TableColumn<ClientTestsInfoForTableview, String> colDateOfTestRegistration;
-
-    @FXML
-    private TableColumn<ClientTestsInfoForTableview, Button> colTestResults;
+    private ListView<String> mListView;
 
     @FXML
     private Button exitBtn;
@@ -76,6 +68,7 @@ public class ClientTestResultsUI1 implements Initializable {
         try {
             ClientMenuUI clientMenuUI = (ClientMenuUI) this.mainApp.replaceSceneContent("/fxml/ClientMenu.fxml");
             clientMenuUI.setMainApp(mainApp);
+            clientMenuUI.setMainUI(this.clientMenuUI.getMainUI());
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,24 +76,36 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*List<TestDTO> testsWithResults = controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
-        updateClientTestsInfoForTableview(testsWithResults, clientTestsInfoForTableview);
-        colTestType.setCellValueFactory(new PropertyValueFactory<ClientTestsInfoForTableview,String>("testType"));
-        colDateOfTestRegistration.setCellValueFactory(new PropertyValueFactory<ClientTestsInfoForTableview,String>("stringDateOfTestRegistration"));
-        tableView.setItems(clientTestsInfoForTableview);*/
+        this.controller=new ViewClientResultsController();
     }
 
-    /*private ObservableList<ClientTestsInfoForTableview> clientTestsInfoForTableview = FXCollections.observableArrayList();
+    public void getClientTests(){
+        clientTests= controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
+        populateData(clientTests);
+    }
 
-    public void updateClientTestsInfoForTableview(List<TestDTO> testsToAdd, List<ClientTestsInfoForTableview> clientTestsInfoForTableview){
-        String description, date;
-        ClientTestsInfoForTableview toAdd;
-        for (int i = 0; i < testsToAdd.size(); i++) {
-            description=testsToAdd.get(i).getTestTypeDescription();
-            date=testsToAdd.get(i).getStringDateOfTestRegistration();
-            toAdd = new ClientTestsInfoForTableview(description,date);
-            clientTestsInfoForTableview.add(toAdd);
+    private void populateData(List<TestDTO> testsWithResults){
+        ArrayList<String> stringsForListview = new ArrayList<>();
+        String toAdd;
+        for (int i = 0; i < testsWithResults.size(); i++) {
+            toAdd=testsWithResults.get(i).getTestTypeDescription() + "  |  " + testsWithResults.get(i).getStringDateOfTestRegistration();
+            stringsForListview.add(toAdd);
         }
-    }*/
+        //ObservableList<String> items =FXCollections.observableArrayList(stringsForListview);
+        //mListView.setItems(items);
+        for (String string : stringsForListview) {
+            mListView.getItems().add(string);
+        }
+    }
+
+    public void handleItemClicks(){
+        mListView.setOnMouseClicked(event -> {
+            String selectedItem = mListView.getSelectionModel().getSelectedItem().toString();
+            Dialog d=new Alert(Alert.AlertType.INFORMATION,selectedItem);
+            d.show();
+        });
+    }
+
+
 
 }

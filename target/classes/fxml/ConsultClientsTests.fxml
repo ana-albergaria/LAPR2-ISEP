@@ -75,8 +75,8 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="orderByTin" layoutX="126.0" layoutY="37.0" mnemonicParsing="false" text="Order by TIN" textAlignment="CENTER" textFill="WHITE" />
-                        <RadioButton fx:id="orderByName" layoutX="252.0" layoutY="37.0" mnemonicParsing="false" text="Order by Name" textFill="WHITE" />
+                        <RadioButton fx:id="tin" layoutX="126.0" layoutY="37.0" mnemonicParsing="false" onAction="#selectedTin" text="Order by TIN" textAlignment="CENTER" textFill="WHITE" />
+                        <RadioButton fx:id="name" layoutX="252.0" layoutY="37.0" mnemonicParsing="false" onAction="#nameSelected" text="Order by Name" textFill="WHITE" />
                         <ListView fx:id="clientsList" editable="true" layoutX="80.0" layoutY="79.0" prefHeight="250.0" prefWidth="453.0" />
                         <Button layoutX="233.0" layoutY="341.0" mnemonicParsing="false" onAction="#getTestsOfClient" text="Get Client's historic" />
                      </children>

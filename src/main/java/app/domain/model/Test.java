@@ -435,23 +435,6 @@ public class Test {
         return f == 0;
     }
 
-    /**
-     * Method to check if the test has results.
-     *
-     * @return true if the test has results,
-     * otherwise return false.
-     */
-    public boolean hasResults(){
-        int f = 0;
-        List<TestParameter> testParameters = this.getParameters();
-        for (TestParameter testParameter : testParameters){
-            if (testParameter.getTestParameterResult() == null){
-                f++;
-            }
-        }
-        return f == 0;
-    }
-
     public boolean isValidated() {
         return this.dateOfValidation != null;
     }
@@ -529,10 +512,12 @@ public class Test {
         if (this == o) return true;
         if (!(o instanceof Test)) return false;
         Test test = (Test) o;
-        return code.equalsIgnoreCase(test.code) &&
-                nhsCode.equalsIgnoreCase(test.nhsCode) &&
+        return nhsCode.equalsIgnoreCase(test.nhsCode) &&
                 client.equals(test.client) &&
                 testType.equals(test.testType) &&
-                dateOfTestRegistration.equals(test.dateOfTestRegistration);
+                dateOfTestRegistration.equals(test.dateOfTestRegistration) &&
+                dateOfChemicalAnalysis.equals(test.dateOfChemicalAnalysis) &&
+                dateOfDiagnosis.equals(test.dateOfDiagnosis) &&
+                dateOfValidation.equals(test.dateOfValidation);
     }
 }
