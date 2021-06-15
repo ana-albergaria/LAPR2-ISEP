@@ -125,7 +125,7 @@ public class App {
         this.company.getClientStore().saveClient(c1);
 
         Client c2 = new Client("1234567890123333","1233367890",d1,"1234555890","pedro@gmail.com","Pedro","11115678901");
-        this.company.getClientStore().saveClient(c1);
+        this.company.getClientStore().saveClient(c2);
 
         Parameter parameter = new Parameter("IgGAN", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));
         this.company.getParameterStore().saveParameter(parameter);
