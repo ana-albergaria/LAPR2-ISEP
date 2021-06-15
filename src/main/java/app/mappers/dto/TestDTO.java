@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author SRC-Code-23
+ */
 public class TestDTO {
 
     /**
@@ -135,6 +138,10 @@ public class TestDTO {
         return dateOfTestRegistration;
     }
 
+    public String getReport(){
+        return diagnosisReport.getReportText();
+    }
+
     /**
      * Returns the date of test registration of the Test Dto, in the String format.
      *
@@ -142,6 +149,81 @@ public class TestDTO {
      */
     public String getStringDateOfTestRegistration(){
         return dateOfTestRegistration.toString();
+    }
+
+    /**
+     * Returns the names of the test parameters of the Test DTO.
+     *
+     * @return the names of the test parameters of the Test DTO
+     */
+    public List<String> getTestParametersName(){
+        List<String> parametersName = new ArrayList<>();
+        String toAdd;
+        for (int i = 0; i < testParameters.size(); i++) {
+            toAdd=testParameters.get(i).getParameter().getShortName();
+            parametersName.add(toAdd);
+        }
+        return parametersName;
+    }
+
+    /**
+     * Returns the results of the test parameters of the Test DTO.
+     *
+     * @return the results of the test parameters of the Test DTO
+     */
+    public List<Double> getTestParametersResult(){
+        List<Double> parametersResult = new ArrayList<>();
+        Double toAdd;
+        for (int i = 0; i < testParameters.size(); i++) {
+            toAdd=testParameters.get(i).getTestParameterResult().getResultValue();
+            parametersResult.add(toAdd);
+        }
+        return parametersResult;
+    }
+
+    /**
+     * Returns the metrics of the test parameters of the Test DTO.
+     *
+     * @return the metrics of the test parameters of the Test DTO
+     */
+    public List<String> getTestParametersMetric(){
+        List<String> parametersMetric = new ArrayList<>();
+        String toAdd;
+        for (int i = 0; i < testParameters.size(); i++) {
+            toAdd=testParameters.get(i).getTestParameterResult().getResultMetric();
+            parametersMetric.add(toAdd);
+        }
+        return parametersMetric;
+    }
+
+    /**
+     * Returns the minimum acceptable values of the test parameters of the Test DTO.
+     *
+     * @return the minimum acceptable values of the test parameters of the Test DTO
+     */
+    public List<Double> getTestParametersReferenceValueMin(){
+        List<Double> parametersMinRef = new ArrayList<>();
+        Double toAdd;
+        for (int i = 0; i < testParameters.size(); i++) {
+            toAdd=testParameters.get(i).getTestParameterResult().getResultReferenceValue().getMinValue();
+            parametersMinRef.add(toAdd);
+        }
+        return parametersMinRef;
+    }
+
+    /**
+     * Returns the maximum acceptable values of the test parameters of the Test DTO.
+     *
+     * @return the maximum acceptable values of the test parameters of the Test DTO
+     */
+    public List<Double> getTestParametersReferenceValueMax(){
+        List<Double> parametersMaxRef = new ArrayList<>();
+        Double toAdd;
+        for (int i = 0; i < testParameters.size(); i++) {
+            toAdd=testParameters.get(i).getTestParameterResult().getResultReferenceValue().getMaxValue();
+            parametersMaxRef.add(toAdd);
+        }
+        return parametersMaxRef;
     }
 
     /**

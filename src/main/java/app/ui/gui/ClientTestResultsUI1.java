@@ -33,6 +33,13 @@ public class ClientTestResultsUI1 implements Initializable {
     private ViewClientResultsController controller;
 
     private List<TestDTO> clientTests;
+    private List<String> testParametersName;
+    private List<Double> testParametersResult;
+    private List<String> testParametersMetric;
+    private List<Double> testParametersMinRef;
+    private List<Double> testParametersMaxRef;
+
+    private ArrayList<String> stringsForListview = new ArrayList<>();
 
     public void setClientMenuUI(ClientMenuUI clientMenuUI) {
         this.clientMenuUI = clientMenuUI;
@@ -46,6 +53,9 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @FXML
     private Button returnBtn;
+
+    @FXML
+    private TextArea resultText;
 
     @FXML
     void exitAction(ActionEvent event) {
@@ -82,27 +92,45 @@ public class ClientTestResultsUI1 implements Initializable {
     public void getClientTests(){
         clientTests= controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
         populateData(clientTests);
+        handleItemClicks(clientTests);
     }
 
     private void populateData(List<TestDTO> testsWithResults){
-        ArrayList<String> stringsForListview = new ArrayList<>();
         String toAdd;
         for (int i = 0; i < testsWithResults.size(); i++) {
-            toAdd=testsWithResults.get(i).getTestTypeDescription() + "  |  " + testsWithResults.get(i).getStringDateOfTestRegistration();
+            toAdd=testsWithResults.get(i).getTestTypeDescription() + "\n ↪ " + testsWithResults.get(i).getStringDateOfTestRegistration();
             stringsForListview.add(toAdd);
         }
-        //ObservableList<String> items =FXCollections.observableArrayList(stringsForListview);
-        //mListView.setItems(items);
         for (String string : stringsForListview) {
             mListView.getItems().add(string);
         }
     }
 
-    public void handleItemClicks(){
+    public void handleItemClicks(List<TestDTO> testsWithResults){
         mListView.setOnMouseClicked(event -> {
-            String selectedItem = mListView.getSelectionModel().getSelectedItem().toString();
-            Dialog d=new Alert(Alert.AlertType.INFORMATION,selectedItem);
-            d.show();
+            String selectedItem = mListView.getSelectionModel().getSelectedItem();
+            int num = -1;
+            for (int i = 0; i < stringsForListview.size(); i++) {
+                if (stringsForListview.get(i).equals(selectedItem)){
+                    num=i;
+                }
+            }
+            if (num!=-1) {
+                testParametersName = testsWithResults.get(num).getTestParametersName();
+                testParametersMetric = testsWithResults.get(num).getTestParametersMetric();
+                testParametersResult = testsWithResults.get(num).getTestParametersResult();
+                testParametersMinRef = testsWithResults.get(num).getTestParametersReferenceValueMin();
+                testParametersMaxRef = testsWithResults.get(num).getTestParametersReferenceValueMax();
+                String text = "";
+                for (int i = 0; i < testParametersName.size(); i++) {
+                    text = text + testParametersName.get(i) + " (" + testParametersMetric.get(i) + ")" + "\n ↪ Result: " +
+                            testParametersResult.get(i) + "\n ↪ Normal Values: " + testParametersMinRef.get(i) + " - " +
+                            testParametersMaxRef.get(i) + "\n ↪ Report: " + testsWithResults.get(num).getReport() + "\n";
+                }
+                resultText.setText(text);
+            } else {
+                resultText.setText("There are no results to show.");
+            }
         });
     }
 
