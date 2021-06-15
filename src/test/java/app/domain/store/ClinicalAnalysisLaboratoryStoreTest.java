@@ -234,8 +234,8 @@ public class ClinicalAnalysisLaboratoryStoreTest {
         ClinicalAnalysisLaboratory cal = new ClinicalAnalysisLaboratory("MEL23",
                 "BMAC","Bragança","97777378811","1234567890", selectedTT);
         app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood, cal);
-        app.domain.model.Test test2 = testStore.createTest("123456789012", client2, t2, parametersCovid, cal);
-        app.domain.model.Test test3 = testStore.createTest("123456789012", client3, t1, parametersBlood, cal);
+        app.domain.model.Test test2 = testStore.createTest("123456759012", client2, t2, parametersCovid, cal);
+        app.domain.model.Test test3 = testStore.createTest("123456779012", client3, t1, parametersBlood, cal);
         testStore.saveTest(test);
         testStore.saveTest(test2);
         testStore.saveTest(test3);

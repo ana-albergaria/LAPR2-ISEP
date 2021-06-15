@@ -59,7 +59,7 @@ public class ConsultTestByClient {
         return testStore.getValidatedTestsByClientTin(clientTin);
     }
 
-    public List<ClientDTO> getClientsDto(List<Client> clients){
+    private List<ClientDTO> getClientsDto(List<Client> clients){
         ClientsMapper clientsMapper = new ClientsMapper();
         return clientsMapper.toDTO(clients);
     }
