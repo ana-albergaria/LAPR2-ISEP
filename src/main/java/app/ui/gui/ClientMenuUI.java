@@ -32,6 +32,10 @@ public class ClientMenuUI implements Initializable, Menu {
         return FXML_PATH;
     }
 
+    public void setMainUI(MainUI mainUI) {
+        this.mainUI = mainUI;
+    }
+
     private MainUI mainUI;
 
     public MainUI getMainUI(){
@@ -72,6 +76,7 @@ public class ClientMenuUI implements Initializable, Menu {
         try {
             ClientTestResultsUI1 clientTestResultsUI1 = (ClientTestResultsUI1) this.mainApp.replaceSceneContent("/fxml/ClientTestResults1.fxml");
             clientTestResultsUI1.setMainApp(mainApp);
+            clientTestResultsUI1.setClientMenuUI(this);
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }

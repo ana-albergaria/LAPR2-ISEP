@@ -75,6 +75,7 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        setClientMenuUI(clientMenuUI);
         this.controller=new ViewClientResultsController();
         clientTests= controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
         populateData(clientTests);
