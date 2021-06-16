@@ -59,7 +59,8 @@ deactivate NHS_REPORT_STORE
 TASK -> TASK : getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints)
 activate TASK
 ref over TASK
-SD_getMyRegressionModel()
+SD_getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray,
+                                        meanAgeArray, observedPositives, historicalPoints)
 end
 TASK --> TASK : myRegressionModel
 deactivate TASK

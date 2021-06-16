@@ -4,9 +4,14 @@ import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
 import com.nhs.report.Report2NHS;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.output.OutputException;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +37,17 @@ public class SendNHSReportController {
                                         String chosenRegressionModelClass,
                                         String chosenVariable,
                                         double significanceLevel,
-                                        double confidenceLevel) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+                                        double confidenceLevel) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
+        //somente para teste
+        TestFileUtils testFileUtils = new TestFileUtils();
+        ImportTestController importTestCtrl = new ImportTestController();
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
+        for (TestFileDTO testData : procedData) {
+            importTestCtrl.importTestFromFile(testData);
+        }
+        //fim teste
+
+
         RegressionModel chosenRegressionModel = this.company.getChosenRegressionModel(chosenRegressionModelClass);
 
         //ALTERAR MÉTODO getDataListToFitTheModel PARA INCLUIR DADOS SEMANAIS
@@ -47,8 +62,7 @@ public class SendNHSReportController {
         HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(chosenRegressionModel, myRegressionModel, significanceLevel);
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(chosenRegressionModel, myRegressionModel, significanceLevel);
 
-        //CORRIGIR ESTE MÉTODO POIS NA US18 É DIFERENTE
-        Date startDate = nhsReportStore.getStartDate();
+        Date startDate = nhsReportStore.getStartDateForSelectedDate(currentDate);
         TableOfValues tableOfValues = getTableOfValues(myRegressionModel, chosenRegressionModel, chosenVariable, typeOfData, historicalPoints, startDate, confidenceLevel);
 
         this.nhsReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);

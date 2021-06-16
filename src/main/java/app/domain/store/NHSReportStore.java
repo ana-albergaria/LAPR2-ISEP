@@ -171,4 +171,14 @@ public class NHSReportStore {
 
         return oneDayBefore.getTime();
     }
+
+    public Date getStartDateForSelectedDate(Date currentDate) {
+        Calendar oneDayBefore = Calendar.getInstance();
+        oneDayBefore.setTime(currentDate);
+        oneDayBefore.add(Calendar.DAY_OF_MONTH, -1);
+        if ((oneDayBefore.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+            oneDayBefore.add(Calendar.DAY_OF_MONTH, -1);
+
+        return oneDayBefore.getTime();
+    }
 }

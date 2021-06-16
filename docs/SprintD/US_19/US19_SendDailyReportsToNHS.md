@@ -204,6 +204,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US19_SD_getDataListToFitTheModel4](US19_SD_getDataListToFitTheModel4.svg)
 
+![US19_SD_getMyRegressionModel5](US19_SD_getMyRegressionModel5.svg)
+
 
 ## 3.3. Class Diagram (CD)
 

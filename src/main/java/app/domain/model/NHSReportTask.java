@@ -146,12 +146,15 @@ public class NHSReportTask extends TimerTask {
     public void run() {
         try {
 
+            //só para teste
             TestFileUtils testFileUtils = new TestFileUtils();
             ImportTestController importTestCtrl = new ImportTestController();
             List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
             for (TestFileDTO testData : procedData) {
                 importTestCtrl.importTestFromFile(testData);
             }
+            //fim teste
+
             boolean success = createNHSDailyReport();
             if(success) {
                 File path = new File("./NHSReport/");
