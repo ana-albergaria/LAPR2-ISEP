@@ -20,16 +20,6 @@ import java.util.logging.Logger;
 public class NHSReportUI implements Initializable, Menu {
 
     private App mainApp;
-    private SendNHSReportController controller;
-
-    public NHSReportUI(App mainApp) {
-        this.mainApp = mainApp;
-        this.controller = new SendNHSReportController();
-    }
-
-    public SendNHSReportController getController() {
-        return this.controller;
-    }
 
     private Menu myMenu;
 
@@ -75,7 +65,9 @@ public class NHSReportUI implements Initializable, Menu {
     @FXML
     private Button sendBtn;
 
-    private final String FXML_PATH = "/fxml/NHSReport.fxml";
+    private SendNHSReportController controller;
+
+    private final String FXML_PATH = "./fxml/NHSReport.fxml";
 
     @Override
     public void setMainApp(App mainApp) {
@@ -97,6 +89,7 @@ public class NHSReportUI implements Initializable, Menu {
         regressionCombBox.setItems(regressionModelList);
         ObservableList<String> variableList = FXCollections.observableArrayList("Covid-19 Tests Realized", "Mean Age Of Clients");
         variableCombBox.setItems(variableList);
+        this.controller = new SendNHSReportController();
     }
 
     @FXML
@@ -104,13 +97,20 @@ public class NHSReportUI implements Initializable, Menu {
         try {
             LocalDate currentDateValue = this.currentDate.getValue();
             Date currentDate = Date.from(currentDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            System.out.println("Current Date: " + currentDate);
             String typeOfData = (this.dayRadioBtn.isSelected()) ? this.dayRadioBtn.getText() : weekRadioBtn.getText();
+            System.out.println("Type Of Data: " + typeOfData);
             int historicalPoints = Integer.parseInt(this.historicalPoints.getText());
+            System.out.println("Historical Points: " + historicalPoints);
             LocalDate initalDateValue = this.initialDate.getValue();
-            Date initialDate = Date.from(initalDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date beginDate = Date.from(initalDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            System.out.println("Initial Date: " + beginDate);
             LocalDate endDateValue = this.endDate.getValue();
             Date endDate = Date.from(endDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            String regressionModelClass = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
+            System.out.println("End Date: " + endDate);
+            String chosenRegressionModelClass = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
+            System.out.println("Chosen Regression Model Class: " + chosenRegressionModelClass);
+
             String chosenVariable = "";
             if(this.regressionCombBox.getSelectionModel().getSelectedItem().toString().equals("Simple Linear Regression"))
                 chosenVariable = this.variableCombBox.getSelectionModel().getSelectedItem().toString();
@@ -120,8 +120,18 @@ public class NHSReportUI implements Initializable, Menu {
             double confidenceLevel = Double.parseDouble(this.confidenceLevel.getText());
 
             //COLOCAR MAIS UMA OPÇÃO NA COMBO BOX PARA A REGRESSÃO MÚLTIPLA!!
+            //FALTA COLOCAR EXCEÇÕES PARA A REGRESSÃO
 
 
+            boolean success = this.controller.createNHSDailyReport(currentDate,
+                    typeOfData, historicalPoints, beginDate, endDate,
+                    chosenRegressionModelClass, chosenVariable, significanceLevel, confidenceLevel);
+
+            if(success)
+                this.controller.sendNHSReport();
+            else
+                AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
+                        "Something went wrong! Please, try again.").show();
 
 
 

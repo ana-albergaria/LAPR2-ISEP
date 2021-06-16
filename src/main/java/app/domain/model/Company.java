@@ -135,11 +135,14 @@ public class Company {
         this.confidenceLevel = confidenceLevel;
         this.significanceLevel = significanceLevel;
 
-
+        /*
         NHSReportTask nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
         Timer timer = new Timer();
         timer.schedule(nhsReportTask,5000);
+
+         */
+
 
 
         //COLOCAR CONSTRUTOR DO REPORTTASK AQUI
@@ -371,8 +374,9 @@ public class Company {
         return (SortAlgorithm) oClass.newInstance();
     }
 
+    //LANÇAR EXCEÇÃO!!
     public RegressionModel getChosenRegressionModel(String regressionModelCLass) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        Class<?> oClass = (regressionModelCLass.equals("Simple")) ? Class.forName(Constants.CLASS_SIMPLE_REGRESSION_MODEL) : Class.forName(Constants.CLASS_MULTIPLE_REGRESSION_MODEL);
+        Class<?> oClass = (regressionModelCLass.equals("Simple Linear Regression")) ? Class.forName(Constants.CLASS_SIMPLE_REGRESSION_MODEL) : Class.forName(Constants.CLASS_MULTIPLE_REGRESSION_MODEL);
         return (RegressionModel) oClass.newInstance();
     }
 

@@ -9,19 +9,54 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Represents the NHS Report Store
+ *
+ * @author Ana Albergaria
+ */
 public class NHSReportStore {
 
-    private List<NHSReport> nhsReportList = new ArrayList<>();
-
+    /**
+     * Method which returns the NHS Report to be sent, receiving:
+     * the myRegressionModel, the hypothesisTest,
+     * the modelAnova and the TableOfValues
+     *
+     *
+     * @param myRegressionModel the Regression Model used to compute the data
+     * @param hypothesisTest the Hypothesis Test of the Regression Model
+     * @param modelAnova the Anova Significance Model of the Regression Model
+     * @param tableOfValues the Table Of Values of the Regression Model
+     *
+     * @return the NHS Report to be sent
+     */
     public NHSReport createNHSDailyReport(MyRegressionModel myRegressionModel, HypothesisTest hypothesisTest, SignificanceModelAnova modelAnova, TableOfValues tableOfValues) {
         return new NHSReport(myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
     }
 
+    /**
+     * Method which validates if the NHS Report
+     *
+     * @param nhsReport the NHS Report to be validated
+     *
+     * @return true if the new NHS Report was successfully validated.
+     *          Otherwise, returns false.
+     */
     public boolean validateNHSDailyReport(NHSReport nhsReport) {
         return nhsReport != null && nhsReport.getMyRegressionModel() != null &&
                 nhsReport.getHypothesisTest() != null && nhsReport.getModelAnova() != null && nhsReport.getTableOfValues() != null;
     }
 
+    /**
+     * Returns the index of the variable of the best Regression Model.
+     *
+     * @param regressionModel the class of the Regression Model who will obtain the result
+     * @param x1 the values of the first independent variable
+     * @param x2 the values of the second independent variable
+     * @param y the values of the dependent variable
+     *
+     * @return index of the varibale of the best Regression Model.
+     *          Returns null if the Regression Model is Multiple Linear Regression.
+     */
     public Integer getBestXIndex(RegressionModel regressionModel,
                              double[] x1,
                              double[] x2,

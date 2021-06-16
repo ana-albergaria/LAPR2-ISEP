@@ -4,7 +4,9 @@ import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
+import com.nhs.report.Report2NHS;
 
+import java.io.File;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -141,6 +143,14 @@ public class SendNHSReportController {
         else //For Multiple Linear Regression
             confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
         return confidenceIntervalList;
+    }
+
+    public void sendNHSReport() {
+        File path = new File("./NHSReport/");
+        if(!path.exists())
+            path.mkdir();
+
+        Report2NHS.writeUsingFileWriter(this.nhsReport.toString());
     }
 
 }

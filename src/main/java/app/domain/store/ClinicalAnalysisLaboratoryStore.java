@@ -8,7 +8,15 @@ import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the Clinical Analysis Laboratory Store
+ *
+ * @author Ana Albergaria
+ */
 public class ClinicalAnalysisLaboratoryStore {
+    /**
+     * The Company's list of Clinical Analysis Laboratories
+     */
     private List<ClinicalAnalysisLaboratory> calList = new ArrayList<>();
 
     /**
