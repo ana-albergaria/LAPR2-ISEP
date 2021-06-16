@@ -15,6 +15,15 @@ public class LabCoordinatorUI implements Initializable, Menu {
 
     private final String FXML_PATH = "/fxml/LabCoordinatorMenu.fxml";
 
+    public void setMainUI(MainUI mainUI) {
+        this.mainUI = mainUI;
+    }
+
+    private MainUI mainUI;
+
+    public MainUI getMainUI(){
+        return this.mainUI;
+    }
 
     @Override
     public void setMainApp(App mainApp) {

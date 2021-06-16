@@ -20,8 +20,6 @@ public class ClientTestResultsUI1 implements Initializable {
 
     private App mainApp;
 
-    private final String FXML_PATH = "/fxml/ClientTestResults1.fxml";
-
     public App getMainApp() {
         return this.mainApp;
     }

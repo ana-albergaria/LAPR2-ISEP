@@ -1,7 +1,9 @@
 package app.controller;
 
 import app.domain.interfaces.SubMaxSumAlgorithms;
+import app.domain.model.Client;
 import app.domain.model.Company;
+import app.domain.model.Test;
 import app.domain.shared.Constants;
 import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
@@ -40,13 +42,30 @@ public class CompanyPerformanceAnalysisController {
     }
 
     /**
-     * Gets the number of clients in the system.
-     * @return the number of clients in the system.
+     * Gets an ArrayList with the number of clients for an interval
+     * @return ArrayList with the number of clients for an interval
      */
-    public int getNumClients() {
-        ClientStore clientStore = new ClientStore();
-        int numClients = clientStore.getClients().size();
-        return numClients;
+    public int getClientsInfoPerInterval(ArrayList<Date> days){
+        Date endingDay = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20, 0, 0);
+        TestStore testStore = new TestStore();
+        ArrayList<String> clientEmails = new ArrayList<>();
+        String clientEmail;
+        boolean repeated = false;
+        for (Test test : testStore.getTests()){
+            if (test.getDateOfTestRegistration().before(endingDay)){
+                clientEmail=test.getClient().getEmail();
+                for (int i = 0; i < clientEmails.size(); i++) {
+                    if (clientEmail.equals(clientEmails.get(i))){
+                        repeated=true;
+                    }
+                }
+                if (!repeated){
+                    clientEmails.add(clientEmail);
+                }
+                repeated=false;
+            }
+        }
+        return clientEmails.size();
     }
 
     //FIRST THE LB SELECTS DAY OR INTERVAL
