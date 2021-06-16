@@ -3,6 +3,7 @@ package app.domain.model;
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.RegressionModel;
 import app.domain.interfaces.SortAlgorithm;
+import app.domain.shared.Constants;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
@@ -370,8 +371,8 @@ public class Company {
         return (SortAlgorithm) oClass.newInstance();
     }
 
-    public RegressionModel getRegressionModel() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        Class<?> oClass = Class.forName(regressionModelCLass);
+    public RegressionModel getChosenRegressionModel(String regressionModelCLass) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        Class<?> oClass = (regressionModelCLass.equals("Simple")) ? Class.forName(Constants.CLASS_SIMPLE_REGRESSION_MODEL) : Class.forName(Constants.CLASS_MULTIPLE_REGRESSION_MODEL);
         return (RegressionModel) oClass.newInstance();
     }
 

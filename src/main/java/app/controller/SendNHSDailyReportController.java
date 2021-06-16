@@ -115,13 +115,11 @@ public class SendNHSDailyReportController {
         return confidenceIntervalList;
     }
 
-
-
-
-
 }
 
  */
+
+
 
 
 

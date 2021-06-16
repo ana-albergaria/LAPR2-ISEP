@@ -27,7 +27,7 @@ public interface RegressionModel {
     public abstract Integer getBestXIndex(double[] x1, double[] x2, double[] y);
 
     /**
-     * Returns the Regression Model of the NHS Report to be sent.
+     * Returns the Regression Model of the NHS Report to be  automatically sent.
      *
      * @param x1 the values of the first independent variable
      * @param x2 the values of the second independent variable

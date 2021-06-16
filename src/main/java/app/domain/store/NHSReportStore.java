@@ -85,7 +85,7 @@ public class NHSReportStore {
     ou a que está definida na configuration file,
      */
     public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
-                                              Date currentDate) {
+                                                        Date currentDate) {
         //VERIFICAR SE O MÉTODO RETIRA BEM AS DATAS POR CAUSA DO DOMINGO!!!
         List<String> dates = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -100,6 +100,31 @@ public class NHSReportStore {
             currentDate = cal.getTime();
         }
         return dates;
+    }
+
+    public List<String> getWeeksColumnToTableOfValues(int numberOfObservations,
+                                                      Date currentDate) {
+        List<String> dates = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
+        while ((cal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)) {
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+        }
+        Date endDate = cal.getTime();
+        for (int i = 0; i < numberOfObservations; i++) {
+            cal.add(Calendar.DAY_OF_MONTH, -7);
+            Date initialDate = cal.getTime();
+            dates.add(getWeek(initialDate, endDate));
+            endDate = initialDate;
+        }
+
+        return dates;
+    }
+
+    public String getWeek(Date initialDate, Date endDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return String.format("%s-%s", sdf.format(initialDate), sdf.format(endDate));
+
     }
 
     public Date getStartDate() {

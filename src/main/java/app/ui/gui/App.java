@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class App extends Application {
 
     private Stage stage;
-    private final String TITLE =  "Many Labs";
+    private final String TITLE =  "Many Labs Application";
     private final double MINIMUM_WINDOW_WIDTH = 500.0;
     private final double MINIMUM_WINDOW_HEIGHT = 300.0;
     private final double SCENE_WIDTH = 693;
@@ -42,6 +42,10 @@ public class App extends Application {
 
     public Stage getStage() {
         return this.stage;
+    }
+
+    public String getTITLE() {
+        return TITLE;
     }
 
     public void toMainScene() {

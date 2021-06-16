@@ -85,6 +85,7 @@ public class NHSReportTask extends TimerTask {
                                                   double[] meanAgeArray,
                                                   double[] observedPositives,
                                                   int historicalPoints) {
+        //eliminar linha abaixo
         NHSReportStore nhsReportStore = new NHSReportStore();
         MyRegressionModel myRegressionModel = (bestXIndex == null) ? nhsReportStore.createMyRegressionModel(regressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
                 ((bestXIndex == 1) ? nhsReportStore.createMyBestRegressionModel(regressionModel, covidTestsArray, observedPositives, historicalPoints) : nhsReportStore.createMyBestRegressionModel(regressionModel, meanAgeArray, observedPositives, historicalPoints));

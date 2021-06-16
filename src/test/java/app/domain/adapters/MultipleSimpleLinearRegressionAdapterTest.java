@@ -21,7 +21,7 @@ public class MultipleSimpleLinearRegressionAdapterTest {
     @Before
     public void setUp() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         company = new Company("Many Labs", Constants.CLASS_BARCODE_API, Constants.CLASS_SORT_ALGORITHM, Constants.CLASS_MULTIPLE_REGRESSION_MODEL, Constants.DATE_INTERVAL, Constants.HISTORICAL_POINTS, Constants.CONFIDENCE_LEVEL, Constants.SIGNIFICANCE_LEVEL);
-        regressionModel = this.company.getRegressionModel();
+        regressionModel = this.company.getChosenRegressionModel(Constants.CLASS_MULTIPLE_REGRESSION_MODEL);
         //MATCP - Teórica Regressão Linear Múltipla
         double[] x1 = {80.0, 93.0, 100.0, 82.0, 90.0, 99.0, 81.0, 96.0, 94.0, 93.0, 97.0, 95.0};
         double[] x2 = {8.0, 9.0, 10.0, 12.0, 11.0, 8.0, 8.0, 10.0, 12.0, 11.0, 13.0, 11.0};
