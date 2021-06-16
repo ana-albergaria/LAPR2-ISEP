@@ -347,9 +347,8 @@ public class TestStore {
         return observedPositives;
     }
 
-    public int[] getWeeklyObservedPositivesToTableOfValues(int numberOfObservations,
-                                                           List<String> dates) throws ParseException {
-        int[] observedPositives = new int[numberOfObservations];
+    public int[] getWeeklyObservedPositivesToTableOfValues(List<String> dates) throws ParseException {
+        int[] observedPositives = new int[dates.size()];
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < dates.size(); i++) {
             String[] intervalDatesInString = dates.get(i).split("-");
@@ -510,7 +509,7 @@ public class TestStore {
         cal.setTime(endDate);
         Date auxEndDate = cal.getTime();
         while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
-            weeklyTests += getObservedPositivesCovidInADay(auxEndDate);
+            weeklyTests += getNumberOfCovidTestsRealizedInADay(auxEndDate);
             cal.add(Calendar.DAY_OF_MONTH,-1);
             auxEndDate = cal.getTime();
         }

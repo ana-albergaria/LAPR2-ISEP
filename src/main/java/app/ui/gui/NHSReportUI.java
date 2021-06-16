@@ -127,7 +127,7 @@ public class NHSReportUI implements Initializable, Menu {
                     typeOfData, historicalPoints, beginDate, endDate,
                     chosenRegressionModelClass, chosenVariable, significanceLevel, confidenceLevel);
 
-            if(success)
+            if(success) //COLOCAR QUE O REPORT FOI ENVIADO COM SUCESSO!
                 this.controller.sendNHSReport();
             else
                 AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
