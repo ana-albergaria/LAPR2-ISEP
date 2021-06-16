@@ -200,7 +200,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US19_SD_Timer_Runs_Task2](US19_SD_Timer_Runs_Task2.svg)
 
-![US19_SD_CreateNHSDailyReport3](US19_SD_CreateNHSDailyReport3.svg)
+![US19_SD_CreateNHSDailyReport3](US19_SD_CreateNHSDailyReport3.svg)  
+
+![US19_SD_getDataListToFitTheModel4](US19_SD_getDataListToFitTheModel4.svg)
 
 
 ## 3.3. Class Diagram (CD)

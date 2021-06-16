@@ -84,8 +84,7 @@ public class NHSReportTask extends TimerTask {
                                                   double[] meanAgeArray,
                                                   double[] observedPositives,
                                                   int historicalPoints) {
-        //eliminar linha abaixo
-        NHSReportStore nhsReportStore = new NHSReportStore();
+
         MyRegressionModel myRegressionModel = (bestXIndex == null) ? nhsReportStore.createMyRegressionModel(regressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
                 ((bestXIndex == 1) ? nhsReportStore.createMyBestRegressionModel(regressionModel, covidTestsArray, observedPositives, historicalPoints) : nhsReportStore.createMyBestRegressionModel(regressionModel, meanAgeArray, observedPositives, historicalPoints));
         return myRegressionModel;
@@ -96,7 +95,7 @@ public class NHSReportTask extends TimerTask {
     public TableOfValues getTableOfValues(MyRegressionModel myRegressionModel,
                                           Integer bestXIndex,
                                           int historicalPoints,
-                                          Date startDate) throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+                                          Date startDate) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
         this.regressionModel = getRegressionModel(regressionModelClass);
