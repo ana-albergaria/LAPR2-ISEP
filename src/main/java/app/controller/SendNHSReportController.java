@@ -141,7 +141,7 @@ public class SendNHSReportController {
         List<ConfidenceInterval> confidenceIntervalList;
         if(!chosenVariable.isEmpty()) //for Simple Linear Regression
             confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
-        else //For Multiple Linear Regression
+        else //for Multiple Linear Regression
             confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
         return confidenceIntervalList;
     }
