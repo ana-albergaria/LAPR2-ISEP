@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="428px" preserveAspectRatio="none" style="width:541px;height:428px;" version="1.1" viewBox="0 0 541 428" width="541px" zoomAndPan="magnify"><defs><filter height="300%" id="fani7mrdwr8yy" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="73" x="231.5" y="30.6855">SD_run()</text><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="161" x="187.5" y="53.3262">Timer runs the Task</text><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="206.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="27" y="150.8516"/><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="206.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="123.5" y="150.8516"/><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="89.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="128.5" y="189.2031"/><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="48.7031" style="stroke:#000000;stroke-width:2.0;" width="380" x="59" y="300.2578"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="32" x2="32" y1="118.5" y2="365.9609"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="128" x2="128" y1="118.5" y2="365.9609"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="397" x2="397" y1="118.5" y2="365.9609"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="485" x2="485" y1="118.5" y2="365.9609"/><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="50" x="5" y="64.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="12.5" y="85.8145">timer:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="12" y="103.4238">Timer</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="50" x="5" y="364.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="12.5" y="386.4941">timer:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="12" y="404.1035">Timer</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="115" x="69" y="64.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="76" y="85.8145">nhsReportTask:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="76" y="103.4238">NHSReportTask</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="115" x="69" y="364.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="76" y="386.4941">nhsReportTask:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="76" y="404.1035">NHSReportTask</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="59" x="366" y="81.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="373" y="103.4238">NhsAPI</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="59" x="366" y="364.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="373" y="386.4941">NhsAPI</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="88" x="439" y="64.2813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="450" y="85.8145">nhsReport</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="446" y="103.4238">:NHSReport</text><rect fill="#FEFECE" filter="url(#fani7mrdwr8yy)" height="49.2188" style="stroke:#A80036;stroke-width:1.5;" width="88" x="439" y="364.9609"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="450" y="386.4941">nhsReport</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74" x="446" y="404.1035">:NHSReport</text><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="206.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="27" y="150.8516"/><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="206.1094" style="stroke:#A80036;stroke-width:1.0;" width="10" x="123.5" y="150.8516"/><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="89.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="128.5" y="189.2031"/><polygon fill="#A80036" points="111.5,146.8516,121.5,150.8516,111.5,154.8516,115.5,150.8516" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="37" x2="117.5" y1="150.8516" y2="150.8516"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="26" x="44" y="145.9951">run()</text><line style="stroke:#A80036;stroke-width:1.0;" x1="133.5" x2="180.5" y1="176.2031" y2="176.2031"/><line style="stroke:#A80036;stroke-width:1.0;" x1="180.5" x2="180.5" y1="176.2031" y2="189.2031"/><line style="stroke:#A80036;stroke-width:1.0;" x1="139.5" x2="180.5" y1="189.2031" y2="189.2031"/><polygon fill="#A80036" points="149.5,185.2031,139.5,189.2031,149.5,193.2031,145.5,189.2031" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="138" x="145.5" y="171.3467">createNHSDailyReport()</text><rect fill="#FFFFFF" filter="url(#fani7mrdwr8yy)" height="42.7031" style="stroke:#000000;stroke-width:2.0;" width="171" x="66" y="202.2031"/><polygon fill="#EEEEEE" points="66,202.2031,128,202.2031,128,210.2031,118,220.2031,66,220.2031,66,202.2031" style="stroke:#000000;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="17" x="79" y="217.6982">ref</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="163" x="72" y="237.6982">SD_createNHSDailyReport()</text><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="138.5" x2="180.5" y1="277.2578" y2="277.2578"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="180.5" x2="180.5" y1="277.2578" y2="290.2578"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="133.5" x2="180.5" y1="290.2578" y2="290.2578"/><polygon fill="#A80036" points="143.5,286.2578,133.5,290.2578,143.5,294.2578,139.5,290.2578" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="145.5" y="272.4014">success</text><path d="M59,300.2578 L124,300.2578 L124,308.2578 L114,318.2578 L59,318.2578 L59,300.2578 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="48.7031" style="stroke:#000000;stroke-width:2.0;" width="380" x="59" y="300.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="20" x="74" y="314.7529">opt</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="90" x="139" y="313.6768">[success = true]</text><polygon fill="#A80036" points="385.5,336.9609,395.5,340.9609,385.5,344.9609,389.5,340.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="133.5" x2="391.5" y1="340.9609" y2="340.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="240" x="140.5" y="336.1045">writeUsingFileWriter(nhsReport.toString())</text><!--MD5=[09f5c291cc1669606231409581b9be17]
+@startuml
+
+title SD_run()\nTimer runs the Task
+
+participant "timer:\nTimer" as TIMER
+participant "nhsReportTask:\nNHSReportTask" as TASK
+participant "NhsAPI" as NHS_API
+participant "nhsReport\n:NHSReport"
+
+
+TIMER -> TASK : run()
+activate TIMER
+activate TASK
+
+TASK -> TASK : createNHSDailyReport()
+activate TASK
+ref over TASK
+SD_createNHSDailyReport()
+end
+TASK - -> TASK : success
+deactivate TASK
+
+opt success = true
+TASK -> NHS_API : writeUsingFileWriter(nhsReport.toString())
+'ACRESCENTAR PARTE DA FILE + DA LOG FILE!
+end
+
+
+@enduml
+
+@startuml
+
+title SD_run()\nTimer runs the Task
+
+participant "timer:\nTimer" as TIMER
+participant "nhsReportTask:\nNHSReportTask" as TASK
+participant "NhsAPI" as NHS_API
+participant "nhsReport\n:NHSReport"
+
+
+TIMER -> TASK : run()
+activate TIMER
+activate TASK
+
+TASK -> TASK : createNHSDailyReport()
+activate TASK
+ref over TASK
+SD_createNHSDailyReport()
+end
+TASK - -> TASK : success
+deactivate TASK
+
+opt success = true
+TASK -> NHS_API : writeUsingFileWriter(nhsReport.toString())
+end
+
+
+@enduml
+
+PlantUML version 1.2021.4(Sun Apr 04 09:49:39 BST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

@@ -92,7 +92,7 @@ class NHSReportTask {
 NHSReportTask "1" -- "1..*" NHSReport : reports >
 Company "1" -- "1" Timer : knows >
 Company "*" - "1" NhsAPI : makes use of >
-NHSReport "*" -- "1" NhsAPI : send by >
+NHSReport "*" -- "1" NhsAPI : sent by >
 NHSReport "*" -- "1" RegressionModel : has >
 NHSReport "1" -- "1" HypothesisTest : contains >
 NHSReport "1" -- "1" SignificanceModelAnova : contains >
@@ -104,8 +104,9 @@ NHSReport "1" -- "1" TableOfValues : contains >
 TableOfValues "1" -- "1" RegressionModel : of >
 TableOfValues "1" -- "*" ConfidenceInterval : contains >
 ConfidenceInterval "*" -- "1" RegressionModel : of >
-Timer - NHSReportTask : schedules >
+Timer "1" - "*" NHSReportTask : schedules >
 NHSReportTask "1" -- "1" RegressionModel : of >
+/'NHSReportTask "*" -- "1" RegressionModel : makes use of >'/
 
 'Apagar posteriormente
 /'RegressionModel "1" -- "1" ConfigFile : defined by >
