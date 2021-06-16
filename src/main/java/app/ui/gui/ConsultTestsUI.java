@@ -1,26 +1,14 @@
 package app.ui.gui;
 
 import app.controller.ConsultTestByClient;
-import app.controller.ImportTestController;
-import app.domain.model.Client;
-import app.domain.shared.Constants;
 import app.mappers.dto.ClientDTO;
 import app.mappers.dto.TestDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,15 +27,14 @@ public class ConsultTestsUI implements Initializable {
     @FXML
     private ListView<ClientDTO> clientsList = new ListView<>();
 
-    private App mainApp;
+    @FXML
+    private TextArea showTests;
 
-    private Stage testPageStage;
+    private App mainApp;
 
     private Menu myMenu;
 
     private ConsultTestByClient ctrl;
-
-    private TestPageUI testPageUI;
 
     List<ClientDTO> clientsDto;
 
@@ -63,25 +50,6 @@ public class ConsultTestsUI implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.ctrl = new ConsultTestByClient();
         this.clientsDto = new ArrayList<>();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TestsPage.fxml"));
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-
-            testPageStage = new Stage();
-            /*testPageStage.initModality(Modality.WINDOW_MODAL);*/
-            testPageStage.setTitle("Client's Test");
-            testPageStage.setWidth(580);
-            testPageStage.setWidth(500);
-            testPageStage.setResizable(false);
-            testPageStage.setScene(scene);
-
-            testPageUI = loader.getController();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 
     @FXML
@@ -110,15 +78,15 @@ public class ConsultTestsUI implements Initializable {
         System.out.println(tin.getId());
         return tin.isSelected() ? tin.getId() : name.getId();
     }
+
     @FXML
-    private void getTestsOfClient(){
-        if(clientsList.getSelectionModel().getSelectedIndex() < 0){
-            AlertUI.createAlert(Alert.AlertType.WARNING, "Many labs", "No client selected!", "Please select a client to see tests historic.").show();
-        }else {
-            int index = clientsList.getSelectionModel().getSelectedIndex();
+    private void selectedClient(){
+        int index = clientsList.getSelectionModel().getSelectedIndex();
+        if(index != -1){
             List<TestDTO> tests = ctrl.getValidatedTestsOfClient(clientsDto.get(index).getTinNumber());
-            testPageUI.setTestIn(tests, clientsDto.get(index).getName());
-            testPageStage.showAndWait();
+            for(TestDTO test: tests){
+                showTests.appendText(test.showAllButReport());
+            }
         }
     }
 

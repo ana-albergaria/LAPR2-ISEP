@@ -28,6 +28,9 @@ public class ImportTestsUI implements Initializable {
     @FXML
     private Label importedTests;
 
+    @FXML
+    private Text numberOfTests;
+
     private App mainApp;
 
     private Menu myMenu;
@@ -87,6 +90,8 @@ public class ImportTestsUI implements Initializable {
             if (!addedTests.isEmpty()) {
                 this.txtImportedTests.setVisible(true);
                 this.importedTests.setVisible(true);
+                this.numberOfTests.setText(String.format("%d tests imported", addedTests.size()));
+                this.numberOfTests.setVisible(true);
                 showImportedTests(addedTests);
             }
         }else{
