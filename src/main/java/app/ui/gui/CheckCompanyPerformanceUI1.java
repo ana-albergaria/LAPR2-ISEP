@@ -125,5 +125,9 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         }
     }
 
+    public void seeAnalysis(){
+
+    }
+
 
 }
