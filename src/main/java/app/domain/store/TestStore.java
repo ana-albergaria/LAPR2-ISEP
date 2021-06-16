@@ -178,6 +178,11 @@ public class TestStore {
         return clientTests;
     }
 
+    /**
+     * Method for getting the tests in validated state for a given client's tin number
+     * @param tinNumber tin number of client to get the tests of.
+     * @return list of validated tests of the client.
+     */
     public List<Test> getValidatedTestsByClientTin(String tinNumber){
         List<Test> clientTests = new ArrayList<>();
         for (Test tst : testList){
@@ -261,6 +266,10 @@ public class TestStore {
         return listTestsNoSamples;
     }
 
+    /**
+     * Method for getting all the clients with tests in validated state
+     * @return list of client object with who have validated tests stored
+     */
     public List<Client> getClientsWithValidatedTests (){
         List<Client> clientsWithValidatedTests  = new ArrayList<>();
         for(Test test : testList){
@@ -284,15 +293,6 @@ public class TestStore {
 
         return listTotalTestParameters;
     }
-
-    public Test getTestByNhsNumber(String nhsNumber){
-        for (Test test : testList) {
-            if (test.getNhsCode().equalsIgnoreCase(nhsNumber))
-                return test;
-        }
-        throw new UnsupportedOperationException("Test not found with given nhs number!");
-    }
-
 
 
     /**
