@@ -496,6 +496,8 @@ public class TestStoreTest {
 //=========== END US1 ============
 
     //for US18 and US19
+    
+
     // Porque dá erro no Jenkins??
     /*
     @Test
@@ -511,7 +513,74 @@ public class TestStoreTest {
     }
      */
 
+    @Test
+    public void getObservedPositivesInOneWeekTest() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        int actual = testStore.getObservedPositivesInOneWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021"));
+        int expected = 79;
+        Assert.assertEquals(expected, actual);
+    }
 
+
+
+    @Test
+    public void getWeeklyObservedPositivesToTableOfValuesTest() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        NHSReportStore nhsReportStore = new NHSReportStore();
+        List<String> dates = new ArrayList<>();
+        dates.add(nhsReportStore.getWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021")));
+        dates.add(nhsReportStore.getWeek(sdf.parse("24/05/2021"), sdf.parse("29/05/2021")));
+        int[] actual = testStore.getWeeklyObservedPositivesToTableOfValues(dates);
+        int[] expected = {79, 27};
+
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void getNumberOfCovidTestsInOneWeek() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        double actual = testStore.getNumberOfCovidTestsInOneWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021"));
+        double expected = 114.0;
+        Assert.assertEquals(actual, expected, 1);
+    }
+
+    @Test
+    public void getWeeklyNumberOfCovidTestsInHistoricalPointsTest() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        NHSReportStore nhsReportStore = new NHSReportStore();
+        List<String> dates = new ArrayList<>();
+        dates.add(nhsReportStore.getWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021")));
+        dates.add(nhsReportStore.getWeek(sdf.parse("24/05/2021"), sdf.parse("29/05/2021")));
+        Double[] actual = testStore.getWeeklyNumberOfCovidTestsInHistoricalPoints(dates);
+        Double[] expected = {114.0, 49.0};
+
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+
+    @Test
+    public void getMeanAgeInOneWeek() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        double actual = testStore.getMeanAgeInOneWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021"));
+        double expected = 30.8;
+        System.out.println(actual);
+        Assert.assertEquals(expected, actual, 2);
+    }
+
+    @Test
+    public void getWeeklyMeanAgeInHistoricalPointsTest() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        NHSReportStore nhsReportStore = new NHSReportStore();
+        List<String> dates = new ArrayList<>();
+        dates.add(nhsReportStore.getWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021")));
+        dates.add(nhsReportStore.getWeek(sdf.parse("24/05/2021"), sdf.parse("29/05/2021")));
+        Double[] actual = testStore.getWeeklyMeanAgeInHistoricalPoints(dates);
+        double [] actual1 = {actual[0], actual[1]};
+        double[] expected = {30.8, 26.3};
+
+        Assert.assertArrayEquals(expected, actual1, 2);
+    }
 
     @Test
     public void getMeanAgeOfClientsOfCovidTestsInADay() throws ParseException {

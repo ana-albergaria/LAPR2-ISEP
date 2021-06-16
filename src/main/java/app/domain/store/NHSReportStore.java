@@ -159,7 +159,6 @@ public class NHSReportStore {
     public String getWeek(Date initialDate, Date endDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return String.format("%s-%s", sdf.format(initialDate), sdf.format(endDate));
-
     }
 
     public Date getStartDate() {
