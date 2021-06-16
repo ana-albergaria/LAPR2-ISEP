@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -45,6 +46,10 @@ public class ClientTestResultsUI1 implements Initializable {
         this.clientMenuUI = clientMenuUI;
     }
 
+    public void setmListView(ListView<String> mListView) {
+        this.mListView = mListView;
+    }
+
     @FXML
     private ListView<String> mListView;
 
@@ -53,6 +58,10 @@ public class ClientTestResultsUI1 implements Initializable {
 
     @FXML
     private Button returnBtn;
+
+    public void setResultText(TextArea resultText) {
+        this.resultText = resultText;
+    }
 
     @FXML
     private TextArea resultText;
@@ -84,15 +93,48 @@ public class ClientTestResultsUI1 implements Initializable {
         }
     }
 
+    @FXML
+    void selectTest(MouseEvent event) {
+        String selectedItem = mListView.getSelectionModel().getSelectedItem();
+        int num = -1;
+        for (int i = 0; i < stringsForListview.size(); i++) {
+            if (stringsForListview.get(i).equals(selectedItem)){
+                num=i;
+            }
+        }
+        if (num!=-1) {
+            testParametersName = clientTests.get(num).getTestParametersName();
+            testParametersMetric = clientTests.get(num).getTestParametersMetric();
+            testParametersResult = clientTests.get(num).getTestParametersResult();
+            testParametersMinRef = clientTests.get(num).getTestParametersReferenceValueMin();
+            testParametersMaxRef = clientTests.get(num).getTestParametersReferenceValueMax();
+            String text = "";
+            for (int i = 0; i < testParametersName.size(); i++) {
+                text = text + testParametersName.get(i) + " (" + testParametersMetric.get(i) + ")" + "\n ↪ Result: " +
+                        testParametersResult.get(i) + "\n ↪ Normal Values: " + testParametersMinRef.get(i) + " - " +
+                        testParametersMaxRef.get(i) + "\n ↪ Report: " + clientTests.get(num).getReport() + "\n";
+            }
+            resultText.setText(text);
+            setResultText(resultText);
+        } else {
+            resultText.setText("There are no results to show.");
+            setResultText(resultText);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.controller=new ViewClientResultsController();
     }
 
+    public void setClientTests(List<TestDTO> clientTests) {
+        this.clientTests = clientTests;
+    }
+
     public void getClientTests(){
         clientTests= controller.getClientTestsWithResults(this.clientMenuUI.getMainUI().getEmail());
+        setClientTests(clientTests);
         populateData(clientTests);
-        handleItemClicks(clientTests);
     }
 
     private void populateData(List<TestDTO> testsWithResults){
@@ -104,36 +146,7 @@ public class ClientTestResultsUI1 implements Initializable {
         for (String string : stringsForListview) {
             mListView.getItems().add(string);
         }
+        setmListView(mListView);
     }
-
-    public void handleItemClicks(List<TestDTO> testsWithResults){
-        mListView.setOnMouseClicked(event -> {
-            String selectedItem = mListView.getSelectionModel().getSelectedItem();
-            int num = -1;
-            for (int i = 0; i < stringsForListview.size(); i++) {
-                if (stringsForListview.get(i).equals(selectedItem)){
-                    num=i;
-                }
-            }
-            if (num!=-1) {
-                testParametersName = testsWithResults.get(num).getTestParametersName();
-                testParametersMetric = testsWithResults.get(num).getTestParametersMetric();
-                testParametersResult = testsWithResults.get(num).getTestParametersResult();
-                testParametersMinRef = testsWithResults.get(num).getTestParametersReferenceValueMin();
-                testParametersMaxRef = testsWithResults.get(num).getTestParametersReferenceValueMax();
-                String text = "";
-                for (int i = 0; i < testParametersName.size(); i++) {
-                    text = text + testParametersName.get(i) + " (" + testParametersMetric.get(i) + ")" + "\n ↪ Result: " +
-                            testParametersResult.get(i) + "\n ↪ Normal Values: " + testParametersMinRef.get(i) + " - " +
-                            testParametersMaxRef.get(i) + "\n ↪ Report: " + testsWithResults.get(num).getReport() + "\n";
-                }
-                resultText.setText(text);
-            } else {
-                resultText.setText("There are no results to show.");
-            }
-        });
-    }
-
-
 
 }

@@ -76,8 +76,8 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ListView fx:id="mListView" editable="true" prefHeight="200.0" prefWidth="200.0" />
-                        <TextArea fx:id="resultText" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <ListView fx:id="mListView" editable="true" onMouseClicked="#selectTest" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="resultText" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>
