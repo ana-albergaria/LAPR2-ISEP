@@ -94,7 +94,7 @@ public class ClientMenuUI implements Initializable, Menu {
     void exitAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
-        alert.setTitle("Application");
+        alert.setTitle("Many Labs Application");
         alert.setHeaderText("Action confirmation.");
         alert.setContentText("Do you really wish to exit the application?");
 
