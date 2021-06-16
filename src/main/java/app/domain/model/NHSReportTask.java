@@ -9,7 +9,6 @@ import app.domain.store.TestStore;
 import app.mappers.dto.TestFileDTO;
 import com.nhs.report.Report2NHS;
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.output.OutputException;
 
 import java.io.File;
 import java.io.IOException;
@@ -186,11 +185,9 @@ public class NHSReportTask extends TimerTask {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (OutputException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (BarcodeException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 

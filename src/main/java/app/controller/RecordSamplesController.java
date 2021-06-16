@@ -65,7 +65,7 @@ public class RecordSamplesController {
      * @throws BarcodeException  if the data to be encoded in the barcode is invalid
      * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      */
-    public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException, IOException, OutputException {
+    public boolean createSample() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
         MyBarcode myBarcode = getBarcode();
         SampleStore sampleStore = this.company.getSampleStore();
         this.sample = sampleStore.createSample(myBarcode);

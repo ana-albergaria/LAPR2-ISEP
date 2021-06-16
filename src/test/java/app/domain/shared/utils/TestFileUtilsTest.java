@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TestFileUtilsTest {
 
-    @Test
+    /*@Test
     public void testCsvProcess(){
     TestFileUtils testFileUtils = new TestFileUtils();
     List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_CovidMATCPCSV.csv");
@@ -18,7 +18,7 @@ public class TestFileUtilsTest {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         }
     }
-
+*/
 
     /*@Test
     public void testGetListOfTestFileDto(){

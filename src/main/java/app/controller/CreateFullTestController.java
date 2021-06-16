@@ -4,12 +4,14 @@ import app.domain.model.*;
 import app.domain.store.*;
 import app.mappers.dto.TestFileDTO;
 import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.output.OutputException;
-
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Controller class to coordenate the creation of a test with all attributes
+ *
+ * @author João Wolff
+ */
 public class CreateFullTestController {
 
     /**
@@ -35,6 +37,14 @@ public class CreateFullTestController {
         this.company = company;
     }
 
+    /**
+     * Method for creating an test instance with all attributes
+     * @param testFileDTO testfile dto which contains all needed data
+     * @return true if successfully created and false otherwise
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     */
     public boolean createTest(TestFileDTO testFileDTO) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestStore testStore = this.company.getTestStore();
         ClientStore clientStore = this.company.getClientStore();
@@ -70,7 +80,15 @@ public class CreateFullTestController {
         return testStore.saveTest(test);
     }
 
-    public boolean addSample() throws IllegalAccessException, InstantiationException, IOException, OutputException, BarcodeException, ClassNotFoundException {
+    /**
+     * Method for adding a sample if the current test has the date of chemical analysis
+     * @return true if successfully added and false otherwise
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     * @throws BarcodeException  if the data to be encoded in the barcode is invalid
+     */
+    public boolean addSample() throws IllegalAccessException, InstantiationException, BarcodeException, ClassNotFoundException {
         if(test.getDateOfChemicalAnalysis() != null) {
             RecordSamplesController samplesController = new RecordSamplesController();
             samplesController.createSample();
