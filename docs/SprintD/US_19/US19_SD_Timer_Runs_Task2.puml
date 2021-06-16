@@ -1,0 +1,32 @@
+@startuml
+
+title SD_run()\nTimer runs the Task
+
+participant "timer:\nTimer" as TIMER
+participant "nhsReportTask:\nNHSReportTask" as TASK
+participant "NhsAPI" as NHS_API
+participant "nhsReport\n:NHSReport"
+
+
+TIMER -> TASK : run()
+activate TIMER
+activate TASK
+
+TASK -> TASK : createNHSDailyReport()
+activate TASK
+ref over TASK
+SD_createNHSDailyReport()
+end
+TASK --> TASK : success
+deactivate TASK
+
+opt success = true
+TASK -> NHS_API : writeUsingFileWriter(nhsReport.toString())
+'ACRESCENTAR PARTE DA FILE + DA LOG FILE!
+end
+
+deactivate TIMER
+deactivate TASK
+
+
+@enduml
