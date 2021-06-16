@@ -496,7 +496,7 @@ public class TestStoreTest {
 //=========== END US1 ============
 
     //for US18 and US19
-    
+
 
     // Porque dá erro no Jenkins??
     /*
