@@ -39,7 +39,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     @FXML
     private ChoiceBox<String> intervalOption;
 
-    private String[] options = {"Analyse Day", "Analyse An Interval"};
+    private final String[] options = {"Analyse A Day", "Analyse An Interval"};
 
     @FXML
     private Button analyseBtn;
@@ -69,9 +69,9 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     @FXML
     void returnAction(ActionEvent event) {
         try {
-            ClientMenuUI clientMenuUI = (ClientMenuUI) this.mainApp.replaceSceneContent("/fxml/ClientMenu.fxml");
-            clientMenuUI.setMainApp(mainApp);
-            clientMenuUI.setMainUI(this.lcUI.getMainUI());
+            LabCoordinatorUI labCoordinatorUI = (LabCoordinatorUI) this.mainApp.replaceSceneContent("/fxml/LabCoordinatorMenu.fxml");
+            labCoordinatorUI.setMainApp(mainApp);
+            labCoordinatorUI.setMainUI(this.lcUI.getMainUI());
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,12 +100,17 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.controller=new CompanyPerformanceAnalysisController();
+
+    }
+
+    public void addOptions(){
         intervalOption.getItems().addAll(options);
+        intervalOption.setOnAction(this::getButtons);
     }
 
     public void getButtons(ActionEvent event){
         String option = intervalOption.getValue();
-        if (option.equals("Analyse Day")){
+        if (option.equals("Analyse A Day")){
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
@@ -113,6 +118,10 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
+        }else{
+            singleDate.setDisable(true);
+            beginningDate.setDisable(true);
+            endingDate.setDisable(true);
         }
     }
 

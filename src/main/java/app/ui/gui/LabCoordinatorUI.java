@@ -53,7 +53,13 @@ public class LabCoordinatorUI implements Initializable, Menu {
 
     @FXML
     public void checkCompPerAction(){
-
+        try {
+            CheckCompanyPerformanceUI1 checkCompanyPerformanceUI1 = (CheckCompanyPerformanceUI1) mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance1.fxml");
+            checkCompanyPerformanceUI1.setMainApp(this.mainApp);
+            checkCompanyPerformanceUI1.addOptions();
+        } catch (Exception ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

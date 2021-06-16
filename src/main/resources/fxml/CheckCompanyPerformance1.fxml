@@ -110,7 +110,7 @@
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin></Text>
-                                    <DatePicker fx:id="biginningDate" disable="true" onAction="#beginningDateAction" promptText="beginning date" GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="beginningDate" disable="true" onAction="#beginningDateAction" promptText="beginning date" GridPane.columnIndex="1" />
                                     <DatePicker fx:id="endingDate" disable="true" onAction="#endingDateAction" promptText="ending date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
