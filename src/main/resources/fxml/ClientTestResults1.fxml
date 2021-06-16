@@ -77,7 +77,7 @@
                     </rowConstraints>
                      <children>
                         <ListView fx:id="mListView" editable="true" onMouseClicked="#selectTest" prefHeight="200.0" prefWidth="200.0" />
-                        <TextArea fx:id="resultText" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <TextArea fx:id="resultText" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" style="-fx-text-inner-color: black;" />
                      </children>
                   </GridPane>
                </children>

@@ -59,10 +59,6 @@ public class ClientTestResultsUI1 implements Initializable {
     @FXML
     private Button returnBtn;
 
-    public void setResultText(TextArea resultText) {
-        this.resultText = resultText;
-    }
-
     @FXML
     private TextArea resultText;
 
@@ -115,10 +111,8 @@ public class ClientTestResultsUI1 implements Initializable {
                         testParametersMaxRef.get(i) + "\n ↪ Report: " + clientTests.get(num).getReport() + "\n";
             }
             resultText.setText(text);
-            setResultText(resultText);
         } else {
             resultText.setText("There are no results to show.");
-            setResultText(resultText);
         }
     }
 
