@@ -12,7 +12,6 @@ participant "clientStore\n:ClientStore" as CLIENT_STORE
 participant "testTypeStore\n:TestTypeStore" as TEST_TYPE_STORE
 participant "parameterStore\n:ParameterStore" as PARAM_STORE
 participant "calStore\n:CalStore" as CAL_STORE
-participant "testFileDto\n:TestFIleDTO" as DTO
 participant ":RecordSamplesController" as SAM_CTRL
 participant "store:TestStore" as ORG
 participant "tt\n:Test" as TAREFA
@@ -73,66 +72,43 @@ activate TEST_CTRL
 
 TEST_CTRL -> PLAT : clientStore = getClientStore()
 activate PLAT
-|||
 deactivate PLAT
 
+
+TEST_CTRL -> PLAT : testTypeStore = getTestTypeStore()
+activate PLAT
+deactivate PLAT
+
+TEST_CTRL -> PLAT : parameterStore = getParameterStore()
+activate PLAT
+deactivate PLAT
+
+TEST_CTRL -> PLAT : calStore = getClinicalAnalysisLaboratoryStore()
+activate PLAT
+deactivate PLAT
 
 TEST_CTRL -> CLIENT_STORE : associatedClient = getClientByTinNumber(testFileDTO.getClientDTO().getTinNumber)
 activate CLIENT_STORE
 deactivate CLIENT_STORE
 
-
-
-TEST_CTRL -> PLAT : testTypeStore = getTestTypeStore()
-activate PLAT
-|||
-deactivate PLAT
-
 TEST_CTRL -> TEST_TYPE_STORE : selectedTestType = getTestTypeByCode(TestFileDTO.getTestTypeCode)
 activate TEST_TYPE_STORE
 deactivate TEST_TYPE_STORE
 
-TEST_CTRL -> PLAT : parameterStore = getParameterStore()
-activate PLAT
-|||
-deactivate PLAT
+
 
 TEST_CTRL -> PARAM_STORE : selectedParamsList = getParamsByCodes(TestFileDTO.getParamsCodes)
 activate PARAM_STORE
 deactivate PARAM_STORE
 
-
-TEST_CTRL -> PLAT : calStore = getClinicalAnalysisLaboratoryStore()
-activate PLAT
-|||
-deactivate PLAT
-
 TEST_CTRL -> CAL_STORE : cal = getCalByCode(TestFileDTO.getCalId)
 activate CAL_STORE
 deactivate CAL_STORE
 
-
-TEST_CTRL -> DTO: nhsCode = testFileDto.getNhsCode()
-activate DTO
-deactivate DTO
-
-TEST_CTRL -> DTO: testRegDate = testFileDto.getTestRegDate()
-activate DTO
-deactivate DTO
-
-TEST_CTRL -> DTO: testChemDate = testFileDto.getTestChemDate()
-activate DTO
-deactivate DTO
-
-TEST_CTRL -> DTO: testDiagnosisDate = testFileDto.getDiagnosisDate()
-activate DTO
-deactivate DTO
-
-TEST_CTRL -> DTO: testValidationDate = testFileDto.getValidationDate()
-activate DTO
-deactivate DTO
-
-TEST_CTRL -> PLAT : Test = getTestStore()
+ref over TEST_CTRL
+SD_extractDatesFromDto
+end
+TEST_CTRL -> PLAT : testStore = getTestStore()
 activate PLAT
 PLAT -> ORG** : create()
 deactivate PLAT
@@ -156,17 +132,7 @@ end
 TAREFA -> TAREFA : code = generateSequentialCode()
 deactivate TAREFA
 
-alt testChemDate different than null
-TEST_CTRL -> SAM_CTRL** : create()
 
-TEST_CTRL -> SAM_CTRL : createSample()
-activate SAM_CTRL
-deactivate SAM_CTRL
-
-TEST_CTRL -> SAM_CTRL : addSample(test.getCode())
-activate SAM_CTRL
-deactivate SAM_CTRL
-end
 
 TEST_CTRL -> ORG : result = validateTest(test)
 TEST_CTRL -> CTRL : result
@@ -190,9 +156,28 @@ ORG -> ORG: validateTest(test)
 ORG -> ORG: addTest(test)
 deactivate ORG
 
+TEST_CTRL -> CTRL : result
+deactivate TEST_CTRL
+
+
+CTRL -> TEST_CTRL : addSample()
+activate TEST_CTRL
+alt testChemDate different than null
+TEST_CTRL -> SAM_CTRL** : create()
+TEST_CTRL -> SAM_CTRL : createSample()
+activate SAM_CTRL
+deactivate SAM_CTRL
+
+TEST_CTRL -> SAM_CTRL : addSample(test.getCode())
+activate SAM_CTRL
+deactivate SAM_CTRL
+end
+TEST_CTRL -> CTRL : result
+deactivate TEST_CTRL
+
 
 CTRL --> UI: result
-deactivate TEST_CTRL
+deactivate CTRL
 end
 
 

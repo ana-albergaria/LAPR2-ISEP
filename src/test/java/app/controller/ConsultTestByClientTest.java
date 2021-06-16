@@ -1,7 +1,6 @@
 package app.controller;
 
-import app.domain.shared.utils.TestFileUtils;
-import app.domain.store.ClientStore;
+import app.ui.console.utils.TestFileUtils;
 import app.domain.store.TestStore;
 import app.mappers.dto.ClientDTO;
 import app.mappers.dto.TestDTO;
@@ -16,8 +15,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class ConsultTestByClientTest {
 

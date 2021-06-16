@@ -87,12 +87,13 @@ public class HypothesisTest {
     }
 
     /**
-     * CONSTRUCTOR FOR SIMPLE LINEAR REGRESSION
+     * CONSTRUCTOR FOR MULTIPLE LINEAR REGRESSION
      *
      * Builds a HypothesisTest's instance receiving:
      * the myRegressionModel
      * the observed value for the first regression coefficient (tObsA)
      * the observed value for the second regression coefficient (tObsB)
+     * the observed value for the third regression coefficient (tObsC)
      * the significance level
      *
      * @param myRegressionModel the myRegressionModel of the HypothesisTest

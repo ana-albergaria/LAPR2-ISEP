@@ -47,6 +47,7 @@ public class SendNHSReportController {
         HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(chosenRegressionModel, myRegressionModel, significanceLevel);
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(chosenRegressionModel, myRegressionModel, significanceLevel);
 
+        //CORRIGIR ESTE MÉTODO POIS NA US18 É DIFERENTE
         Date startDate = nhsReportStore.getStartDate();
         TableOfValues tableOfValues = getTableOfValues(myRegressionModel, chosenRegressionModel, chosenVariable, typeOfData, historicalPoints, startDate, confidenceLevel);
 
@@ -106,7 +107,7 @@ public class SendNHSReportController {
             meanAgeInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
         } else {
             dates = nhsReportStore.getWeeksColumnToTableOfValues(historicalPoints, startDate);
-            observedPositives = testStore.getWeeklyObservedPositivesToTableOfValues(historicalPoints, dates);
+            observedPositives = testStore.getWeeklyObservedPositivesToTableOfValues(dates);
             numCovidTestsInHistoricalPoints = testStore.getWeeklyNumberOfCovidTestsInHistoricalPoints(dates);
             meanAgeInHistoricalPoints = testStore.getWeeklyMeanAgeInHistoricalPoints(dates);
         }
@@ -140,7 +141,7 @@ public class SendNHSReportController {
         List<ConfidenceInterval> confidenceIntervalList;
         if(!chosenVariable.isEmpty()) //for Simple Linear Regression
             confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
-        else //For Multiple Linear Regression
+        else //for Multiple Linear Regression
             confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
         return confidenceIntervalList;
     }

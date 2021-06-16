@@ -1,7 +1,7 @@
 package app.ui.gui;
 
 import app.controller.ImportTestController;
-import app.domain.shared.utils.TestFileUtils;
+import app.ui.console.utils.TestFileUtils;
 import app.mappers.dto.TestFileDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

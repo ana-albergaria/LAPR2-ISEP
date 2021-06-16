@@ -71,7 +71,7 @@ Test "1" -- "1..*" TestParameter : requests analysis of >
 TestParameter "*" -- "1" Parameter : refers to >
 TestParameter "1" -- "0..1" TestParameterResult : contains >
 ClinicalAnalysisLaboratory "1" -- "1..*" TestType : operates >
-ClinicalAnalysisLaboratory "1" -- "1..*" Test : performs >
+ClinicalAnalysisLaboratory "1" -- "1..*" Test : conducted at <
 Company "1" --- "*" Test : conducts >
 Company "1" -- "2..*" ClinicalAnalysisLaboratory : owns >
 

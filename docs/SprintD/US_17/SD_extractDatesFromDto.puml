@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant ":CreateFileTestController" as TEST_CTRL
+participant "testFileDto\n:TestFIleDTO" as DTO
+
+
+activate TEST_CTRL
+
+TEST_CTRL -> DTO: nhsCode = testFileDto.getNhsCode()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testRegDate = testFileDto.getTestRegDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testChemDate = testFileDto.getTestChemDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testDiagnosisDate = testFileDto.getDiagnosisDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testValidationDate = testFileDto.getValidationDate()
+activate DTO
+deactivate DTO
+
+deactivate TEST_CTRL
+
+@enduml

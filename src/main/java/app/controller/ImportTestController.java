@@ -1,10 +1,6 @@
 package app.controller;
 
 import app.domain.model.Company;
-import app.domain.model.Test;
-import app.domain.shared.utils.TestFileUtils;
-import app.domain.store.ClientStore;
-import app.domain.store.TestStore;
 import app.mappers.dto.TestFileDTO;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.output.OutputException;
@@ -46,7 +42,8 @@ public class ImportTestController {
         if(existsClient)
             clientController.saveClient();
         testController.createTest(testFileDTO);
-        return testController.saveTest();
+        if(!testController.saveTest()) return false;
+        return testController.addSample();
     }
 
 }
