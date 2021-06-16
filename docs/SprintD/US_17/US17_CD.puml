@@ -47,6 +47,10 @@ left to right direction
             - collectingMethod : String
             }
 
+        class Sample {
+        -myBarcode
+        }
+
         class Parameter {
           -code
           -shortName
@@ -72,27 +76,38 @@ left to right direction
         - email
         }
 
+        class MyBarcode {
+        - barcodeNumber
+        }
+
 
         class ClientStore {
            +getClientByTinNumber(tinNumber)
         }
 
         class ParameterStore {
-                    +getParamsByCategories(List<String> selectedCategoriesCodes)
-                    +getParamsByCategory(String category)
-                }
+                +getParamsByCategories(List<String> selectedCategoriesCodes)
+                +getParamsByCategory(String category)
+            }
 
+        class SampleStore {
+            +createSample(myBarcode)
+            +validateSample(sample)
+        }
 
         class TestStore {
-            +getTestByNhsCode(nhsCode)
             +createTest(String nhsCode, Client associatedClient,\n TestType selectedTestType, List<Parameter>selectedParamsList)
             +validateTest(test)
             +saveTest(test)
         }
 
         class ClinicalAnalysisLaboratoryStore {
-            +getCalByCode(clinicalAnalysisLabCode)
+            +getCalByCode(labId)
         }
+
+        class TestTypeStore {
+            +getTestTypeByTinNumber(code)
+            }
 
 /'    }
 }'/
@@ -105,11 +120,18 @@ left to right direction
 
     class ImportTestController{
             +createTestsFromFile(TestFileDto)
+            +saveTest()
+            +addSample()
         }
 
     class RegisterClientController {
       +registerClient(ClientDto)
       +saveClient()
+    }
+
+    class RecordSamplesController {
+    +createSample()
+    +addSample(code)
     }
 
 /'}'/
@@ -133,6 +155,7 @@ CreateTestOfFileControler ..> ClinicalAnalysisLaboratoryStore
 CreateTestOfFileControler ..> ParameterStore
 CreateTestOfFileControler ..> TestTypeStore
 CreateTestOfFileControler ..> TestStore
+CreateTestOfFileControler ..> RecordSamplesController
 Company "1" -- "1" ParameterStore : uses >
 ParameterStore "1" -- "*" Parameter : stores >
 RegisterClientController ..> Company
@@ -155,4 +178,10 @@ Test "*" -- "1" TestType : classified as >
 Test "1" -- "1..*" TestParameter : requests analysis of >
 TestParameter "*" -- "1" Parameter : refers to >
 TestParameter "1" -- "0..1" TestParameterResult : contains >
+Test"1" -- "1..*" Sample : collects >
+RecordSamplesController ..> Sample
+RecordSamplesController ..> SampleStore
+Company "1" --> "1" SampleStore : uses >
+SampleStore "1" - "*" Sample : manages >
+Sample "1" -- "1" MyBarcode : identified with >
 @enduml

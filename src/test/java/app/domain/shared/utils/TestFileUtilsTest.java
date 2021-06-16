@@ -1,13 +1,10 @@
 package app.domain.shared.utils;
 
 import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
 import org.junit.Test;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class TestFileUtilsTest {
 

@@ -1,19 +1,15 @@
 package app.controller;
 
-import app.domain.model.Client;
 import app.domain.model.Parameter;
 import app.domain.model.ParameterCategory;
 import app.domain.model.TestType;
 import app.domain.shared.Constants;
-import app.domain.shared.utils.TestFileUtils;
-import app.domain.store.ClientStore;
+import app.ui.console.utils.TestFileUtils;
 import app.domain.store.ParameterStore;
-import app.domain.store.TestStore;
 import app.domain.store.TestTypeStore;
 import app.mappers.dto.TestFileDTO;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.output.OutputException;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,8 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class ImportTestControllerTest {
     private List<Parameter> parametersBlood;

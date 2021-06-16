@@ -35,7 +35,7 @@ public class CreateFullTestController {
         this.company = company;
     }
 
-    public boolean createTest(TestFileDTO testFileDTO) throws IllegalAccessException, InstantiationException, ClassNotFoundException, BarcodeException, OutputException, IOException {
+    public boolean createTest(TestFileDTO testFileDTO) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         TestStore testStore = this.company.getTestStore();
         ClientStore clientStore = this.company.getClientStore();
         TestTypeStore testTypeStore = this.company.getTestTypeStore();
@@ -57,11 +57,6 @@ public class CreateFullTestController {
 
         this.test = testStore.createTest(nhsCode, associatedClient, testType, parameters,results, cal, testRegDate, testChemDate, testDiagnosisDate, testValidationDate);
 
-        if(test.hasChemDate()){
-            RecordSamplesController sample_controller = new RecordSamplesController();
-            sample_controller.createSample();
-        }
-
         return testStore.validateTest(test);
     }
 
@@ -73,6 +68,15 @@ public class CreateFullTestController {
     public boolean saveTest() {
         TestStore testStore = this.company.getTestStore();
         return testStore.saveTest(test);
+    }
+
+    public boolean addSample() throws IllegalAccessException, InstantiationException, IOException, OutputException, BarcodeException, ClassNotFoundException {
+        if(test.getDateOfChemicalAnalysis() != null) {
+            RecordSamplesController samplesController = new RecordSamplesController();
+            samplesController.createSample();
+            return samplesController.addSample(test.getCode());
+        }
+        return true;
     }
 
 }

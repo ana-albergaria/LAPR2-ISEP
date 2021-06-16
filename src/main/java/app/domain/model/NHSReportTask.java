@@ -3,7 +3,7 @@ package app.domain.model;
 
 import app.controller.ImportTestController;
 import app.domain.interfaces.RegressionModel;
-import app.domain.shared.utils.TestFileUtils;
+import app.ui.console.utils.TestFileUtils;
 import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 import app.mappers.dto.TestFileDTO;
@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
