@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.NHSReport">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ui.gui.NHSReportUI">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="693.0">
          <children>
@@ -23,33 +23,43 @@
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1">
-                          <items>
-                            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1">
+                                 <items>
+                                    <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #ff4d4d;" text="X" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </items>
+                              </ToolBar>
+                              <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnAction" style="-fx-background-color: transparent;">
                                  <font>
-                                    <Font name="System Bold" size="15.0" />
+                                    <Font name="Tahoma" size="15.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView fitHeight="31.0" fitWidth="31.0">
+                                       <image>
+                                          <Image url="@Images/Icon3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Button>
-                          </items>
-                        </ToolBar>
-                        <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnAction" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font name="Tahoma" size="15.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="31.0" fitWidth="31.0">
-                                 <image>
-                                    <Image url="@Images/Icon3.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                           </children>
+                        </GridPane>
                      </children>
                   </GridPane>
                </top>
@@ -78,7 +88,7 @@
                               <Insets top="15.0" />
                            </GridPane.margin>
                         </Text>
-                        <DatePicker prefHeight="31.0" prefWidth="246.0" promptText="Date" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <DatePicker fx:id="currentDate" prefHeight="31.0" prefWidth="246.0" promptText="DD/MM/YYYY" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets top="15.0" />
                            </GridPane.margin>
@@ -92,12 +102,15 @@
                         </Text>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <children>
-                              <RadioButton layoutX="25.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Day" textFill="WHITE">
+                              <RadioButton fx:id="dayRadioBtn" layoutX="25.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Day" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tgTypeOfData" />
+                                 </toggleGroup>
                               </RadioButton>
-                              <RadioButton layoutX="145.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Week" textFill="WHITE">
+                              <RadioButton fx:id="weekRadioBtn" layoutX="145.0" layoutY="23.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" text="Week" textFill="WHITE" toggleGroup="$tgTypeOfData">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -109,7 +122,7 @@
                               <Font name="System Bold" size="21.0" />
                            </font>
                         </Text>
-                        <TextField alignment="CENTER" prefHeight="25.0" prefWidth="234.0" promptText="Number" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="historicalPoints" alignment="CENTER" prefHeight="25.0" prefWidth="234.0" promptText="Number" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets right="40.0" />
                            </GridPane.margin>
@@ -148,8 +161,8 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Text>
-                              <DatePicker />
-                              <DatePicker GridPane.rowIndex="1" />
+                              <DatePicker fx:id="initialDate" promptText="DD/MM/YYYY" />
+                              <DatePicker fx:id="endDate" promptText="DD/MM/YYYY" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Regression Model:" textAlignment="CENTER" wrappingWidth="308.0" GridPane.rowIndex="5">
@@ -157,8 +170,8 @@
                               <Font name="System Bold" size="21.0" />
                            </font>
                         </Text>
-                        <ComboBox prefHeight="25.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <ComboBox prefHeight="25.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <ComboBox fx:id="regressionCombBox" prefHeight="25.0" prefWidth="248.0" style="-fx-border-color: #98C1d9; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="variableCombBox" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: #98c1d9;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Independent Variable:" textAlignment="CENTER" wrappingWidth="308.0" GridPane.rowIndex="6">
                            <font>
                               <Font name="System Bold" size="21.0" />
@@ -181,16 +194,13 @@
                                     <Insets bottom="10.0" />
                                  </GridPane.margin>
                               </Text>
-                              <TextField alignment="CENTER" prefHeight="25.0" prefWidth="234.0" promptText="Number" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
+                              <TextField fx:id="significanceLevel" alignment="CENTER" promptText="Number" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="15.0" left="15.0" />
                                  </GridPane.margin>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
                               </TextField>
                            </children>
                         </GridPane>
@@ -211,13 +221,10 @@
                                     <Insets bottom="10.0" />
                                  </GridPane.margin>
                               </Text>
-                              <TextField alignment="CENTER" prefHeight="25.0" prefWidth="234.0" promptText="Number" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1">
+                              <TextField fx:id="confidenceLevel" alignment="CENTER" promptText="Number" style="-fx-background-color: transparent; -fx-border-color: #ee6c4d; -fx-border-width: 0px 0px 2px 0px;" GridPane.columnIndex="1">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
                                  <GridPane.margin>
                                     <Insets bottom="15.0" left="15.0" />
                                  </GridPane.margin>
@@ -230,7 +237,7 @@
                <bottom>
                   <Pane prefHeight="40.0" prefWidth="693.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutX="304.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getTestsOfClient" prefHeight="30.0" prefWidth="85.0" style="-fx-background-radius: 10;" text="OK" textFill="#2e3136">
+                        <Button fx:id="sendBtn" layoutX="304.0" layoutY="-1.0" mnemonicParsing="false" onAction="#sendReportAction" prefHeight="30.0" prefWidth="85.0" style="-fx-background-radius: 10;" text="SEND" textFill="#2e3136">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></Button>

@@ -14,8 +14,6 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MainUI implements Initializable {
 
@@ -94,7 +92,7 @@ public class MainUI implements Initializable {
     private List<MenuItem> getMenuItemForRoles()
     {
         List<MenuItem> rolesUI = new ArrayList<>();
-        rolesUI.add(new MenuItem(Constants.ROLE_ADMIN, new AdminMenu()));
+        rolesUI.add(new MenuItem(Constants.ROLE_ADMIN, new AdminMenuUI()));
         rolesUI.add(new MenuItem(Constants.ROLE_CLIENT, new ClientMenuUI()));
         rolesUI.add(new MenuItem(Constants.ROLE_LAB_COORDINATOR, new LabCoordinatorUI()));
         rolesUI.add(new MenuItem(Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST, new ChemTechUI()));
