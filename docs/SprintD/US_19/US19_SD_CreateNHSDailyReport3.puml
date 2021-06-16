@@ -1,0 +1,119 @@
+@startuml
+
+title SD_createNHSDailyReport()
+
+participant "nhsReportTask:\nNHSReportTask" as TASK
+participant "regressionModel:\nRegressionModel" as REGRESSION_MODEL
+participant "dataList:\nList< List<Double> >"
+participant "nhsReportStore\n:NHSReportStore" as NHS_REPORT_STORE
+participant "covidTestsArray:\ndouble[]" as TESTS_ARRAY
+participant "meanAgeArray:\ndouble[]" as MEAN_AGE_ARRAY
+participant "observedPositives:\ndouble[]" as OBSERVED_POSITIVES_ARRAY
+participant "bestXIndex:\nInteger" as BEST_X
+participant "myRegressionModel:\nMyRegressionModel" as MY_REGRESSION_MODEL
+participant "hypothesisTest:\nHypothesisTest" as HYPOTHESIS_TEST
+participant "modelAnova:\nSignificanceModelAnova" as MODEL_ANOVA
+participant "startDate:\nDate" as START_DATE
+participant "tableOfValues:\nTableOfValues"
+participant "nhsReport:\nNHSReport"
+
+[o-> TASK : createNHSDailyReport()
+
+activate TASK
+TASK -> TASK : regressionModel = getRegressionModel(regressionModelClass)
+activate TASK
+deactivate TASK
+
+TASK -> TASK : getDataListToFitTheModel()
+activate TASK
+ref over TASK
+SD_getDataListToFitTheModel()
+end
+TASK --> TASK : dataList
+deactivate TASK
+
+TASK -> NHS_REPORT_STORE : getDoubleArrayWithData(dataList, 0)
+activate NHS_REPORT_STORE
+ref over NHS_REPORT_STORE
+SD_getDoubleArrayWithData(dataList, index)
+end
+NHS_REPORT_STORE --> TASK : covidTestsArray
+deactivate NHS_REPORT_STORE
+
+TASK -> NHS_REPORT_STORE : meanAgeArray = getDoubleArrayWithData(dataList, 1)
+activate NHS_REPORT_STORE
+deactivate NHS_REPORT_STORE
+
+TASK -> NHS_REPORT_STORE : observedPositives = getDoubleArrayWithData(dataList, 2)
+activate NHS_REPORT_STORE
+deactivate NHS_REPORT_STORE
+
+TASK -> NHS_REPORT_STORE : getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives)
+activate NHS_REPORT_STORE
+ref over NHS_REPORT_STORE
+SD_getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives)
+end
+NHS_REPORT_STORE --> TASK : bestXIndex
+deactivate NHS_REPORT_STORE
+
+TASK -> TASK : getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints)
+activate TASK
+ref over TASK
+SD_getMyRegressionModel()
+end
+TASK --> TASK : myRegressionModel
+deactivate TASK
+
+TASK -> NHS_REPORT_STORE : createHypothesisTest(regressionModel, myRegressionModel, significanceLevel)
+activate NHS_REPORT_STORE
+ref over NHS_REPORT_STORE
+SD_createHypothesisTest(regressionModel, myRegressionModel, significanceLevel)
+end
+NHS_REPORT_STORE --> TASK : hypothesisTest
+deactivate NHS_REPORT_STORE
+
+TASK -> NHS_REPORT_STORE : createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel)
+activate NHS_REPORT_STORE
+ref over NHS_REPORT_STORE
+SD_createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel)
+end
+NHS_REPORT_STORE --> TASK : modelAnova
+deactivate NHS_REPORT_STORE
+
+TASK -> NHS_REPORT_STORE : getStartDate()
+activate NHS_REPORT_STORE
+ref over NHS_REPORT_STORE
+SD_getStartDate()
+end
+NHS_REPORT_STORE --> TASK : startDate
+deactivate NHS_REPORT_STORE
+
+TASK -> TASK : getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
+activate TASK
+ref over TASK
+SD_getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
+end
+TASK --> TASK : tableOfValues
+deactivate TASK
+
+TASK -> NHS_REPORT_STORE : createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues)
+activate NHS_REPORT_STORE
+ref over NHS_REPORT_STORE
+SD_getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
+end
+NHS_REPORT_STORE --> TASK : nhsReport
+deactivate NHS_REPORT_STORE
+
+TASK -> NHS_REPORT_STORE : validateNHSDailyReport(nhsReport)
+activate NHS_REPORT_STORE
+deactivate NHS_REPORT_STORE
+
+[<-- TASK : success
+deactivate TASK
+
+
+
+
+
+
+@enduml
