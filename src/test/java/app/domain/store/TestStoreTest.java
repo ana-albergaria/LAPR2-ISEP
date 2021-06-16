@@ -244,24 +244,6 @@ public class TestStoreTest {
         Assert.assertEquals(test.getParameters(), testStore.getTestParameters(test));
     }
 
-//Us 13 ==================
-    @Test
-    public void ensureClientsOfValidatedTestsAreFound() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
-        List<Double> res = new ArrayList<>();
-        res.add(1.3);
-        app.domain.model.Test test = testStore.createTest("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), new Date());
-        testStore.saveTest(test);
-        Client client1 = new Client("1234567890123050", "1234517890", d1, "Male", "1234567860", "alexa@gmail.com", "Alexa", "12345678901");
-        app.domain.model.Test test2 = testStore.createTest("123456789012", client1, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), new Date());
-        testStore.saveTest(test2);
-
-        List<Client> expected = new ArrayList<>();
-        expected.add(client);
-        expected.add(client1);
-
-        Assert.assertEquals(expected, testStore.getClientsWithValidatedTests());
-    }
 
 //========== US16 ================
 
