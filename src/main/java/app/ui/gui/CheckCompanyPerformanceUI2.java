@@ -70,6 +70,12 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.analysisEndDate = analysisEndDate;
     }
 
+    private String chosenAlg;
+
+    public void setChosenAlg(String chosenAlg) {
+        this.chosenAlg = chosenAlg;
+    }
+
     @FXML
     private TextArea cliTesOverview;
 
@@ -136,6 +142,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     }
 
     public void analyseCompany(){
+        setChosenAlg(checkCompPerUI1.getChosenAlg());
         ArrayList<Date> days = controller.getDays(analysisBegDate,analysisEndDate);
         String text = "Interval when the company was less effective in responding" + "\n ↪ From:" + "INICIO" + "\n ↪ To:" + "FIM";
         text = text + "Number of Clients" + "\n ↪ " + controller.getClientsInfoPerInterval(days) + "\n";

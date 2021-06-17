@@ -217,11 +217,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     public void getAlg(){
         String option = algorithmOption.getValue();
         setChosenAlg(option);
-        if (chosenAlg.equals("Benchmark Algorithm")){
-
-        } else if (chosenAlg.equals("Brute-Force Algorithm")){
-            
-        }
     }
 
     //É PRECISO CRIAR ALERTAS SE FOREM ESCOLHIDAS DATAS NÃO PERMITIDAS E NÃO PERMITIR AVANÇAR
