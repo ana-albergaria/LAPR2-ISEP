@@ -91,7 +91,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     @FXML
     private ChoiceBox<String> intervalOption;
 
-    private final String[] options = {"Analyse A Day", "Analyse An Interval"};
+    private final String[] options = {"A Day", "An Interval"};
 
     @FXML
     private Button analyseBtn;
@@ -101,6 +101,9 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     @FXML
     private DatePicker singleDate;
+
+    @FXML
+    private ChoiceBox<?> algorithmOption;
 
     @FXML
     void exitAction(ActionEvent event) {
@@ -169,12 +172,12 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     public void getButtons(ActionEvent event){
         String option = intervalOption.getValue();
-        if (option.equals("Analyse A Day")){
+        if (option.equals("A Day")){
             setChosenOption(option);
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
-        }else if (option.equals("Analyse An Interval")){
+        }else if (option.equals("An Interval")){
             setChosenOption(option);
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
@@ -184,11 +187,11 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     public void getDates(){ //ActionEvent??
         String option = getChosenOption();
-        if (option.equals("Analyse A Day")){
+        if (option.equals("A Day")){
             LocalDate singDate = singleDate.getValue();
             singleDateD = Date.from(singDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setSingleDateD(singleDateD);
-        }else if (option.equals("Analyse An Interval")){
+        }else if (option.equals("An Interval")){
             LocalDate begDate = beginningDate.getValue();
             beginningDateD = Date.from(begDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setBeginningDateD(beginningDateD);
@@ -197,5 +200,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             setEndingDateD(endingDateD);
         }
     }
+
+    //É PRECISO CRIAR ALERTAS SE FOREM ESCOLHIDAS DATAS NÃO PERMITIDAS E NÃO PERMITIR AVANÇAR
+    //FAZER DISABLE AO ANALYSE BUTTON ATÉ SER POSSÍVEL
 
 }
