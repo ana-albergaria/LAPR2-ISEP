@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="553.75px" preserveAspectRatio="none" style="width:617px;height:553px;" version="1.1" viewBox="0 0 617 553" width="617.5px" zoomAndPan="magnify"><defs><filter height="300%" id="fppsnp48hzb9l" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.5"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="5.0" dy="5.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="367.1973" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="111.25" y="86.5234"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="114.4629"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="189.9023"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="265.3418"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="340.7813"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="416.2207"/><line style="stroke:#A80036;stroke-width:1.25;stroke-dasharray:5.0,5.0;" x1="117.5" x2="117.5" y1="74.0234" y2="476.2207"/><line style="stroke:#A80036;stroke-width:1.25;stroke-dasharray:5.0,5.0;" x1="540.625" x2="540.625" y1="74.0234" y2="476.2207"/><rect fill="#FEFECE" filter="url(#fppsnp48hzb9l)" height="39.5117" style="stroke:#A80036;stroke-width:1.875;" width="217.5" x="6.25" y="28.2617"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacing" textLength="200" x="15" y="55.1782">:CreateFileTestController</text><rect fill="#FEFECE" filter="url(#fppsnp48hzb9l)" height="39.5117" style="stroke:#A80036;stroke-width:1.875;" width="217.5" x="6.25" y="474.9707"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacing" textLength="200" x="15" y="501.8872">:CreateFileTestController</text><rect fill="#FEFECE" filter="url(#fppsnp48hzb9l)" height="61.5234" style="stroke:#A80036;stroke-width:1.875;" width="123.75" x="476.875" y="6.25"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacing" textLength="85" x="496.25" y="33.1665">testFileDto</text><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacing" textLength="106.25" x="485.625" y="55.1782">:TestFIleDTO</text><rect fill="#FEFECE" filter="url(#fppsnp48hzb9l)" height="61.5234" style="stroke:#A80036;stroke-width:1.875;" width="123.75" x="476.875" y="474.9707"/><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacing" textLength="85" x="496.25" y="501.8872">testFileDto</text><text fill="#000000" font-family="sans-serif" font-size="17.5" lengthAdjust="spacing" textLength="106.25" x="485.625" y="523.8989">:TestFIleDTO</text><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="367.1973" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="111.25" y="86.5234"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="114.4629"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="189.9023"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="265.3418"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="340.7813"/><rect fill="#FFFFFF" filter="url(#fppsnp48hzb9l)" height="37.5" style="stroke:#A80036;stroke-width:1.25;" width="12.5" x="535" y="416.2207"/><polygon fill="#A80036" points="520,109.4629,532.5,114.4629,520,119.4629,525,114.4629" style="stroke:#A80036;stroke-width:1.25;"/><line style="stroke:#A80036;stroke-width:1.25;" x1="123.75" x2="527.5" y1="114.4629" y2="114.4629"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacing" textLength="8.75" x="132.5" y="108.3923">1</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacing" textLength="266.25" x="146.25" y="108.3923">nhsCode = testFileDto.getNhsCode()</text><polygon fill="#A80036" points="520,184.9023,532.5,189.9023,520,194.9023,525,189.9023" style="stroke:#A80036;stroke-width:1.25;"/><line style="stroke:#A80036;stroke-width:1.25;" x1="123.75" x2="527.5" y1="189.9023" y2="189.9023"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacing" textLength="8.75" x="132.5" y="183.8318">2</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacing" textLength="320" x="146.25" y="183.8318">testRegDate = testFileDto.getTestRegDate()</text><polygon fill="#A80036" points="520,260.3418,532.5,265.3418,520,270.3418,525,265.3418" style="stroke:#A80036;stroke-width:1.25;"/><line style="stroke:#A80036;stroke-width:1.25;" x1="123.75" x2="527.5" y1="265.3418" y2="265.3418"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacing" textLength="8.75" x="132.5" y="259.2712">3</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacing" textLength="347.5" x="146.25" y="259.2712">testChemDate = testFileDto.getTestChemDate()</text><polygon fill="#A80036" points="520,335.7813,532.5,340.7813,520,345.7813,525,340.7813" style="stroke:#A80036;stroke-width:1.25;"/><line style="stroke:#A80036;stroke-width:1.25;" x1="123.75" x2="527.5" y1="340.7813" y2="340.7813"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacing" textLength="8.75" x="132.5" y="334.7107">4</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacing" textLength="373.75" x="146.25" y="334.7107">testDiagnosisDate = testFileDto.getDiagnosisDate()</text><polygon fill="#A80036" points="520,411.2207,532.5,416.2207,520,421.2207,525,416.2207" style="stroke:#A80036;stroke-width:1.25;"/><line style="stroke:#A80036;stroke-width:1.25;" x1="123.75" x2="527.5" y1="416.2207" y2="416.2207"/><text fill="#000000" font-family="sans-serif" font-size="16.25" font-weight="bold" lengthAdjust="spacing" textLength="8.75" x="132.5" y="410.1501">5</text><text fill="#000000" font-family="sans-serif" font-size="16.25" lengthAdjust="spacing" textLength="373.75" x="146.25" y="410.1501">testValidationDate = testFileDto.getValidationDate()</text><!--MD5=[3a1c9fa877180c9fbff2439b5b507d2d]
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant ":CreateFileTestController" as TEST_CTRL
+participant "testFileDto\n:TestFIleDTO" as DTO
+
+
+activate TEST_CTRL
+
+TEST_CTRL -> DTO: nhsCode = testFileDto.getNhsCode()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testRegDate = testFileDto.getTestRegDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testChemDate = testFileDto.getTestChemDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testDiagnosisDate = testFileDto.getDiagnosisDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testValidationDate = testFileDto.getValidationDate()
+activate DTO
+deactivate DTO
+
+deactivate TEST_CTRL
+
+@enduml
+
+@startuml
+
+autonumber
+
+participant ":CreateFileTestController" as TEST_CTRL
+participant "testFileDto\n:TestFIleDTO" as DTO
+
+
+activate TEST_CTRL
+
+TEST_CTRL -> DTO: nhsCode = testFileDto.getNhsCode()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testRegDate = testFileDto.getTestRegDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testChemDate = testFileDto.getTestChemDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testDiagnosisDate = testFileDto.getDiagnosisDate()
+activate DTO
+deactivate DTO
+
+TEST_CTRL -> DTO: testValidationDate = testFileDto.getValidationDate()
+activate DTO
+deactivate DTO
+
+deactivate TEST_CTRL
+
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 10:25:05 GMT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: BR
+--></g></svg>
