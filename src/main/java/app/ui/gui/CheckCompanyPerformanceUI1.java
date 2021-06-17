@@ -41,8 +41,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     private String chosenOption;
 
-    public void setChosenOption(String choosenOption) {
-        this.chosenOption = choosenOption;
+    public void setChosenOption(String chosenOption) {
+        this.chosenOption = chosenOption;
     }
 
     public String getChosenOption() {
@@ -144,28 +144,14 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     }
 
     @FXML
-    void beginningDateAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void endingDateAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void singleDateAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void analyseAction(ActionEvent event) {
         try {
             CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
-            checkCompanyPerformanceUI2.setMainApp(mainApp);
+            checkCompanyPerformanceUI2.setMainApp(this.mainApp);
             checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
+            checkCompanyPerformanceUI2.setController(this.controller);
             checkCompanyPerformanceUI2.getDateOrInterval();
-
+            checkCompanyPerformanceUI2.analyseCompany();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -189,7 +175,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
-        }else if (chosenOption.equals("An Interval")){
+        } else if(chosenOption.equals("An Interval")){
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
@@ -209,14 +195,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             endingDateD = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setEndingDateD(endingDateD);
         }
-
-        //posso fazer já aqui a conversão para o formato (hora) que preciso, assim não uso ifs no UI2
-
-    }
-
-    public void getAlg(){
-        String option = algorithmOption.getValue();
-        setChosenAlg(option);
     }
 
     //É PRECISO CRIAR ALERTAS SE FOREM ESCOLHIDAS DATAS NÃO PERMITIDAS E NÃO PERMITIR AVANÇAR

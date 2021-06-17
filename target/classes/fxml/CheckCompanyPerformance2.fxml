@@ -82,7 +82,6 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextArea fx:id="cliTesOverview" prefHeight="200.0" prefWidth="200.0" />
                               <LineChart fx:id="inefChart" GridPane.columnIndex="1">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
@@ -91,6 +90,19 @@
                                   <NumberAxis side="LEFT" tickLabelFill="WHITE" />
                                 </yAxis>
                               </LineChart>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="186.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <TextArea fx:id="cliTesOverview" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" style="-fx-text-inner-color: black;" />
+                                    <ListView fx:id="listView" onMouseClicked="#handleListViewClick" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
                            </children>
                         </GridPane>
                      </children>

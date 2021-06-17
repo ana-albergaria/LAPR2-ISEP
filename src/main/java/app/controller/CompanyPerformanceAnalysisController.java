@@ -42,8 +42,8 @@ public class CompanyPerformanceAnalysisController {
     }
 
     /**
-     * Gets an ArrayList with the number of clients for an interval
-     * @return ArrayList with the number of clients for an interval
+     * Gets the number of clients for an interval
+     * @return the number of clients for an interval
      */
     public int getClientsInfoPerInterval(ArrayList<Date> days){
         Date endingDay = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20, 0, 0);
@@ -68,6 +68,22 @@ public class CompanyPerformanceAnalysisController {
         return clientEmails.size();
     }
 
+    /**
+     * Gets the number of processed tests for an interval
+     * @return the number of processed tests for an interval
+     */
+    public int getNumTestsProcessedInterval(ArrayList<Date> days){
+        Date endingDay = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20, 0, 0);
+        TestStore testStore = new TestStore();
+        int quant=0;
+        for (Test test : testStore.getTests()){
+            if (test.getDateOfValidation()!=null && test.getDateOfValidation().before(endingDay)){
+                quant++;
+            }
+        }
+        return quant;
+    }
+
     //FIRST THE LB SELECTS DAY OR INTERVAL
     //SHOW ERROR MESSAGES!!! (CAN'T CHOOSE PRESENT OR FUTURE)
     //12 WORKING HOURS PER DAY
@@ -80,7 +96,7 @@ public class CompanyPerformanceAnalysisController {
      */
     public ArrayList<int[]> getTestInfoPerDay(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerDay = new ArrayList<>();
-        int[] testInfo = new int[3];
+        int[] testInfo = new int[2];
         TestStore testStore = new TestStore();
         Date beginningDay;
         Date endingDay;
@@ -89,7 +105,6 @@ public class CompanyPerformanceAnalysisController {
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfo[2] = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
             testInfoPerDay.add(testInfo);
         }
         return testInfoPerDay;
@@ -101,7 +116,7 @@ public class CompanyPerformanceAnalysisController {
      */
     public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days){ //WEEK: FROM MONDAY TO SATURDAY (NO WORK AT SUNDAY)
         ArrayList<int[]> testInfoPerWeek = new ArrayList<>();
-        int[] testInfo = new int[3];
+        int[] testInfo = new int[2];
         TestStore testStore = new TestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK AT SUNDAY
@@ -121,7 +136,6 @@ public class CompanyPerformanceAnalysisController {
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfo[2] = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
         }
         return testInfoPerWeek;
@@ -133,7 +147,7 @@ public class CompanyPerformanceAnalysisController {
      */
     public ArrayList<int[]> getTestInfoPerMonth(ArrayList<Date> days){ //MONTH: FROM 1 TO END OF MONTH
         ArrayList<int[]> testInfoPerMonth = new ArrayList<>();
-        int[] testInfo = new int[3];
+        int[] testInfo = new int[2];
         TestStore testStore = new TestStore();
         ArrayList<ArrayList<Date>> months = new ArrayList<>();
         ArrayList<Date> month = new ArrayList<>();
@@ -180,7 +194,6 @@ public class CompanyPerformanceAnalysisController {
             endingDay = new Date(singleMonth.get(singleMonth.size()-1).getYear(), singleMonth.get(singleMonth.size()-1).getMonth(), singleMonth.get(singleMonth.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfo[2] = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
             testInfoPerMonth.add(testInfo);
         }
         return testInfoPerMonth;
@@ -192,7 +205,7 @@ public class CompanyPerformanceAnalysisController {
      */
     public ArrayList<int[]> getTestInfoPerYear(ArrayList<Date> days){ //YEAR: FROM JAN 1 TO DEC 31
         ArrayList<int[]> testInfoPerYear = new ArrayList<>();
-        int[] testInfo = new int[3];
+        int[] testInfo = new int[2];
         TestStore testStore = new TestStore();
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
@@ -212,7 +225,6 @@ public class CompanyPerformanceAnalysisController {
             endingDay = new Date(singleYear.get(singleYear.size()-1).getYear(), singleYear.get(singleYear.size()-1).getMonth(), singleYear.get(singleYear.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfo[2] = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
             testInfoPerYear.add(testInfo);
         }
         return testInfoPerYear;

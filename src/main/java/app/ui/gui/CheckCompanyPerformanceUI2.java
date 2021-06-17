@@ -19,10 +19,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     private App mainApp;
 
-    public App getMainApp() {
-        return this.mainApp;
-    }
-
     public void setMainApp(App mainApp){
         this.mainApp=mainApp;
     }
@@ -34,6 +30,10 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     }
 
     private CompanyPerformanceAnalysisController controller;
+
+    public void setController(CompanyPerformanceAnalysisController controller) {
+        this.controller = controller;
+    }
 
     private int[] chartValues;
 
@@ -93,6 +93,14 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     private Button returnBtn;
 
     @FXML
+    private ListView<?> listView;
+
+    @FXML
+    void handleListViewClick(ActionEvent event) {
+
+    }
+
+    @FXML
     void exitAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
@@ -114,6 +122,8 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             CheckCompanyPerformanceUI1 checkCompanyPerformanceUI1 = (CheckCompanyPerformanceUI1) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance1.fxml");
             checkCompanyPerformanceUI1.setMainApp(mainApp);
             checkCompanyPerformanceUI1.setLcUI(this.checkCompPerUI1.getLcUI());
+            checkCompanyPerformanceUI1.addOptions();
+            checkCompanyPerformanceUI1.getDates();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -121,7 +131,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.controller=new CompanyPerformanceAnalysisController();
+
     }
 
     public void getDateOrInterval(){
@@ -150,7 +160,8 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         ArrayList<Date> days = controller.getDays(analysisBegDate,analysisEndDate);
         Date[] limits= controller.findWorstSubIntWithChosenAlgorithm(days,chosenAlg);
         String text = "Interval When The Company Was Less Effective In Responding" + "\n ↪ From: " + limits[0].toString() + "\n ↪ To: " + limits[1].toString();
-        text = text + "\nNumber Of Clients" + "\n ↪ " + controller.getClientsInfoPerInterval(days);
+        text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval(days);
+        text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval(days);
         cliTesOverview.setText(text);
         setCliTesOverview(cliTesOverview);
     }

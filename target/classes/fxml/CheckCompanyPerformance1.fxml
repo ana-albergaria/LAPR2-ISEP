@@ -110,8 +110,8 @@
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin></Text>
-                                    <DatePicker fx:id="beginningDate" disable="true" onAction="#beginningDateAction" promptText="beginning date" showWeekNumbers="true" GridPane.columnIndex="1" />
-                                    <DatePicker fx:id="endingDate" disable="true" onAction="#endingDateAction" promptText="ending date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <DatePicker fx:id="beginningDate" disable="true" promptText="beginning date" showWeekNumbers="true" GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="endingDate" disable="true" promptText="ending date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font name="Tahoma Bold" size="15.0" />
@@ -120,12 +120,13 @@
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </Text>
-                                    <DatePicker fx:id="singleDate" disable="true" onAction="#singleDateAction" promptText="date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <DatePicker fx:id="singleDate" disable="true" promptText="date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                               <GridPane prefHeight="144.0" prefWidth="613.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -139,7 +140,7 @@
                                        <GridPane.margin>
                                           <Insets bottom="30.0" />
                                        </GridPane.margin></ChoiceBox>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose An Option:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Time to Analyze:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font name="Tahoma Bold" size="15.0" />
                                        </font>
@@ -147,6 +148,22 @@
                                           <Insets top="30.0" />
                                        </GridPane.margin>
                                     </Text>
+                                    <Text fill="WHITE" layoutX="101.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Algorithm to Use:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="Tahoma Bold" size="15.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets top="30.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                    <ChoiceBox fx:id="algorithmOption" layoutX="89.0" layoutY="86.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                       <opaqueInsets>
+                                          <Insets bottom="30.0" />
+                                       </opaqueInsets>
+                                       <GridPane.margin>
+                                          <Insets bottom="30.0" />
+                                       </GridPane.margin>
+                                    </ChoiceBox>
                                  </children>
                               </GridPane>
                               <Button fx:id="analyseBtn" mnemonicParsing="false" onAction="#analyseAction" prefHeight="38.0" prefWidth="100.0" style="-fx-background-radius: 90; -fx-background-color: e0fbfc;" text="Analyse" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
