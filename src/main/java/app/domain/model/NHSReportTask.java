@@ -128,12 +128,12 @@ public class NHSReportTask extends TimerTask {
                                                                               Double[] x1InHistoricalPoints,
                                                                               Double[] x2InHistoricalPoints,
                                                                               Integer bestXIndex) {
-        List<ConfidenceInterval> confidenceIntervalList;
+        List<ConfidenceInterval> confidenceIntervals;
         if(bestXIndex != null) //for Simple Linear Regression
-            confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
+            confidenceIntervals = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel);
         else //For Multiple Linear Regression
-            confidenceIntervalList = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
-        return confidenceIntervalList;
+            confidenceIntervals = regressionModel.getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel);
+        return confidenceIntervals;
     }
 
     public RegressionModel getRegressionModel(String regressionModelCLass) throws ClassNotFoundException, IllegalAccessException, InstantiationException {

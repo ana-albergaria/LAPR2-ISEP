@@ -32,12 +32,12 @@ end
 TASK --> TASK : dataList
 deactivate TASK
 
-TASK -> NHS_REPORT_STORE : getDoubleArrayWithData(dataList, 0)
+TASK -> NHS_REPORT_STORE : covidTestsArray = getDoubleArrayWithData(dataList, 0)
 activate NHS_REPORT_STORE
-ref over NHS_REPORT_STORE
+/'ref over NHS_REPORT_STORE
 SD_getDoubleArrayWithData(dataList, index)
-end
-NHS_REPORT_STORE --> TASK : covidTestsArray
+end'/
+/'NHS_REPORT_STORE --> TASK : covidTestsArray'/
 deactivate NHS_REPORT_STORE
 
 TASK -> NHS_REPORT_STORE : meanAgeArray = getDoubleArrayWithData(dataList, 1)
@@ -48,12 +48,13 @@ TASK -> NHS_REPORT_STORE : observedPositives = getDoubleArrayWithData(dataList, 
 activate NHS_REPORT_STORE
 deactivate NHS_REPORT_STORE
 
-TASK -> NHS_REPORT_STORE : getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives)
+TASK -> NHS_REPORT_STORE : bestXIndex = getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives)
 activate NHS_REPORT_STORE
-ref over NHS_REPORT_STORE
+'TALVEZ VALE A PENA DIAGRAMA PARCIAL?
+/'ref over NHS_REPORT_STORE
 SD_getBestXIndex(regressionModel, covidTestsArray, meanAgeArray, observedPositives)
-end
-NHS_REPORT_STORE --> TASK : bestXIndex
+end'/
+/'NHS_REPORT_STORE --> TASK : bestXIndex'/
 deactivate NHS_REPORT_STORE
 
 TASK -> TASK : getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints)
@@ -64,29 +65,29 @@ SD_getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray,
 end
 TASK --> TASK : myRegressionModel
 deactivate TASK
-
-TASK -> NHS_REPORT_STORE : createHypothesisTest(regressionModel, myRegressionModel, significanceLevel)
+|||
+TASK -> NHS_REPORT_STORE : hypothesisTest = createHypothesisTest(regressionModel, myRegressionModel, significanceLevel)
 activate NHS_REPORT_STORE
-ref over NHS_REPORT_STORE
+/'ref over NHS_REPORT_STORE
 SD_createHypothesisTest(regressionModel, myRegressionModel, significanceLevel)
-end
-NHS_REPORT_STORE --> TASK : hypothesisTest
+end'/
+/'NHS_REPORT_STORE --> TASK : hypothesisTest'/
 deactivate NHS_REPORT_STORE
 
-TASK -> NHS_REPORT_STORE : createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel)
+TASK -> NHS_REPORT_STORE : modelAnova = createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel)
 activate NHS_REPORT_STORE
-ref over NHS_REPORT_STORE
+/'ref over NHS_REPORT_STORE
 SD_createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel)
-end
-NHS_REPORT_STORE --> TASK : modelAnova
+end'/
+/'NHS_REPORT_STORE --> TASK : modelAnova'/
 deactivate NHS_REPORT_STORE
 
-TASK -> NHS_REPORT_STORE : getStartDate()
+TASK -> NHS_REPORT_STORE : startDate = getStartDate()
 activate NHS_REPORT_STORE
-ref over NHS_REPORT_STORE
+/'ref over NHS_REPORT_STORE
 SD_getStartDate()
-end
-NHS_REPORT_STORE --> TASK : startDate
+end'/
+/'NHS_REPORT_STORE --> TASK : startDate'/
 deactivate NHS_REPORT_STORE
 
 TASK -> TASK : getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
@@ -96,13 +97,13 @@ SD_getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
 end
 TASK --> TASK : tableOfValues
 deactivate TASK
-
-TASK -> NHS_REPORT_STORE : createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues)
+|||
+TASK -> NHS_REPORT_STORE : nhsReport = createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues)
 activate NHS_REPORT_STORE
-ref over NHS_REPORT_STORE
-SD_getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
-end
-NHS_REPORT_STORE --> TASK : nhsReport
+/'ref over NHS_REPORT_STORE
+SD_createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues)
+end'/
+/'NHS_REPORT_STORE --> TASK : nhsReport'/
 deactivate NHS_REPORT_STORE
 
 TASK -> NHS_REPORT_STORE : validateNHSDailyReport(nhsReport)
