@@ -36,6 +36,16 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     private CompanyPerformanceAnalysisController controller;
 
+    private String chosenOption;
+
+    public void setChosenOption(String choosenOption) {
+        this.chosenOption = choosenOption;
+    }
+
+    public String getChosenOption() {
+        return chosenOption;
+    }
+
     @FXML
     private Button exitBtn;
 
@@ -103,13 +113,18 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     @FXML
     void analyseAction(ActionEvent event) {
-
+        try {
+            CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
+            checkCompanyPerformanceUI2.setMainApp(mainApp);
+            checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
+        } catch (Exception ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.controller=new CompanyPerformanceAnalysisController();
-
     }
 
     public void addOptions(){
@@ -120,17 +135,15 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     public void getButtons(ActionEvent event){
         String option = intervalOption.getValue();
         if (option.equals("Analyse A Day")){
+            setChosenOption(option);
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
         }else if (option.equals("Analyse An Interval")){
+            setChosenOption(option);
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
-        }else{
-            singleDate.setDisable(true);
-            beginningDate.setDisable(true);
-            endingDate.setDisable(true);
         }
     }
 

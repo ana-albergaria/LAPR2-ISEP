@@ -3,14 +3,17 @@ package app.ui.gui;
 import app.controller.CompanyPerformanceAnalysisController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CheckCompanyPerformanceUI2 {
+public class CheckCompanyPerformanceUI2 implements Initializable {
 
     private App mainApp;
 
@@ -30,6 +33,14 @@ public class CheckCompanyPerformanceUI2 {
 
     private CompanyPerformanceAnalysisController controller;
 
+    private int[] chartValues;
+
+    private String option;
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
     @FXML
     private TextArea cliTesOverview;
 
@@ -37,7 +48,7 @@ public class CheckCompanyPerformanceUI2 {
     private Button exitBtn;
 
     @FXML
-    private LineChart<?, ?> inefChart;
+    private LineChart<String, Integer> inefChart;
 
     @FXML
     private Button returnBtn;
@@ -68,6 +79,18 @@ public class CheckCompanyPerformanceUI2 {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        this.controller=new CompanyPerformanceAnalysisController();
+    }
+
+    public void getDateOrInterval(){
+        option=checkCompPerUI1.getChosenOption();
+
+    }
+
+
 
 
 }
