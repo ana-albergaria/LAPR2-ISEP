@@ -41,8 +41,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     private String chosenOption;
 
-    public void setChosenOption(String choosenOption) {
-        this.chosenOption = choosenOption;
+    public void setChosenOption(String chosenOption) {
+        this.chosenOption = chosenOption;
     }
 
     public String getChosenOption() {
@@ -165,7 +165,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             checkCompanyPerformanceUI2.setMainApp(mainApp);
             checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
             checkCompanyPerformanceUI2.getDateOrInterval();
-
+            checkCompanyPerformanceUI2.analyseCompany();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,11 +185,13 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     public void getButtons(ActionEvent event){
         String option = intervalOption.getValue();
         setChosenOption(option);
-        if (chosenOption.equals("A Day")){
+        String optionAl = algorithmOption.getValue();
+        setChosenAlg(optionAl);
+        if (chosenOption.equals("A Day") && (chosenAlg.equals("Benchmark Algorithm") || chosenAlg.equals("Brute-Force Algorithm"))){
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
-        }else if (chosenOption.equals("An Interval")){
+        }else if (chosenOption.equals("An Interval") && chosenAlg!=null){
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
@@ -214,9 +216,14 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     }
 
-    public void getAlg(){
-        String option = algorithmOption.getValue();
-        setChosenAlg(option);
+    public void enableButton(){
+        if ((chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") || chosenAlg.equals("Brute-Force Algorithm")) && singleDateD!=null){
+            analyseBtn.setDisable(false);
+        } else if ((chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") || chosenAlg.equals("Brute-Force Algorithm")) && beginningDateD!=null && endingDateD!=null) {
+            analyseBtn.setDisable(false);
+        } else {
+            analyseBtn.setDisable(true);
+        }
     }
 
     //É PRECISO CRIAR ALERTAS SE FOREM ESCOLHIDAS DATAS NÃO PERMITIDAS E NÃO PERMITIR AVANÇAR

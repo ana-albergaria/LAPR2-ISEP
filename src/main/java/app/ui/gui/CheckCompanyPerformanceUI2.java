@@ -150,7 +150,8 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         ArrayList<Date> days = controller.getDays(analysisBegDate,analysisEndDate);
         Date[] limits= controller.findWorstSubIntWithChosenAlgorithm(days,chosenAlg);
         String text = "Interval When The Company Was Less Effective In Responding" + "\n ↪ From: " + limits[0].toString() + "\n ↪ To: " + limits[1].toString();
-        text = text + "\nNumber Of Clients" + "\n ↪ " + controller.getClientsInfoPerInterval(days);
+        text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval(days);
+        text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval(days);
         cliTesOverview.setText(text);
         setCliTesOverview(cliTesOverview);
     }

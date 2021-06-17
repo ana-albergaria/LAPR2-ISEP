@@ -58,6 +58,7 @@ public class LabCoordinatorUI implements Initializable, Menu {
             checkCompanyPerformanceUI1.setMainApp(this.mainApp);
             checkCompanyPerformanceUI1.addOptions();
             checkCompanyPerformanceUI1.getDates();
+            checkCompanyPerformanceUI1.enableButton();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }

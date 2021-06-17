@@ -119,28 +119,6 @@ public class TestStore {
     }
 
     /**
-     * Gets the number of tests processed in lab on a specific day/interval
-     * @return number of tests processed in lab on a specific day/interval
-     */
-    public int getNumTestsProcessedInLabDayOrInterval(Date beginningDay, Date endingDay){
-        //number of tests that became completed in the specific day/interval
-        //in case of a day, the difference between the beginningDay and the endingDay is in the hours
-        int num = 0;
-        Date date1, date2, date3, date4, date5;
-        for (Test test : testList) {
-            date1 = test.getDateOfTestRegistration();
-            date2 = test.getDateOfSamplesCollection();
-            date3 = test.getDateOfChemicalAnalysis();
-            date4 = test.getDateOfDiagnosis();
-            date5 = test.getDateOfValidation();
-            if (date1!=null && date2!=null && date3!=null && date4!=null && date5!=null &&
-                    ((date4.after(beginningDay) && date4.before(endingDay)) || date4.equals(endingDay)))
-                num++;
-        }
-        return num;
-    }
-
-    /**
      * gets the tests which are ready to be diagnosed
      * @return list of ready to diagnosis tests
      */

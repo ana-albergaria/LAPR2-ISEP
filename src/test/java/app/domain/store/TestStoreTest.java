@@ -389,7 +389,7 @@ public class TestStoreTest {
     }
 
     //Test 7
-    @Test
+    /*@Test
     public void testGetNumTestsProcessedInLabDayOrInterval() throws BarcodeException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         TestStore testStore = new TestStore();
         Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
@@ -452,7 +452,7 @@ public class TestStoreTest {
         int obtainedResult = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
 
         Assert.assertEquals(expectedResult, obtainedResult);
-    }
+    }*/
 
 //========== END US16 ============
 
