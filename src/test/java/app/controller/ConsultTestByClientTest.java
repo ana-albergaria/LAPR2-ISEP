@@ -43,10 +43,10 @@ public class ConsultTestByClientTest {
 
         List<ClientDTO> clientDTOList = consultTestByClient.getClientsDtoInOrder("tin");
 
-        for(ClientDTO client : clientDTOList){
+    /*      for(ClientDTO client : clientDTOList){
             System.out.println(client);
             System.out.println();
-        }
+        }*/
 
     }
 
