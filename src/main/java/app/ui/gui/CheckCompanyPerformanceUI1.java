@@ -79,6 +79,19 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         return endingDateD;
     }
 
+    private final String[] options = {"A Day", "An Interval"};
+    private final String[] optionsAlg = {"Benchmark Algorithm", "Brute-Force Algorithm"};
+
+    private String chosenAlg;
+
+    public String getChosenAlg() {
+        return chosenAlg;
+    }
+
+    public void setChosenAlg(String chosenAlg) {
+        this.chosenAlg = chosenAlg;
+    }
+
     @FXML
     private Button exitBtn;
 
@@ -91,8 +104,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     @FXML
     private ChoiceBox<String> intervalOption;
 
-    private final String[] options = {"A Day", "An Interval"};
-
     @FXML
     private Button analyseBtn;
 
@@ -103,7 +114,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     private DatePicker singleDate;
 
     @FXML
-    private ChoiceBox<?> algorithmOption;
+    private ChoiceBox<String> algorithmOption;
 
     @FXML
     void exitAction(ActionEvent event) {
@@ -168,17 +179,17 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     public void addOptions(){
         intervalOption.getItems().addAll(options);
         intervalOption.setOnAction(this::getButtons);
+        algorithmOption.getItems().addAll(optionsAlg);
     }
 
     public void getButtons(ActionEvent event){
         String option = intervalOption.getValue();
-        if (option.equals("A Day")){
-            setChosenOption(option);
+        setChosenOption(option);
+        if (chosenOption.equals("A Day")){
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
-        }else if (option.equals("An Interval")){
-            setChosenOption(option);
+        }else if (chosenOption.equals("An Interval")){
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
@@ -186,18 +197,30 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     }
 
     public void getDates(){ //ActionEvent??
-        String option = getChosenOption();
-        if (option.equals("A Day")){
+        if (chosenOption.equals("A Day")){
             LocalDate singDate = singleDate.getValue();
             singleDateD = Date.from(singDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setSingleDateD(singleDateD);
-        }else if (option.equals("An Interval")){
+        }else if (chosenOption.equals("An Interval")){
             LocalDate begDate = beginningDate.getValue();
             beginningDateD = Date.from(begDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setBeginningDateD(beginningDateD);
             LocalDate endDate = endingDate.getValue();
             endingDateD = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setEndingDateD(endingDateD);
+        }
+
+        //posso fazer já aqui a conversão para o formato (hora) que preciso, assim não uso ifs no UI2
+
+    }
+
+    public void getAlg(){
+        String option = algorithmOption.getValue();
+        setChosenAlg(option);
+        if (chosenAlg.equals("Benchmark Algorithm")){
+
+        } else if (chosenAlg.equals("Brute-Force Algorithm")){
+            
         }
     }
 
