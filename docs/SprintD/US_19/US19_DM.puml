@@ -91,6 +91,7 @@ class NHSReportTask {
 
 NHSReportTask "1" -- "1..*" NHSReport : reports >
 Company "1" -- "1" Timer : knows >
+Company "1" -- "1" NHSReportTask : knows >
 /'Company "*" - "1" NhsAPI : makes use of >'/
 NHSReportTask "*" - "1" NhsAPI : makes use of >
 NHSReport "*" - "1" NhsAPI : sent by >

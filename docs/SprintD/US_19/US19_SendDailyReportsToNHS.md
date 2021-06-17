@@ -169,10 +169,14 @@ Since all the performed tests **with results** by Many Labs must be recorded in 
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1: asks to send automatic daily report to NHS  | ...interacting with the actor? |             |                              |
-|                                       	          |	...coordinating the US?		                                                   | SendDailyReportsNHSController                 | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model. |
-|                                       	          |	...knowing which Regression Model (Simple or Multiple) is to be used?		   | Company                                       | IE: in the DM, Company makes use of a Regression Model. |
-|                                       	          |	...coordinating the US?		                                                   | SendDailyReportsNHSController                 | Pure Fabrication: it refers to the Controller. there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 1: sends automatic daily report to NHS          | ...instantiating a new Report to be sent?                         | NHSReportStore           | Creator (Rule 1): Company aggregates all the NHSReport objects. <br> High Cohesion and Low Coupling: NHSReportStore was created to reduce coupling.                          |
+|                                       	           | ...being accountable for the task of sending the report?          | NHSReportTask            | IE: in the DM, NHSReportTask reports report.                                                                                                                             |
+|                                       	           | ...scheduling said task?		                                   | Timer                    | IE: in the DM, Timer schedules NHSReportTask.                                                       |
+|                                       	           | ...instantiating a new NHSReportTask?		                       | Company                  | IE: in the DM, Company knows NHSReportTask.                                                         |
+|                                       	           | ...instantiating a new Timer?		                               | Company                  | IE: in the DM, Company knows Timer.                                                                 |
+|                                       	           | ...knowing which Regression Model to use?		                   | Company                  | IE: in the DM, Company makes use of RegressionModel.                                                |
+|                                       	           | ...knowing which API will send the report?		                   | NHSReportTask            | IE: in the DM, NHSReportTask makes use of NhsAPI.                                                   |
+|                                       	           | ...sending the report?		                                       | NhsAPI                   | IE: in the DM, NHSReport is sent by NhsAPI.                                                         |
 | Step 2: informs operation success  		          |     |     |    |
 
 
