@@ -185,13 +185,11 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     public void getButtons(ActionEvent event){
         String option = intervalOption.getValue();
         setChosenOption(option);
-        String optionAl = algorithmOption.getValue();
-        setChosenAlg(optionAl);
-        if (chosenOption.equals("A Day") && (chosenAlg.equals("Benchmark Algorithm") || chosenAlg.equals("Brute-Force Algorithm"))){
+        if (chosenOption.equals("A Day")){
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
-        }else if (chosenOption.equals("An Interval") && chosenAlg!=null){
+        } else if(chosenOption.equals("An Interval")){
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
@@ -210,19 +208,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             LocalDate endDate = endingDate.getValue();
             endingDateD = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             setEndingDateD(endingDateD);
-        }
-
-        //posso fazer já aqui a conversão para o formato (hora) que preciso, assim não uso ifs no UI2
-
-    }
-
-    public void enableButton(){
-        if ((chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") || chosenAlg.equals("Brute-Force Algorithm")) && singleDateD!=null){
-            analyseBtn.setDisable(false);
-        } else if ((chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") || chosenAlg.equals("Brute-Force Algorithm")) && beginningDateD!=null && endingDateD!=null) {
-            analyseBtn.setDisable(false);
-        } else {
-            analyseBtn.setDisable(true);
         }
     }
 
