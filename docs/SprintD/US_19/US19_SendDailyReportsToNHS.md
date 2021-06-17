@@ -208,6 +208,8 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US19_SD_getTableOfValues6](US19_SD_getTableOfValues6.svg)
 
+![US19_SD_getConfidenceIntervalListForTableOfValues7](US19_SD_getConfidenceIntervalListForTableOfValues7.svg)
+
 
 ## 3.3. Class Diagram (CD)
 

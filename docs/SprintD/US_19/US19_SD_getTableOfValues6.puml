@@ -54,7 +54,7 @@ deactivate REGRESSION_MODEL
 TASK -> TASK : getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, bestXInHistoricalPoints, null, bestXIndex)
 activate TASK
 ref over TASK
-SD_getConfidenceIntervalListForTableOfValues()
+SD_getConfidenceIntervalListForTableOfValues(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel, bestXIndex)
 end
 TASK --> TASK : confidenceIntervals
 deactivate TASK
