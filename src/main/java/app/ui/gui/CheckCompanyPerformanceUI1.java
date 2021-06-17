@@ -152,6 +152,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             checkCompanyPerformanceUI2.setController(this.controller);
             checkCompanyPerformanceUI2.getDateOrInterval();
             checkCompanyPerformanceUI2.analyseCompany();
+            checkCompanyPerformanceUI2.populateListView();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
