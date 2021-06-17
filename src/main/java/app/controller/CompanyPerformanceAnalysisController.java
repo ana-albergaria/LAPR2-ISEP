@@ -277,13 +277,13 @@ public class CompanyPerformanceAnalysisController {
 
 
     /**
-     * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
+     * Finds the beginning and the ending dates of the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
      * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
-     * @return the contiguous subsequence with maximum sum of an interval
+     * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
 
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
@@ -292,7 +292,57 @@ public class CompanyPerformanceAnalysisController {
 
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
 
-        return worstSubInt;
+        int num=0;
+        int val;
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < interval.length; i++) {
+            val=i;
+            for (int j = 0; j < worstSubInt.length; j++) {
+                if(interval[val]==worstSubInt[j]){
+                    num++;
+                }
+                val++;
+            }
+            if (num==worstSubInt.length){
+                start=i;
+                end=start+worstSubInt.length-1;
+            }
+            num=0;
+        }
+
+        int difStart=interval.length-(interval.length-(start+1));
+
+        int difEnd=interval.length-(interval.length-(end+1));
+
+        Date[] limits = new Date[2];
+
+        Date lastDate;
+        Date firstDate;
+
+        Date finish = days.get(days.size()-1);
+        int quant=0;
+        lastDate=finish;
+        do {
+            lastDate=DateUtils.addMinutes(lastDate,-30);
+            if ((lastDate.getHours()>=8 && lastDate.getHours()<20) || (lastDate.getHours()==20 && lastDate.getMinutes()==0)) {
+                quant++;
+            }
+        }while (quant!=difEnd);
+        quant=0;
+        firstDate=finish;
+        do {
+            firstDate=DateUtils.addMinutes(firstDate,-30);
+            if ((firstDate.getHours()>=8 && firstDate.getHours()<20) || (firstDate.getHours()==20 && firstDate.getMinutes()==0)) {
+                quant++;
+            }
+        }while (quant!=difStart);
+
+        limits[0]=firstDate;
+        limits[1]=lastDate;
+
+        return limits;
     }
 
     /**
@@ -301,9 +351,9 @@ public class CompanyPerformanceAnalysisController {
      * @param chosenAlgorithm the chosen algorithm
      * @return the chosen algorithm adapter
      */
-    public String getChosenAlgorithmAdapter(int chosenAlgorithm) {
+    public String getChosenAlgorithmAdapter(String chosenAlgorithm) {
         String chosenAlgorithmAdapter;
-        if(chosenAlgorithm == 1)
+        if(chosenAlgorithm.equals("Benchmark Algorithm"))
             chosenAlgorithmAdapter = Constants.BENCHMARK_ALGORITHM_ADAPTER;
         else
             chosenAlgorithmAdapter = Constants.BRUTEFORCE_ALGORITHM_ADAPTER;

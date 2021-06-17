@@ -165,19 +165,37 @@ Since all the performed tests **with results** by Many Labs must be recorded in 
 
 ### 3.1. Rationale
 
+
 **The rationale grounds on the SSD interactions and the identified input/output data.**
 
 | Interaction ID | Question: Which class is responsible for... | Answer  | Justification (with patterns)  |
 |:-------------  |:--------------------- |:------------|:---------------------------- |
-| Step 1: sends automatic daily report to NHS          | ...instantiating a new Report to be sent?                         | NHSReportStore           | Creator (Rule 1): Company aggregates all the NHSReport objects. <br> High Cohesion and Low Coupling: NHSReportStore was created to reduce coupling.                          |
-|                                       	           | ...being accountable for the task of sending the report?          | NHSReportTask            | IE: in the DM, NHSReportTask reports report.                                                                                                                             |
-|                                       	           | ...scheduling said task?		                                   | Timer                    | IE: in the DM, Timer schedules NHSReportTask.                                                       |
-|                                       	           | ...instantiating a new NHSReportTask?		                       | Company                  | IE: in the DM, Company knows NHSReportTask.                                                         |
-|                                       	           | ...instantiating a new Timer?		                               | Company                  | IE: in the DM, Company knows Timer.                                                                 |
-|                                       	           | ...knowing which Regression Model to use?		                   | Company                  | IE: in the DM, Company makes use of RegressionModel.                                                |
-|                                       	           | ...knowing which API will send the report?		                   | NHSReportTask            | IE: in the DM, NHSReportTask makes use of NhsAPI.                                                   |
-|                                       	           | ...sending the report?		                                       | NhsAPI                   | IE: in the DM, NHSReport is sent by NhsAPI.                                                         |
-| Step 2: informs operation success  		          |     |     |    |
+| Step 1: sends automatic daily report to NHS          | ...instantiating a new NHSReport to be sent?                                   | NHSReportStore            | High Cohesion and Low Coupling: NHSReportStore was created to reduce coupling.                             |
+|                                       	           | ...validating the NHSReport created?                                           | NHSReportStore            | High Cohesion and Low Coupling: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                           |
+|                                       	           | ...being accountable for the task of sending the report?                       | NHSReportTask             | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                |
+|                                       	           | ...scheduling said task?		                                                | Timer                     | IE: in the DM, Timer schedules NHSReport.                                                           |
+|                                       	           | ...instantiating a new NHSReportTask?		                                    | Company                   | Creator (Rule 4): Company has the data used to initialize NHSReportTask objects.                    |
+|                                       	           | ...instantiating a new Timer?		                                            | Company                   | Creator (Rule 4): Company has the data used to initialize the Timer objects.                        |
+|                                       	           | ...knowing which Regression Model to use?		                                | Company                   | IE: in the DM, Company makes use of RegressionModel.                                                |
+|                                       	           | ...knowing which API will send the report?		                                | Company                   | IE: in the DM, Company makes use of NhsAPI.                                                         |
+|                                       	           | ...making the system support several Regression Models? 	                    | RegressionModel           | Protected Variations: to create a stable interface around the point of variation - the existence of different Regression Models.                       |
+|                                       	           | ...enabling different Regression Models to be compatible with the system?      | RegressionModelAdapterX   | Adapter Pattern: to convert requests made in accordance to our system. One adapter per ExternalAPI.                                                    |
+|                                       	           | ...saving the information regarding the regression model used?	                | MyRegressionModel         | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...instantiate a new MyRegressionModel?		                                | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...saving the information regarding the Hypothesis Test?	                    | HypothesisTest            | IE: has its own data.                   |
+|                                       	           | ...instantiate a new HypothesisTest?		                                    | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...saving the information regarding the Anova Significance Model?	            | AnovaSignificanceModel    | IE: has its own data.                    |
+|                                       	           | ...instantiate a new SignificanceModelAnova?		                            | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...instantiate a new HypothesisTest for the Test for Significance of Regression?    | SignificanceModelAnova         | Creator (Rule 1): SignificanceModelAnova contains HypothesisTest.                   |
+|                                       	           | ...calculating the estimated Positives in accordance to the regression model being used?	                                        | RegressionModel    | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...saving the information regarding a Confidence Interval in accordance to the regression model being used?	                    | ConfidenceInterval | IE: has its own data.                   |
+|                                       	           | ...instantiate a new ConfidenceInterval?		                                    | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...calculating the list of Confidence Intervals in accordance to the regression model being used?	                                | RegressionModel    | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...knowing the number of observed Covid-19 positive tests?	                        | TestStore                 | IE: records/stores all the Tests objects.                                                           |
+|                                       	           | ...knowing the number of Covid-19 tests realized in a certain period of time?      | TestStore                 | IE: records/stores all the Tests objects.                                                           |
+|                                       	           | ...knowing the mean age of the Clients of Covid-19 tests realized in a certain period of time?             | TestStore                 | IE: records/stores all the Tests objects.                                                           |
+|                                       	           | ...saving the information regarding the Tests/Mean Age data and confidence Intervals?	                    | TableOfValues | IE: has its own data.                   |
+| Step 2: informs operation success  		           |     |     |    |
 
 
 The interval of dates to fit the regression model and the
@@ -188,13 +206,21 @@ defined through a configuration file.
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * Class1
- * Class2
- * Class3
+ * NHSReport
+ * Timer
+ * Company
+ * SignificanceModelAnova  
+ * TableOfValues
+ * HypothesisTest  
+ * ConfidenceInterval
+ * RegressionModel
 
 Other software classes (i.e. Pure Fabrication) identified: 
- * xxxxUI  
- * xxxxController
+ * NHSReportTask
+ * NHSReportStore  
+ * TestStore
+ * RegressionModelAdapterX  
+ * MyRegressionModel
 
 ## 3.2. Sequence Diagram (SD)
 
