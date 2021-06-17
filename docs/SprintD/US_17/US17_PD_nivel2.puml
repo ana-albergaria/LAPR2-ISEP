@@ -8,6 +8,19 @@ package Core {
 
 package Domain {
 
+package Adapters {
+    class BarbecueAdapter {
+    +MyBarcode getBarcode(barcodeNumber)
+    +saveImageBarcode(myBarcode, code)
+    }
+    }
+
+package Interfaces {
+    interface ExternalAPI <<interface>> {
+    +MyBarcode getBarcode(barcodeNumber)
+    +saveImageBarcode(myBarcode, code)
+    }
+}
 package Model {
 
        class ClinicalAnalysisLaboratory{
@@ -137,9 +150,15 @@ package Controllers {
       +saveClient()
     }
 
-    class RecordSamplesController {
-    +createSample()
-    +addSample(code)
+}
+
+package ThirdParty {
+class barcode
+package APIs {
+    class BarbecueAPI{
+    +Barcode createUPCA(data)
+    +BufferedImage saveJPEG(barcode, file)
+    }
     }
 }
 
@@ -167,7 +186,6 @@ Model -- Stores : uses >
 ImportTestUI .> TestFileUtils
 ImportTestController ..> CreateTestOfFileControler
 ImportTestController ..> RegisterClientController
-CreateTestOfFileControler ..> RecordSamplesController
 Company "1" --- "*" Test : conducts >
 Client "1" -- "1" Test : requested by <
 ClinicalAnalysisLaboratory "1" - "1..*" Test : performs >
@@ -181,5 +199,7 @@ TestParameter "*" -- "1" Parameter : refers to >
 TestParameter "1" - "0..1" TestParameterResult : contains >
 Test"1" -- "1..*" Sample : collects >
 Sample "1" -- "1" MyBarcode : identified with >
+Interfaces <|.. Adapters
+Adapters --> APIs
 
 @enduml

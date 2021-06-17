@@ -12,7 +12,6 @@ participant "clientStore\n:ClientStore" as CLIENT_STORE
 participant "testTypeStore\n:TestTypeStore" as TEST_TYPE_STORE
 participant "parameterStore\n:ParameterStore" as PARAM_STORE
 participant "calStore\n:CalStore" as CAL_STORE
-participant ":RecordSamplesController" as SAM_CTRL
 participant "store:TestStore" as ORG
 participant "tt\n:Test" as TAREFA
 participant ": TestParameter" as tp
@@ -108,6 +107,7 @@ deactivate CAL_STORE
 ref over TEST_CTRL
 SD_extractDatesFromDto
 end
+
 TEST_CTRL -> PLAT : testStore = getTestStore()
 activate PLAT
 PLAT -> ORG** : create()
@@ -117,11 +117,8 @@ TEST_CTRL -> ORG : test = createTest(nhsCode, associatedClient,\n selectedTestTy
 activate ORG
 ORG -> TAREFA** : createTest(nhsCode, associatedClient,\n selectedTestType, selectedParamsList, paramsResults, cal,\n testRegDate, testChemDate, testDiagnosisDate, testValidationDate)
 
-
 activate TAREFA
 TAREFA -> TAREFA : checkAttributes(NHScode, associatedClient)
-
-
 
 loop for each parameter of the list
 TAREFA -> ExternalAPI** : refValue = getRefValueFor(parameter)
@@ -132,7 +129,26 @@ end
 TAREFA -> TAREFA : code = generateSequentialCode()
 deactivate TAREFA
 
+alt testChemDate different than null
+TEST_CTRL -> TEST_CTRL : sample = createSample()
+ref over TEST_CTRL
+SD_creatSample()
+end
+activate TEST_CTRL
+deactivate TEST_CTRL
 
+TEST_CTRL -> TAREFA : test.addSample()
+activate TAREFA
+
+TAREFA -> TAREFA : validate(sample)
+activate TAREFA
+deactivate TAREFA
+
+TAREFA -> TAREFA : samples.add(sample)
+activate TAREFA
+deactivate TAREFA
+deactivate TAREFA
+end
 
 TEST_CTRL -> ORG : result = validateTest(test)
 TEST_CTRL -> CTRL : result
@@ -146,7 +162,6 @@ activate TEST_CTRL
 
 TEST_CTRL -> PLAT : testStore = getTestStore()
 activate PLAT
-|||
 deactivate PLAT
 
 TEST_CTRL -> ORG : saveTest(test)
@@ -156,22 +171,6 @@ ORG -> ORG: validateTest(test)
 ORG -> ORG: addTest(test)
 deactivate ORG
 
-TEST_CTRL -> CTRL : result
-deactivate TEST_CTRL
-
-
-CTRL -> TEST_CTRL : addSample()
-activate TEST_CTRL
-alt testChemDate different than null
-TEST_CTRL -> SAM_CTRL** : create()
-TEST_CTRL -> SAM_CTRL : createSample()
-activate SAM_CTRL
-deactivate SAM_CTRL
-
-TEST_CTRL -> SAM_CTRL : addSample(test.getCode())
-activate SAM_CTRL
-deactivate SAM_CTRL
-end
 TEST_CTRL -> CTRL : result
 deactivate TEST_CTRL
 
