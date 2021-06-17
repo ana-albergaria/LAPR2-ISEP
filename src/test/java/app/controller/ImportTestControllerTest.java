@@ -79,10 +79,11 @@ public class ImportTestControllerTest {
         for (TestFileDTO testData : procedData) {
             ctrl.importTestFromFile(testData);
         }
-        for (app.domain.model.Test s : App.getInstance().getCompany().getTestStore().getTests()) {
+        /*for (app.domain.model.Test s : App.getInstance().getCompany().getTestStore().getTests()) {
             System.out.println(s);
+            System.out.println(s.getSamples().get(0).getMyBarcode().getBarcodeNumber());
             System.out.println("++++++++++++++++++++++++++++++");
-        }
+        }*/
     }
 
 }

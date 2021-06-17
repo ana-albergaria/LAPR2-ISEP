@@ -57,8 +57,7 @@ public class ImportTestController {
         if(existsClient)
             clientController.saveClient();
         testController.createTest(testFileDTO);
-        if(!testController.saveTest()) return false;
-        return testController.addSample();
+        return testController.saveTest();
     }
 
 }

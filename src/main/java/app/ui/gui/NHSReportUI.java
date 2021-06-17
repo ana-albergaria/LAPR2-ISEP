@@ -116,8 +116,12 @@ public class NHSReportUI implements Initializable, Menu {
                 chosenVariable = this.variableCombBox.getSelectionModel().getSelectedItem().toString();
             else
                 throw new UnsupportedOperationException("For Multiple Linear Regression, there's no chosen independent variable!");
+
+            System.out.println("Chosen Variable: " + chosenVariable);
             double significanceLevel = Double.parseDouble(this.significanceLevel.getText());
+            System.out.println("Significance Level: " + significanceLevel);
             double confidenceLevel = Double.parseDouble(this.confidenceLevel.getText());
+            System.out.println("Confidence Level: " + confidenceLevel);
 
             //COLOCAR MAIS UMA OPÇÃO NA COMBO BOX PARA A REGRESSÃO MÚLTIPLA!!
             //FALTA COLOCAR EXCEÇÕES PARA A REGRESSÃO
@@ -127,11 +131,14 @@ public class NHSReportUI implements Initializable, Menu {
                     typeOfData, historicalPoints, beginDate, endDate,
                     chosenRegressionModelClass, chosenVariable, significanceLevel, confidenceLevel);
 
-            if(success) //COLOCAR QUE O REPORT FOI ENVIADO COM SUCESSO!
+            if(success) {
                 this.controller.sendNHSReport();
-            else
+                AlertUI.createAlert(Alert.AlertType.INFORMATION, mainApp.getTITLE(), "Operation success!",
+                        "NHS Report successfully sent!").show();
+            } else {
                 AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
                         "Something went wrong! Please, try again.").show();
+            }
 
 
 
@@ -142,13 +149,13 @@ public class NHSReportUI implements Initializable, Menu {
                     "Make sure the numbers only contain digits and cannot be blank!").show();
         } catch (UnsupportedOperationException uoe) {
             AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
-                    "Multiple Linear Regression doesn't have a chosen independent variable!").show();
+                    uoe.getMessage()).show();
         } catch (NullPointerException npe) {
             AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
                     "Every date is mandatory!").show();
         } catch(Exception e) {
             AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
-                    "Invalid data was submitted. Please verify if everything was correctly selected/typed.").show();
+                    e.getMessage()).show();
         }
 
     }
