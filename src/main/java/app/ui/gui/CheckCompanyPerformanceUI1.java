@@ -147,8 +147,9 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     void analyseAction(ActionEvent event) {
         try {
             CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
-            checkCompanyPerformanceUI2.setMainApp(mainApp);
+            checkCompanyPerformanceUI2.setMainApp(this.mainApp);
             checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
+            checkCompanyPerformanceUI2.setController(this.controller);
             checkCompanyPerformanceUI2.getDateOrInterval();
             checkCompanyPerformanceUI2.analyseCompany();
         } catch (Exception ex) {

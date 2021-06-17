@@ -110,8 +110,8 @@
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin></Text>
-                                    <DatePicker fx:id="beginningDate" disable="true" onAction="#beginningDateAction" promptText="beginning date" showWeekNumbers="true" GridPane.columnIndex="1" />
-                                    <DatePicker fx:id="endingDate" disable="true" onAction="#endingDateAction" promptText="ending date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <DatePicker fx:id="beginningDate" disable="true" promptText="beginning date" showWeekNumbers="true" GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="endingDate" disable="true" promptText="ending date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font name="Tahoma Bold" size="15.0" />
@@ -120,7 +120,7 @@
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </Text>
-                                    <DatePicker fx:id="singleDate" disable="true" onAction="#singleDateAction" promptText="date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <DatePicker fx:id="singleDate" disable="true" promptText="date" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                               <GridPane prefHeight="144.0" prefWidth="613.0">

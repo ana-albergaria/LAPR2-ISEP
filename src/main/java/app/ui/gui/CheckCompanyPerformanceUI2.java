@@ -19,10 +19,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     private App mainApp;
 
-    public App getMainApp() {
-        return this.mainApp;
-    }
-
     public void setMainApp(App mainApp){
         this.mainApp=mainApp;
     }
@@ -34,6 +30,10 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     }
 
     private CompanyPerformanceAnalysisController controller;
+
+    public void setController(CompanyPerformanceAnalysisController controller) {
+        this.controller = controller;
+    }
 
     private int[] chartValues;
 
@@ -131,7 +131,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.controller=new CompanyPerformanceAnalysisController();
+
     }
 
     public void getDateOrInterval(){
