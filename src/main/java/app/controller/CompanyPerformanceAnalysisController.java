@@ -277,13 +277,13 @@ public class CompanyPerformanceAnalysisController {
 
 
     /**
-     * Finds the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
+     * Finds the beginning and the ending dates of the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
      * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
-     * @return the contiguous subsequence with maximum sum of an interval
+     * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
      */
-    public int[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
 
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
@@ -312,49 +312,37 @@ public class CompanyPerformanceAnalysisController {
             num=0;
         }
 
-        int dif=interval.length-start+1;
+        int difStart=interval.length-(interval.length-(start+1));
 
+        int difEnd=interval.length-(interval.length-(end+1));
 
+        Date[] limits = new Date[2];
 
+        Date lastDate;
+        Date firstDate;
 
-
-        TestStore testStore = company.getTestStore();
-        ArrayList<Integer> intervalArrayList = new ArrayList<>();
-        int numRegistered = 0, numValidated = 0, intToKeep = 0, minToAdd = 30;
-        Date date1 = days.get(0), date2 = DateUtils.addMinutes(date1, minToAdd);
-        Date finish = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20,0,0);
-        Date endDay = date1;
-        do{
-            if (date1.getHours()>=8 && date2.getHours()<20) {
-                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
-                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
-                intToKeep = numRegistered - numValidated;
-                intervalArrayList.add(intToKeep);
-            } else if (date2.getHours()==20 && date2.getMinutes()==0) {
-                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
-                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
-                intToKeep = numRegistered - numValidated;
-                intervalArrayList.add(intToKeep);
+        Date finish = days.get(days.size()-1);
+        int quant=0;
+        lastDate=finish;
+        do {
+            lastDate=DateUtils.addMinutes(lastDate,-30);
+            if ((lastDate.getHours()>=8 && lastDate.getHours()<20) || (lastDate.getHours()==20 && lastDate.getMinutes()==0)) {
+                quant++;
             }
-            date1 = DateUtils.addMinutes(date1, minToAdd);
-            date2 = DateUtils.addMinutes(date2, minToAdd);
-            endDay = date2;
-            endDay.setHours(19);
-            endDay.setMinutes(59);
-            endDay.setSeconds(59);
-        } while (!(date2.equals(finish)));
-        int[] intervalArray = new int[intervalArrayList.size()];
-        for (int i = 0; i < intervalArray.length; i++) {
-            intervalArray[i] = intervalArrayList.get(i).intValue();
-        }
+        }while (quant!=difEnd);
+        quant=0;
+        firstDate=finish;
+        do {
+            firstDate=DateUtils.addMinutes(firstDate,-30);
+            if ((firstDate.getHours()>=8 && firstDate.getHours()<20) || (firstDate.getHours()==20 && firstDate.getMinutes()==0)) {
+                quant++;
+            }
+        }while (quant!=difStart);
 
+        limits[0]=firstDate;
+        limits[1]=lastDate;
 
-
-
-
-
-
-        return worstSubInt;
+        return limits;
     }
 
     /**

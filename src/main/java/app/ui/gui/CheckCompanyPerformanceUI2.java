@@ -76,6 +76,10 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.chosenAlg = chosenAlg;
     }
 
+    public void setCliTesOverview(TextArea cliTesOverview) {
+        this.cliTesOverview = cliTesOverview;
+    }
+
     @FXML
     private TextArea cliTesOverview;
 
@@ -141,15 +145,14 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         }
     }
 
-    public void analyseCompany(){
+    public void analyseCompany() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         setChosenAlg(checkCompPerUI1.getChosenAlg());
         ArrayList<Date> days = controller.getDays(analysisBegDate,analysisEndDate);
-        String text = "Interval when the company was less effective in responding" + "\n ↪ From:" + "INICIO" + "\n ↪ To:" + "FIM";
-        text = text + "Number of Clients" + "\n ↪ " + controller.getClientsInfoPerInterval(days) + "\n";
-        /*for (int i = 0; i < controller; i++) {
-
-        }*/
-
+        Date[] limits= controller.findWorstSubIntWithChosenAlgorithm(days,chosenAlg);
+        String text = "Interval When The Company Was Less Effective In Responding" + "\n ↪ From: " + limits[0].toString() + "\n ↪ To: " + limits[1].toString();
+        text = text + "\nNumber Of Clients" + "\n ↪ " + controller.getClientsInfoPerInterval(days);
+        cliTesOverview.setText(text);
+        setCliTesOverview(cliTesOverview);
     }
 
     //MUDAR A LABEL DO TITULO PARA INDICAR AS DATAS QUE ESTÃO A SER ANALIZADAS
