@@ -11,7 +11,7 @@ public class InsertionSort {
         for (int j = 1; j < list.size(); j++) {
             T current = list.get(j);
             int i = j-1;
-            while ((i > -1) && ((comparator.compare(list.get(i),current)) > 0)) {
+            while ((i >= 0) && ((comparator.compare(list.get(i),current)) > 0)) {
                 list.set(i+1, list.get(i));
                 i--;
             }
