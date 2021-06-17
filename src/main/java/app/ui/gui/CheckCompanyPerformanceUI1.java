@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +47,36 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     public String getChosenOption() {
         return chosenOption;
+    }
+
+    private Date singleDateD;
+
+    public void setSingleDateD(Date singleDateD) {
+        this.singleDateD = singleDateD;
+    }
+
+    public Date getSingleDateD() {
+        return singleDateD;
+    }
+
+    private Date beginningDateD;
+
+    public void setBeginningDateD(Date beginningDateD) {
+        this.beginningDateD = beginningDateD;
+    }
+
+    public Date getBeginningDateD() {
+        return beginningDateD;
+    }
+
+    private Date endingDateD;
+
+    public void setEndingDateD(Date endingDateD) {
+        this.endingDateD = endingDateD;
+    }
+
+    public Date getEndingDateD() {
+        return endingDateD;
     }
 
     @FXML
@@ -117,6 +150,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
             checkCompanyPerformanceUI2.setMainApp(mainApp);
             checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
+            checkCompanyPerformanceUI2.getDateOrInterval();
+
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -147,9 +182,20 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         }
     }
 
-    public void seeAnalysis(){
-
+    public void getDates(){ //ActionEvent??
+        String option = getChosenOption();
+        if (option.equals("Analyse A Day")){
+            LocalDate singDate = singleDate.getValue();
+            singleDateD = Date.from(singDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            setSingleDateD(singleDateD);
+        }else if (option.equals("Analyse An Interval")){
+            LocalDate begDate = beginningDate.getValue();
+            beginningDateD = Date.from(begDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            setBeginningDateD(beginningDateD);
+            LocalDate endDate = endingDate.getValue();
+            endingDateD = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            setEndingDateD(endingDateD);
+        }
     }
-
 
 }

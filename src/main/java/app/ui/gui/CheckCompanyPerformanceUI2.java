@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +40,33 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    private Date singleDateD;
+    private Date beginningDateD;
+    private Date endingDateD;
+
+    public void setSingleDateD(Date singleDateD) {
+        this.singleDateD = singleDateD;
+    }
+
+    public void setBeginningDateD(Date beginningDateD) {
+        this.beginningDateD = beginningDateD;
+    }
+
+    public void setEndingDateD(Date endingDateD) {
+        this.endingDateD = endingDateD;
+    }
+
+    private Date analysisBegDate;
+    private Date analysisEndDate;
+
+    public void setAnalysisBegDate(Date analysisBegDate) {
+        this.analysisBegDate = analysisBegDate;
+    }
+
+    public void setAnalysisEndDate(Date analysisEndDate) {
+        this.analysisEndDate = analysisEndDate;
     }
 
     @FXML
@@ -87,10 +115,27 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     public void getDateOrInterval(){
         option=checkCompPerUI1.getChosenOption();
-
+        if (option.equals("Analyse A Day")){
+            singleDateD=checkCompPerUI1.getSingleDateD();
+            setSingleDateD(singleDateD);
+            analysisBegDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 8,0,0);
+            setAnalysisBegDate(analysisBegDate);
+            analysisEndDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 19,59,59);
+            setAnalysisEndDate(analysisEndDate);
+        }else if (option.equals("Analyse An Interval")){
+            beginningDateD=checkCompPerUI1.getBeginningDateD();
+            setBeginningDateD(beginningDateD);
+            endingDateD=checkCompPerUI1.getEndingDateD();
+            setEndingDateD(endingDateD);
+            analysisBegDate = new Date(beginningDateD.getYear(), beginningDateD.getMonth(), beginningDateD.getDate(), 8,0,0);
+            setAnalysisBegDate(analysisBegDate);
+            analysisEndDate = new Date(endingDateD.getYear(), endingDateD.getMonth(), endingDateD.getDate(), 19,59,59);
+            setAnalysisEndDate(analysisEndDate);
+        }
     }
 
-
-
+    public void analyseCompany(){
+        
+    }
 
 }
