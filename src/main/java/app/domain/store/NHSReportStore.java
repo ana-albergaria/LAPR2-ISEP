@@ -147,10 +147,11 @@ public class NHSReportStore {
         }
         Date endDate = cal.getTime();
         for (int i = 0; i < numberOfObservations; i++) {
-            cal.add(Calendar.DAY_OF_MONTH, -7);
+            cal.add(Calendar.DAY_OF_MONTH, -5);
             Date initialDate = cal.getTime();
             dates.add(getWeek(initialDate, endDate));
-            endDate = initialDate;
+            cal.add(Calendar.DAY_OF_MONTH, -2);
+            endDate = cal.getTime();
         }
 
         return dates;
