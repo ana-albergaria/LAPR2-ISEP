@@ -144,21 +144,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     }
 
     @FXML
-    void beginningDateAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void endingDateAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void singleDateAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void analyseAction(ActionEvent event) {
         try {
             CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");

@@ -93,6 +93,14 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     private Button returnBtn;
 
     @FXML
+    private ListView<?> listView;
+
+    @FXML
+    void handleListViewClick(ActionEvent event) {
+
+    }
+
+    @FXML
     void exitAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
