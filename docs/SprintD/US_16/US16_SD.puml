@@ -4,15 +4,16 @@ actor "Laboratory Coordinator" as LC
 
 participant ":CompanyPerformanceAnalysisUI" as UI
 participant ":CompanyPerformanceAnalysisController" as CTRL
-participant ":Company" as CMP
-participant ":Test" as TST
-participant "testStore\n:TestStore" as TSTSTORE
-participant "clientStore\n:ClientStore" as CLTSTORE
-participant ":Constants" as CST
-participant ":Class" as CL
-participant ":SubMaxSumAlgorithms" as SMSA
-participant ":Sum" as SUM
-participant ":BruteForceAlgorithm" as BFA
+participant ":CompanyPerformance" as CP
+'participant ":Company" as CMP
+'participant ":Test" as TST
+'participant "testStore\n:TestStore" as TSTSTORE
+'participant "clientStore\n:ClientStore" as CLTSTORE
+'participant ":Constants" as CST
+'participant ":Class" as CL
+'participant ":SubMaxSumAlgorithms" as SMSA
+'participant ":Sum" as SUM
+'participant ":BruteForceAlgorithm" as BFA
 
 activate LC
 LC -> UI : asks to see an overview of all the tests performed and \n analyse the overall performance of the company
@@ -21,238 +22,75 @@ UI --> LC : asks the day or interval of time to analyse \n and asks the algorith
 deactivate UI
 
 loop while the Laboratory Coordinator inserts and selects different data
-LC -> UI : inserts and selects the requested data
+LC -> UI : inserts and selects the requested data (i.e., beginningDay, endingDay, chosenAlgorithm)
 activate UI
 
-UI -> CTRL : days = getDays(beginningDay, endingDay)
+UI -> CTRL : companyPerformance = setCompanyPerformance(beginningDay, endingDay, chosenAlgorithm)
 activate CTRL
-CTRL --> UI : days
+CTRL -> CP** : create()
+CTRL --> UI : companyPerformance
 deactivate CTRL
 
-UI -> CTRL : clientInfo = getClientsInfoPerInterval(days)
+UI -> CTRL : clientInfo = getClientsInfoPerInterval()
 activate CTRL
-
-CTRL -> CMP : testStore = getTestStore()
-activate CMP
-CMP --> TSTSTORE** : create()
-deactivate CMP
-CTRL -> TSTSTORE : tests = getTests()
-activate TSTSTORE
+CTRL -> CP : clientInfo = getClientsNum()
+activate CP
 |||
-deactivate TSTSTORE
-
-loop For every test in the system
-
-CTRL -> TST : registrationDate = getDateOfTestRegistration()
-activate TST
-|||
-deactivate TST
-
-alt The registrationDate is prior to the endingDay
-
-CTRL -> TST : client = getClient()
-activate TST
-|||
-deactivate TST
-CTRL -> TST : clientEmail = getEmail()
-deactivate TST
-
-alt The email is not repeated
-
-CTRL -> CTRL : add(clientEmail)
-activate CTRL
-|||
-deactivate CTRL
-
-end
-
-end
-
-end
-
-CTRL -> CTRL : size()
-activate CTRL
-|||
-deactivate CTRL
-
+deactivate CP
 CTRL --> UI : clientInfo
 deactivate CTRL
 
-UI -> CTRL : numTestsProcessed = getNumTestsProcessedInterval(days)
+UI -> CTRL : numTestsProcessed = getNumTestsProcessedInterval()
 activate CTRL
-CTRL -> CMP : testStore = getTestStore()
-activate CMP
+CTRL -> CP : numTestsProcessed = getProcessTestsNum()
+activate CP
 |||
-deactivate CMP
-
-loop For every test in the system
-
-alt The test was validated before the endingDay
-
-CTRL -> CTRL : quant++
-activate CTRL
-|||
-deactivate CTRL
-
-end
-
-end
-
+deactivate CP
 CTRL --> UI : numTestsProcessed
 deactivate CTRL
 
-UI -> CTRL : testInfoDays = getTestInfoPerDay(days)
+UI -> CTRL : testInfoDays = getTestInfoPerDay()
 activate CTRL
-
-CTRL -> CMP : testStore = getTestStore()
-activate CMP
+CTRL -> CP : testInfoDays = getTestInfoDay()
+activate CP
 |||
-deactivate CMP
-
-loop For every day of the interval
-
-CTRL -> TSTSTORE : numTestsWaitingForResultsDay = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDay = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> CTRL : add(testInfo)
-activate CTRL
-|||
-deactivate CTRL
-
-end
-
+deactivate CP
 CTRL --> UI : testInfoDays
 deactivate CTRL
 
-UI -> CTRL : testInfoWeeks = getTestInfoPerWeek(days)
+UI -> CTRL : testInfoWeeks = getTestInfoPerWeek()
 activate CTRL
-
-CTRL -> CMP : testStore = getTestStore()
-activate CMP
+CTRL -> CP : testInfoWeeks = getTestInfoWeek()
+activate CP
 |||
-deactivate CMP
-
-loop For every week of the interval
-
-CTRL -> TSTSTORE : numTestsWaitingForResultsWeek = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisWeek = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> CTRL : add(testInfo)
-activate CTRL
-|||
-deactivate CTRL
-
-end
-
+deactivate CP
 CTRL --> UI : testInfoWeeks
 deactivate CTRL
 
-UI -> CTRL : testInfoMonths = getTestInfoPerMonth(days)
+UI -> CTRL : testInfoMonths = getTestInfoPerMonth()
 activate CTRL
-
-CTRL -> CMP : testStore = getTestStore()
-activate CMP
+CTRL -> CP : testInfoMonths = getTestInfoMonth()
+activate CP
 |||
-deactivate CMP
-
-loop For every month of the interval
-
-CTRL -> TSTSTORE : numTestsWaitingForResultsMonth = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisMonth = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> CTRL : add(testInfo)
-activate CTRL
-|||
+deactivate CP
+CTRL --> UI : testInfoMonths
 deactivate CTRL
 
-end
-
+UI -> CTRL : testInfoYears = getTestInfoPerYear()
+activate CTRL
+CTRL -> CP : testInfoYears = getTestInfoYear()
+activate CP
+|||
+deactivate CP
 CTRL --> UI : testInfoYears
 deactivate CTRL
 
-UI -> CTRL : testInfoYears = getTestInfoPerYear(days)
+UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm()
 activate CTRL
-
-CTRL -> CMP : testStore = getTestStore()
-activate CMP
+CTRL -> CP : worstSubInt = getWorstSubInt()
+activate CP
 |||
-deactivate CMP
-
-loop For every year of the interval
-
-CTRL -> TSTSTORE : numTestsWaitingForResultsYear = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsWaitingForDiagnosisYear = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-
-CTRL -> CTRL : add(testInfo)
-activate CTRL
-|||
-deactivate CTRL
-
-end
-
-CTRL --> UI : testInfoYears
-deactivate CTRL
-
-UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm(days, chosenAlgorithm)
-activate CTRL
-
-CTRL -> CTRL : interval = makeIntervalArray(days)
-activate CTRL
-|||
-deactivate CTRL
-
-CTRL -> CTRL : algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm)
-activate CTRL
-|||
-deactivate CTRL
-
-CTRL -> CL : oClass = forName(algorithmClass)
-activate CL
-|||
-deactivate CL
-
-CTRL -> SMSA : subMaxSumAlgorithm = newInstance()
-activate SMSA
-|||
-deactivate SMSA
-
-alt The chosen algorithm is the Benchmark algorithm
-
-CTRL -> SUM : worstSubInt = findSubMaxSum(interval)
-activate SUM
-|||
-deactivate SUM
-
-else The chosen algorithm is the Brute-force algorithm
-
-CTRL -> BFA : worstSubInt = findSubMaxSum(interval)
-activate BFA
-|||
-deactivate BFA
-
-end
-
+deactivate CP
 CTRL --> UI : worstSubInt
 deactivate CTRL
 

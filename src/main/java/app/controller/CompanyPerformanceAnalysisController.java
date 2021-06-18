@@ -1,15 +1,9 @@
 package app.controller;
 
-import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;
 import app.domain.model.CompanyPerformance;
-import app.domain.model.Test;
-import app.domain.shared.Constants;
-import app.domain.store.TestStore;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -40,13 +34,24 @@ public class CompanyPerformanceAnalysisController {
         this.company = company;
     }
 
+    /**
+     * The company performance.
+     */
     private CompanyPerformance companyPerformance;
 
+    /**
+     * Creates a CompanyPerformance object with the data requested to the Laboratory Coordinator.
+     *
+     * @param beginningDay the first moment of study
+     * @param endingDay the last moment of study
+     * @param chosenAlgorithm the chosen algorithm
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
     public void setCompanyPerformance(Date beginningDay, Date endingDay, String chosenAlgorithm) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         this.companyPerformance = new CompanyPerformance(beginningDay, endingDay, chosenAlgorithm);
     }
-
-    //private CompanyPerformance companyPerformance = new CompanyPerformance()
 
     /**
      * Gets the number of clients for an interval

@@ -5,22 +5,47 @@ hide empty attributes
 'left to right direction
 skinparam classAttributeIconSize 0
 
-package Core {
+package Core{
 
 package Domain {
 
 package Model{
 
 class Company {
-    -String designation
-    -TestStore testStore
-    -ClientStore clientStore
-    +getTestStore()
-    +getClientStore()
+    - String designation
+    - TestStore testStore
+    + getTestStore()
 }
 
-class BruteForceAlgorithm{
-    +Max(seq)
+class CompanyPerformance{
+    - Company company
+    - Date beginningDate
+    - Date endingDate
+    - String chosenAlg
+    - int clientsNum
+    - int processTestsNum
+    - ArrayList<int[]> testInfoDay
+    - ArrayList<int[]> testInfoWeek
+    - ArrayList<int[]> testInfoMonth
+    - ArrayList<int[]> testInfoYear
+    - Date[] worstSubInt
+    + getClientsNum()
+    + getProcessTestsNum()
+    + getTestInfoDay()
+    + getTestInfoWeek()
+    + getTestInfoMonth()
+    + getTestInfoYear()
+    + getWorstSubInt()
+    + getClientsInfoPerInterval(days)
+    + getNumTestsProcessedInterval(days)
+    + getTestInfoPerDay(days)
+    + getTestInfoPerWeek(days)
+    + getTestInfoPerMonth(days)
+    + getTestInfoPerYear(days)
+    + getDays(beginningDay, endingDay)
+    + makeIntervalArray(days)
+    + findWorstSubIntWithChosenAlgorithm(days, chosenAlgorithm)
+    + getChosenAlgorithmAdapter(chosenAlgorithm)
 }
 
 }
@@ -36,15 +61,10 @@ interface SubMaxSumAlgorithms <<interface>> {
 package Store {
 
 class TestStore {
-    +getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay)
-    +getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay)
-    +getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay)
-    +getNumberOfTestsByIntervalDateOfTestRegistration(beginningDay, endingDay)
-    +getNumberOfTestsByIntervalDateOfDiagnosis(beginningDay, endingDay)
-}
-
-class ClientStore {
-    +getClients()
+    + getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay)
+    + getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay)
+    + getNumberOfTestsByIntervalDateOfTestRegistration(beginningDay, endingDay)
+    + getNumberOfTestsByIntervalDateOfDiagnosis(beginningDay, endingDay)
 }
 
 }
@@ -66,28 +86,32 @@ class BruteForceAlgorithmAdapter{
 package Controller {
 
 class CompanyPerformanceAnalysisController{
-    -Company company
-    +getNumClients()
-    +getTestInfoPerDay(days)
-    +getTestInfoPerWeek(days)
-    +getTestInfoPerMonth(days)
-    +getTestInfoPerYear(days)
-    +getDays(beginningDay, endingDay)
-    +makeIntervalArray(days)
-    +findWorstSubIntWithChosenAlgorithm(days, chosenAlgorithm)
-    +getChosenAlgorithmAdapter(chosenAlgorithm)
+    - Company company
+    - CompanyPerformance companyPerformance
+    + setCompanyPerformance(beginningDay, endingDay, chosenAlgorithm)
+    + getClientsInfoPerInterval()
+    + getNumTestsProcessedInterval()
+    + getTestInfoPerDay()
+    + getTestInfoPerWeek()
+    + getTestInfoPerMonth()
+    + getTestInfoPerYear()
+    + findWorstSubIntWithChosenAlgorithm()
 }
 
 }
 
 package ThirdParty{
 
-package APIs{
+package APIs {
 
 class Sum{
     +Max(seq)
 }
 
+}
+
+class BruteForceAlgorithm{
+    +Max(seq)
 }
 
 }
@@ -96,7 +120,7 @@ class Sum{
 
 package UI {
 
-package GUI {
+package GUI{
 
 class CompanyPerformanceAnalysisUI{
 }
