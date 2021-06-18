@@ -465,8 +465,6 @@ public class TestStore {
         }
     }
 
-    //ACABAR!!!!!!!
-
     public void addWeeklyDataFromDateInterval(Date beginDate,
                                               Date endDate,
                                               List<Double> covidTestList,

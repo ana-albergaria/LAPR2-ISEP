@@ -153,6 +153,15 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         return confidenceIntervals;
     }
 
+    /**
+     * Returns the Hypothesis Test of the NHS Report to be sent for a chosen regression coefficient.
+     *
+     * @param myRegressionModel the myRegressionModel of the NHS Report
+     * @param significanceLevel the significance level
+     * @param chosenRegCoefficient the chosen regression coefficient
+     *
+     * @return the Hypothesis Test for a chosen regression coefficient of the NHS Report to be sent
+     */
     @Override
     public HypothesisTest getChosenHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel, String chosenRegCoefficient) {
         SimpleLinearRegression simpleLR = (SimpleLinearRegression) myRegressionModel.getRegressionModel();

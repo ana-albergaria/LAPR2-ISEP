@@ -153,4 +153,27 @@ public class MultipleLinearRegressionAdapter implements RegressionModel {
         }
         return confidenceIntervals;
     }
+
+    /**
+     * Returns the Hypothesis Test of the NHS Report to be sent for a chosen regression coefficient.
+     *
+     * @param myRegressionModel the myRegressionModel of the NHS Report
+     * @param significanceLevel the significance level
+     * @param chosenRegCoefficient the chosen regression coefficient
+     *
+     * @return the Hypothesis Test for a chosen regression coefficient of the NHS Report to be sent
+     */
+    @Override
+    public HypothesisTest getChosenHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel, String chosenRegCoefficient) {
+        MultipleLinearRegression multipleLR = (MultipleLinearRegression) myRegressionModel.getRegressionModel();
+        double chosenTObs;
+        if(chosenRegCoefficient.equalsIgnoreCase("a"))
+            chosenTObs = multipleLR.calculateTObsBj(0);
+        else if(chosenRegCoefficient.equalsIgnoreCase("b"))
+            chosenTObs = multipleLR.calculateTObsBj(1);
+        else
+            chosenTObs = multipleLR.calculateTObsBj(2);
+
+        return new HypothesisTest(myRegressionModel, chosenRegCoefficient, chosenTObs, significanceLevel);
+    }
 }

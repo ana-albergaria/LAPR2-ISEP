@@ -39,7 +39,8 @@ public class SendNHSReportController {
                                         String chosenRegressionModelClass,
                                         String chosenVariable,
                                         double significanceLevel,
-                                        double confidenceLevel) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
+                                        double confidenceLevel,
+                                        String chosenRegCoefficient) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
         //somente para teste
         TestFileUtils testFileUtils = new TestFileUtils();
         ImportTestController importTestCtrl = new ImportTestController();
@@ -52,8 +53,6 @@ public class SendNHSReportController {
 
         RegressionModel chosenRegressionModel = this.company.getChosenRegressionModel(chosenRegressionModelClass);
 
-        //ALTERAR MÉTODO getDataListToFitTheModel PARA INCLUIR DADOS SEMANAIS
-        //OPÇÃO: COLOCAR MAIS UM PARÂMETRO COM O TIPO DE DATA E DEPOIS FAZER UM IF NO METODO
         List<List<Double>> dataList = getDataListToFitTheModel(beginDate, endDate, typeOfData);
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
         double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
@@ -64,8 +63,8 @@ public class SendNHSReportController {
         System.out.println(Arrays.toString(observedPositives));
 
         MyRegressionModel myRegressionModel = getMyRegressionModel(chosenRegressionModel, chosenVariable, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
-        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(chosenRegressionModel, myRegressionModel, significanceLevel);
-        SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(chosenRegressionModel, myRegressionModel, significanceLevel);
+        HypothesisTest hypothesisTest = chosenRegressionModel.getChosenHypothesisTest(myRegressionModel, significanceLevel, chosenRegCoefficient);
+        SignificanceModelAnova modelAnova = chosenRegressionModel.getSignificanceModelAnova(myRegressionModel, significanceLevel);
 
         Date startDate = nhsReportStore.getStartDateForSelectedDate(currentDate);
         TableOfValues tableOfValues = getTableOfValues(myRegressionModel, chosenRegressionModel, chosenVariable, typeOfData, historicalPoints, startDate, confidenceLevel);
@@ -95,11 +94,11 @@ public class SendNHSReportController {
         if(!chosenVariable.isEmpty()) {
             //for Simple Linear Regression
             myRegressionModel = (chosenVariable.equalsIgnoreCase(Constants.TEST_VARIABLE)) ?
-                    nhsReportStore.createMyRegressionModel(chosenRegressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
-                    nhsReportStore.createMyRegressionModel(chosenRegressionModel, meanAgeArray, covidTestsArray, observedPositives, historicalPoints);
+                    chosenRegressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
+                    chosenRegressionModel.getRegressionModel(meanAgeArray, covidTestsArray, observedPositives, historicalPoints);
         } else {
             //for Multiple Linear Regression
-            myRegressionModel = nhsReportStore.createMyRegressionModel(chosenRegressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
+            myRegressionModel = chosenRegressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
         }
         return myRegressionModel;
     }
