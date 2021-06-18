@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -84,6 +85,8 @@ public class Company {
 
     private String significanceLevel;
 
+    private Timer timer;
+
     public Company(String designation,
                    String classNameForBarcodeApi,
                    String classNameForSortAlgorithm,
@@ -135,13 +138,17 @@ public class Company {
         this.confidenceLevel = confidenceLevel;
         this.significanceLevel = significanceLevel;
 
-        /*
+
         NHSReportTask nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
-        Timer timer = new Timer();
-        timer.schedule(nhsReportTask,5000);
+        this.timer = new Timer();
+        Date initialDateForTask = getDateForNHSReportTask();
 
-         */
+        //timer.schedule(nhsReportTask, today.getTime(), 1000L * 60L * 60L * 24L);
+        //timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES));
+        timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
+        //timer.schedule(nhsReportTask,5000);
+
 
 
 
@@ -399,5 +406,13 @@ public class Company {
 
     public double getSignificanceLevel() {
         return Double.parseDouble(significanceLevel);
+    }
+
+    public Date getDateForNHSReportTask() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 6);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        return cal.getTime();
     }
 }

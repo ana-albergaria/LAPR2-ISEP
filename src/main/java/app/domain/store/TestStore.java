@@ -311,6 +311,20 @@ public class TestStore {
         int[] observedPositives = new int[numberOfObservations];
         int indexDate = 0;
 
+        List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
+        for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
+            Test test = iterator.next();
+            if(test.hasPositiveResultForCovid()) {
+                for (int i = 0; i < dates.size(); i++) {
+                    String testDateOfRegistration = sdf.format(test.getDateOfTestRegistration());
+                    if(testDateOfRegistration.equals(dates.get(i))) {
+                        indexDate = i;
+                        observedPositives[indexDate]++;
+                    }
+                }
+            }
+        }
+        /*
         for (Test test : testList) {
             if(test.hasPositiveResultForCovid()) {
                 for (int i = 0; i < dates.size(); i++) {
@@ -322,6 +336,7 @@ public class TestStore {
                 }
             }
         }
+         */
         return observedPositives;
     }
 
@@ -352,11 +367,6 @@ public class TestStore {
 
     public double getNumberOfCovidTestsRealizedInADay(Date date) {
         double testsInADay = 0;
-        /*for (Test test : testList) {
-            if(test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date))
-                testsInADay++;
-        }
-         */
         List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
         for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
             Test test = iterator.next();
@@ -369,7 +379,6 @@ public class TestStore {
 
 
     public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
-        //COLOCAR EXCEÇÃO!!!!!!! OU ENTÃO QUE COLOCAR?
         return (getNumClientsWithValidatedTestsInADay(date) != 0)
                 ? getSumOfClientAgesInADay(date) / getNumClientsWithValidatedTestsInADay(date)
                     : 0;
@@ -401,11 +410,6 @@ public class TestStore {
 
     public double getObservedPositivesCovidInADay(Date date) {
         double positives = 0;
-        /*for (Test test : testList) {
-            if(test.hasPositiveResultForCovid() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date))
-                positives++;
-        }
-         */
         List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
         for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
             Test test = iterator.next();
@@ -457,11 +461,49 @@ public class TestStore {
         }
     }
 
+    //ACABAR!!!!!!!
+    /*
+    public void addWeeklyDataFromDateInterval(Date beginDate,
+                                              Date endDate,
+                                              List<Double> covidTestList,
+                                              List<Double> meanAgeList,
+                                              List<Double> observedPositives) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        Date auxEndDate = cal.getTime();
+        cal.add(Calendar.DAY_OF_MONTH, -5);
+        Date auxBeginDate = cal.getTime();
+
+        while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
+            double testsInAWeek = getMeanAgeInOneWeek(auxBeginDate, auxEndDate);
+            covidTestList.add(testsInAWeek);
+            double meanAgeInAWeek = getMeanAgeInOneWeek(auxBeginDate, auxEndDate);
+            meanAgeList.add(meanAgeInAWeek);
+
+        }
+
+    }
+     */
+
     public Double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
         double[] covidTestsInHistoricalPointsPrimitive = new double[dates.size()];
         int indexDate = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+        List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
+        for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
+            Test test = iterator.next();
+            if(test.isCovidTest() && test.isValidated()) {
+                for (int i = 0; i < dates.size(); i++) {
+                    String testDateOfRegistration = sdf.format(test.getDateOfTestRegistration());
+                    if (testDateOfRegistration.equals(dates.get(i))) {
+                        indexDate = i;
+                        covidTestsInHistoricalPointsPrimitive[indexDate]++;
+                    }
+                }
+            }
+        }
+        /*
         for (Test test : testList) {
             if(test.isCovidTest() && test.isValidated()) {
                 for (int i = 0; i < dates.size(); i++) {
@@ -473,6 +515,7 @@ public class TestStore {
                 }
             }
         }
+         */
         Double[] covidTestsInHistoricalPoints = turnPrimitiveIntoDoubleArray(covidTestsInHistoricalPointsPrimitive);
         return covidTestsInHistoricalPoints;
     }
