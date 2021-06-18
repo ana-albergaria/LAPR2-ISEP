@@ -91,7 +91,8 @@ class Test{
 - dateOfChemicalAnalysis
 - dateOfDiagnosis
 }
-
+/'O CONTROLLER É A APP STARTUP'/
+/'COLOCAR TIMER'/
 
 /'Timer "1" -- "*" NHSReport : schedules >'/
 /'Company "1" -- "1..*" NHSReport : reports >'/
@@ -109,11 +110,12 @@ TableOfValues "1" -- "*" ConfidenceInterval : contains >
 ConfidenceInterval "*" -- "1" MyRegressionModel : of >
 RegressionModel "*" - "1" MathCalculus : provided by >
 MyRegressionModel "1" -- "1" RegressionModel : has >
+Timer "1" -- "*" NHSReportTask : runs >
 
 
 
 
-NHSReportTask ..> Company
+/'NHSReportTask ..> Company
 NHSReportTask ..> TestStore
 NHSReportTask ..> NHSReportStore
 NHSReportTask ..> NHSReport
@@ -123,7 +125,7 @@ NHSReportTask ..> SignificanceModelAnova
 NHSReportTask ..> ConfidenceInterval
 NHSReportTask ..> HypothesisTest
 NHSReportTask ..> MyRegressionModel
-NHSReportTask ..> MathCalculus
+NHSReportTask ..> MathCalculus'/
 
 
 

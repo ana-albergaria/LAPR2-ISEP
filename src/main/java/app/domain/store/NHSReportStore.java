@@ -97,11 +97,9 @@ public class NHSReportStore {
     }
 
     public double[] getDoubleArrayWithData(List<List<Double>> covidTestAndMeanAgeList, int index) {
-        Double[] extractedArray = new Double[covidTestAndMeanAgeList.get(index).size()];
         double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
         for (int i = 0; i < wishedArray.length; i++) {
             wishedArray[i] = covidTestAndMeanAgeList.get(index).get(i);
-            //wishedArray[i] = extractedArray[i];
         }
         return wishedArray;
     }
