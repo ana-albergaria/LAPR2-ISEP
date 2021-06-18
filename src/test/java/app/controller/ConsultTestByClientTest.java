@@ -30,7 +30,7 @@ public class ConsultTestByClientTest {
     public static void setUp() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
         importTestController = new ImportTestController();
         TestFileUtils testFileUtils = new TestFileUtils();
-        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("inputs_mdisc/TESTS_6060INPUTS.csv");
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("inputs_mdisc/TESTS_6060INPUTS.CSV");
         for (TestFileDTO testData : procedData) {
             try{
                 importTestController.importTestFromFile(testData);
