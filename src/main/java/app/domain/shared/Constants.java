@@ -35,8 +35,9 @@ public class Constants {
     public static final String SIGNIFICANCE_LEVEL = "0.05";
 
     public static final String DAY_DATA = "Day";
-    public static final String WEEK_DATA = "Week";
     public static final String TEST_VARIABLE = "Covid-19 Tests Realized";
+    public static final String CHOSEN_REG_COEFFICIENT_A = "a";
+    public static final String CHOSEN_REG_COEFFICIENT_B = "b";
 
     public static final String BLOOD_MODULE_1_NAME = "BloodModule1 (for blood tests, requires a key access)";
     public static final String BLOOD_MODULE_2_NAME = "BloodModule2 (for Blood tests, no access key)";

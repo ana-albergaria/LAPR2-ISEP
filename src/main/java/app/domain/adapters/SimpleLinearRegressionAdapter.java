@@ -152,5 +152,12 @@ public class SimpleLinearRegressionAdapter implements RegressionModel {
         }
         return confidenceIntervals;
     }
+
+    @Override
+    public HypothesisTest getChosenHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel, String chosenRegCoefficient) {
+        SimpleLinearRegression simpleLR = (SimpleLinearRegression) myRegressionModel.getRegressionModel();
+        double chosenTObs = (chosenRegCoefficient.equalsIgnoreCase("a")) ? simpleLR.calculatetObsA() : simpleLR.calculateTObsB();
+        return new HypothesisTest(myRegressionModel, chosenRegCoefficient, chosenTObs, significanceLevel);
+    }
 }
 

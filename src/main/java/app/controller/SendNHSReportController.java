@@ -171,7 +171,7 @@ public class SendNHSReportController {
         if(!path.exists())
             path.mkdir();
 
-        Report2NHS.writeUsingFileWriter(this.nhsReport.toString());
+        Report2NHS.writeUsingFileWriter(this.nhsReport.toStringForChosenHypothesisTest());
     }
 
 }
