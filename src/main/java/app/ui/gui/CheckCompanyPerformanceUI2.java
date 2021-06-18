@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -227,7 +228,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             checkCompanyPerformanceUI1.setMainApp(mainApp);
             checkCompanyPerformanceUI1.setLcUI(this.checkCompPerUI1.getLcUI());
             checkCompanyPerformanceUI1.addOptions();
-            checkCompanyPerformanceUI1.getDates();
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }

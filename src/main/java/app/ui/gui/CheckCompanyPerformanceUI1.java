@@ -49,7 +49,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         return chosenOption;
     }
 
-    private Date singleDateD;
+    private Date singleDateD = null;
 
     public void setSingleDateD(Date singleDateD) {
         this.singleDateD = singleDateD;
@@ -59,7 +59,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         return singleDateD;
     }
 
-    private Date beginningDateD;
+    private Date beginningDateD = null;
 
     public void setBeginningDateD(Date beginningDateD) {
         this.beginningDateD = beginningDateD;
@@ -69,7 +69,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         return beginningDateD;
     }
 
-    private Date endingDateD;
+    private Date endingDateD = null;
 
     public void setEndingDateD(Date endingDateD) {
         this.endingDateD = endingDateD;
@@ -90,6 +90,12 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     public void setChosenAlg(String chosenAlg) {
         this.chosenAlg = chosenAlg;
+    }
+
+    private Date referenceDate = null;
+
+    public void setReferenceDate(Date referenceDate) {
+        this.referenceDate = referenceDate;
     }
 
     @FXML
@@ -115,6 +121,27 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     @FXML
     private ChoiceBox<String> algorithmOption;
+
+    @FXML
+    void pickBeginningDate(ActionEvent event) {
+        LocalDate begDate = beginningDate.getValue();
+        beginningDateD = Date.from(begDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        setBeginningDateD(beginningDateD);
+    }
+
+    @FXML
+    void pickEndingDate(ActionEvent event) {
+        LocalDate endDate = endingDate.getValue();
+        endingDateD = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        setEndingDateD(endingDateD);
+    }
+
+    @FXML
+    void pickSingleDate(ActionEvent event) {
+        LocalDate singDate = singleDate.getValue();
+        singleDateD = Date.from(singDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        setSingleDateD(singleDateD);
+    }
 
     @FXML
     void exitAction(ActionEvent event) {
@@ -145,17 +172,40 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     @FXML
     void analyseAction(ActionEvent event) {
-        try {
-            CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
-            checkCompanyPerformanceUI2.setMainApp(this.mainApp);
-            checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
-            checkCompanyPerformanceUI2.setController(this.controller);
-            checkCompanyPerformanceUI2.getDateOrInterval();
-            checkCompanyPerformanceUI2.analyseCompany();
-            checkCompanyPerformanceUI2.populateListView();
-        } catch (Exception ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        referenceDate=java.util.Calendar.getInstance().getTime();
+        referenceDate.setHours(0);
+        referenceDate.setMinutes(0);
+        referenceDate.setSeconds(0);
+        setReferenceDate(referenceDate);
+        if (((singleDateD!=null && singleDateD.before(referenceDate)) || (beginningDateD!=null && endingDateD!=null && endingDateD.before(referenceDate)
+                && beginningDateD.before(endingDateD) && (beginningDateD.getYear()!=endingDateD.getYear() ||
+                beginningDateD.getMonth()!=endingDateD.getMonth() || beginningDateD.getDate()!=endingDateD.getDate()))) &&
+                (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") ||
+                chosenAlg.equals("Brute-Force Algorithm"))) {
+            try {
+                CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
+                checkCompanyPerformanceUI2.setMainApp(this.mainApp);
+                checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
+                checkCompanyPerformanceUI2.setController(this.controller);
+                checkCompanyPerformanceUI2.getDateOrInterval();
+                checkCompanyPerformanceUI2.analyseCompany();
+                checkCompanyPerformanceUI2.populateListView();
+            } catch (Exception ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            createAlert1().showAndWait();
         }
+    }
+
+    private Alert createAlert1(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle("Many Labs Application");
+        alert.setHeaderText("Insufficient Data");
+        alert.setContentText("All fields should be correctly filled, before analysing!");
+
+        return alert;
     }
 
     @Override
@@ -176,29 +226,14 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             singleDate.setDisable(false);
             beginningDate.setDisable(true);
             endingDate.setDisable(true);
+            setEndingDateD(null);
+            setBeginningDateD(null);
         } else if(chosenOption.equals("An Interval")){
             singleDate.setDisable(true);
             beginningDate.setDisable(false);
             endingDate.setDisable(false);
+            setSingleDateD(null);
         }
     }
-
-    public void getDates(){ //ActionEvent??
-        if (chosenOption.equals("A Day")){
-            LocalDate singDate = singleDate.getValue();
-            singleDateD = Date.from(singDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            setSingleDateD(singleDateD);
-        }else if (chosenOption.equals("An Interval")){
-            LocalDate begDate = beginningDate.getValue();
-            beginningDateD = Date.from(begDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            setBeginningDateD(beginningDateD);
-            LocalDate endDate = endingDate.getValue();
-            endingDateD = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            setEndingDateD(endingDateD);
-        }
-    }
-
-    //É PRECISO CRIAR ALERTAS SE FOREM ESCOLHIDAS DATAS NÃO PERMITIDAS E NÃO PERMITIR AVANÇAR
-    //FAZER DISABLE AO ANALYSE BUTTON ATÉ SER POSSÍVEL
 
 }
