@@ -202,6 +202,15 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             analysisEndDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 19,59,59);
             setAnalysisEndDate(analysisEndDate);
         }
+        try {
+            controller.createCompanyPerformance(analysisBegDate,analysisEndDate,chosenAlg);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
         referenceDate=java.util.Calendar.getInstance().getTime();
         referenceDate.setHours(0);
         referenceDate.setMinutes(0);

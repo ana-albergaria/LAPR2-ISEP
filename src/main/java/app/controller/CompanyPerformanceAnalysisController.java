@@ -35,11 +35,27 @@ public class CompanyPerformanceAnalysisController {
     }
 
     /**
+     * Creates an instance of company performance type.
+     * @param beginningDate the first moment of study
+     * @param endingDate the last moment of study
+     * @param chosenAlg the chosen algorithm
+     * @return true is the company performance is successfully created
+     * otherwise return false.
+     * @throws ClassNotFoundException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    public boolean createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        this.companyPerformance = company.createCompanyPerformance(beginningDate,endingDate,chosenAlg);
+        return (companyPerformance != null);
+    }
+
+    /**
      * The company performance.
      */
     private CompanyPerformance companyPerformance;
 
-    /**
+    /*
      * Creates a CompanyPerformance object with the data requested to the Laboratory Coordinator.
      *
      * @param beginningDay the first moment of study
@@ -49,9 +65,9 @@ public class CompanyPerformanceAnalysisController {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public void setCompanyPerformance(Date beginningDay, Date endingDay, String chosenAlgorithm) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    /*public void setCompanyPerformance(Date beginningDay, Date endingDay, String chosenAlgorithm) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         this.companyPerformance = new CompanyPerformance(beginningDay, endingDay, chosenAlgorithm);
-    }
+    }*/
 
     /**
      * Gets the number of clients for an interval

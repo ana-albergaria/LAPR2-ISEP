@@ -365,6 +365,19 @@ public class Company {
     }
 
     /**
+     * Called method through the CompanyPerformanceAnalysisController to create a new company performance
+     * through the first and last moments of study and the chosen algorithm.
+     *
+     * @param beginningDate the first moment of study
+     * @param endingDate the last moment of study
+     * @param chosenAlg the chosen algorithm
+     * @return instance of CompanyPerformance Class with the beginningDate, endingDate and chosenAlg.
+     */
+    public CompanyPerformance createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        return new CompanyPerformance(beginningDate,endingDate,chosenAlg);
+    }
+
+    /**
      * Called method to get the External API, using Java Reflection.
      *
      * @return a instance of the External API to be used.

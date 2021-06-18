@@ -49,17 +49,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.option = option;
     }
 
-    private Date begDateAnalysis;
-    private Date endDateAnalysis;
-
-    public void setBegDateAnalysis(Date begDateAnalysis) {
-        this.begDateAnalysis = begDateAnalysis;
-    }
-
-    public void setEndDateAnalysis(Date endDateAnalysis) {
-        this.endDateAnalysis = endDateAnalysis;
-    }
-
     public void setCliTesOverview(TextArea cliTesOverview) {
         this.cliTesOverview = cliTesOverview;
     }
@@ -210,17 +199,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            controller.setCompanyPerformance(checkCompPerUI1.getBeginningDateD(),checkCompPerUI1.getEndingDateD(),checkCompPerUI1.getChosenAlg());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
-        setBegDateAnalysis(checkCompPerUI1.getAnalysisBegDate());
-        setEndDateAnalysis(checkCompPerUI1.getAnalysisEndDate());
     }
 
     public void analyseCompany() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
