@@ -581,6 +581,88 @@ public class TestStoreTest {
 
     }
 
+    @Test(expected = UnsupportedOperationException.class)
+    public void checkDateIntervalHasMinRange() throws ParseException {
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/06/2021");
+        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("22/06/2021");
+
+        boolean result = testStore.checkDateIntervalHasMinRange(beginDate, endDate);
+
+        Assert.assertFalse(result);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void checkDateIntervalHasMinRange2() throws ParseException {
+
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("14/06/2021");
+        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/06/2021");
+
+        boolean result = testStore.checkDateIntervalHasMinRange(beginDate, endDate);
+
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void checkDateIntervalHasMinRange3() throws ParseException {
+
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("9/06/2021");
+        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("16/06/2021");
+
+        boolean result = testStore.checkDateIntervalHasMinRange(beginDate, endDate);
+
+    }
+
+    @Test
+    public void checkDateIntervalHasMinRangeTrue() throws ParseException {
+
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("7/06/2021");
+        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("16/06/2021");
+
+        boolean result = testStore.checkDateIntervalHasMinRange(beginDate, endDate);
+
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void getFinalBeginDateForWeekData() throws ParseException {
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("7/06/2021");
+
+        Date expectedFinalBeginDate = new SimpleDateFormat("dd/MM/yyyy").parse("7/06/2021");
+        Date finalBeginDate = testStore.getFinalBeginDateForWeekData(beginDate);
+
+        Assert.assertEquals(expectedFinalBeginDate, finalBeginDate);
+    }
+
+    @Test
+    public void getFinalBeginDateForWeekData2() throws ParseException {
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("15/06/2021");
+
+        Date expectedFinalBeginDate = new SimpleDateFormat("dd/MM/yyyy").parse("21/06/2021");
+        Date finalBeginDate = testStore.getFinalBeginDateForWeekData(beginDate);
+
+        Assert.assertEquals(expectedFinalBeginDate, finalBeginDate);
+    }
+
+    @Test
+    public void getFinalEndDateForWeekData1() throws ParseException {
+        Date finalDate = new SimpleDateFormat("dd/MM/yyyy").parse("12/06/2021");
+
+        Date expectedFinalEndDate = new SimpleDateFormat("dd/MM/yyyy").parse("12/06/2021");
+        Date finalEndDate = testStore.getFinalEndDateForWeekData(finalDate);
+
+        Assert.assertEquals(expectedFinalEndDate, finalEndDate);
+    }
+
+    @Test
+    public void getFinalEndDateForWeekData2() throws ParseException {
+        Date finalDate = new SimpleDateFormat("dd/MM/yyyy").parse("23/06/2021");
+
+        Date expectedFinalEndDate = new SimpleDateFormat("dd/MM/yyyy").parse("19/06/2021");
+        Date finalEndDate = testStore.getFinalEndDateForWeekData(finalDate);
+
+        Assert.assertEquals(expectedFinalEndDate, finalEndDate);
+    }
+
+
 
 
 

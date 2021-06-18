@@ -429,10 +429,16 @@ public class TestStore {
         List<Double> meanAgeList = new ArrayList<>();
         List<Double> observedPositives = new ArrayList<>();
 
-        if(typeOfData.equals(Constants.DAY_DATA))
+        if(typeOfData.equals(Constants.DAY_DATA)) {
             addAllDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
-        else
+        } else {
+            if(checkDateIntervalHasMinRange(beginDate, endDate)) {
+                beginDate = getFinalBeginDateForWeekData(beginDate);
+                endDate = getFinalEndDateForWeekData(endDate);
+            }
             addWeeklyDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
+        }
+
 
         List< List<Double> > dataList = new ArrayList<>();
         dataList.add(covidTestList);
@@ -628,6 +634,65 @@ public class TestStore {
         return wishedArray;
     }
 
+    /**
+     * Returns true if the date interval to fit the model has the
+     * minimum range required in order to provide accurate and
+     * correct data for the model
+     *
+     * @param beginDate the initial date
+     * @param endDate the final date
+     *
+     * @return true if the date interval to fit the model has the
+     * minimum range required. Otherwise, returns false.
+     */
+    public boolean checkDateIntervalHasMinRange(Date beginDate, Date endDate) {
+        Calendar auxInitialDate = Calendar.getInstance();
+        auxInitialDate.setTime(beginDate);
+        int cont = 0;
+
+        while(auxInitialDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            System.out.println(auxInitialDate.getTime());
+            auxInitialDate.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        Date finalBeginDate = auxInitialDate.getTime();
+
+        while(!finalBeginDate.after(endDate) || checkIfDatesAreEqual(finalBeginDate, endDate)) {
+            cont++;
+            auxInitialDate.add(Calendar.DAY_OF_MONTH, 1);
+            finalBeginDate = auxInitialDate.getTime();
+        }
+
+        if(cont < Constants.WEEK_DAYS)
+            throw new UnsupportedOperationException("For Week data, you must select a range in which at least one COMPLETE week (Monday-Saturday) fits in it!");
+
+        return true;
+    }
+
+    /**
+     * Returns the final initial date for providing data to fit the regression model.
+     *
+     * @param beginDate the initial date provided
+     *
+     * @return final initial date
+     */
+    public Date getFinalBeginDateForWeekData(Date beginDate) {
+        Calendar auxInitialDate = Calendar.getInstance();
+        auxInitialDate.setTime(beginDate);
+        while(auxInitialDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            auxInitialDate.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return auxInitialDate.getTime();
+    }
+
+    public Date getFinalEndDateForWeekData(Date endDate) {
+        Calendar auxFinalDate = Calendar.getInstance();
+        auxFinalDate.setTime(endDate);
+        while(auxFinalDate.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
+            auxFinalDate.add(Calendar.DAY_OF_MONTH, -1);
+        }
+        return auxFinalDate.getTime();
+    }
 
 
 }
