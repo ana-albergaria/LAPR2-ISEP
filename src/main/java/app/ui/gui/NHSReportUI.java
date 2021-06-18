@@ -174,3 +174,4 @@ public class NHSReportUI implements Initializable, Menu {
     }
 
 }
+

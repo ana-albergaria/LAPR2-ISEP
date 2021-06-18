@@ -97,5 +97,17 @@ public interface RegressionModel {
      * @return the list of Confidence Intervals of the MyRegressionModel of the NHSReport
      */
     public abstract List<ConfidenceInterval> getConfidenceIntervalList(MyRegressionModel myRegressionModel, Double[] x1InHistoricalPoints, Double[] x2InHistoricalPoints, double confidenceLevel);
+
+    /**
+     * Returns the Hypothesis Test for the parameter chosen by the administrator of the NHS Report to be sent.
+     *
+     * @param myRegressionModel the myRegressionModel of the NHS Report
+     * @param significanceLevel the significance level
+     * @param chosenRegCoefficient the chosen parameter
+     *
+     * @return the Hypothesis Test of the NHS Report to be sent
+     *
+     */
+    public abstract HypothesisTest getChosenHypothesisTest(MyRegressionModel myRegressionModel, double significanceLevel, String chosenRegCoefficient);
 }
 

@@ -2,6 +2,7 @@ package app.controller;
 
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
+import app.domain.shared.Constants;
 import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
 import app.mappers.dto.TestFileDTO;
@@ -13,6 +14,7 @@ import net.sourceforge.barbecue.output.OutputException;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +39,8 @@ public class SendNHSReportController {
                                         String chosenRegressionModelClass,
                                         String chosenVariable,
                                         double significanceLevel,
-                                        double confidenceLevel) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
+                                        double confidenceLevel,
+                                        String chosenRegCoefficient) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
         //somente para teste
         TestFileUtils testFileUtils = new TestFileUtils();
         ImportTestController importTestCtrl = new ImportTestController();
@@ -50,17 +53,18 @@ public class SendNHSReportController {
 
         RegressionModel chosenRegressionModel = this.company.getChosenRegressionModel(chosenRegressionModelClass);
 
-        //ALTERAR MÉTODO getDataListToFitTheModel PARA INCLUIR DADOS SEMANAIS
-        //OPÇÃO: COLOCAR MAIS UM PARÂMETRO COM O TIPO DE DATA E DEPOIS FAZER UM IF NO METODO
-        List<List<Double>> dataList = getDataListToFitTheModel(beginDate, endDate);
+        List<List<Double>> dataList = getDataListToFitTheModel(beginDate, endDate, typeOfData);
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
         double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
+        System.out.println(Arrays.toString(covidTestsArray));
         double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
+        System.out.println(Arrays.toString(meanAgeArray));
         double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
+        System.out.println(Arrays.toString(observedPositives));
 
         MyRegressionModel myRegressionModel = getMyRegressionModel(chosenRegressionModel, chosenVariable, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
-        HypothesisTest hypothesisTest = nhsReportStore.createHypothesisTest(chosenRegressionModel, myRegressionModel, significanceLevel);
-        SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(chosenRegressionModel, myRegressionModel, significanceLevel);
+        HypothesisTest hypothesisTest = chosenRegressionModel.getChosenHypothesisTest(myRegressionModel, significanceLevel, chosenRegCoefficient);
+        SignificanceModelAnova modelAnova = chosenRegressionModel.getSignificanceModelAnova(myRegressionModel, significanceLevel);
 
         Date startDate = nhsReportStore.getStartDateForSelectedDate(currentDate);
         TableOfValues tableOfValues = getTableOfValues(myRegressionModel, chosenRegressionModel, chosenVariable, typeOfData, historicalPoints, startDate, confidenceLevel);
@@ -71,9 +75,10 @@ public class SendNHSReportController {
 
 
     public List<List<Double>> getDataListToFitTheModel(Date beginDate,
-                                                       Date endDate) {
+                                                       Date endDate,
+                                                       String typeOfData) {
         TestStore testStore = this.company.getTestStore();
-        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate);
+        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate, typeOfData);
         return dataList;
     }
 
@@ -88,12 +93,12 @@ public class SendNHSReportController {
         MyRegressionModel myRegressionModel;
         if(!chosenVariable.isEmpty()) {
             //for Simple Linear Regression
-            myRegressionModel = (chosenVariable.equals("Covid-19 Tests Realized")) ?
-                    nhsReportStore.createMyRegressionModel(chosenRegressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
-                    nhsReportStore.createMyRegressionModel(chosenRegressionModel, meanAgeArray, covidTestsArray, observedPositives, historicalPoints);
+            myRegressionModel = (chosenVariable.equalsIgnoreCase(Constants.TEST_VARIABLE)) ?
+                    chosenRegressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives, historicalPoints) :
+                    chosenRegressionModel.getRegressionModel(meanAgeArray, covidTestsArray, observedPositives, historicalPoints);
         } else {
             //for Multiple Linear Regression
-            myRegressionModel = nhsReportStore.createMyRegressionModel(chosenRegressionModel, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
+            myRegressionModel = chosenRegressionModel.getRegressionModel(covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
         }
         return myRegressionModel;
     }
@@ -114,7 +119,7 @@ public class SendNHSReportController {
         Double[] numCovidTestsInHistoricalPoints;
         Double[] meanAgeInHistoricalPoints;
 
-        if(typeOfData.equals("Day")) {
+        if(typeOfData.equalsIgnoreCase(Constants.DAY_DATA)) {
             dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
             observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
             numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
@@ -131,7 +136,7 @@ public class SendNHSReportController {
         List<ConfidenceInterval> confidenceIntervals;
 
         if(!chosenVariable.isEmpty()) { //for Simple Linear Regression
-            if(chosenVariable.equals("Covid-19 Tests Realized"))
+            if(chosenVariable.equalsIgnoreCase("Covid-19 Tests Realized"))
                 chosenVariableArray = nhsReportStore.copyArray(numCovidTestsInHistoricalPoints);
             else
                 chosenVariableArray = nhsReportStore.copyArray(meanAgeInHistoricalPoints);
@@ -165,7 +170,7 @@ public class SendNHSReportController {
         if(!path.exists())
             path.mkdir();
 
-        Report2NHS.writeUsingFileWriter(this.nhsReport.toString());
+        Report2NHS.writeUsingFileWriter(this.nhsReport.toStringForChosenHypothesisTest());
     }
 
 }

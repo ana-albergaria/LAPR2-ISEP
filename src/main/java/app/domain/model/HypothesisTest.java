@@ -59,6 +59,14 @@ public class HypothesisTest {
      * for the Fisher-Snedecor Distribution.
      */
     private int denominatorDegreesOfFreedom;
+    /**
+     * The observed value for the chosen regression coefficient, if applicable.
+     */
+    private double chosenTObs;
+    /**
+     * The chosen regression coefficient, if applicable.
+     */
+    private String chosenRegCoefficient;
 
 
     /**
@@ -150,6 +158,25 @@ public class HypothesisTest {
     }
 
     /**
+     * CONSTRUCTOR FOR A CHOSEN REGRESSION COEFFICIENT
+     *
+     * @param myRegressionModel the myRegressionModel of the HypothesisTest
+     * @param chosenTObs the observed value for the chosen regression coefficient
+     *                   of the HypothesisTest
+     * @param significanceLevel the significance level of the HypothesisTest
+     */
+    public HypothesisTest(MyRegressionModel myRegressionModel,
+                          String chosenRegCoefficient,
+                          double chosenTObs,
+                          double significanceLevel) {
+        this.myRegressionModel = myRegressionModel;
+        this.chosenRegCoefficient = chosenRegCoefficient;
+        this.chosenTObs = chosenTObs;
+        this.significanceLevel = significanceLevel;
+        this.critTD = myRegressionModel.calculateCriticalValTStudent(significanceLevel);
+    }
+
+    /**
      * Returns the decision of the HypothesisTest.
      *
      * @param tObs the observed value regarding a certain regression coefficient
@@ -211,6 +238,23 @@ public class HypothesisTest {
         StringBuilder text = new StringBuilder();
         text.append(String.format("Decision: f%n"));
         text.append(String.format("%s%n", getDecisionForAnova(critFD)));
+        return text.toString();
+    }
+
+    /**
+     * Returns the textual description of the HypothesisTest's instance
+     * for a chosen regression coefficient.
+     *
+     * @return characteristics of the HypothesisTest of a chosen regression coefficient
+     */
+    public String toStringForChosenRegCoeffient() {
+        StringBuilder text = new StringBuilder();
+        text.append("Hypothesis tests for regression coefficients\n\n");
+        text.append(String.format("--> Significance Level: %.2f%n%n", significanceLevel));
+        text.append(String.format("H0:%s=0 H1:%s<>0\n", chosenRegCoefficient, chosenRegCoefficient));
+        text.append(String.format("t_obs=%f%n", chosenTObs));
+        text.append(String.format("Decision: %n%s%n", getDecision(chosenTObs, critTD)));
+        text.append("//\n");
         return text.toString();
     }
 
