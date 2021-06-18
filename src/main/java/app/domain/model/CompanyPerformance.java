@@ -18,9 +18,18 @@ import java.util.Date;
 public class CompanyPerformance {
 
     /**
-     * The company associated with the Controller.
+     * The company associated with the Company Performance.
      */
     private Company company;
+
+    /**
+     * Set the company associated with the Company Performance.
+     *
+     * @param company the company to associate with the Company Performance
+     */
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     /**
      * The beginning date of the interval.
@@ -72,7 +81,7 @@ public class CompanyPerformance {
      */
     private Date[] worstSubInt;
 
-    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) {
         this.beginningDate=beginningDate;
         this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
@@ -82,7 +91,15 @@ public class CompanyPerformance {
         this.testInfoWeek=getTestInfoPerWeek(getDays(beginningDate,endingDate));
         this.testInfoMonth=getTestInfoPerMonth(getDays(beginningDate,endingDate));
         this.testInfoYear=getTestInfoPerYear(getDays(beginningDate,endingDate));
-        this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
+        try {
+            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -395,7 +412,7 @@ public class CompanyPerformance {
      * @param chosenAlgorithm the chosen algorithm
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
      */
-    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
