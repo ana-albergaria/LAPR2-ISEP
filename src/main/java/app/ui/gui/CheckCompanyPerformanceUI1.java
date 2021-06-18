@@ -98,6 +98,25 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         this.referenceDate = referenceDate;
     }
 
+    private Date analysisBegDate;
+    private Date analysisEndDate;
+
+    public void setAnalysisBegDate(Date analysisBegDate) {
+        this.analysisBegDate = analysisBegDate;
+    }
+
+    public void setAnalysisEndDate(Date analysisEndDate) {
+        this.analysisEndDate = analysisEndDate;
+    }
+
+    public Date getAnalysisBegDate() {
+        return analysisBegDate;
+    }
+
+    public Date getAnalysisEndDate() {
+        return analysisEndDate;
+    }
+
     @FXML
     private Button exitBtn;
 
@@ -172,6 +191,17 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     @FXML
     void analyseAction(ActionEvent event) {
+        if (singleDateD==null && beginningDateD!=null && endingDateD!=null){
+            analysisBegDate = new Date(beginningDateD.getYear(), beginningDateD.getMonth(), beginningDateD.getDate(), 8,0,0);
+            setAnalysisBegDate(analysisBegDate);
+            analysisEndDate = new Date(endingDateD.getYear(), endingDateD.getMonth(), endingDateD.getDate(), 19,59,59);
+            setAnalysisEndDate(analysisEndDate);
+        } else if (singleDateD!=null && beginningDateD==null && endingDateD==null){
+            analysisBegDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 8,0,0);
+            setAnalysisBegDate(analysisBegDate);
+            analysisEndDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 19,59,59);
+            setAnalysisEndDate(analysisEndDate);
+        }
         referenceDate=java.util.Calendar.getInstance().getTime();
         referenceDate.setHours(0);
         referenceDate.setMinutes(0);
@@ -187,7 +217,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
                 checkCompanyPerformanceUI2.setMainApp(this.mainApp);
                 checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
                 checkCompanyPerformanceUI2.setController(this.controller);
-                checkCompanyPerformanceUI2.getDateOrInterval();
                 checkCompanyPerformanceUI2.analyseCompany();
                 checkCompanyPerformanceUI2.populateListView();
             } catch (Exception ex) {

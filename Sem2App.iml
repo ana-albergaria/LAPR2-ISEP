@@ -48,9 +48,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Report2NHS-1.0.0" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: com.example3:CovidReferenceValues1API:1.0.0">
         <CLASSES>
@@ -120,5 +117,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:11.0.2" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

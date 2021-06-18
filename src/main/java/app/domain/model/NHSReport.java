@@ -95,4 +95,9 @@ public class NHSReport {
         return String.format("%s%n%s%n%s%n%s",
                 myRegressionModel, hypothesisTest, modelAnova, tableOfValues);
     }
+
+    public String toStringForChosenHypothesisTest() {
+        return String.format("%s%n%s%n%s%n%s",
+                myRegressionModel, hypothesisTest.toStringForChosenRegCoeffient(), modelAnova, tableOfValues);
+    }
 }

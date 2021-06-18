@@ -1,0 +1,138 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+class Company {
+-designation
+-classNameForBarcodeApi
+-classNameForSortAlgorithm
+-regressionModelCLass
+-dateInterval
+-historicalPoints
+-confidenceLevel
+-significanceLevel
+}
+
+class NHSReport {}
+
+class RegressionModel {}
+
+class HypothesisTest {
+-tObsA
+-tObsB
+-tObsC
+-significanceLevel
+-critTD
+-f
+-critFD
+-numeratorDegreesOfFreedom
+-denominatorDegreesOfFreedom
+}
+
+class SignificanceModelAnova {
+-significanceLevel
+-sr
+-se
+-st
+-mr
+-me
+-f
+-degFreedomSr
+-degFreedomSe
+-degFreedomSt
+}
+
+class TableOfValues {
+-dates
+-observedPositives
+-estimatedPositives
+}
+
+class ConfidenceInterval {
+-y0
+-auxDelta
+-confidenceLevel
+-delta
+-limInf
+-limSup
+}
+
+class Timer {}
+
+class NHSReportStore {}
+
+class TestStore {}
+
+class SimpleLinearRegressionAdapter {}
+
+class MultipleLinearRegressionAdapter {}
+
+class RegressionModel {}
+
+class NHSReportTask {}
+
+class MyRegressionModel {
+-intercept
+-slope
+-secondIndVariable
+-r
+-r2
+-r2Adjusted
+-numberOfObservations
+}
+
+interface MathCalculus <<interface>> {}
+
+class Test{
+- code
+- nhsCode
+- dateOfTestRegistration
+- dateOfSamplesCollection
+- dateOfChemicalAnalysis
+- dateOfDiagnosis
+}
+/'O CONTROLLER É A APP STARTUP'/
+/'COLOCAR TIMER'/
+
+/'Timer "1" -- "*" NHSReport : schedules >'/
+/'Company "1" -- "1..*" NHSReport : reports >'/
+/'Company "1" -- "1" Timer : knows >'/
+NHSReport "*" -- "1" MyRegressionModel : has >
+NHSReport "1" -- "1" HypothesisTest : contains >
+NHSReport "1" -- "1" SignificanceModelAnova : contains >
+Company "*" -- "1" RegressionModel : makes use of >
+HypothesisTest "*" -- "1" MyRegressionModel : of >
+SignificanceModelAnova "1" -- "1" MyRegressionModel : of >
+SignificanceModelAnova "1" -- "1" HypothesisTest : contains >
+NHSReport "1" - "1" TableOfValues : contains >
+TableOfValues "1" -- "1" MyRegressionModel : of >
+TableOfValues "1" -- "*" ConfidenceInterval : contains >
+ConfidenceInterval "*" -- "1" MyRegressionModel : of >
+RegressionModel "*" - "1" MathCalculus : provided by >
+MyRegressionModel "1" -- "1" RegressionModel : has >
+Timer "1" -- "*" NHSReportTask : runs >
+
+
+
+
+/'NHSReportTask ..> Company
+NHSReportTask ..> TestStore
+NHSReportTask ..> NHSReportStore
+NHSReportTask ..> NHSReport
+NHSReportTask ..> Test
+NHSReportTask ..> TableOfValues
+NHSReportTask ..> SignificanceModelAnova
+NHSReportTask ..> ConfidenceInterval
+NHSReportTask ..> HypothesisTest
+NHSReportTask ..> MyRegressionModel
+NHSReportTask ..> MathCalculus'/
+
+
+
+Company "1" --> "1" TestStore : uses >
+Company "1" --> "1" NHSReportStore : uses >
+TestStore "1" -- "*" Test : conducts >
+NHSReportStore "1" -- "1..*" NHSReport : reports >
+
+
+@enduml

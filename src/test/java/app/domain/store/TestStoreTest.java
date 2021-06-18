@@ -433,7 +433,7 @@ public class TestStoreTest {
 
 
     // Porque dá erro no Jenkins??
-    /*
+
     @Test
     public void getObservedPositivesToTableOfValues() throws ParseException, IllegalAccessException, InstantiationException, OutputException, IOException, BarcodeException, ClassNotFoundException {
         int numberOfObservations = 8;
@@ -445,7 +445,7 @@ public class TestStoreTest {
 
         Assert.assertArrayEquals(expObservedPositives, observedPositives);
     }
-     */
+
 
     @Test
     public void getObservedPositivesInOneWeekTest() throws ParseException {
@@ -498,7 +498,6 @@ public class TestStoreTest {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         double actual = testStore.getMeanAgeInOneWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021"));
         double expected = 30.8;
-        System.out.println(actual);
         Assert.assertEquals(expected, actual, 2);
     }
 
@@ -531,15 +530,57 @@ public class TestStoreTest {
     }
 
     //Porque dá erro no Jenkins?
-    /*
+
     @Test
-    public void getObservedPositivesCovidInADay() throws IllegalAccessException, InstantiationException, OutputException, IOException, BarcodeException, ClassNotFoundException {
+    public void getObservedPositivesCovidInADay() {
         double expNumber = 1;
         double number = testStore.getObservedPositivesCovidInADay(startDate);
 
         Assert.assertEquals(expNumber, number, 0.0);
     }
-     */
+
+    @Test
+    public void addWeeklyDataFromDateInterval() throws ParseException {
+        List<Double> expCovidTestList = new ArrayList<>();
+        List<Double> expMeanAgeList = new ArrayList<>();
+        List<Double> expObservedPositives = new ArrayList<>();
+
+        Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("10/05/2021");
+        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("28/05/2021");
+
+        List<List<Double>> expectedList = new ArrayList<>();
+        expCovidTestList.add(43.0);
+        expCovidTestList.add(114.0);
+        expCovidTestList.add(159.0);
+
+        expMeanAgeList.add(26.930232558139537);
+        expMeanAgeList.add(30.82456140350877);
+        expMeanAgeList.add(35.943396226415096);
+
+        expObservedPositives.add(26.0);
+        expObservedPositives.add(79.0);
+        expObservedPositives.add(118.0);
+
+        expectedList.add(expCovidTestList);
+        expectedList.add(expMeanAgeList);
+        expectedList.add(expObservedPositives);
+        //Act
+        List<Double> covidTestList = new ArrayList<>();
+        List<Double> meanAgeList = new ArrayList<>();
+        List<Double> observedPositives = new ArrayList<>();
+
+        testStore.addWeeklyDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
+
+        List<List<Double>> list = new ArrayList<>();
+        list.add(covidTestList);
+        list.add(meanAgeList);
+        list.add(observedPositives);
+
+        Assert.assertEquals(expectedList, list);
+
+
+    }
+
 
 
 

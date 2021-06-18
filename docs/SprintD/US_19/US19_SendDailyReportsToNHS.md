@@ -206,8 +206,8 @@ defined through a configuration file.
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
- * NHSReport
- * Timer
+ * NHSReport  
+ * Timer  
  * Company
  * SignificanceModelAnova  
  * TableOfValues

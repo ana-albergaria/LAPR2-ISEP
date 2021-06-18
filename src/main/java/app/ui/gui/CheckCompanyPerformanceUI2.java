@@ -1,6 +1,7 @@
 package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
+import app.domain.model.CompanyPerformance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,6 +21,9 @@ import java.util.logging.Logger;
 public class CheckCompanyPerformanceUI2 implements Initializable {
 
     private App mainApp;
+
+    public CheckCompanyPerformanceUI2() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    }
 
     public void setMainApp(App mainApp){
         this.mainApp=mainApp;
@@ -46,37 +49,15 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.option = option;
     }
 
-    private Date singleDateD;
-    private Date beginningDateD;
-    private Date endingDateD;
+    private Date begDateAnalysis;
+    private Date endDateAnalysis;
 
-    public void setSingleDateD(Date singleDateD) {
-        this.singleDateD = singleDateD;
+    public void setBegDateAnalysis(Date begDateAnalysis) {
+        this.begDateAnalysis = begDateAnalysis;
     }
 
-    public void setBeginningDateD(Date beginningDateD) {
-        this.beginningDateD = beginningDateD;
-    }
-
-    public void setEndingDateD(Date endingDateD) {
-        this.endingDateD = endingDateD;
-    }
-
-    private Date analysisBegDate;
-    private Date analysisEndDate;
-
-    public void setAnalysisBegDate(Date analysisBegDate) {
-        this.analysisBegDate = analysisBegDate;
-    }
-
-    public void setAnalysisEndDate(Date analysisEndDate) {
-        this.analysisEndDate = analysisEndDate;
-    }
-
-    private String chosenAlg;
-
-    public void setChosenAlg(String chosenAlg) {
-        this.chosenAlg = chosenAlg;
+    public void setEndDateAnalysis(Date endDateAnalysis) {
+        this.endDateAnalysis = endDateAnalysis;
     }
 
     public void setCliTesOverview(TextArea cliTesOverview) {
@@ -85,12 +66,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     public void setListView(ListView<String> listView) {
         this.listView = listView;
-    }
-
-    private ArrayList<Date> daysF = new ArrayList<>();
-
-    public void setDaysF(ArrayList<Date> daysF) {
-        this.daysF = daysF;
     }
 
     private ArrayList<int[]> testsInfo = new ArrayList<>();
@@ -134,7 +109,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
         switch (selectedItem) {
             case "Number Of Tests Waiting For Results - Over Days":
-                setTestsInfo(controller.getTestInfoPerDay(daysF));
+                setTestsInfo(controller.getTestInfoPerDay());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
@@ -142,7 +117,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Results - Over Weeks":
-                setTestsInfo(controller.getTestInfoPerWeek(daysF));
+                setTestsInfo(controller.getTestInfoPerWeek());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
@@ -150,7 +125,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Results - Over Months":
-                setTestsInfo(controller.getTestInfoPerMonth(daysF));
+                setTestsInfo(controller.getTestInfoPerMonth());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
@@ -158,7 +133,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Results - Over Years":
-                setTestsInfo(controller.getTestInfoPerYear(daysF));
+                setTestsInfo(controller.getTestInfoPerYear());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
@@ -166,7 +141,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Days":
-                setTestsInfo(controller.getTestInfoPerDay(daysF));
+                setTestsInfo(controller.getTestInfoPerDay());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
@@ -174,7 +149,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Diagnosis");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Weeks":
-                setTestsInfo(controller.getTestInfoPerWeek(daysF));
+                setTestsInfo(controller.getTestInfoPerWeek());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
@@ -182,7 +157,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Diagnosis");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Months":
-                setTestsInfo(controller.getTestInfoPerMonth(daysF));
+                setTestsInfo(controller.getTestInfoPerMonth());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
@@ -190,7 +165,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 series.setName("Tests Waiting For Diagnosis");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Years":
-                setTestsInfo(controller.getTestInfoPerYear(daysF));
+                setTestsInfo(controller.getTestInfoPerYear());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
@@ -235,38 +210,24 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-    }
-
-    public void getDateOrInterval(){
-        option=checkCompPerUI1.getChosenOption();
-        if (option.equals("A Day")){
-            singleDateD=checkCompPerUI1.getSingleDateD();
-            setSingleDateD(singleDateD);
-            analysisBegDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 8,0,0);
-            setAnalysisBegDate(analysisBegDate);
-            analysisEndDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 19,59,59);
-            setAnalysisEndDate(analysisEndDate);
-        }else if (option.equals("An Interval")){
-            beginningDateD=checkCompPerUI1.getBeginningDateD();
-            setBeginningDateD(beginningDateD);
-            endingDateD=checkCompPerUI1.getEndingDateD();
-            setEndingDateD(endingDateD);
-            analysisBegDate = new Date(beginningDateD.getYear(), beginningDateD.getMonth(), beginningDateD.getDate(), 8,0,0);
-            setAnalysisBegDate(analysisBegDate);
-            analysisEndDate = new Date(endingDateD.getYear(), endingDateD.getMonth(), endingDateD.getDate(), 19,59,59);
-            setAnalysisEndDate(analysisEndDate);
+        try {
+            controller.setCompanyPerformance(checkCompPerUI1.getBeginningDateD(),checkCompPerUI1.getEndingDateD(),checkCompPerUI1.getChosenAlg());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
+        setBegDateAnalysis(checkCompPerUI1.getAnalysisBegDate());
+        setEndDateAnalysis(checkCompPerUI1.getAnalysisEndDate());
     }
 
     public void analyseCompany() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        setChosenAlg(checkCompPerUI1.getChosenAlg());
-        ArrayList<Date> days = controller.getDays(analysisBegDate,analysisEndDate);
-        setDaysF(days);
-        Date[] limits= controller.findWorstSubIntWithChosenAlgorithm(days,chosenAlg);
+        Date[] limits= controller.findWorstSubIntWithChosenAlgorithm();
         String text = "Interval When The Company Was Less Effective In Responding" + "\n ↪ From: " + limits[0].toString() + "\n ↪ To: " + limits[1].toString();
-        text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval(daysF);
-        text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval(daysF);
+        text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval();
+        text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval();
         cliTesOverview.setText(text);
         setCliTesOverview(cliTesOverview);
     }

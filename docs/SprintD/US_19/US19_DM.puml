@@ -81,6 +81,8 @@ class ConfidenceInterval {
 -limSup
 }
 
+class MathCalculus {}
+
 /'class NHSReportTask {
 -regressionModelClass
 -historicalPoints
@@ -109,6 +111,7 @@ NHSReport "1" - "1" TableOfValues : contains >
 TableOfValues "1" -- "1" RegressionModel : of >
 TableOfValues "1" -- "*" ConfidenceInterval : contains >
 ConfidenceInterval "*" -- "1" RegressionModel : of >
+RegressionModel "*" -- "1" MathCalculus : provided by >
 /'Timer "1" -- "*" NHSReportTask : schedules >'/
 /'NHSReportTask "1" -- "1" RegressionModel : makes use of >'/
 /'NHSReportTask "*" -- "1" RegressionModel : makes use of >'/
