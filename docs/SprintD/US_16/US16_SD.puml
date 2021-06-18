@@ -24,46 +24,86 @@ loop while the Laboratory Coordinator inserts and selects different data
 LC -> UI : inserts and selects the requested data
 activate UI
 
-UI -> CTRL : clientInfo = getNumClients()
-activate CTRL
-
-CTRL -> CMP : clientStore = getClientStore()
-activate CMP
-CMP --> CLTSTORE** : create()
-deactivate CMP
-CTRL -> CLTSTORE : clients = getClients()
-activate CLTSTORE
-|||
-deactivate CLTSTORE
-CTRL -> CLTSTORE : clientsNum = size()
-activate CLTSTORE
-|||
-deactivate CLTSTORE
-
-CTRL --> UI : clientInfo
-deactivate CTRL
-
 UI -> CTRL : days = getDays(beginningDay, endingDay)
 activate CTRL
 CTRL --> UI : days
 deactivate CTRL
 
-UI -> CTRL : testInfoDays = getTestInfoPerDay(days)
+UI -> CTRL : clientInfo = getClientsInfoPerInterval(days)
 activate CTRL
 
 CTRL -> CMP : testStore = getTestStore()
 activate CMP
 CMP --> TSTSTORE** : create()
 deactivate CMP
+CTRL -> TSTSTORE : tests = getTests()
+activate TSTSTORE
+|||
+deactivate TSTSTORE
+
+loop For every test in the system
+
+CTRL -> TST : registrationDate = getDateOfTestRegistration()
+activate TST
+|||
+deactivate TST
+
+alt The registrationDate is prior to the endingDay
+
+CTRL -> TST : client = getClient()
+activate TST
+|||
+deactivate TST
+CTRL -> TST : clientEmail = getEmail()
+deactivate TST
+
+alt The email is not repeated
+
+CTRL -> CTRL : add(clientEmail)
+activate CTRL
+|||
+deactivate CTRL
+
+end
+
+end
+
+end
+
+CTRL -> CTRL : size()
+activate CTRL
+|||
+deactivate CTRL
+
+CTRL --> UI : clientInfo
+deactivate CTRL
+
+UI -> CTRL : numTestsProcessed = getNumTestsProcessedInterval(days)
+activate CTRL
+CTRL -> CMP : testStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
+
+'TO CONTINUE HERE !!!!
+
+
+
+
+
+
+UI -> CTRL : testInfoDays = getTestInfoPerDay(days)
+activate CTRL
+
+CTRL -> CMP : testStore = getTestStore()
+activate CMP
+|||
+deactivate CMP
 CTRL -> TSTSTORE : numTestsWaitingForResultsDay = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
 CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDay = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabDay = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE
@@ -86,10 +126,6 @@ CTRL -> TSTSTORE : numTestsWaitingForDiagnosisWeek = getNumTestsWaitingForDiagno
 activate TSTSTORE
 |||
 deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabWeek = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
 
 CTRL --> UI : testInfoWeeks
 deactivate CTRL
@@ -109,10 +145,6 @@ CTRL -> TSTSTORE : numTestsWaitingForDiagnosisMonth = getNumTestsWaitingForDiagn
 activate TSTSTORE
 |||
 deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabMonth = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
 
 CTRL --> UI : testInfoYears
 deactivate CTRL
@@ -129,10 +161,6 @@ activate TSTSTORE
 |||
 deactivate TSTSTORE
 CTRL -> TSTSTORE : numTestsWaitingForDiagnosisYear = getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay,endingDay)
-activate TSTSTORE
-|||
-deactivate TSTSTORE
-CTRL -> TSTSTORE : numTestsProcessedInLabYear = getNumTestsProcessedInLabDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
 deactivate TSTSTORE

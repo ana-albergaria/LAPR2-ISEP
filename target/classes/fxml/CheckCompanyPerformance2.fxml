@@ -82,7 +82,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <LineChart fx:id="inefChart" GridPane.columnIndex="1">
+                              <LineChart fx:id="lineChart" GridPane.columnIndex="1">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>

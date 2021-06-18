@@ -141,6 +141,32 @@ Please consider the requirements introduced at the beginning of Sprint D. The la
 
 >Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8931#p11901).
 
+-
+
+> **Question:** When you say tests waiting results are you referring to tests with samples collected but not analyzed yet? If so, and considering the csv file does not have an explicit date for when the sample is collected, which date should we use?
+> 
+> **Answer:** You should use the test registration date (Test_Reg_DateHour).
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9169#p12111).
+
+-
+
+> **Question:** What is the total number of tests processed in the laboratory? Is it the number of tests that were given results in that time span or is it the number of tests that were validated in that time span?
+>
+> **Answer:** The total number of tests processed in the laboratory is the total number of tests that were validated by the laboratory coordinator.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9198#p12184).
+
+-
+
+> **Question:** What are the statistics that require a graph, could you specify, please.
+>
+> **Answer:**  In a previous post I asked: "The laboratory coordinator should be able to check the number of clients, the number of tests waiting for results, the number of tests waiting for diagnosis and the total number of tests processed (tests validated) in the laboratory in each day, week, month and year. The system should show these statistics for a given interval that should be selected/defined by the user".
+The application should present these statistics using four graphs/charts, one for each time resolution (day, week, month and year).
+In a previous post I also said: "Moreover, the application should also show to the laboratory coordinator the total number of clients and the total number of validated tests that exist in the system.". There is no need to show these information using a graph/chart.
+
+>Read the whole answer [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9204#p12186).
+
 
 ### 1.3. Acceptance Criteria
 
@@ -297,7 +323,7 @@ Tests from 4.1 and 4.2 follow this model:
 
 ## 4.3 TestStoreTest
 
-Tests 5-7 are made following this process:
+Tests 5-6 are made following this process:
 * create different tests in different "parts" of the testing process
 * manually count the number of the tests in the desired condition
 * compare the manually counted number with the number returned by the method to be tested
@@ -305,8 +331,6 @@ Tests 5-7 are made following this process:
 **Test 5:** Check if the number of tests waiting for results on a specific day or interval is being correctly counted.
 
 **Test 6:** Check if the number of tests waiting for diagnosis on a specific day or interval is being correctly counted.
-
-**Test 7:** Check if the number of tests processed in the lab on a specific day or interval is being correctly counted.
 
 
 # 5. Construction (Implementation)
@@ -324,9 +348,23 @@ Tests 5-7 are made following this process:
 
     //...Omitted
 
+    public int getNumTestsProcessedInterval(ArrayList<Date> days){
+        Date endingDay = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20, 0, 0);
+        TestStore testStore = new TestStore();
+        int quant=0;
+        for (Test test : testStore.getTests()){
+            if (test.getDateOfValidation()!=null && test.getDateOfValidation().before(endingDay)){
+                quant++;
+            }
+        }
+        return quant;
+    }
+
+    //...Omitted
+
     public ArrayList<int[]> getTestInfoPerYear(ArrayList<Date> days){ //YEAR: FROM JAN 1 TO DEC 31
         ArrayList<int[]> testInfoPerYear = new ArrayList<>();
-        int[] testInfo = new int[3];
+        int[] testInfo = new int[2];
         TestStore testStore = new TestStore();
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
@@ -346,7 +384,6 @@ Tests 5-7 are made following this process:
             endingDay = new Date(singleYear.get(singleYear.size()-1).getYear(), singleYear.get(singleYear.size()-1).getMonth(), singleYear.get(singleYear.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfo[2] = testStore.getNumTestsProcessedInLabDayOrInterval(beginningDay, endingDay);
             testInfoPerYear.add(testInfo);
         }
         return testInfoPerYear;
@@ -354,12 +391,12 @@ Tests 5-7 are made following this process:
 
     //...Omitted
 
-        public ArrayList<Date> getDays(Date beginningDay, Date endingDay){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+        public ArrayList<Date> getDays(Date beginningDay, Date endingDay){
         ArrayList<Date> days = new ArrayList<>();
         Date day = beginningDay;
         Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
         do {
-            if (day.getDay()!=0) //NO WORK ON SUNDAYS
+            if (day.getDay()!=0)
                 days.add(day);
             day = DateUtils.addDays(day, 1);
         } while (day.before(end));
@@ -368,16 +405,52 @@ Tests 5-7 are made following this process:
 
     //...Omitted
 
-    public int[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, int chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
-
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
         SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
-
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
-
-        return worstSubInt;
+        int num=0, val, start = 0, end = 0;
+        for (int i = 0; i < interval.length; i++) {
+            val=i;
+            for (int j = 0; j < worstSubInt.length; j++) {
+                if(interval[val]==worstSubInt[j]){
+                    num++;
+                }
+                val++;
+            }
+            if (num==worstSubInt.length){
+                start=i;
+                end=start+worstSubInt.length-1;
+            }
+            num=0;
+        }
+        int difStart=interval.length-(interval.length-(start+1));
+        int difEnd=interval.length-(interval.length-(end+1));
+        Date[] limits = new Date[2];
+        Date lastDate;
+        Date firstDate;
+        Date finish = days.get(days.size()-1);
+        int quant=0;
+        lastDate=finish;
+        do {
+            lastDate=DateUtils.addMinutes(lastDate,-30);
+            if ((lastDate.getHours()>=8 && lastDate.getHours()<20) || (lastDate.getHours()==20 && lastDate.getMinutes()==0)) {
+                quant++;
+            }
+        }while (quant!=difEnd);
+        quant=0;
+        firstDate=finish;
+        do {
+            firstDate=DateUtils.addMinutes(firstDate,-30);
+            if ((firstDate.getHours()>=8 && firstDate.getHours()<20) || (firstDate.getHours()==20 && firstDate.getMinutes()==0)) {
+                quant++;
+            }
+        }while (quant!=difStart);
+        limits[0]=firstDate;
+        limits[1]=lastDate;
+        return limits;
     }
 
     //...Omitted
@@ -499,7 +572,10 @@ that were registered between the desired interval of time.
 The "getNumberOfTestsByIntervalDateOfDiagnosis" method gets the number of tests that 
 were validated between the desired interval of time.
 
+
 # 6. Integration and Demo
+
+n/a
 
 
 # 7. Observations

@@ -1,11 +1,9 @@
 package app.controller;
 
 import app.domain.interfaces.SubMaxSumAlgorithms;
-import app.domain.model.Client;
 import app.domain.model.Company;
 import app.domain.model.Test;
 import app.domain.shared.Constants;
-import app.domain.store.ClientStore;
 import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -47,7 +45,7 @@ public class CompanyPerformanceAnalysisController {
      */
     public int getClientsInfoPerInterval(ArrayList<Date> days){
         Date endingDay = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20, 0, 0);
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         ArrayList<String> clientEmails = new ArrayList<>();
         String clientEmail;
         boolean repeated = false;
@@ -74,7 +72,7 @@ public class CompanyPerformanceAnalysisController {
      */
     public int getNumTestsProcessedInterval(ArrayList<Date> days){
         Date endingDay = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20, 0, 0);
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         int quant=0;
         for (Test test : testStore.getTests()){
             if (test.getDateOfValidation()!=null && test.getDateOfValidation().before(endingDay)){
@@ -97,7 +95,7 @@ public class CompanyPerformanceAnalysisController {
     public ArrayList<int[]> getTestInfoPerDay(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerDay = new ArrayList<>();
         int[] testInfo = new int[2];
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
@@ -117,7 +115,7 @@ public class CompanyPerformanceAnalysisController {
     public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days){ //WEEK: FROM MONDAY TO SATURDAY (NO WORK AT SUNDAY)
         ArrayList<int[]> testInfoPerWeek = new ArrayList<>();
         int[] testInfo = new int[2];
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK AT SUNDAY
         for (Date date : days) {
@@ -148,7 +146,7 @@ public class CompanyPerformanceAnalysisController {
     public ArrayList<int[]> getTestInfoPerMonth(ArrayList<Date> days){ //MONTH: FROM 1 TO END OF MONTH
         ArrayList<int[]> testInfoPerMonth = new ArrayList<>();
         int[] testInfo = new int[2];
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> months = new ArrayList<>();
         ArrayList<Date> month = new ArrayList<>();
         for (Date date : days) {
@@ -206,7 +204,7 @@ public class CompanyPerformanceAnalysisController {
     public ArrayList<int[]> getTestInfoPerYear(ArrayList<Date> days){ //YEAR: FROM JAN 1 TO DEC 31
         ArrayList<int[]> testInfoPerYear = new ArrayList<>();
         int[] testInfo = new int[2];
-        TestStore testStore = new TestStore();
+        TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
         for (Date date : days) {
@@ -255,7 +253,7 @@ public class CompanyPerformanceAnalysisController {
      * @return an array with the difference between the number of new tests and the number of results available to the client during each half an hour period
      */
     public int[] makeIntervalArray(ArrayList<Date> days){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
-        TestStore testStore = company.getTestStore();
+        TestStore testStore = this.company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
         int numRegistered = 0, numValidated = 0, intToKeep = 0, minToAdd = 30;
         Date date1 = days.get(0), date2 = DateUtils.addMinutes(date1, minToAdd);
@@ -297,18 +295,11 @@ public class CompanyPerformanceAnalysisController {
      */
     public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
-
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = Class.forName(algorithmClass);
         SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
-
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
-
-        int num=0;
-        int val;
-        int start = 0;
-        int end = 0;
-
+        int num=0, val, start = 0, end = 0;
         for (int i = 0; i < interval.length; i++) {
             val=i;
             for (int j = 0; j < worstSubInt.length; j++) {
@@ -323,16 +314,11 @@ public class CompanyPerformanceAnalysisController {
             }
             num=0;
         }
-
         int difStart=interval.length-(interval.length-(start+1));
-
         int difEnd=interval.length-(interval.length-(end+1));
-
         Date[] limits = new Date[2];
-
         Date lastDate;
         Date firstDate;
-
         Date finish = days.get(days.size()-1);
         int quant=0;
         lastDate=finish;
@@ -350,10 +336,8 @@ public class CompanyPerformanceAnalysisController {
                 quant++;
             }
         }while (quant!=difStart);
-
         limits[0]=firstDate;
         limits[1]=lastDate;
-
         return limits;
     }
 

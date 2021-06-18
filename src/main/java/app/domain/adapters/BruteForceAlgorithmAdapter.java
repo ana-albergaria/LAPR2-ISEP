@@ -1,7 +1,7 @@
 package app.domain.adapters;
 
 import app.domain.interfaces.SubMaxSumAlgorithms;
-import app.domain.model.BruteForceAlgorithm;
+import app.thirdparty.BruteForceAlgorithm;
 
 /**
  * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm.
