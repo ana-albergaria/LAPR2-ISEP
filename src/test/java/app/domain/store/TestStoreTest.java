@@ -11,7 +11,7 @@ import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
 import net.sourceforge.barbecue.output.OutputException;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -23,23 +23,23 @@ import static org.junit.Assert.*;
 
 public class TestStoreTest {
 
-    private List<Parameter> parametersBlood;
-    private List<Parameter> parametersCovid;
-    private List<ParameterCategory> pcListBlood;
-    private List<ParameterCategory> pcList;
-    private ParameterCategory p1;
-    private ParameterCategory p2;
-    private List<TestType> selectedTT;
-    private TestType t1;
-    private TestType t2;
-    private Date d1;
-    private ClinicalAnalysisLaboratory cal;
-    private ImportTestController importTestCtrl;
-    private TestStore testStore;
-    private Date startDate;
+    static private List<Parameter> parametersBlood;
+    static private List<Parameter> parametersCovid;
+    static private List<ParameterCategory> pcListBlood;
+    static private List<ParameterCategory> pcList;
+    static private ParameterCategory p1;
+    static private ParameterCategory p2;
+    static private List<TestType> selectedTT;
+    static private TestType t1;
+    static private TestType t2;
+    static private Date d1;
+    static private ClinicalAnalysisLaboratory cal;
+    static private ImportTestController importTestCtrl;
+    static private TestStore testStore;
+    static private Date startDate;
 
-    @Before
-    public void setUp() throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException, BarcodeException, OutputException, IOException {
+    @BeforeClass
+    public static void setUp() throws ParseException, IllegalAccessException, InstantiationException, ClassNotFoundException, BarcodeException, OutputException, IOException {
         parametersBlood = new ArrayList<>();
         parametersCovid = new ArrayList<>();
 
@@ -75,7 +75,12 @@ public class TestStoreTest {
         importTestCtrl = new ImportTestController();
         List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
         for (TestFileDTO testData : procedData) {
-            importTestCtrl.importTestFromFile(testData);
+            try{
+                importTestCtrl.importTestFromFile(testData);
+            }catch (Exception e){
+
+            }
+
         }
         testStore = App.getInstance().getCompany().getTestStore();
         Calendar cal = Calendar.getInstance();
@@ -615,7 +620,7 @@ public class TestStoreTest {
     public void checkDateIntervalHasMinRangeTrue() throws ParseException {
 
         Date beginDate = new SimpleDateFormat("dd/MM/yyyy").parse("7/06/2021");
-        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("16/06/2021");
+        Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("19/06/2021");
 
         boolean result = testStore.checkDateIntervalHasMinRange(beginDate, endDate);
 
