@@ -146,8 +146,8 @@ public class Company {
 
         //timer.schedule(nhsReportTask, today.getTime(), 1000L * 60L * 60L * 24L);
         //timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES));
-        timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
-        //timer.schedule(nhsReportTask,5000);
+        //timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
+        timer.schedule(nhsReportTask,5000);
 
 
 

@@ -462,7 +462,7 @@ public class TestStore {
     }
 
     //ACABAR!!!!!!!
-    /*
+
     public void addWeeklyDataFromDateInterval(Date beginDate,
                                               Date endDate,
                                               List<Double> covidTestList,
@@ -471,19 +471,28 @@ public class TestStore {
         Calendar cal = Calendar.getInstance();
         cal.setTime(endDate);
         Date auxEndDate = cal.getTime();
-        cal.add(Calendar.DAY_OF_MONTH, -5);
+        cal.add(Calendar.DAY_OF_MONTH, -4);
         Date auxBeginDate = cal.getTime();
 
         while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
+            System.out.println("AuxEndDate: " + auxEndDate);
+            System.out.println("AuxBeginDate: " + auxBeginDate);
             double testsInAWeek = getMeanAgeInOneWeek(auxBeginDate, auxEndDate);
+            System.out.println("Tests in a Week" + testsInAWeek);
             covidTestList.add(testsInAWeek);
             double meanAgeInAWeek = getMeanAgeInOneWeek(auxBeginDate, auxEndDate);
             meanAgeList.add(meanAgeInAWeek);
-
+            //FALTA VERIFICAR MEAN AGE
+            double observedPositivesInAWeek = getObservedPositivesInOneWeek(auxBeginDate, auxEndDate);
+            observedPositives.add(observedPositivesInAWeek);
+            System.out.println("Observed Positives In a Week: " + observedPositivesInAWeek);
+            cal.add(Calendar.DAY_OF_MONTH, -2);
+            auxEndDate = cal.getTime();
+            cal.add(Calendar.DAY_OF_MONTH, -5);
+            auxBeginDate = cal.getTime();
         }
-
     }
-     */
+
 
     public Double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
         double[] covidTestsInHistoricalPointsPrimitive = new double[dates.size()];
@@ -562,7 +571,6 @@ public class TestStore {
                     }
                 }
             }
-            //SE O NUM CLIENTES == 0, O QUE FAZER????
             if(numClients == 0)
                 meanAgeInHistoricalPoints[i] = 0.0;
             else
@@ -575,7 +583,6 @@ public class TestStore {
 
     public Double[] getWeeklyMeanAgeInHistoricalPoints(List<String> dates) throws ParseException {
         Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
-        double sumAges = 0, numClients = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < dates.size(); i++) {
             String[] intervalDatesInString = dates.get(i).split("-");
