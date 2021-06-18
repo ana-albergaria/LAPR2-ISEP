@@ -64,7 +64,8 @@ public class ClientStore {
     public boolean validateClient(Client cl) {
         if (cl == null)
             return false;
-
+        if(auth.existsUser(cl.getEmail()))
+            throw new IllegalArgumentException("Client's email already registered in the system.");
         return !this.clientList.contains(cl);
     }
 
@@ -107,16 +108,6 @@ public class ClientStore {
      */
     private boolean makeClientAnUser(String name,String email, String pwd) {
         return auth.addUserWithRole(name, email, pwd, "CLIENT");
-    }
-
-
-    public boolean existsClientByTin(String tinNumber){
-        for (Client client : clientList){
-            if(client.getTinNumber().equals(tinNumber)){
-                return true;
-            }
-        }
-        return false;
     }
 
     public Client getClientByTinNumber(String tinNumber){
