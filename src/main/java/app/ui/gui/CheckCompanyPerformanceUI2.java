@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -97,10 +98,14 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.testsInfo = testsInfo;
     }
 
-    private int[] chosenGraphData;
+    private ArrayList<Integer> chosenGraphData = new ArrayList<>();
 
-    public void setChosenGraphData(int[] chosenGraphData) {
+    public void setChosenGraphData(ArrayList<Integer> chosenGraphData) {
         this.chosenGraphData = chosenGraphData;
+    }
+
+    public void setLineChart(LineChart<String, Integer> lineChart) {
+        this.lineChart = lineChart;
     }
 
     @FXML
@@ -110,7 +115,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     private Button exitBtn;
 
     @FXML
-    private LineChart<String, Integer> inefChart;
+    private LineChart<String, Integer> lineChart;
 
     @FXML
     private Button returnBtn;
@@ -120,9 +125,12 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     @FXML
     void handleListViewClick(MouseEvent event) {
+        lineChart.getData().clear();
         String selectedItem = listView.getSelectionModel().getSelectedItem();
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
         switch (selectedItem) {
             case "Number Of Tests Waiting For Results - Over Days":
                 setTestsInfo(controller.getTestInfoPerDay(daysF));
@@ -130,6 +138,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
+                series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Results - Over Weeks":
                 setTestsInfo(controller.getTestInfoPerWeek(daysF));
@@ -137,6 +146,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
+                series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Results - Over Months":
                 setTestsInfo(controller.getTestInfoPerMonth(daysF));
@@ -144,6 +154,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
+                series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Results - Over Years":
                 setTestsInfo(controller.getTestInfoPerYear(daysF));
@@ -151,6 +162,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
+                series.setName("Tests Waiting For Results");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Days":
                 setTestsInfo(controller.getTestInfoPerDay(daysF));
@@ -158,6 +170,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
+                series.setName("Tests Waiting For Diagnosis");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Weeks":
                 setTestsInfo(controller.getTestInfoPerWeek(daysF));
@@ -165,6 +178,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
+                series.setName("Tests Waiting For Diagnosis");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Months":
                 setTestsInfo(controller.getTestInfoPerMonth(daysF));
@@ -172,6 +186,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
+                series.setName("Tests Waiting For Diagnosis");
                 break;
             case "Number Of Tests Waiting For Diagnosis - Over Years":
                 setTestsInfo(controller.getTestInfoPerYear(daysF));
@@ -179,9 +194,14 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                     bothValues= testsInfo.get(0);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
+                series.setName("Tests Waiting For Diagnosis");
                 break;
         }
-        
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
     }
 
     @FXML
