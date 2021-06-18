@@ -85,12 +85,21 @@ activate CMP
 |||
 deactivate CMP
 
-'TO CONTINUE HERE !!!!
+loop For every test in the system
 
+alt The test was validated before the endingDay
 
+CTRL -> CTRL : quant++
+activate CTRL
+|||
+deactivate CTRL
 
+end
 
+end
 
+CTRL --> UI : numTestsProcessed
+deactivate CTRL
 
 UI -> CTRL : testInfoDays = getTestInfoPerDay(days)
 activate CTRL
@@ -99,6 +108,9 @@ CTRL -> CMP : testStore = getTestStore()
 activate CMP
 |||
 deactivate CMP
+
+loop For every day of the interval
+
 CTRL -> TSTSTORE : numTestsWaitingForResultsDay = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
@@ -107,6 +119,12 @@ CTRL -> TSTSTORE : numTestsWaitingForDiagnosisDay = getNumTestsWaitingForDiagnos
 activate TSTSTORE
 |||
 deactivate TSTSTORE
+CTRL -> CTRL : add(testInfo)
+activate CTRL
+|||
+deactivate CTRL
+
+end
 
 CTRL --> UI : testInfoDays
 deactivate CTRL
@@ -118,6 +136,9 @@ CTRL -> CMP : testStore = getTestStore()
 activate CMP
 |||
 deactivate CMP
+
+loop For every week of the interval
+
 CTRL -> TSTSTORE : numTestsWaitingForResultsWeek = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
@@ -126,6 +147,12 @@ CTRL -> TSTSTORE : numTestsWaitingForDiagnosisWeek = getNumTestsWaitingForDiagno
 activate TSTSTORE
 |||
 deactivate TSTSTORE
+CTRL -> CTRL : add(testInfo)
+activate CTRL
+|||
+deactivate CTRL
+
+end
 
 CTRL --> UI : testInfoWeeks
 deactivate CTRL
@@ -137,6 +164,9 @@ CTRL -> CMP : testStore = getTestStore()
 activate CMP
 |||
 deactivate CMP
+
+loop For every month of the interval
+
 CTRL -> TSTSTORE : numTestsWaitingForResultsMonth = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
@@ -145,6 +175,12 @@ CTRL -> TSTSTORE : numTestsWaitingForDiagnosisMonth = getNumTestsWaitingForDiagn
 activate TSTSTORE
 |||
 deactivate TSTSTORE
+CTRL -> CTRL : add(testInfo)
+activate CTRL
+|||
+deactivate CTRL
+
+end
 
 CTRL --> UI : testInfoYears
 deactivate CTRL
@@ -156,6 +192,9 @@ CTRL -> CMP : testStore = getTestStore()
 activate CMP
 |||
 deactivate CMP
+
+loop For every year of the interval
+
 CTRL -> TSTSTORE : numTestsWaitingForResultsYear = getNumTestsWaitingForResultsDayOrInterval(beginningDay,endingDay)
 activate TSTSTORE
 |||
@@ -164,6 +203,13 @@ CTRL -> TSTSTORE : numTestsWaitingForDiagnosisYear = getNumTestsWaitingForDiagno
 activate TSTSTORE
 |||
 deactivate TSTSTORE
+
+CTRL -> CTRL : add(testInfo)
+activate CTRL
+|||
+deactivate CTRL
+
+end
 
 CTRL --> UI : testInfoYears
 deactivate CTRL
