@@ -21,3 +21,10 @@
     -fx-control-inner-background: #293241 ;
 }
 
+.choice-box .label {
+    -fx-text-fill: white;
+}
+
+.choice-box .context-menu { -fx-background-color:  #293241; }
+
+

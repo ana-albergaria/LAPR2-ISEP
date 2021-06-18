@@ -78,6 +78,7 @@
                         <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="386.0" minHeight="10.0" prefHeight="384.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Current date:" textAlignment="CENTER" wrappingWidth="308.0" GridPane.rowIndex="1">
@@ -170,8 +171,6 @@
                               <Font name="System Bold" size="21.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="regressionCombBox" prefHeight="25.0" prefWidth="248.0" style="-fx-border-color: #98C1d9; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <ComboBox fx:id="variableCombBox" prefHeight="25.0" prefWidth="248.0" style="-fx-background-color: transparent; -fx-border-color: #98c1d9;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Independent Variable:" textAlignment="CENTER" wrappingWidth="308.0" GridPane.rowIndex="6">
                            <font>
                               <Font name="System Bold" size="21.0" />
@@ -231,6 +230,14 @@
                               </TextField>
                            </children>
                         </GridPane>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Regression Coefficient: (Hypothesis Test)" textAlignment="CENTER" wrappingWidth="308.0" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="21.0" />
+                           </font>
+                        </Text>
+                        <ChoiceBox fx:id="regressionChoiceBox" prefHeight="27.0" prefWidth="246.0" style="-fx-background-color: transparent; -fx-border-color: #98C1d9;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <ChoiceBox fx:id="variableChoiceBox" prefHeight="27.0" prefWidth="246.0" style="-fx-background-color: transparent; -fx-border-color: #98C1d9;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <ChoiceBox fx:id="regCoefficientsChoiceBox" prefHeight="27.0" prefWidth="246.0" style="-fx-background-color: transparent; -fx-border-color: #98C1d9;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                      </children>
                   </GridPane>
                </center>

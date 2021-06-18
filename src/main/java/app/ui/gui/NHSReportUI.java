@@ -4,6 +4,7 @@ import app.controller.SendNHSReportController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -51,16 +52,26 @@ public class NHSReportUI implements Initializable, Menu {
     private DatePicker endDate;
 
     @FXML
-    private ComboBox regressionCombBox;
-
-    @FXML
-    private ComboBox variableCombBox;
-
-    @FXML
     private TextField significanceLevel;
 
     @FXML
     private TextField confidenceLevel;
+
+    @FXML
+    private ChoiceBox<String> regressionChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> regCoefficientsChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> variableChoiceBox;
+
+    private String chosenOption;
+
+    private final String[] regressionModels = {"Simple Linear Regression", "Multiple Linear Regression"};
+    private final String[] independentVariables = {"Covid-19 Tests Realized", "Mean Age Of Clients"};
+    private final String[] regressionCoefficients = {"a", "b", "c"};
+    private final String[] regressionCoefficientsForSLR = {"a", "b"};
 
     @FXML
     private Button sendBtn;
@@ -85,11 +96,34 @@ public class NHSReportUI implements Initializable, Menu {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> regressionModelList = FXCollections.observableArrayList("Simple Linear Regression", "Multiple Linear Regression");
-        regressionCombBox.setItems(regressionModelList);
-        ObservableList<String> variableList = FXCollections.observableArrayList("Covid-19 Tests Realized", "Mean Age Of Clients");
-        variableCombBox.setItems(variableList);
+        this.regressionChoiceBox.getItems().addAll(regressionModels);
+        this.variableChoiceBox.getItems().addAll(independentVariables);
+        this.variableChoiceBox.setDisable(true);
+        this.regCoefficientsChoiceBox.setDisable(true);
+        regressionChoiceBox.setOnAction(this::getButtons);
         this.controller = new SendNHSReportController();
+    }
+
+
+    public void setChosenOption(String chosenOption) {
+        this.chosenOption = chosenOption;
+    }
+
+    public void getButtons(ActionEvent event){
+        String chosenRegressionModel = regressionChoiceBox.getValue();
+        setChosenOption(chosenRegressionModel);
+        if (chosenOption.equals("Simple Linear Regression")) {
+            this.variableChoiceBox.setDisable(false);
+            this.regCoefficientsChoiceBox.setDisable(false);
+            regCoefficientsChoiceBox.getItems().clear();
+            regCoefficientsChoiceBox.getItems().addAll(regressionCoefficientsForSLR);
+        } else {
+            this.variableChoiceBox.setDisable(true);
+            this.regCoefficientsChoiceBox.setDisable(false);
+            regCoefficientsChoiceBox.getItems().clear();
+            regCoefficientsChoiceBox.getItems().addAll(regressionCoefficients);
+        }
+
     }
 
     @FXML
@@ -108,14 +142,17 @@ public class NHSReportUI implements Initializable, Menu {
             LocalDate endDateValue = this.endDate.getValue();
             Date endDate = Date.from(endDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
             System.out.println("End Date: " + endDate);
-            String chosenRegressionModelClass = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
-            System.out.println("Chosen Regression Model Class: " + chosenRegressionModelClass);
+            //String chosenRegressionModelClass = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
+            //System.out.println("Chosen Regression Model Class: " + chosenRegressionModelClass);
+            //String chosenRegCoefficient = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
 
             String chosenVariable = "";
-            if(this.regressionCombBox.getSelectionModel().getSelectedItem().toString().equals("Simple Linear Regression"))
+            /*if(this.regressionCombBox.getSelectionModel().getSelectedItem().toString().equals("Simple Linear Regression"))
                 chosenVariable = this.variableCombBox.getSelectionModel().getSelectedItem().toString();
             else
                 throw new UnsupportedOperationException("For Multiple Linear Regression, there's no chosen independent variable!");
+
+             */
 
             System.out.println("Chosen Variable: " + chosenVariable);
             double significanceLevel = Double.parseDouble(this.significanceLevel.getText());
@@ -126,10 +163,12 @@ public class NHSReportUI implements Initializable, Menu {
             //COLOCAR MAIS UMA OPÇÃO NA COMBO BOX PARA A REGRESSÃO MÚLTIPLA!!
             //FALTA COLOCAR EXCEÇÕES PARA A REGRESSÃO
 
-
+            /*
             boolean success = this.controller.createNHSDailyReport(currentDate,
                     typeOfData, historicalPoints, beginDate, endDate,
-                    chosenRegressionModelClass, chosenVariable, significanceLevel, confidenceLevel);
+                    chosenRegressionModelClass, chosenVariable, significanceLevel, confidenceLevel, chosenRegCoefficient);
+
+
 
             if(success) {
                 this.controller.sendNHSReport();
@@ -139,6 +178,8 @@ public class NHSReportUI implements Initializable, Menu {
                 AlertUI.createAlert(Alert.AlertType.ERROR, mainApp.getTITLE(), "Error on data",
                         "Something went wrong! Please, try again.").show();
             }
+
+             */
 
 
 
