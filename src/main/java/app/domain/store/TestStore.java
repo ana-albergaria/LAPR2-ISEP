@@ -435,6 +435,8 @@ public class TestStore {
             if(checkDateIntervalHasMinRange(beginDate, endDate)) {
                 beginDate = getFinalBeginDateForWeekData(beginDate);
                 endDate = getFinalEndDateForWeekData(endDate);
+                System.out.println("Final Begin Date: " + beginDate);
+                System.out.println("Final End Date: " + endDate);
             }
             addWeeklyDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
         }
@@ -448,6 +450,15 @@ public class TestStore {
         return dataList;
     }
 
+    /**
+     * Fills all the required arrays containing the data to fit the regression model.
+     *
+     * @param beginDate initial date
+     * @param endDate final date
+     * @param covidTestList list of the Covid-19 tests
+     * @param meanAgeList list of the Mean Age of Clients
+     * @param observedPositives list of observed Positives
+     */
     public void addAllDataFromDateInterval(Date beginDate,
                                            Date endDate,
                                            List<Double> covidTestList,
@@ -663,8 +674,8 @@ public class TestStore {
             finalBeginDate = auxInitialDate.getTime();
         }
 
-        if(cont < Constants.WEEK_DAYS)
-            throw new UnsupportedOperationException("For Week data, you must select a range in which at least one COMPLETE week (Monday-Saturday) fits in it!");
+        if(cont < Constants.MINIMUM_ALLOWED_WEEK_DAYS)
+            throw new UnsupportedOperationException("For Week data, you must select a range in which at least 2 COMPLETE week (Monday-Saturday) fits in it!");
 
         return true;
     }
@@ -685,6 +696,13 @@ public class TestStore {
         return auxInitialDate.getTime();
     }
 
+    /**
+     * Returns the final end date for providing data to fit the regression model.
+     *
+     * @param endDate the end date provided
+     *
+     * @return final end date
+     */
     public Date getFinalEndDateForWeekData(Date endDate) {
         Calendar auxFinalDate = Calendar.getInstance();
         auxFinalDate.setTime(endDate);

@@ -157,9 +157,12 @@ public class NHSReportUI implements Initializable, Menu {
             double confidenceLevel = Double.parseDouble(this.confidenceLevel.getText());
             System.out.println("Confidence Level: " + confidenceLevel);
 
-            //COLOCAR MAIS UMA OPÇÃO NA COMBO BOX PARA A REGRESSÃO MÚLTIPLA!!
-            //FALTA COLOCAR EXCEÇÕES PARA A REGRESSÃO
 
+            if(historicalPoints <= 2 && chosenRegressionModelClass.equalsIgnoreCase("Simple Linear Regression"))
+                throw new UnsupportedOperationException("The historical points for SLR must be greater than 2!");
+            if(historicalPoints <= 3 && chosenRegressionModelClass.equalsIgnoreCase("Multiple Linear Regression"))
+                throw new UnsupportedOperationException("The historical points for MLR must be greater than 3!");
+            
 
             boolean success = this.controller.createNHSDailyReport(currentDate,
                     typeOfData, historicalPoints, beginDate, endDate,

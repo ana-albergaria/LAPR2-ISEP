@@ -16,8 +16,7 @@ import java.util.*;
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-public class
-App {
+public class App {
 
     private Company company;
     private AuthFacade authFacade;
