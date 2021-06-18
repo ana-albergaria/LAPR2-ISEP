@@ -93,13 +93,11 @@ App {
         this.authFacade.addUserWithRole("rece","rec@gmail.com","1",Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
-        this.authFacade.addUserWithRole("Maria", "maria@gmail.com","maria","CLIENT");
-        this.authFacade.addUserWithRole("Pedro", "pedro@gmail.com","pedro","CLIENT");
         this.authFacade.addUserWithRole("labCord", "lc@gmail.com","1",Constants.ROLE_LAB_COORDINATOR);
 
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));
-        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE3","covid"));
+        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Covid","covid"));
 
         List<ParameterCategory> pcsCovid = new ArrayList<>();
         pcsCovid.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));
@@ -110,8 +108,8 @@ App {
         selectedTT.add(t1);
 
         List<ParameterCategory> pcsBlood = new ArrayList<>();
-        pcsCovid.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
-        pcsCovid.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(1));
+        pcsBlood.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
+        pcsBlood.add(this.company.getParameterCategoryStore().getParameterCategoriesStore().get(1));
 
         TestType t2 = new TestType("blood","blabla","blood",pcsBlood, Constants.BLOOD_EXTERNAL_ADAPTER_2);
         this.company.getTestTypeStore().saveTestType(t2);
@@ -130,6 +128,16 @@ App {
 
         Parameter parameter = new Parameter("IgGAN", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(2));
         this.company.getParameterStore().saveParameter(parameter);
+        Parameter parameter1 = new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
+        this.company.getParameterStore().saveParameter(parameter1);
+        Parameter parameter2 = new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
+        this.company.getParameterStore().saveParameter(parameter2);
+        Parameter parameter3 = new Parameter("HDL00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(1));
+        this.company.getParameterStore().saveParameter(parameter3);
+        Parameter parameter4 = new Parameter("PLT00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
+        this.company.getParameterStore().saveParameter(parameter4);
+        Parameter parameter5 = new Parameter("HB000", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0));
+        this.company.getParameterStore().saveParameter(parameter5);
 
         List<Parameter> listParameter = new ArrayList<>();
         listParameter.add(parameter);
@@ -155,34 +163,11 @@ App {
                 "CAL6","AAA","91841373221","1234437890", selectedTT));
 
 
-        //Test test1 = new Test("123456789012",c1,t1,listParameter, cal2);
-        //this.company.getTestStore().saveTest(test1);
-        //RETIRAR BARCODE EXCEPTION DO CONSTRUTOR, BOOTSTRAP E SINGLETON EM BAIXO
-
         MyBarcode mb1 = new MyBarcode(c1, "12345678901");
 
         Sample s1 = new Sample(mb1);
-        //test1.addSample(s1);
-        /*
-        try{
-            test1.addTestResult("code1", 23.45, "ug");
-            test1.addTestResult("code2", 23.45, "ug");
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-
-         */
-
         this.company.getParameterStore().saveParameter(new Parameter("WBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
         this.company.getParameterStore().saveParameter(new Parameter("RBC00", "name", "descrip",this.company.getParameterCategoryStore().getParameterCategoriesStore().get(0)));
-
-
-        //Test test2 = new Test("123456789000",c1,t2,listParameter2, cal1);
-        //this.company.getTestStore().saveTest(test2);
-
-        p1 = new ParameterCategory("CODE1","Hemogram");
-        Parameter rbc = new Parameter("RBC12", "rbc", "redbloodcells", p1);
-        Parameter wbc = new Parameter("WBC12", "wbc", "whitebloodcells", p1);
 
         Test testWithResult = new Test("123456789067",c1,t2,listParameter,cal1);
         this.company.getTestStore().saveTest(testWithResult);
