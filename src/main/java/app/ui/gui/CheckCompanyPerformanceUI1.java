@@ -180,8 +180,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         if (((singleDateD!=null && singleDateD.before(referenceDate)) || (beginningDateD!=null && endingDateD!=null && endingDateD.before(referenceDate)
                 && beginningDateD.before(endingDateD) && (beginningDateD.getYear()!=endingDateD.getYear() ||
                 beginningDateD.getMonth()!=endingDateD.getMonth() || beginningDateD.getDate()!=endingDateD.getDate()))) &&
-                (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") ||
-                chosenAlg.equals("Brute-Force Algorithm"))) {
+                (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (algorithmOption.getValue().equals("Benchmark Algorithm") ||
+                algorithmOption.getValue().equals("Brute-Force Algorithm"))) {
             try {
                 CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
                 checkCompanyPerformanceUI2.setMainApp(this.mainApp);
@@ -211,11 +211,11 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.controller=new CompanyPerformanceAnalysisController();
+        intervalOption.setOnAction(this::getButtons);
     }
 
     public void addOptions(){
         intervalOption.getItems().addAll(options);
-        intervalOption.setOnAction(this::getButtons);
         algorithmOption.getItems().addAll(optionsAlg);
     }
 

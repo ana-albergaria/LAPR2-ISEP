@@ -7,7 +7,7 @@ import java.util.List;
 
 public class InsertionSort {
     public <T> void sort(List<T> list, Comparator<? super T> comparator) {
-        System.out.println("laricel");
+        long start2 = System.currentTimeMillis();
         for (int j = 1; j < list.size(); j++) {
             T current = list.get(j);
             int i = j-1;
@@ -17,6 +17,8 @@ public class InsertionSort {
             }
             list.set(i+1, current);
         }
+        long end2 = System.currentTimeMillis();
+        System.out.println("Elapsed Time in milli seconds(Insertion sort): "+ (end2-start2) + "ms for input size:" + list.size());
     }
 
 }
