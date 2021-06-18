@@ -1,10 +1,16 @@
 package app.controller;
 
+import app.domain.model.Client;
+import app.domain.sort.algorithms.BubbleSort;
+import app.domain.sort.algorithms.InsertionSort;
+import app.domain.sort.comparators.alphabeticalNameClient;
+import app.domain.sort.comparators.ascendTinClient;
 import app.ui.console.utils.TestFileUtils;
 import app.domain.store.TestStore;
 import app.mappers.dto.ClientDTO;
 import app.mappers.dto.TestDTO;
 import app.mappers.dto.TestFileDTO;
+import jdk.jfr.Timespan;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.output.OutputException;
 import org.junit.Before;
@@ -48,6 +54,23 @@ public class ConsultTestByClientTest {
             System.out.println();
         }
 
+    }
+
+    @Test
+    public void runtimeTestForInsertion(){
+        List<Client> clients = App.getInstance().getCompany().getClientStore().getClients();
+        InsertionSort insertionSort = new InsertionSort();
+/*        long start2 = System.currentTimeMillis();*/
+            insertionSort.sort(clients, new ascendTinClient());
+/*        long end2 = System.currentTimeMillis();
+        System.out.println("Elapsed Time in milli seconds: "+ (end2-start2));*/
+    }
+
+    @Test
+    public void runtimeTestForBubble(){
+        List<Client> clients = App.getInstance().getCompany().getClientStore().getClients();
+        BubbleSort bubbleSort = new BubbleSort();
+        bubbleSort.bubbleSortArrayList(clients, new ascendTinClient());
     }
 
     @Test
