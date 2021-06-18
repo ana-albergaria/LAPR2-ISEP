@@ -87,7 +87,7 @@ public class ConfidenceInterval {
      */
     @Override
     public String toString() {
-        return String.format("%f-%f", limInf, limSup);
+        return String.format("%.4f-%.4f", limInf, limSup);
     }
 
     /**

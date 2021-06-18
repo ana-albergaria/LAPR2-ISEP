@@ -142,17 +142,14 @@ public class NHSReportUI implements Initializable, Menu {
             LocalDate endDateValue = this.endDate.getValue();
             Date endDate = Date.from(endDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
             System.out.println("End Date: " + endDate);
-            //String chosenRegressionModelClass = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
-            //System.out.println("Chosen Regression Model Class: " + chosenRegressionModelClass);
-            //String chosenRegCoefficient = this.regressionCombBox.getSelectionModel().getSelectedItem().toString();
+            String chosenRegressionModelClass = this.regressionChoiceBox.getValue();
+            System.out.println("Chosen Regression Model Class: " + chosenRegressionModelClass);
+            String chosenRegCoefficient = this.regCoefficientsChoiceBox.getValue();
 
             String chosenVariable = "";
-            /*if(this.regressionCombBox.getSelectionModel().getSelectedItem().toString().equals("Simple Linear Regression"))
-                chosenVariable = this.variableCombBox.getSelectionModel().getSelectedItem().toString();
-            else
-                throw new UnsupportedOperationException("For Multiple Linear Regression, there's no chosen independent variable!");
+            if(this.regressionChoiceBox.getValue().equalsIgnoreCase("Simple Linear Regression"))
+                chosenVariable = this.variableChoiceBox.getValue();
 
-             */
 
             System.out.println("Chosen Variable: " + chosenVariable);
             double significanceLevel = Double.parseDouble(this.significanceLevel.getText());
@@ -163,7 +160,7 @@ public class NHSReportUI implements Initializable, Menu {
             //COLOCAR MAIS UMA OPÇÃO NA COMBO BOX PARA A REGRESSÃO MÚLTIPLA!!
             //FALTA COLOCAR EXCEÇÕES PARA A REGRESSÃO
 
-            /*
+
             boolean success = this.controller.createNHSDailyReport(currentDate,
                     typeOfData, historicalPoints, beginDate, endDate,
                     chosenRegressionModelClass, chosenVariable, significanceLevel, confidenceLevel, chosenRegCoefficient);
@@ -179,7 +176,7 @@ public class NHSReportUI implements Initializable, Menu {
                         "Something went wrong! Please, try again.").show();
             }
 
-             */
+
 
 
 
