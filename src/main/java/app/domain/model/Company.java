@@ -374,7 +374,7 @@ public class Company {
      * @return instance of CompanyPerformance Class with the beginningDate, endingDate and chosenAlg.
      */
     public CompanyPerformance createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        return new CompanyPerformance(beginningDate,endingDate,chosenAlg);
+        return new CompanyPerformance(beginningDate,endingDate,chosenAlg, this);
     }
 
     /**

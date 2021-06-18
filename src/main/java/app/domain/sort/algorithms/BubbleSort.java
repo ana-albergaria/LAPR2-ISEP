@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BubbleSort {
     public <T> void bubbleSortArrayList(List<T> list, Comparator<? super T> comparator) {
-        long start2 = System.currentTimeMillis();
+        long start2 = System.nanoTime();
         T temp;
         int k = list.size();
         for (int i = 0; i < k-1; i++) {
@@ -18,7 +18,7 @@ public class BubbleSort {
                 }
             }
         }
-        long end2 = System.currentTimeMillis();
-        System.out.println("Elapsed Time in milli seconds(Bubble sort): "+ (end2-start2) + "ms for input size:" + list.size());
+        long end2 = System.nanoTime();
+        System.out.println("Elapsed Time in milli seconds(Bubble sort): "+ (end2-start2) + "ns for input size:" + list.size());
     }
 }

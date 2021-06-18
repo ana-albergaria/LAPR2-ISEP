@@ -203,7 +203,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             setAnalysisEndDate(analysisEndDate);
         }
         try {
-            controller.createCompanyPerformance(analysisBegDate,analysisEndDate,chosenAlg);
+            controller.createCompanyPerformance(analysisBegDate,analysisEndDate,algorithmOption.getValue());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

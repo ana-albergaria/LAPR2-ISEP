@@ -72,7 +72,8 @@ public class CompanyPerformance {
      */
     private Date[] worstSubInt;
 
-    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        this.company = company;
         this.beginningDate=beginningDate;
         this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
@@ -375,7 +376,7 @@ public class CompanyPerformance {
             }
             date1 = DateUtils.addMinutes(date1, minToAdd);
             date2 = DateUtils.addMinutes(date2, minToAdd);
-            endDay = date2;
+            endDay = (Date)date2.clone();
             endDay.setHours(19);
             endDay.setMinutes(59);
             endDay.setSeconds(59);
@@ -429,6 +430,8 @@ public class CompanyPerformance {
             if ((lastDate.getHours()>=8 && lastDate.getHours()<20) || (lastDate.getHours()==20 && lastDate.getMinutes()==0)) {
                 quant++;
             }
+            System.out.println(quant);
+            System.out.println(difEnd);
         }while (quant!=difEnd);
         quant=0;
         firstDate=finish;
@@ -437,6 +440,8 @@ public class CompanyPerformance {
             if ((firstDate.getHours()>=8 && firstDate.getHours()<20) || (firstDate.getHours()==20 && firstDate.getMinutes()==0)) {
                 quant++;
             }
+            System.out.println(quant);
+            System.out.println(difStart);
         }while (quant!=difStart);
         limits[0]=firstDate;
         limits[1]=lastDate;

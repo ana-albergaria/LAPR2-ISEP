@@ -65,7 +65,7 @@ public class ClientStore {
         if (cl == null)
             return false;
         if(auth.existsUser(cl.getEmail()))
-            throw new IllegalArgumentException("Client's email already registered in the system.");
+            throw new IllegalArgumentException("Client's email already registered in the system.: " + cl.getEmail());
         return !this.clientList.contains(cl);
     }
 
