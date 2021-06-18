@@ -1,8 +1,8 @@
-/*
 package app.domain.model;
 
 import app.controller.ImportTestController;
 import app.domain.interfaces.RegressionModel;
+import app.domain.shared.Constants;
 import app.ui.console.utils.TestFileUtils;
 import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
@@ -31,7 +31,8 @@ public class NHSReportTask extends TimerTask {
     private String dateInterval;
     private TestStore testStore;
     private NHSReportStore nhsReportStore;
-    private NHSReport nhsReport;
+    private NHSReport nhsDayDataReport;
+    private NHSReport nhsWeekDataReport;
 
     public NHSReportTask(String regressionModelClass,
                          String historicalPoints,
@@ -49,9 +50,9 @@ public class NHSReportTask extends TimerTask {
         this.nhsReportStore = nhsReportStore;
     }
 
-    public boolean createNHSDailyReport() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
+    public NHSReport createNHSDailyReport(String typeOfData) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException {
         this.regressionModel = getRegressionModel(regressionModelClass);
-        List<List<Double>> dataList = getDataListToFitTheModel();
+        List<List<Double>> dataList = getDataListToFitTheModel(typeOfData);
         double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
         double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
         double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
@@ -62,18 +63,21 @@ public class NHSReportTask extends TimerTask {
         SignificanceModelAnova modelAnova = nhsReportStore.createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel);
 
         Date startDate = nhsReportStore.getStartDate();
-        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate);
+        TableOfValues tableOfValues = getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate, typeOfData);
 
-        this.nhsReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
-        return nhsReportStore.validateNHSDailyReport(nhsReport);
+        NHSReport nhsReport = nhsReportStore.createNHSDailyReport(myRegressionModel,hypothesisTest,modelAnova,tableOfValues);
+        if(nhsReportStore.validateNHSDailyReport(nhsReport))
+            return nhsReport;
+        else
+            throw new IllegalArgumentException("The Report must be validated in order to be sent!");
     }
 
 
-    public List<List<Double>> getDataListToFitTheModel() throws ParseException {
+    public List<List<Double>> getDataListToFitTheModel(String typeOfData) throws ParseException {
         String[] intervalDatesInString = dateInterval.split("-");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date beginDate = sdf.parse(intervalDatesInString[0]), endDate = sdf.parse(intervalDatesInString[1]);
-        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate);
+        List<List<Double>> dataList = testStore.getAllDataToFitTheModel(beginDate, endDate, typeOfData);
         return dataList;
     }
 
@@ -94,15 +98,31 @@ public class NHSReportTask extends TimerTask {
     public TableOfValues getTableOfValues(MyRegressionModel myRegressionModel,
                                           Integer bestXIndex,
                                           int historicalPoints,
-                                          Date startDate) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
-        int[] observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
+                                          Date startDate,
+                                          String typeOfData) throws IllegalAccessException, InstantiationException, ClassNotFoundException, ParseException {
+
+        List<String> dates;
+        int[] observedPositives;
+        Double[] numCovidTestsInHistoricalPoints;
+        Double[] meanAgeInHistoricalPoints;
+
+        if(typeOfData.equalsIgnoreCase(Constants.DAY_DATA)) {
+            dates = nhsReportStore.getDatesColumnToTableOfValues(historicalPoints, startDate);
+            observedPositives = testStore.getObservedPositivesToTableOfValues(historicalPoints, dates);
+            numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
+            meanAgeInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
+        } else {
+            dates = nhsReportStore.getWeeksColumnToTableOfValues(historicalPoints, startDate);
+            observedPositives = testStore.getWeeklyObservedPositivesToTableOfValues(dates);
+            numCovidTestsInHistoricalPoints = testStore.getWeeklyNumberOfCovidTestsInHistoricalPoints(dates);
+            meanAgeInHistoricalPoints = testStore.getWeeklyMeanAgeInHistoricalPoints(dates);
+        }
+
         this.regressionModel = getRegressionModel(regressionModelClass);
 
         Double[] bestXInHistoricalPoints;
         List<Double> estimatedPositives;
-        Double[] numCovidTestsInHistoricalPoints = testStore.getNumberOfCovidTestsInHistoricalPoints(dates);
-        Double[] meanAgeInHistoricalPoints = testStore.getMeanAgeInHistoricalPoints(dates);
+
         List<ConfidenceInterval> confidenceIntervals;
 
         if(bestXIndex != null) {
@@ -141,6 +161,22 @@ public class NHSReportTask extends TimerTask {
         return (RegressionModel) oClass.newInstance();
     }
 
+    public void writeEventIntoLogFile() throws IOException {
+        Logger logger = Logger.getLogger(NHSReportTask.class.getSimpleName());
+        FileHandler fh;
+
+        // This block configure the logger with handler and formatter
+        fh = new FileHandler("./NHSReport.log", true);
+        logger.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();
+        fh.setFormatter(formatter);
+
+        // the following statement is used to log any messages
+        logger.info("NHS Daily Report sent");
+
+        logger.setUseParentHandlers(false);
+    }
+
     @Override
     public void run() {
         try {
@@ -154,29 +190,19 @@ public class NHSReportTask extends TimerTask {
             }
             //fim teste
 
-            boolean success = createNHSDailyReport();
-            if(success) {
-                File path = new File("./NHSReport/");
-                if(!path.exists())
+            this.nhsDayDataReport = createNHSDailyReport(Constants.DAY_DATA);
+            this.nhsWeekDataReport = createNHSDailyReport(Constants.WEEK_DATA);
+
+            File path = new File("./NHSReport/");
+            if(!path.exists())
                     path.mkdir();
 
-                Report2NHS.writeUsingFileWriter(this.nhsReport.toString());
+            String dataToBeSent = String.format("----------------------> DAY DATA <----------------------%n%n%s%n%n" +
+                    "----------------------> WEEK DATA <----------------------%n%n%s", this.nhsDayDataReport.toString(), this.nhsWeekDataReport);
 
-                Logger logger = Logger.getLogger(NHSReportTask.class.getSimpleName());
-                FileHandler fh;
+            Report2NHS.writeUsingFileWriter(dataToBeSent);
+            writeEventIntoLogFile();
 
-                // This block configure the logger with handler and formatter
-                fh = new FileHandler("./NHSReport.log", true);
-                logger.addHandler(fh);
-                SimpleFormatter formatter = new SimpleFormatter();
-                fh.setFormatter(formatter);
-
-                // the following statement is used to log any messages
-                logger.info("NHS Daily Report sent");
-
-                logger.setUseParentHandlers(false);
-
-            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -194,6 +220,6 @@ public class NHSReportTask extends TimerTask {
     }
 }
 
- */
+
 
 

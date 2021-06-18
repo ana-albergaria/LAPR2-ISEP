@@ -1,6 +1,7 @@
 package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
+import app.domain.model.CompanyPerformance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,18 +46,10 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         this.chosenOption = chosenOption;
     }
 
-    public String getChosenOption() {
-        return chosenOption;
-    }
-
     private Date singleDateD = null;
 
     public void setSingleDateD(Date singleDateD) {
         this.singleDateD = singleDateD;
-    }
-
-    public Date getSingleDateD() {
-        return singleDateD;
     }
 
     private Date beginningDateD = null;
@@ -65,18 +58,10 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         this.beginningDateD = beginningDateD;
     }
 
-    public Date getBeginningDateD() {
-        return beginningDateD;
-    }
-
     private Date endingDateD = null;
 
     public void setEndingDateD(Date endingDateD) {
         this.endingDateD = endingDateD;
-    }
-
-    public Date getEndingDateD() {
-        return endingDateD;
     }
 
     private final String[] options = {"A Day", "An Interval"};
@@ -109,12 +94,14 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         this.analysisEndDate = analysisEndDate;
     }
 
-    public Date getAnalysisBegDate() {
-        return analysisBegDate;
+    private CompanyPerformance companyPerformance;
+
+    public void setCompanyPerformance(CompanyPerformance companyPerformance) {
+        this.companyPerformance = companyPerformance;
     }
 
-    public Date getAnalysisEndDate() {
-        return analysisEndDate;
+    public CompanyPerformance getCompanyPerformance() {
+        return companyPerformance;
     }
 
     @FXML
