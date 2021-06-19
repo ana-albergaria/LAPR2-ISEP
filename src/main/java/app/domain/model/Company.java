@@ -138,18 +138,20 @@ public class Company {
         this.confidenceLevel = confidenceLevel;
         this.significanceLevel = significanceLevel;
 
-
+        /*
         NHSReportTask nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
         this.timer = new Timer();
         Date initialDateForTask = getDateForNHSReportTask();
+
+         */
 
 
 
         //timer.schedule(nhsReportTask, today.getTime(), 1000L * 60L * 60L * 24L);
         //timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES));
         //timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
-        timer.schedule(nhsReportTask,5000);
+        //timer.schedule(nhsReportTask,5000);
 
 
 

@@ -1,4 +1,4 @@
-/*package app.domain.model.US19;
+package app.domain.model.US19;
 
 
 import app.domain.interfaces.RegressionModel;
@@ -36,12 +36,17 @@ public class Main {
 
         double[] y1 = {128.0, 122.0, 168.0, 140.0, 176.0, 184.0, 144.0, 154.0};
 
+        //TESTE EM COMPARAÇÃO COM APP
+        double[] covidTests = {12.0, 12.0, 18.0, 15.0, 15.0, 20.0, 24.0, 22.0, 23.0};
+        double[] observPositives = {8.0, 8.0, 12.0, 10.0, 9.0, 14.0, 18.0, 16.0, 16.0};
+
         SimpleLinearRegression simpleLR = new SimpleLinearRegression(x, y);
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
         RegressionModel calculus = (RegressionModel) oClass.newInstance();
-        MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y, x.length);
+        //MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y, x.length);
         //MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, y1);
+        MyRegressionModel myRegressionModel = calculus.getRegressionModel(covidTests, x0, observPositives, 10);
         System.out.println(myRegressionModel);
         HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel, 0.05);
         System.out.println(hypothesisTest);
@@ -81,7 +86,7 @@ public class Main {
     }
 }
 
- */
+
 
 
 

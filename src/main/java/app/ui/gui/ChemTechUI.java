@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import app.ui.console.RecordResultsUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,7 +44,8 @@ public class ChemTechUI implements Initializable, Menu {
 
     @FXML
     public void addTestResult(){
-
+        RecordResultsUI recordResultsUI = new RecordResultsUI();
+        recordResultsUI.run();
     }
 
     @FXML
