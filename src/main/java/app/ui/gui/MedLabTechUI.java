@@ -45,7 +45,6 @@ public class MedLabTechUI implements Initializable, Menu {
 
     private String labID;
 
-
     /**
      * Initializes the UI class.
      */
