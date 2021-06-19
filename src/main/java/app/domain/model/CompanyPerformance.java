@@ -1,13 +1,18 @@
 package app.domain.model;
 
+import app.controller.ImportTestController;
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.shared.Constants;
 import app.domain.store.TestStore;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
+import net.sourceforge.barbecue.BarcodeException;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Represents the company performance through:
@@ -398,9 +403,30 @@ public class CompanyPerformance {
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
         int numRegistered = 0, numValidated = 0, intToKeep = 0;
         //TESTAR
-        System.out.println("MAKE INTERVAL | MAX PER DO: " + 24);
+        System.out.println("MAKE INTERVAL | PER DO: " + 24);
         int num=0;
+        Date finalDate = new Date(days.get(days.size()-1).getYear(),days.get(days.size()-1).getMonth(),days.get(days.size()-1).getDate(),8,0,0);
+        days.set(days.size()-1,finalDate);
+        //só para teste
+        TestFileUtils testFileUtils = new TestFileUtils();
+        ImportTestController importTestCtrl = new ImportTestController();
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
+        for (TestFileDTO testData : procedData) {
+            try {
+                importTestCtrl.importTestFromFile(testData);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (BarcodeException e) {
+                e.printStackTrace();
+            }
+        }
+        //fim teste
         for (Date day : days){
+            System.out.println("day " + day.toString());
             Date date1 = day;
             Date date2 = DateUtils.addMinutes(date1, 30);
             Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,1);
@@ -408,6 +434,9 @@ public class CompanyPerformance {
             endDay = DateUtils.addSeconds(endDay,-1);
             num=0;
             do{
+                System.out.println("date1 " + date1);
+                System.out.println("date2 " + date2);
+                System.out.println("date3 " + endDay);
                 if (date1.getHours()>=8 && date2.getHours()<20) {
                     numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
                     numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
@@ -419,9 +448,9 @@ public class CompanyPerformance {
                     intToKeep = numRegistered - numValidated;
                     intervalArrayList.add(intToKeep);
                 }
-                date1 = DateUtils.addMinutes(date1, 30);
-                date2 = DateUtils.addMinutes(date2, 30);
-                endDay = DateUtils.addMinutes(endDay, 30);
+                date1 = DateUtils.addMinutes(date1, 30); //19:30
+                date2 = DateUtils.addMinutes(date2, 30); //20:00
+                endDay = DateUtils.addMinutes(endDay, 30); //19:59:59
                 //TESTAR
                 num++;
                 System.out.println("MAKE INTERVAL | DO NUM " + num);
@@ -460,7 +489,7 @@ public class CompanyPerformance {
                     System.out.println("2");
                     for (int value : worstSubInt) {
                         System.out.println("3");
-                        if (value == interval[ind]) {
+                        if (ind<interval.length && value == interval[ind]) {
                             System.out.println("4");
                             num++;
                         }
