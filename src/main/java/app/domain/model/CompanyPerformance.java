@@ -362,14 +362,9 @@ public class CompanyPerformance {
         ArrayList<Date> days = new ArrayList<>();
         Date day = beginningDay;
         Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
-        do {
-            if (day.getDay()!=0) //NO WORK ON SUNDAYS
-                days.add(day);
-            day = DateUtils.addDays(day, 1);
-        } while (day.before(end));
         if (end.getDay()!=0){
             do {
-                if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                if (day.getDay()!=0  && (day.getYear()!=end.getYear() || day.getMonth()!=end.getMonth() || day.getDate()!=end.getDate())) //NO WORK ON SUNDAYS
                     days.add(day);
                 day = DateUtils.addDays(day, 1);
             } while (day.before(end));
@@ -380,7 +375,7 @@ public class CompanyPerformance {
         } else {
             end = DateUtils.addDays(day,-1);
             do {
-                if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                if (day.getDay()!=0  && (day.getYear()!=end.getYear() || day.getMonth()!=end.getMonth() || day.getDate()!=end.getDate())) //NO WORK ON SUNDAYS
                     days.add(day);
                 day = DateUtils.addDays(day, 1);
             } while (day.before(end));
@@ -456,56 +451,68 @@ public class CompanyPerformance {
         SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
-        for (int j = 0; j < interval.length; j++) {
-                if (worstSubInt[0]==interval[j]){
-                    ind=j;
-                    for (int value : worstSubInt){
-                        if (value==interval[ind]){
+        Date[] limits = new Date[2];
+        if (worstSubInt.length!=0) {
+            for (int j = 0; j < interval.length; j++) {
+                System.out.println("1");
+                if (interval[j] == worstSubInt[0]) {
+                    ind = j;
+                    System.out.println("2");
+                    for (int value : worstSubInt) {
+                        System.out.println("3");
+                        if (value == interval[ind]) {
+                            System.out.println("4");
                             num++;
                         }
                         ind++;
                     }
-                    if (num==worstSubInt.length){
-                        ref=j;
+                    if (num == worstSubInt.length) {
+                        System.out.println("5");
+                        ref = j;
                     }
-                    num=0;
-                }
-        }
-        int startIndex=ref;
-        int endIndex=startIndex+worstSubInt.length-1;
-        Date first = days.get(0);
-        Date last = DateUtils.addMinutes(first,30);
-        int quant=0;
-        while (quant!=startIndex){
-            for (Date day : days) {
-                if (first.getHours() >= 8 && last.getHours() < 20) {
-                    first=DateUtils.addMinutes(first,30);
-                    last=DateUtils.addMinutes(last,30);
-                    quant++;
-                } else if ((last.getHours()==20 && last.getMinutes()==0)) {
-                    first=DateUtils.addMinutes(first,30);
-                    last=DateUtils.addMinutes(last,30);
-                    quant++;
+                    num = 0;
                 }
             }
-        }
-        Date[] limits = new Date[2];
-        limits[0]=first;
-        quant=0;
-        while (quant!=(endIndex-startIndex)){
-            if (first.getDay()!=0 && last.getDay()!=0) {
-                if (first.getHours() >= 8 && last.getHours() < 20) {
-                    first=DateUtils.addMinutes(first,30);
-                    last=DateUtils.addMinutes(last,30);
-                    quant++;
-                } else if ((last.getHours()==20 && last.getMinutes()==0)) {
-                    first=DateUtils.addMinutes(first,30);
-                    last=DateUtils.addMinutes(last,30);
-                    quant++;
+            int startIndex = ref;
+            int endIndex = startIndex + worstSubInt.length - 1;
+            Date first = days.get(0);
+            Date last = DateUtils.addMinutes(first, 30);
+            int quant = 0;
+            while (quant != startIndex) {
+                for (Date day : days) {
+                    if (first.getHours() >= 8 && last.getHours() < 20) {
+                        first = DateUtils.addMinutes(first, 30);
+                        last = DateUtils.addMinutes(last, 30);
+                        quant++;
+                    } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                        first = DateUtils.addMinutes(first, 30);
+                        last = DateUtils.addMinutes(last, 30);
+                        quant++;
+                    }
                 }
+                System.out.println("1");
             }
+            limits[0] = first;
+            quant = 0;
+            while (quant != (endIndex - startIndex)) {
+                if (first.getDay() != 0 && last.getDay() != 0) {
+                    if (first.getHours() >= 8 && last.getHours() < 20) {
+                        first = DateUtils.addMinutes(first, 30);
+                        last = DateUtils.addMinutes(last, 30);
+                        quant++;
+                    } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                        first = DateUtils.addMinutes(first, 30);
+                        last = DateUtils.addMinutes(last, 30);
+                        quant++;
+                    }
+                }
+                System.out.println("2");
+            }
+            limits[1] = last;
+        }else{
+            limits[0]=null;
+            limits[1]=null;
         }
-        limits[1]=last;
         return limits;
     }
 
