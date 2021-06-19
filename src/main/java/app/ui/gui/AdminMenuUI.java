@@ -75,8 +75,6 @@ public class AdminMenuUI implements Initializable, Menu {
         classToRun.run();
         System.out.println("Operation finished. Back to Graphical Interface");
     }
-
-
     public void registerCal(ActionEvent actionEvent) {
         RegisterNewCalUI registerNewCalUI = new RegisterNewCalUI();
         runConsole(registerNewCalUI);

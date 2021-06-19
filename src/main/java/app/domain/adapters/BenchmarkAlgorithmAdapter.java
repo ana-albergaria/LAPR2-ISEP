@@ -20,7 +20,7 @@ public class BenchmarkAlgorithmAdapter implements SubMaxSumAlgorithms {
         long start1 = System.nanoTime();
         int[] result = Sum.Max(interval);
         long end1 = System.nanoTime();
-        System.out.println("Elapsed Time in milli seconds(Benchmark Algorithm): "+ (end1-start1)/* + "ns for input size:" + */);
+        System.out.println("Elapsed Time in milli seconds(Benchmark Algorithm): "+ (end1-start1) + "ns for input size:" + interval.length);
         return result;
     }
 

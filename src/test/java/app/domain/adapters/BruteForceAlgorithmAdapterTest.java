@@ -1,26 +1,25 @@
 package app.domain.adapters;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import java.util.Random;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BruteForceAlgorithmAdapterTest {
 
-    private app.domain.adapters.BenchmarkAlgorithmAdapter bfa;
-    private int min;
-    private int max;
+    private static app.domain.adapters.BruteForceAlgorithmAdapter bfa;
+    private static int min;
+    private static int max;
 
-    @Before
-    public void setUp() {
-        bfa = new app.domain.adapters.BenchmarkAlgorithmAdapter();
+    @BeforeClass
+    public static void setUp() {
         min = -99;
         max = 99;
     }
 
     //Test 3
-    @Test
+/*    @Test
     public void checkIfSubMaxSumIsFound(){
         int[] example1 = new int[]{29, -32, -9, -25, 44, 12, -61, 51, -9, 44, 74, 4};
         int[] example1Result = new int[]{51, -9, 44, 74, 4};
@@ -35,6 +34,19 @@ public class BruteForceAlgorithmAdapterTest {
         int[] example2Result = new int[]{17, -2, 4, 20};
         int[] obtainedResult = bfa.findSubMaxSum(example2);
         Assert.assertArrayEquals(example2Result, obtainedResult);
+    }*/
+
+    @Test
+    public void runtimeTestAForBenchmark1Ints(){
+        int num = 1;
+        int[] input = new int[num];
+        Random rand = new Random();
+        int rand_int;
+        for (int i = 0; i < num; i++) {
+            rand_int = rand.nextInt(max+1-min)+min;
+            input[i]=rand_int;
+        }
+        int[] output = bfa.findSubMaxSum(input);
     }
 
     @Test
@@ -51,7 +63,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce60Ints(){
+    public void runtimeTestBForBruteForce60Ints(){
         int num = 60;
         int[] input = new int[num];
         Random rand = new Random();
@@ -64,7 +76,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce240Ints(){
+    public void runtimeTestCForBruteForce240Ints(){
         int num = 240;
         int[] input = new int[num];
         Random rand = new Random();
@@ -77,7 +89,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce480Ints(){
+    public void runtimeTestDForBruteForce480Ints(){
         int num = 480;
         int[] input = new int[num];
         Random rand = new Random();
@@ -90,7 +102,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce900Ints(){
+    public void runtimeTestEForBruteForce900Ints(){
         int num = 900;
         int[] input = new int[num];
         Random rand = new Random();
@@ -103,7 +115,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce1800Ints(){
+    public void runtimeTestFForBruteForce1800Ints(){
         int num = 1800;
         int[] input = new int[num];
         Random rand = new Random();
@@ -116,7 +128,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce3000Ints(){
+    public void runtimeTestGForBruteForce3000Ints(){
         int num = 3000;
         int[] input = new int[num];
         Random rand = new Random();
@@ -129,7 +141,7 @@ public class BruteForceAlgorithmAdapterTest {
     }
 
     @Test
-    public void runtimeTestAForBruteForce6000Ints(){
+    public void runtimeTestHForBruteForce6000Ints(){
         int num = 6000;
         int[] input = new int[num];
         Random rand = new Random();
