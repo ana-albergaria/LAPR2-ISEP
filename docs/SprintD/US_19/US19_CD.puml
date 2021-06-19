@@ -1,6 +1,8 @@
 @startuml
 
 skinparam classAttributeIconSize 0
+hide empty methods
+
 
 class Company {
 -designation
@@ -11,6 +13,7 @@ class Company {
 -historicalPoints
 -confidenceLevel
 -significanceLevel
++scheduleNHSReportTask(delay, interval)
 }
 
 class NHSReport {}
@@ -27,6 +30,8 @@ class HypothesisTest {
 -critFD
 -numeratorDegreesOfFreedom
 -denominatorDegreesOfFreedom
++getDecision(tObs, critTD)
++getDecisionForAnova(critFD)
 }
 
 class SignificanceModelAnova {
@@ -46,6 +51,7 @@ class TableOfValues {
 -dates
 -observedPositives
 -estimatedPositives
++getConfidenceLevelInPercentage()
 }
 
 class ConfidenceInterval {
@@ -55,9 +61,12 @@ class ConfidenceInterval {
 -delta
 -limInf
 -limSup
++getConfidenceLevel()
 }
 
-class Timer {}
+class Timer {
++schedule(task, delay, interval)
+}
 
 class NHSReportStore {}
 
@@ -83,7 +92,7 @@ class MyRegressionModel {
 
 interface MathCalculus <<interface>> {}
 
-class Test{
+class Test {
 - code
 - nhsCode
 - dateOfTestRegistration
@@ -91,12 +100,27 @@ class Test{
 - dateOfChemicalAnalysis
 - dateOfDiagnosis
 }
+
+class Client {
+- name
+- citizenCardNum
+- nhsNum
+- birthDate
+- sex
+- taxIdNum
+- phoneNum
+- email
+}
 /'O CONTROLLER É A APP STARTUP'/
 /'COLOCAR TIMER'/
 
+class App {}
+
 /'Timer "1" -- "*" NHSReport : schedules >'/
 /'Company "1" -- "1..*" NHSReport : reports >'/
-/'Company "1" -- "1" Timer : knows >'/
+App "1" -- "1" Company : knows >
+Company "1" -- "1" Timer : knows >
+/'NHSReportTask "1" -- "1" NHSReport : sends >'/
 NHSReport "*" -- "1" MyRegressionModel : has >
 NHSReport "1" -- "1" HypothesisTest : contains >
 NHSReport "1" -- "1" SignificanceModelAnova : contains >
@@ -108,14 +132,17 @@ NHSReport "1" - "1" TableOfValues : contains >
 TableOfValues "1" -- "1" MyRegressionModel : of >
 TableOfValues "1" -- "*" ConfidenceInterval : contains >
 ConfidenceInterval "*" -- "1" MyRegressionModel : of >
-RegressionModel "*" - "1" MathCalculus : provided by >
+RegressionModel "*" -- "1" MathCalculus : provided by >
 MyRegressionModel "1" -- "1" RegressionModel : has >
-Timer "1" -- "*" NHSReportTask : runs >
+/'Timer "1" -- "*" NHSReportTask : runs >'/
+Test "*" -- "1" Client : requested by >
+
+class SimpleLinearRegressionAdapter implements MathCalculus
+class MultipleLinearRegressionAdapter implements MathCalculus
 
 
 
-
-/'NHSReportTask ..> Company
+/'NHSReportTask ..> Company'/
 NHSReportTask ..> TestStore
 NHSReportTask ..> NHSReportStore
 NHSReportTask ..> NHSReport
@@ -125,7 +152,9 @@ NHSReportTask ..> SignificanceModelAnova
 NHSReportTask ..> ConfidenceInterval
 NHSReportTask ..> HypothesisTest
 NHSReportTask ..> MyRegressionModel
-NHSReportTask ..> MathCalculus'/
+NHSReportTask ..> MathCalculus
+NHSReportTask ..> Client
+Timer ..> NHSReportTask
 
 
 

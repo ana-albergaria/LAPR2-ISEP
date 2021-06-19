@@ -44,9 +44,9 @@ public class Main {
 
         Class<?> oClass = Class.forName("app.domain.adapters.SimpleLinearRegressionAdapter");
         RegressionModel calculus = (RegressionModel) oClass.newInstance();
-        //MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y, x.length);
+        MyRegressionModel myRegressionModel = calculus.getRegressionModel(x, x0, y, x.length);
         //MyRegressionModel myRegressionModel = calculus.getRegressionModel(xa, xb, y1);
-        MyRegressionModel myRegressionModel = calculus.getRegressionModel(covidTests, x0, observPositives, 10);
+        //MyRegressionModel myRegressionModel = calculus.getRegressionModel(covidTests, x0, observPositives, 10);
         System.out.println(myRegressionModel);
         HypothesisTest hypothesisTest = calculus.getHypothesisTest(myRegressionModel, 0.05);
         System.out.println(hypothesisTest);
