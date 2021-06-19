@@ -97,5 +97,6 @@ public class MedLabTechUI implements Initializable, Menu {
     public void HandleAddSamples(ActionEvent actionEvent) {
         RecordSamplesUI recordSamplesUI = new RecordSamplesUI(labID);
         recordSamplesUI.run();
+        System.out.println("Operation finished. Back to Graphical Interface");
     }
 }

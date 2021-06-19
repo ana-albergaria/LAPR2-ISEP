@@ -60,11 +60,6 @@ public class SpecDoctorUI implements Initializable, Menu {
     }
 
     @FXML
-    void updateClientDataAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void exitAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
@@ -84,5 +79,6 @@ public class SpecDoctorUI implements Initializable, Menu {
     public void handleWriteReport(ActionEvent actionEvent) {
         WriteReportUI writeReportUI = new WriteReportUI();
         writeReportUI.run();
+        System.out.println("Operation finished. Back to Graphical Interface");
     }
 }

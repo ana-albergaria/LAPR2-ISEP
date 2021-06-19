@@ -46,6 +46,7 @@ public class ChemTechUI implements Initializable, Menu {
     public void addTestResult(){
         RecordResultsUI recordResultsUI = new RecordResultsUI();
         recordResultsUI.run();
+        System.out.println("Operation finished. Back to Graphical Interface");
     }
 
     @FXML

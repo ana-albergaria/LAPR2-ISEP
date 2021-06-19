@@ -71,29 +71,34 @@ public class AdminMenuUI implements Initializable, Menu {
         System.exit(0);
     }
 
+    public void runConsole(Runnable classToRun){
+        classToRun.run();
+        System.out.println("Operation finished. Back to Graphical Interface");
+    }
+
 
     public void registerCal(ActionEvent actionEvent) {
         RegisterNewCalUI registerNewCalUI = new RegisterNewCalUI();
-        registerNewCalUI.run();
+        runConsole(registerNewCalUI);
     }
 
     public void createEmployee(ActionEvent actionEvent) {
         CreateEmployeeUI createEmployeeUI = new CreateEmployeeUI();
-        createEmployeeUI.run();
+        runConsole(createEmployeeUI);
     }
 
     public void createTestType(ActionEvent actionEvent) {
         CreateTestTypeUI createTestTypeUI = new CreateTestTypeUI();
-        createTestTypeUI.run();
+        runConsole(createTestTypeUI);
     }
 
     public void createParameterCategory(ActionEvent actionEvent) {
         ParameterCategoryUI parameterCategoryUI = new ParameterCategoryUI();
-        parameterCategoryUI.run();
+        runConsole(parameterCategoryUI);
     }
 
     public void createParameter(ActionEvent actionEvent) {
         CreateParameterUI createParameterUI = new CreateParameterUI();
-        createParameterUI.run();
+        runConsole(createParameterUI);
     }
 }
