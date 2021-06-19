@@ -1,3 +1,4 @@
+/*
 package app.controller;
 
 import app.domain.model.Client;
@@ -30,7 +31,7 @@ public class ConsultTestByClientTest {
     public static void setUp() throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
         importTestController = new ImportTestController();
         TestFileUtils testFileUtils = new TestFileUtils();
-        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("inputs_mdisc/TESTS_6060INPUTS.csv");
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("./inputs_mdisc/TESTS_6060INPUTS.CSV");
         for (TestFileDTO testData : procedData) {
             try{
                 importTestController.importTestFromFile(testData);
@@ -39,7 +40,8 @@ public class ConsultTestByClientTest {
         }
         clients = App.getInstance().getCompany().getClientStore().getClients();
         Collections.shuffle(clients);
-        /*TestStore testStore = App.getInstance().getCompany().getTestStore();
+        */
+/*TestStore testStore = App.getInstance().getCompany().getTestStore();
         CreateTestController createTestController = new CreateTestController("001WA");
         List<String> params = new ArrayList<>();
         params.add("WBC00");
@@ -47,9 +49,11 @@ public class ConsultTestByClientTest {
         createTestController.createTest("123456789012", "2100000004", "Blood", params);
         createTestController.saveTest();
         App.getInstance().getCompany().getTestStore().getTestsByClient(App.getInstance().getCompany().getClientStore().getClientByTinNumber("2100000004")).get(1).setDateOfValidation(new Date());
-    */}
+    *//*
+}
     
-    /*@Test
+    */
+/*@Test
     public void getClientsDtoInOrder() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         ConsultTestByClient consultTestByClient = new ConsultTestByClient();
 
@@ -60,7 +64,8 @@ public class ConsultTestByClientTest {
             System.out.println();
         }
 
-    }*/
+    }*//*
+
 
     @Test
     public void runtimeTestAForInsertion30Inputs() throws ClassNotFoundException, InstantiationException, BarcodeException, IllegalAccessException {
@@ -200,4 +205,4 @@ public class ConsultTestByClientTest {
         bubbleSort.bubbleSortArrayList(clients, new ascendTinClient());
     }
 
-}
+}*/

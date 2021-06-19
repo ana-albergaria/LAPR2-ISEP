@@ -71,7 +71,7 @@ public class ImportTestControllerTest {
 
     }
 
-    @Test
+    /*@Test
     public void createCovidTestsFromFile() throws ClassNotFoundException, InstantiationException, IllegalAccessException, BarcodeException, OutputException, IOException {
         ImportTestController ctrl = new ImportTestController();
         TestFileUtils testFileUtils = new TestFileUtils();
@@ -79,11 +79,11 @@ public class ImportTestControllerTest {
         for (TestFileDTO testData : procedData) {
             ctrl.importTestFromFile(testData);
         }
-        /*for (app.domain.model.Test s : App.getInstance().getCompany().getTestStore().getTests()) {
+        *//*for (app.domain.model.Test s : App.getInstance().getCompany().getTestStore().getTests()) {
             System.out.println(s);
             System.out.println(s.getSamples().get(0).getMyBarcode().getBarcodeNumber());
             System.out.println("++++++++++++++++++++++++++++++");
-        }*/
-    }
+        }*//*
+    }*/
 
 }

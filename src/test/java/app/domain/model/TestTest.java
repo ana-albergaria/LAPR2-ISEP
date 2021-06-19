@@ -163,6 +163,14 @@ public class TestTest {
         app.domain.model.Test test = new app.domain.model.Test("1234567890123", client, t1, parametersBlood,cal);
     }
 
+    @Test
+    public void createFulltest() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+        Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
+        List<Double> res = new ArrayList<>();
+        res.add(1.3);
+        app.domain.model.Test test = new app.domain.model.Test("123456789012", client, t2, parametersCovid, res,cal, new Date(), new Date(),new Date(), null);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void createTestWithMore12CharsNhsFullConstructor() throws IllegalAccessException, ClassNotFoundException, InstantiationException {
         Client client = new Client("1234567890123450", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678901");
@@ -365,6 +373,18 @@ public class TestTest {
         test.addSampleCollectionDate();
 
         Assert.assertTrue(test.hasSamples());
+    }
+
+    @Test
+    public void ensureSampleIsAddedToTest() throws BarcodeException {
+        TestStore testStore = new TestStore();
+        Client client = new Client("1234567890123456", "1234567890", d1, "Male", "1234567890", "alex@gmail.com", "Alex", "12345678601");
+        app.domain.model.Test test = testStore.createTest("123456789012", client, t1, parametersBlood,cal);
+
+        Sample sample = new Sample(new MyBarcode(BarcodeFactory.createUPCA("12345678901"), "12345678901"));
+
+        test.addSample(sample);
+        Assert.assertTrue(test.addSample(sample));
     }
 
 
