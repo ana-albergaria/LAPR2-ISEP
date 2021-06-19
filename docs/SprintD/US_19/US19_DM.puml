@@ -81,6 +81,26 @@ class ConfidenceInterval {
 -limSup
 }
 
+class Test {
+- code
+- nhsCode
+- dateOfTestRegistration
+- dateOfSamplesCollection
+- dateOfChemicalAnalysis
+- dateOfDiagnosis
+}
+
+class Client {
+- name
+- citizenCardNum
+- nhsNum
+- birthDate
+- sex
+- taxIdNum
+- phoneNum
+- email
+}
+
 class MathCalculus {}
 
 /'class NHSReportTask {
@@ -91,6 +111,7 @@ class MathCalculus {}
 -dateInterval
 }'/
 
+App "1" -- "1" Company : knows >
 Timer "1" -- "*" NHSReport : schedules >
 /'NHSReportTask "1" -- "1..*" NHSReport : reports >'/
 Company "1" -- "1..*" NHSReport : reports >
@@ -112,6 +133,8 @@ TableOfValues "1" -- "1" RegressionModel : of >
 TableOfValues "1" -- "*" ConfidenceInterval : contains >
 ConfidenceInterval "*" -- "1" RegressionModel : of >
 RegressionModel "*" -- "1" MathCalculus : provided by >
+Test "*" -- "1" Client : requested by >
+Company "1" -- "*" Test : conducts >
 /'Timer "1" -- "*" NHSReportTask : schedules >'/
 /'NHSReportTask "1" -- "1" RegressionModel : makes use of >'/
 /'NHSReportTask "*" -- "1" RegressionModel : makes use of >'/
