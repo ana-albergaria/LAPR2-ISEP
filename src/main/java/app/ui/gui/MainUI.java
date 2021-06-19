@@ -98,6 +98,7 @@ public class MainUI implements Initializable {
         rolesUI.add(new MenuItem(Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST, new ChemTechUI()));
         rolesUI.add(new MenuItem(Constants.ROLE_RECEPTIONIST, new ReceptionistMenuUI()));
         rolesUI.add(new MenuItem(Constants.ROLE_MED_LAB_TECHNICIAN, new MedLabTechUI()));
+        rolesUI.add(new MenuItem(Constants.ROLE_SPECIALIST_DOCTOR, new SpecDoctorUI()));
         return rolesUI;
     }
 

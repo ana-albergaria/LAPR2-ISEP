@@ -3,7 +3,7 @@ package app.ui.gui;
 import app.controller.SelectCalController;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 import app.ui.console.RecordSamplesUI;
-import javafx.application.Platform;
+import app.ui.console.WriteReportUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,11 +17,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MedLabTechUI implements Initializable, Menu {
+public class SpecDoctorUI implements Initializable, Menu {
 
     private App mainApp;
 
-    private final String FXML_PATH = "/fxml/MecLabTech.fxml";
+    private final String FXML_PATH = "/fxml/SpecDoctor.fxml";
 
     public App getMainApp() {
         return this.mainApp;
@@ -41,26 +41,12 @@ public class MedLabTechUI implements Initializable, Menu {
     @FXML
     private Button exitBtn;
 
-    private SelectCalController ctrl;
-
-    private String labID;
-
     /**
      * Initializes the UI class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ctrl = new SelectCalController();
-        List<ClinicalAnalysisLaboratoryDTO> dto = ctrl.getCalListDTO();
-        List<String> ids = new ArrayList<>();
-        for (ClinicalAnalysisLaboratoryDTO cal : dto){
-            ids.add(cal.getLaboratoryID());
-        }
-        ChoiceDialog d = new ChoiceDialog(ids.get(0), ids);
-        d.setHeaderText("Clinical Analysis Laboratory");
-        d.setContentText("Please select the ID of the CAL you are working at:");
-        d.showAndWait();
-        this.labID = (String) d.getSelectedItem();
+
     }
 
     @FXML
@@ -71,11 +57,6 @@ public class MedLabTechUI implements Initializable, Menu {
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @FXML
-    void updateClientDataAction(ActionEvent event) {
-
     }
 
     @FXML
@@ -94,9 +75,10 @@ public class MedLabTechUI implements Initializable, Menu {
         }
     }
 
-    public void HandleAddSamples(ActionEvent actionEvent) {
-        RecordSamplesUI recordSamplesUI = new RecordSamplesUI(labID);
-        recordSamplesUI.run();
+
+    public void handleWriteReport(ActionEvent actionEvent) {
+        WriteReportUI writeReportUI = new WriteReportUI();
+        writeReportUI.run();
         System.out.println("Operation finished. Back to Graphical Interface");
     }
 }
