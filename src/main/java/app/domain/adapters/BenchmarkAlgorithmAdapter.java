@@ -17,7 +17,11 @@ public class BenchmarkAlgorithmAdapter implements SubMaxSumAlgorithms {
      */
     @Override
     public int[] findSubMaxSum(int[] interval){
-        return Sum.Max(interval);
+        long start1 = System.nanoTime();
+        int[] result = Sum.Max(interval);
+        long end1 = System.nanoTime();
+        System.out.println("Elapsed Time in milli seconds(Benchmark Algorithm): "+ (end1-start1)/* + "ns for input size:" + */);
+        return result;
     }
 
 }

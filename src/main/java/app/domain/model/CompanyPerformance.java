@@ -169,6 +169,10 @@ public class CompanyPerformance {
         ArrayList<String> clientEmails = new ArrayList<>();
         String clientEmail;
         boolean repeated = false;
+        String notEmp = "";
+        clientEmails.add(notEmp);
+        System.out.println("NUM TESTS" + testStore.getTests().size());
+        int num=1;
         for (Test test : testStore.getTests()){
             if (test.getDateOfTestRegistration().before(endingDay)){
                 clientEmail=test.getClient().getEmail();
@@ -182,8 +186,10 @@ public class CompanyPerformance {
                 }
                 repeated=false;
             }
+            System.out.println("TEST NUM" + num);
+            num++;
         }
-        return clientEmails.size();
+        return clientEmails.size()-1;
     }
 
     /**
