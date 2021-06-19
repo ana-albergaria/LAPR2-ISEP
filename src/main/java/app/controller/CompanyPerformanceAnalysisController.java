@@ -48,14 +48,12 @@ public class CompanyPerformanceAnalysisController {
      -     * @param chosenAlg the chosen algorithm
      -     * @return true is the company performance is successfully created
      -     * otherwise return false.
-     -     * @throws ClassNotFoundException
-     -     * @throws IllegalAccessException
-     -     * @throws InstantiationException
      -     */
-    public boolean createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public boolean createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) {
             this.companyPerformance = company.createCompanyPerformance(beginningDate,endingDate,chosenAlg);
             return (companyPerformance != null);
     }
+
     /**
      * Creates a CompanyPerformance object with the data requested to the Laboratory Coordinator.
      *
@@ -63,7 +61,7 @@ public class CompanyPerformanceAnalysisController {
      * @param endingDay the last moment of study
      * @param chosenAlgorithm the chosen algorithm
      */
-    public void setCompanyPerformance(Date beginningDay, Date endingDay, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public void setCompanyPerformance(Date beginningDay, Date endingDay, String chosenAlgorithm) {
         this.companyPerformance = new CompanyPerformance(beginningDay, endingDay, chosenAlgorithm, company);
     }
 

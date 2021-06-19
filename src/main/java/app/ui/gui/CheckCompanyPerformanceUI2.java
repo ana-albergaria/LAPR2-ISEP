@@ -90,7 +90,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     @FXML
     void handleListViewClick(MouseEvent event) {
-        lineChart.getData().clear();
         String selectedItem = listView.getSelectionModel().getSelectedItem();
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
@@ -99,8 +98,8 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         switch (selectedItem) {
             case "Number Of Tests Waiting For Results - Over Days":
                 setTestsInfo(controller.getTestInfoPerDay());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
                 series.setName("Tests Waiting For Results");
@@ -108,7 +107,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Results - Over Weeks":
                 setTestsInfo(controller.getTestInfoPerWeek());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
                 series.setName("Tests Waiting For Results");
@@ -116,7 +115,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Results - Over Months":
                 setTestsInfo(controller.getTestInfoPerMonth());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
                 series.setName("Tests Waiting For Results");
@@ -124,7 +123,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Results - Over Years":
                 setTestsInfo(controller.getTestInfoPerYear());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[0]));
                 }
                 series.setName("Tests Waiting For Results");
@@ -132,7 +131,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Diagnosis - Over Days":
                 setTestsInfo(controller.getTestInfoPerDay());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
                 series.setName("Tests Waiting For Diagnosis");
@@ -140,7 +139,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Diagnosis - Over Weeks":
                 setTestsInfo(controller.getTestInfoPerWeek());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
                 series.setName("Tests Waiting For Diagnosis");
@@ -148,7 +147,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Diagnosis - Over Months":
                 setTestsInfo(controller.getTestInfoPerMonth());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
                 series.setName("Tests Waiting For Diagnosis");
@@ -156,15 +155,17 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             case "Number Of Tests Waiting For Diagnosis - Over Years":
                 setTestsInfo(controller.getTestInfoPerYear());
                 for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(0);
+                    bothValues= testsInfo.get(i);
                     desiredData.add(Integer.valueOf(bothValues[1]));
                 }
                 series.setName("Tests Waiting For Diagnosis");
                 break;
         }
+        setChosenGraphData(desiredData);
         for (int i = 0; i < chosenGraphData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
         }
+        lineChart.getData().clear();
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -201,7 +202,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void analyseCompany() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public void analyseCompany() {
         Date[] limits= controller.findWorstSubIntWithChosenAlgorithm();
         String text = "Interval When The Company Was Less Effective In Responding" + "\n ↪ From: " + limits[0].toString() + "\n ↪ To: " + limits[1].toString();
         text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval();

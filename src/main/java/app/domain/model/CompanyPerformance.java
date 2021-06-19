@@ -81,7 +81,7 @@ public class CompanyPerformance {
      */
     private Date[] worstSubInt;
 
-    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
         this.company = company;
         this.beginningDate=beginningDate;
         this.endingDate=endingDate;
@@ -219,11 +219,13 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
-            beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
-            endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
-            testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-            testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfoPerDay.add(testInfo);
+            if (day.getDay()!=0) {
+                beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
+                endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
+                testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+                testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+                testInfoPerDay.add(testInfo);
+            }
         }
         return testInfoPerDay;
     }
@@ -239,10 +241,10 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK AT SUNDAY
         for (Date date : days) {
-            if (date.getDay() != 6) {
+            if (date.getDay()!=0){
                 week.add(date);
-            } else {
-                week.add(date);
+            }
+            if (date.getDay() == 6) {
                 weeks.add(week);
                 week.clear();
             }
@@ -270,36 +272,36 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> months = new ArrayList<>();
         ArrayList<Date> month = new ArrayList<>();
         for (Date date : days) {
-            if (date.getMonth()== Calendar.JANUARY || date.getMonth()==Calendar.MARCH || date.getMonth()==Calendar.MAY ||
-                    date.getMonth()==Calendar.JULY || date.getMonth()==Calendar.AUGUST || date.getMonth()==Calendar.OCTOBER || date.getMonth()==Calendar.DECEMBER) {
-                if (date.getDate() != 31) {
+            if (date.getMonth() == Calendar.JANUARY || date.getMonth() == Calendar.MARCH || date.getMonth() == Calendar.MAY ||
+                    date.getMonth() == Calendar.JULY || date.getMonth() == Calendar.AUGUST || date.getMonth() == Calendar.OCTOBER || date.getMonth() == Calendar.DECEMBER) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==31){
                     months.add(month);
                     month.clear();
                 }
-            } else if (date.getMonth()==Calendar.APRIL || date.getMonth()==Calendar.JUNE || date.getMonth()==Calendar.SEPTEMBER || date.getMonth()==Calendar.NOVEMBER) {
-                if (date.getDate() != 30) {
+            } else if (date.getMonth() == Calendar.APRIL || date.getMonth() == Calendar.JUNE || date.getMonth() == Calendar.SEPTEMBER || date.getMonth() == Calendar.NOVEMBER) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==30){
                     months.add(month);
                     month.clear();
                 }
-            }else if (date.getMonth()==Calendar.FEBRUARY && (date.getYear()%400 == 0) || ((date.getYear()%100) != 0 && (date.getYear()%4 == 0))) {
-                if (date.getDate() != 29) {
+            } else if (date.getMonth() == Calendar.FEBRUARY && (date.getYear() % 400 == 0) || ((date.getYear() % 100) != 0 && (date.getYear() % 4 == 0))) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==29){
                     months.add(month);
                     month.clear();
                 }
             } else {
-                if (date.getDate() != 28) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==28){
                     months.add(month);
                     month.clear();
                 }
@@ -328,10 +330,10 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
         for (Date date : days) {
-            if (!(date.getMonth()==Calendar.DECEMBER && date.getDate()==31)) {
+            if (date.getDay()!=0){
                 year.add(date);
-            } else {
-                year.add(date);
+            }
+            if ((date.getMonth()==Calendar.DECEMBER && date.getDate()==31)) {
                 years.add(year);
                 year.clear();
             }
@@ -405,13 +407,15 @@ public class CompanyPerformance {
         return intervalArray;
     }
 
-
     /**
      * Finds the beginning and the ending dates of the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
      * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      */
     public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
@@ -447,8 +451,6 @@ public class CompanyPerformance {
             if ((lastDate.getHours()>=8 && lastDate.getHours()<20) || (lastDate.getHours()==20 && lastDate.getMinutes()==0)) {
                 quant++;
             }
-            System.out.println(quant);
-            System.out.println(difEnd);
         }while (quant!=difEnd);
         quant=0;
         firstDate=finish;
@@ -457,8 +459,6 @@ public class CompanyPerformance {
             if ((firstDate.getHours()>=8 && firstDate.getHours()<20) || (firstDate.getHours()==20 && firstDate.getMinutes()==0)) {
                 quant++;
             }
-            System.out.println(quant);
-            System.out.println(difStart);
         }while (quant!=difStart);
         limits[0]=firstDate;
         limits[1]=lastDate;

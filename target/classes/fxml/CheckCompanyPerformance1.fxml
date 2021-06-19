@@ -135,7 +135,7 @@
                                  <children>
                                     <ChoiceBox fx:id="intervalOption" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <opaqueInsets>
-                                          <Insets bottom="30.0" />
+                                          <Insets />
                                        </opaqueInsets>
                                        <GridPane.margin>
                                           <Insets bottom="30.0" />
@@ -158,7 +158,7 @@
                                     </Text>
                                     <ChoiceBox fx:id="algorithmOption" layoutX="89.0" layoutY="86.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <opaqueInsets>
-                                          <Insets bottom="30.0" />
+                                          <Insets />
                                        </opaqueInsets>
                                        <GridPane.margin>
                                           <Insets bottom="30.0" />
