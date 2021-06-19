@@ -203,18 +203,17 @@ public class TestStore {
     }
 
     /**
-     * Gets the number of tests that were validated between the desired interval of time
+     * Gets the number of tests that were diagnosed between the desired interval of time
      *
      * @param beginningDay the beginning date of the desired interval of time
      * @param endingDay the end date of the desired interval of time
-     * @return the number of tests that were validated between the desired interval of time
+     * @return the number of tests that were diagnosed between the desired interval of time
      */
     public int getNumberOfTestsByIntervalDateOfDiagnosis(Date beginningDay, Date endingDay){
         //because it only becomes available to the client after the diagnosis
         int num = 0;
         for (Test test : testList) {
-            if ((test.getDateOfDiagnosis().after(beginningDay) && test.getDateOfDiagnosis().before(endingDay))
-            || (test.getDateOfTestRegistration().equals(beginningDay)) || (test.getDateOfTestRegistration().equals(endingDay)))
+            if ((test.getDateOfValidation().after(beginningDay) && test.getDateOfValidation().before(beginningDay)) || (test.getDateOfValidation().equals(beginningDay)) || (test.getDateOfValidation().equals(endingDay)))
                 num++;
         }
         return num;
