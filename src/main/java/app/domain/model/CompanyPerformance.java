@@ -171,8 +171,6 @@ public class CompanyPerformance {
         boolean repeated = false;
         String notEmp = "";
         clientEmails.add(notEmp);
-        System.out.println("NUM TESTS" + testStore.getTests().size());
-        int num=1;
         for (Test test : testStore.getTests()){
             if (test.getDateOfTestRegistration().before(endingDay)){
                 clientEmail=test.getClient().getEmail();
@@ -186,8 +184,6 @@ public class CompanyPerformance {
                 }
                 repeated=false;
             }
-            System.out.println("TEST NUM" + num);
-            num++;
         }
         return clientEmails.size()-1;
     }
@@ -406,12 +402,16 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
         int numRegistered = 0, numValidated = 0, intToKeep = 0;
-
+        //TESTAR
+        System.out.println("MAKE INTERVAL | MAX PER DO: " + 24);
+        int num=0;
         for (Date day : days){
-            Date date1 = day, date2 = DateUtils.addMinutes(date1, 30);
-            Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,0);
+            Date date1 = day;
+            Date date2 = DateUtils.addMinutes(date1, 30);
+            Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,1);
             Date endDay = (Date)date2.clone();
             endDay = DateUtils.addSeconds(endDay,-1);
+            num=0;
             do{
                 if (date1.getHours()>=8 && date2.getHours()<20) {
                     numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
@@ -427,7 +427,10 @@ public class CompanyPerformance {
                 date1 = DateUtils.addMinutes(date1, 30);
                 date2 = DateUtils.addMinutes(date2, 30);
                 endDay = DateUtils.addMinutes(endDay, 30);
-            } while (!date2.equals(finish));
+                //TESTAR
+                num++;
+                System.out.println("MAKE INTERVAL | DO NUM " + num);
+            } while (date2.before(finish));
         }
         int[] intervalArray = new int[intervalArrayList.size()];
         for (int i = 0; i < intervalArray.length; i++) {
