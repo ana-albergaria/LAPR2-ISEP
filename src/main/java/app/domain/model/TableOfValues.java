@@ -82,7 +82,7 @@ public class TableOfValues {
         StringBuilder text = new StringBuilder();
         text.append(String.format("%-25s%-50s%-63s%-50s%n", "Date", "Number of OBSERVED positive cases", "Number of ESTIMATED/EXPECTED positive cases", getConfidenceLevelInPercentage() + "% intervals"));
         for (int i = 0; i < myRegressionModel.getNumberOfObservations(); i++) {
-            text.append(String.format("%-40s%-50d%-49f%-35s%n", dates.get(i), observedPositives[i], estimatedPositives.get(i), confidenceIntervals.get(i).toString()));
+            text.append(String.format("%-40s%-50d%-49.4f%-35s%n", dates.get(i), observedPositives[i], estimatedPositives.get(i), confidenceIntervals.get(i).toString()));
         }
         return text.toString();
     }

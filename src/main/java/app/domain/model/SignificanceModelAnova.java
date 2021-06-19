@@ -124,9 +124,9 @@ public class SignificanceModelAnova {
         text.append("Significance model with Anova\n");
         text.append("H0: b=0  H1:b<>0\n");
         text.append(String.format("%-20s%-20s%-20s%-20s%-20s%n", "", "df", "SS", "MS","F"));
-        text.append(String.format("%-20s%-20d%-20f%-20f%-20f%n", "Regression", deg_freedom_sr, sr, mr,f));
-        text.append(String.format("%-20s%-20d%-20f%-20f%n", "Residual", deg_freedom_se, se, me));
-        text.append(String.format("%-20s%-20d%-20f%n%n", "Total", deg_freedom_st, st));
+        text.append(String.format("%-20s%-20d%-20.4f%-20.4f%-20.4f%n", "Regression", deg_freedom_sr, sr, mr,f));
+        text.append(String.format("%-20s%-20d%-20.4f%-20.4f%n", "Residual", deg_freedom_se, se, me));
+        text.append(String.format("%-20s%-20d%-20.4f%n%n", "Total", deg_freedom_st, st));
         text.append(testRegSignificance.toStringForAnova());
         return text.toString();
     }
