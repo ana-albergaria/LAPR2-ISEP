@@ -365,6 +365,28 @@ public class CompanyPerformance {
                 days.add(day);
             day = DateUtils.addDays(day, 1);
         } while (day.before(end));
+        if (end.getDay()!=0){
+            do {
+                if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                    days.add(day);
+                day = DateUtils.addDays(day, 1);
+            } while (day.before(end));
+            end.setHours(19);
+            end.setMinutes(59);
+            end.setSeconds(59);
+            days.add(end);
+        } else {
+            end = DateUtils.addDays(day,-1);
+            do {
+                if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                    days.add(day);
+                day = DateUtils.addDays(day, 1);
+            } while (day.before(end));
+            end.setHours(19);
+            end.setMinutes(59);
+            end.setSeconds(59);
+            days.add(end);
+        }
         return days;
     }
 
@@ -377,29 +399,30 @@ public class CompanyPerformance {
     public int[] makeIntervalArray(ArrayList<Date> days){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         TestStore testStore = this.company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
-        int numRegistered = 0, numValidated = 0, intToKeep = 0, minToAdd = 30;
-        Date date1 = days.get(0), date2 = DateUtils.addMinutes(date1, minToAdd);
-        Date finish = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20,0,0);
-        Date endDay = date1;
-        do{
-            if (date1.getHours()>=8 && date2.getHours()<20) {
-                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
-                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
-                intToKeep = numRegistered - numValidated;
-                intervalArrayList.add(intToKeep);
-            } else if (date2.getHours()==20 && date2.getMinutes()==0) {
-                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
-                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
-                intToKeep = numRegistered - numValidated;
-                intervalArrayList.add(intToKeep);
-            }
-            date1 = DateUtils.addMinutes(date1, minToAdd);
-            date2 = DateUtils.addMinutes(date2, minToAdd);
-            endDay = (Date)date2.clone();
-            endDay.setHours(19);
-            endDay.setMinutes(59);
-            endDay.setSeconds(59);
-        } while (!(date2.equals(finish)));
+        int numRegistered = 0, numValidated = 0, intToKeep = 0;
+
+        for (Date day : days){
+            Date date1 = day, date2 = DateUtils.addMinutes(date1, 30);
+            Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,0);
+            Date endDay = (Date)date2.clone();
+            endDay = DateUtils.addSeconds(endDay,-1);
+            do{
+                if (date1.getHours()>=8 && date2.getHours()<20) {
+                    numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
+                    numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
+                    intToKeep = numRegistered - numValidated;
+                    intervalArrayList.add(intToKeep);
+                } else if ((date2.getHours()==20 && date2.getMinutes()==0)) {
+                    numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
+                    numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
+                    intToKeep = numRegistered - numValidated;
+                    intervalArrayList.add(intToKeep);
+                }
+                date1 = DateUtils.addMinutes(date1, 30);
+                date2 = DateUtils.addMinutes(date2, 30);
+                endDay = DateUtils.addMinutes(endDay, 30);
+            } while (!date2.equals(finish));
+        }
         int[] intervalArray = new int[intervalArrayList.size()];
         for (int i = 0; i < intervalArray.length; i++) {
             intervalArray[i] = intervalArrayList.get(i).intValue();
