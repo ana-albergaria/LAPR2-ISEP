@@ -165,13 +165,11 @@ public class NHSReportTask extends TimerTask {
         Logger logger = Logger.getLogger(NHSReportTask.class.getSimpleName());
         FileHandler fh;
 
-        // This block configure the logger with handler and formatter
         fh = new FileHandler("./NHSReport.log", true);
         logger.addHandler(fh);
         SimpleFormatter formatter = new SimpleFormatter();
         fh.setFormatter(formatter);
 
-        // the following statement is used to log any messages
         logger.info("NHS Daily Report sent");
 
         logger.setUseParentHandlers(false);

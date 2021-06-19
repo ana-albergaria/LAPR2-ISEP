@@ -112,11 +112,6 @@ public class NHSReportStore {
         return wishedArray;
     }
 
-
-    /*
-    WARNING - ter em atenção que ao converter a String selecionada pelo administrador
-    ou a que está definida na configuration file,
-     */
     public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
                                                         Date currentDate) {
         //VERIFICAR SE O MÉTODO RETIRA BEM AS DATAS POR CAUSA DO DOMINGO!!!
