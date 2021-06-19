@@ -81,7 +81,8 @@ public class CompanyPerformance {
      */
     private Date[] worstSubInt;
 
-    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) {
+    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
+        this.company = company;
         this.beginningDate=beginningDate;
         this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
@@ -218,11 +219,13 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
-            beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
-            endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
-            testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-            testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfoPerDay.add(testInfo);
+            if (day.getDay()!=0) {
+                beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
+                endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
+                testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+                testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+                testInfoPerDay.add(testInfo);
+            }
         }
         return testInfoPerDay;
     }
@@ -238,10 +241,10 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK AT SUNDAY
         for (Date date : days) {
-            if (date.getDay() != 6) {
+            if (date.getDay()!=0){
                 week.add(date);
-            } else {
-                week.add(date);
+            }
+            if (date.getDay() == 6) {
                 weeks.add(week);
                 week.clear();
             }
@@ -269,36 +272,36 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> months = new ArrayList<>();
         ArrayList<Date> month = new ArrayList<>();
         for (Date date : days) {
-            if (date.getMonth()== Calendar.JANUARY || date.getMonth()==Calendar.MARCH || date.getMonth()==Calendar.MAY ||
-                    date.getMonth()==Calendar.JULY || date.getMonth()==Calendar.AUGUST || date.getMonth()==Calendar.OCTOBER || date.getMonth()==Calendar.DECEMBER) {
-                if (date.getDate() != 31) {
+            if (date.getMonth() == Calendar.JANUARY || date.getMonth() == Calendar.MARCH || date.getMonth() == Calendar.MAY ||
+                    date.getMonth() == Calendar.JULY || date.getMonth() == Calendar.AUGUST || date.getMonth() == Calendar.OCTOBER || date.getMonth() == Calendar.DECEMBER) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==31){
                     months.add(month);
                     month.clear();
                 }
-            } else if (date.getMonth()==Calendar.APRIL || date.getMonth()==Calendar.JUNE || date.getMonth()==Calendar.SEPTEMBER || date.getMonth()==Calendar.NOVEMBER) {
-                if (date.getDate() != 30) {
+            } else if (date.getMonth() == Calendar.APRIL || date.getMonth() == Calendar.JUNE || date.getMonth() == Calendar.SEPTEMBER || date.getMonth() == Calendar.NOVEMBER) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==30){
                     months.add(month);
                     month.clear();
                 }
-            }else if (date.getMonth()==Calendar.FEBRUARY && (date.getYear()%400 == 0) || ((date.getYear()%100) != 0 && (date.getYear()%4 == 0))) {
-                if (date.getDate() != 29) {
+            } else if (date.getMonth() == Calendar.FEBRUARY && (date.getYear() % 400 == 0) || ((date.getYear() % 100) != 0 && (date.getYear() % 4 == 0))) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==29){
                     months.add(month);
                     month.clear();
                 }
             } else {
-                if (date.getDate() != 28) {
+                if (date.getDay()!=0){
                     month.add(date);
-                } else {
-                    month.add(date);
+                }
+                if (date.getDate()==28){
                     months.add(month);
                     month.clear();
                 }
@@ -327,10 +330,10 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
         for (Date date : days) {
-            if (!(date.getMonth()==Calendar.DECEMBER && date.getDate()==31)) {
+            if (date.getDay()!=0){
                 year.add(date);
-            } else {
-                year.add(date);
+            }
+            if ((date.getMonth()==Calendar.DECEMBER && date.getDate()==31)) {
                 years.add(year);
                 year.clear();
             }
@@ -362,6 +365,28 @@ public class CompanyPerformance {
                 days.add(day);
             day = DateUtils.addDays(day, 1);
         } while (day.before(end));
+        if (end.getDay()!=0){
+            do {
+                if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                    days.add(day);
+                day = DateUtils.addDays(day, 1);
+            } while (day.before(end));
+            end.setHours(19);
+            end.setMinutes(59);
+            end.setSeconds(59);
+            days.add(end);
+        } else {
+            end = DateUtils.addDays(day,-1);
+            do {
+                if (day.getDay()!=0) //NO WORK ON SUNDAYS
+                    days.add(day);
+                day = DateUtils.addDays(day, 1);
+            } while (day.before(end));
+            end.setHours(19);
+            end.setMinutes(59);
+            end.setSeconds(59);
+            days.add(end);
+        }
         return days;
     }
 
@@ -374,29 +399,30 @@ public class CompanyPerformance {
     public int[] makeIntervalArray(ArrayList<Date> days){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         TestStore testStore = this.company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
-        int numRegistered = 0, numValidated = 0, intToKeep = 0, minToAdd = 30;
-        Date date1 = days.get(0), date2 = DateUtils.addMinutes(date1, minToAdd);
-        Date finish = new Date(days.get(days.size()-1).getYear(), days.get(days.size()-1).getMonth(), days.get(days.size()-1).getDate(), 20,0,0);
-        Date endDay = date1;
-        do{
-            if (date1.getHours()>=8 && date2.getHours()<20) {
-                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
-                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
-                intToKeep = numRegistered - numValidated;
-                intervalArrayList.add(intToKeep);
-            } else if (date2.getHours()==20 && date2.getMinutes()==0) {
-                numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
-                numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
-                intToKeep = numRegistered - numValidated;
-                intervalArrayList.add(intToKeep);
-            }
-            date1 = DateUtils.addMinutes(date1, minToAdd);
-            date2 = DateUtils.addMinutes(date2, minToAdd);
-            endDay = date2;
-            endDay.setHours(19);
-            endDay.setMinutes(59);
-            endDay.setSeconds(59);
-        } while (!(date2.equals(finish)));
+        int numRegistered = 0, numValidated = 0, intToKeep = 0;
+
+        for (Date day : days){
+            Date date1 = day, date2 = DateUtils.addMinutes(date1, 30);
+            Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,0);
+            Date endDay = (Date)date2.clone();
+            endDay = DateUtils.addSeconds(endDay,-1);
+            do{
+                if (date1.getHours()>=8 && date2.getHours()<20) {
+                    numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
+                    numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
+                    intToKeep = numRegistered - numValidated;
+                    intervalArrayList.add(intToKeep);
+                } else if ((date2.getHours()==20 && date2.getMinutes()==0)) {
+                    numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, endDay);
+                    numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, endDay);
+                    intToKeep = numRegistered - numValidated;
+                    intervalArrayList.add(intToKeep);
+                }
+                date1 = DateUtils.addMinutes(date1, 30);
+                date2 = DateUtils.addMinutes(date2, 30);
+                endDay = DateUtils.addMinutes(endDay, 30);
+            } while (!date2.equals(finish));
+        }
         int[] intervalArray = new int[intervalArrayList.size()];
         for (int i = 0; i < intervalArray.length; i++) {
             intervalArray[i] = intervalArrayList.get(i).intValue();
@@ -404,13 +430,15 @@ public class CompanyPerformance {
         return intervalArray;
     }
 
-
     /**
      * Finds the beginning and the ending dates of the contiguous subsequence with maximum sum of an interval, through the chosen algorithm
      *
      * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
+     * @throws ClassNotFoundException if the class name of the external API is not found
+     * @throws InstantiationException if the class object of the external API cannot be instantiated
+     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      */
     public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
@@ -418,45 +446,57 @@ public class CompanyPerformance {
         Class<?> oClass = Class.forName(algorithmClass);
         SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
-        int num=0, val, start = 0, end = 0;
-        for (int i = 0; i < interval.length; i++) {
-            val=i;
-            for (int j = 0; j < worstSubInt.length; j++) {
-                if(interval[val]==worstSubInt[j]){
-                    num++;
+        int num=0, ind, ref=0;
+        for (int j = 0; j < interval.length; j++) {
+                if (worstSubInt[0]==interval[j]){
+                    ind=j;
+                    for (int value : worstSubInt){
+                        if (value==interval[ind]){
+                            num++;
+                        }
+                        ind++;
+                    }
+                    if (num==worstSubInt.length){
+                        ref=j;
+                    }
+                    num=0;
                 }
-                val++;
-            }
-            if (num==worstSubInt.length){
-                start=i;
-                end=start+worstSubInt.length-1;
-            }
-            num=0;
         }
-        int difStart=interval.length-(interval.length-(start+1));
-        int difEnd=interval.length-(interval.length-(end+1));
-        Date[] limits = new Date[2];
-        Date lastDate;
-        Date firstDate;
-        Date finish = days.get(days.size()-1);
+        int startIndex=ref;
+        int endIndex=startIndex+worstSubInt.length-1;
+        Date first = days.get(0);
+        Date last = DateUtils.addMinutes(first,30);
         int quant=0;
-        lastDate=finish;
-        do {
-            lastDate=DateUtils.addMinutes(lastDate,-30);
-            if ((lastDate.getHours()>=8 && lastDate.getHours()<20) || (lastDate.getHours()==20 && lastDate.getMinutes()==0)) {
-                quant++;
+        while (quant!=startIndex){
+            for (Date day : days) {
+                if (first.getHours() >= 8 && last.getHours() < 20) {
+                    first=DateUtils.addMinutes(first,30);
+                    last=DateUtils.addMinutes(last,30);
+                    quant++;
+                } else if ((last.getHours()==20 && last.getMinutes()==0)) {
+                    first=DateUtils.addMinutes(first,30);
+                    last=DateUtils.addMinutes(last,30);
+                    quant++;
+                }
             }
-        }while (quant!=difEnd);
+        }
+        Date[] limits = new Date[2];
+        limits[0]=first;
         quant=0;
-        firstDate=finish;
-        do {
-            firstDate=DateUtils.addMinutes(firstDate,-30);
-            if ((firstDate.getHours()>=8 && firstDate.getHours()<20) || (firstDate.getHours()==20 && firstDate.getMinutes()==0)) {
-                quant++;
+        while (quant!=(endIndex-startIndex)){
+            if (first.getDay()!=0 && last.getDay()!=0) {
+                if (first.getHours() >= 8 && last.getHours() < 20) {
+                    first=DateUtils.addMinutes(first,30);
+                    last=DateUtils.addMinutes(last,30);
+                    quant++;
+                } else if ((last.getHours()==20 && last.getMinutes()==0)) {
+                    first=DateUtils.addMinutes(first,30);
+                    last=DateUtils.addMinutes(last,30);
+                    quant++;
+                }
             }
-        }while (quant!=difStart);
-        limits[0]=firstDate;
-        limits[1]=lastDate;
+        }
+        limits[1]=last;
         return limits;
     }
 

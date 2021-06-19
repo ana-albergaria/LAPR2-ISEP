@@ -189,14 +189,13 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             analysisEndDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 19,59,59);
             setAnalysisEndDate(analysisEndDate);
         }
-        CompanyPerformance compPer = new CompanyPerformance(analysisBegDate, analysisEndDate,chosenAlg);
-        setCompanyPerformance(compPer);
+        controller.createCompanyPerformance(analysisBegDate,analysisEndDate,algorithmOption.getValue());
         referenceDate=java.util.Calendar.getInstance().getTime();
         referenceDate.setHours(0);
         referenceDate.setMinutes(0);
         referenceDate.setSeconds(0);
         setReferenceDate(referenceDate);
-        if (((singleDateD!=null && singleDateD.before(referenceDate)) || (beginningDateD!=null && endingDateD!=null && endingDateD.before(referenceDate)
+        if (((singleDateD!=null && singleDateD.getDay()!=0 && singleDateD.before(referenceDate)) || (beginningDateD!=null && endingDateD!=null && endingDateD.before(referenceDate)
                 && beginningDateD.before(endingDateD) && (beginningDateD.getYear()!=endingDateD.getYear() ||
                 beginningDateD.getMonth()!=endingDateD.getMonth() || beginningDateD.getDate()!=endingDateD.getDate()))) &&
                 (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (algorithmOption.getValue().equals("Benchmark Algorithm") ||

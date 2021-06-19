@@ -1,5 +1,6 @@
 package app.ui.gui;
 
+import app.ui.console.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,4 +72,28 @@ public class AdminMenuUI implements Initializable, Menu {
     }
 
 
+    public void registerCal(ActionEvent actionEvent) {
+        RegisterNewCalUI registerNewCalUI = new RegisterNewCalUI();
+        registerNewCalUI.run();
+    }
+
+    public void createEmployee(ActionEvent actionEvent) {
+        CreateEmployeeUI createEmployeeUI = new CreateEmployeeUI();
+        createEmployeeUI.run();
+    }
+
+    public void createTestType(ActionEvent actionEvent) {
+        CreateTestTypeUI createTestTypeUI = new CreateTestTypeUI();
+        createTestTypeUI.run();
+    }
+
+    public void createParameterCategory(ActionEvent actionEvent) {
+        ParameterCategoryUI parameterCategoryUI = new ParameterCategoryUI();
+        parameterCategoryUI.run();
+    }
+
+    public void createParameter(ActionEvent actionEvent) {
+        CreateParameterUI createParameterUI = new CreateParameterUI();
+        createParameterUI.run();
+    }
 }

@@ -87,7 +87,7 @@
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
                                 <yAxis>
-                                  <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                                  <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
                               <GridPane>
@@ -95,12 +95,12 @@
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="103.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="186.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="161.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <TextArea fx:id="cliTesOverview" mouseTransparent="true" prefHeight="200.0" prefWidth="200.0" style="-fx-text-inner-color: black;" />
+                                    <TextArea fx:id="cliTesOverview" editable="false" mouseTransparent="true" prefHeight="90.0" prefWidth="279.0" style="-fx-text-inner-color: black;" />
                                     <ListView fx:id="listView" onMouseClicked="#handleListViewClick" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Select to analyze:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
