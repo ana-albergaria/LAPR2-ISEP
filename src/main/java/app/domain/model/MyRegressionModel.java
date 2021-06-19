@@ -221,12 +221,12 @@ public class MyRegressionModel {
         StringBuilder text = new StringBuilder();
         text.append("The regression model fitted using data from the interval\n");
         if(secondIndVariable == null)
-            text.append(String.format("^y=%fx + %f%n//%n", slope, intercept));
+            text.append(String.format("^y=%.4fx + %.4f%n//%n", slope, intercept));
         else
-            text.append(String.format("^y=%f + %fx1 + %fx2%n", slope, intercept, secondIndVariable)); //corrigir - RLMúltipla
-        text.append(String.format("Other statistics%nR2 = %f%nR2 adjusted = %f%n", r2, r2Adjusted));
+            text.append(String.format("^y=%.4f + %.4f x1 + %.4f x2%n", slope, intercept, secondIndVariable)); //corrigir - RLMúltipla
+        text.append(String.format("Other statistics%nR2 = %.4f%nR2 adjusted = %.4f%n", r2, r2Adjusted));
         if(secondIndVariable == null)
-            text.append(String.format("R = %f%n", r));
+            text.append(String.format("R = %.4f%n", r));
         text.append("//\n");
 
         return text.toString();

@@ -195,8 +195,8 @@ public class HypothesisTest {
      * @return the decision of the Test for Significance of Regression for the Anova Significance Model
      */
     public String getDecisionForAnova(double critFD) {
-        return (f > critFD) ? String.format("%f > f%.2f,(%d,%d)=%f%nReject H0\nThe regression model is significant.", f, significanceLevel, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD) :
-                String.format("%f <= f%.2f,(%d,%d)=%f%nNo Reject H0\nThe regression model is not significant.", f, significanceLevel, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD);
+        return (f > critFD) ? String.format("%.4f > f%.2f,(%d,%d)=%.4f%nReject H0\nThe regression model is significant.", f, significanceLevel, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD) :
+                String.format("%.4f <= f%.2f,(%d,%d)=%.4f%nNo Reject H0\nThe regression model is not significant.", f, significanceLevel, numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, critFD);
     }
 
     /**
@@ -210,16 +210,16 @@ public class HypothesisTest {
         text.append("Hypothesis tests for regression coefficients\n\n");
         text.append(String.format("--> Significance Level: %.2f%n%n", significanceLevel));
         text.append("H0:a=0 H1:a<>0\n");
-        text.append(String.format("t_obs=%f%n", tObsA));
+        text.append(String.format("t_obs=%.4f%n", tObsA));
         text.append(String.format("Decision: %n%s%n", getDecision(tObsA, critTD)));
         text.append("//\n");
         text.append("H0:b=0 H1:b<>0\n");
-        text.append(String.format("t_obs=%f%n", tObsB));
+        text.append(String.format("t_obs=%.4f%n", tObsB));
         text.append(String.format("Decision: %n%s%n", getDecision(tObsB, critTD)));
         text.append("//\n");
         if(myRegressionModel.getSecondIndVariable() != null) {
             text.append("H0:c=0 H1:c<>0\n");
-            text.append(String.format("t_obs=%f%n", tObsC));
+            text.append(String.format("t_obs=%.4f%n", tObsC));
             text.append(String.format("Decision: %n%s%n", getDecision(tObsC, critTD)));
             text.append("//\n");
         }
@@ -252,7 +252,7 @@ public class HypothesisTest {
         text.append("Hypothesis tests for regression coefficients\n\n");
         text.append(String.format("--> Significance Level: %.2f%n%n", significanceLevel));
         text.append(String.format("H0:%s=0 H1:%s<>0\n", chosenRegCoefficient, chosenRegCoefficient));
-        text.append(String.format("t_obs=%f%n", chosenTObs));
+        text.append(String.format("t_obs=%.4f%n", chosenTObs));
         text.append(String.format("Decision: %n%s%n", getDecision(chosenTObs, critTD)));
         text.append("//\n");
         return text.toString();
