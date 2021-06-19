@@ -300,10 +300,13 @@ public class TestStore {
         return false;
     }
 
-    /*
-    to be used in US19
-    WARNING: - Confirm if it's tests with results OR validated tests -> A: Validated.
-            - Confirm if the client wishes the date of test registration or date of results
+    /**
+     * Returns a list containing the observed Positive cases in the historical points.
+     *
+     * @param numberOfObservations number of observations
+     * @param dates dates of the historical points
+     *
+     * @return a list containing the observed Positive cases in the historical points
      */
     public int[] getObservedPositivesToTableOfValues(int numberOfObservations,
                                                     List<String> dates) {
@@ -324,22 +327,17 @@ public class TestStore {
                 }
             }
         }
-        /*
-        for (Test test : testList) {
-            if(test.hasPositiveResultForCovid()) {
-                for (int i = 0; i < dates.size(); i++) {
-                    String testDateOfValidation = sdf.format(test.getDateOfValidation());
-                    if(testDateOfValidation.equals(dates.get(i))) {
-                        indexDate = i;
-                        observedPositives[indexDate]++;
-                    }
-                }
-            }
-        }
-         */
         return observedPositives;
     }
 
+    /**
+     * Returns a list containing the weekly observed Positive cases in the historical points.
+     *
+     * @param dates weeks of the historical points
+     * @throws ParseException if the date to be compared is not valid
+     *
+     * @return a list containing the weekly observed Positive cases in the historical points
+     */
     public int[] getWeeklyObservedPositivesToTableOfValues(List<String> dates) throws ParseException {
         int[] observedPositives = new int[dates.size()];
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -351,6 +349,14 @@ public class TestStore {
         return observedPositives;
     }
 
+    /**
+     * Returns the observed positive Covid-19 cases in a certain week.
+     *
+     * @param beginDate initial date
+     * @param endDate final date
+     *
+     * @return observed positive Covid-19 cases in a certain week
+     */
     public int getObservedPositivesInOneWeek(Date beginDate, Date endDate) {
         int weeklyPositives = 0;
         Calendar cal = Calendar.getInstance();
@@ -364,38 +370,64 @@ public class TestStore {
         return weeklyPositives;
     }
 
-
+    /**
+     * Returns the number of Covid Tests Realized on a certain day.
+     *
+     * @param date date of the day
+     *
+     * @return the number of Covid Tests Realized on a certain day
+     */
     public double getNumberOfCovidTestsRealizedInADay(Date date) {
         double testsInADay = 0;
         List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
         for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
             Test test = iterator.next();
-            if (test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date)) {
+            if (test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfTestRegistration(), date)) {
                 testsInADay++;
             }
         }
         return testsInADay;
     }
 
-
+    /**
+     * Returns the mean age of Clients who did Covid-test in a certain day.
+     *
+     * @param date date of the day
+     *
+     * @return the mean age of Clients who did Covid-test in a certain day
+     */
     public double getMeanAgeOfClientsOfCovidTestsInADay(Date date) {
         return (getNumClientsWithValidatedTestsInADay(date) != 0)
                 ? getSumOfClientAgesInADay(date) / getNumClientsWithValidatedTestsInADay(date)
                     : 0;
     }
 
+    /**
+     * Returns the number of Clients which did validated tests in a day.
+     *
+     * @param date date of the day
+     *
+     * @return the number of Clients which did validated tests in a day
+     */
     public double getNumClientsWithValidatedTestsInADay(Date date){
         double numClients = 0;
         List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
         for (Iterator<Test> iterator = testListCopy.iterator(); iterator.hasNext();) {
             Test test = iterator.next();
-            if (test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfValidation(), date)) {
+            if (test.isCovidTest() && test.isValidated() && checkIfDatesAreEqual(test.getDateOfTestRegistration(), date)) {
                 numClients++;
             }
         }
         return numClients;
     }
 
+    /**
+     * Returns the sum of Client's ages in a day.
+     *
+     * @param date date of the day
+     *
+     * @return the sum of Client's ages in a day
+     */
     public double getSumOfClientAgesInADay(Date date){
         double sumAges = 0;
         List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
@@ -408,6 +440,13 @@ public class TestStore {
         return  sumAges;
     }
 
+    /**
+     * Returns the observed Covid-19 cases in a certain day.
+     *
+     * @param date date of the day
+     *
+     * @return the observed Covid-19 cases in a certain day
+     */
     public double getObservedPositivesCovidInADay(Date date) {
         double positives = 0;
         List<Test> testListCopy = new CopyOnWriteArrayList<>(testList);
@@ -420,6 +459,18 @@ public class TestStore {
         return positives;
     }
 
+    /**
+     * Returns a list containing 3 lists in a certain date interval:
+     * the list of the Covid-tests realized,
+     * the list of the Mean Age of the clients which did said tests,
+     * the list of the observed Positives
+     *
+     * @param beginDate initial date
+     * @param endDate final date
+     * @param typeOfData the type of data (day or week)
+     *
+     * @return a list containing the 3 lists required in a certain date interval
+     */
     public List< List<Double> > getAllDataToFitTheModel(Date beginDate, Date endDate, String typeOfData) {
         Calendar auxEndDate = Calendar.getInstance();
         auxEndDate.setTime(endDate);
@@ -450,7 +501,7 @@ public class TestStore {
     }
 
     /**
-     * Fills all the required arrays containing the data to fit the regression model.
+     * Fills all the required arrays containing the daily data to fit the regression model.
      *
      * @param beginDate initial date
      * @param endDate final date
@@ -481,6 +532,15 @@ public class TestStore {
         }
     }
 
+    /**
+     * Fills all the required arrays containing the weekly data to fit the regression model.
+     *
+     * @param beginDate initial date
+     * @param endDate final date
+     * @param covidTestList list of the Covid-19 tests
+     * @param meanAgeList list of the Mean Age of Clients
+     * @param observedPositives list of observed Positives
+     */
     public void addWeeklyDataFromDateInterval(Date beginDate,
                                               Date endDate,
                                               List<Double> covidTestList,
@@ -493,17 +553,12 @@ public class TestStore {
         Date auxBeginDate = cal.getTime();
 
         while(!beginDate.after(auxEndDate) && !endDate.before(auxEndDate)) {
-            System.out.println("AuxEndDate: " + auxEndDate);
-            System.out.println("AuxBeginDate: " + auxBeginDate);
             double testsInAWeek = getNumberOfCovidTestsInOneWeek(auxBeginDate, auxEndDate);
-            System.out.println("Tests in a Week" + testsInAWeek);
             covidTestList.add(testsInAWeek);
             double meanAgeInAWeek = getMeanAgeInOneWeek(auxBeginDate, auxEndDate);
-            System.out.println("Mean Age in a Week: " + meanAgeInAWeek);
             meanAgeList.add(meanAgeInAWeek);
             double observedPositivesInAWeek = getObservedPositivesInOneWeek(auxBeginDate, auxEndDate);
             observedPositives.add(observedPositivesInAWeek);
-            System.out.println("Observed Positives In a Week: " + observedPositivesInAWeek);
             cal.add(Calendar.DAY_OF_MONTH, -2);
             auxEndDate = cal.getTime();
             cal.add(Calendar.DAY_OF_MONTH, -5);
@@ -511,7 +566,13 @@ public class TestStore {
         }
     }
 
-
+    /**
+     * Returns the number of validated tests in the  daily historical points.
+     *
+     * @param dates list of dates of the historical points
+     *
+     * @return the number of validated tests in the historical points
+     */
     public Double[] getNumberOfCovidTestsInHistoricalPoints(List<String> dates) {
         double[] covidTestsInHistoricalPointsPrimitive = new double[dates.size()];
         int indexDate = 0;
@@ -530,23 +591,19 @@ public class TestStore {
                 }
             }
         }
-        /*
-        for (Test test : testList) {
-            if(test.isCovidTest() && test.isValidated()) {
-                for (int i = 0; i < dates.size(); i++) {
-                    String testDateOfValidation = sdf.format(test.getDateOfValidation());
-                    if(testDateOfValidation.equals(dates.get(i))) {
-                        indexDate = i;
-                        covidTestsInHistoricalPointsPrimitive[indexDate]++;
-                    }
-                }
-            }
-        }
-         */
         Double[] covidTestsInHistoricalPoints = turnPrimitiveIntoDoubleArray(covidTestsInHistoricalPointsPrimitive);
         return covidTestsInHistoricalPoints;
     }
 
+    /**
+     * Returns the number of validated tests in the weekly historical points.
+     *
+     * @param dates list of dates of the historical points
+     *
+     * @return the number of validated tests in the weekly historical points
+     *
+     * @throws ParseException if the date to be compared is not valid
+     */
     public Double[] getWeeklyNumberOfCovidTestsInHistoricalPoints(List<String> dates) throws ParseException {
         double[] covidTestsInHistoricalPointsPrimitive = new double[dates.size()];
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -559,6 +616,14 @@ public class TestStore {
         return covidTestsInHistoricalPoints;
     }
 
+    /**
+     * Returns the number of Covid Tests realized in one week.
+     *
+     * @param beginDate initial date
+     * @param endDate final date
+     *
+     * @return the number of Covid Tests realized in one week
+     */
     public double getNumberOfCovidTestsInOneWeek(Date beginDate, Date endDate) {
         int weeklyTests = 0;
         Calendar cal = Calendar.getInstance();
@@ -572,8 +637,13 @@ public class TestStore {
         return weeklyTests;
     }
 
-//TESTAR POR CAUSA DO NULL DO DOUBLE!!!!
-
+    /**
+     * Returns the mean age of Clients in the daily historical points
+     *
+     * @param dates list of dates of the historical points
+     *
+     * @return the mean age of Clinets in the daily historical points
+     */
     public Double[] getMeanAgeInHistoricalPoints(List<String> dates) {
         Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
         double sumAges = 0, numClients = 0;
@@ -582,8 +652,8 @@ public class TestStore {
         for (int i = 0; i < dates.size(); i++) {
             for (Test test : testList) {
                 if(test.isCovidTest() && test.isValidated()) {
-                    String testDateOfDiagnosis = sdf.format(test.getDateOfDiagnosis());
-                    if(testDateOfDiagnosis.equals(dates.get(i))) {
+                    String testDateOfRegistration = sdf.format(test.getDateOfTestRegistration());
+                    if(testDateOfRegistration.equals(dates.get(i))) {
                         sumAges += test.getClient().getAge();
                         numClients++;
                     }
@@ -599,6 +669,15 @@ public class TestStore {
         return meanAgeInHistoricalPoints;
     }
 
+    /**
+     * Returns the mean age of the Clinets in weekly historical points.
+     *
+     * @param dates list of dates of the historical points
+     *
+     * @return the mean age of the Clinets in weekly historical points
+     *
+     * @throws ParseException if the data to be compared is not valid
+     */
     public Double[] getWeeklyMeanAgeInHistoricalPoints(List<String> dates) throws ParseException {
         Double[] meanAgeInHistoricalPoints = new Double[dates.size()];
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -609,6 +688,7 @@ public class TestStore {
         }
         return meanAgeInHistoricalPoints;
     }
+
 
     public double getMeanAgeInOneWeek(Date beginDate, Date endDate) {
         int sumAges = 0;
@@ -626,7 +706,15 @@ public class TestStore {
     }
 
 
-
+    /**
+     * Returns true if the dates are equal in day, month and year.
+     *
+     * @param date date
+     * @param otherDate date to be compared with
+     *
+     * @return Returns true if the dates are equal in day, month and year.
+     *          Otherwise, returns false.
+     */
     public boolean checkIfDatesAreEqual(Date date, Date otherDate) {
         Calendar cal = Calendar.getInstance(), otherCal = Calendar.getInstance();
         cal.setTime(date);
@@ -636,6 +724,14 @@ public class TestStore {
                 cal.get(Calendar.YEAR) == otherCal.get(Calendar.YEAR);
     }
 
+    /**
+     * Returns a Double[] array containing the elements of a double[] array
+     * received by parameter
+     *
+     * @param array array whose elements are to be copied
+     *
+     * @returna Double[] array containing the elements of a double[] array received by parameter
+     */
     public Double[] turnPrimitiveIntoDoubleArray(double[] array) {
         Double[] wishedArray = new Double[array.length];
         for (int i = 0; i < array.length; i++) {

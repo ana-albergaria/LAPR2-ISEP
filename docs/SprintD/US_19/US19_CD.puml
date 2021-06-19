@@ -68,17 +68,84 @@ class Timer {
 +schedule(task, delay, interval)
 }
 
-class NHSReportStore {}
+class NHSReportStore {
++getBestXIndex(regressionModel, x1, x2, y)
++createMyBestRegressionModel(regressionModel, bestX, y, historicalPoints)
++createMyRegressionModel(regressionModel, x1, x2, y, historicalPoints)
++createHypothesisTest(regressionModel, myRegressionModel, significanceLevel)
++createSignificanceModelAnova(regressionModel, myRegressionModel, significanceLevel)
++createTableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals)
++getDoubleArrayWithData(covidTestAndMeanAgeList, index)
++copyArray(array)
++getDatesColumnToTableOfValues(numberOfObservations, currentDate)
++getWeeksColumnToTableOfValues(numberOfObservations, currentDate)
++getWeek(initialDate, endDate)
++getStartDate()
++getStartDateForSelectedDate(currentDate)
+}
 
-class TestStore {}
+class TestStore {
++getObservedPositivesToTableOfValues(numberOfObservations, dates)
++getWeeklyObservedPositivesToTableOfValues(dates)
++getObservedPositivesInOneWeek(beginDate, endDate)
++getNumberOfCovidTestsRealizedInADay(date)
++getMeanAgeOfClientsOfCovidTestsInADay(date)
++getNumClientsWithValidatedTestsInADay(date)
++getSumOfClientAgesInADay(date)
++getObservedPositivesCovidInADay(date)
++getAllDataToFitTheModel(beginDate, endDate, typeOfData)
++addAllDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives)
++addWeeklyDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives)
++getNumberOfCovidTestsInHistoricalPoints(dates)
++getWeeklyNumberOfCovidTestsInHistoricalPoints(dates)
++getNumberOfCovidTestsInOneWeek(beginDate, endDate)
++getMeanAgeInHistoricalPoints(dates)
++getWeeklyMeanAgeInHistoricalPoints(dates)
++checkIfDatesAreEqual(date, otherDate)
++turnPrimitiveIntoDoubleArray(array)
++checkDateIntervalHasMinRange(beginDate, endDate)
++getFinalBeginDateForWeekData(beginDate)
++getFinalEndDateForWeekData(endDate)
+}
 
-class SimpleLinearRegressionAdapter {}
+class SimpleLinearRegressionAdapter {
++getBestXIndex(x1, x2, y)
++getRegressionModel(x1, x2, y, historicalPoints)
++getHypothesisTest(myRegressionModel, significanceLevel)
++getSignificanceModelAnova(myRegressionModel, significanceLevel)
++getEstimatedPositives(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints)
++getConfidenceInterval(myRegressionModel, x1, x2, confidenceLevel)
++getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel)
++getChosenHypothesisTest(myRegressionModel, significanceLevel, chosenRegCoefficient)
+}
 
-class MultipleLinearRegressionAdapter {}
+class MultipleLinearRegressionAdapter {
++getBestXIndex(x1, x2, y)
++getRegressionModel(x1, x2, y, historicalPoints)
++getHypothesisTest(myRegressionModel, significanceLevel)
++getSignificanceModelAnova(myRegressionModel, significanceLevel)
++getEstimatedPositives(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints)
++getConfidenceInterval(myRegressionModel, x1, x2, confidenceLevel)
++getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel)
++getChosenHypothesisTest(myRegressionModel, significanceLevel, chosenRegCoefficient)
+}
 
 class RegressionModel {}
 
-class NHSReportTask {}
+class NHSReportTask {
+-historicalPoints
+-significanceLevel
+-confidenceLevel
+-regressionModelClass
++createNHSDailyReport(typeOfData)
++getDataListToFitTheModel(typeOfData)
++getMyRegressionModel(regressionModel, bestXIndex, covidTestsArray, meanAgeArray, observedPositives, historicalPoints)
++getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate, typeOfData)
++getConfidenceIntervalListForTableOfValues(myRegressionModel, regressionModel, x1InHistoricalPoints, x2InHistoricalPoints, bestXIndex)
++getRegressionModel(regressionModelCLass)
++writeEventIntoLogFile()
++run()
+}
 
 class MyRegressionModel {
 -intercept
@@ -88,9 +155,20 @@ class MyRegressionModel {
 -r2
 -r2Adjusted
 -numberOfObservations
++calculateCriticalValFSnedecor(numeratorDegreesOfFreedom, denominatorDegreesOfFreedom, significanceLevel)
++calculateCriticalValTStudent(significanceLevel)
 }
 
-interface MathCalculus <<interface>> {}
+interface MathCalculus <<interface>> {
++getBestXIndex(x1, x2, y)
++getRegressionModel(x1, x2, y, historicalPoints)
++getHypothesisTest(myRegressionModel, significanceLevel)
++getSignificanceModelAnova(myRegressionModel, significanceLevel)
++getEstimatedPositives(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints)
++getConfidenceInterval(myRegressionModel, x1, x2, confidenceLevel)
++getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel)
++getChosenHypothesisTest(myRegressionModel, significanceLevel, chosenRegCoefficient)
+}
 
 class Test {
 - code
@@ -99,6 +177,9 @@ class Test {
 - dateOfSamplesCollection
 - dateOfChemicalAnalysis
 - dateOfDiagnosis
++isValidated()
++hasPositiveResultForCovid()
++isCovidTest()
 }
 
 class Client {
@@ -110,6 +191,7 @@ class Client {
 - taxIdNum
 - phoneNum
 - email
++getAge()
 }
 /'O CONTROLLER É A APP STARTUP'/
 /'COLOCAR TIMER'/
