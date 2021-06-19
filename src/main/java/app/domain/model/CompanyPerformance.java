@@ -481,7 +481,7 @@ public class CompanyPerformance {
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
         Date[] limits = new Date[2];
-        if (worstSubInt.length!=0) {
+        if (worstSubInt.length!=0) { //é 0 quando a company é igualmente eficiente ao longo do interval (ex: todos os valores são 0)
             for (int j = 0; j < interval.length; j++) {
                 System.out.println("1");
                 if (interval[j] == worstSubInt[0]) {
@@ -489,7 +489,7 @@ public class CompanyPerformance {
                     System.out.println("2");
                     for (int value : worstSubInt) {
                         System.out.println("3");
-                        if (ind<interval.length && value == interval[ind]) {
+                        if (value==interval[ind]) {
                             System.out.println("4");
                             num++;
                         }
@@ -519,7 +519,7 @@ public class CompanyPerformance {
                         quant++;
                     }
                 }
-                System.out.println("1");
+                System.out.println("6");
             }
             limits[0] = first;
             quant = 0;
@@ -535,7 +535,7 @@ public class CompanyPerformance {
                         quant++;
                     }
                 }
-                System.out.println("2");
+                System.out.println("7");
             }
             limits[1] = last;
         }else{

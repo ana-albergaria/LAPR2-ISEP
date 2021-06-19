@@ -211,7 +211,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         Date[] limits= controller.findWorstSubIntWithChosenAlgorithm();
         String text = "Interval When The Company Was Less Effective In Responding";
         if (limits[0]==null && limits[1]==null){
-            text = text + "\n ↪ [ERROR: not found]";
+            text = text + "\n ↪ [The company was equally effective during the whole interval.]";
         } else {
             text = text + "\n ↪ From: " + limits[0].toString() + "\n ↪ To: " + limits[1].toString();
         }
