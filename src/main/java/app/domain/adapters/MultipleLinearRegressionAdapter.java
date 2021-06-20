@@ -5,7 +5,7 @@ import app.domain.model.ConfidenceInterval;
 import app.domain.model.HypothesisTest;
 import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
-import app.thirdparty.MultipleLinearRegression;
+import app.thirdparty.regressionModels.MultipleLinearRegression;
 
 import java.util.ArrayList;
 import java.util.List;

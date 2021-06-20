@@ -3,21 +3,34 @@
 title SD - Scheduling the Task
 
 participant ":App" as APP
-participant ":Company" as COMPANY
+participant ":Company\n" as COMPANY
 participant "testStore\n:TestStore" as TEST_STORE
 participant "nhsReportStore\n:NHSReportStore" as NHS_REPORT_STORE
 participant "nhsReportTask:\nNHSReportTask" as TASK
 participant "timer:\nTimer" as TIMER
+participant "dateForTask:\nDate" as DATE_TASK
 
 /'[o-> COMPANY : scheduleNHSReportTask(delay, interval)'/
-APP -> COMPANY : scheduleNHSReportTask(delay, interval)
 activate APP
+APP -> COMPANY** : create(designation, classNameForBarcodeApi, classNameForSortAlgorithm, \nregressionModelClass, dateInterval, historicalPoints, confidenceLevel, significanceLevel)
 activate COMPANY
+note over COMPANY, TIMER
+Some steps are omitted - only the **important ones for this US** are registered in this SD.
+end note
 COMPANY --> TEST_STORE** : create()
 COMPANY --> NHS_REPORT_STORE** : create()
 COMPANY --> TASK** : create(regressionModelClass, historicalPoints, significanceLevel, \nconfidenceLevel, dateInterval, testStore, nhsReportStore)
 COMPANY --> TIMER** : create()
-COMPANY -> TIMER : schedule(task, delay, interval)
+deactivate COMPANY
+
+APP -> COMPANY : delay = getDateForNHSReportTask()
+activate COMPANY
+deactivate COMPANY
+
+APP -> COMPANY : scheduleNHSReportTask(delay, interval)
+activate COMPANY
+
+COMPANY -> TIMER : schedule(nhsReportTask, delay, interval)
 activate TIMER
 deactivate TIMER
 deactivate COMPANY

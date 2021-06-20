@@ -4,7 +4,7 @@ import app.domain.interfaces.RegressionModel;
 import app.domain.model.Company;
 import app.domain.model.ConfidenceInterval;
 import app.domain.model.MyRegressionModel;
-import app.thirdparty.SimpleLinearRegression;
+import app.thirdparty.regressionModels.SimpleLinearRegression;
 import app.domain.shared.Constants;
 import org.junit.Assert;
 import org.junit.Before;

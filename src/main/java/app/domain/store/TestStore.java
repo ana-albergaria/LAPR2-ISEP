@@ -97,6 +97,7 @@ public class TestStore {
                     || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
                     || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
                 num++;
+            System.out.println(num);
         }
         return num;
     }
@@ -489,8 +490,6 @@ public class TestStore {
             if(checkDateIntervalHasMinRange(beginDate, endDate)) {
                 beginDate = getFinalBeginDateForWeekData(beginDate);
                 endDate = getFinalEndDateForWeekData(endDate);
-                System.out.println("Final Begin Date: " + beginDate);
-                System.out.println("Final End Date: " + endDate);
             }
             addWeeklyDataFromDateInterval(beginDate, endDate, covidTestList, meanAgeList, observedPositives);
         }
@@ -761,7 +760,6 @@ public class TestStore {
         int cont = 0;
 
         while(auxInitialDate.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            System.out.println(auxInitialDate.getTime());
             auxInitialDate.add(Calendar.DAY_OF_MONTH, 1);
         }
 

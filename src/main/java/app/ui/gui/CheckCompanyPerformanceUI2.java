@@ -27,6 +27,9 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     private App mainApp;
 
+    @FXML
+    private TextArea cliTesOverview;
+
     public CheckCompanyPerformanceUI2() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
     }
 
@@ -78,8 +81,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.lineChart = lineChart;
     }
 
-    @FXML
-    private TextArea cliTesOverview;
+
 
     @FXML
     private Button exitBtn;
@@ -105,7 +107,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerDay());
                 for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[0]));
+                    desiredData.add(bothValues[0]);
                 }
                 series.setName("Tests Waiting For Results");
                 break;
@@ -113,7 +115,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerWeek());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[0]));
+                    desiredData.add(bothValues[0]);
                 }
                 series.setName("Tests Waiting For Results");
                 break;
@@ -121,7 +123,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerMonth());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[0]));
+                    desiredData.add(bothValues[0]);
                 }
                 series.setName("Tests Waiting For Results");
                 break;
@@ -129,7 +131,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerYear());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[0]));
+                    desiredData.add(bothValues[0]);
                 }
                 series.setName("Tests Waiting For Results");
                 break;
@@ -137,7 +139,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerDay());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[1]));
+                    desiredData.add(bothValues[1]);
                 }
                 series.setName("Tests Waiting For Diagnosis");
                 break;
@@ -145,7 +147,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerWeek());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[1]));
+                    desiredData.add(bothValues[1]);
                 }
                 series.setName("Tests Waiting For Diagnosis");
                 break;
@@ -153,7 +155,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerMonth());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[1]));
+                    desiredData.add(bothValues[1]);
                 }
                 series.setName("Tests Waiting For Diagnosis");
                 break;
@@ -161,11 +163,12 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 setTestsInfo(controller.getTestInfoPerYear());
                 for (int i = 0; i < testsInfo.size(); i++) {
                     bothValues= testsInfo.get(i);
-                    desiredData.add(Integer.valueOf(bothValues[1]));
+                    desiredData.add(bothValues[1]);
                 }
                 series.setName("Tests Waiting For Diagnosis");
                 break;
         }
+        System.out.println(desiredData);
         setChosenGraphData(desiredData);
         for (int i = 0; i < chosenGraphData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
@@ -217,8 +220,10 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         }
         text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval();
         text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval();
+        cliTesOverview.setEditable(false);
         cliTesOverview.setText(text);
-        setCliTesOverview(cliTesOverview);
+        System.out.println(text);
+        /*setCliTesOverview(cliTesOverview);*/
     }
 
     public void populateListView(){

@@ -1,13 +1,9 @@
 package app.thirdparty;
 
-import app.domain.model.MyRegressionModel;
+import app.thirdparty.regressionModels.MultipleLinearRegression;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 public class MultipleLinearRegressionTest {
     private MultipleLinearRegression multipleLR;

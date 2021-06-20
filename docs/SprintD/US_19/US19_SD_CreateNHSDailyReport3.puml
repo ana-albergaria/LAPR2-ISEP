@@ -1,6 +1,6 @@
 @startuml
 
-title SD_createNHSDailyReport()
+title SD_createNHSDailyReport(typeOfData)
 
 participant "nhsReportTask:\nNHSReportTask" as TASK
 participant "regressionModel:\nRegressionModel" as REGRESSION_MODEL
@@ -17,7 +17,7 @@ participant "startDate:\nDate" as START_DATE
 participant "tableOfValues:\nTableOfValues"
 participant "nhsReport:\nNHSReport"
 
-[o-> TASK : createNHSDailyReport()
+[o-> TASK : createNHSDailyReport(typeOfData)
 
 activate TASK
 TASK -> TASK : regressionModel = getRegressionModel(regressionModelClass)

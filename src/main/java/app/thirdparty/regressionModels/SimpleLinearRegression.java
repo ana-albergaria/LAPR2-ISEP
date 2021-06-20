@@ -1,4 +1,4 @@
-package app.thirdparty;
+package app.thirdparty.regressionModels;
 
 /******************************************************************************
  *  Compute least squares solution to y = beta * x + alpha.

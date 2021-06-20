@@ -2,6 +2,8 @@ package app.controller;
 
 import app.domain.model.*;
 import app.domain.shared.Constants;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
 import auth.AuthFacade;
 import auth.UserSession;
 import net.sourceforge.barbecue.BarcodeException;
@@ -11,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -33,6 +36,8 @@ public class App {
                 props.getProperty("Company.SignificanceLevel"));
         this.authFacade = this.company.getAuthFacade();
         bootstrap();
+        Date delay = this.company.getDateForNHSReportTask();
+        this.company.scheduleNHSReportTask(delay, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
     }
 
     public Company getCompany()
@@ -259,6 +264,7 @@ public class App {
         Date date5r = new Date(2020,Calendar.JANUARY,16,19,59,59);
         test5.setDateOfDiagnosis(date5r);
         test5.setDateOfValidation(date5r);
+
 
     }
 
