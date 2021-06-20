@@ -1,14 +1,11 @@
 package app.domain;
 
-import app.controller.ImportTestController;
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;
 import app.domain.model.Test;
 import app.domain.shared.Constants;
 import app.domain.store.TestStore;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
-import net.sourceforge.barbecue.BarcodeException;
+
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
@@ -41,12 +38,12 @@ public class CompanyPerformance {
     /**
      * The beginning date of the interval.
      */
-    private Date beginningDate;
+    private Calendar beginningDate;
 
     /**
      * The ending date of the interval.
      */
-    private Date endingDate;
+    private Calendar endingDate;
 
     /**
      * The chosen algorithm.
@@ -90,24 +87,26 @@ public class CompanyPerformance {
 
     public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
         this.company = company;
-        this.beginningDate=beginningDate;
-        this.endingDate=endingDate;
+        this.beginningDate = Calendar.getInstance();
+        this.beginningDate.setTime(beginningDate);
+        this.endingDate=Calendar.getInstance();
+        this.endingDate.setTime(endingDate);
         this.chosenAlg=chosenAlg;
         this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
         this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
         this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        if (beginningDate.getYear()!=endingDate.getYear() || beginningDate.getMonth()!=endingDate.getMonth() || beginningDate.getDate()!=endingDate.getDate()) {
+        if (this.beginningDate.get(Calendar.YEAR) != this.endingDate.get(Calendar.YEAR)
+                || this.beginningDate.get(Calendar.MONTH)!= this.endingDate.get(Calendar.MONTH)
+                || this.beginningDate.get(Calendar.DAY_OF_MONTH)!= this.endingDate.get(Calendar.DAY_OF_MONTH)) {
             this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
             this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
             this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
         }
         try {
             this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }
