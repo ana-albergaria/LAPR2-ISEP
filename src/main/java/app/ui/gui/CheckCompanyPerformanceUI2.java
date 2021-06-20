@@ -346,7 +346,15 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         if (daysOption.equals("A Day")){
             text = text + "[Unavailable for day analysis.]";
         } else {
-            text = text + "[See bellow.]";
+            if (DateUtils.addDays(end,-7).before(beginning) || DateUtils.addDays(end,-7).equals(beginning)){
+                text = text + "[The chosen interval is less than a week long. Analysis over weeks, months and years are not available. The other ones can be seen bellow.]";
+            } else if (DateUtils.addMonths(end,-1).before(beginning) || DateUtils.addMonths(end,-1).equals(beginning)){
+                text = text + "[The chosen interval is less than a month long. Analysis over months and years are not available. The other ones can be seen bellow.]";
+            } else if (DateUtils.addYears(end,-1).before(beginning) || DateUtils.addYears(end,-1).equals(beginning)){
+                text = text + "[The chosen interval is less than a year long. Analysis over years are not available. The other ones can be seen bellow.]";
+            } else {
+                text = text + "[See bellow.]";
+            }
         }
         cliTesOverview.setEditable(false);
         cliTesOverview.setText(text);
