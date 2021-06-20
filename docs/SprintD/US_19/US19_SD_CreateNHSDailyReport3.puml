@@ -3,7 +3,7 @@
 title SD_createNHSDailyReport(typeOfData)
 
 participant "nhsReportTask:\nNHSReportTask" as TASK
-participant "regressionModel:\nRegressionModel" as REGRESSION_MODEL
+participant "regressionModel:\nMathCalculus" as REGRESSION_MODEL
 participant "dataList:\nList< List<Double> >"
 participant "nhsReportStore\n:NHSReportStore" as NHS_REPORT_STORE
 participant "covidTestsArray:\ndouble[]" as TESTS_ARRAY

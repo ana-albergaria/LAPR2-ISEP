@@ -11,9 +11,7 @@ The Many Labs company wants to send to the NHS daily reports of Covid-19
 data, including the number of observed values and estimated values. Reports should be
 generated automatically with historical data and must be sent every day at 6:00 am.
 
-### 1.2. Customer Specifications and Clarifications 
-
-*Insert here any related specification and/or clarification provided by the client together with **your interpretation**. When possible, provide a link to such specifications/clarifications.*  
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**  
 >[…] NHS […] requires Many Labs to summarize and report Covid-19 data […]  identify the number of Covid-19 tests performed, identify all positive results to Covid-19 tests, **report the total number of Covid-19 cases per day, per week and per month of the year, and send the forecasts for these same time horizons (the number of Covid-19 cases for the following day, next week and next month). The company is also required to generate daily (automatic) reports with the information demanded by the NHS and should send them to the NHS using their API.**”  
@@ -151,8 +149,7 @@ As our group is of 3 elements, **a validated test means concluding US14**.
 
 ### 1.7 Other Relevant Remarks
 
-*Use this section to capture other relevant information that is related with this US such as (i) special requirements ; (ii) data and/or technology variations; (iii) how often this US is held.* 
-
+N/A
 
 ## 2. OO Analysis
 
@@ -163,7 +160,7 @@ As our group is of 3 elements, **a validated test means concluding US14**.
 
 ### 2.2. Other Remarks
 
-*Use this section to capture some aditional notes/remarks that must be taken into consideration into the design activity. In some case, it might be usefull to add other analysis artifacts (e.g. activity or state diagrams).* 
+N/A
 
 
 
@@ -184,18 +181,18 @@ As our group is of 3 elements, **a validated test means concluding US14**.
 |                                       	           | ...instantiating a new Timer?		                                            | Company                   | Creator (Rule 4): Company has the data used to initialize the Timer objects.                        |
 |                                       	           | ...knowing which Regression Model to use?		                                | Company                   | IE: in the DM, Company makes use of RegressionModel.                                                |
 |                                       	           | ...knowing which API will send the report?		                                | Company                   | IE: in the DM, Company makes use of NhsAPI.                                                         |
-|                                       	           | ...making the system support several Regression Models? 	                    | RegressionModel           | Protected Variations: to create a stable interface around the point of variation - the existence of different Regression Models.                       |
+|                                       	           | ...making the system support several Regression Models? 	                    | MathCalculus         | Protected Variations: to create a stable interface around the point of variation - the existence of different Regression Models.                       |
 |                                       	           | ...enabling different Regression Models to be compatible with the system?      | RegressionModelAdapterX   | Adapter Pattern: to convert requests made in accordance to our system. One adapter per ExternalAPI.                                                    |
 |                                       	           | ...saving the information regarding the regression model used?	                | MyRegressionModel         | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
-|                                       	           | ...instantiate a new MyRegressionModel?		                                | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...instantiate a new MyRegressionModel?		                                | MathCalculus           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
 |                                       	           | ...saving the information regarding the Hypothesis Test?	                    | HypothesisTest            | IE: has its own data.                   |
-|                                       	           | ...instantiate a new HypothesisTest?		                                    | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...instantiate a new HypothesisTest?		                                    | MathCalculus           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
 |                                       	           | ...saving the information regarding the Anova Significance Model?	            | AnovaSignificanceModel    | IE: has its own data.                    |
-|                                       	           | ...instantiate a new SignificanceModelAnova?		                            | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...instantiate a new SignificanceModelAnova?		                            | MathCalculus           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
 |                                       	           | ...instantiate a new HypothesisTest for the Test for Significance of Regression?    | SignificanceModelAnova         | Creator (Rule 1): SignificanceModelAnova contains HypothesisTest.                   |
-|                                       	           | ...calculating the estimated Positives in accordance to the regression model being used?	                                        | RegressionModel    | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...calculating the estimated Positives in accordance to the regression model being used?	                                        | MathCalculus    | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
 |                                       	           | ...saving the information regarding a Confidence Interval in accordance to the regression model being used?	                    | ConfidenceInterval | IE: has its own data.                   |
-|                                       	           | ...instantiate a new ConfidenceInterval?		                                    | RegressionModel           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
+|                                       	           | ...instantiate a new ConfidenceInterval?		                                    | MathCalculus           | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
 |                                       	           | ...calculating the list of Confidence Intervals in accordance to the regression model being used?	                                | RegressionModel    | Adapter Pattern: to allow every Adapter class to return the same type of object.                    |
 |                                       	           | ...knowing the number of observed Covid-19 positive tests?	                        | TestStore                 | IE: records/stores all the Tests objects.                                                           |
 |                                       	           | ...knowing the number of Covid-19 tests realized in a certain period of time?      | TestStore                 | IE: records/stores all the Tests objects.                                                           |
@@ -219,7 +216,7 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * TableOfValues
  * HypothesisTest  
  * ConfidenceInterval
- * RegressionModel
+ * MathCalculus
 
 Other software classes (i.e. Pure Fabrication) identified: 
  * NHSReportTask

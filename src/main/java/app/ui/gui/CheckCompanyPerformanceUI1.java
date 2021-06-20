@@ -241,6 +241,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
                 (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") ||
                 chosenAlg.equals("Brute-Force Algorithm"))) {
             try {
+                System.out.println(mainApp);
                 CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
                 checkCompanyPerformanceUI2.setMainApp(this.mainApp);
                 checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
@@ -248,7 +249,9 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
                 checkCompanyPerformanceUI2.enableBtns();
                 checkCompanyPerformanceUI2.analyseCompany();
             } catch (Exception ex) {
-                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
+                System.out.println(ex.getMessage());
+                /*Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);*/
             }
         } else {
             createAlert1().showAndWait();
