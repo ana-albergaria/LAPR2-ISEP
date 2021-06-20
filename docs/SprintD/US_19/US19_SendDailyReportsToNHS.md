@@ -252,44 +252,182 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.4. Class Diagram (CD)
 
-*In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
-
 ![US19_CD](US19_CD.svg)
 
 
 # 4. Tests 
-*In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 
 
-**_DO NOT COPY ALL DEVELOPED TESTS HERE_**
+### Class SimpleLinearRegressionAdapterTest and MultipleSimpleLinearRegressionAdapterTest
 
-###4.1. SimpleLinearRegressionAdapterTest and MultipleSimpleLinearRegressionAdapterTest
+**Test:** Ensure estimate positive values are correct with a given dataset  
+```
+@Test
+    public void getEstimatedPositives() {
+        Locale.setDefault(Locale.ENGLISH); //necessary because Jenkins was configured to put numbers in English format.
+        //Ex. 1 TP PL7 MATCP
+        double[] x = {825.0, 215.0, 1070.0, 550.0, 480.0, 920.0, 1350.0, 325.0, 670.0, 1215.0};
+        double[] y = {3.5, 1.0, 4.0, 2.0, 1.0, 3.0, 4.5, 1.5, 3.0, 5.0};
+        Double[] xInDouble = {825.0, 215.0, 1070.0, 550.0, 480.0, 920.0, 1350.0, 325.0, 670.0, 1215.0};
+        Double[] yInDouble = {3.5, 1.0, 4.0, 2.0, 1.0, 3.0, 4.5, 1.5, 3.0, 5.0};
 
-**Test 1:** ensure estimate positive values are correct with a given dataset
-
-**Test 2:** ensure confidence interval is correct.
-
-###4.3. ConfidenceIntervalTest and TableOfValuesTest
-
-**Test 3:** check if equals overwritten equals method is evaluating correctly for:
-    - Objects From Different Classes.
-    - Null Object Not Equal To Existing Object.
-    - Equals if all attributes are equals.
-
-###4.4. MyRegressionModelTest
-
-**Test 4:** Check if the generated critical value for simple and multiple linear regression
-
-**Test 5:** Check if the generated F snedcore value is correct.
-
-**Test 5:** Check if the generated F snedcore value is correct.
-
-**Test 6:** check if equals overwritten equals method is evaluating correctly for:
-    - Objects From Different Classes.
-    - Null Object Not Equal To Existing Object.
-    - Equals if all attributes are equals.
+        List<String> expectedEstimatedPositives = new ArrayList<>();
+        expectedEstimatedPositives.add("3.075863");
+        expectedEstimatedPositives.add("0.888933");
+        expectedEstimatedPositives.add("3.954221");
+        expectedEstimatedPositives.add("2.089952");
+        expectedEstimatedPositives.add("1.838993");
+        expectedEstimatedPositives.add("3.416451");
+        expectedEstimatedPositives.add("4.958058");
+        expectedEstimatedPositives.add("1.283297");
+        expectedEstimatedPositives.add("2.520168");
+        expectedEstimatedPositives.add("4.474065");
 
 
-###4.5. SignificanceModelAnovaTest
+        MyRegressionModel myRegressionModel = regressionModel.getRegressionModel(x, null, y, 10);
+        List<Double> estimatedPositives = regressionModel.getEstimatedPositives(myRegressionModel, xInDouble, yInDouble);
+
+        /*
+         * it was necessary to convert to an Array of String because JUNIT doesn't
+         * have an Assert.assertEquals with a delta for Double Arrays
+         */
+
+        List<String> estimatedPositivesString = new ArrayList<>();
+        DecimalFormat df = new DecimalFormat("#.######");
+
+        for (Double estimatedPositive : estimatedPositives) {
+            estimatedPositivesString.add(df.format(estimatedPositive));
+        }
+
+        Assert.assertEquals(expectedEstimatedPositives, estimatedPositivesString);
+    }
+```
+
+**Test:** Ensure confidence interval is correct.  
+```
+@Test
+    public void getConfidenceInterval() {
+        //Arrange
+        double y0 = 2241.90597157;
+        double auxDelta = 22.5859909;
+        double confidenceLevel = 0.95;
+        ConfidenceInterval expectedConfInt = new ConfidenceInterval(myRegressionModel,y0,auxDelta,confidenceLevel);
+        //Act
+        ConfidenceInterval confidenceInterval = regressionModel.getConfidenceInterval(myRegressionModel, 80.0, 8.0, confidenceLevel);
+        //Assert
+        Assert.assertEquals(expectedConfInt, confidenceInterval);
+    }
+```
+
+For the classes:  
+ * ConfidenceInterval  
+ * SignificanceModelAnova  
+ * TableOfValues  
+ * MyRegressionModel  
+ * HypothesisTest  
+
+the tests were **similar**. Mostly they were checking if equals method was working properly.
+
+### Example:
+
+### Class MyRegressionModelTest
+
+**Test:** Check if the critical value for F. Snedecor distribution is correct.  
+```
+@Test
+    public void calculateCriticalValFSnedecor() {
+        double expected = 4.2565;
+        double actual = myRegressionModelWithSLR.calculateCriticalValFSnedecor(2,9,0.05);
+
+        Assert.assertEquals(expected, actual, 0.0001);
+    }
+```
+**Test:** Check if the critical value for T-Student distribution is correct.  
+```
+@Test
+    public void calculateCriticalValTStudentForSLR() {
+        double expected = 2.306;
+        double actual = myRegressionModelWithSLR.calculateCriticalValTStudent(0.05);
+
+        Assert.assertEquals(expected, actual, 0.0001);
+    }
+```
+ 
+**Test:** check if equals overwritten equals method is evaluating correctly for  
+    a) Objects From Different Classes.  
+    b) Null Object Not Equal To Existing Object.  
+    c) Equals if all attributes are equals.  
+    d) If one of the attributes is not the same, returns false.  
+
+a)  
+```
+@Test
+    public void ensureEqualsMethodObjectsFromDifferentClasses() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+
+        boolean result = object.equals(simpleLR);
+
+        Assert.assertFalse(result);
+    }
+```
+
+b)  
+```
+@Test
+    public void ensureEqualsMethodNullObjectNotEqualToExistingObject() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+        MyRegressionModel nullObject = null;
+
+        boolean result = object.equals(nullObject);
+
+        Assert.assertFalse(result);
+    }
+```
+
+c)  
+```
+@Test
+    public void ensureEquals() {
+        MyRegressionModel object1 = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+        MyRegressionModel object2 = new MyRegressionModel(1.2345,0.0045, 2.33,0,900,10, simpleLR);
+
+        boolean result = object1.equals(object2);
+
+        Assert.assertTrue(result);
+    }
+```
+
+d)
+```
+@Test
+    public void ensureNotEqualsWithDifferentIntercept() {
+        MyRegressionModel object = new MyRegressionModel(1.2345,0.0045,0,900,10, simpleLR);
+        MyRegressionModel differentObject = new MyRegressionModel(1.25,0.0045,0,900,10, simpleLR);
+
+        boolean result = object.equals(differentObject);
+
+        Assert.assertFalse(result);
+    }
+```
+
+
+### Class MultipleLinearRegression  
+
+To make sure the class for Multiple Linear Regression I made was functioning properly, I made several tests, such as:  
+
+**Test:** Ensure the method returns the transpose of a matrix correctly.
+```
+@Test
+    public void transposeMatrix() {
+        double[][] x = {{1,2,3,1}, {4,5,6,2}, {7,8,9,0}, {1,1,1,1}};
+        double[][] expected = {{1,4,7,1}, {2,5,8,1}, {3,6,9,1}, {1,2,0,1}};
+
+        double[][] actual = multipleLR.transposeMatrix(x);
+
+        Assert.assertArrayEquals(expected, actual);
+    }
+```
+
+
 
 
 

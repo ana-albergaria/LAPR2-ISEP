@@ -36,12 +36,12 @@ public class CompanyPerformance {
     /**
      * The beginning date of the interval.
      */
-    private Calendar beginningDate;
+    private Date beginningDate;
 
     /**
      * The ending date of the interval.
      */
-    private Calendar endingDate;
+    private Date endingDate;
 
     /**
      * The chosen algorithm.
@@ -84,24 +84,18 @@ public class CompanyPerformance {
     private Date[] worstSubInt;
 
     public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
-        this.company = company;
-        this.beginningDate = Calendar.getInstance();
-        this.beginningDate.setTime(beginningDate);
-        this.endingDate=Calendar.getInstance();
-        this.endingDate.setTime(endingDate);
+        this.company=company;
+        this.beginningDate=beginningDate;
+        this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
-        this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
-        this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
-        this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        if (this.beginningDate.get(Calendar.YEAR) != this.endingDate.get(Calendar.YEAR)
-                || this.beginningDate.get(Calendar.MONTH)!= this.endingDate.get(Calendar.MONTH)
-                || this.beginningDate.get(Calendar.DAY_OF_MONTH)!= this.endingDate.get(Calendar.DAY_OF_MONTH)) {
-            this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
-            this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
-            this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
-        }
+        this.clientsNum=getClientsInfoPerInterval(getDays());
+        this.processTestsNum=getNumTestsProcessedInterval(getDays());
+        this.testInfoDay=getTestInfoPerDay(getDays());
+        this.testInfoWeek=getTestInfoPerWeek(getDays());
+        this.testInfoMonth=getTestInfoPerMonth(getDays());
+        this.testInfoYear=getTestInfoPerYear(getDays());
         try {
-            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
+            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
         } catch (ClassNotFoundException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -506,16 +500,14 @@ public class CompanyPerformance {
 
     /**
      * Creates an ArrayList with all the days of the interval
-     * @param beginningDay beginning date of the interval
-     * @param endingDay end date of the interval
      * @return an ArrayList with all the days of the interval
      */
-    public ArrayList<Date> getDays(Date beginningDay, Date endingDay){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+    public ArrayList<Date> getDays(){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         ArrayList<Date> days = new ArrayList<>();
-        Date day = beginningDay;
-        Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
+        Date day = this.beginningDate;
+        Date end = new Date(this.endingDate.getYear(), this.endingDate.getMonth(), this.endingDate.getDate(), 8,0,0);
         if (day.getYear()==end.getYear() && day.getMonth()==end.getMonth() && day.getDate()==end.getDate()) {
-            days.add(endingDay);
+            days.add(this.endingDate);
         } else {
             if (end.getDay() != 0) {
                 do {
@@ -556,16 +548,12 @@ public class CompanyPerformance {
         Date finalDate = new Date(days.get(days.size()-1).getYear(),days.get(days.size()-1).getMonth(),days.get(days.size()-1).getDate(),8,0,0);
         days.set(days.size()-1,finalDate);
         for (Date day : days){
-            System.out.println("day " + day.toString());
             Date date1 = day;
             Date date2 = DateUtils.addMinutes(date1, 30);
             Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,1);
             Date endDay = (Date)date2.clone();
             endDay = DateUtils.addSeconds(endDay,-1);
             do{
-                System.out.println("date1 " + date1);
-                System.out.println("date2 " + date2);
-                System.out.println("date3 " + endDay);
                 if (date1.getHours()>=8 && date2.getHours()<20) {
                     numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
                     numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
@@ -607,29 +595,19 @@ public class CompanyPerformance {
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
         Date[] limits = new Date[2];
-        System.out.println("WORSTSUBINT.LENGTH: " + worstSubInt.length);
         if (worstSubInt.length!=0) { //é 0 quando a company é igualmente eficiente ao longo do interval (ex: todos os valores são 0)
             for (int j = 0; j < interval.length; j++) {
-                System.out.println("VALOR J: " + j);
                 if (num!=worstSubInt.length) {
                     if (interval[j] == worstSubInt[0]) {
                         ind = j;
-                        System.out.println("VALOR IND=J: " + ind);
                         for (int value : worstSubInt) {
-                            System.out.println("VALOR VALUE: " + value);
                             if (value == interval[ind]) {
-                                System.out.println("VALOR INTERVAL[IND]: " + interval[ind]);
                                 num++;
-                                System.out.println("VALOR NUM: " + num);
                             }
                             ind++;
-                            System.out.println("VALOR IND: " + ind);
                         }
-                        System.out.println("VALOR NUM IGUALDADE: " + num);
-                        System.out.println("VALOR WORSTSUBINT.LENGTH: " + worstSubInt.length);
                         if (num == worstSubInt.length) {
                             ref = j;
-                            System.out.println("VALOR REF: " + ref);
                         } else {
                             num = 0;
                         }
@@ -644,15 +622,10 @@ public class CompanyPerformance {
             Date resultFor1 = last;
             int quant = 0;
             if (quant != startIndex) {
-                System.out.println("QUANT: " + quant);
-                System.out.println("STARTINDEX: " + endIndex);
                 for (Date day : days) {
-                    System.out.println("DAY: " + day);
                     first = day;
                     last = DateUtils.addMinutes(first, 30);
                     do {
-                        System.out.println("FIRST: " + first);
-                        System.out.println("LAST: " + last);
                         if (first.getHours() >= 8 && last.getHours() < 20) {
                             first = DateUtils.addMinutes(first, 30);
                             last = DateUtils.addMinutes(last, 30);
@@ -666,23 +639,16 @@ public class CompanyPerformance {
                                 resultFor0=first;
                             }
                         }
-                        System.out.println("ATT QUANT: " + quant);
                     } while (last.getHours()!=20 && last.getMinutes()!=0);
                 }
-                System.out.println("6");
             }
             limits[0] = resultFor0;
             quant = 0;
             if (quant != endIndex) {
-                System.out.println("QUANT: " + quant);
-                System.out.println("ENDINDEX: " + endIndex);
                 for (Date day : days) {
-                    System.out.println("DAY: " + day);
                     first = day;
                     last = DateUtils.addMinutes(first, 30);
                     do {
-                        System.out.println("FIRST: " + first);
-                        System.out.println("LAST: " + last);
                         if (first.getHours() >= 8 && last.getHours() < 20) {
                             first = DateUtils.addMinutes(first, 30);
                             last = DateUtils.addMinutes(last, 30);
@@ -696,10 +662,8 @@ public class CompanyPerformance {
                                 resultFor1=last;
                             }
                         }
-                        System.out.println("ATT QUANT: " + quant);
                     } while (last.getHours()!=20 && last.getMinutes()!=0);
                 }
-                System.out.println("7");
             }
             limits[1] = resultFor1;
         }else{

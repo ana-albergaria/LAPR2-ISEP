@@ -28,7 +28,7 @@ deactivate TASK
 TASK -> CONSTANTS : weekData = WEEK_DATA
 activate CONSTANTS
 deactivate CONSTANTS
-TASK -> TASK : createNHSDailyReport(dayData)
+TASK -> TASK : createNHSDailyReport(weekData)
 activate TASK
 ref over TASK
 SD_createNHSDailyReport(typeOfData)

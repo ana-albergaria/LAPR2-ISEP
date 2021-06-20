@@ -47,11 +47,8 @@ public class SendNHSReportController {
         List<List<Double>> dataList = getDataListToFitTheModel(beginDate, endDate, typeOfData);
         NHSReportStore nhsReportStore = this.company.getNhsReportStore();
         double[] covidTestsArray = nhsReportStore.getDoubleArrayWithData(dataList, 0);
-        System.out.println(Arrays.toString(covidTestsArray));
         double[] meanAgeArray = nhsReportStore.getDoubleArrayWithData(dataList, 1);
-        System.out.println(Arrays.toString(meanAgeArray));
         double[] observedPositives = nhsReportStore.getDoubleArrayWithData(dataList, 2);
-        System.out.println(Arrays.toString(observedPositives));
 
         MyRegressionModel myRegressionModel = getMyRegressionModel(chosenRegressionModel, chosenVariable, covidTestsArray, meanAgeArray, observedPositives, historicalPoints);
         HypothesisTest hypothesisTest = chosenRegressionModel.getChosenHypothesisTest(myRegressionModel, significanceLevel, chosenRegCoefficient);

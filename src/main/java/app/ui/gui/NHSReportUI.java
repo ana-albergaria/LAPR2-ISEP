@@ -131,19 +131,13 @@ public class NHSReportUI implements Initializable, Menu {
         try {
             LocalDate currentDateValue = this.currentDate.getValue();
             Date currentDate = Date.from(currentDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            System.out.println("Current Date: " + currentDate);
             String typeOfData = (this.dayRadioBtn.isSelected()) ? this.dayRadioBtn.getText() : weekRadioBtn.getText();
-            System.out.println("Type Of Data: " + typeOfData);
             int historicalPoints = Integer.parseInt(this.historicalPoints.getText());
-            System.out.println("Historical Points: " + historicalPoints);
             LocalDate initalDateValue = this.initialDate.getValue();
             Date beginDate = Date.from(initalDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            System.out.println("Initial Date: " + beginDate);
             LocalDate endDateValue = this.endDate.getValue();
             Date endDate = Date.from(endDateValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            System.out.println("End Date: " + endDate);
             String chosenRegressionModelClass = this.regressionChoiceBox.getValue();
-            System.out.println("Chosen Regression Model Class: " + chosenRegressionModelClass);
             String chosenRegCoefficient = this.regCoefficientsChoiceBox.getValue();
 
             String chosenVariable = "";
@@ -151,11 +145,8 @@ public class NHSReportUI implements Initializable, Menu {
                 chosenVariable = this.variableChoiceBox.getValue();
 
 
-            System.out.println("Chosen Variable: " + chosenVariable);
             double significanceLevel = Double.parseDouble(this.significanceLevel.getText());
-            System.out.println("Significance Level: " + significanceLevel);
             double confidenceLevel = Double.parseDouble(this.confidenceLevel.getText());
-            System.out.println("Confidence Level: " + confidenceLevel);
 
 
             if(historicalPoints <= 2 && chosenRegressionModelClass.equalsIgnoreCase("Simple Linear Regression"))
