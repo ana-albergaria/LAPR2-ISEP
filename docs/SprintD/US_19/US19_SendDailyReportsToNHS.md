@@ -62,34 +62,10 @@ You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/dis
 
 You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9112#p11872).  
 
+> **Q**: As the report is generated automatically, should the system generate a notication that the report was sent?
+> **A**: The application should write the event into a log file.  
 
-
-
-
-
-
-### For US18
->**Q**: which significance level should we use for the hypothesis tests?  
->**A**: The application should allow the user to choose the significance level.  
-
-You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8890).  
-
-> **Q**: From Sprint D requirements we get "I want to define... the number of historical points (number of days or number of weeks) that must be sent to the NHS".  
-> Is the Administrator who must choose between days or weeks? If so, how should he make this choice?  
-> **A**: Yes. The Administrator should select between days and weeks using the user interface.  
-
-You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8937#p11751).  
-
-> **Q:** In US18 you said " ..the number of historical points (number of days or number of weeks) that must be sent to the NHS .." what exactly is this? Is this a interval of dates?  
-> **A:** Yes, you must allow the client to choose days of weeks.  
-
-You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=9109#p11873).  
-
-
-
-
-
-
+You can read the whole dicussion [here](https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=8894).
 
 
 
@@ -218,7 +194,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * ConfidenceInterval
  * MathCalculus
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:  
+
  * NHSReportTask
  * NHSReportStore  
  * TestStore
@@ -315,7 +292,7 @@ Other software classes (i.e. Pure Fabrication) identified:
     }
 ```
 
-For the classes:  
+For the classes:
  * ConfidenceInterval  
  * SignificanceModelAnova  
  * TableOfValues  
