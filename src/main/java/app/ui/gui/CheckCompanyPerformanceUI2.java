@@ -129,7 +129,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredData.get(i)));
         }
@@ -151,7 +150,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredData.get(i)));
         }
@@ -173,7 +171,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredData.get(i)));
         }
@@ -195,7 +192,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredData.get(i)));
         }
@@ -217,7 +213,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredData.get(i)));
         }
@@ -239,7 +234,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredData.get(i)));
         }
@@ -261,7 +255,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredData.get(i)));
         }
@@ -283,7 +276,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        System.out.println(desiredData);
         for (int i = 0; i < desiredData.size(); i++) {
             series.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredData.get(i)));
         }
