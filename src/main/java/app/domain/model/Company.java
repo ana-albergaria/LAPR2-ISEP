@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import app.controller.ImportTestController;
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.RegressionModel;
 import app.domain.interfaces.SortAlgorithm;
@@ -7,7 +8,10 @@ import app.domain.shared.Constants;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
 import auth.AuthFacade;
+import net.sourceforge.barbecue.BarcodeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
@@ -87,6 +91,8 @@ public class Company {
 
     private Timer timer;
 
+    private NHSReportTask nhsReportTask;
+
     public Company(String designation,
                    String classNameForBarcodeApi,
                    String classNameForSortAlgorithm,
@@ -138,13 +144,12 @@ public class Company {
         this.confidenceLevel = confidenceLevel;
         this.significanceLevel = significanceLevel;
 
-        /*
-        NHSReportTask nhsReportTask = new NHSReportTask(regressionModelCLass,
+
+        this.nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
         this.timer = new Timer();
-        Date initialDateForTask = getDateForNHSReportTask();
 
-         */
+
 
 
 
@@ -155,8 +160,6 @@ public class Company {
 
 
 
-
-        //COLOCAR CONSTRUTOR DO REPORTTASK AQUI
     }
 
     public String getDesignation() {
@@ -431,5 +434,9 @@ public class Company {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         return cal.getTime();
+    }
+
+    public void scheduleNHSReportTask(Date delay, long interval) {
+        timer.schedule(this.nhsReportTask, delay, interval);
     }
 }

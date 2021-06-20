@@ -121,15 +121,21 @@ There is a dependency to:
 
 * **"US004 Register a test to be performed to a registered client"**  
 * **"US012 Record the results of a given test**  
+* **"US014 To make a diagnosis and write a report for a given test**  
 * **"US017 Import clinical tests from a CSV file"**
 
-Since all the performed tests **with results** by Many Labs must be recorded in the system in order to send accurate data and forecasts to NHS.
+Since all the performed tests **with results and validated** by Many Labs must be recorded in the system in order to send accurate data and forecasts to NHS.  
+As our group is of 3 elements, **a validated test means concluding US14**.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* Report data
+* historical points  
+* date interval  
+* regression model to be used  
+* significance level  
+* confidence level
 
 **Output Data:**
 
@@ -240,12 +246,16 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ![US19_SD_getConfidenceIntervalListForTableOfValues7](US19_SD_getConfidenceIntervalListForTableOfValues7.svg)
 
+## 3.3 Package Diagram (PD)  
 
-## 3.3. Class Diagram (CD)
+![US19_PD](US19_PackageDiagram.svg)
+
+## 3.4. Class Diagram (CD)
 
 *In this section, it is suggested to present an UML static view representing the main domain related software classes that are involved in fulfilling the requirement as well as and their relations, attributes and methods.*
 
 ![US19_CD](US19_CD.svg)
+
 
 # 4. Tests 
 *In this section, it is suggested to systematize how the tests were designed to allow a correct measurement of requirements fulfilling.* 

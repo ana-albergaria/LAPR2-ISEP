@@ -1,4 +1,4 @@
-package app.thirdparty;
+package app.thirdparty.regressionModels;
 
 /**
  *  The code MultipleLinearRegression class performs a multiple linear regression
