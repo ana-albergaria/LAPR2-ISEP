@@ -343,9 +343,12 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval();
         text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval();
         text = text + "\nTests Overview Graphs" + "\n ↪ ";
+        setDaysOption(checkCompPerUI1.getChosenOption());
         if (daysOption.equals("A Day")){
             text = text + "[Unavailable for day analysis.]";
         } else {
+            setBeginning(checkCompPerUI1.getAnalysisBegDate());
+            setEnd(checkCompPerUI1.getAnalysisEndDate());
             if (DateUtils.addDays(end,-7).before(beginning) || DateUtils.addDays(end,-7).equals(beginning)){
                 text = text + "[The chosen interval is less than a week long. Analysis over weeks, months and years are not available. The other ones can be seen bellow.]";
             } else if (DateUtils.addMonths(end,-1).before(beginning) || DateUtils.addMonths(end,-1).equals(beginning)){
