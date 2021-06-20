@@ -199,12 +199,6 @@ public class CompanyPerformance {
         return quant;
     }
 
-    //FIRST THE LB SELECTS DAY OR INTERVAL
-    //SHOW ERROR MESSAGES!!! (CAN'T CHOOSE PRESENT OR FUTURE)
-    //12 WORKING HOURS PER DAY
-    //WORKING DAY IS FROM 8:00 TO 20:00 (endingDay will end at 19:59:59)
-    //SUNDAY IS NOT A WORKING DAY
-
     /**
      * Gets an ArrayList with the tests info for the days of the interval
      * @return ArrayList with the tests info for the days of the interval
@@ -216,24 +210,12 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
-            System.out.println("DAY DAY: " + day);
             beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-            System.out.println("DAY TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            System.out.println("DAY TEST INFO 1: " + testInfo[1]);
             testInfoPerDay.add(testInfo);
         }
-        //TESTE
-        StringBuilder sb = new StringBuilder();
-        for (int[] s : testInfoPerDay)
-        {
-            sb.append(Arrays.toString(s));
-            sb.append("\t");
-        }
-        System.out.println("DAY TEST INFO PER DAY: " + sb.toString());
-        //TESTE
         return testInfoPerDay;
     }
 
@@ -241,12 +223,12 @@ public class CompanyPerformance {
      * Gets an ArrayList with the tests info for the weeks of the interval
      * @return ArrayList with the tests info for the weeks of the interval
      */
-    public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days){ //WEEK: FROM MONDAY TO SATURDAY (NO WORK ON SUNDAY)
+    public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerWeek = new ArrayList<>();
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
-        ArrayList<Date> week = new ArrayList<>(); //NO WORK ON SUNDAY
+        ArrayList<Date> week = new ArrayList<>();
         if (days.get(days.size()-1).getDay()!=6){
             Date lastSat = days.get(days.size()-1);
             do {
@@ -254,14 +236,12 @@ public class CompanyPerformance {
             }while (lastSat.getDay()!=6);
             if (lastSat.before(days.get(0))){
                 for (Date date : days){
-                    System.out.println("WEEK DAY: " + date);
                     week.add(date);
                 }
                 weeks.add((ArrayList<Date>) week.clone());
                 week.clear();
             } else {
                 for (Date date : days) {
-                    System.out.println("WEEK DAY: " + date);
                     if (date.getDay() != 0) {
                         week.add(date);
                     }
@@ -276,7 +256,6 @@ public class CompanyPerformance {
             }
         } else {
             for (Date date : days) {
-                System.out.println("WEEK DAY: " + date);
                 if (date.getDay() != 0) {
                     week.add(date);
                 }
@@ -289,24 +268,12 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (ArrayList<Date> singleWeek : weeks) {
-            System.out.println("WEEK WEEK: " + singleWeek);
             beginningDay = new Date(singleWeek.get(0).getYear(), singleWeek.get(0).getMonth(), singleWeek.get(0).getDate(), 8, 0, 0);
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-            System.out.println("WEEK TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            System.out.println("WEEK TEST INFO 0: " + testInfo[0]);
             testInfoPerWeek.add(testInfo);
         }
-        //TESTE
-        StringBuilder sb = new StringBuilder();
-        for (int[] s : testInfoPerWeek)
-        {
-            sb.append(Arrays.toString(s));
-            sb.append("\t");
-        }
-        System.out.println("WEEK TEST INFO PER WEEK: " + sb.toString());
-        //TESTE
         return testInfoPerWeek;
     }
 
@@ -314,7 +281,7 @@ public class CompanyPerformance {
      * Gets an ArrayList with the tests info for the months of the interval
      * @return ArrayList with the tests info for the months of the interval
      */
-    public ArrayList<int[]> getTestInfoPerMonth(ArrayList<Date> days){ //MONTH: FROM 1 TO END OF MONTH
+    public ArrayList<int[]> getTestInfoPerMonth(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerMonth = new ArrayList<>();
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
@@ -461,15 +428,6 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerMonth.add(testInfo);
         }
-        //TESTE
-        StringBuilder sb = new StringBuilder();
-        for (int[] s : testInfoPerMonth)
-        {
-            sb.append(Arrays.toString(s));
-            sb.append("\t");
-        }
-        System.out.println("TEST INFO PER MONTH: " + sb.toString());
-        //TESTE
         return testInfoPerMonth;
     }
 
@@ -477,7 +435,7 @@ public class CompanyPerformance {
      * Gets an ArrayList with the tests info for the years of the interval
      * @return ArrayList with the tests info for the years of the interval
      */
-    public ArrayList<int[]> getTestInfoPerYear(ArrayList<Date> days){ //YEAR: FROM JAN 1 TO DEC 31
+    public ArrayList<int[]> getTestInfoPerYear(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerYear = new ArrayList<>();
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
@@ -526,15 +484,6 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerYear.add(testInfo);
         }
-        //TESTE
-        StringBuilder sb = new StringBuilder();
-        for (int[] s : testInfoPerYear)
-        {
-            sb.append(Arrays.toString(s));
-            sb.append("\t");
-        }
-        System.out.println("TEST INFO PER YEAR: " + sb.toString());
-        //TESTE
         return testInfoPerYear;
     }
 
@@ -542,7 +491,7 @@ public class CompanyPerformance {
      * Creates an ArrayList with all the days of the interval
      * @return an ArrayList with all the days of the interval
      */
-    public ArrayList<Date> getDays(){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+    public ArrayList<Date> getDays(){
         ArrayList<Date> days = new ArrayList<>();
         Date day = this.beginningDate;
         Date end = new Date(this.endingDate.getYear(), this.endingDate.getMonth(), this.endingDate.getDate(), 8,0,0);
@@ -551,7 +500,7 @@ public class CompanyPerformance {
         } else {
             if (end.getDay() != 0) {
                 do {
-                    if (day.getDay() != 0 && (day.getYear() != end.getYear() || day.getMonth() != end.getMonth() || day.getDate() != end.getDate())) //NO WORK ON SUNDAYS
+                    if (day.getDay() != 0 && (day.getYear() != end.getYear() || day.getMonth() != end.getMonth() || day.getDate() != end.getDate()))
                         days.add(day);
                     day = DateUtils.addDays(day, 1);
                 } while (day.before(end));
@@ -562,7 +511,7 @@ public class CompanyPerformance {
             } else {
                 end = DateUtils.addDays(day, -1);
                 do {
-                    if (day.getDay() != 0 && (day.getYear() != end.getYear() || day.getMonth() != end.getMonth() || day.getDate() != end.getDate())) //NO WORK ON SUNDAYS
+                    if (day.getDay() != 0 && (day.getYear() != end.getYear() || day.getMonth() != end.getMonth() || day.getDate() != end.getDate()))
                         days.add(day);
                     day = DateUtils.addDays(day, 1);
                 } while (day.before(end));
@@ -581,7 +530,7 @@ public class CompanyPerformance {
      * @param days days of the interval
      * @return an array with the difference between the number of new tests and the number of results available to the client during each half an hour period
      */
-    public int[] makeIntervalArray(ArrayList<Date> days){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+    public int[] makeIntervalArray(ArrayList<Date> days){
         TestStore testStore = this.company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
         int numRegistered = 0, numValidated = 0, intToKeep = 0;
@@ -605,9 +554,9 @@ public class CompanyPerformance {
                     intToKeep = numRegistered - numValidated;
                     intervalArrayList.add(intToKeep);
                 }
-                date1 = DateUtils.addMinutes(date1, 30); //19:30
-                date2 = DateUtils.addMinutes(date2, 30); //20:00
-                endDay = DateUtils.addMinutes(endDay, 30); //19:59:59
+                date1 = DateUtils.addMinutes(date1, 30);
+                date2 = DateUtils.addMinutes(date2, 30);
+                endDay = DateUtils.addMinutes(endDay, 30);
             } while (date2.before(finish));
         }
         int[] intervalArray = new int[intervalArrayList.size()];
@@ -625,7 +574,7 @@ public class CompanyPerformance {
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
      */
     public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) {
-        int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+        int[] interval = makeIntervalArray(days);
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
         Class<?> oClass = null;
         try {
@@ -635,7 +584,7 @@ public class CompanyPerformance {
         }
         SubMaxSumAlgorithms subMaxSumAlgorithm = null;
         try {
-            subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance(); //NÃO ESTÁ A FUNCIONAR PQ ELE ESTÁ A SAIR NULL, COMO NA LINHA EM QUE É INICIADO COMO NULL
+            subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -644,7 +593,7 @@ public class CompanyPerformance {
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
         Date[] limits = new Date[2];
-        if (worstSubInt.length!=0) { //é 0 quando a company é igualmente eficiente ao longo do interval (ex: todos os valores são 0)
+        if (worstSubInt.length!=0) {
             for (int j = 0; j < interval.length; j++) {
                 if (num!=worstSubInt.length) {
                     if (interval[j] == worstSubInt[0]) {

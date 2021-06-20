@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.net.URL;
@@ -125,15 +124,11 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         XYChart.Series<String, Integer> seriesRD = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
-        System.out.println("FORA DAY TEST INFO SIZE: " + testsInfo.size());
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredDataRD.add(bothValues[0]);
-            System.out.println("DENTRO DAY TEST INFO SIZE: " + testsInfo.size());
         }
-        System.out.println("FORA DAY DESIRED DATA SIZE: " + desiredDataRD.size());
         for (int i = 0; i < desiredDataRD.size(); i++) {
-            System.out.println("DENTRO DAY DESIRED DATA SIZE: " + desiredDataRD.size());
             seriesRD.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredDataRD.get(i)));
         }
         seriesRD.setName("Tests Waiting For Results");
@@ -150,15 +145,11 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         XYChart.Series<String, Integer> seriesRW = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerWeek();
         setTestsInfo(testsInfo);
-        System.out.println("FORA WEEK TEST INFO SIZE: " + testsInfo.size());
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredDataRW.add(bothValues[0]);
-            System.out.println("DENTRO WEEK TEST INFO SIZE: " + testsInfo.size());
         }
-        System.out.println("FORA WEEK DESIRED DATA SIZE: " + desiredDataRW.size());
         for (int i = 0; i < desiredDataRW.size(); i++) {
-            System.out.println("DENTRO WEEK DESIRED DATA SIZE: " + desiredDataRW.size());
             seriesRW.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredDataRW.get(i)));
         }
         seriesRW.setName("Tests Waiting For Results");
@@ -354,8 +345,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         }
         cliTesOverview.setEditable(false);
         cliTesOverview.setText(text);
-        System.out.println(text);
-        /*setCliTesOverview(cliTesOverview);*/
     }
 
     public void enableBtns(){
@@ -411,7 +400,5 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             diagnosisYearsBtn.setDisable(true);
         }
     }
-
-    //MUDAR A LABEL DO TITULO PARA INDICAR AS DATAS QUE ESTÃO A SER ANALIZADAS
 
 }
