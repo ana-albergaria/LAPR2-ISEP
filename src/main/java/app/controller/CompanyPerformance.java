@@ -5,13 +5,15 @@ import app.domain.model.Company;
 import app.domain.model.Test;
 import app.domain.shared.Constants;
 import app.domain.store.TestStore;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 12b7a143d3678a28abc154a0d66cbc8d67d2d6fc
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Represents the company performance through:
@@ -308,13 +310,13 @@ public class CompanyPerformance {
         ArrayList<Date> month = new ArrayList<>();
         if (days.get(days.size()-1).getDate()!=31 &&
                 (days.get(days.size()-1).getMonth() == Calendar.JANUARY || days.get(days.size()-1).getMonth() == Calendar.MARCH || days.get(days.size()-1).getMonth() == Calendar.MAY ||
-                        days.get(days.size()-1).getMonth() == Calendar.JULY || days.get(days.size()-1).getMonth() == Calendar.AUGUST || days.get(days.size()-1).getMonth() == Calendar.OCTOBER || days.get(days.size()-1).getMonth() == Calendar.DECEMBER)){
-            Date lastDayMonth = days.get(days.size()-1);
-            do{
-                lastDayMonth = DateUtils.addDays(lastDayMonth,-1);
-            }while (lastDayMonth.getDate()!=31);
-            if (lastDayMonth.before(days.get(0))){
-                for (Date date : days){
+                        days.get(days.size()-1).getMonth() == Calendar.JULY || days.get(days.size()-1).getMonth() == Calendar.AUGUST || days.get(days.size()-1).getMonth() == Calendar.OCTOBER || days.get(days.size()-1).getMonth() == Calendar.DECEMBER)) {
+            Date lastDayMonth = days.get(days.size() - 1);
+            do {
+                lastDayMonth = DateUtils.addDays(lastDayMonth, -1);
+            } while (lastDayMonth.getDate() != 31);
+            if (lastDayMonth.before(days.get(0))) {
+                for (Date date : days) {
                     month.add(date);
                 }
                 months.add((ArrayList<Date>) month.clone());
@@ -322,16 +324,84 @@ public class CompanyPerformance {
             } else {
                 for (Date date : days) {
                     month.add(date);
-                    if (date.getDate()==31){
+                    if (date.getDate() == 31) {
                         months.add((ArrayList<Date>) month.clone());
                         month.clear();
-                    } else if (date==days.get(days.size()-1)){
+                    } else if (date == days.get(days.size() - 1)) {
                         months.add((ArrayList<Date>) month.clone());
                         month.clear();
                     }
                 }
             }
-        //FAZER TAMBÉM ELSE PARA OS OUTROS MESES
+        }else if(days.get(days.size()-1).getDate()!=30 && (days.get(days.size()-1).getMonth() == Calendar.APRIL || days.get(days.size()-1).getMonth() == Calendar.JUNE || days.get(days.size()-1).getMonth() == Calendar.SEPTEMBER || days.get(days.size()-1).getMonth() == Calendar.NOVEMBER)) {
+            Date lastDayMonth = days.get(days.size() - 1);
+            do {
+                lastDayMonth = DateUtils.addDays(lastDayMonth, -1);
+            } while (lastDayMonth.getDate() != 30);
+            if (lastDayMonth.before(days.get(0))) {
+                for (Date date : days) {
+                    month.add(date);
+                }
+                months.add((ArrayList<Date>) month.clone());
+                month.clear();
+            } else {
+                for (Date date : days) {
+                    month.add(date);
+                    if (date.getDate() == 30) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    } else if (date == days.get(days.size() - 1)) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
+                }
+            }
+        } else if(days.get(days.size()-1).getDate()!=29 && (days.get(days.size()-1).getMonth() == Calendar.FEBRUARY && (days.get(days.size()-1).getYear() % 400 == 0) || ((days.get(days.size()-1).getYear() % 100) != 0 && (days.get(days.size()-1).getYear() % 4 == 0)))) {
+            Date lastDayMonth = days.get(days.size() - 1);
+            do {
+                lastDayMonth = DateUtils.addDays(lastDayMonth, -1);
+            } while (lastDayMonth.getDate() != 29);
+            if (lastDayMonth.before(days.get(0))) {
+                for (Date date : days) {
+                    month.add(date);
+                }
+                months.add((ArrayList<Date>) month.clone());
+                month.clear();
+            } else {
+                for (Date date : days) {
+                    month.add(date);
+                    if (date.getDate() == 29) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    } else if (date == days.get(days.size() - 1)) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
+                }
+            }
+        }else if(days.get(days.size()-1).getDate()!=28 && (days.get(days.size()-1).getMonth() == Calendar.FEBRUARY && (days.get(days.size()-1).getYear() % 400 != 0) && ((days.get(days.size()-1).getYear() % 100) == 0 || (days.get(days.size()-1).getYear() % 4 != 0)))){
+            Date lastDayMonth = days.get(days.size() - 1);
+            do {
+                lastDayMonth = DateUtils.addDays(lastDayMonth, -1);
+            } while (lastDayMonth.getDate() != 28);
+            if (lastDayMonth.before(days.get(0))) {
+                for (Date date : days) {
+                    month.add(date);
+                }
+                months.add((ArrayList<Date>) month.clone());
+                month.clear();
+            } else {
+                for (Date date : days) {
+                    month.add(date);
+                    if (date.getDate() == 28) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    } else if (date == days.get(days.size() - 1)) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
+                }
+            }
         }else {
             for (Date date : days) {
                 if (date.getMonth() == Calendar.JANUARY || date.getMonth() == Calendar.MARCH || date.getMonth() == Calendar.MAY ||
@@ -393,7 +463,28 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
         if (days.get(days.size()-1).getMonth()!=Calendar.DECEMBER && days.get(days.size()-1).getDate()!=31){
-            //TO DO (based on the week one)
+            Date lastDayYear = days.get(days.size() - 1);
+            do {
+                lastDayYear = DateUtils.addDays(lastDayYear, -1);
+            } while (lastDayYear.getMonth()!=Calendar.DECEMBER && lastDayYear.getDate()!=31);
+            if (lastDayYear.before(days.get(0))) {
+                for (Date date : days) {
+                    year.add(date);
+                }
+                years.add((ArrayList<Date>) year.clone());
+                year.clear();
+            } else {
+                for (Date date : days) {
+                    year.add(date);
+                    if (date.getMonth()==Calendar.DECEMBER && date.getDate()==31) {
+                        years.add((ArrayList<Date>) year.clone());
+                        year.clear();
+                    } else if (date == days.get(days.size() - 1)) {
+                        years.add((ArrayList<Date>) year.clone());
+                        year.clear();
+                    }
+                }
+            }
         } else {
             for (Date date : days) {
                 if (date.getDay() != 0) {
