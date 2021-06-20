@@ -19,10 +19,7 @@ public class BruteForceAlgorithmAdapter implements SubMaxSumAlgorithms, Serializ
      */
     @Override
     public int[] findSubMaxSum(int[] interval){
-        long start2 = System.nanoTime();
         int[] result = BruteForceAlgorithm.Max(interval);
-        long end2 = System.nanoTime();
-        System.out.println("Elapsed Time in milli seconds(BruteForce Algorithm): "+ (end2-start2) + "ns for input size:" + interval.length);
         return result;
     }
 

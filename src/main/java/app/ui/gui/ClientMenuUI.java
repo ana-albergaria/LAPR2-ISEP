@@ -78,7 +78,6 @@ public class ClientMenuUI implements Initializable, Menu {
             clientTestResultsUI1.setMainApp(this.mainApp);
             clientTestResultsUI1.setClientMenuUI(this);
             clientTestResultsUI1.getClientTests();
-            //clientTestResultsUI1.handleItemClicks();
 
         } catch (Exception ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);

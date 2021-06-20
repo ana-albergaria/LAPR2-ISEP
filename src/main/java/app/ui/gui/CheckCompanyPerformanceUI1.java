@@ -3,19 +3,15 @@ package app.ui.gui;
 import app.controller.CompanyPerformanceAnalysisController;
 import app.domain.model.Company;
 import app.controller.CompanyPerformance;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -229,7 +225,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
                 (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") ||
                 chosenAlg.equals("Brute-Force Algorithm"))) {
             try {
-                System.out.println(mainApp);
                 CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
                 checkCompanyPerformanceUI2.setMainApp(this.mainApp);
                 checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
@@ -239,7 +234,6 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             } catch (Exception ex) {
                 ex.printStackTrace();
                 System.out.println(ex.getMessage());
-                /*Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);*/
             }
         } else {
             createAlert1().showAndWait();

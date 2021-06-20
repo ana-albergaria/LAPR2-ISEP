@@ -62,12 +62,6 @@ public class CompanyPerformanceAnalysisController {
         return companyPerformance.getProcessTestsNum();
     }
 
-    //FIRST THE LB SELECTS DAY OR INTERVAL
-    //SHOW ERROR MESSAGES!!! (CAN'T CHOOSE PRESENT OR FUTURE)
-    //12 WORKING HOURS PER DAY
-    //WORKING DAY IS FROM 8:00 TO 20:00 (endingDay will end at 19:59:59)
-    //SUNDAY IS NOT A WORKING DAY
-
     /**
      * Gets an ArrayList with the tests info for the days of the interval
      * @return ArrayList with the tests info for the days of the interval
