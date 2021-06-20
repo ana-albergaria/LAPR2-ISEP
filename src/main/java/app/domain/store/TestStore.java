@@ -89,16 +89,6 @@ public class TestStore implements Serializable {
     public int getNumTestsWaitingForResultsDayOrInterval(Date beginningDay, Date endingDay){ //mesmo dia, mas 8:00 e 19:59
         int num = 0;
         Date date1, date2;
-        /*for (Test test : testList) {
-            date2 = test.getDateOfSamplesCollection();
-            date1 = test.getDateOfChemicalAnalysis();
-            if (date2!=null && date1==null)
-                date1=new Date(10000,Calendar.JANUARY,1);
-            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) //waiting in moment beginningDay
-                    || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
-                    || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
-                num++;
-        }*/
         for (Test test : testList) {
             date2 = test.getDateOfSamplesCollection();
             date1 = test.getDateOfChemicalAnalysis();
