@@ -1,8 +1,11 @@
 package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
+import app.controller.ImportTestController;
 import app.domain.model.Company;
 import app.domain.model.CompanyPerformance;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +16,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -189,6 +193,17 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     @FXML
     void analyseAction(ActionEvent event) {
+        //só para teste
+        TestFileUtils testFileUtils = new TestFileUtils();
+        ImportTestController importTestCtrl = new ImportTestController();
+        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
+        for (TestFileDTO testData : procedData) {
+            try {
+                importTestCtrl.importTestFromFile(testData);
+            } catch (Exception e) {
+            }
+        }
+        //fim teste
         if (singleDateD==null && beginningDateD!=null && endingDateD!=null){
             analysisBegDate = new Date(beginningDateD.getYear(), beginningDateD.getMonth(), beginningDateD.getDate(), 8,0,0);
             setAnalysisBegDate(analysisBegDate);

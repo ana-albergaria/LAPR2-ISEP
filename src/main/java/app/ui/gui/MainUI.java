@@ -118,17 +118,6 @@ public class MainUI implements Initializable {
                     Menu uiController = (Menu)this.mainApp.replaceSceneContent(item.getUi().getFXML_PATH());
                     uiController.setMainApp(mainApp);
                     if (item.getUi().getFXML_PATH().equals("/fxml/ClientMenu.fxml")){
-                        //só para teste
-                        TestFileUtils testFileUtils = new TestFileUtils();
-                        ImportTestController importTestCtrl = new ImportTestController();
-                        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
-                        for (TestFileDTO testData : procedData) {
-                            try {
-                                importTestCtrl.importTestFromFile(testData);
-                            } catch (Exception e) {
-                            }
-                        }
-                        //fim teste
                         ClientMenuUI clientMenuUI = (ClientMenuUI) uiController;
                         clientMenuUI.setMainUI(this);
                     }
