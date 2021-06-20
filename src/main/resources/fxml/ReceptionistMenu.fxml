@@ -99,7 +99,7 @@
                         </Text>
                      </children>
                   </GridPane>
-                  <Text fill="#e0fbfc" strokeType="OUTSIDE" strokeWidth="0.0" text="Laboratory Coordinator Menu" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fill="#e0fbfc" strokeType="OUTSIDE" strokeWidth="0.0" text="Receptionist Coordinator Menu" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Tahoma Bold" size="20.0" />
                      </font>

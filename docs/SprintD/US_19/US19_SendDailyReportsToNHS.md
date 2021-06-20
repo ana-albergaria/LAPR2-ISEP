@@ -118,8 +118,6 @@ As our group is of 3 elements, **a validated test means concluding US14**.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-*Insert here a SSD depicting the envisioned Actor-System interactions and throughout which data is inputted and outputted to fulfill the requirement. All interactions must be numbered.*
-
 ![US19_SSD](US19_SSD.svg)
 
 
@@ -129,8 +127,7 @@ N/A
 
 ## 2. OO Analysis
 
-### 2.1. Relevant Domain Model Excerpt 
-*In this section, it is suggested to present an excerpt of the domain model that is seen as relevant to fulfill this requirement.* 
+### 2.1. Relevant Domain Model Excerpt
 
 ![US19_DM](US19_DM.svg)
 
@@ -292,7 +289,8 @@ Other software classes (i.e. Pure Fabrication) identified:
     }
 ```
 
-For the classes:
+For the classes:  
+
  * ConfidenceInterval  
  * SignificanceModelAnova  
  * TableOfValues  
@@ -677,7 +675,10 @@ In order to reduce duplicated and complicated code, I made sure to use an Interf
 
 # 7. Observations
 
-A more careful work towards possible exceptions could be done.
+A more careful work towards possible exceptions could be done.  
+**Due to lack of time**:  
+* I was unable to correct the DM regarding the classes SignificanceModelAnova, TableOfValues, HypothesisTest, ConfidenceInterval. They are classes of **Pure Fabrication** and **not** conceptual classes and therefore shouldn't be in the DM.  
+* I didn't change the name of the interface in code (in the Documentation it's called MathCalculus and in code RegressionModel).  
 
 
 

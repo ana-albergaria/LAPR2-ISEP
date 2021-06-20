@@ -387,7 +387,7 @@ public class TestStoreTest {
         Date beginningDay = new Date(2020, Calendar.JANUARY, 15, 8, 0, 0);
         Date endingDay = new Date(2020, Calendar.JANUARY, 16, 19, 59, 59);
 
-        int expectedResult = 2;
+        int expectedResult = 3;
         int obtainedResult = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
 
         Assert.assertEquals(expectedResult, obtainedResult);
@@ -444,10 +444,17 @@ public class TestStoreTest {
         int numberOfObservations = 8;
         NHSReportStore nhsReportStore = new NHSReportStore();
         List<String> dates = nhsReportStore.getDatesColumnToTableOfValues(numberOfObservations, startDate);
-        int[] expObservedPositives = {5, 6, 4, 6, 11,11, 17, 13};
+        int[] expObservedPositives = {1, 3, 2, 5, 8,8, 12, 10};
 
         int[] observedPositives = testStore.getObservedPositivesToTableOfValues(numberOfObservations, dates);
 
+        System.out.println(observedPositives[0]);
+        System.out.println(observedPositives[1]);
+        System.out.println(observedPositives[2]);
+        System.out.println(observedPositives[3]);
+        System.out.println(observedPositives[4]);
+        System.out.println(observedPositives[5]);
+        System.out.println(observedPositives[6]);
         System.out.println(observedPositives[7]);
 
         Assert.assertArrayEquals(expObservedPositives, observedPositives);
@@ -458,7 +465,7 @@ public class TestStoreTest {
     public void getObservedPositivesInOneWeekTest() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         int actual = testStore.getObservedPositivesInOneWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021"));
-        int expected = 105;
+        int expected = 79;
         Assert.assertEquals(expected, actual);
     }
 
@@ -472,7 +479,7 @@ public class TestStoreTest {
         dates.add(nhsReportStore.getWeek(sdf.parse("17/05/2021"), sdf.parse("22/05/2021")));
         dates.add(nhsReportStore.getWeek(sdf.parse("24/05/2021"), sdf.parse("29/05/2021")));
         int[] actual = testStore.getWeeklyObservedPositivesToTableOfValues(dates);
-        int[] expected = {105, 43};
+        int[] expected = {79, 27};
 
         Assert.assertArrayEquals(expected, actual);
     }
@@ -540,7 +547,7 @@ public class TestStoreTest {
 
     @Test
     public void getObservedPositivesCovidInADay() {
-        double expNumber = 5.0;
+        double expNumber = 1.0;
         double number = testStore.getObservedPositivesCovidInADay(startDate);
 
         Assert.assertEquals(expNumber, number, 0.0);
@@ -564,9 +571,9 @@ public class TestStoreTest {
         expMeanAgeList.add(30.833333333333332);
         expMeanAgeList.add(35.9496855345912);
 
-        expObservedPositives.add(38.0);
-        expObservedPositives.add(105.0);
-        expObservedPositives.add(153.0);
+        expObservedPositives.add(26.0);
+        expObservedPositives.add(79.0);
+        expObservedPositives.add(118.0);
 
         expectedList.add(expCovidTestList);
         expectedList.add(expMeanAgeList);
