@@ -140,9 +140,10 @@ public class NHSReportStore implements Serializable {
      * Extracts the wished list from the list which contains all the lists
      * with the 3 variables
      *
-     * @param covidTestAndMeanAgeList
-     * @param index
-     * @return
+     * @param covidTestAndMeanAgeList total list
+     * @param index index of the list to be extracted
+     *
+     * @return the wished list from the list which contains all the lists
      */
     public double[] getDoubleArrayWithData(List<List<Double>> covidTestAndMeanAgeList, int index) {
         double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
@@ -152,6 +153,13 @@ public class NHSReportStore implements Serializable {
         return wishedArray;
     }
 
+    /**
+     * Returns a copy of a Double[] array
+     *
+     * @param array the array whose content is to be copied
+     *
+     * @return a copy of a Double[] array
+     */
     public Double[] copyArray(Double[] array) {
         Double[] wishedArray = new Double[array.length];
         for (int i = 0; i < array.length; i++) {
@@ -160,6 +168,13 @@ public class NHSReportStore implements Serializable {
         return wishedArray;
     }
 
+    /**
+     *
+     *
+     * @param numberOfObservations
+     * @param currentDate
+     * @return
+     */
     public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
                                                         Date currentDate) {
         List<String> dates = new ArrayList<>();

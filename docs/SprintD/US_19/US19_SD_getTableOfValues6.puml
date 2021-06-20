@@ -7,7 +7,7 @@ participant "nhsReportStore\n:NHSReportStore" as NHS_REPORT_STORE
 participant "testStore\n:TestStore" as TEST_STORE
 participant "dates:\nList<String>" as DATES
 participant "observedPositives:\nint[]" as OBSERVED_POSITIVES
-participant "regressionModel:\nRegressionModel" as REGRESSION_MODEL
+participant "regressionModel:\nMathCalculus" as REGRESSION_MODEL
 participant "bestXInHistoricalPoints:\nDouble[]" as BEST_X_HISTORICAL_POINTS
 participant "estimatedPositives:\nList<Double>" as ESTIMATED_POSITIVES
 participant "numCovidTestsInHistoricalPoints\nDouble[]" as COVID_TESTS_HISTORICAL_POINTS
@@ -37,7 +37,7 @@ deactivate TEST_STORE
 
 else else
 
-ASK -> NHS_REPORT_STORE : dates = getWeeksColumnToTableOfValues(historicalPoints, startDate)
+TASK -> NHS_REPORT_STORE : dates = getWeeksColumnToTableOfValues(historicalPoints, startDate)
 activate NHS_REPORT_STORE
 deactivate NHS_REPORT_STORE
 
