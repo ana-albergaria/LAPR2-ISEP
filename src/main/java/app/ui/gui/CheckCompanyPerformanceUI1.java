@@ -47,6 +47,10 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         this.chosenOption = chosenOption;
     }
 
+    public String getChosenOption() {
+        return chosenOption;
+    }
+
     private Date singleDateD = null;
 
     public void setSingleDateD(Date singleDateD) {

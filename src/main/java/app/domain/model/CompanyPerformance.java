@@ -94,9 +94,11 @@ public class CompanyPerformance {
         this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
         this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
         this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        this.testInfoWeek=getTestInfoPerWeek(getDays(beginningDate,endingDate));
-        this.testInfoMonth=getTestInfoPerMonth(getDays(beginningDate,endingDate));
-        this.testInfoYear=getTestInfoPerYear(getDays(beginningDate,endingDate));
+        if (beginningDate.getYear()!=endingDate.getYear() || beginningDate.getMonth()!=endingDate.getMonth() || beginningDate.getDate()!=endingDate.getDate()) {
+            this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
+            this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
+            this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
+        }
         try {
             this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
         } catch (ClassNotFoundException e) {
@@ -246,7 +248,7 @@ public class CompanyPerformance {
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
-        ArrayList<Date> week = new ArrayList<>(); //NO WORK AT SUNDAY
+        ArrayList<Date> week = new ArrayList<>(); //NO WORK ON SUNDAY
         System.out.println("entered week");
         for (Date date : days) {
             System.out.println(date);
@@ -377,27 +379,31 @@ public class CompanyPerformance {
         ArrayList<Date> days = new ArrayList<>();
         Date day = beginningDay;
         Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
-        if (end.getDay()!=0){
-            do {
-                if (day.getDay()!=0  && (day.getYear()!=end.getYear() || day.getMonth()!=end.getMonth() || day.getDate()!=end.getDate())) //NO WORK ON SUNDAYS
-                    days.add(day);
-                day = DateUtils.addDays(day, 1);
-            } while (day.before(end));
-            end.setHours(19);
-            end.setMinutes(59);
-            end.setSeconds(59);
-            days.add(end);
+        if (day.getYear()==end.getYear() && day.getMonth()==end.getMonth() && day.getDate()==end.getDate()) {
+            days.add(endingDay);
         } else {
-            end = DateUtils.addDays(day,-1);
-            do {
-                if (day.getDay()!=0  && (day.getYear()!=end.getYear() || day.getMonth()!=end.getMonth() || day.getDate()!=end.getDate())) //NO WORK ON SUNDAYS
-                    days.add(day);
-                day = DateUtils.addDays(day, 1);
-            } while (day.before(end));
-            end.setHours(19);
-            end.setMinutes(59);
-            end.setSeconds(59);
-            days.add(end);
+            if (end.getDay() != 0) {
+                do {
+                    if (day.getDay() != 0 && (day.getYear() != end.getYear() || day.getMonth() != end.getMonth() || day.getDate() != end.getDate())) //NO WORK ON SUNDAYS
+                        days.add(day);
+                    day = DateUtils.addDays(day, 1);
+                } while (day.before(end));
+                end.setHours(19);
+                end.setMinutes(59);
+                end.setSeconds(59);
+                days.add(end);
+            } else {
+                end = DateUtils.addDays(day, -1);
+                do {
+                    if (day.getDay() != 0 && (day.getYear() != end.getYear() || day.getMonth() != end.getMonth() || day.getDate() != end.getDate())) //NO WORK ON SUNDAYS
+                        days.add(day);
+                    day = DateUtils.addDays(day, 1);
+                } while (day.before(end));
+                end.setHours(19);
+                end.setMinutes(59);
+                end.setSeconds(59);
+                days.add(end);
+            }
         }
         return days;
     }
