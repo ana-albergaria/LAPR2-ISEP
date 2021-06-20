@@ -523,33 +523,45 @@ public class CompanyPerformance {
             int endIndex = startIndex + worstSubInt.length - 1;
             Date first = days.get(0);
             Date last = DateUtils.addMinutes(first, 30);
+            Date resultFor0 = first;
+            Date resultFor1 = last;
             int quant = 0;
+            int quantEqual=0;
             while (quant != startIndex) {
                 System.out.println("QUANT: " + quant);
-                System.out.println("STARTINDEX: " + startIndex);
+                System.out.println("ENDINDEX: " + endIndex);
                 for (Date day : days) {
                     System.out.println("DAY: " + day);
                     first = day;
                     last = DateUtils.addMinutes(first, 30);
-                        do {
-                        while (quant!=startIndex) {
-                            System.out.println("FIRST: " + first);
-                            System.out.println("LAST: " + last);
-                            if (first.getHours() >= 8 && last.getHours() < 20) {
-                                first = DateUtils.addMinutes(first, 30);
-                                last = DateUtils.addMinutes(last, 30);
-                                quant++;
-                            } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                    do {
+                        System.out.println("FIRST: " + first);
+                        System.out.println("LAST: " + last);
+                        if (first.getHours() >= 8 && last.getHours() < 20) {
+                            first = DateUtils.addMinutes(first, 30);
+                            last = DateUtils.addMinutes(last, 30);
+                            if (quant!=startIndex) {
                                 quant++;
                             }
-                            System.out.println("ATT QUANT: " + quant);
+                        } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                            if (quant!=startIndex) {
+                                quant++;
+                            }
                         }
-                    } while (last.getHours() != 20 && last.getMinutes() != 0);
+                        System.out.println("ATT QUANT: " + quant);
+                        if (quant==startIndex){
+                            quantEqual++;
+                            if (quantEqual==1) {
+                                resultFor1 = first;
+                            }
+                        }
+                    } while (last.getHours()!=20 && last.getMinutes()!=0);
                 }
                 System.out.println("6");
             }
-            limits[0] = first;
+            limits[0] = resultFor0;
             quant = 0;
+            quantEqual=0;
             while (quant != endIndex) {
                 System.out.println("QUANT: " + quant);
                 System.out.println("ENDINDEX: " + endIndex);
@@ -558,23 +570,31 @@ public class CompanyPerformance {
                     first = day;
                     last = DateUtils.addMinutes(first, 30);
                     do {
-                        while (quant!=endIndex) {
-                            System.out.println("FIRST: " + first);
-                            System.out.println("LAST: " + last);
-                            if (first.getHours() >= 8 && last.getHours() < 20) {
-                                first = DateUtils.addMinutes(first, 30);
-                                last = DateUtils.addMinutes(last, 30);
-                                quant++;
-                            } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                        System.out.println("FIRST: " + first);
+                        System.out.println("LAST: " + last);
+                        if (first.getHours() >= 8 && last.getHours() < 20) {
+                            first = DateUtils.addMinutes(first, 30);
+                            last = DateUtils.addMinutes(last, 30);
+                            if (quant!=endIndex) {
                                 quant++;
                             }
-                            System.out.println("ATT QUANT: " + quant);
+                        } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                            if (quant!=endIndex) {
+                                quant++;
+                            }
                         }
-                    } while (last.getHours() != 20 && last.getMinutes() != 0);
+                        System.out.println("ATT QUANT: " + quant);
+                        if (quant==endIndex){
+                            quantEqual++;
+                            if (quantEqual==1) {
+                                resultFor1 = last;
+                            }
+                        }
+                    } while (last.getHours()!=20 && last.getMinutes()!=0);
                 }
                 System.out.println("7");
             }
-            limits[1] = last;
+            limits[1] = resultFor1;
         }else{
             limits[0]=null;
             limits[1]=null;
