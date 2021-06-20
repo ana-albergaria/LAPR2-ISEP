@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Marta Ribeiro 1201592
+ */
 public class ClientMenuUI implements Initializable, Menu {
 
     private App mainApp;
@@ -54,9 +57,6 @@ public class ClientMenuUI implements Initializable, Menu {
     @FXML
     private Button viewTestResultBtn;
 
-    /**
-     * Initializes the UI class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }

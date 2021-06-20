@@ -1,14 +1,9 @@
 package app.controller;
 
 import app.domain.model.Company;
-import app.domain.model.CompanyPerformance;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
-import net.sourceforge.barbecue.BarcodeException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Controller class for analysing the company performance
@@ -21,6 +16,10 @@ public class CompanyPerformanceAnalysisController {
      * The company associated with the Controller.
      */
     private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
 
     /**
      * Builds an empty constructor for having the actual instance of the company when instantiated.
@@ -36,7 +35,6 @@ public class CompanyPerformanceAnalysisController {
      */
     public CompanyPerformanceAnalysisController(Company company){
         this.company = company;
-        this.companyPerformance = null;
     }
 
     /**
@@ -44,6 +42,9 @@ public class CompanyPerformanceAnalysisController {
      */
     private CompanyPerformance companyPerformance;
 
+    public void setCompanyPerformance(CompanyPerformance companyPerformance) {
+        this.companyPerformance = companyPerformance;
+    }
 
     /**
      -     * Creates an instance of company performance type.
@@ -59,22 +60,10 @@ public class CompanyPerformanceAnalysisController {
     }
 
     /**
-     * Creates a CompanyPerformance object with the data requested to the Laboratory Coordinator.
-     *
-     * @param beginningDay the first moment of study
-     * @param endingDay the last moment of study
-     * @param chosenAlgorithm the chosen algorithm
-     */
-    public void setCompanyPerformance(Date beginningDay, Date endingDay, String chosenAlgorithm) {
-        this.companyPerformance = new CompanyPerformance(beginningDay, endingDay, chosenAlgorithm, company);
-    }
-
-    /**
      * Gets the number of clients for an interval
      * @return the number of clients for an interval
      */
     public int getClientsInfoPerInterval() {
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getClientsNum();
     }
 
@@ -83,7 +72,6 @@ public class CompanyPerformanceAnalysisController {
      * @return the number of processed tests for an interval
      */
     public int getNumTestsProcessedInterval(){
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getProcessTestsNum();
     }
 
@@ -98,7 +86,6 @@ public class CompanyPerformanceAnalysisController {
      * @return ArrayList with the tests info for the days of the interval
      */
     public ArrayList<int[]> getTestInfoPerDay(){
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getTestInfoDay();
     }
 
@@ -107,7 +94,6 @@ public class CompanyPerformanceAnalysisController {
      * @return ArrayList with the tests info for the weeks of the interval
      */
     public ArrayList<int[]> getTestInfoPerWeek(){ //WEEK: FROM MONDAY TO SATURDAY (NO WORK AT SUNDAY)
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getTestInfoWeek();
     }
 
@@ -116,7 +102,6 @@ public class CompanyPerformanceAnalysisController {
      * @return ArrayList with the tests info for the months of the interval
      */
     public ArrayList<int[]> getTestInfoPerMonth(){ //MONTH: FROM 1 TO END OF MONTH
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getTestInfoMonth();
     }
 
@@ -125,7 +110,6 @@ public class CompanyPerformanceAnalysisController {
      * @return ArrayList with the tests info for the years of the interval
      */
     public ArrayList<int[]> getTestInfoPerYear(){ //YEAR: FROM JAN 1 TO DEC 31
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getTestInfoYear();
     }
 
@@ -134,7 +118,6 @@ public class CompanyPerformanceAnalysisController {
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
      */
     public Date[] findWorstSubIntWithChosenAlgorithm() {
-        companyPerformance.setCompany(this.company);
         return companyPerformance.getWorstSubInt();
     }
 

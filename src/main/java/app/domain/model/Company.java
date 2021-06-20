@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.controller.ImportTestController;
+import app.controller.CompanyPerformance;
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.RegressionModel;
 import app.domain.interfaces.SortAlgorithm;
@@ -8,16 +8,12 @@ import app.domain.shared.Constants;
 import app.domain.store.*;
 import app.mappers.dto.EmployeeDTO;
 import app.mappers.dto.SpecialistDoctorDTO;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
 import auth.AuthFacade;
-import net.sourceforge.barbecue.BarcodeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  *

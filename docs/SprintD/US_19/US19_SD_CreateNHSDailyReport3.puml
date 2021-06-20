@@ -110,8 +110,14 @@ TASK -> NHS_REPORT_STORE : validateNHSDailyReport(nhsReport)
 activate NHS_REPORT_STORE
 deactivate NHS_REPORT_STORE
 
-[<-- TASK : success
+alt nhsReport is validated
+[<-- TASK : nhsReport
 deactivate TASK
+else
+[<-- TASK : IllegalArgumentException(\n"The Report must be validated in order to be sent!")
+deactivate TASK
+end
+
 
 
 
