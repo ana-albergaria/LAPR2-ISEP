@@ -194,7 +194,8 @@ According to the taken rationale, the conceptual classes promoted to software cl
  * ConfidenceInterval
  * MathCalculus
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:  
+
  * NHSReportTask
  * NHSReportStore  
  * TestStore
@@ -291,7 +292,7 @@ Other software classes (i.e. Pure Fabrication) identified:
     }
 ```
 
-For the classes:  
+For the classes:
  * ConfidenceInterval  
  * SignificanceModelAnova  
  * TableOfValues  
