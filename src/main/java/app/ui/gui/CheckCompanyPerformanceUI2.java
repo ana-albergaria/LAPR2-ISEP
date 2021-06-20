@@ -106,26 +106,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         ArrayList<Integer> desiredData = new ArrayList<>();
         setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        if (daysOption.equals("A Day")){
-            switch (selectedItem) {
-                case "Number Of Tests Waiting For Results - Over Days":
-                    setTestsInfo(controller.getTestInfoPerDay());
-                    for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
-                        bothValues = testsInfo.get(i);
-                        desiredData.add(bothValues[0]);
-                    }
-                    series.setName("Tests Waiting For Results");
-                    break;
-                case "Number Of Tests Waiting For Diagnosis - Over Days":
-                    setTestsInfo(controller.getTestInfoPerDay());
-                    for (int i = 0; i < testsInfo.size(); i++) {
-                        bothValues = testsInfo.get(i);
-                        desiredData.add(bothValues[1]);
-                    }
-                    series.setName("Tests Waiting For Diagnosis");
-                    break;
-            }
-        } else {
+        if (!daysOption.equals("A Day")){
             switch (selectedItem) {
                 case "Number Of Tests Waiting For Results - Over Days":
                     setTestsInfo(controller.getTestInfoPerDay());
@@ -245,6 +226,12 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         }
         text = text + "\nTotal Number Of Clients In The System" + "\n ↪ " + controller.getClientsInfoPerInterval();
         text = text + "\nTotal Number of Processed Tests In The System" + "\n ↪ " + controller.getNumTestsProcessedInterval();
+        text = text + "\nTests Overview Graphs" + "\n ↪ ";
+        if (daysOption.equals("A Day")){
+            text = text + "[Unavailable for day analysis.]";
+        } else {
+            text = text + "[See bellow.]";
+        }
         cliTesOverview.setEditable(false);
         cliTesOverview.setText(text);
         System.out.println(text);
@@ -253,10 +240,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     public void populateListView(){
         setDaysOption(checkCompPerUI1.getChosenOption());
-        if (daysOption.equals("A Day")){
-            listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
-            listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
-        } else {
+        if (!daysOption.equals("A Day")) {
             listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
             listView.getItems().add("Number Of Tests Waiting For Results - Over Weeks");
             listView.getItems().add("Number Of Tests Waiting For Results - Over Months");
