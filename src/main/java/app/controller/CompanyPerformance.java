@@ -84,18 +84,18 @@ public class CompanyPerformance {
     private Date[] worstSubInt;
 
     public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
-        this.company = company;
-        this.beginningDate = beginningDate;
+        this.company=company;
+        this.beginningDate=beginningDate;
         this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
-        this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
-        this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
-        this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
-        this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
-        this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
+        this.clientsNum=getClientsInfoPerInterval(getDays());
+        this.processTestsNum=getNumTestsProcessedInterval(getDays());
+        this.testInfoDay=getTestInfoPerDay(getDays());
+        this.testInfoWeek=getTestInfoPerWeek(getDays());
+        this.testInfoMonth=getTestInfoPerMonth(getDays());
+        this.testInfoYear=getTestInfoPerYear(getDays());
         try {
-            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
+            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
         } catch (ClassNotFoundException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -108,7 +108,7 @@ public class CompanyPerformance {
      * @return number of clients
      */
     public int getClientsNum() {
-        return this.clientsNum;
+        return clientsNum;
     }
 
     /**
@@ -116,7 +116,7 @@ public class CompanyPerformance {
      * @return number of processed tests
      */
     public int getProcessTestsNum() {
-        return this.processTestsNum;
+        return processTestsNum;
     }
 
     /**
@@ -124,7 +124,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoDay() {
-        return this.testInfoDay;
+        return testInfoDay;
     }
 
     /**
@@ -132,7 +132,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoWeek() {
-        return this.testInfoWeek;
+        return testInfoWeek;
     }
 
     /**
@@ -140,7 +140,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoMonth() {
-        return this.testInfoMonth;
+        return testInfoMonth;
     }
 
     /**
@@ -148,7 +148,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoYear() {
-        return this.testInfoYear;
+        return testInfoYear;
     }
 
     /**
@@ -156,7 +156,7 @@ public class CompanyPerformance {
      * @return beginning and end of the contiguous subsequence with maximum sum
      */
     public Date[] getWorstSubInt() {
-        return this.worstSubInt;
+        return worstSubInt;
     }
 
     /**
@@ -500,16 +500,14 @@ public class CompanyPerformance {
 
     /**
      * Creates an ArrayList with all the days of the interval
-     * @param beginningDay beginning date of the interval
-     * @param endingDay end date of the interval
      * @return an ArrayList with all the days of the interval
      */
-    public ArrayList<Date> getDays(Date beginningDay, Date endingDay){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+    public ArrayList<Date> getDays(){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         ArrayList<Date> days = new ArrayList<>();
-        Date day = beginningDay;
-        Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
+        Date day = this.beginningDate;
+        Date end = new Date(this.endingDate.getYear(), this.endingDate.getMonth(), this.endingDate.getDate(), 8,0,0);
         if (day.getYear()==end.getYear() && day.getMonth()==end.getMonth() && day.getDate()==end.getDate()) {
-            days.add(endingDay);
+            days.add(this.endingDate);
         } else {
             if (end.getDay() != 0) {
                 do {
