@@ -2,6 +2,7 @@ package app.ui.gui;
 
 import javafx.application.Application;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 
 import java.io.InputStream;
@@ -26,7 +28,6 @@ public class App extends Application {
     private final double SCENE_HEIGHT = 495;
 
     @Override
-
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setTitle(TITLE);
@@ -77,6 +78,11 @@ public class App extends Application {
         return (Initializable) loader.getController();
     }
 
+    public void exitSave(){
+        app.controller.App.getInstance().storeUserSection();
+        System.exit(0);
+    }
+
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -89,4 +95,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

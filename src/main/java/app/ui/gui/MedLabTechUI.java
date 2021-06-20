@@ -90,7 +90,7 @@ public class MedLabTechUI implements Initializable, Menu {
         ((Labeled) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("No");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            ((Stage) exitBtn.getScene().getWindow()).close();
+            this.mainApp.exitSave();
         }
     }
 

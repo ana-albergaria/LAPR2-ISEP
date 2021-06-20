@@ -2,6 +2,7 @@ package auth.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -9,7 +10,7 @@ import java.util.regex.Pattern;
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-public class Email {
+public class Email implements Serializable {
 
     private String email;
 

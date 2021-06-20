@@ -3,12 +3,14 @@ package app.domain.adapters;
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import com.isep.mdis.Sum;
 
+import java.io.Serializable;
+
 /**
  * Finds the contiguous subsequence with maximum sum of an interval, through a benchmark algorithm.
  *
  * @author Marta Ribeiro 1201592
  */
-public class BenchmarkAlgorithmAdapter implements SubMaxSumAlgorithms {
+public class BenchmarkAlgorithmAdapter implements SubMaxSumAlgorithms, Serializable {
 
     /**
      * Method for getting the contiguous subsequence with maximum sum of an interval, through the benchmark algorithm

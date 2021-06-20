@@ -202,7 +202,7 @@ public class NHSReportUI implements Initializable, Menu {
     }
 
     public void exitAction(ActionEvent actionEvent) {
-        System.exit(0);
+        this.mainApp.exitSave();
     }
 
     public void returnAction(ActionEvent actionEvent) {

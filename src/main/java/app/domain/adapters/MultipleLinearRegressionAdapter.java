@@ -7,6 +7,7 @@ import app.domain.model.MyRegressionModel;
 import app.domain.model.SignificanceModelAnova;
 import app.thirdparty.regressionModels.MultipleLinearRegression;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author Ana Albergaria
  */
-public class MultipleLinearRegressionAdapter implements RegressionModel {
+public class MultipleLinearRegressionAdapter implements RegressionModel, Serializable {
 
     /**
      * Returns the index of the best independent variable between two Simple Linear Regressions

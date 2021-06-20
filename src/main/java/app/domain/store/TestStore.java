@@ -7,6 +7,7 @@ import app.mappers.dto.TestFileDTO;
 import app.ui.console.utils.TestFileUtils;
 import net.sourceforge.barbecue.BarcodeException;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -17,7 +18,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  *
  * @author SRC-Code-23
  */
-public class TestStore {
+public class TestStore implements Serializable {
 
     /**
      * List of all existing tests

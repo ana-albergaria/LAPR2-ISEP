@@ -2,6 +2,7 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author Ana Albergaria
  */
 
-public class ClinicalAnalysisLaboratory extends Laboratory {
+public class ClinicalAnalysisLaboratory extends Laboratory implements Serializable {
     /**
      * The laboratory ID of the Clinical Analysis Laboratory.
      */

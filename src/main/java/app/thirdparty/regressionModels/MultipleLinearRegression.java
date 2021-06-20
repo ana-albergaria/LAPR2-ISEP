@@ -1,5 +1,7 @@
 package app.thirdparty.regressionModels;
 
+import java.io.Serializable;
+
 /**
  *  The code MultipleLinearRegression class performs a multiple linear regression
  *  on an set of n data points (x1_i, x2_i, y_i).
@@ -13,7 +15,7 @@ package app.thirdparty.regressionModels;
  *
  * @author Ana Albergaria
  */
-public class MultipleLinearRegression {
+public class MultipleLinearRegression implements Serializable {
     /**
      * The first regression coefficient.
      */

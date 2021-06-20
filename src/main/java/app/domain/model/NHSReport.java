@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Represents a NHS Report through:
  * the My Regression Model,
@@ -9,7 +11,7 @@ package app.domain.model;
  *
  * @author Ana Albergaria
  */
-public class NHSReport {
+public class NHSReport implements Serializable {
     /**
      * The myRegressionModel of the NHSReport.
      */

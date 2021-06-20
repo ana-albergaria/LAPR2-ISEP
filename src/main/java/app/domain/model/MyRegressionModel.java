@@ -3,6 +3,8 @@ package app.domain.model;
 import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.distribution.TDistribution;
 
+import java.io.Serializable;
+
 /**
  * Represents a MyRegressionModel through:
  * the intercept, the slope, the second independent variable (if it exists - for MLR),
@@ -20,7 +22,7 @@ import org.apache.commons.math3.distribution.TDistribution;
  *
  * @author Ana Albergaria
  */
-public class MyRegressionModel {
+public class MyRegressionModel implements Serializable {
     /**
      * The intercept of the MyRegressionModel.
      */

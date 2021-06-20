@@ -119,7 +119,7 @@ public class ImportTestsUI implements Initializable {
 
     @FXML
     void exitAction(ActionEvent event) {
-        System.exit(    0);
+        this.mainApp.exitSave();
     }
 
 

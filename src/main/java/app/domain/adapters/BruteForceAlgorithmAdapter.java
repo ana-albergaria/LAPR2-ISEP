@@ -3,12 +3,14 @@ package app.domain.adapters;
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.thirdparty.BruteForceAlgorithm;
 
+import java.io.Serializable;
+
 /**
  * Finds the contiguous subsequence with maximum sum of an interval, through a brute-force algorithm.
  *
  * @author Marta Ribeiro 1201592
  */
-public class BruteForceAlgorithmAdapter implements SubMaxSumAlgorithms {
+public class BruteForceAlgorithmAdapter implements SubMaxSumAlgorithms, Serializable {
 
     /**
      * Method for getting the contiguous subsequence with maximum sum of an interval, through the brute-force algorithm
