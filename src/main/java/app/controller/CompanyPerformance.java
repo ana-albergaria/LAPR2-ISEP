@@ -216,12 +216,24 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
+            System.out.println("DAY: " + day);
             beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+            System.out.println("TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+            System.out.println("TEST INFO 1: " + testInfo[1]);
             testInfoPerDay.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerDay)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER DAY: " + sb.toString());
+        //TESTE
         return testInfoPerDay;
     }
 
@@ -280,6 +292,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerWeek)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER WEEK: " + sb.toString());
+        //TESTE
         return testInfoPerWeek;
     }
 
@@ -434,6 +455,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerMonth.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerMonth)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER MONTH: " + sb.toString());
+        //TESTE
         return testInfoPerMonth;
     }
 
@@ -490,6 +520,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerYear.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerYear)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER YEAR: " + sb.toString());
+        //TESTE
         return testInfoPerYear;
     }
 

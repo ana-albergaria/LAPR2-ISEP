@@ -105,7 +105,7 @@ public class TestStore implements Serializable {
             if (date2!=null) {
                 if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
                 date2.equals(beginningDay) ||
-                        (date2.after(beginningDay) && date2.before(beginningDay))){
+                        (date2.after(beginningDay) && date2.before(endingDay))){
                     num++;
                 }
             }
@@ -113,10 +113,10 @@ public class TestStore implements Serializable {
         return num;
     }
 
-    //                                                     BEGINNING                                        ENDING
-    //SAMPLE COLLECTION    NÃO PODE TER RESULTADO AQUI      NEM AQUI
-    //                                                  SAMPLE COLLECTION
-    //                                                                          SAMPLE COLLECTION
+    //                                                         BEGINNING                                        ENDING
+    //SAMPLE COLLECTION    CA NÃO PODE TER RESULTADO AQUI      NEM AQUI
+    //                                                     SAMPLE COLLECTION
+    //                                                                            SAMPLE COLLECTION
     //
 
     /**
@@ -141,10 +141,12 @@ public class TestStore implements Serializable {
         for (Test test : testList) {
             date2 = test.getDateOfSamplesCollection();
             date1 = test.getDateOfChemicalAnalysis();
+            System.out.println("DATE SAMPLE COLLECTION: " + date2);
+            System.out.println("DATE CHEMICAL ANALYSIS: " + date1);
             if (date2!=null) {
                 if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
                         date2.equals(beginningDay) ||
-                        (date2.after(beginningDay) && date2.before(beginningDay))){
+                        (date2.after(beginningDay) && date2.before(endingDay))){
                     num++;
                 }
             }
