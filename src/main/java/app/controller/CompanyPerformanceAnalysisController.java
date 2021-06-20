@@ -22,6 +22,10 @@ public class CompanyPerformanceAnalysisController {
      */
     private Company company;
 
+    public Company getCompany() {
+        return company;
+    }
+
     /**
      * Builds an empty constructor for having the actual instance of the company when instantiated.
      */

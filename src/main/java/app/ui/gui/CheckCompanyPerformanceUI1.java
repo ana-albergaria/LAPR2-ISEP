@@ -1,6 +1,7 @@
 package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
+import app.domain.model.Company;
 import app.domain.model.CompanyPerformance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +45,10 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     public void setChosenOption(String chosenOption) {
         this.chosenOption = chosenOption;
+    }
+
+    public String getChosenOption() {
+        return chosenOption;
     }
 
     private Date singleDateD = null;
@@ -102,6 +107,12 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
 
     public CompanyPerformance getCompanyPerformance() {
         return companyPerformance;
+    }
+
+    private Company company;
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @FXML
@@ -189,7 +200,9 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             analysisEndDate = new Date(singleDateD.getYear(), singleDateD.getMonth(), singleDateD.getDate(), 19,59,59);
             setAnalysisEndDate(analysisEndDate);
         }
-        controller.createCompanyPerformance(analysisBegDate,analysisEndDate,algorithmOption.getValue());
+        setCompany(controller.getCompany());
+        companyPerformance = company.createCompanyPerformance(analysisBegDate,analysisEndDate,chosenAlg);
+        setCompanyPerformance(companyPerformance);
         referenceDate=java.util.Calendar.getInstance().getTime();
         referenceDate.setHours(0);
         referenceDate.setMinutes(0);
@@ -198,8 +211,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         if (((singleDateD!=null && singleDateD.getDay()!=0 && singleDateD.before(referenceDate)) || (beginningDateD!=null && endingDateD!=null && endingDateD.before(referenceDate)
                 && beginningDateD.before(endingDateD) && (beginningDateD.getYear()!=endingDateD.getYear() ||
                 beginningDateD.getMonth()!=endingDateD.getMonth() || beginningDateD.getDate()!=endingDateD.getDate()))) &&
-                (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (algorithmOption.getValue().equals("Benchmark Algorithm") ||
-                algorithmOption.getValue().equals("Brute-Force Algorithm"))) {
+                (chosenOption.equals("A Day") || chosenOption.equals("An Interval")) && (chosenAlg.equals("Benchmark Algorithm") ||
+                chosenAlg.equals("Brute-Force Algorithm"))) {
             try {
                 CheckCompanyPerformanceUI2 checkCompanyPerformanceUI2 = (CheckCompanyPerformanceUI2) this.mainApp.replaceSceneContent("/fxml/CheckCompanyPerformance2.fxml");
                 checkCompanyPerformanceUI2.setMainApp(this.mainApp);
@@ -219,7 +232,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
         alert.setTitle("Many Labs Application");
-        alert.setHeaderText("Insufficient Data");
+        alert.setHeaderText("Insufficient or Wrong Data");
         alert.setContentText("All fields should be correctly filled, before analysing!");
 
         return alert;
@@ -229,6 +242,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.controller=new CompanyPerformanceAnalysisController();
         intervalOption.setOnAction(this::getButtons);
+        algorithmOption.setOnAction(this::keepChosenAlg);
     }
 
     public void addOptions(){
@@ -251,6 +265,11 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
             endingDate.setDisable(false);
             setSingleDateD(null);
         }
+    }
+
+    public void keepChosenAlg(ActionEvent event){
+        String chosenAlg = algorithmOption.getValue();
+        setChosenAlg(chosenAlg);
     }
 
 }

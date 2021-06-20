@@ -81,7 +81,11 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.lineChart = lineChart;
     }
 
+    private String daysOption;
 
+    public void setDaysOption(String daysOption) {
+        this.daysOption = daysOption;
+    }
 
     @FXML
     private Button exitBtn;
@@ -102,71 +106,92 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         ArrayList<Integer> desiredData = new ArrayList<>();
         setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        switch (selectedItem) {
-            case "Number Of Tests Waiting For Results - Over Days":
-                setTestsInfo(controller.getTestInfoPerDay());
-                for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[0]);
-                }
-                series.setName("Tests Waiting For Results");
-                break;
-            case "Number Of Tests Waiting For Results - Over Weeks":
-                setTestsInfo(controller.getTestInfoPerWeek());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[0]);
-                }
-                series.setName("Tests Waiting For Results");
-                break;
-            case "Number Of Tests Waiting For Results - Over Months":
-                setTestsInfo(controller.getTestInfoPerMonth());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[0]);
-                }
-                series.setName("Tests Waiting For Results");
-                break;
-            case "Number Of Tests Waiting For Results - Over Years":
-                setTestsInfo(controller.getTestInfoPerYear());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[0]);
-                }
-                series.setName("Tests Waiting For Results");
-                break;
-            case "Number Of Tests Waiting For Diagnosis - Over Days":
-                setTestsInfo(controller.getTestInfoPerDay());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[1]);
-                }
-                series.setName("Tests Waiting For Diagnosis");
-                break;
-            case "Number Of Tests Waiting For Diagnosis - Over Weeks":
-                setTestsInfo(controller.getTestInfoPerWeek());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[1]);
-                }
-                series.setName("Tests Waiting For Diagnosis");
-                break;
-            case "Number Of Tests Waiting For Diagnosis - Over Months":
-                setTestsInfo(controller.getTestInfoPerMonth());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[1]);
-                }
-                series.setName("Tests Waiting For Diagnosis");
-                break;
-            case "Number Of Tests Waiting For Diagnosis - Over Years":
-                setTestsInfo(controller.getTestInfoPerYear());
-                for (int i = 0; i < testsInfo.size(); i++) {
-                    bothValues= testsInfo.get(i);
-                    desiredData.add(bothValues[1]);
-                }
-                series.setName("Tests Waiting For Diagnosis");
-                break;
+        if (daysOption.equals("A Day")){
+            switch (selectedItem) {
+                case "Number Of Tests Waiting For Results - Over Days":
+                    setTestsInfo(controller.getTestInfoPerDay());
+                    for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[0]);
+                    }
+                    series.setName("Tests Waiting For Results");
+                    break;
+                case "Number Of Tests Waiting For Diagnosis - Over Days":
+                    setTestsInfo(controller.getTestInfoPerDay());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[1]);
+                    }
+                    series.setName("Tests Waiting For Diagnosis");
+                    break;
+            }
+        } else {
+            switch (selectedItem) {
+                case "Number Of Tests Waiting For Results - Over Days":
+                    setTestsInfo(controller.getTestInfoPerDay());
+                    for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[0]);
+                    }
+                    series.setName("Tests Waiting For Results");
+                    break;
+                case "Number Of Tests Waiting For Results - Over Weeks":
+                    setTestsInfo(controller.getTestInfoPerWeek());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[0]);
+                    }
+                    series.setName("Tests Waiting For Results");
+                    break;
+                case "Number Of Tests Waiting For Results - Over Months":
+                    setTestsInfo(controller.getTestInfoPerMonth());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[0]);
+                    }
+                    series.setName("Tests Waiting For Results");
+                    break;
+                case "Number Of Tests Waiting For Results - Over Years":
+                    setTestsInfo(controller.getTestInfoPerYear());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[0]);
+                    }
+                    series.setName("Tests Waiting For Results");
+                    break;
+                case "Number Of Tests Waiting For Diagnosis - Over Days":
+                    setTestsInfo(controller.getTestInfoPerDay());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[1]);
+                    }
+                    series.setName("Tests Waiting For Diagnosis");
+                    break;
+                case "Number Of Tests Waiting For Diagnosis - Over Weeks":
+                    setTestsInfo(controller.getTestInfoPerWeek());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[1]);
+                    }
+                    series.setName("Tests Waiting For Diagnosis");
+                    break;
+                case "Number Of Tests Waiting For Diagnosis - Over Months":
+                    setTestsInfo(controller.getTestInfoPerMonth());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[1]);
+                    }
+                    series.setName("Tests Waiting For Diagnosis");
+                    break;
+                case "Number Of Tests Waiting For Diagnosis - Over Years":
+                    setTestsInfo(controller.getTestInfoPerYear());
+                    for (int i = 0; i < testsInfo.size(); i++) {
+                        bothValues = testsInfo.get(i);
+                        desiredData.add(bothValues[1]);
+                    }
+                    series.setName("Tests Waiting For Diagnosis");
+                    break;
+            }
         }
         System.out.println(desiredData);
         setChosenGraphData(desiredData);
@@ -227,14 +252,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     }
 
     public void populateListView(){
-        listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
-        listView.getItems().add("Number Of Tests Waiting For Results - Over Weeks");
-        listView.getItems().add("Number Of Tests Waiting For Results - Over Months");
-        listView.getItems().add("Number Of Tests Waiting For Results - Over Years");
-        listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
-        listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Weeks");
-        listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Months");
-        listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Years");
+        setDaysOption(checkCompPerUI1.getChosenOption());
+        if (daysOption.equals("A Day")){
+            listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
+            listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
+        } else {
+            listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
+            listView.getItems().add("Number Of Tests Waiting For Results - Over Weeks");
+            listView.getItems().add("Number Of Tests Waiting For Results - Over Months");
+            listView.getItems().add("Number Of Tests Waiting For Results - Over Years");
+            listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
+            listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Weeks");
+            listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Months");
+            listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Years");
+        }
         setListView(listView);
     }
 
