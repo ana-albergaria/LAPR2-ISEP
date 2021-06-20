@@ -58,7 +58,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@Images/Icon5.png" />
+                              <Image url="@Images/Icon8.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -72,7 +72,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@Images/Icon5.png" />
+                              <Image url="@Images/Icon9.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -86,7 +86,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@Images/Icon5.png" />
+                              <Image url="@Images/Icon10.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -100,7 +100,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@Images/Icon5.png" />
+                              <Image url="@Images/Icon7.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -114,7 +114,7 @@
                      <graphic>
                         <ImageView fitHeight="140.0" fitWidth="140.0">
                            <image>
-                              <Image url="@Images/Icon5.png" />
+                              <Image url="@Images/Icon6.png" />
                            </image>
                         </ImageView>
                      </graphic>
