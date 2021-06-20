@@ -9,9 +9,7 @@ import auth.UserSession;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
-public class App {
+public class App implements Serializable {
 
     private Company company;
     private AuthFacade authFacade;
@@ -84,7 +82,7 @@ public class App {
     }
 
     private void bootstrap() {
-        this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
+        /*this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
         this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
         this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserRole(Constants.ROLE_SPECIALIST_DOCTOR, Constants.ROLE_SPECIALIST_DOCTOR);
@@ -263,11 +261,46 @@ public class App {
         test5.addReport(report5);
         Date date5r = new Date(2020,Calendar.JANUARY,16,19,59,59);
         test5.setDateOfDiagnosis(date5r);
-        test5.setDateOfValidation(date5r);
-
-
+        test5.setDateOfValidation(date5r);*/
     }
 
+    public boolean storeUserSection(){
+        try {
+            try (ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream(Constants.SERILIAZTION_FILE_NAME))) {
+                out.writeObject(this);
+                System.out.println("success here write");
+            }
+            return true;
+        } catch (IOException ex) {
+            System.out.println("falhou wirte");
+            ex.printStackTrace();
+            return false;
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    private static App getStoredAppInstance(){
+        File file = new File(Constants.SERILIAZTION_FILE_NAME);
+        App app;
+        try {
+            ObjectInputStream in = new ObjectInputStream(
+                    new FileInputStream(file));
+            try {
+                app = (App) in.readObject();
+                System.out.println("success here");
+            } finally {
+                in.close();
+            }
+            return app;
+        } catch (IOException | ClassNotFoundException ex) {
+            System.out.println("File Not Found");
+            return new App();
+        }
+    }
 
 
     // Extracted from https://www.javaworld.com/article/2073352/core-java/core-java-simply-singleton.html?page=2
@@ -277,7 +310,7 @@ public class App {
         {
             synchronized(App.class)
             {
-                singleton = new App();
+                singleton = getStoredAppInstance();
             }
         }
         return singleton;

@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -47,8 +46,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.controller = controller;
     }
 
-    private int[] chartValues;
-
     private String option;
 
     public void setOption(String option) {
@@ -63,12 +60,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
 
     public void setTestsInfo(ArrayList<int[]> testsInfo) {
         this.testsInfo = testsInfo;
-    }
-
-    private ArrayList<Integer> chosenGraphData = new ArrayList<>();
-
-    public void setChosenGraphData(ArrayList<Integer> chosenGraphData) {
-        this.chosenGraphData = chosenGraphData;
     }
 
     public void setLineChart(LineChart<String, Integer> lineChart) {
@@ -128,22 +119,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void resultsDaysAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerDay());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        series.setName("Tests Waiting For Results");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Results");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -151,22 +140,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void resultsWeeksAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerWeek());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        series.setName("Tests Waiting For Results");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Results");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -174,22 +161,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void resultsMonthsAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerMonth());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        series.setName("Tests Waiting For Results");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Results");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -197,22 +182,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void resultsYearsAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerYear());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[0]);
         }
-        series.setName("Tests Waiting For Results");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Results");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -220,22 +203,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void diagnosisDaysAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerDay());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        series.setName("Tests Waiting For Diagnosis");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Diagnosis");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -243,22 +224,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void diagnosisWeeksAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerWeek());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        series.setName("Tests Waiting For Diagnosis");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Diagnosis");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -266,22 +245,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void diagnosisMonthsAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerMonth());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        series.setName("Tests Waiting For Diagnosis");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Diagnosis");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }
@@ -289,22 +266,20 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     void diagnosisYearsAction(ActionEvent event) {
         lineChart.getData().clear();
+        setLineChart(lineChart);
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
-        setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        setTestsInfo(controller.getTestInfoPerYear());
+        testsInfo = controller.getTestInfoPerDay();
+        setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredData.add(bothValues[1]);
         }
-        series.setName("Tests Waiting For Diagnosis");
-        System.out.println(desiredData);
-        setChosenGraphData(desiredData);
-        for (int i = 0; i < chosenGraphData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        for (int i = 0; i < desiredData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredData.get(i)));
         }
-        lineChart.getData().clear();
+        series.setName("Tests Waiting For Diagnosis");
         lineChart.getData().add(series);
         setLineChart(lineChart);
     }

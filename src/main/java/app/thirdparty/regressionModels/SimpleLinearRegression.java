@@ -7,6 +7,8 @@ package app.thirdparty.regressionModels;
 
 import app.domain.shared.Constants;
 
+import java.io.Serializable;
+
 /**
  *  The code SimpleLinearRegression class performs a simple linear regression
  *  on an set of n data points (y_i, x_i).
@@ -19,7 +21,7 @@ import app.domain.shared.Constants;
  *  estimates for the slope and y-intercept.
  *
  */
-public class SimpleLinearRegression {
+public class SimpleLinearRegression implements Serializable {
     /**
      * The intercept of the SimpleLinearRegression.
      */

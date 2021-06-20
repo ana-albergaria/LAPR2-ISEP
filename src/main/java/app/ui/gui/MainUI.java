@@ -58,7 +58,7 @@ public class MainUI implements Initializable {
 
     @FXML
     void exitAction(ActionEvent event) {
-        System.exit(    0);
+        this.mainApp.exitSave();
     }
 
     @FXML

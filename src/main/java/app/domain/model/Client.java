@@ -2,6 +2,7 @@ package app.domain.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  *
  * @author Alexandre Dias and João Wolff
  */
-public class Client {
+public class Client implements Serializable {
 
     /**
      * Validation constants

@@ -68,7 +68,7 @@ public class AdminMenuUI implements Initializable, Menu {
 
     @FXML
     void exitAction(ActionEvent event) {
-        System.exit(0);
+        this.mainApp.exitSave();
     }
 
     public void runConsole(Runnable classToRun){

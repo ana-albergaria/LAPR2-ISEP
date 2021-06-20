@@ -5,6 +5,7 @@ import app.domain.model.Test;
 import app.domain.model.TestType;
 import app.mappers.dto.ClinicalAnalysisLaboratoryDTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author Ana Albergaria
  */
-public class ClinicalAnalysisLaboratoryStore {
+public class ClinicalAnalysisLaboratoryStore implements Serializable {
     /**
      * The Company's list of Clinical Analysis Laboratories
      */

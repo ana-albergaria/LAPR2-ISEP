@@ -10,6 +10,7 @@ import java.util.List;
  * @author Paulo Maio <pam@isep.ipp.pt>
  */
 public class Constants {
+    public static final String SERILIAZTION_FILE_NAME = "app.dat";
     public static final String ROLE_ADMIN = "ADMINISTRATOR";
     public static final String ROLE_RECEPTIONIST = "RECEPTIONIST";
     public static final String ROLE_MED_LAB_TECHNICIAN = "MED LAB TECHNICIAN";

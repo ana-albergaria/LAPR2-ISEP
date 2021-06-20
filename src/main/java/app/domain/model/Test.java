@@ -3,6 +3,8 @@ package app.domain.model;
 import app.domain.interfaces.ExternalModule;
 import app.domain.shared.Constants;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,7 +12,7 @@ import java.util.*;
  *
  * @author João Wolff
  */
-public class Test {
+public class Test implements Serializable {
 
     /**
      * Max lenght of nhs code field
@@ -145,7 +147,7 @@ public class Test {
         this.dateOfTestRegistration = (Date)testRegDate.clone();
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
-        this.dateOfSamplesCollection = null;
+        this.dateOfSamplesCollection = testChemDate == null ? null : (Date)testChemDate.clone();;
         this.dateOfChemicalAnalysis = testChemDate == null ? null : (Date)testChemDate.clone();
         this.dateOfDiagnosis = testDiagnosisDate == null ? null : (Date)testDiagnosisDate.clone();
         this.dateOfValidation = testValidationDate == null ? null :(Date)testValidationDate.clone();

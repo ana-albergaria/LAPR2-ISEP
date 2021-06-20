@@ -1,5 +1,6 @@
 package app.thirdparty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Marta Ribeiro 1201592
  */
-public class BruteForceAlgorithm {
+public class BruteForceAlgorithm implements Serializable {
 
     /**
      * Searches for the contiguous subsequence with maximum sum of a sequence

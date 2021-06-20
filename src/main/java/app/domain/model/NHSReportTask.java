@@ -12,6 +12,7 @@ import net.sourceforge.barbecue.BarcodeException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 
-public class NHSReportTask extends TimerTask {
+public class NHSReportTask extends TimerTask implements Serializable {
     private String regressionModelClass;
     private RegressionModel regressionModel;
     private int historicalPoints;

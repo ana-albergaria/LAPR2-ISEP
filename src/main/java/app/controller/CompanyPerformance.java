@@ -8,6 +8,7 @@ import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,12 +37,12 @@ public class CompanyPerformance {
     /**
      * The beginning date of the interval.
      */
-    private Calendar beginningDate;
+    private Date beginningDate;
 
     /**
      * The ending date of the interval.
      */
-    private Calendar endingDate;
+    private Date endingDate;
 
     /**
      * The chosen algorithm.
@@ -84,29 +85,17 @@ public class CompanyPerformance {
     private Date[] worstSubInt;
 
     public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
-        this.company = company;
-        this.beginningDate = Calendar.getInstance();
-        this.beginningDate.setTime(beginningDate);
-        this.endingDate=Calendar.getInstance();
-        this.endingDate.setTime(endingDate);
+        this.company=company;
+        this.beginningDate=beginningDate;
+        this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
-        this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
-        this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
-        this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        if (this.beginningDate.get(Calendar.YEAR) != this.endingDate.get(Calendar.YEAR)
-                || this.beginningDate.get(Calendar.MONTH)!= this.endingDate.get(Calendar.MONTH)
-                || this.beginningDate.get(Calendar.DAY_OF_MONTH)!= this.endingDate.get(Calendar.DAY_OF_MONTH)) {
-            this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
-            this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
-            this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
-        }
-        try {
-            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
-        } catch (ClassNotFoundException | IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+        this.clientsNum=getClientsInfoPerInterval(getDays());
+        this.processTestsNum=getNumTestsProcessedInterval(getDays());
+        this.testInfoDay=getTestInfoPerDay(getDays());
+        this.testInfoWeek=getTestInfoPerWeek(getDays());
+        this.testInfoMonth=getTestInfoPerMonth(getDays());
+        this.testInfoYear=getTestInfoPerYear(getDays());
+        this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
     }
 
     /**
@@ -227,12 +216,24 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
+            System.out.println("DAY: " + day);
             beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+            System.out.println("TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+            System.out.println("TEST INFO 1: " + testInfo[1]);
             testInfoPerDay.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerDay)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER DAY: " + sb.toString());
+        //TESTE
         return testInfoPerDay;
     }
 
@@ -291,6 +292,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerWeek)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER WEEK: " + sb.toString());
+        //TESTE
         return testInfoPerWeek;
     }
 
@@ -445,6 +455,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerMonth.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerMonth)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER MONTH: " + sb.toString());
+        //TESTE
         return testInfoPerMonth;
     }
 
@@ -501,21 +520,28 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerYear.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerYear)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER YEAR: " + sb.toString());
+        //TESTE
         return testInfoPerYear;
     }
 
     /**
      * Creates an ArrayList with all the days of the interval
-     * @param beginningDay beginning date of the interval
-     * @param endingDay end date of the interval
      * @return an ArrayList with all the days of the interval
      */
-    public ArrayList<Date> getDays(Date beginningDay, Date endingDay){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
+    public ArrayList<Date> getDays(){ //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         ArrayList<Date> days = new ArrayList<>();
-        Date day = beginningDay;
-        Date end = new Date(endingDay.getYear(), endingDay.getMonth(), endingDay.getDate(), 8,0,0);
+        Date day = this.beginningDate;
+        Date end = new Date(this.endingDate.getYear(), this.endingDate.getMonth(), this.endingDate.getDate(), 8,0,0);
         if (day.getYear()==end.getYear() && day.getMonth()==end.getMonth() && day.getDate()==end.getDate()) {
-            days.add(endingDay);
+            days.add(this.endingDate);
         } else {
             if (end.getDay() != 0) {
                 do {
@@ -556,16 +582,12 @@ public class CompanyPerformance {
         Date finalDate = new Date(days.get(days.size()-1).getYear(),days.get(days.size()-1).getMonth(),days.get(days.size()-1).getDate(),8,0,0);
         days.set(days.size()-1,finalDate);
         for (Date day : days){
-            System.out.println("day " + day.toString());
             Date date1 = day;
             Date date2 = DateUtils.addMinutes(date1, 30);
             Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,1);
             Date endDay = (Date)date2.clone();
             endDay = DateUtils.addSeconds(endDay,-1);
             do{
-                System.out.println("date1 " + date1);
-                System.out.println("date2 " + date2);
-                System.out.println("date3 " + endDay);
                 if (date1.getHours()>=8 && date2.getHours()<20) {
                     numRegistered = testStore.getNumberOfTestsByIntervalDateOfTestRegistration(date1, date2);
                     numValidated = testStore.getNumberOfTestsByIntervalDateOfDiagnosis(date1, date2);
@@ -595,41 +617,40 @@ public class CompanyPerformance {
      * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
-     * @throws ClassNotFoundException if the class name of the external API is not found
-     * @throws InstantiationException if the class object of the external API cannot be instantiated
-     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      */
-    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
-        Class<?> oClass = Class.forName(algorithmClass);
-        SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
+        Class<?> oClass = null;
+        try {
+            oClass = Class.forName(algorithmClass);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        SubMaxSumAlgorithms subMaxSumAlgorithm = null;
+        try {
+            subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance(); //NÃO ESTÁ A FUNCIONAR PQ ELE ESTÁ A SAIR NULL, COMO NA LINHA EM QUE É INICIADO COMO NULL
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
         Date[] limits = new Date[2];
-        System.out.println("WORSTSUBINT.LENGTH: " + worstSubInt.length);
         if (worstSubInt.length!=0) { //é 0 quando a company é igualmente eficiente ao longo do interval (ex: todos os valores são 0)
             for (int j = 0; j < interval.length; j++) {
-                System.out.println("VALOR J: " + j);
                 if (num!=worstSubInt.length) {
                     if (interval[j] == worstSubInt[0]) {
                         ind = j;
-                        System.out.println("VALOR IND=J: " + ind);
                         for (int value : worstSubInt) {
-                            System.out.println("VALOR VALUE: " + value);
                             if (value == interval[ind]) {
-                                System.out.println("VALOR INTERVAL[IND]: " + interval[ind]);
                                 num++;
-                                System.out.println("VALOR NUM: " + num);
                             }
                             ind++;
-                            System.out.println("VALOR IND: " + ind);
                         }
-                        System.out.println("VALOR NUM IGUALDADE: " + num);
-                        System.out.println("VALOR WORSTSUBINT.LENGTH: " + worstSubInt.length);
                         if (num == worstSubInt.length) {
                             ref = j;
-                            System.out.println("VALOR REF: " + ref);
                         } else {
                             num = 0;
                         }
@@ -639,69 +660,59 @@ public class CompanyPerformance {
             int startIndex = ref;
             int endIndex = startIndex + worstSubInt.length - 1;
             Date first = days.get(0);
+            limits[0]=(Date)first.clone();
             Date last = DateUtils.addMinutes(first, 30);
-            Date resultFor0 = first;
-            Date resultFor1 = last;
+            limits[1]=(Date)last.clone();
+            Date resultFor0 = (Date)first.clone();
+            Date resultFor1 = (Date)last.clone();
             int quant = 0;
             if (quant != startIndex) {
-                System.out.println("QUANT: " + quant);
-                System.out.println("STARTINDEX: " + endIndex);
                 for (Date day : days) {
-                    System.out.println("DAY: " + day);
                     first = day;
                     last = DateUtils.addMinutes(first, 30);
                     do {
-                        System.out.println("FIRST: " + first);
-                        System.out.println("LAST: " + last);
                         if (first.getHours() >= 8 && last.getHours() < 20) {
                             first = DateUtils.addMinutes(first, 30);
                             last = DateUtils.addMinutes(last, 30);
                             quant++;
                             if (quant==startIndex){
-                                resultFor0=first;
+                                resultFor0=(Date)first.clone();
                             }
                         } else if (last.getHours()==20 && last.getMinutes()==0){
                             quant++;
                             if (quant==startIndex){
-                                resultFor0=first;
+                                resultFor0=(Date)first.clone();
                             }
                         }
-                        System.out.println("ATT QUANT: " + quant);
-                    } while (last.getHours()!=20 && last.getMinutes()!=0);
+                    } while (last.getHours()!=20);
                 }
-                System.out.println("6");
+                limits[0] = (Date)resultFor0.clone();
             }
-            limits[0] = resultFor0;
+            first = days.get(0);
+            last = DateUtils.addMinutes(first, 30);
             quant = 0;
             if (quant != endIndex) {
-                System.out.println("QUANT: " + quant);
-                System.out.println("ENDINDEX: " + endIndex);
                 for (Date day : days) {
-                    System.out.println("DAY: " + day);
                     first = day;
                     last = DateUtils.addMinutes(first, 30);
                     do {
-                        System.out.println("FIRST: " + first);
-                        System.out.println("LAST: " + last);
                         if (first.getHours() >= 8 && last.getHours() < 20) {
                             first = DateUtils.addMinutes(first, 30);
                             last = DateUtils.addMinutes(last, 30);
                             quant++;
                             if (quant==endIndex){
-                                resultFor1=last;
+                                resultFor1=(Date)last.clone();
                             }
                         } else if (last.getHours()==20 && last.getMinutes()==0){
                             quant++;
                             if (quant==endIndex){
-                                resultFor1=last;
+                                resultFor1=(Date)last.clone();
                             }
                         }
-                        System.out.println("ATT QUANT: " + quant);
-                    } while (last.getHours()!=20 && last.getMinutes()!=0);
+                    } while (last.getHours()!=20);
                 }
-                System.out.println("7");
             }
-            limits[1] = resultFor1;
+            limits[1] = (Date)resultFor1.clone();
         }else{
             limits[0]=null;
             limits[1]=null;

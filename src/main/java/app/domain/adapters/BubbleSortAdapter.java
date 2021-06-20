@@ -4,6 +4,7 @@ import app.domain.interfaces.SortAlgorithm;
 import app.domain.model.Client;
 import app.domain.sort.algorithms.BubbleSort;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Marta Ribeiro 1201592
  */
-public class BubbleSortAdapter implements SortAlgorithm {
+public class BubbleSortAdapter implements SortAlgorithm, Serializable {
     @Override
     public void sortClientsList(List<Client> clients, Comparator<Client> comparator) {
         BubbleSort bubbleSort = new BubbleSort();
