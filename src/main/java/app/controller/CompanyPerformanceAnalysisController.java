@@ -47,19 +47,6 @@ public class CompanyPerformanceAnalysisController {
     }
 
     /**
-     -     * Creates an instance of company performance type.
-     -     * @param beginningDate the first moment of study
-     -     * @param endingDate the last moment of study
-     -     * @param chosenAlg the chosen algorithm
-     -     * @return true is the company performance is successfully created
-     -     * otherwise return false.
-     -     */
-    public boolean createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) {
-            this.companyPerformance = company.createCompanyPerformance(beginningDate,endingDate,chosenAlg);
-            return (companyPerformance != null);
-    }
-
-    /**
      * Gets the number of clients for an interval
      * @return the number of clients for an interval
      */
