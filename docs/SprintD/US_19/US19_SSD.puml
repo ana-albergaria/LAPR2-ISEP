@@ -12,7 +12,7 @@ deactivate ":System"
 T -> ":System" : create daily report and send it'/
 activate ":System"
 
-":System" --> T : informs operation success
+":System" --> T : operation success
 
 deactivate ":System"
 
