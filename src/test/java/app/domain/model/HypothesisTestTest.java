@@ -55,7 +55,7 @@ public class HypothesisTestTest {
         Locale.setDefault(Locale.ENGLISH); //because of Jenkins
         double f = 20, critFD = 4.256494729093686;
         HypothesisTest hypothesisTest = new HypothesisTest(myRegressionModelWithSLR,f,2,9,0.05);
-        String expected = String.format("20.000000 > f0.05,(2,9)=4.256495%nReject H0\nThe regression model is significant.");
+        String expected = String.format("20.0000 > f0.05,(2,9)=4.2565%nReject H0\nThe regression model is significant.");
         String actual = hypothesisTest.getDecisionForAnova(critFD);
 
         Assert.assertEquals(expected, actual);
@@ -66,7 +66,7 @@ public class HypothesisTestTest {
         Locale.setDefault(Locale.ENGLISH); //because of Jenkins
         double f = 3, critFD = 4.256494729093686;
         HypothesisTest hypothesisTest = new HypothesisTest(myRegressionModelWithSLR,f,2,9,0.05);
-        String expected = String.format("3.000000 <= f0.05,(2,9)=4.256495%nNo Reject H0\nThe regression model is not significant.");
+        String expected = String.format("3.0000 <= f0.05,(2,9)=4.2565%nNo Reject H0\nThe regression model is not significant.");
         String actual = hypothesisTest.getDecisionForAnova(critFD);
 
         Assert.assertEquals(expected, actual);
@@ -77,7 +77,7 @@ public class HypothesisTestTest {
         Locale.setDefault(Locale.ENGLISH); //because of Jenkins
         double f = 4.256494729093686, critFD = 4.256494729093686;
         HypothesisTest hypothesisTest = new HypothesisTest(myRegressionModelWithSLR,f,2,9,0.05);
-        String expected = String.format("4.256495 <= f0.05,(2,9)=4.256495%nNo Reject H0\nThe regression model is not significant.");
+        String expected = String.format("4.2565 <= f0.05,(2,9)=4.2565%nNo Reject H0\nThe regression model is not significant.");
         String actual = hypothesisTest.getDecisionForAnova(critFD);
 
         Assert.assertEquals(expected, actual);
