@@ -147,7 +147,7 @@ public class Test implements Serializable {
         this.dateOfTestRegistration = (Date)testRegDate.clone();
         this.diagnosisReport = null;
         this.samples = new ArrayList<>();
-        this.dateOfSamplesCollection = null;
+        this.dateOfSamplesCollection = testChemDate == null ? null : (Date)testChemDate.clone();;
         this.dateOfChemicalAnalysis = testChemDate == null ? null : (Date)testChemDate.clone();
         this.dateOfDiagnosis = testDiagnosisDate == null ? null : (Date)testDiagnosisDate.clone();
         this.dateOfValidation = testValidationDate == null ? null :(Date)testValidationDate.clone();
