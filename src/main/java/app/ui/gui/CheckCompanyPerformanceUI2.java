@@ -125,11 +125,15 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         XYChart.Series<String, Integer> seriesRD = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
+        System.out.println("FORA DAY TEST INFO SIZE: " + testsInfo.size());
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredDataRD.add(bothValues[0]);
+            System.out.println("DENTRO DAY TEST INFO SIZE: " + testsInfo.size());
         }
+        System.out.println("FORA DAY DESIRED DATA SIZE: " + desiredDataRD.size());
         for (int i = 0; i < desiredDataRD.size(); i++) {
+            System.out.println("DENTRO DAY DESIRED DATA SIZE: " + desiredDataRD.size());
             seriesRD.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredDataRD.get(i)));
         }
         seriesRD.setName("Tests Waiting For Results");
@@ -144,13 +148,17 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         int[] bothValues;
         ArrayList<Integer> desiredDataRW = new ArrayList<>();
         XYChart.Series<String, Integer> seriesRW = new XYChart.Series<String, Integer>();
-        testsInfo = controller.getTestInfoPerDay();
+        testsInfo = controller.getTestInfoPerWeek();
         setTestsInfo(testsInfo);
+        System.out.println("FORA WEEK TEST INFO SIZE: " + testsInfo.size());
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
             desiredDataRW.add(bothValues[0]);
+            System.out.println("DENTRO WEEK TEST INFO SIZE: " + testsInfo.size());
         }
+        System.out.println("FORA WEEK DESIRED DATA SIZE: " + desiredDataRW.size());
         for (int i = 0; i < desiredDataRW.size(); i++) {
+            System.out.println("DENTRO WEEK DESIRED DATA SIZE: " + desiredDataRW.size());
             seriesRW.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredDataRW.get(i)));
         }
         seriesRW.setName("Tests Waiting For Results");
@@ -165,7 +173,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         int[] bothValues;
         ArrayList<Integer> desiredDataRM = new ArrayList<>();
         XYChart.Series<String, Integer> seriesRM = new XYChart.Series<String, Integer>();
-        testsInfo = controller.getTestInfoPerDay();
+        testsInfo = controller.getTestInfoPerMonth();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
@@ -186,7 +194,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         int[] bothValues;
         ArrayList<Integer> desiredDataRY = new ArrayList<>();
         XYChart.Series<String, Integer> seriesRY = new XYChart.Series<String, Integer>();
-        testsInfo = controller.getTestInfoPerDay();
+        testsInfo = controller.getTestInfoPerYear();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
@@ -228,7 +236,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         int[] bothValues;
         ArrayList<Integer> desiredDataDW = new ArrayList<>();
         XYChart.Series<String, Integer> seriesDW = new XYChart.Series<String, Integer>();
-        testsInfo = controller.getTestInfoPerDay();
+        testsInfo = controller.getTestInfoPerWeek();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
@@ -249,7 +257,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         int[] bothValues;
         ArrayList<Integer> desiredDataDM = new ArrayList<>();
         XYChart.Series<String, Integer> seriesDM = new XYChart.Series<String, Integer>();
-        testsInfo = controller.getTestInfoPerDay();
+        testsInfo = controller.getTestInfoPerMonth();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
@@ -270,7 +278,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         int[] bothValues;
         ArrayList<Integer> desiredDataDY = new ArrayList<>();
         XYChart.Series<String, Integer> seriesDY = new XYChart.Series<String, Integer>();
-        testsInfo = controller.getTestInfoPerDay();
+        testsInfo = controller.getTestInfoPerYear();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
@@ -392,6 +400,15 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
                 resultsYearsBtn.setDisable(false);
                 diagnosisYearsBtn.setDisable(false);
             }
+        } else {
+            resultsDaysBtn.setDisable(true);
+            diagnosisDaysBtn.setDisable(true);
+            resultsWeeksBtn.setDisable(true);
+            diagnosisWeeksBtn.setDisable(true);
+            resultsMonthsBtn.setDisable(true);
+            diagnosisMonthsBtn.setDisable(true);
+            resultsYearsBtn.setDisable(true);
+            diagnosisYearsBtn.setDisable(true);
         }
     }
 
