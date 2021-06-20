@@ -1,14 +1,10 @@
 package app.controller;
 
 import app.domain.model.Company;
-import app.domain.model.CompanyPerformance;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
-import net.sourceforge.barbecue.BarcodeException;
+import app.domain.CompanyPerformance;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Controller class for analysing the company performance

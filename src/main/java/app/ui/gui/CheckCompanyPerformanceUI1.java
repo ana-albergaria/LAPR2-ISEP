@@ -3,7 +3,7 @@ package app.ui.gui;
 import app.controller.CompanyPerformanceAnalysisController;
 import app.controller.ImportTestController;
 import app.domain.model.Company;
-import app.domain.model.CompanyPerformance;
+import app.domain.CompanyPerformance;
 import app.mappers.dto.TestFileDTO;
 import app.ui.console.utils.TestFileUtils;
 import javafx.event.ActionEvent;

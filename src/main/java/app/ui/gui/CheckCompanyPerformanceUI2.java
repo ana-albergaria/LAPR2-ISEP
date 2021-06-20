@@ -1,10 +1,6 @@
 package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
-import app.controller.ImportTestController;
-import app.domain.model.CompanyPerformance;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,12 +9,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import net.sourceforge.barbecue.BarcodeException;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
