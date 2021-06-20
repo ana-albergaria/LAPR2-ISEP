@@ -17,6 +17,7 @@ participant "tableOfValues:\nTableOfValues" as TABLE_OF_VALUES
 
 [o-> TASK : getTableOfValues(myRegressionModel, bestXIndex, historicalPoints, startDate)
 
+alt type of data is equal to day data
 TASK -> NHS_REPORT_STORE : dates = getDatesColumnToTableOfValues(historicalPoints, startDate)
 activate TASK
 activate NHS_REPORT_STORE
@@ -26,10 +27,6 @@ TASK -> TEST_STORE : observedPositives = getObservedPositivesToTableOfValues(his
 activate TEST_STORE
 deactivate TEST_STORE
 
-TASK -> TASK : regressionModel = getRegressionModel(regressionModelClass)
-activate TASK
-deactivate TASK
-
 TASK -> TEST_STORE : numCovidTestsInHistoricalPoints = getNumberOfCovidTestsInHistoricalPoints(dates)
 activate TEST_STORE
 deactivate TEST_STORE
@@ -37,6 +34,29 @@ deactivate TEST_STORE
 TASK -> TEST_STORE : meanAgeInHistoricalPoints = getMeanAgeInHistoricalPoints(dates)
 activate TEST_STORE
 deactivate TEST_STORE
+
+else else
+
+ASK -> NHS_REPORT_STORE : dates = getWeeksColumnToTableOfValues(historicalPoints, startDate)
+activate NHS_REPORT_STORE
+deactivate NHS_REPORT_STORE
+
+TASK -> TEST_STORE : observedPositives = getWeeklyObservedPositivesToTableOfValues(historicalPoints, dates)
+activate TEST_STORE
+deactivate TEST_STORE
+
+TASK -> TEST_STORE : numCovidTestsInHistoricalPoints = getWeeklyNumberOfCovidTestsInHistoricalPoints(dates)
+activate TEST_STORE
+deactivate TEST_STORE
+
+TASK -> TEST_STORE : meanAgeInHistoricalPoints = getWeeklyMeanAgeInHistoricalPoints(dates)
+activate TEST_STORE
+deactivate TEST_STORE
+end
+TASK -> TASK : regressionModel = getRegressionModel(regressionModelClass)
+activate TASK
+deactivate TASK
+
 
 alt bestXIndex != null (Simple Linear Regression)
 alt bestXIndex = 1
