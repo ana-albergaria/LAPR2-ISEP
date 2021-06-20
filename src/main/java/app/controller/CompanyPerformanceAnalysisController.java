@@ -1,7 +1,6 @@
 package app.controller;
 
 import app.domain.model.Company;
-import app.domain.CompanyPerformance;
 
 import java.util.ArrayList;
 import java.util.Date;

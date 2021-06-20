@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import app.domain.CompanyPerformance;
+import app.controller.CompanyPerformance;
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.RegressionModel;
 import app.domain.interfaces.SortAlgorithm;
