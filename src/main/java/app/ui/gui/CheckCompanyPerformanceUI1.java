@@ -203,6 +203,7 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         setCompany(controller.getCompany());
         companyPerformance = company.createCompanyPerformance(analysisBegDate,analysisEndDate,chosenAlg);
         setCompanyPerformance(companyPerformance);
+        controller.setCompanyPerformance(companyPerformance);
         referenceDate=java.util.Calendar.getInstance().getTime();
         referenceDate.setHours(0);
         referenceDate.setMinutes(0);
