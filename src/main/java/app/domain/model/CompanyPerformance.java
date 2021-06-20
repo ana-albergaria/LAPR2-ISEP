@@ -221,20 +221,18 @@ public class CompanyPerformance {
      * Gets an ArrayList with the tests info for the days of the interval
      * @return ArrayList with the tests info for the days of the interval
      */
-    public ArrayList<int[]>  getTestInfoPerDay(ArrayList<Date> days){
+    public ArrayList<int[]> getTestInfoPerDay(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerDay = new ArrayList<>();
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
-            if (day.getDay()!=0) {
-                beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
-                endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
-                testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-                testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-                testInfoPerDay.add(testInfo);
-            }
+            beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
+            endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
+            testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+            testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+            testInfoPerDay.add(testInfo);
         }
         return testInfoPerDay;
     }
@@ -249,8 +247,7 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK ON SUNDAY
-        if (days.get(days.size()-1).getDay()!=6 && days.get(days.size()-1).getDay()!=0){
-            int weekDay = days.get(days.size()-1).getDay();
+        if (days.get(days.size()-1).getDay()!=6){
             Date lastSat = days.get(days.size()-1);
             do {
                 lastSat = DateUtils.addDays(lastSat,-1);
@@ -308,39 +305,67 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> months = new ArrayList<>();
         ArrayList<Date> month = new ArrayList<>();
-        for (Date date : days) {
-            if (date.getMonth() == Calendar.JANUARY || date.getMonth() == Calendar.MARCH || date.getMonth() == Calendar.MAY ||
-                    date.getMonth() == Calendar.JULY || date.getMonth() == Calendar.AUGUST || date.getMonth() == Calendar.OCTOBER || date.getMonth() == Calendar.DECEMBER) {
-                if (date.getDay()!=0){
+        if (days.get(days.size()-1).getDate()!=31 &&
+                (days.get(days.size()-1).getMonth() == Calendar.JANUARY || days.get(days.size()-1).getMonth() == Calendar.MARCH || days.get(days.size()-1).getMonth() == Calendar.MAY ||
+                        days.get(days.size()-1).getMonth() == Calendar.JULY || days.get(days.size()-1).getMonth() == Calendar.AUGUST || days.get(days.size()-1).getMonth() == Calendar.OCTOBER || days.get(days.size()-1).getMonth() == Calendar.DECEMBER)){
+            Date lastDayMonth = days.get(days.size()-1);
+            do{
+                lastDayMonth = DateUtils.addDays(lastDayMonth,-1);
+            }while (lastDayMonth.getDate()!=31);
+            if (lastDayMonth.before(days.get(0))){
+                for (Date date : days){
                     month.add(date);
                 }
-                if (date.getDate()==31){
-                    months.add(month);
-                    month.clear();
-                }
-            } else if (date.getMonth() == Calendar.APRIL || date.getMonth() == Calendar.JUNE || date.getMonth() == Calendar.SEPTEMBER || date.getMonth() == Calendar.NOVEMBER) {
-                if (date.getDay()!=0){
-                    month.add(date);
-                }
-                if (date.getDate()==30){
-                    months.add(month);
-                    month.clear();
-                }
-            } else if (date.getMonth() == Calendar.FEBRUARY && (date.getYear() % 400 == 0) || ((date.getYear() % 100) != 0 && (date.getYear() % 4 == 0))) {
-                if (date.getDay()!=0){
-                    month.add(date);
-                }
-                if (date.getDate()==29){
-                    months.add(month);
-                    month.clear();
-                }
+                months.add((ArrayList<Date>) month.clone());
+                month.clear();
             } else {
-                if (date.getDay()!=0){
+                for (Date date : days) {
                     month.add(date);
+                    if (date.getDate()==31){
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    } else if (date==days.get(days.size()-1)){
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
                 }
-                if (date.getDate()==28){
-                    months.add(month);
-                    month.clear();
+            }
+        //FAZER TAMBÉM ELSE PARA OS OUTROS MESES
+        }else {
+            for (Date date : days) {
+                if (date.getMonth() == Calendar.JANUARY || date.getMonth() == Calendar.MARCH || date.getMonth() == Calendar.MAY ||
+                        date.getMonth() == Calendar.JULY || date.getMonth() == Calendar.AUGUST || date.getMonth() == Calendar.OCTOBER || date.getMonth() == Calendar.DECEMBER) {
+                    if (date.getDay() != 0) {
+                        month.add(date);
+                    }
+                    if (date.getDate() == 31) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
+                } else if (date.getMonth() == Calendar.APRIL || date.getMonth() == Calendar.JUNE || date.getMonth() == Calendar.SEPTEMBER || date.getMonth() == Calendar.NOVEMBER) {
+                    if (date.getDay() != 0) {
+                        month.add(date);
+                    }
+                    if (date.getDate() == 30) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
+                } else if (date.getMonth() == Calendar.FEBRUARY && (date.getYear() % 400 == 0) || ((date.getYear() % 100) != 0 && (date.getYear() % 4 == 0))) {
+                    if (date.getDay() != 0) {
+                        month.add(date);
+                    }
+                    if (date.getDate() == 29) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
+                } else {
+                    if (date.getDay() != 0) {
+                        month.add(date);
+                    }
+                    if (date.getDate() == 28) {
+                        months.add((ArrayList<Date>) month.clone());
+                        month.clear();
+                    }
                 }
             }
         }
@@ -366,13 +391,17 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> years = new ArrayList<>();
         ArrayList<Date> year = new ArrayList<>();
-        for (Date date : days) {
-            if (date.getDay()!=0){
-                year.add(date);
-            }
-            if ((date.getMonth()==Calendar.DECEMBER && date.getDate()==31)) {
-                years.add(year);
-                year.clear();
+        if (days.get(days.size()-1).getMonth()!=Calendar.DECEMBER && days.get(days.size()-1).getDate()!=31){
+            //TO DO (based on the week one)
+        } else {
+            for (Date date : days) {
+                if (date.getDay() != 0) {
+                    year.add(date);
+                }
+                if ((date.getMonth() == Calendar.DECEMBER && date.getDate() == 31)) {
+                    years.add(year);
+                    year.clear();
+                }
             }
         }
         Date beginningDay;

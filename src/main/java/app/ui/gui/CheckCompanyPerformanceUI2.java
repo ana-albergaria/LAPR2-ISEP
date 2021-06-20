@@ -30,7 +30,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     @FXML
     private TextArea cliTesOverview;
 
-    public CheckCompanyPerformanceUI2() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public CheckCompanyPerformanceUI2() {
     }
 
     public void setMainApp(App mainApp){
@@ -110,7 +110,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             switch (selectedItem) {
                 case "Number Of Tests Waiting For Results - Over Days":
                     setTestsInfo(controller.getTestInfoPerDay());
-                    for (int i = 0; i < testsInfo.size(); i++) { //não é do testInfo
+                    for (int i = 0; i < testsInfo.size(); i++) {
                         bothValues = testsInfo.get(i);
                         desiredData.add(bothValues[0]);
                     }
