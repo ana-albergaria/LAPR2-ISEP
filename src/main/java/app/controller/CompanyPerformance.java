@@ -216,13 +216,13 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
-            System.out.println("DAY: " + day);
+            System.out.println("DAY DAY: " + day);
             beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
-            System.out.println("TEST INFO 0: " + testInfo[0]);
+            System.out.println("DAY TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            System.out.println("TEST INFO 1: " + testInfo[1]);
+            System.out.println("DAY TEST INFO 1: " + testInfo[1]);
             testInfoPerDay.add(testInfo);
         }
         //TESTE
@@ -232,7 +232,7 @@ public class CompanyPerformance {
             sb.append(Arrays.toString(s));
             sb.append("\t");
         }
-        System.out.println("TEST INFO PER DAY: " + sb.toString());
+        System.out.println("DAY TEST INFO PER DAY: " + sb.toString());
         //TESTE
         return testInfoPerDay;
     }
@@ -254,12 +254,14 @@ public class CompanyPerformance {
             }while (lastSat.getDay()!=6);
             if (lastSat.before(days.get(0))){
                 for (Date date : days){
+                    System.out.println("WEEK DAY: " + date);
                     week.add(date);
                 }
                 weeks.add((ArrayList<Date>) week.clone());
                 week.clear();
             } else {
                 for (Date date : days) {
+                    System.out.println("WEEK DAY: " + date);
                     if (date.getDay() != 0) {
                         week.add(date);
                     }
@@ -274,6 +276,7 @@ public class CompanyPerformance {
             }
         } else {
             for (Date date : days) {
+                System.out.println("WEEK DAY: " + date);
                 if (date.getDay() != 0) {
                     week.add(date);
                 }
@@ -286,10 +289,13 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (ArrayList<Date> singleWeek : weeks) {
+            System.out.println("WEEK WEEK: " + singleWeek);
             beginningDay = new Date(singleWeek.get(0).getYear(), singleWeek.get(0).getMonth(), singleWeek.get(0).getDate(), 8, 0, 0);
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+            System.out.println("WEEK TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+            System.out.println("WEEK TEST INFO 0: " + testInfo[0]);
             testInfoPerWeek.add(testInfo);
         }
         //TESTE
@@ -299,7 +305,7 @@ public class CompanyPerformance {
             sb.append(Arrays.toString(s));
             sb.append("\t");
         }
-        System.out.println("TEST INFO PER WEEK: " + sb.toString());
+        System.out.println("WEEK TEST INFO PER WEEK: " + sb.toString());
         //TESTE
         return testInfoPerWeek;
     }
