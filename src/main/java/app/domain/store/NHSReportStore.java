@@ -169,11 +169,13 @@ public class NHSReportStore implements Serializable {
     }
 
     /**
+     * Returns the daily dates to Table of Values.
      *
      *
-     * @param numberOfObservations
-     * @param currentDate
-     * @return
+     * @param numberOfObservations number of observations
+     * @param currentDate current Date
+     *
+     * @return the daily dates to Table of Values
      */
     public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
                                                         Date currentDate) {
@@ -192,6 +194,15 @@ public class NHSReportStore implements Serializable {
         return dates;
     }
 
+    /**
+     * Returns the weekly dates to Table of Values.
+     *
+     *
+     * @param numberOfObservations number of observations
+     * @param currentDate current Date
+     *
+     * @return the weekly dates to Table of Values
+     */
     public List<String> getWeeksColumnToTableOfValues(int numberOfObservations,
                                                       Date currentDate) {
         List<String> dates = new ArrayList<>();
@@ -212,11 +223,24 @@ public class NHSReportStore implements Serializable {
         return dates;
     }
 
+    /**
+     * Returns the string with the weeks in the format "DD/MM/YYYY-DD/MM/YYYY".
+     *
+     * @param initialDate initial Date
+     * @param endDate end Date
+     *
+     * @return the string with the weeks in the format "DD/MM/YYYY-DD/MM/YYYY"
+     */
     public String getWeek(Date initialDate, Date endDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return String.format("%s-%s", sdf.format(initialDate), sdf.format(endDate));
     }
 
+    /**
+     * Get start date for US19
+     *
+     * @return start date for US19
+     */
     public Date getStartDate() {
         Date currentDate = new Date();
         Calendar oneDayBefore = Calendar.getInstance();
@@ -228,6 +252,13 @@ public class NHSReportStore implements Serializable {
         return oneDayBefore.getTime();
     }
 
+    /**
+     * Get start date for US18 (selected date)
+     *
+     * @param currentDate current date
+     *
+     * @return start date for US18 (selected date)
+     */
     public Date getStartDateForSelectedDate(Date currentDate) {
         Calendar oneDayBefore = Calendar.getInstance();
         oneDayBefore.setTime(currentDate);

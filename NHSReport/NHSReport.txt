@@ -1,0 +1,47 @@
+The regression model fitted using data from the interval
+^y=0,8769x + -3,3134
+//
+Other statistics
+R2 = 0,9683
+R2 adjusted = 0,9638
+R = 0,9840
+//
+
+Hypothesis tests for regression coefficients
+
+--> Significance Level: 0,05
+
+H0:b=0 H1:b<>0
+t_obs=14,6329
+Decision: 
+Reject H0
+//
+
+Significance model with Anova
+H0: b=0  H1:b<>0
+                    df                  SS                  MS                  F                   
+Regression          1                   114,4797            114,4797            397,6543            
+Residual            13                  3,7425              0,2879              
+Total               14                  118,2222            
+
+Decision: f
+397,6543 > f0,05,(1,13)=4,6672
+Reject H0
+The regression model is significant.
+
+Date                     Number of OBSERVED positive cases                 Number of ESTIMATED/EXPECTED positive cases                    95.0% intervals                                   
+28/05/2021                              3                                                 1,9478                                           -0,4300-4,3255                     
+27/05/2021                              2                                                 1,9478                                           -0,4300-4,3255                     
+26/05/2021                              5                                                 2,8246                                           0,5375-5,1117                      
+25/05/2021                              8                                                 7,2090                                           5,3063-9,1116                      
+24/05/2021                              8                                                 7,2090                                           5,3063-9,1116                      
+22/05/2021                              12                                                12,4701                                          10,7988-14,1415                    
+21/05/2021                              10                                                9,8396                                           8,0915-11,5876                     
+20/05/2021                              9                                                 9,8396                                           8,0915-11,5876                     
+19/05/2021                              14                                                14,2239                                          12,5548-15,8930                    
+18/05/2021                              18                                                17,7313                                          15,9500-19,5127                    
+17/05/2021                              16                                                15,9776                                          14,2710-17,6842                    
+15/05/2021                              16                                                16,8545                                          15,1149-18,5940                    
+14/05/2021                              18                                                16,8545                                          15,1149-18,5940                    
+13/05/2021                              18                                                18,6082                                          16,7769-20,4395                    
+12/05/2021                              22                                                22,1157                                          20,0153-24,2160                    
