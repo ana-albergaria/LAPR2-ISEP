@@ -24628,3 +24628,10 @@ Emplooye Password: J7XxsAsAdY
 Employee email: ElizaFAWCETT490@hotmail.com
 Emplooye Password: Yb6keCLhIU
 >>>>>>> 58428af21b7d227f197168afe98e8d7d01fbcd67
+
+
+Employee email: maria@gmail.com
+Emplooye Password: hDCzuzot6k
+
+Employee email: pedro@gmail.com
+Emplooye Password: 6h9r7Xm58s

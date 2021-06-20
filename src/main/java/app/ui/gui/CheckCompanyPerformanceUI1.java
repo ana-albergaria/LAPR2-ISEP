@@ -1,7 +1,6 @@
 package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
-import app.controller.ImportTestController;
 import app.domain.model.Company;
 import app.controller.CompanyPerformance;
 import app.mappers.dto.TestFileDTO;

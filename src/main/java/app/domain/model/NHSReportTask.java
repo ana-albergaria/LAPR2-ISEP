@@ -1,14 +1,10 @@
 package app.domain.model;
 
-import app.controller.ImportTestController;
 import app.domain.interfaces.RegressionModel;
 import app.domain.shared.Constants;
-import app.ui.console.utils.TestFileUtils;
 import app.domain.store.NHSReportStore;
 import app.domain.store.TestStore;
-import app.mappers.dto.TestFileDTO;
 import com.nhs.report.Report2NHS;
-import net.sourceforge.barbecue.BarcodeException;
 
 import java.io.File;
 import java.io.IOException;
@@ -183,30 +179,6 @@ public class NHSReportTask extends TimerTask implements Serializable {
 
 
         try {
-            if(cont == 0) {
-                //só para teste
-                TestFileUtils testFileUtils = new TestFileUtils();
-                ImportTestController importTestCtrl = new ImportTestController();
-                List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
-                for (TestFileDTO testData : procedData) {
-                    try {
-                        importTestCtrl.importTestFromFile(testData);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (BarcodeException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //fim teste
-                cont++;
-            }
-
-
-
             this.nhsDayDataReport = createNHSDailyReport(Constants.DAY_DATA);
             this.nhsWeekDataReport = createNHSDailyReport(Constants.WEEK_DATA);
 

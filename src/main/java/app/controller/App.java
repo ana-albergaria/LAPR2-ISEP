@@ -82,7 +82,7 @@ public class App implements Serializable {
     }
 
     private void bootstrap() {
-        /*this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
+        this.authFacade.addUserRole(Constants.ROLE_MED_LAB_TECHNICIAN, Constants.ROLE_MED_LAB_TECHNICIAN);
         this.authFacade.addUserRole(Constants.ROLE_ADMIN, Constants.ROLE_ADMIN);
         this.authFacade.addUserRole(Constants.ROLE_RECEPTIONIST, Constants.ROLE_RECEPTIONIST);
         this.authFacade.addUserRole(Constants.ROLE_SPECIALIST_DOCTOR, Constants.ROLE_SPECIALIST_DOCTOR);
@@ -96,8 +96,7 @@ public class App implements Serializable {
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
         this.authFacade.addUserWithRole("labCord", "lc@gmail.com","1",Constants.ROLE_LAB_COORDINATOR);
-
-        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
+        /*this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Covid","covid"));
 
