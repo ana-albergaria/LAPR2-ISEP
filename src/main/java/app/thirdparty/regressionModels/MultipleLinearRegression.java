@@ -87,62 +87,34 @@ public class MultipleLinearRegression {
             x[i][2] = x2[i];
         }
 
-        System.out.println("X:");
-        imprimir(x);
-        System.out.println();
-
         //determine xT (transpose of the matrix X)
         double[][] xT = transposeMatrix(x);
-
-        System.out.println("xT:");
-        imprimir(xT);
-        System.out.println();
 
         //determine xTx
         double[][] xTx = matrixMultiplication(xT, x);
 
-        System.out.println("xTx:");
-        imprimir(xTx);
-        System.out.println();
-
         //determine inverse of xTx
         xTxInverse = invert(xTx);
-
-        System.out.println("xTxInverse: ");
-        imprimir(xTxInverse);
-        System.out.println();
 
         //determine xTy
         double[] xTy = matrixWithVectorMultiplication(xT, y);
 
-        System.out.println("xTy: ");
-        imprimir(xTy);
-        System.out.println();
-
         //determine the vector containing the regression coefficients
         regressionCoefficients = matrixWithVectorMultiplication(xTxInverse, xTy);
-
-        System.out.println("Regression Coefficients Vector: ");
-        imprimir(regressionCoefficients);
-        System.out.println();
 
         b0 = regressionCoefficients[0];
         b1 = regressionCoefficients[1];
         b2 = regressionCoefficients[2];
 
         double ybar = mean(y);
-        System.out.println("Ybar: " + ybar);
-        
 
         //regressionCoefficientsT = regressionCoefficients (in Code!)
         //determine ^BTxTy
         double regressionsCoefficientsTxTy = vectorWithVectorMultiplication(regressionCoefficients, xTy);
-        System.out.println("^BTxTy = " + regressionsCoefficientsTxTy);
 
         //y = yT in Code!
         //determine yTy
         double yTy = vectorWithVectorMultiplication(y, y);
-        System.out.println("yTy = " + yTy);
 
         //determine SQr
         sr = regressionsCoefficientsTxTy - (n * Math.pow(ybar, 2));
@@ -151,21 +123,13 @@ public class MultipleLinearRegression {
         //determine SQt
         double st = sr + se;
 
-        System.out.println("SQr = " + sr);
-        System.out.println("SQe = " + se);
-
         //determine r2 and r2Adjusted
         r2 = sr / st;
         r2Adjusted = 1 - ((n-1.0) / (n-(NUM_REG_COEFFICIENTS+1)) * (1-r2));
 
-        System.out.println("R2 = " + r2);
-        System.out.println("R2 adjusted = " + r2Adjusted);
-        System.out.println();
-
         //determine svar == MQe!
         svar = se / (n - (NUM_REG_COEFFICIENTS + 1));
 
-        System.out.println("Variância: " + svar);
     }
 
     /**
@@ -522,21 +486,4 @@ public class MultipleLinearRegression {
         return String.format("^y=%f + %fx1 + %fx2%nR2 = %s", b0, b1, b2, r2);
     }
 
-
-    //APAGAR POSTERIORMENTE!!!!!!!
-    public static void imprimir(double[][] array) {
-        for (int linha = 0; linha < array.length; linha++) {
-            for (int coluna = 0; coluna < array[linha].length; coluna++) {
-                System.out.print(array[linha][coluna] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    //APAGAR!!!!!!
-    public static void imprimir(double[] vector) {
-        for (int i = 0; i < vector.length; i++) {
-            System.out.println(vector[i]);
-        }
-    }
 }
