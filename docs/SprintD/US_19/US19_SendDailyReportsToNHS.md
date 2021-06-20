@@ -262,12 +262,41 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 **_DO NOT COPY ALL DEVELOPED TESTS HERE_**
 
-**Test 1:** Check that it is not possible to create an instance of the Example class with null values. 
+###4.1. SimpleLinearRegressionAdapterTest and MultipleSimpleLinearRegressionAdapterTest
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+**Test 1:** ensure estimate positive values are correct with a given dataset
+
+**Test 2:** ensure confidence interval is correct.
+
+###4.3. ConfidenceIntervalTest and TableOfValuesTest
+
+**Test 3:** check if equals overwritten equals method is evaluating correctly for:
+    - Objects From Different Classes.
+    - Null Object Not Equal To Existing Object.
+    - Equals if all attributes are equals.
+
+###4.4. MyRegressionModelTest
+
+**Test 4:** Check if the generated critical value for simple and multiple linear regression
+
+**Test 5:** Check if the generated F snedcore value is correct.
+
+**Test 5:** Check if the generated F snedcore value is correct.
+
+**Test 6:** check if equals overwritten equals method is evaluating correctly for:
+    - Objects From Different Classes.
+    - Null Object Not Equal To Existing Object.
+    - Equals if all attributes are equals.
+
+
+###4.5. SignificanceModelAnovaTest
+
+
+
+
+
+
+
 
 *It is also recommended to organize this content by subsections.* 
 
