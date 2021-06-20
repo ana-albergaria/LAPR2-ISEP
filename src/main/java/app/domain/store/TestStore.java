@@ -1,7 +1,11 @@
 package app.domain.store;
 
+import app.controller.ImportTestController;
 import app.domain.model.*;
 import app.domain.shared.Constants;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
+import net.sourceforge.barbecue.BarcodeException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -192,7 +196,7 @@ public class TestStore {
      * @param endingDay the end date of the desired interval of time
      * @return the number of tests that were registered between the desired interval of time
      */
-    public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDay, Date endingDay){
+    public int getNumberOfTestsByIntervalDateOfTestRegistration(Date beginningDay, Date endingDay) {
         int num = 0;
         for (Test test : testList) {
             if ((test.getDateOfTestRegistration().after(beginningDay) && test.getDateOfTestRegistration().before(endingDay))
