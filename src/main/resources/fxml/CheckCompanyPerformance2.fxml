@@ -87,7 +87,7 @@
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
                                 <yAxis>
-                                  <NumberAxis side="LEFT" />
+                                  <NumberAxis autoRanging="false" side="LEFT" />
                                 </yAxis>
                               </LineChart>
                               <GridPane>
@@ -114,32 +114,32 @@
                                        <children>
                                           <Button fx:id="resultsDaysBtn" disable="true" mnemonicParsing="false" onAction="#resultsDaysAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Days" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                           <Button fx:id="resultsWeeksBtn" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#resultsWeeksAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Weeks" textAlignment="CENTER" GridPane.rowIndex="1">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                           <Button fx:id="resultsMonthsBtn" disable="true" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#resultsMonthsAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Months" textAlignment="CENTER" GridPane.rowIndex="2">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                           <Button fx:id="resultsYearsBtn" disable="true" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#resultsYearsAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Years" textAlignment="CENTER" GridPane.rowIndex="3">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                           <Button fx:id="diagnosisDaysBtn" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#diagnosisDaysAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Days" textAlignment="CENTER" GridPane.columnIndex="1">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                           <Button fx:id="diagnosisWeeksBtn" disable="true" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#diagnosisWeeksAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Weeks" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                           <Button fx:id="diagnosisMonthsBtn" disable="true" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#diagnosisMonthsAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Months" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -149,7 +149,7 @@
                                           </Button>
                                           <Button fx:id="diagnosisYearsBtn" disable="true" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" onAction="#diagnosisYearsAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Years" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <font>
-                                                <Font name="Tahoma Bold" size="11.0" />
+                                                <Font name="Tahoma Bold" size="10.0" />
                                              </font>
                                           </Button>
                                        </children>

@@ -36,12 +36,12 @@ public class CompanyPerformance {
     /**
      * The beginning date of the interval.
      */
-    private Calendar beginningDate;
+    private Date beginningDate;
 
     /**
      * The ending date of the interval.
      */
-    private Calendar endingDate;
+    private Date endingDate;
 
     /**
      * The chosen algorithm.
@@ -85,21 +85,15 @@ public class CompanyPerformance {
 
     public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
         this.company = company;
-        this.beginningDate = Calendar.getInstance();
-        this.beginningDate.setTime(beginningDate);
-        this.endingDate=Calendar.getInstance();
-        this.endingDate.setTime(endingDate);
+        this.beginningDate = beginningDate;
+        this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
         this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
         this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
         this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        if (this.beginningDate.get(Calendar.YEAR) != this.endingDate.get(Calendar.YEAR)
-                || this.beginningDate.get(Calendar.MONTH)!= this.endingDate.get(Calendar.MONTH)
-                || this.beginningDate.get(Calendar.DAY_OF_MONTH)!= this.endingDate.get(Calendar.DAY_OF_MONTH)) {
-            this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
-            this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
-            this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
-        }
+        this.testInfoWeek = getTestInfoPerWeek(getDays(beginningDate, endingDate));
+        this.testInfoMonth = getTestInfoPerMonth(getDays(beginningDate, endingDate));
+        this.testInfoYear = getTestInfoPerYear(getDays(beginningDate, endingDate));
         try {
             this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
         } catch (ClassNotFoundException | IllegalAccessException e) {
@@ -114,7 +108,7 @@ public class CompanyPerformance {
      * @return number of clients
      */
     public int getClientsNum() {
-        return clientsNum;
+        return this.clientsNum;
     }
 
     /**
@@ -122,7 +116,7 @@ public class CompanyPerformance {
      * @return number of processed tests
      */
     public int getProcessTestsNum() {
-        return processTestsNum;
+        return this.processTestsNum;
     }
 
     /**
@@ -130,7 +124,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoDay() {
-        return testInfoDay;
+        return this.testInfoDay;
     }
 
     /**
@@ -138,7 +132,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoWeek() {
-        return testInfoWeek;
+        return this.testInfoWeek;
     }
 
     /**
@@ -146,7 +140,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoMonth() {
-        return testInfoMonth;
+        return this.testInfoMonth;
     }
 
     /**
@@ -154,7 +148,7 @@ public class CompanyPerformance {
      * @return tests info
      */
     public ArrayList<int[]> getTestInfoYear() {
-        return testInfoYear;
+        return this.testInfoYear;
     }
 
     /**
@@ -162,7 +156,7 @@ public class CompanyPerformance {
      * @return beginning and end of the contiguous subsequence with maximum sum
      */
     public Date[] getWorstSubInt() {
-        return worstSubInt;
+        return this.worstSubInt;
     }
 
     /**
