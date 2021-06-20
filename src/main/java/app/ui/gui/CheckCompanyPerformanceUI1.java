@@ -106,6 +106,14 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
         this.analysisEndDate = analysisEndDate;
     }
 
+    public Date getAnalysisBegDate() {
+        return analysisBegDate;
+    }
+
+    public Date getAnalysisEndDate() {
+        return analysisEndDate;
+    }
+
     private CompanyPerformance companyPerformance;
 
     public void setCompanyPerformance(CompanyPerformance companyPerformance) {
