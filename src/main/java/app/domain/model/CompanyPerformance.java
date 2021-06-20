@@ -219,7 +219,7 @@ public class CompanyPerformance {
      * Gets an ArrayList with the tests info for the days of the interval
      * @return ArrayList with the tests info for the days of the interval
      */
-    public ArrayList<int[]> getTestInfoPerDay(ArrayList<Date> days){
+    public ArrayList<int[]>  getTestInfoPerDay(ArrayList<Date> days){
         ArrayList<int[]> testInfoPerDay = new ArrayList<>();
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
@@ -247,7 +247,9 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK AT SUNDAY
+        System.out.println("entered week");
         for (Date date : days) {
+            System.out.println(date);
             if (date.getDay()!=0){
                 week.add(date);
             }
@@ -258,12 +260,20 @@ public class CompanyPerformance {
         }
         Date beginningDay;
         Date endingDay;
+        System.out.println(weeks);
+        System.out.println(week);
         for (ArrayList<Date> singleWeek : weeks) {
             beginningDay = new Date(singleWeek.get(0).getYear(), singleWeek.get(0).getMonth(), singleWeek.get(0).getDate(), 8, 0, 0);
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
+            System.out.println(testInfo[0]);
+            System.out.println(testInfo[1]);
+            System.out.println(beginningDay);
+            System.out.println(endingDay);
+            System.out.println();
+
         }
         return testInfoPerWeek;
     }
@@ -414,14 +424,7 @@ public class CompanyPerformance {
         for (TestFileDTO testData : procedData) {
             try {
                 importTestCtrl.importTestFromFile(testData);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (BarcodeException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
             }
         }
         //fim teste

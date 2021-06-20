@@ -97,6 +97,7 @@ public class TestStore {
                     || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
                     || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
                 num++;
+            System.out.println(num);
         }
         return num;
     }
