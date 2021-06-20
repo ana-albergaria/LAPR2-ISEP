@@ -76,7 +76,7 @@ public class ReceptionistMenuUI implements Initializable, Menu {
 
     @FXML
     void exitAction(ActionEvent event) {
-        System.exit(0);
+        this.mainApp.exitSave();
     }
 
     public void handleRegisterClient(ActionEvent actionEvent) {

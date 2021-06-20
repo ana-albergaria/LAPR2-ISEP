@@ -1,11 +1,13 @@
 package app.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Container of one of the test parameters and its test result
  *
  * @author SRC-Code-23
  */
-public class TestParameter {
+public class TestParameter implements Serializable {
 
     /**
      * Parameter to be evaluated for the a test.

@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Represents a Significance Model Anova through:
  * a My Regression Model,
@@ -18,7 +20,7 @@ package app.domain.model;
  * @author Ana Albergaria
  */
 
-public class SignificanceModelAnova {
+public class SignificanceModelAnova implements Serializable {
     /**
      * The MyRegressionModel of the HypothesisTest.
      */

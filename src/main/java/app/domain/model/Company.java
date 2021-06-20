@@ -11,15 +11,16 @@ import app.mappers.dto.SpecialistDoctorDTO;
 import auth.AuthFacade;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+import java.util.Timer;
 /**
  *
  * @author Paulo Maio <pam@isep.ipp.pt> and SRC-Code-23
  */
-public class Company {
+public class Company implements Serializable {
 
     /**
      * The company designation.
@@ -85,8 +86,6 @@ public class Company {
 
     private String significanceLevel;
 
-    private Timer timer;
-
     private NHSReportTask nhsReportTask;
 
     public Company(String designation,
@@ -143,11 +142,7 @@ public class Company {
 
         this.nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
-        this.timer = new Timer();
-
-
-
-
+        //this.timer = new Timer();
 
         //timer.schedule(nhsReportTask, today.getTime(), 1000L * 60L * 60L * 24L);
         //timer.schedule(nhsReportTask, initialDateForTask, TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES));
@@ -433,6 +428,7 @@ public class Company {
     }
 
     public void scheduleNHSReportTask(Date delay, long interval) {
+        Timer timer = new Timer();
         timer.schedule(this.nhsReportTask, delay, interval);
     }
 }

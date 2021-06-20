@@ -2,10 +2,12 @@ package app.domain.model;
 
 import app.domain.interfaces.ExternalModule;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestType {
+public class TestType implements Serializable {
 
     /**
      * Max lenght of description field

@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Ana Albergaria
  */
 
-public class TableOfValues {
+public class TableOfValues implements Serializable {
     /**
      * The MyRegressionModel of the TableOfValues.
      */

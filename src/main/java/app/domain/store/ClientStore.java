@@ -6,6 +6,7 @@ import app.mappers.dto.ClientDTO;
 import auth.AuthFacade;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Date;
  *
  * @author João Wolff and Alexandre Dias
  */
-public class ClientStore {
+public class ClientStore implements Serializable {
 
     private AuthFacade auth;
 

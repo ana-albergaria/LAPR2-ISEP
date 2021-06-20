@@ -4,6 +4,7 @@ import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 import app.thirdparty.regressionModels.SimpleLinearRegression;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author Ana Albergaria
  */
-public class SimpleLinearRegressionAdapter implements RegressionModel {
+public class SimpleLinearRegressionAdapter implements RegressionModel , Serializable {
 
     /**
      * Returns the index of the best independent variable between two Simple Linear Regressions

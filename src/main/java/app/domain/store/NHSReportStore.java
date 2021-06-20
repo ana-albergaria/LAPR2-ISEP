@@ -3,6 +3,7 @@ package app.domain.store;
 import app.domain.interfaces.RegressionModel;
 import app.domain.model.*;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author Ana Albergaria
  */
-public class NHSReportStore {
+public class NHSReportStore implements Serializable {
 
     /**
      * Method which returns the NHS Report to be sent, receiving:

@@ -1,5 +1,6 @@
 package app.domain.model;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 /**
@@ -14,7 +15,7 @@ import java.text.DecimalFormat;
  * @author Ana Albergaria
  */
 
-public class ConfidenceInterval {
+public class ConfidenceInterval implements Serializable {
     /**
      * The MyRegressionModel of the ConfidenceInterval.
      */
