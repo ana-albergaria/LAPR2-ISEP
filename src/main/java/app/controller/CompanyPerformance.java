@@ -1,14 +1,10 @@
-package app.domain;
+package app.controller;
 
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;
 import app.domain.model.Test;
 import app.domain.shared.Constants;
 import app.domain.store.TestStore;
-<<<<<<< HEAD
-
-=======
->>>>>>> 12b7a143d3678a28abc154a0d66cbc8d67d2d6fc
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
