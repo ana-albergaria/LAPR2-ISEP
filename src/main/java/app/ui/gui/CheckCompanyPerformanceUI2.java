@@ -59,10 +59,6 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         this.cliTesOverview = cliTesOverview;
     }
 
-    public void setListView(ListView<String> listView) {
-        this.listView = listView;
-    }
-
     private ArrayList<int[]> testsInfo = new ArrayList<>();
 
     public void setTestsInfo(ArrayList<int[]> testsInfo) {
@@ -106,190 +102,203 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
     private Button returnBtn;
 
     @FXML
-    private ListView<String> listView;
+    private Button resultsWeeksBtn;
 
     @FXML
-    void handleListViewClick(MouseEvent event) {
-        String selectedItem = listView.getSelectionModel().getSelectedItem();
+    private Button resultsMonthsBtn;
+
+    @FXML
+    private Button resultsDaysBtn;
+
+    @FXML
+    private Button diagnosisWeeksBtn;
+
+    @FXML
+    private Button diagnosisMonthsBtn;
+
+    @FXML
+    private Button diagnosisYearsBtn;
+
+    @FXML
+    private Button resultsYearsBtn;
+
+    @FXML
+    private Button diagnosisDaysBtn;
+
+    @FXML
+    void resultsDaysAction(ActionEvent event) {
+        lineChart.getData().clear();
         int[] bothValues;
         ArrayList<Integer> desiredData = new ArrayList<>();
         setChosenGraphData(desiredData);
         XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
-        if (!daysOption.equals("A Day")){
-            if (DateUtils.addDays(end,-7).before(beginning) || DateUtils.addDays(end,-7).equals(beginning)){
-                switch (selectedItem) {
-                    case "Number Of Tests Waiting For Results - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                }
-            } else if (DateUtils.addMonths(end,-1).before(beginning) || DateUtils.addMonths(end,-1).equals(beginning)){
-                switch (selectedItem) {
-                    case "Number Of Tests Waiting For Results - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Results - Over Weeks":
-                        setTestsInfo(controller.getTestInfoPerWeek());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Weeks":
-                        setTestsInfo(controller.getTestInfoPerWeek());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                }
-            } else if (DateUtils.addYears(end,-1).before(beginning) || DateUtils.addYears(end,-1).equals(beginning)){
-                switch (selectedItem) {
-                    case "Number Of Tests Waiting For Results - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Results - Over Weeks":
-                        setTestsInfo(controller.getTestInfoPerWeek());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Results - Over Months":
-                        setTestsInfo(controller.getTestInfoPerMonth());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Weeks":
-                        setTestsInfo(controller.getTestInfoPerWeek());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Months":
-                        setTestsInfo(controller.getTestInfoPerMonth());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                }
-            } else {
-                switch (selectedItem) {
-                    case "Number Of Tests Waiting For Results - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Results - Over Weeks":
-                        setTestsInfo(controller.getTestInfoPerWeek());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Results - Over Months":
-                        setTestsInfo(controller.getTestInfoPerMonth());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Results - Over Years":
-                        setTestsInfo(controller.getTestInfoPerYear());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[0]);
-                        }
-                        series.setName("Tests Waiting For Results");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Days":
-                        setTestsInfo(controller.getTestInfoPerDay());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Weeks":
-                        setTestsInfo(controller.getTestInfoPerWeek());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Months":
-                        setTestsInfo(controller.getTestInfoPerMonth());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                    case "Number Of Tests Waiting For Diagnosis - Over Years":
-                        setTestsInfo(controller.getTestInfoPerYear());
-                        for (int i = 0; i < testsInfo.size(); i++) {
-                            bothValues = testsInfo.get(i);
-                            desiredData.add(bothValues[1]);
-                        }
-                        series.setName("Tests Waiting For Diagnosis");
-                        break;
-                }
-            }
+        setTestsInfo(controller.getTestInfoPerDay());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[0]);
         }
+        series.setName("Tests Waiting For Results");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void resultsWeeksAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerWeek());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[0]);
+        }
+        series.setName("Tests Waiting For Results");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void resultsMonthsAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerMonth());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[0]);
+        }
+        series.setName("Tests Waiting For Results");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void resultsYearsAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerYear());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[0]);
+        }
+        series.setName("Tests Waiting For Results");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void diagnosisDaysAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerDay());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[1]);
+        }
+        series.setName("Tests Waiting For Diagnosis");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void diagnosisWeeksAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerWeek());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[1]);
+        }
+        series.setName("Tests Waiting For Diagnosis");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void diagnosisMonthsAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerMonth());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[1]);
+        }
+        series.setName("Tests Waiting For Diagnosis");
+        System.out.println(desiredData);
+        setChosenGraphData(desiredData);
+        for (int i = 0; i < chosenGraphData.size(); i++) {
+            series.getData().add(new XYChart.Data<String, Integer>("",chosenGraphData.get(i)));
+        }
+        lineChart.getData().clear();
+        lineChart.getData().add(series);
+        setLineChart(lineChart);
+    }
+
+    @FXML
+    void diagnosisYearsAction(ActionEvent event) {
+        lineChart.getData().clear();
+        int[] bothValues;
+        ArrayList<Integer> desiredData = new ArrayList<>();
+        setChosenGraphData(desiredData);
+        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        setTestsInfo(controller.getTestInfoPerYear());
+        for (int i = 0; i < testsInfo.size(); i++) {
+            bothValues = testsInfo.get(i);
+            desiredData.add(bothValues[1]);
+        }
+        series.setName("Tests Waiting For Diagnosis");
         System.out.println(desiredData);
         setChosenGraphData(desiredData);
         for (int i = 0; i < chosenGraphData.size(); i++) {
@@ -314,6 +323,7 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         if (alert.showAndWait().get() == ButtonType.OK) {
             ((Stage) exitBtn.getScene().getWindow()).close();
         }
+
     }
 
     @FXML
@@ -350,13 +360,13 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
             setBeginning(checkCompPerUI1.getAnalysisBegDate());
             setEnd(checkCompPerUI1.getAnalysisEndDate());
             if (DateUtils.addDays(end,-7).before(beginning) || DateUtils.addDays(end,-7).equals(beginning)){
-                text = text + "[The chosen interval is less than a week long. Analysis over weeks, months and years are not available. The other ones can be seen bellow.]";
+                text = text + "[The chosen interval is less than a week long. Analysis over weeks, months and years are not available. The other ones can be seen by selecting one of the options bellow.]";
             } else if (DateUtils.addMonths(end,-1).before(beginning) || DateUtils.addMonths(end,-1).equals(beginning)){
-                text = text + "[The chosen interval is less than a month long. Analysis over months and years are not available. The other ones can be seen bellow.]";
+                text = text + "[The chosen interval is less than a month long. Analysis over months and years are not available. The other ones can be seen by selecting one of the options bellow.]";
             } else if (DateUtils.addYears(end,-1).before(beginning) || DateUtils.addYears(end,-1).equals(beginning)){
-                text = text + "[The chosen interval is less than a year long. Analysis over years are not available. The other ones can be seen bellow.]";
+                text = text + "[The chosen interval is less than a year long. Analysis over years are not available. The other ones can be seen by selecting one of the options bellow.]";
             } else {
-                text = text + "[See bellow.]";
+                text = text + "[The analysis over time can be seen by selecting one of the options bellow.]";
             }
         }
         cliTesOverview.setEditable(false);
@@ -365,38 +375,49 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         /*setCliTesOverview(cliTesOverview);*/
     }
 
-    public void populateListView(){
+    public void enableBtns(){
         setDaysOption(checkCompPerUI1.getChosenOption());
         setBeginning(checkCompPerUI1.getAnalysisBegDate());
         setEnd(checkCompPerUI1.getAnalysisEndDate());
         if (!daysOption.equals("A Day")) {
             if (DateUtils.addDays(end,-7).before(beginning) || DateUtils.addDays(end,-7).equals(beginning)){
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
+                resultsDaysBtn.setDisable(false);
+                diagnosisDaysBtn.setDisable(false);
+                resultsWeeksBtn.setDisable(true);
+                diagnosisWeeksBtn.setDisable(true);
+                resultsMonthsBtn.setDisable(true);
+                diagnosisMonthsBtn.setDisable(true);
+                resultsYearsBtn.setDisable(true);
+                diagnosisYearsBtn.setDisable(true);
             } else if (DateUtils.addMonths(end,-1).before(beginning) || DateUtils.addMonths(end,-1).equals(beginning)){
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Weeks");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Weeks");
+                resultsDaysBtn.setDisable(false);
+                diagnosisDaysBtn.setDisable(false);
+                resultsWeeksBtn.setDisable(false);
+                diagnosisWeeksBtn.setDisable(false);
+                resultsMonthsBtn.setDisable(true);
+                diagnosisMonthsBtn.setDisable(true);
+                resultsYearsBtn.setDisable(true);
+                diagnosisYearsBtn.setDisable(true);
             } else if (DateUtils.addYears(end,-1).before(beginning) || DateUtils.addYears(end,-1).equals(beginning)){
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Weeks");
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Months");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Weeks");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Months");
+                resultsDaysBtn.setDisable(false);
+                diagnosisDaysBtn.setDisable(false);
+                resultsWeeksBtn.setDisable(false);
+                diagnosisWeeksBtn.setDisable(false);
+                resultsMonthsBtn.setDisable(false);
+                diagnosisMonthsBtn.setDisable(false);
+                resultsYearsBtn.setDisable(true);
+                diagnosisYearsBtn.setDisable(true);
             } else {
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Weeks");
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Months");
-                listView.getItems().add("Number Of Tests Waiting For Results - Over Years");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Days");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Weeks");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Months");
-                listView.getItems().add("Number Of Tests Waiting For Diagnosis - Over Years");
+                resultsDaysBtn.setDisable(false);
+                diagnosisDaysBtn.setDisable(false);
+                resultsWeeksBtn.setDisable(false);
+                diagnosisWeeksBtn.setDisable(false);
+                resultsMonthsBtn.setDisable(false);
+                diagnosisMonthsBtn.setDisable(false);
+                resultsYearsBtn.setDisable(false);
+                diagnosisYearsBtn.setDisable(false);
             }
         }
-        setListView(listView);
     }
 
     //MUDAR A LABEL DO TITULO PARA INDICAR AS DATAS QUE ESTÃO A SER ANALIZADAS
