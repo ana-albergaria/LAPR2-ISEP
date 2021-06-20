@@ -1,7 +1,10 @@
 package app.ui.gui;
 
 import app.controller.AuthController;
+import app.controller.ImportTestController;
 import app.domain.shared.Constants;
+import app.mappers.dto.TestFileDTO;
+import app.ui.console.utils.TestFileUtils;
 import app.ui.console.utils.Utils;
 import auth.mappers.dto.UserRoleDTO;
 import javafx.event.ActionEvent;
@@ -115,6 +118,17 @@ public class MainUI implements Initializable {
                     Menu uiController = (Menu)this.mainApp.replaceSceneContent(item.getUi().getFXML_PATH());
                     uiController.setMainApp(mainApp);
                     if (item.getUi().getFXML_PATH().equals("/fxml/ClientMenu.fxml")){
+                        //só para teste
+                        TestFileUtils testFileUtils = new TestFileUtils();
+                        ImportTestController importTestCtrl = new ImportTestController();
+                        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
+                        for (TestFileDTO testData : procedData) {
+                            try {
+                                importTestCtrl.importTestFromFile(testData);
+                            } catch (Exception e) {
+                            }
+                        }
+                        //fim teste
                         ClientMenuUI clientMenuUI = (ClientMenuUI) uiController;
                         clientMenuUI.setMainUI(this);
                     }

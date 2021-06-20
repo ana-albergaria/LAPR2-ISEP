@@ -423,17 +423,6 @@ public class CompanyPerformance {
         int num=0;
         Date finalDate = new Date(days.get(days.size()-1).getYear(),days.get(days.size()-1).getMonth(),days.get(days.size()-1).getDate(),8,0,0);
         days.set(days.size()-1,finalDate);
-        //só para teste
-        TestFileUtils testFileUtils = new TestFileUtils();
-        ImportTestController importTestCtrl = new ImportTestController();
-        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
-        for (TestFileDTO testData : procedData) {
-            try {
-                importTestCtrl.importTestFromFile(testData);
-            } catch (Exception e) {
-            }
-        }
-        //fim teste
         for (Date day : days){
             System.out.println("day " + day.toString());
             Date date1 = day;
