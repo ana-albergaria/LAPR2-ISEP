@@ -241,7 +241,7 @@ public class CompanyPerformance {
      * Gets an ArrayList with the tests info for the weeks of the interval
      * @return ArrayList with the tests info for the weeks of the interval
      */
-    public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days){ //WEEK: FROM MONDAY TO SATURDAY (NO WORK AT SUNDAY)
+    public ArrayList<int[]> getTestInfoPerWeek(ArrayList<Date> days){ //WEEK: FROM MONDAY TO SATURDAY (NO WORK ON SUNDAY)
         ArrayList<int[]> testInfoPerWeek = new ArrayList<>();
         int[] testInfo = new int[2];
         TestStore testStore = this.company.getTestStore();
