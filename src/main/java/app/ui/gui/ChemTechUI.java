@@ -51,7 +51,7 @@ public class ChemTechUI implements Initializable, Menu {
 
     @FXML
     void exitAction(ActionEvent event) {
-        System.exit(    0);
+        this.mainApp.exitSave();
     }
 
     @FXML
