@@ -99,7 +99,11 @@
                                   <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
+<<<<<<< HEAD
+                                    <TextArea fx:id="cliTesOverview" editable="false" mouseTransparent="true" prefHeight="90.0" prefWidth="279.0" style="-fx-text-inner-color: black;" />
+=======
                                     <TextArea fx:id="cliTesOverview" editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="90.0" prefWidth="279.0" style="-fx-text-inner-color: black;" />
+>>>>>>> 58428af21b7d227f197168afe98e8d7d01fbcd67
                                     <GridPane GridPane.rowIndex="1">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -112,6 +116,47 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
+<<<<<<< HEAD
+                                          <Button fx:id="resultsDaysBtn" disable="true" mnemonicParsing="false" onAction="#resultsDaysAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Days" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="resultsWeeksBtn" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#resultsWeeksAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Weeks" textAlignment="CENTER" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="resultsMonthsBtn" disable="true" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#resultsMonthsAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Months" textAlignment="CENTER" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="resultsYearsBtn" disable="true" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#resultsYearsAction" prefWidth="150.0" text="Tests Waiting For &#10;Results Over Years" textAlignment="CENTER" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="diagnosisDaysBtn" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#diagnosisDaysAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Days" textAlignment="CENTER" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="diagnosisWeeksBtn" disable="true" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#diagnosisWeeksAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Weeks" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="diagnosisMonthsBtn" disable="true" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#diagnosisMonthsAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Months" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="10.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="diagnosisYearsBtn" disable="true" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" onAction="#diagnosisYearsAction" prefWidth="150.0" text="Tests Waiting For &#10;Diagnosis Over Years" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Tahoma Bold" size="11.0" />
+                                             </font>
+=======
                                           <Button fx:id="resultsDaysBtn" graphicTextGap="0.0" mnemonicParsing="false" onAction="#resultsDaysAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Days" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                              <font>
                                                 <Font name="Tahoma Bold" size="10.0" />
@@ -175,6 +220,7 @@
                                              <GridPane.margin>
                                                 <Insets />
                                              </GridPane.margin>
+>>>>>>> 58428af21b7d227f197168afe98e8d7d01fbcd67
                                           </Button>
                                        </children>
                                     </GridPane>

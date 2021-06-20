@@ -427,16 +427,81 @@ To make sure the class for Multiple Linear Regression I made was functioning pro
     }
 ```
 
+**Test:** Ensure the different multiplications work properly:  
+            a) Matrix multiplication  
+            b) Matrix with Vector multiplication
+            c) Vector with vector multiplication
+            d) Vector with matrix multiplication
+
+
+a)
+```
+@Test
+    public void matrixMultiplication() {
+        double[][] matrix1 = {{1,2,3,1,1}, {4,5,6,2,1}, {7,8,9,0,1}, {1,1,1,1,1}, {2,3,4,1,1}};
+        double[][] matrix2 = {{1,2,3}, {2,3,4}, {1,2,1}, {2,3,4}, {2,3,4}};
+
+        double[][] expected = {{12,20,22}, {26,44,50}, {34,59,66}, {8,13,16}, {16,27,30}};
+
+        double[][] actual = multipleLR.matrixMultiplication(matrix1, matrix2);
+    }
+```  
+
+b)
+```
+@Test
+    public void matrixWithVectorMultiplication() {
+        double[][] matrix = {{1,2,3,1,1}, {4,5,6,2,1}, {7,8,9,0,1}, {1,1,1,1,1}, {2,3,4,1,1}};
+        double[] vector = {1,2,1,2,2};
+
+        double[] expected = {12,26,34,8,16};
+
+        double[] actual = multipleLR.matrixWithVectorMultiplication(matrix, vector);
+
+        Assert.assertArrayEquals(expected, actual, 0.0);
+    }
+```  
+
+c)  
+```
+@Test
+    public void vectorWithVectorMultiplication() {
+        double[] vector1 = {1,2,3,4,5,6};
+        double[] vector2 = {1,2,1,2,2,5};
+
+        double expected = 56;
+        double actual = multipleLR.vectorWithVectorMultiplication(vector1, vector2);
+
+        Assert.assertEquals(expected, actual, 0.0);
+    }
+```
+
+d) 
+```
+@Test(expected = IllegalArgumentException.class)
+    public void vectorWithMatrixMultiplicationNotPossible() {
+        double[] vector = {21,23,56,3};
+        double[][] matrix = {{23,1,0,20,3}, {5,6,9,13,0}, {1,2,3,4,5}, {40,8,9,76,7}, {1,2,3,4,5}};
+
+        double[] actual = multipleLR.vectorWithMatrixMultiplication(vector, matrix);
+    }
+```
+
+**Test:** Ensure it calculaste the mean of an array of values correctly.
+```
+@Test
+    public void mean() {
+        double[] values = {20,3,4,5,7,4};
+        double expected = 7.16666666;
+        double actual = multipleLR.mean(values);
+
+        Assert.assertEquals(expected, actual, 0.0001);
+
+    }
+```
 
 
 
-
-
-
-
-
-
-*It is also recommended to organize this content by subsections.* 
 
 # 5. Construction (Implementation)
 

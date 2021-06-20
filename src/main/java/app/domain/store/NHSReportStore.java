@@ -66,6 +66,16 @@ public class NHSReportStore implements Serializable {
         return regressionModel.getBestXIndex(x1, x2, y);
     }
 
+    /**
+     * Returns the MyRegressionModel.
+     *
+     * @param regressionModel the class of the Regression Model who will obtain the result
+     * @param bestX the values of the best independent variable
+     * @param y the values of the dependent variable
+     * @param historicalPoints the historical points
+     *
+     * @return the myRegressionModel
+     */
     public MyRegressionModel createMyBestRegressionModel(RegressionModel regressionModel,
                                                          double[] bestX,
                                                          double[] y,
@@ -85,18 +95,55 @@ public class NHSReportStore implements Serializable {
         return myRegressionModel;
     }
 
+    /**
+     * Returns the Hypothesis Test of the myRegressionModel.
+     *
+     * @param regressionModel the class of the Regression Model who will obtain the result
+     * @param myRegressionModel the myRegressionModel
+     * @param significanceLevel the significance level
+     *
+     * @return the Hypothesis Test of the myRegressionModel
+     */
     public HypothesisTest createHypothesisTest(RegressionModel regressionModel, MyRegressionModel myRegressionModel, double significanceLevel) {
         return regressionModel.getHypothesisTest(myRegressionModel, significanceLevel);
     }
 
+    /**
+     * Returns the SignificanceModelAnova.
+     *
+     * @param regressionModel the class of the Regression Model who will obtain the result
+     * @param myRegressionModel the myRegressionModel
+     * @param significanceLevel the significance level
+     *
+     * @return the SignificanceModelAnova of the myRegressionModel
+     */
     public SignificanceModelAnova createSignificanceModelAnova(RegressionModel regressionModel, MyRegressionModel myRegressionModel, double significanceLevel) {
         return regressionModel.getSignificanceModelAnova(myRegressionModel, significanceLevel);
     }
 
+    /**
+     * Returns the TableOfValues of the myRegressionModel
+     *
+     * @param myRegressionModel the myRegressionModel
+     * @param dates the dates of the historical points
+     * @param observedPositives the observed positives
+     * @param estimatedPositives the estimated positives
+     * @param confidenceIntervals the confidence intervals
+     *
+     * @return the TableOfValues of the myRegressionModel
+     */
     public TableOfValues createTableOfValues(MyRegressionModel myRegressionModel, List<String> dates, int[] observedPositives, List<Double> estimatedPositives, List<ConfidenceInterval> confidenceIntervals) {
         return new TableOfValues(myRegressionModel, dates, observedPositives, estimatedPositives, confidenceIntervals);
     }
 
+    /**
+     * Extracts the wished list from the list which contains all the lists
+     * with the 3 variables
+     *
+     * @param covidTestAndMeanAgeList
+     * @param index
+     * @return
+     */
     public double[] getDoubleArrayWithData(List<List<Double>> covidTestAndMeanAgeList, int index) {
         double[] wishedArray = new double[covidTestAndMeanAgeList.get(index).size()];
         for (int i = 0; i < wishedArray.length; i++) {
@@ -115,7 +162,6 @@ public class NHSReportStore implements Serializable {
 
     public List<String> getDatesColumnToTableOfValues(int numberOfObservations,
                                                         Date currentDate) {
-        //VERIFICAR SE O MÉTODO RETIRA BEM AS DATAS POR CAUSA DO DOMINGO!!!
         List<String> dates = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();

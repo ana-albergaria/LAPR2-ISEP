@@ -236,7 +236,7 @@ NHSReportTask ..> HypothesisTest
 NHSReportTask ..> MyRegressionModel
 NHSReportTask ..> MathCalculus
 NHSReportTask ..> Client
-Timer ..> NHSReportTask
+Timer --> NHSReportTask : runs >
 
 
 
