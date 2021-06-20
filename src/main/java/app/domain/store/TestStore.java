@@ -86,23 +86,13 @@ public class TestStore implements Serializable {
      * Gets the number of tests that were waiting for results on a specific day/interval
      * @return number of tests that were waiting for results on a specific day/interval
      */
-    public int getNumTestsWaitingForResultsDayOrInterval(Date beginningDay, Date endingDay){ //mesmo dia, mas 8:00 e 19:59
+    public int getNumTestsWaitingForResultsDayOrInterval(Date beginningDay, Date endingDay){
         int num = 0;
         Date date1, date2;
-        /*for (Test test : testList) {
-            date2 = test.getDateOfSamplesCollection();
-            date1 = test.getDateOfChemicalAnalysis();
-            if (date2!=null && date1==null)
-                date1=new Date(10000,Calendar.JANUARY,1);
-            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) //waiting in moment beginningDay
-                    || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
-                    || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
-                num++;
-        }*/
         for (Test test : testList) {
             date2 = test.getDateOfSamplesCollection();
             date1 = test.getDateOfChemicalAnalysis();
-            if (date2!=null) {
+            if (date2!=null && !date2.equals(date1)) {
                 if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
                 date2.equals(beginningDay) ||
                         (date2.after(beginningDay) && date2.before(endingDay))){
@@ -113,37 +103,17 @@ public class TestStore implements Serializable {
         return num;
     }
 
-    //                                                         BEGINNING                                        ENDING
-    //SAMPLE COLLECTION    CA NÃO PODE TER RESULTADO AQUI      NEM AQUI
-    //                                                     SAMPLE COLLECTION
-    //                                                                            SAMPLE COLLECTION
-    //
-
     /**
      * Gets the number of tests that were waiting for diagnosis on a specific day/interval
      * @return number of tests that were waiting for diagnosis on a specific day/interval
      */
     public int getNumTestsWaitingForDiagnosisDayOrInterval(Date beginningDay, Date endingDay){
-        //number of tests that were waiting for the diagnosis on a specific day/interval
-        //in case of a day, the difference between the beginningDay and the endingDay is in the hours
         int num = 0;
         Date date1, date2;
-        /*for (Test test : testList) {
-            date2 = test.getDateOfChemicalAnalysis();
-            date1 = test.getDateOfDiagnosis();
-            if (date2!=null && date1==null)
-                date1=new Date(10000,Calendar.JANUARY,1);
-            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) //waiting in moment beginningDay
-                    || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
-                    || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
-                num++;
-        }*/
         for (Test test : testList) {
             date2 = test.getDateOfSamplesCollection();
             date1 = test.getDateOfChemicalAnalysis();
-            System.out.println("DATE SAMPLE COLLECTION: " + date2);
-            System.out.println("DATE CHEMICAL ANALYSIS: " + date1);
-            if (date2!=null) {
+            if (date2!=null && !date2.equals(date1)) {
                 if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
                         date2.equals(beginningDay) ||
                         (date2.after(beginningDay) && date2.before(endingDay))){

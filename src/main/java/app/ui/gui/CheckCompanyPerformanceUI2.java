@@ -121,19 +121,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataRD = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesRD = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[0]);
+            desiredDataRD.add(bothValues[0]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataRD.size(); i++) {
+            seriesRD.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredDataRD.get(i)));
         }
-        series.setName("Tests Waiting For Results");
-        lineChart.getData().add(series);
+        seriesRD.setName("Tests Waiting For Results");
+        lineChart.getData().add(seriesRD);
         setLineChart(lineChart);
     }
 
@@ -142,19 +142,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataRW = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesRW = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[0]);
+            desiredDataRW.add(bothValues[0]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataRW.size(); i++) {
+            seriesRW.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredDataRW.get(i)));
         }
-        series.setName("Tests Waiting For Results");
-        lineChart.getData().add(series);
+        seriesRW.setName("Tests Waiting For Results");
+        lineChart.getData().add(seriesRW);
         setLineChart(lineChart);
     }
 
@@ -163,19 +163,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataRM = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesRM = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[0]);
+            desiredDataRM.add(bothValues[0]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataRM.size(); i++) {
+            seriesRM.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredDataRM.get(i)));
         }
-        series.setName("Tests Waiting For Results");
-        lineChart.getData().add(series);
+        seriesRM.setName("Tests Waiting For Results");
+        lineChart.getData().add(seriesRM);
         setLineChart(lineChart);
     }
 
@@ -184,19 +184,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataRY = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesRY = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[0]);
+            desiredDataRY.add(bothValues[0]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataRY.size(); i++) {
+            seriesRY.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredDataRY.get(i)));
         }
-        series.setName("Tests Waiting For Results");
-        lineChart.getData().add(series);
+        seriesRY.setName("Tests Waiting For Results");
+        lineChart.getData().add(seriesRY);
         setLineChart(lineChart);
     }
 
@@ -205,19 +205,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataDD = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesDD = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[1]);
+            desiredDataDD.add(bothValues[1]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataDD.size(); i++) {
+            seriesDD.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredDataDD.get(i)));
         }
-        series.setName("Tests Waiting For Diagnosis");
-        lineChart.getData().add(series);
+        seriesDD.setName("Tests Waiting For Diagnosis");
+        lineChart.getData().add(seriesDD);
         setLineChart(lineChart);
     }
 
@@ -226,19 +226,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataDW = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesDW = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[1]);
+            desiredDataDW.add(bothValues[1]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataDW.size(); i++) {
+            seriesDW.getData().add(new XYChart.Data<String, Integer>("Week"+(i+1),desiredDataDW.get(i)));
         }
-        series.setName("Tests Waiting For Diagnosis");
-        lineChart.getData().add(series);
+        seriesDW.setName("Tests Waiting For Diagnosis");
+        lineChart.getData().add(seriesDW);
         setLineChart(lineChart);
     }
 
@@ -247,19 +247,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataDM = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesDM = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[1]);
+            desiredDataDM.add(bothValues[1]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataDM.size(); i++) {
+            seriesDM.getData().add(new XYChart.Data<String, Integer>("Month"+(i+1),desiredDataDM.get(i)));
         }
-        series.setName("Tests Waiting For Diagnosis");
-        lineChart.getData().add(series);
+        seriesDM.setName("Tests Waiting For Diagnosis");
+        lineChart.getData().add(seriesDM);
         setLineChart(lineChart);
     }
 
@@ -268,19 +268,19 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         lineChart.getData().clear();
         setLineChart(lineChart);
         int[] bothValues;
-        ArrayList<Integer> desiredData = new ArrayList<>();
-        XYChart.Series<String, Integer> series = new XYChart.Series<String, Integer>();
+        ArrayList<Integer> desiredDataDY = new ArrayList<>();
+        XYChart.Series<String, Integer> seriesDY = new XYChart.Series<String, Integer>();
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
             bothValues = testsInfo.get(i);
-            desiredData.add(bothValues[1]);
+            desiredDataDY.add(bothValues[1]);
         }
-        for (int i = 0; i < desiredData.size(); i++) {
-            series.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredData.get(i)));
+        for (int i = 0; i < desiredDataDY.size(); i++) {
+            seriesDY.getData().add(new XYChart.Data<String, Integer>("Year"+(i+1),desiredDataDY.get(i)));
         }
-        series.setName("Tests Waiting For Diagnosis");
-        lineChart.getData().add(series);
+        seriesDY.setName("Tests Waiting For Diagnosis");
+        lineChart.getData().add(seriesDY);
         setLineChart(lineChart);
     }
 

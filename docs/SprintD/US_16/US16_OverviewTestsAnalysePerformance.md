@@ -307,7 +307,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 # 4. Tests
 
-Tests from 4.1 and 4.2 follow this model:
+Tests 1-2 from 4.1 and tests 3-4 from 4.2 follow this model:
 
     @Test
     public void checkIfSubMaxSumIsFound(){
@@ -320,10 +320,14 @@ Tests from 4.1 and 4.2 follow this model:
 
 **Test 1-2:** Check if the contiguous subsequence with maximum sum is being successfully found, using the BenchmarkAlgorithm.
 
+**Test A2-H2:** Check the runtime of the Benchmark algorithm, for different array sizes.
+
 
 ## 4.2 BruteForceAlgorithmAdapterTest
 
 **Test 3-4:** Check if the contiguous subsequence with maximum sum is being successfully found, using the BruteForceAlgorithm.
+
+**Test A1-H1:** Check the runtime of the Brute-Force algorithm, for different array sizes.
 
 
 ## 4.3 TestStoreTest
@@ -351,6 +355,11 @@ Tests 5-6 are made following this process:
         this.companyPerformance = new CompanyPerformance(beginningDay, endingDay, chosenAlgorithm);
     }
 
+    public boolean createCompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) {
+      this.companyPerformance = company.createCompanyPerformance(beginningDate,endingDate,chosenAlg);
+      return (companyPerformance != null);
+    }
+
     //...Omitted
 
     public int getClientsInfoPerInterval() {
@@ -359,28 +368,14 @@ Tests 5-6 are made following this process:
 
     //...Omitted
 
-    public int getNumTestsProcessedInterval(){
-        return companyPerformance.getProcessTestsNum();
-    }
-
-    //...Omitted
-
-    public ArrayList<int[]> getTestInfoPerYear(){
-        return companyPerformance.getTestInfoYear();
-    }
-
-    //...Omitted
-
-    public Date[] findWorstSubIntWithChosenAlgorithm() {
-        return companyPerformance.getWorstSubInt();
-    }
-
-    //...Omitted
-
-The logic used in the "getTestsInfoPerYear" method above, is similar to the one used in the following methods:
-* public ArrayList<int[]> getTestInfoPerMonth() ;
+The logic used in the "getClientsInfoPerInterval" method above, is similar to the one used in the following methods:
+* public int getNumTestsProcessedInterval() ;
+* public ArrayList<int[]> getTestInfoPerDay() ;
 * public ArrayList<int[]> getTestInfoPerWeek() ;
-* public ArrayList<int[]> getTestInfoPerDay() .
+* public ArrayList<int[]> getTestInfoPerMonth() ;
+* public ArrayList<int[]> getTestInfoPerYear() ;
+* public Date[] findWorstSubIntWithChosenAlgorithm() .
+
 
 ## 5.2 SubMaxSumAlgorithms
 
@@ -453,18 +448,19 @@ The logic used in the "getTestsInfoPerYear" method above, is similar to the one 
 
     //...Omitted
 
-    public int getNumTestsWaitingForResultsDayOrInterval(Date beginningDay, Date endingDay){ //endingDay vai ser as 19:59:59 do (domingo) sábado PARA NÃO PERTENCER
+    public int getNumTestsWaitingForResultsDayOrInterval(Date beginningDay, Date endingDay){ //mesmo dia, mas 8:00 e 19:59
         int num = 0;
         Date date1, date2;
         for (Test test : testList) {
             date2 = test.getDateOfSamplesCollection();
             date1 = test.getDateOfChemicalAnalysis();
-            if (date2!=null && date1==null)
-                date1=new Date(10000,Calendar.JANUARY,1);
-            if ((date2!=null && date1.after(beginningDay) && date1.before(endingDay)) //waiting in moment beginningDay
-                    || (date2!=null && date1.equals(endingDay)) //waiting before endingDay
-                    || (date2!=null && date2.before(endingDay) && date1.after(endingDay))) //waiting in moment endingDay and maybe before too
-                num++;
+            if (date2!=null) {
+                if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
+                date2.equals(beginningDay) ||
+                        (date2.after(beginningDay) && date2.before(endingDay))){
+                    num++;
+                }
+            }
         }
         return num;
     }
@@ -486,34 +482,57 @@ were validated between the desired interval of time.
 
     //...Omitted
 
-    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public CompanyPerformance(Date beginningDate, Date endingDate, String chosenAlg, Company company) {
+        this.company=company;
         this.beginningDate=beginningDate;
         this.endingDate=endingDate;
         this.chosenAlg=chosenAlg;
-        this.clientsNum=getClientsInfoPerInterval(getDays(beginningDate,endingDate));
-        this.processTestsNum=getNumTestsProcessedInterval(getDays(beginningDate,endingDate));
-        this.testInfoDay=getTestInfoPerDay(getDays(beginningDate,endingDate));
-        this.testInfoWeek=getTestInfoPerWeek(getDays(beginningDate,endingDate));
-        this.testInfoMonth=getTestInfoPerMonth(getDays(beginningDate,endingDate));
-        this.testInfoYear=getTestInfoPerYear(getDays(beginningDate,endingDate));
-        this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(beginningDate,endingDate),chosenAlg);
+        this.clientsNum=getClientsInfoPerInterval(getDays());
+        this.processTestsNum=getNumTestsProcessedInterval(getDays());
+        this.testInfoDay=getTestInfoPerDay(getDays());
+        this.testInfoWeek=getTestInfoPerWeek(getDays());
+        this.testInfoMonth=getTestInfoPerMonth(getDays());
+        this.testInfoYear=getTestInfoPerYear(getDays());
+        this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
     }
 
     //...Omitted
 
-    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
-        Class<?> oClass = Class.forName(algorithmClass);
-        SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
+        Class<?> oClass = null;
+        try {
+            oClass = Class.forName(algorithmClass);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        SubMaxSumAlgorithms subMaxSumAlgorithm = null;
+        try {
+            subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance(); //NÃO ESTÁ A FUNCIONAR PQ ELE ESTÁ A SAIR NULL, COMO NA LINHA EM QUE É INICIADO COMO NULL
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         //...Omitted
         Date[] limits = new Date[2];
-        Date lastDate;
-        Date firstDate;
-        //...Omitted
-        limits[0]=firstDate;
-        limits[1]=lastDate;
+        if (worstSubInt.length!=0) {
+            //...Omitted
+            if (quant != startIndex) {
+                //...Omitted
+                limits[0] = (Date)resultFor0.clone();
+            }
+            //...Omitted
+            if (quant != endIndex) {
+                //...Omitted
+            }
+            limits[1] = (Date)resultFor1.clone();
+        }else{
+            limits[0]=null;
+            limits[1]=null;
+        }
         return limits;
     }
 

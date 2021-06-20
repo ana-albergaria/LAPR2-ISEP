@@ -60,155 +60,155 @@
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints maxHeight="135.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="237.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="237.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="410.0" minHeight="10.0" prefHeight="325.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="386.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="386.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <GridPane prefHeight="151.0" prefWidth="613.0" GridPane.rowIndex="2">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints />
-                     </rowConstraints>
-                     <children>
-                        <GridPane prefHeight="435.0" prefWidth="613.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="279.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="334.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <LineChart fx:id="lineChart" style="-fx-background-color: transparent;" GridPane.columnIndex="1">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis autoRanging="false" side="LEFT" tickLabelFill="WHITE" />
-                                </yAxis>
-                              </LineChart>
-                              <GridPane>
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="174.0" minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <TextArea fx:id="cliTesOverview" editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="90.0" prefWidth="279.0" style="-fx-text-inner-color: black;" />
-                                    <GridPane GridPane.rowIndex="1">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
+                            <rowConstraints>
+                                <RowConstraints />
+                            </rowConstraints>
+                            <children>
+                                <GridPane prefHeight="435.0" prefWidth="613.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="279.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="334.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Button fx:id="resultsDaysBtn" graphicTextGap="0.0" mnemonicParsing="false" onAction="#resultsDaysAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Days" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="resultsWeeksBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#resultsWeeksAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Weeks" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="resultsMonthsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#resultsMonthsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Months" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="resultsYearsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#resultsYearsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Years" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="diagnosisDaysBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#diagnosisDaysAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Days" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="diagnosisWeeksBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#diagnosisWeeksAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Weeks" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="diagnosisMonthsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#diagnosisMonthsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Months" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="diagnosisYearsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" onAction="#diagnosisYearsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Years" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                             <font>
-                                                <Font name="Tahoma Bold" size="10.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin>
-                                          </Button>
-                                       </children>
-                                    </GridPane>
-                                 </children>
-                              </GridPane>
-                           </children>
+                                    </rowConstraints>
+                                    <children>
+                                        <LineChart fx:id="lineChart" style="-fx-background-color: transparent;" GridPane.columnIndex="1">
+                                            <xAxis>
+                                                <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis autoRanging="false" side="LEFT" tickLabelFill="WHITE" />
+                                            </yAxis>
+                                        </LineChart>
+                                        <GridPane>
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="174.0" minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <TextArea fx:id="cliTesOverview" editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="90.0" prefWidth="279.0" style="-fx-text-inner-color: black;" />
+                                                <GridPane GridPane.rowIndex="1">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Button fx:id="resultsDaysBtn" graphicTextGap="0.0" mnemonicParsing="false" onAction="#resultsDaysAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Days" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="resultsWeeksBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#resultsWeeksAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Weeks" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="resultsMonthsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#resultsMonthsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Months" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="resultsYearsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#resultsYearsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Results | Years" textAlignment="CENTER" textFill="#293241" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="diagnosisDaysBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#diagnosisDaysAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Days" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="diagnosisWeeksBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="44.0" mnemonicParsing="false" onAction="#diagnosisWeeksAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Weeks" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="diagnosisMonthsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#diagnosisMonthsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Months" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                        <Button fx:id="diagnosisYearsBtn" graphicTextGap="0.0" layoutX="10.0" layoutY="112.0" mnemonicParsing="false" onAction="#diagnosisYearsAction" pickOnBounds="false" prefHeight="30.0" prefWidth="120.0" scaleShape="false" style="-fx-background-color: #98c1d9; -fx-background-radius: 90;" text="Diagnosis | Years" textAlignment="CENTER" textFill="#293241" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                            <font>
+                                                                <Font name="Tahoma Bold" size="10.0" />
+                                                            </font>
+                                                            <GridPane.margin>
+                                                                <Insets />
+                                                            </GridPane.margin>
+                                                        </Button>
+                                                    </children>
+                                                </GridPane>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </GridPane>
+                            </children>
                         </GridPane>
-                     </children>
+                        <Label text="ANALYSIS" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <font>
+                                <Font name="Tahoma Bold" size="20.0" />
+                            </font></Label>
+                        <GridPane prefHeight="33.0" prefWidth="613.0" GridPane.rowIndex="1">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="279.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.0" minWidth="10.0" prefWidth="334.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Clients and Tests Overview" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font name="Tahoma Bold" size="15.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Over Time Statistics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font name="Tahoma Bold" size="15.0" />
+                                    </font>
+                                </Text>
+                            </children>
                         </GridPane>
-                  <Label text="ANALYSIS" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <font>
-                        <Font name="Tahoma Bold" size="20.0" />
-                     </font></Label>
-                  <GridPane prefHeight="33.0" prefWidth="613.0" GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="279.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.0" minWidth="10.0" prefWidth="334.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Clients and Tests Overview" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Tahoma Bold" size="15.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Over Time Statistics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="Tahoma Bold" size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </GridPane>
                     </children>
                 </GridPane>
             </center>
