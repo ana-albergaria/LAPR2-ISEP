@@ -245,8 +245,8 @@ public class CheckCompanyPerformanceUI1 implements Initializable {
                 checkCompanyPerformanceUI2.setMainApp(this.mainApp);
                 checkCompanyPerformanceUI2.setCheckCompPerUI1(this);
                 checkCompanyPerformanceUI2.setController(this.controller);
-                checkCompanyPerformanceUI2.analyseCompany();
                 checkCompanyPerformanceUI2.enableBtns();
+                checkCompanyPerformanceUI2.analyseCompany();
             } catch (Exception ex) {
                 Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             }

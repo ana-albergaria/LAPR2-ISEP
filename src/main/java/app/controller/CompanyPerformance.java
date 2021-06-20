@@ -8,6 +8,7 @@ import app.domain.store.TestStore;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -94,13 +95,7 @@ public class CompanyPerformance {
         this.testInfoWeek=getTestInfoPerWeek(getDays());
         this.testInfoMonth=getTestInfoPerMonth(getDays());
         this.testInfoYear=getTestInfoPerYear(getDays());
-        try {
-            this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
-        } catch (ClassNotFoundException | IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+        this.worstSubInt=findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
     }
 
     /**
@@ -221,12 +216,24 @@ public class CompanyPerformance {
         Date beginningDay;
         Date endingDay;
         for (Date day : days) {
+            System.out.println("DAY: " + day);
             beginningDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 8, 0, 0);
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
+            System.out.println("TEST INFO 0: " + testInfo[0]);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
+            System.out.println("TEST INFO 1: " + testInfo[1]);
             testInfoPerDay.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerDay)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER DAY: " + sb.toString());
+        //TESTE
         return testInfoPerDay;
     }
 
@@ -285,6 +292,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerWeek)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER WEEK: " + sb.toString());
+        //TESTE
         return testInfoPerWeek;
     }
 
@@ -439,6 +455,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerMonth.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerMonth)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER MONTH: " + sb.toString());
+        //TESTE
         return testInfoPerMonth;
     }
 
@@ -495,6 +520,15 @@ public class CompanyPerformance {
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerYear.add(testInfo);
         }
+        //TESTE
+        StringBuilder sb = new StringBuilder();
+        for (int[] s : testInfoPerYear)
+        {
+            sb.append(Arrays.toString(s));
+            sb.append("\t");
+        }
+        System.out.println("TEST INFO PER YEAR: " + sb.toString());
+        //TESTE
         return testInfoPerYear;
     }
 
@@ -583,15 +617,24 @@ public class CompanyPerformance {
      * @param days days of the interval
      * @param chosenAlgorithm the chosen algorithm
      * @return the beginning and the ending dates of the contiguous subsequence with maximum sum
-     * @throws ClassNotFoundException if the class name of the external API is not found
-     * @throws InstantiationException if the class object of the external API cannot be instantiated
-     * @throws IllegalAccessException if there's a method invoked does not have access to the class representing the API
      */
-    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public Date[] findWorstSubIntWithChosenAlgorithm(ArrayList<Date> days, String chosenAlgorithm) {
         int[] interval = makeIntervalArray(days); //EX: 14/01/2020 AT 08:00:00 - 16-02-2020 AT 19:59:59
         String algorithmClass = getChosenAlgorithmAdapter(chosenAlgorithm);
-        Class<?> oClass = Class.forName(algorithmClass);
-        SubMaxSumAlgorithms subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance();
+        Class<?> oClass = null;
+        try {
+            oClass = Class.forName(algorithmClass);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        SubMaxSumAlgorithms subMaxSumAlgorithm = null;
+        try {
+            subMaxSumAlgorithm = (SubMaxSumAlgorithms) oClass.newInstance(); //NÃO ESTÁ A FUNCIONAR PQ ELE ESTÁ A SAIR NULL, COMO NA LINHA EM QUE É INICIADO COMO NULL
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
         Date[] limits = new Date[2];
@@ -617,9 +660,11 @@ public class CompanyPerformance {
             int startIndex = ref;
             int endIndex = startIndex + worstSubInt.length - 1;
             Date first = days.get(0);
+            limits[0]=(Date)first.clone();
             Date last = DateUtils.addMinutes(first, 30);
-            Date resultFor0 = first;
-            Date resultFor1 = last;
+            limits[1]=(Date)last.clone();
+            Date resultFor0 = (Date)first.clone();
+            Date resultFor1 = (Date)last.clone();
             int quant = 0;
             if (quant != startIndex) {
                 for (Date day : days) {
@@ -631,18 +676,20 @@ public class CompanyPerformance {
                             last = DateUtils.addMinutes(last, 30);
                             quant++;
                             if (quant==startIndex){
-                                resultFor0=first;
+                                resultFor0=(Date)first.clone();
                             }
                         } else if (last.getHours()==20 && last.getMinutes()==0){
                             quant++;
                             if (quant==startIndex){
-                                resultFor0=first;
+                                resultFor0=(Date)first.clone();
                             }
                         }
-                    } while (last.getHours()!=20 && last.getMinutes()!=0);
+                    } while (last.getHours()!=20);
                 }
+                limits[0] = (Date)resultFor0.clone();
             }
-            limits[0] = resultFor0;
+            first = days.get(0);
+            last = DateUtils.addMinutes(first, 30);
             quant = 0;
             if (quant != endIndex) {
                 for (Date day : days) {
@@ -654,18 +701,18 @@ public class CompanyPerformance {
                             last = DateUtils.addMinutes(last, 30);
                             quant++;
                             if (quant==endIndex){
-                                resultFor1=last;
+                                resultFor1=(Date)last.clone();
                             }
                         } else if (last.getHours()==20 && last.getMinutes()==0){
                             quant++;
                             if (quant==endIndex){
-                                resultFor1=last;
+                                resultFor1=(Date)last.clone();
                             }
                         }
-                    } while (last.getHours()!=20 && last.getMinutes()!=0);
+                    } while (last.getHours()!=20);
                 }
             }
-            limits[1] = resultFor1;
+            limits[1] = (Date)resultFor1.clone();
         }else{
             limits[0]=null;
             limits[1]=null;
