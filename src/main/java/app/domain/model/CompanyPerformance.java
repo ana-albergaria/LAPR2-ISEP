@@ -526,7 +526,7 @@ public class CompanyPerformance {
             Date resultFor0 = first;
             Date resultFor1 = last;
             int quant = 0;
-            while (quant != startIndex) {
+            if (quant != startIndex) {
                 System.out.println("QUANT: " + quant);
                 System.out.println("STARTINDEX: " + endIndex);
                 for (Date day : days) {
@@ -556,7 +556,7 @@ public class CompanyPerformance {
             }
             limits[0] = resultFor0;
             quant = 0;
-            while (quant != endIndex) {
+            if (quant != endIndex) {
                 System.out.println("QUANT: " + quant);
                 System.out.println("ENDINDEX: " + endIndex);
                 for (Date day : days) {
