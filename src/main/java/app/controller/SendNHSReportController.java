@@ -41,15 +41,6 @@ public class SendNHSReportController {
                                         double significanceLevel,
                                         double confidenceLevel,
                                         String chosenRegCoefficient) throws ClassNotFoundException, InstantiationException, ParseException, IllegalAccessException, BarcodeException, OutputException, IOException {
-        //somente para teste
-        TestFileUtils testFileUtils = new TestFileUtils();
-        ImportTestController importTestCtrl = new ImportTestController();
-        List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
-        for (TestFileDTO testData : procedData) {
-            importTestCtrl.importTestFromFile(testData);
-        }
-        //fim teste
-
 
         RegressionModel chosenRegressionModel = this.company.getChosenRegressionModel(chosenRegressionModelClass);
 

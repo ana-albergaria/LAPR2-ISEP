@@ -175,18 +175,36 @@ public class NHSReportTask extends TimerTask {
         logger.setUseParentHandlers(false);
     }
 
+    static int cont = 0;
+
     @Override
     public void run() {
-        try {
 
-            //só para teste
-            TestFileUtils testFileUtils = new TestFileUtils();
-            ImportTestController importTestCtrl = new ImportTestController();
-            List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
-            for (TestFileDTO testData : procedData) {
-                importTestCtrl.importTestFromFile(testData);
+
+        try {
+            if(cont == 0) {
+                //só para teste
+                TestFileUtils testFileUtils = new TestFileUtils();
+                ImportTestController importTestCtrl = new ImportTestController();
+                List<TestFileDTO> procedData = testFileUtils.getTestsDataToDto("tests_Covid_short.csv");
+                for (TestFileDTO testData : procedData) {
+                    try {
+                        importTestCtrl.importTestFromFile(testData);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (BarcodeException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //fim teste
+                cont++;
             }
-            //fim teste
+
+
 
             this.nhsDayDataReport = createNHSDailyReport(Constants.DAY_DATA);
             this.nhsWeekDataReport = createNHSDailyReport(Constants.WEEK_DATA);
@@ -210,8 +228,6 @@ public class NHSReportTask extends TimerTask {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BarcodeException e) {
             e.printStackTrace();
         }
 

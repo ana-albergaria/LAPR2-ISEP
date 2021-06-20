@@ -1,7 +1,7 @@
 package app.domain.model;
 
 import app.domain.interfaces.RegressionModel;
-import app.thirdparty.SimpleLinearRegression;
+import app.thirdparty.regressionModels.SimpleLinearRegression;
 import app.domain.shared.Constants;
 import org.junit.Assert;
 import org.junit.Before;

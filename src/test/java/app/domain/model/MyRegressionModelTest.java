@@ -1,12 +1,10 @@
 package app.domain.model;
 
-import app.thirdparty.MultipleLinearRegression;
-import app.thirdparty.SimpleLinearRegression;
+import app.thirdparty.regressionModels.MultipleLinearRegression;
+import app.thirdparty.regressionModels.SimpleLinearRegression;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class MyRegressionModelTest {
     private MyRegressionModel myRegressionModelWithSLR;
