@@ -17,6 +17,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Marta Ribeiro 1201592
+ */
 public class CheckCompanyPerformanceUI2 implements Initializable {
 
     private App mainApp;

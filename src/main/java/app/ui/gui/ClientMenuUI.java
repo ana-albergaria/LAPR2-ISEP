@@ -1,8 +1,5 @@
 package app.ui.gui;
 
-import app.controller.ImportTestController;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,11 +10,13 @@ import javafx.scene.control.Labeled;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Marta Ribeiro 1201592
+ */
 public class ClientMenuUI implements Initializable, Menu {
 
     private App mainApp;
@@ -58,9 +57,6 @@ public class ClientMenuUI implements Initializable, Menu {
     @FXML
     private Button viewTestResultBtn;
 
-    /**
-     * Initializes the UI class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }

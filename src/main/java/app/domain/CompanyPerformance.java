@@ -1,20 +1,15 @@
 package app.domain;
 
-import app.controller.ImportTestController;
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;
 import app.domain.model.Test;
 import app.domain.shared.Constants;
 import app.domain.store.TestStore;
-import app.mappers.dto.TestFileDTO;
-import app.ui.console.utils.TestFileUtils;
-import net.sourceforge.barbecue.BarcodeException;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Represents the company performance through:
