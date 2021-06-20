@@ -250,31 +250,65 @@ public class CompanyPerformance {
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK ON SUNDAY
         System.out.println("entered week");
-        for (Date date : days) {
-            System.out.println(date);
-            if (date.getDay()!=0){
-                week.add(date);
-            }
-            if (date.getDay() == 6) {
-                weeks.add(week);
+        if (days.get(days.size()-1).getDay()!=6 && days.get(days.size()-1).getDay()!=0){
+            int weekDay = days.get(days.size()-1).getDay();
+            Date lastSat = days.get(days.size()-1);
+            do {
+                lastSat = DateUtils.addDays(lastSat,-1);
+            }while (lastSat.getDay()!=6);
+            if (lastSat.before(days.get(0))){
+                for (Date date : days){
+                    week.add(date);
+                }
+                weeks.add((ArrayList<Date>) week.clone());
                 week.clear();
+            } else {
+                for (Date date : days) {
+                    System.out.println("DATE: " + date);
+                    if (date.getDay() != 0) {
+                        week.add(date);
+                    }
+                    if (date.getDay() == 6) {
+                        weeks.add((ArrayList<Date>) week.clone());
+                        System.out.println("WEEK: " + week);
+                        week.clear();
+                        System.out.println("CLEAR WEEK: " + week);
+                    } else if (date==days.get(days.size()-1)) {
+                        weeks.add((ArrayList<Date>) week.clone());
+                        System.out.println("WEEK: " + week);
+                        week.clear();
+                        System.out.println("CLEAR WEEK: " + week);
+                    }
+                }
+            }
+        } else {
+            for (Date date : days) {
+                System.out.println("DATE: " + date);
+                if (date.getDay() != 0) {
+                    week.add(date);
+                }
+                if (date.getDay() == 6) {
+                    weeks.add((ArrayList<Date>) week.clone());
+                    System.out.println("WEEK: " + week);
+                    week.clear();
+                    System.out.println("CLEAR WEEK: " + week);
+                }
             }
         }
         Date beginningDay;
         Date endingDay;
-        System.out.println(weeks);
-        System.out.println(week);
+        System.out.println("WEEKS: " + weeks);
         for (ArrayList<Date> singleWeek : weeks) {
+            System.out.println("SINGLE WEEK IN WEEKS: " + singleWeek);
             beginningDay = new Date(singleWeek.get(0).getYear(), singleWeek.get(0).getMonth(), singleWeek.get(0).getDate(), 8, 0, 0);
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
-            System.out.println(testInfo[0]);
-            System.out.println(testInfo[1]);
-            System.out.println(beginningDay);
-            System.out.println(endingDay);
-            System.out.println();
+            System.out.println("TESTINFO[0]: " + testInfo[0]);
+            System.out.println("TESTINFO[1]: " + testInfo[1]);
+            System.out.println("BEGINNINGDAY: " + beginningDay);
+            System.out.println("ENDINGDAY: " + endingDay);
 
         }
         return testInfoPerWeek;
@@ -481,23 +515,29 @@ public class CompanyPerformance {
         Date[] limits = new Date[2];
         if (worstSubInt.length!=0) { //é 0 quando a company é igualmente eficiente ao longo do interval (ex: todos os valores são 0)
             for (int j = 0; j < interval.length; j++) {
-                System.out.println("1");
-                if (interval[j] == worstSubInt[0]) {
-                    ind = j;
-                    System.out.println("2");
-                    for (int value : worstSubInt) {
-                        System.out.println("3");
-                        if (value==interval[ind]) {
-                            System.out.println("4");
-                            num++;
+                System.out.println("VALOR J: " + j);
+                if (num!=worstSubInt.length) {
+                    if (interval[j] == worstSubInt[0]) {
+                        ind = j;
+                        System.out.println("VALOR IND=J: " + ind);
+                        for (int value : worstSubInt) {
+                            System.out.println("VALOR VALUE: " + value);
+                            if (value == interval[ind]) {
+                                System.out.println("VALOR INTERVAL[IND]: " + interval[ind]);
+                                num++;
+                                System.out.println("VALOR NUM: " + num);
+                            }
+                            ind++;
+                            System.out.println("VALOR IND: " + ind);
                         }
-                        ind++;
+                        System.out.println("VALOR NUM IGUALDADE: " + num);
+                        System.out.println("VALOR WORSTSUBINT.LENGTH: " + worstSubInt.length);
+                        if (num == worstSubInt.length) {
+                            ref = j;
+                            System.out.println("VALOR REF: " + ref);
+                        }
+                        num = 0;
                     }
-                    if (num == worstSubInt.length) {
-                        System.out.println("5");
-                        ref = j;
-                    }
-                    num = 0;
                 }
             }
             int startIndex = ref;
