@@ -621,9 +621,11 @@ public class CompanyPerformance {
             int startIndex = ref;
             int endIndex = startIndex + worstSubInt.length - 1;
             Date first = days.get(0);
+            limits[0]=(Date)first.clone();
             Date last = DateUtils.addMinutes(first, 30);
-            Date resultFor0 = first;
-            Date resultFor1 = last;
+            limits[1]=(Date)last.clone();
+            Date resultFor0 = (Date)first.clone();
+            Date resultFor1 = (Date)last.clone();
             int quant = 0;
             if (quant != startIndex) {
                 for (Date day : days) {
@@ -635,18 +637,20 @@ public class CompanyPerformance {
                             last = DateUtils.addMinutes(last, 30);
                             quant++;
                             if (quant==startIndex){
-                                resultFor0=first;
+                                resultFor0=(Date)first.clone();
                             }
                         } else if (last.getHours()==20 && last.getMinutes()==0){
                             quant++;
                             if (quant==startIndex){
-                                resultFor0=first;
+                                resultFor0=(Date)first.clone();
                             }
                         }
                     } while (last.getHours()!=20);
                 }
+                limits[0] = (Date)resultFor0.clone();
             }
-            limits[0] = resultFor0;
+            first = days.get(0);
+            last = DateUtils.addMinutes(first, 30);
             quant = 0;
             if (quant != endIndex) {
                 for (Date day : days) {
@@ -658,18 +662,18 @@ public class CompanyPerformance {
                             last = DateUtils.addMinutes(last, 30);
                             quant++;
                             if (quant==endIndex){
-                                resultFor1=last;
+                                resultFor1=(Date)last.clone();
                             }
                         } else if (last.getHours()==20 && last.getMinutes()==0){
                             quant++;
                             if (quant==endIndex){
-                                resultFor1=last;
+                                resultFor1=(Date)last.clone();
                             }
                         }
                     } while (last.getHours()!=20);
                 }
             }
-            limits[1] = resultFor1;
+            limits[1] = (Date)resultFor1.clone();
         }else{
             limits[0]=null;
             limits[1]=null;
