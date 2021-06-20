@@ -249,7 +249,6 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<ArrayList<Date>> weeks = new ArrayList<>();
         ArrayList<Date> week = new ArrayList<>(); //NO WORK ON SUNDAY
-        System.out.println("entered week");
         if (days.get(days.size()-1).getDay()!=6 && days.get(days.size()-1).getDay()!=0){
             int weekDay = days.get(days.size()-1).getDay();
             Date lastSat = days.get(days.size()-1);
@@ -264,52 +263,37 @@ public class CompanyPerformance {
                 week.clear();
             } else {
                 for (Date date : days) {
-                    System.out.println("DATE: " + date);
                     if (date.getDay() != 0) {
                         week.add(date);
                     }
                     if (date.getDay() == 6) {
                         weeks.add((ArrayList<Date>) week.clone());
-                        System.out.println("WEEK: " + week);
                         week.clear();
-                        System.out.println("CLEAR WEEK: " + week);
                     } else if (date==days.get(days.size()-1)) {
                         weeks.add((ArrayList<Date>) week.clone());
-                        System.out.println("WEEK: " + week);
                         week.clear();
-                        System.out.println("CLEAR WEEK: " + week);
                     }
                 }
             }
         } else {
             for (Date date : days) {
-                System.out.println("DATE: " + date);
                 if (date.getDay() != 0) {
                     week.add(date);
                 }
                 if (date.getDay() == 6) {
                     weeks.add((ArrayList<Date>) week.clone());
-                    System.out.println("WEEK: " + week);
                     week.clear();
-                    System.out.println("CLEAR WEEK: " + week);
                 }
             }
         }
         Date beginningDay;
         Date endingDay;
-        System.out.println("WEEKS: " + weeks);
         for (ArrayList<Date> singleWeek : weeks) {
-            System.out.println("SINGLE WEEK IN WEEKS: " + singleWeek);
             beginningDay = new Date(singleWeek.get(0).getYear(), singleWeek.get(0).getMonth(), singleWeek.get(0).getDate(), 8, 0, 0);
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
             testInfoPerWeek.add(testInfo);
-            System.out.println("TESTINFO[0]: " + testInfo[0]);
-            System.out.println("TESTINFO[1]: " + testInfo[1]);
-            System.out.println("BEGINNINGDAY: " + beginningDay);
-            System.out.println("ENDINGDAY: " + endingDay);
-
         }
         return testInfoPerWeek;
     }
@@ -452,9 +436,6 @@ public class CompanyPerformance {
         TestStore testStore = this.company.getTestStore();
         ArrayList<Integer> intervalArrayList = new ArrayList<>();
         int numRegistered = 0, numValidated = 0, intToKeep = 0;
-        //TESTAR
-        System.out.println("MAKE INTERVAL | PER DO: " + 24);
-        int num=0;
         Date finalDate = new Date(days.get(days.size()-1).getYear(),days.get(days.size()-1).getMonth(),days.get(days.size()-1).getDate(),8,0,0);
         days.set(days.size()-1,finalDate);
         for (Date day : days){
@@ -464,7 +445,6 @@ public class CompanyPerformance {
             Date finish = new Date(day.getYear(), day.getMonth(), day.getDate(), 20,0,1);
             Date endDay = (Date)date2.clone();
             endDay = DateUtils.addSeconds(endDay,-1);
-            num=0;
             do{
                 System.out.println("date1 " + date1);
                 System.out.println("date2 " + date2);
@@ -483,9 +463,6 @@ public class CompanyPerformance {
                 date1 = DateUtils.addMinutes(date1, 30); //19:30
                 date2 = DateUtils.addMinutes(date2, 30); //20:00
                 endDay = DateUtils.addMinutes(endDay, 30); //19:59:59
-                //TESTAR
-                num++;
-                System.out.println("MAKE INTERVAL | DO NUM " + num);
             } while (date2.before(finish));
         }
         int[] intervalArray = new int[intervalArrayList.size()];
@@ -513,6 +490,7 @@ public class CompanyPerformance {
         int[] worstSubInt = subMaxSumAlgorithm.findSubMaxSum(interval);
         int num=0, ind, ref=0;
         Date[] limits = new Date[2];
+        System.out.println("WORSTSUBINT.LENGTH: " + worstSubInt.length);
         if (worstSubInt.length!=0) { //é 0 quando a company é igualmente eficiente ao longo do interval (ex: todos os valores são 0)
             for (int j = 0; j < interval.length; j++) {
                 System.out.println("VALOR J: " + j);
@@ -535,8 +513,9 @@ public class CompanyPerformance {
                         if (num == worstSubInt.length) {
                             ref = j;
                             System.out.println("VALOR REF: " + ref);
+                        } else {
+                            num = 0;
                         }
-                        num = 0;
                     }
                 }
             }
@@ -546,32 +525,52 @@ public class CompanyPerformance {
             Date last = DateUtils.addMinutes(first, 30);
             int quant = 0;
             while (quant != startIndex) {
+                System.out.println("QUANT: " + quant);
+                System.out.println("STARTINDEX: " + startIndex);
                 for (Date day : days) {
-                    if (first.getHours() >= 8 && last.getHours() < 20) {
-                        first = DateUtils.addMinutes(first, 30);
-                        last = DateUtils.addMinutes(last, 30);
-                        quant++;
-                    } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
-                        first = DateUtils.addMinutes(first, 30);
-                        last = DateUtils.addMinutes(last, 30);
-                        quant++;
-                    }
+                    System.out.println("DAY: " + day);
+                    first = day;
+                    last = DateUtils.addMinutes(first, 30);
+                        do {
+                        while (quant!=startIndex) {
+                            System.out.println("FIRST: " + first);
+                            System.out.println("LAST: " + last);
+                            if (first.getHours() >= 8 && last.getHours() < 20) {
+                                first = DateUtils.addMinutes(first, 30);
+                                last = DateUtils.addMinutes(last, 30);
+                                quant++;
+                            } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                                quant++;
+                            }
+                            System.out.println("ATT QUANT: " + quant);
+                        }
+                    } while (last.getHours() != 20 && last.getMinutes() != 0);
                 }
                 System.out.println("6");
             }
             limits[0] = first;
             quant = 0;
-            while (quant != (endIndex - startIndex)) {
-                if (first.getDay() != 0 && last.getDay() != 0) {
-                    if (first.getHours() >= 8 && last.getHours() < 20) {
-                        first = DateUtils.addMinutes(first, 30);
-                        last = DateUtils.addMinutes(last, 30);
-                        quant++;
-                    } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
-                        first = DateUtils.addMinutes(first, 30);
-                        last = DateUtils.addMinutes(last, 30);
-                        quant++;
-                    }
+            while (quant != endIndex) {
+                System.out.println("QUANT: " + quant);
+                System.out.println("ENDINDEX: " + endIndex);
+                for (Date day : days) {
+                    System.out.println("DAY: " + day);
+                    first = day;
+                    last = DateUtils.addMinutes(first, 30);
+                    do {
+                        while (quant!=endIndex) {
+                            System.out.println("FIRST: " + first);
+                            System.out.println("LAST: " + last);
+                            if (first.getHours() >= 8 && last.getHours() < 20) {
+                                first = DateUtils.addMinutes(first, 30);
+                                last = DateUtils.addMinutes(last, 30);
+                                quant++;
+                            } else if ((last.getHours() == 20 && last.getMinutes() == 0)) {
+                                quant++;
+                            }
+                            System.out.println("ATT QUANT: " + quant);
+                        }
+                    } while (last.getHours() != 20 && last.getMinutes() != 0);
                 }
                 System.out.println("7");
             }
