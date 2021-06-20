@@ -3,7 +3,7 @@
 title SD_getConfidenceIntervalListForTableOfValues(myRegressionModel, x1InHistoricalPoints, x2InHistoricalPoints, confidenceLevel, bestXIndex)
 
 participant "nhsReportTask:\nNHSReportTask" as TASK
-participant "regressionModel:\nRegressionModel" as REGRESSION_MODEL
+participant "regressionModel:\nMathCalculus" as REGRESSION_MODEL
 participant "confidenceIntervals:\nList<ConfidenceInterval>"
 
 [o-> TASK : getConfidenceIntervalList(myRegressionModel, x1InHistoricalPoints, null, confidenceLevel, bestXIndex)
