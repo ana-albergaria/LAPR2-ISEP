@@ -153,6 +153,8 @@ public class NHSReportUI implements Initializable, Menu {
                 throw new UnsupportedOperationException("The historical points for SLR must be greater than 2!");
             if(historicalPoints <= 3 && chosenRegressionModelClass.equalsIgnoreCase("Multiple Linear Regression"))
                 throw new UnsupportedOperationException("The historical points for MLR must be greater than 3!");
+            if(beginDate.after(endDate) || beginDate.equals(endDate))
+                throw new UnsupportedOperationException("The initial date must be before the end date!");
 
 
             boolean success = this.controller.createNHSDailyReport(currentDate,
