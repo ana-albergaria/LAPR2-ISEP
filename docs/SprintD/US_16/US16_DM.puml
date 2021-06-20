@@ -29,22 +29,10 @@ class Client{
 class LaboratoryCoordinator{
 }
 
-class CompanyPerformance{
-- beginningDate
-- endingDate
-- chosenAlg
-- clientsNum
-- processTestsNum
-- testInfoDay
-- testInfoWeek
-- testInfoMonth
-- testInfoYear
-- worstSubInt
-}
-
 Company "1" -- "*" Test : conducts >
-LaboratoryCoordinator "1..*" -- "*" Test : analyses >
-LaboratoryCoordinator "1..*" -- "*" Client : analyses >
-Company "1" -- "*" CompanyPerformance : has >
+'LaboratoryCoordinator "1..*" -- "*" Test : analyses >
+'LaboratoryCoordinator "1..*" -- "*" Client : analyses >
+LaboratoryCoordinator "*" -- "*" Test : analyses >
+LaboratoryCoordinator "*" -- "*" Client : analyses >
 
 @enduml

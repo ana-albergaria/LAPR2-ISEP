@@ -553,7 +553,7 @@ were validated between the desired interval of time.
 
 # 6. Integration and Demo
 
-n/a
+In order to reduce duplicated and complicated code, I made sure to use an Interface and Adapter Classes.
 
 
 # 7. Observations

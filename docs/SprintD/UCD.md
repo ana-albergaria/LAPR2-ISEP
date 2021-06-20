@@ -5,7 +5,7 @@
 However, be aware, this is a pedagogical simplification. On further projects and curricular units might also exist _1 to N **and/or** N to 1 relationships between US and UC.
 
 
-![Use Case Diagram](Use_Case_Diagram.svg)
+![Use Case Diagram](Use Case Diagram.svg)
 
 
 **For each UC/US, it must be provided evidences of applying main activities of the software development process (requirements, analysis, design, tests and code). Gather those evidences on a separate file for each UC/US and set up a link as suggested below.**
@@ -13,7 +13,7 @@ However, be aware, this is a pedagogical simplification. On further projects and
 # Use Cases / User Stories
 | UC/US  | Description                                                               |                   
 |:----|:------------------------------------------------------------------------|
-| US1 | [As a client, I want to access the application to view the results of the tests I have performed.](US_1/US1_ViewTestResults.md)   |
+| US1 | [As a client, I want to access the application to view the results of the tests I have performed.]()   |
 | US2 | [As a client, I want to update my personal data]()  |
 | US3 | [As a receptionist of the laboratory, I want to register a client.](US_3/US3_RegisterClient.md)|
 | US4 | [As a receptionist of the laboratory, I intend to register a test to be performed to a registered client.](US_4/US_4.md)|
@@ -29,6 +29,6 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US14 | [As a specialist doctor, I intend to make the diagnosis and write a report for a given test.](US_14/US14_MakeDiagnosisWriteTestReport.md)|
 | US15 | [As a laboratory coordinator, I want to validate the work done by the clinical chemistry technologist and specialist doctor.]()|
 | US16 | [As a laboratory coordinator, I want to have an overview of all the tests performed by Many Labs and analyse the overall performance of the company.](US_16/US16_OverviewTestsAnalysePerformance.md)
-| US17 | [As a laboratory coordinator, I want to import clinical tests from a CSV file.]()
+| US17 | [As a laboratory coordinator, I want to import clinical tests from a CSV file.](US_17/US_17.md)
 | US18 | [As an Administrator I want to send the Covid-19 report to the NHS at any time.]()
-| US19 | [The Many Labs company wants to send to the NHS daily reports of Covid-19 data, including the number of observed values and estimated values.]()
+| US19 | [The Many Labs company wants to send to the NHS daily reports of Covid-19 data, including the number of observed values and estimated values.](US_19/US19_SendDailyReportsToNHS.md)

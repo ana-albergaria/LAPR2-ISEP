@@ -34,8 +34,6 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 * Report (Specialist Doctor);
 * NHS Report;
-* Forecast;
-* Daily Covid-19 Data;
 
 
 --- 
@@ -49,6 +47,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 * Clinical chemistry technologist;
 * Specialist doctor;
 * Laboratory coordinator;
+* Timer;
 
 
 ---
@@ -153,6 +152,8 @@ An association is a relationship between instances of objects that indicates a r
 |  |owns |Laboratory|
 |  | reports | NHS Report |
 |  | knows | Application |
+| | knows | Timer
+| | makes use of | NHSAPI
 | Chemical Laboratory | is of | Laboratory |
 | Clinical Analysis Laboratory | is of | Laboratory|
 |  Parameter	| presented under  		 	| Category  |
@@ -181,6 +182,8 @@ An association is a relationship between instances of objects that indicates a r
 |Report| is validated by | Laboratory Coordinator|
 |Laboratory Coordinator| confirms | Final Result |
 |  | is of | Employee|
+| | analysis | Test
+| | analysis | Client
 |Client| receives |Notification|
 |Final Result | is known by | Client|
 |NHS API |receives |NHS Report|

@@ -35,63 +35,63 @@ UI -> CTRL : clientInfo = getClientsInfoPerInterval()
 activate CTRL
 CTRL -> CP : clientInfo = getClientsNum()
 activate CP
-|||
-deactivate CP
+CP --> CP : clientsNum = getClientsInfoPerInterval(getDays())
 CTRL --> UI : clientInfo
+deactivate CP
 deactivate CTRL
 
 UI -> CTRL : numTestsProcessed = getNumTestsProcessedInterval()
 activate CTRL
 CTRL -> CP : numTestsProcessed = getProcessTestsNum()
 activate CP
-|||
-deactivate CP
+CP --> CP : processTestsNum = getNumTestsProcessedInterval(getDays())
 CTRL --> UI : numTestsProcessed
+deactivate CP
 deactivate CTRL
 
 UI -> CTRL : testInfoDays = getTestInfoPerDay()
 activate CTRL
 CTRL -> CP : testInfoDays = getTestInfoDay()
 activate CP
-|||
-deactivate CP
+CP --> CP : testInfoDay = getTestInfoPerDay(getDays());
 CTRL --> UI : testInfoDays
+deactivate CP
 deactivate CTRL
 
 UI -> CTRL : testInfoWeeks = getTestInfoPerWeek()
 activate CTRL
 CTRL -> CP : testInfoWeeks = getTestInfoWeek()
 activate CP
-|||
-deactivate CP
+CP --> CP : testInfoWeek = getTestInfoPerWeek(getDays());
 CTRL --> UI : testInfoWeeks
+deactivate CP
 deactivate CTRL
 
 UI -> CTRL : testInfoMonths = getTestInfoPerMonth()
 activate CTRL
 CTRL -> CP : testInfoMonths = getTestInfoMonth()
 activate CP
-|||
-deactivate CP
+CP --> CP : testInfoMonth = getTestInfoPerMonth(getDays());
 CTRL --> UI : testInfoMonths
+deactivate CP
 deactivate CTRL
 
 UI -> CTRL : testInfoYears = getTestInfoPerYear()
 activate CTRL
 CTRL -> CP : testInfoYears = getTestInfoYear()
 activate CP
-|||
-deactivate CP
+CP --> CP : testInfoYear = getTestInfoPerYear(getDays());
 CTRL --> UI : testInfoYears
+deactivate CP
 deactivate CTRL
 
 UI -> CTRL : worstSubInt = findWorstSubIntWithChosenAlgorithm()
 activate CTRL
 CTRL -> CP : worstSubInt = getWorstSubInt()
 activate CP
-|||
-deactivate CP
+CP --> CP : worstSubInt = findWorstSubIntWithChosenAlgorithm(getDays(),chosenAlg);
 CTRL --> UI : worstSubInt
+deactivate CP
 deactivate CTRL
 
 UI --> LC : shows an overview of the clients and tests performed, and \n shows the overall performance of the company

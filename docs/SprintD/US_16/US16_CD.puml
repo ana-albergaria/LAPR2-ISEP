@@ -21,7 +21,7 @@ class TestStore {
 class CompanyPerformanceAnalysisController{
     - Company company
     - CompanyPerformance companyPerformance
-    + setCompanyPerformance(beginningDay, endingDay, chosenAlgorithm)
+    + setCompanyPerformance(companyPerformance)
     + getClientsInfoPerInterval()
     + getNumTestsProcessedInterval()
     + getTestInfoPerDay()
@@ -66,6 +66,8 @@ class CompanyPerformance{
     - ArrayList<int[]> testInfoMonth
     - ArrayList<int[]> testInfoYear
     - Date[] worstSubInt
+    + setCompany
+    + CompanyPerformance(beginningDate, endingDate, chosenAlg, company)
     + getClientsNum()
     + getProcessTestsNum()
     + getTestInfoDay()
@@ -79,7 +81,7 @@ class CompanyPerformance{
     + getTestInfoPerWeek(days)
     + getTestInfoPerMonth(days)
     + getTestInfoPerYear(days)
-    + getDays(beginningDay, endingDay)
+    + getDays()
     + makeIntervalArray(days)
     + findWorstSubIntWithChosenAlgorithm(days, chosenAlgorithm)
     + getChosenAlgorithmAdapter(chosenAlgorithm)
