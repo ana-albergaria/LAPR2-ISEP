@@ -125,11 +125,13 @@ public class CheckCompanyPerformanceUI2 implements Initializable {
         testsInfo = controller.getTestInfoPerDay();
         setTestsInfo(testsInfo);
         for (int i = 0; i < testsInfo.size(); i++) {
+            System.out.println("tests info: " + testsInfo.get(i)[0] + " " + testsInfo.get(i)[1]);
             bothValues = testsInfo.get(i);
             desiredDataRD.add(bothValues[0]);
         }
         for (int i = 0; i < desiredDataRD.size(); i++) {
             seriesRD.getData().add(new XYChart.Data<String, Integer>("Day"+(i+1),desiredDataRD.get(i)));
+            System.out.println(desiredDataRD.get(i));
         }
         seriesRD.setName("Tests Waiting For Results");
         lineChart.getData().add(seriesRD);

@@ -214,7 +214,7 @@ public class CompanyPerformance {
             endingDay = new Date(day.getYear(), day.getMonth(), day.getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfoPerDay.add(testInfo);
+            testInfoPerDay.add(testInfo.clone());
         }
         return testInfoPerDay;
     }
@@ -272,7 +272,7 @@ public class CompanyPerformance {
             endingDay = new Date(singleWeek.get(singleWeek.size()-1).getYear(), singleWeek.get(singleWeek.size()-1).getMonth(), singleWeek.get(singleWeek.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfoPerWeek.add(testInfo);
+            testInfoPerWeek.add(testInfo.clone());
         }
         return testInfoPerWeek;
     }
@@ -426,7 +426,7 @@ public class CompanyPerformance {
             endingDay = new Date(singleMonth.get(singleMonth.size()-1).getYear(), singleMonth.get(singleMonth.size()-1).getMonth(), singleMonth.get(singleMonth.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfoPerMonth.add(testInfo);
+            testInfoPerMonth.add(testInfo.clone());
         }
         return testInfoPerMonth;
     }
@@ -482,7 +482,7 @@ public class CompanyPerformance {
             endingDay = new Date(singleYear.get(singleYear.size()-1).getYear(), singleYear.get(singleYear.size()-1).getMonth(), singleYear.get(singleYear.size()-1).getDate(), 19, 59, 59);
             testInfo[0] = testStore.getNumTestsWaitingForResultsDayOrInterval(beginningDay, endingDay);
             testInfo[1] = testStore.getNumTestsWaitingForDiagnosisDayOrInterval(beginningDay, endingDay);
-            testInfoPerYear.add(testInfo);
+            testInfoPerYear.add(testInfo.clone());
         }
         return testInfoPerYear;
     }
