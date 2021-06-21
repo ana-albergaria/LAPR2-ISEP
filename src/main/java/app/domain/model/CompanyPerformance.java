@@ -1,4 +1,4 @@
-package app.controller;
+package app.domain.model;
 
 import app.domain.interfaces.SubMaxSumAlgorithms;
 import app.domain.model.Company;

@@ -96,7 +96,7 @@ public class App implements Serializable {
         this.authFacade.addUserWithRole("Spedoc", "spdc@gmail.com", "123", Constants.ROLE_SPECIALIST_DOCTOR);
         this.authFacade.addUserWithRole("chem", "chem@gmail.com", "123", Constants.ROLE_CLINICAL_CHEM_TECHNOLOGIST);
         this.authFacade.addUserWithRole("labCord", "lc@gmail.com","1",Constants.ROLE_LAB_COORDINATOR);
-        /*this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
+        this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Blood","hemogram"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("CODE2","choleste"));
         this.company.getParameterCategoryStore().saveParameterCategory(new ParameterCategory("Covid","covid"));
 
@@ -260,7 +260,7 @@ public class App implements Serializable {
         test5.addReport(report5);
         Date date5r = new Date(2020,Calendar.JANUARY,16,19,59,59);
         test5.setDateOfDiagnosis(date5r);
-        test5.setDateOfValidation(date5r);*/
+        test5.setDateOfValidation(date5r);
     }
 
     public boolean storeUserSection(){

@@ -86,7 +86,7 @@ public class TestStore implements Serializable {
         int num = 0;
         Date date1, date2;
         for (Test test : testList) {
-            date2 = test.getDateOfSamplesCollection();
+            date2 = test.getDateOfTestRegistration();
             date1 = test.getDateOfChemicalAnalysis();
             if (date2!=null && !date2.equals(date1)) {
                 if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
@@ -107,8 +107,8 @@ public class TestStore implements Serializable {
         int num = 0;
         Date date1, date2;
         for (Test test : testList) {
-            date2 = test.getDateOfSamplesCollection();
-            date1 = test.getDateOfChemicalAnalysis();
+            date2 = test.getDateOfTestRegistration();
+            date1 = test.getDateOfDiagnosis();
             if (date2!=null && !date2.equals(date1)) {
                 if ((date2.before(beginningDay) && (date1==null || date1.after(beginningDay))) ||
                         date2.equals(beginningDay) ||
