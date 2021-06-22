@@ -290,6 +290,8 @@ public class App implements Serializable {
                     new FileInputStream(file));
             try {
                 app = (App) in.readObject();
+                Date delay = app.getCompany().getDateForNHSReportTask();
+                app.getCompany().scheduleNHSReportTask(delay, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
                 System.out.println("success here");
             } finally {
                 in.close();
@@ -297,6 +299,7 @@ public class App implements Serializable {
             return app;
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println("File Not Found");
+            ex.printStackTrace();
             return new App();
         }
     }
