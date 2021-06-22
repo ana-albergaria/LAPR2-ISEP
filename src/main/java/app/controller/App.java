@@ -299,7 +299,6 @@ public class App implements Serializable {
             return app;
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println("File Not Found");
-            ex.printStackTrace();
             return new App();
         }
     }
