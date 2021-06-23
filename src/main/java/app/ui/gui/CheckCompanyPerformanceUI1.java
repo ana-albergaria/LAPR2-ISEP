@@ -2,7 +2,7 @@ package app.ui.gui;
 
 import app.controller.CompanyPerformanceAnalysisController;
 import app.domain.model.Company;
-import app.controller.CompanyPerformance;
+import app.domain.model.CompanyPerformance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

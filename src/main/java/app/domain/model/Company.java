@@ -1,6 +1,5 @@
 package app.domain.model;
 
-import app.controller.CompanyPerformance;
 import app.domain.interfaces.ExternalAPI;
 import app.domain.interfaces.RegressionModel;
 import app.domain.interfaces.SortAlgorithm;
@@ -142,6 +141,7 @@ public class Company implements Serializable {
 
         this.nhsReportTask = new NHSReportTask(regressionModelCLass,
                 historicalPoints, significanceLevel, confidenceLevel, dateInterval, testStore, nhsReportStore);
+
         //this.timer = new Timer();
 
         //timer.schedule(nhsReportTask, today.getTime(), 1000L * 60L * 60L * 24L);
